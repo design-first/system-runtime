@@ -1,7 +1,16 @@
 {
     "name": "monoco",
     "version": "0.1.0",
+    "description": "A Model and a NoSQL Database for your Components",
     "main": "build/monoco-min.js",
+    "keywords": [
+        "metamodel",
+        "model",
+        "design",
+        "nosql",
+        "component",
+        "system"
+    ],
     "ignore": [
         "addons",
         "build/system",
@@ -16,6 +25,7 @@
         "package.json"
     ],
     "homepage": "https://github.com/monocojs/monoco.git",
+    "license": "MIT",
     "author": {
         "name": "erwan carriou",
         "email": "erwan.carriou@mac.com",
