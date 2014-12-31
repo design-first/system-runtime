@@ -176,16 +176,26 @@ You will find more examples on the [/example](./example) directory.
 
 ## Installation
 
-Install Monoco with bower:
+#### bower
 
 ```sh
 bower install monoco --save
 ```
 
-Install Monoco on node:
+Then add a `<script>` tag to your HTML page:
+```html
+<script src="/bower_components/monoco/build/monoco-min.js"><script>
+```
+
+#### node
 
 ```sh
 npm install monoco --save
+```
+
+Then require monoco:
+```js
+var monoco = require('monoco');
 ```
 
 ## Extend Monoco
