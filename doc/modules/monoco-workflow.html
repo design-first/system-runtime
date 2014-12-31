@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>monoco-workflow - monoco</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/lucid.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+            monoco
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.1.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <div id="sidebar">
+    <div id="classes">
+        <ul id="api-classes" class="nav nav-list">
+            
+                <li><a href="../classes/monoco.html">monoco</a></li>
+            
+                <li><a href="../classes/monoco-behavior.html">monoco-behavior</a></li>
+            
+                <li><a href="../classes/monoco-component.html">monoco-component</a></li>
+            
+                <li><a href="../classes/monoco-db.html">monoco-db</a></li>
+            
+                <li><a href="../classes/monoco-helper.html">monoco-helper</a></li>
+            
+                <li><a href="../classes/monoco-log.html">monoco-log</a></li>
+            
+                <li><a href="../classes/monoco-metamodel.html">monoco-metamodel</a></li>
+            
+                <li><a href="../classes/monoco-state.html">monoco-state</a></li>
+            
+                <li><a href="../classes/monoco-system.html">monoco-system</a></li>
+            
+                <li><a href="../classes/monoco-workflow.html">monoco-workflow</a></li>
+            
+                <li><a href="../classes/MonocoDatabaseCollection.html">MonocoDatabaseCollection</a></li>
+            
+                <li><a href="../classes/MonocoError.html">MonocoError</a></li>
+            
+        </ul>
+    </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>monoco-workflow <small>Module</small></h1>
+</div>
+
+<div class="clearfix well well-small">
+    
+
+    
+        <div class="uses">
+            Requires
+            <ul class="inline commas">
+                
+                    <li><a href="../modules/monoco-metamodel.html">monoco-metamodel</a></li>
+                
+                    <li><a href="../modules/monoco-component.html">monoco-component</a></li>
+                
+                    <li><a href="../modules/monoco-behavior.html">monoco-behavior</a></li>
+                
+                    <li><a href="../modules/monoco-state.html">monoco-state</a></li>
+                
+                    <li><a href="../modules/monoco-helper.html">monoco-helper</a></li>
+                
+                    <li><a href="../modules/monoco-log.html">monoco-log</a></li>
+                
+                    <li><a href="../modules/monoco-db.html">monoco-db</a></li>
+                
+            </ul>
+        </div>
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_workflow.js.html#l65"><code>src&#x2F;workflow.js:65</code></a>
+        </div>
+    
+
+    
+</div>
+
+
+
+<div class="moduledesc well well-small">
+    <p>This module manages the workflow of Monoco. It behaves like a workflow engine. <br>
+It checks if the change of status of a component is valid to be executed. By valid, it means that:<br></p>
+<ul>
+<li>the state is valid for the component, <br></li>
+<li>the input (i.e. parameters) of all actions for the state are compliants with the model and <br></li>
+<li>the output of all actions are compliants with the model. <br></li>
+</ul>
+<p>If an error occurs, the workflow will call the error state of the component and monoco. <br>
+If the error can break the consistency of the current system, the worklow will stop.</p>
+
+</div>
+
+
+
+<div class="yui3-g">
+    <div class="yui3-u-1-2">
+        
+            <p>This module provides the following classes:</p>
+
+            <ul class="module-classes">
+            
+                <li class="module-class">
+                    <a href="../classes/monoco-workflow.html">
+                        monoco-workflow
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/MonocoError.html">
+                        MonocoError
+                    </a>
+                </li>
+            
+            </ul>
+        
+    </div>
+
+    <div class="yui3-u-1-2">
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

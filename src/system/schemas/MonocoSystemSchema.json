@@ -1,0 +1,18 @@
+{
+    "_id": "MonocoSystemSchema",
+    "_name": "MonocoSystemSchema",
+    "_inherit": ["MonocoComponentSchema"],
+    "_core": true,
+    "name": "property",
+    "master": "property",
+    "subsystem": "property",
+    "version": "property",
+    "description": "property",
+    "schemas": "property",
+    "behaviors": "property",
+    "types": "property",
+    "components": "property",
+    "ready": "event",
+    "sync": "method",
+    "main": "event"
+}

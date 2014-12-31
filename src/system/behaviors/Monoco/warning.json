@@ -1,0 +1,6 @@
+{
+    "component": "Monoco",
+    "state": "warning",
+    "action": "function warning(message) { console.warn('monoco: ' + message); }",
+    "core": true
+}

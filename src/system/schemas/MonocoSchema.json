@@ -1,0 +1,12 @@
+{
+    "_id": "MonocoSchema",
+    "_name": "MonocoSchema",
+    "_inherit": ["MonocoComponentSchema"],
+    "_core": true,
+    "version": "property",
+    "find": "method",
+    "load": "method",
+    "system": "method",
+    "warning": "event",
+    "ready": "event"
+}

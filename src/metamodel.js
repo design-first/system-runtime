@@ -1,0 +1,1404 @@
+/* 
+ * Monoco
+ * A Model and a NoSQL Database for your Components
+ * http://monoco.io/
+ * @monocojs
+ *
+ * Copyright (C) 2014 - Erwan Carriou
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+/**
+ * This module manages Monoco Metamodel. <br>
+ * Monoco Metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.
+ * 
+ * @module monoco
+ * @submodule monoco-metamodel
+ * @requires monoco-db
+ * @requires monoco-log
+ * @requires monoco-component
+ * @requires monoco-workflow
+ * @class monoco-metamodel
+ * @static
+ */
+
+'use strict';
+
+var $db = require('./db.js');
+var $log = require('./log.js');
+var $component = require('./component.js');
+var $workflow = require('./workflow.js');
+
+
+/* Private properties */
+
+
+var ID = '_id',
+NAME = '_name',
+INHERITS = '_inherit',
+SCHEMA = '_schema',
+CLASS = '_class',
+CORE = '_core',
+EVENT_TYPE = 'event',
+internalTypes = ['property', 'collection', 'method', 'event'],
+defaultTypes = ['boolean', 'string', 'number', 'object', 'function', 'array'],
+store = {
+    metadef: {},
+    catalog: {},
+    inheritance: {},
+    inheritanceTree: {},
+    model: {},
+    states: {},
+    type: {},
+    implementation: {}
+};
+
+
+/* Private methods */
+
+
+/*
+ * Create the inheritance tree.
+ * @method createInheritanceTree
+ * @private
+ */
+function createInheritanceTree() {
+    var id = null,
+    fatherId = null,
+    newId = null;
+
+    for (id in store.inheritance) {
+        fatherId = store.inheritance[id];
+        store.inheritanceTree[id] = [];
+
+        while (fatherId) {
+            store.inheritanceTree[id].push(fatherId);
+            newId = fatherId;
+            fatherId = store.inheritance[newId];
+        }
+    }
+}
+
+
+/*
+ * Extend a schema with the properties of its parent.
+ * @method extend
+ * @param {type} id id of the schema to extend
+ * @return {JSON} object extended with the properties of its parent
+ * @private
+ */
+function extend(id) {
+    var sonExtend = {},
+    son = store.catalog[id],
+    ancestors = store.inheritanceTree[id],
+    length = 0,
+    i = 0,
+    ancestor = null,
+    prop = '';
+
+    if (ancestors) {
+        length = ancestors.length;
+        ancestors.reverse();
+    }
+    for (i = 0; i < length; i++) {
+        ancestor = store.catalog[ancestors[i]];
+        for (prop in ancestor) {
+            if (prop.indexOf('_') !== 0) {
+                sonExtend[prop] = ancestor[prop];
+            }
+        }
+    }
+    for (prop in son) {
+        sonExtend[prop] = son[prop];
+    }
+    return sonExtend;
+}
+
+
+/*
+ * Add the models.
+ * @method createModel
+ * @private
+ */
+function createModel() {
+    var id = '';
+    for (id in store.catalog) {
+        store.model[id] = extend(id);
+    }
+}
+
+
+/*
+ * Test if all the schema are compliants with their schemas.
+ * @method checkImplementation
+ * @private
+ */
+function checkImplementation() {
+    var id = '',
+    classDef = null,
+    classImp = '';
+
+    for (id in store.model) {
+        classDef = store.model[id];
+        if (classDef && typeof classDef[SCHEMA] !== 'undefined') {
+            classImp = store.model[classDef[SCHEMA]];
+            if (classImp) {
+                checkImp(classDef, classImp);
+                store.implementation[classDef[ID]] = classImp[ID];
+            } else {
+                $log.missingImplementation(classDef[SCHEMA], classDef[ID]);
+            }
+        }
+    }
+}
+
+
+/*
+ * Test if a schema is compliant with its schema.
+ * @method checkStates
+ * @private
+ */
+function checkStates() {
+    var id = '',
+    classDef = null,
+    type = '',
+    states = [],
+    attribute = '';
+
+    for (id in store.model) {
+        states = [];
+        classDef = store.model[id];
+        if (classDef && typeof classDef[SCHEMA] === 'undefined') {
+            for (attribute in classDef) {
+                type = classDef[attribute];
+                if (attribute.indexOf('_') !== 0 && internalTypes.indexOf(type) !== -1) {
+                    states.push(attribute);
+                }
+            }
+        }
+        store.states[id] = states;
+    }
+}
+
+
+/*
+ * Test if a schema is compliant with its schema.
+ * @method checkImp
+ * @param {JSON} classDef schema to test 
+ * @param {JSON} classImp schema to validate
+ * @private
+ */
+function checkImp(classDef, classImp) {
+    var property = '',
+    value = null;
+    for (property in classImp) {
+        if (property !== ID &&
+        property !== NAME &&
+        property !== INHERITS &&
+        property !== SCHEMA &&
+        property !== CLASS &&
+        property !== CORE) {
+            if (typeof classDef[property] !== 'undefined') {
+                value = classDef[property];
+                if (!checkSchema(value, classImp[property])) {
+                    $log.invalidTypeImp(property, classDef[ID]);
+                }
+            } else {
+                $log.missingPropertyImp(property, classDef[ID]);
+            }
+        }
+    }
+    // check if all properties are there
+    for (property in classDef) {
+        if (property !== ID &&
+        property !== NAME &&
+        property !== INHERITS &&
+        property !== SCHEMA &&
+        property !== CLASS &&
+        property !== CORE) {
+            if (typeof classImp[property] === 'undefined') {
+                $log.unknownPropertyImp(property, classDef[ID]);
+            }
+        }
+    }
+}
+
+
+/*
+ * Test if a value has the correct type.
+ * @method checkSchema
+ * @param {Object} value value to test
+ * @param {Object} type type to test
+ * @return {Boolean} true if the value has the correct type
+ * @private
+ */
+function checkSchema(value, type) {
+    var result = true;
+    if (hasType(type, 'string') && defaultTypes.indexOf(type) !== -1) {
+        result = hasType(value, type);
+    } else {
+        result = checkCustomSchema(value, type);
+    }
+    return result;
+}
+
+
+/*
+ * Test if a value has correct custom type.
+ * @method checkCustomSchema
+ * @param {type} value value to test
+ * @param {String} typeName type to test
+ * @return {Boolean} true if the value has the correct type
+ * @private
+ */
+function checkCustomSchema(value, typeName) {
+    var result = true,
+    typeDef = store.type[typeName],
+    length = 0,
+    i = 0;
+
+    if (!hasType(typeDef, 'undefined')) {
+        if (!hasType(value, 'undefined')) {
+            if (typeDef.type === 'array') {
+                length = value.length;
+                for (i = 0; i < length; i++) {
+                    result = isValidSchema(value[i], typeDef.schema);
+                    if (result === false) {
+                        break;
+                    }
+                }
+            } else {
+                result = isValidSchema(value, typeDef.schema);
+            }
+        } else {
+            result = false;
+        }
+    } else {
+        result = false;
+    }
+
+    return result;
+}
+
+
+/*
+ * Init the Database stucture.
+ * @method initDbStructure
+ * @private
+ */
+function initDbStructure() {
+    $db.collection('MonocoSchema');
+    $db.collection('MonocoExtendedSchema');
+    $db.collection('MonocoClassInfo');
+    $db.collection('MonocoBehavior');
+    $db.collection('MonocoState');
+    $db.collection('MonocoType');
+}
+
+
+/*
+ * Create the Database structure (i.e. MonocoDatabaseCollection).
+ * @method createDbStructure
+ * @private
+ */
+function createDbStructure() {
+    var modelName = '',
+    modelDef = {},
+    typeName = '';
+
+    for (modelName in store.catalog) {
+        modelDef = store.catalog[modelName];
+        $db.MonocoSchema.insert(modelDef);
+        if (typeof modelDef[SCHEMA] !== 'undefined' &&
+        typeof $db[modelDef[ID]] === 'undefined' &&
+        modelDef[CLASS] !== false) {
+            $db.collection(modelDef[ID]);
+        }
+    }
+
+    for (modelName in store.model) {
+        modelDef = store.model[modelName];
+        $db.MonocoExtendedSchema.insert(modelDef);
+    }
+
+    for (typeName in store.type) {
+        modelDef = store.type[typeName];
+        modelDef._id = modelDef.name;
+        $db.MonocoType.insert(modelDef);
+    }
+}
+
+
+/*
+ * Create all the classes of the model.
+ * @method createClass
+ * @private
+ */
+function createClass() {
+    var modelName = '',
+    modelDef = {};
+
+    for (modelName in store.model) {
+        modelDef = store.model[modelName];
+        if (typeof modelDef[SCHEMA] !== 'undefined' && modelDef[CLASS] !== false) {
+            $component.create({
+                "model": modelName
+            });
+        }
+    }
+}
+
+
+/*
+ * Create all the ClassInfo of the model.
+ * @method createClassInfo
+ * @private
+ */
+function createClassInfo() {
+    var modelName = '',
+    modelDef = {};
+
+    for (modelName in store.model) {
+        modelDef = store.model[modelName];
+        if (typeof modelDef[SCHEMA] !== 'undefined' && modelDef[CLASS] !== false) {
+            $db.MonocoClassInfo.insert({
+                "_id": modelDef._id + 'Info',
+                "metamodel": store.model[modelDef[SCHEMA]],
+                "model": modelDef
+            });
+        }
+    }
+}
+
+
+/* 
+ * Get the real name of the reference object / type.
+ * @method getReference
+ * @param {String} value
+ * @return {String} real name
+ * @private
+ */
+function getReference(value) {
+    return value.replace('@', '');
+}
+
+
+/*
+ * Is the value a custom type.
+ * @method isCustomType
+ * @param {String} value
+ * @return {Boolean}
+ * @private
+ */
+function isCustomType(value) {
+    var result = hasType(value, 'string') &&
+    defaultTypes.indexOf(value) === -1 &&
+    !isReference(value);
+
+    return result;
+}
+
+
+/*
+ * Is the value a reference.
+ * @method isReference
+ * @param {String} value
+ * @return {Boolean}
+ * @private
+ */
+function isReference(value) {
+    return value.indexOf('@') !== -1;
+}
+
+
+/*
+ * Get the real type of a value.
+ * @method getType
+ * @param {type} value
+ * @return {String} type of the value
+ * @private
+ */
+function getType(value) {
+    var type = '';
+
+    if (Array.isArray(value)) {
+        type = 'array';
+    } else {
+        type = typeof value;
+    }
+
+    return type;
+}
+
+
+/*
+ * Get the class name of an object.
+ * @method getClassName
+ * @param {type} obj object
+ * @return {String} the class name of the object
+ * @private
+ */
+function getClassName(obj) {
+    return obj.constructor.name;
+}
+
+
+/*
+ * Check if the value is a valid enum value.
+ * @method isValidEnumValue
+ * @param {String} value
+ * @param {Array} enumValue
+ * @return {Boolean} the class name of the object
+ * @private
+ */
+function isValidEnumValue(value, enumValue) {
+    return enumValue.indexOf(value) !== -1;
+}
+
+
+/*
+ * Check if a value has the specified type.
+ * @param {type} value
+ * @param {type} type
+ * @returns {Boolean} true is value has type 'type'
+ */
+function hasType(value, type) {
+    var result = true;
+
+    switch (type) {
+        case 'array':
+            result = Array.isArray(value);
+            break;
+        default:
+            result = (type === typeof value);
+            break;
+    }
+
+    return result;
+}
+
+
+/* Public methods */
+
+
+/*
+ * Add a new schema.
+ * @method schema
+ * @param {JSON} importedSchema schema to add
+ */
+function schema(importedSchema) {
+    var id = importedSchema[ID],
+    inherit = importedSchema[INHERITS],
+    name = importedSchema[NAME],
+    length = 0,
+    i = 0;
+
+    // if no id, it will be the name by default
+    if (hasType(id, 'undefined')) {
+        id = name;
+        importedSchema[ID] = name;
+    }
+
+    // check if schema is compliant with the meta meta model
+    if (isValidObject(importedSchema, store.metadef.schema, false)) {
+
+        store.catalog[id] = importedSchema;
+        if (inherit) {
+            length = inherit.length;
+            for (i = 0; i < length; i++) {
+                store.inheritance[id] = inherit[i];
+            }
+        }
+    } else {
+        $workflow.stop({
+            "error": true,
+            "message": "the schema '" + JSON.stringify(importedSchema) + "' is not valid"
+        });
+    }
+}
+
+
+/*
+ * Add a new type.
+ * @method type
+ * @param {JSON} importedType
+ */
+function type(importedType) {
+    var name = importedType.name;
+
+    // check if type is compliant with the meta meta model
+    if (isValidObject(importedType, store.metadef.type)) {
+        if (name) {
+            store.type[name] = importedType;
+        } else {
+            $log.invalidTypeDefinition(importedType);
+        }
+    } else {
+        $workflow.stop({
+            "error": true,
+            "message": "the type '" + JSON.stringify(importedType) + "' is not valid"
+        });
+    }
+}
+
+
+/*
+ * Init the metamodel.
+ * @method init
+ */
+function init() {
+    clear();
+    store.metadef = {
+        schema: {
+            "_id": {
+                "type": "string",
+                "mandatory": true
+            },
+            "_name": {
+                "type": "string",
+                "mandatory": true
+            },
+            "_inherit": {
+                "type": ["string"],
+                "mandatory": false
+            },
+            "_schema": {
+                "type": "string",
+                "mandatory": false
+            },
+            "_class": {
+                "type": "boolean",
+                "mandatory": false
+            },
+            "_core": {
+                "type": "boolean",
+                "mandatory": false
+            }
+        },
+        type: {
+            "name": {
+                "type": "string",
+                "mandatory": true
+            },
+            "type": {
+                "type": "string",
+                "mandatory": true
+            },
+            "schema": {
+                "type": "object",
+                "mandatory": false
+            },
+            "value": {
+                "type": ["string"],
+                "mandatory": false
+            },
+            "core": {
+                "type": "boolean",
+                "mandatory": false
+            }
+        }
+
+    };
+    initDbStructure();
+}
+
+
+/*
+ * Remove the data of the metamodel from the memory.
+ * @method clear
+ */
+function clear() {
+    store = {
+        catalog: {},
+        inheritance: {},
+        inheritanceTree: {},
+        model: {},
+        states: {},
+        type: {},
+        implementation: {}
+    };
+}
+
+
+/*
+ * Create the metamodel.
+ * @method create
+ */
+function create() {
+    createInheritanceTree();
+    createModel();
+    checkImplementation();
+    checkStates();
+    createDbStructure();
+    createClass();
+    createClassInfo();
+}
+
+
+/*
+ * Check if an attribute of the schema is an event.
+ * @method isEvent
+ * @param {String} name
+ * @param {String} id component id
+ * @return {Boolean} true if the attribute is an event
+ */
+function isEvent(name, id) {
+    var result = false,
+    componentSchema = store.model[id],
+    attributeType = '';
+
+    if (componentSchema && componentSchema[SCHEMA]) {
+        componentSchema = store.model[componentSchema[SCHEMA]];
+    }
+
+    if (componentSchema) {
+        attributeType = componentSchema[name];
+        if (attributeType === EVENT_TYPE) {
+            result = true;
+        }
+    }
+
+    return result;
+}
+
+
+/*
+ * Check if the name is a correct state for the component.
+ * @method isValidState
+ * @param {String} name name of the state
+ * @param {String} id component id
+ * @return {Boolean} true if the name is a correct state for the component
+ */
+function isValidState(name, id) {
+    var result = false,
+    componentSchema = store.model[id],
+    state = {};
+
+    if (componentSchema && componentSchema[SCHEMA]) {
+        componentSchema = store.model[componentSchema[SCHEMA]];
+    }
+    state = store.states[componentSchema[ID]];
+
+    if (Array.isArray(state)) {
+        result = state.indexOf(name) !== -1;
+    }
+
+    return result;
+}
+
+
+/*
+ * Check if a value is compliant with a type.
+ * @method isValidType
+ * @param {Object} value
+ * @param {String} typeName
+ * @return {Boolean} true if the object is compliant with the type
+ */
+function isValidType(value, typeName) {
+    var result = true;
+
+    function _checkReference(value, typeName) {
+        var isValid = true;
+        var typeRef = getReference(typeName);
+        if (getClassName(value) !== typeRef) {
+            isValid = false;
+            $log.invalidType(value.id(), typeName);
+        }
+        return isValid;
+    }
+
+    if (!hasType(typeName, 'undefined')) {
+        switch (true) {
+            case isCustomType(typeName):
+                result = checkCustomSchema(value, typeName);
+                break;
+            case isReference(typeName):
+                result = _checkReference(value, typeName);
+                break;
+            default:
+                result = hasType(value, typeName);
+                break;
+        }
+    } else {
+        $log.invalidType(value, typeName);
+    }
+
+    return result;
+}
+
+
+/*
+ * Check if a value is compliant with a enum type.
+ * @method isValidEnum
+ * @param {String|Object} value
+ * @param {Object} schema
+ * @return {Boolean} true if the object is compliant with the enum
+ */
+function isValidEnum(value, schema) {
+    var result = true;
+
+    if (isReference(schema.type)) {
+        result = $component.isInstanceOf($component.get(value), getReference(schema.type)) && schema.value.indexOf(value) !== -1;
+        if (!result) {
+            $log.invalidEnumValue(value, schema.type);
+        }
+    } else {
+        result = (hasType(value, schema.type)) && schema.value.indexOf(value) !== -1;
+        if (!result) {
+            $log.invalidEnumValue(value, schema.type);
+        }
+    }
+
+    return result;
+}
+
+
+/*
+ * Check if the object is compliant with the schema.
+ * Use it to test if a schema is compliant with a schema
+ * it is supposed to validate.
+ * @method isValidSchema
+ * @param {JSON} object
+ * @param {JSON} schema
+ * @return {Boolean}
+ * @private
+ */
+function isValidSchema(object, schema) {
+    var fieldName = '',
+    field = null,
+    result = true,
+    mandatory = true,
+    typeSchema = '',
+    typeRef = '',
+    realType = '',
+    length = 0,
+    i = 0;
+
+    /*
+     * Check if a field is compliant with the type of the reference.
+     * @return {Boolean} the field is compliant with the type of the reference
+     * @private
+     */
+    function _isValidReference() {
+        var isValid = true,
+        enumValue = [];
+
+        typeRef = getReference(typeSchema);
+        typeRef = object[typeRef];
+        if (isCustomType(typeRef)) {
+            if (store.type[typeRef]) {
+                if (store.type[typeRef].schema) {
+                    isValid = isValidSchema(field, store.type[typeRef].schema);
+                } else {
+                    // check type
+                    isValid = hasType(field, store.type[typeRef].type);
+
+                    // check value
+                    enumValue = store.type[typeRef].value;
+                    if (enumValue) {
+                        isValid = isValidEnumValue(field, enumValue);
+                    }
+                }
+            } else {
+                isValid = false;
+            }
+        } else {
+            if (typeRef === 'array') {
+                isValid = Array.isArray(field);
+            } else {
+                if (isReference(typeRef)) {
+                    isValid = hasType(field, 'object');
+                } else {
+                    isValid = hasType(field, typeRef);
+                }
+            }
+        }
+        if (!isValid) {
+            $log.invalidPropertyType(field, typeRef, field);
+        }
+        return isValid;
+    }
+
+    /*
+     * Check if a field is compliant with a type.
+     * @return {Boolean} the field is compliant with the type
+     * @private
+     */
+    function _isValidType() {
+        var isValid = true;
+
+        realType = getType(typeSchema);
+        switch (realType) {
+            case 'string':
+                if (isCustomType(realType)) {
+                    isValid = isValidSchema(field, typeSchema);
+                } else {
+                    if (!hasType(field, typeSchema)) {
+                        $log.invalidPropertyType(fieldName, typeSchema, field);
+                        isValid = false;
+                        break;
+                    }
+                }
+                break;
+            case 'array':
+                length = field.length;
+                for (i = 0; i < length; i++) {
+                    if (isCustomType(typeSchema[0])) {
+                        isValid = isValidSchema(field[i], store.type[typeSchema[0]].schema);
+                    } else {
+                        if (!hasType(field[i], typeSchema[0])) {
+                            $log.invalidPropertyType(field[i], typeSchema[0], field[i]);
+                            isValid = false;
+                            break;
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        return isValid;
+    }
+
+    // type
+    for (fieldName in object) {
+        field = object[fieldName];
+
+        if (hasType(schema[fieldName], 'undefined')) {
+            $log.unknownProperty(fieldName, schema);
+            return false;
+        } else {
+            typeSchema = schema[fieldName].type;
+        }
+
+        switch (true) {
+            case isReference(typeSchema):
+                result = _isValidReference();
+                break;
+            default:
+                result = _isValidType();
+                break;
+        }
+    }
+
+    // mandatory
+    for (fieldName in schema) {
+        field = schema[fieldName];
+        mandatory = field.mandatory;
+        if (mandatory === true && hasType(object[fieldName], 'undefined')) {
+            $log.missingProperty(fieldName);
+            result = false;
+            break;
+        }
+    }
+
+    return result;
+}
+
+
+/*
+ * Check if the object is compliant with the schema.
+ * Use it to test if the constructor of an object is compliant
+ * with the definition of the class.
+ * @method isValidObject
+ * @param {Object} object
+ * @param {Object} schema
+ * @param {Boolean} strict
+ * @param {Boolean} cleanRef
+ * @return {Boolean} true is the object is compliant with the schema
+ */
+function isValidObject(object, schema, strict, cleanRef) {
+    var fieldName = '',
+    field = null,
+    result = true,
+    mandatory = true,
+    typeSchema = '',
+    typeRef = '',
+    realType = '',
+    length = 0,
+    i = 0;
+
+    if (hasType(strict, 'undefined')) {
+        strict = true;
+    }
+
+    if (hasType(cleanRef, 'undefined')) {
+        strict = false;
+    }
+
+    /*
+     * Check if a field is compliant with a custom type.
+     * @return {Boolean} the field is compliant with the custom type
+     * @private
+     */
+    function _isValidCustomType() {
+        var isValid = true;
+
+        typeSchema = store.type[typeSchema];
+        if (typeSchema) {
+            if (typeSchema.schema) {
+                isValid = isValidObject(field, typeSchema.schema);
+            } else {
+                isValid = isValidEnum(field, typeSchema);
+            }
+        } else {
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    /*
+     * Check if a field is compliant with the type of the reference.
+     * @return {Boolean} the field is compliant with the type of the reference
+     * @private
+     */
+    function _isValidReference() {
+        var isValid = true,
+        comp = null,
+        isComponent = false;
+
+        typeRef = getReference(typeSchema);
+        if (field && field.id) {
+            comp = field;
+            isComponent = true;
+        } else {
+            comp = $component.get(field);
+        }
+
+        if (!hasType(comp, 'undefined')) {
+            if (getClassName(comp) !== typeRef) {
+                isValid = false;
+                $log.invalidType(field, typeRef);
+            } else {
+                if (isComponent && cleanRef) {
+                    object[fieldName] = comp.id(); // store the id instead the full object 
+                }
+            }
+        } else {
+            // check for default value of an object ({} or null)
+            switch (true) {
+                case (hasType(field, 'object') && field !== null && Object.keys(field).length):
+                case hasType(field, 'string'):
+                    $log.canNotYetValidate(field, typeRef);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return isValid;
+    }
+
+    /*
+     * Check if a field is compliant with a type.
+     * @return {Boolean} the field is compliant with the type
+     * @private
+     */
+    function _isValidType() {
+        var isValid = true,
+        typeArray = '';
+
+        realType = getType(typeSchema);
+        switch (realType) {
+            case 'string':
+                if (isCustomType(realType)) {
+                    isValid = isValidObject(field, typeSchema);
+                } else {
+                    if (typeSchema === 'array') {
+                        if (getType(field) !== 'array') {
+                            $log.invalidPropertyType(fieldName, typeSchema, field);
+                            isValid = false;
+                            break;
+                        }
+                    } else {
+                        if (getType(field) !== typeSchema) {
+                            $log.invalidPropertyType(fieldName, typeSchema, field);
+                            isValid = false;
+                            break;
+                        }
+                    }
+                }
+                break;
+            case 'array':
+                if (Array.isArray(field)) {
+                    length = field.length;
+                    typeArray = typeSchema[0];
+                    for (i = 0; i < length; i++) {
+                        if (isCustomType(typeArray)) {
+                            isValid = isValidObject(field[i], store.type[typeArray].schema);
+                        } else {
+                            if (!isReference(typeArray)) {
+                                if (getType(field[i]) !== typeArray) {
+                                    $log.invalidPropertyType(field[i], typeArray, field[i]);
+                                    isValid = false;
+                                    break;
+                                }
+                            } else {
+                                if (getType(field[i]) === 'string') {
+                                    // Case of an import of a system
+                                    if (getClassName($component.get(field[i])) !== getReference(typeArray)) {
+                                        $log.invalidClassName(JSON.stringify(field[i]), getReference(typeArray), getClassName(field[i]));
+                                        isValid = false;
+                                        break;
+                                    }
+                                } else {
+                                    if (getClassName(field[i]) !== getReference(typeArray)) {
+                                        $log.invalidClassName(JSON.stringify(field[i]), getReference(typeArray), getClassName(field[i]));
+                                        isValid = false;
+                                        break;
+                                    } else {
+                                        if (cleanRef) {
+                                            field[i] = field[i].id(); // store the id instead the full object
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    isValid = false;
+                    $log.invalidType(field, 'array');
+                }
+                break;
+            default:
+                isValid = false;
+                $log.unknownType(field);
+                break;
+        }
+        return isValid;
+    }
+
+
+    // type
+    for (fieldName in object) {
+        field = object[fieldName];
+
+        if (!hasType(schema[fieldName], 'undefined')) {
+            typeSchema = schema[fieldName].type;
+
+            // cas of _id
+            if (fieldName === '_id') {
+                typeSchema = 'string';
+            }
+
+        } else {
+            if (strict) {
+                $log.unknownProperty(fieldName, schema);
+                return false;
+            } else {
+                continue;
+            }
+        }
+
+        switch (true) {
+            case isCustomType(typeSchema):
+                result = _isValidCustomType();
+                break;
+            case isReference(typeSchema):
+                result = _isValidReference();
+                break;
+            default:
+                result = _isValidType();
+                break;
+        }
+    }
+
+    // mandatory
+    for (fieldName in schema) {
+        field = schema[fieldName];
+        mandatory = field.mandatory;
+        if (hasType(object[fieldName], 'undefined')) {
+            if (mandatory === true) {
+                $log.missingProperty(fieldName);
+                result = false;
+            }
+        }
+    }
+
+    return result;
+}
+
+
+/*
+ * Prepare the object in order to be compliant with the schema.
+ * @method prepareObject
+ * @param {Object} object
+ * @param {Object} schema
+ */
+function prepareObject(object, schema) {
+    var fieldName = '',
+    field = null,
+    mandatory = true,
+    defaultValue = '';
+
+    // mandatory & default value
+    for (fieldName in schema) {
+        field = schema[fieldName];
+        mandatory = field.mandatory;
+        defaultValue = field.default;
+        if (hasType(object[fieldName], 'undefined')) {
+            if (mandatory === false && !hasType(defaultValue, 'undefined')) {
+                object[fieldName] = defaultValue;
+            }
+        }
+    }
+}
+
+
+/*
+ * Get a schema.
+ * @method get
+ * @param {String} id of the schema
+ * @return {Object} the schema
+ */
+function get(id) {
+    var result = null;
+    if (store.model[id]) {
+        result = store.model[id];
+    }
+    return result;
+}
+
+
+/*
+ * Get parents of a shema if any.
+ * @method get
+ * @param {String} id of the schema
+ * @return {Array} id of the parents
+ */
+function getParents(id) {
+    var result = [],
+    model = null;
+
+    model = store.model[id];
+    if (model) {
+        result = model[INHERITS];
+    }
+    if (!result) {
+        result = [];
+    }
+
+    return result;
+}
+
+/*
+ * Check if a class inherits from another one
+ * @method inheritFrom
+ * @param {String} name name of the class
+ * @param {String} parentName name of the parent
+ * @return {Boolean} true if the component inherit from the specific class name
+ */
+function inheritFrom(name, parentName) {
+    var result = false,
+    parents = [],
+    i = 0,
+    length = 0;
+
+    /*
+     * 
+     * Check if a class inherits from another one
+     * @method _searchParent
+     * @param {String} className name of the class
+     * @param {String} ancestorName of the parent
+     * @returns {Boolean} true if the component inherit from the specific class name
+     * @private
+     */
+    function _searchParent(className, ancestorName) {
+        var isAncestor = false,
+        parents = [],
+        i = 0,
+        length = 0;
+
+        parents = getParents(className);
+        if (parents.length !== 0) {
+            if (parents.indexOf(ancestorName) !== 1) {
+                isAncestor = true;
+            } else {
+                for (i = 0; i < length; i++) {
+                    isAncestor = _searchParent(parents[i], ancestorName);
+                    if (isAncestor) {
+                        break;
+                    }
+                }
+            }
+        }
+        return isAncestor;
+    }
+
+    parents = getParents(name);
+    if (parents.length !== 0) {
+        if (parents.indexOf(parentName) !== 1) {
+            result = true;
+        } else {
+            for (i = 0; i < length; i++) {
+                result = _searchParent(parents[i], parentName);
+                if (result) {
+                    break;
+                }
+            }
+        }
+    }
+
+    return result;
+}
+
+
+/* exports */
+
+
+/**
+ * This module manages Monoco Metamodel. <br>
+ * Monoco Metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.
+ * 
+ * @module monoco
+ * @submodule monoco-metamodel
+ * @requires monoco-db
+ * @requires monoco-log
+ * @requires monoco-component
+ * @requires monoco-workflow
+ * @class monoco-metamodel
+ * @static
+ */
+
+
+/**
+ * Init the metamodel.
+ * @method init
+ */
+exports.init = init;
+
+
+/**
+ * Remove the data of the metamodel from the memory.
+ * @method clear
+ */
+exports.clear = clear;
+
+
+/**
+ * Add a new schema.
+ * @param {JSON} schema
+ * @method schema
+ */
+exports.schema = schema;
+
+
+/**
+ * Add a new type.
+ * @param {JSON} type
+ * @method type
+ */
+exports.type = type;
+
+
+/**
+ * Create the metamodel.
+ * @method create
+ */
+exports.create = create;
+
+
+/**
+ * Get a schema.
+ * @method get
+ * @param {String} id of the schema
+ * @return {Object} the schema
+ */
+exports.get = get;
+
+
+/**
+ * Get parents of a shema if any.
+ * @method getParents
+ * @param {String} id of the schema
+ * @return {Array} id of the parents
+ */
+exports.getParents = getParents;
+
+
+/*
+ * Check if a class inherits from another one
+ * @method inheritFrom
+ * @param {String} name name of the class
+ * @param {String} parentName name of the parent
+ * @return {Boolean} true if the component inherit from the specific class name
+ */
+exports.inheritFrom = inheritFrom;
+
+
+/**
+ * Check if the object is compliant with the schema.
+ * Use it to test if the constructor of an object is compliant
+ * with the definition of the class.
+ * @method isValidObject
+ * @param {Object} object
+ * @param {Object} schema
+ * @param {Boolean} strict
+ * @param {Boolean} cleanRef
+ * @return {Boolean} true is the object is compliant with the schema
+ */
+exports.isValidObject = isValidObject;
+
+
+/**
+ * Prepare the object in order to be compliant with the schema.
+ * @method prepareObject
+ * @param {Object} object
+ * @param {Object} schema
+ */
+exports.prepareObject = prepareObject;
+
+
+/**
+ * Check if a value is compliant with a type.
+ * @method isValidType
+ * @param {Object} object
+ * @param {String} type
+ * @return {Boolean} true if the object is compliant with the type
+ */
+exports.isValidType = isValidType;
+
+/**
+ * Check if a value is compliant with a type enum.
+ * @method isValidEnum
+ * @param {String|Object} value
+ * @param {Schema} schema
+ * @return {Boolean} true if the object is compliant with the enum
+ */
+exports.isValidEnum = isValidEnum;
+
+
+/**
+ * Check if the name is a correct state for the component.
+ * @method isValidState
+ * @param {String} name name of the state
+ * @param {String} id component id
+ * @return {Boolean} true if the name is a correct state for the component
+ */
+exports.isValidState = isValidState;
+
+
+/**
+ * Check if an attribute of the schema is an event.
+ * @method isEvent
+ * @param {String} name name of the attribute
+ * @param {String} id component id
+ * @return {Boolean} true if the attribute is an event
+ */
+exports.isEvent = isEvent;

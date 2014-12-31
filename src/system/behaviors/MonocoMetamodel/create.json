@@ -1,0 +1,7 @@
+{
+    "component": "MonocoMetamodel",
+    "state": "create",
+    "action": "function create() { $metamodel.create(); }",
+    "core": true,
+    "useCoreAPI": true
+}

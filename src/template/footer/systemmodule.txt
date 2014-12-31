@@ -1,0 +1,20 @@
+;
+
+/* exports  */
+
+
+/**
+ * This module contains the Monoco core system.
+ *
+ * @module monoco
+ * @submodule monoco-system
+ * @class monoco-system
+ * @static 
+ */
+
+
+/**
+ * The Monoco core system
+ * @property {MonocoSystem} system
+ */
+exports.system = system;

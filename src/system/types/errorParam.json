@@ -1,0 +1,15 @@
+{
+    "name": "errorParam",
+    "type": "object",
+    "schema": {
+        "message": {
+            "type": "string",
+            "mandatory": true
+        },
+        "error": {
+            "type": "object",
+            "mandatory": true
+        }
+    },
+    "core": true
+}

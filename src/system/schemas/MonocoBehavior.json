@@ -1,0 +1,37 @@
+{
+    "_id": "MonocoBehavior",
+    "_name": "MonocoBehavior",
+    "_schema": "MonocoBehaviorSchema",
+    "_core": true,
+    "_class": false,
+    "core": {
+        "type": "boolean",
+        "readOnly": false,
+        "mandatory": false,
+        "default": false
+    },
+    "useCoreAPI": {
+        "type": "boolean",
+        "readOnly": false,
+        "mandatory": false,
+        "default": false
+    },
+    "component": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    },
+    "action": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    },
+    "state": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    }
+}

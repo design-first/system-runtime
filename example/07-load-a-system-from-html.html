@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>07 - Load a system from HTML</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/prism.css" rel="stylesheet">
+        <script src="js/prism.js"></script>
+
+        <!-- we load a system with a link tag that has a rel attribute with "system" value -->
+        <link rel="system" type="application/json" href="system/example04.json"> 
+        <script type="text/javascript" src="../build/monoco-min.js"></script> 
+
+    </head>
+    <body style="font-family:Arial">
+        <h1>Example 07 - Load the system from HTML</h1>
+        <hr/>
+        <p>
+            We use the system of example 04.<br/>
+            We saved the exported system in a JSON file and then we loaded it with a link tag.<br/>
+            The main method of the system will be called when the system will be imported.
+        </p>
+        <p>
+            Look at the console of your browser to see the result of the imported system.<br/>
+            NB: an error can occured if you access this file from the file system.
+        </p> 
+        <pre class="line-numbers"><code class="language-markup">&lt;link rel="system" type="application/json" href="system/example04.json"></code></pre>
+    </body>
+</html>

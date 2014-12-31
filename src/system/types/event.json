@@ -1,0 +1,11 @@
+{
+    "name": "event",
+    "type": "object",
+    "schema": {
+        "params": {
+            "type": ["parameter"],
+            "mandatory": false
+        }
+    },
+    "core": true
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>02 - Export a system</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/prism.css" rel="stylesheet">
+        <script src="js/prism.js"></script>
+
+        <script type="text/javascript" src="../build/monoco-min.js"></script> 
+        <script type="text/javascript" src="scripts/example02.js"></script>
+
+    </head>
+    <body style="font-family:Arial">
+        <h1>Example 02 - Export "hello world" example as a system</h1>
+        <hr/>
+        <p>
+            Look at the console of your browser to see the result of the script.
+        </p> 
+        <pre class="line-numbers"><code class="language-javascript">// create the system
+monoco.system('example02');
+
+// create the model
+var metamodel = monoco.require('metamodel');
+
+metamodel.schema({
+    "_name": "Example02Schema",
+    "_inherit": ["MonocoComponentSchema"],
+    "hello": "method"
+});
+
+metamodel.schema({
+    "_name": "Example02",
+    "_schema": "Example02Schema",
+    "_inherit": ["MonocoComponent"],
+    "hello": {
+        "params": [
+            {
+                "name": "name",
+                "type": "string"
+            }
+        ],
+        "result": "string"
+    }
+});
+
+metamodel.create();
+
+// add the behavior
+var Example02 = monoco.require('Example02');
+
+Example02.on('hello', function (name) {
+    return 'Hello ' + name + '!';
+});
+
+// create the component
+var example = new Example02();
+var message = example.hello('world');
+
+console.log(message);
+
+// export the system. All the models, components and behaviors will be exported
+console.log(monoco.require('db').system());</code></pre>
+    </body>
+</html>

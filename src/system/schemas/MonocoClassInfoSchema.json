@@ -1,0 +1,14 @@
+{
+    "_id": "MonocoClassInfoSchema",
+    "_name": "MonocoClassInfoSchema",
+    "_inherit": ["MonocoComponentSchema"],
+    "_core": true,
+    "model": "property",
+    "metamodel": "property",
+    "method": "method",
+    "methods": "method",
+    "property": "method",
+    "properties": "method",
+    "event": "method",
+    "events": "method"
+}

@@ -1,0 +1,15 @@
+{
+    "name": "method",
+    "type": "object",
+    "schema": {
+        "result": {
+            "type": "string",
+            "mandatory": false
+        },
+        "params": {
+            "type": ["parameter"],
+            "mandatory": false
+        }
+    },
+    "core": true
+}

@@ -1,0 +1,12 @@
+{
+    "_id": "MonocoComponentSchema",
+    "_name": "MonocoComponentSchema",
+    "_core": true,
+    "on": "method",
+    "classInfo": "property",
+    "off": "method",
+    "require": "method",
+    "destroy": "event",
+    "init": "event",
+    "error": "event"
+}

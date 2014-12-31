@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>14 - Inheritance between components</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/prism.css" rel="stylesheet">
+        <script src="js/prism.js"></script>
+
+        <script type="text/javascript" src="../build/monoco-min.js"></script>
+        <script type="text/javascript" src="scripts/example14.js"></script>  
+
+    </head>
+    <body style="font-family:Arial" >
+        <h1>Example 14 - Inheritance between components</h1>
+        <hr/>
+        <p>
+            Inheritance is defined at schema level.<br/>
+            The call to a method will follow the prototype chain of the component and at each level it finds if there is a behahior for the corresponding method (state).
+        </p> 
+        <p>
+            Look at the console of your browser to see the result of the script.
+        </p> 
+        <pre class="line-numbers"><code class="language-javascript">// create the system
+monoco.system("example14");
+
+// create the model
+monoco.require('metamodel').schema({
+    "_name": "PersonSchema",
+    "_inherit": ["MonocoComponentSchema"], // you need to inherit from MonocoComponentSchema to have the 'on' method
+    "description": "string",
+    "firstName": "property",
+    "lastName": "property",
+    "getFullName": "method"
+});
+
+monoco.require('metamodel').schema({
+    "_name": "Person",
+    "_schema": "PersonSchema",
+    "_inherit": ["MonocoComponent"], // you need to inherit from MonocoComponent to have the 'on' method
+    "description": "a person",
+    "firstName": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    },
+    "lastName": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    },
+    "getFullName": {
+        "result": "string"
+    }
+});
+
+monoco.require('metamodel').schema({
+    "_name": "TeacherSchema",
+    "_inherit": ["PersonSchema"] // inheritance is set at metaclass schema level
+});
+
+monoco.require('metamodel').schema({
+    "_name": "Teacher",
+    "_schema": "PersonSchema",
+    "_inherit": ["Person"], // inheritance is set at class schema level
+    "description": "a teacher"
+});
+
+monoco.require('metamodel').create();
+
+// add some code
+monoco.system().on('main', function () {
+
+    var Person = this.require('Person');
+
+    // 'getFullName' method is implemented for Person
+    Person.on('getFullName', function () {
+        return this.firstName() + ' ' + this.lastName();
+    });
+
+    var Teacher = this.require('Teacher');
+
+    var eikichi = new Teacher({
+        "firstName": "Eikichi",
+        "lastName": "Onizuka"
+    });
+
+    console.log(eikichi.getFullName());
+});
+
+// run the system
+monoco.system().main();</code></pre>
+    </body>
+</html>

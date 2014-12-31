@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>01 - A Hello world example</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/prism.css" rel="stylesheet" />
+        <script src="js/prism.js"></script>
+
+        <script type="text/javascript" src="../build/monoco-min.js"></script> 
+        <script type="text/javascript" src="scripts/example01.js"></script>  
+
+    </head>
+    <body style="font-family:Arial">
+        <h1>Example 01 - A basic "hello world"</h1>
+        <hr/>
+        <p>
+            Look at the console of your browser to see the result of the script.
+        </p> 
+        <pre class="line-numbers"><code class="language-javascript">// create the model
+var metamodel = monoco.require('metamodel');
+
+metamodel.schema({
+    "_name": "Example01Schema",
+    "hello": "method"
+});
+
+metamodel.schema({
+    "_name": "Example01",
+    "_schema": "Example01Schema",
+    "hello": {
+        "params": [
+            {
+                "name": "name",
+                "type": "string"
+            }
+        ],
+        "result": "string"
+    }
+});
+
+metamodel.create();
+
+// require the class
+var Example01 = monoco.require('Example01');
+
+// add the behavior
+Example01.on('hello', function (name) {
+    return 'Hello ' + name + '!';
+});
+
+// create the component 
+var example = new Example01();
+var message = example.hello('world');
+
+console.log(message);</code></pre>
+    </body>
+</html>

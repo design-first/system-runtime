@@ -1,0 +1,7 @@
+{
+    "component": "MonocoSystem",
+    "state": "sync",
+    "action": "function sync() { var dump = $db.dump(); this.schemas(dump.schemas); this.types(dump.types); this.behaviors(dump.behaviors); this.components(dump.components); }",
+    "core": true,
+    "useCoreAPI": true
+}

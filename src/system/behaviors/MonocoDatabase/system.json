@@ -1,0 +1,7 @@
+{
+    "component": "MonocoDatabase",
+    "state": "system",
+    "action": "function system(system) { return $db.system(system); }",
+    "core": true,
+    "useCoreAPI": true
+}

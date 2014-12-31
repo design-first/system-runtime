@@ -1,0 +1,25 @@
+{
+    "_id": "MonocoMetamodel",
+    "_name": "MonocoMetamodel",
+    "_schema": "MonocoMetamodelSchema",
+    "_inherit": ["MonocoComponent"],
+    "_core": true,
+    "schema": {
+        "params": [{
+                "name": "schema",
+                "type": "object"
+            }
+        ]
+    },
+    "type": {
+        "params": [{
+                "name": "type",
+                "type": "object"
+            }
+        ]
+    },
+    "create": {
+        "params": [
+        ]
+    }
+}

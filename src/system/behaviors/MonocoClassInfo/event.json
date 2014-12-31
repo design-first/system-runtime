@@ -1,0 +1,6 @@
+{
+    "component": "MonocoClassInfo",
+    "state": "event",
+    "action": "function event(name) { var result = {}; if (this.metamodel()[name] === 'event') { result = this.model()[name]; } return result; }",
+    "core": true
+}

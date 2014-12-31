@@ -1,0 +1,7 @@
+{
+    "component": "MonocoComponent",
+    "state": "require",
+    "action": "function require(id) { return $component.get(id); }",
+    "core": true,
+    "useCoreAPI": true
+}

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/helper.js - monoco</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/lucid.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+            monoco
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.1.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <div id="sidebar">
+    <div id="classes">
+        <ul id="api-classes" class="nav nav-list">
+            
+                <li><a href="../classes/monoco.html">monoco</a></li>
+            
+                <li><a href="../classes/monoco-behavior.html">monoco-behavior</a></li>
+            
+                <li><a href="../classes/monoco-component.html">monoco-component</a></li>
+            
+                <li><a href="../classes/monoco-db.html">monoco-db</a></li>
+            
+                <li><a href="../classes/monoco-helper.html">monoco-helper</a></li>
+            
+                <li><a href="../classes/monoco-log.html">monoco-log</a></li>
+            
+                <li><a href="../classes/monoco-metamodel.html">monoco-metamodel</a></li>
+            
+                <li><a href="../classes/monoco-state.html">monoco-state</a></li>
+            
+                <li><a href="../classes/monoco-system.html">monoco-system</a></li>
+            
+                <li><a href="../classes/monoco-workflow.html">monoco-workflow</a></li>
+            
+                <li><a href="../classes/MonocoDatabaseCollection.html">MonocoDatabaseCollection</a></li>
+            
+                <li><a href="../classes/MonocoError.html">MonocoError</a></li>
+            
+        </ul>
+    </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>src/helper.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+/* 
+ * Monoco
+ * A Model and a NoSQL Database for your Components
+ * http://monoco.io/
+ * @monocojs
+ *
+ * Copyright (C) 2014 - Erwan Carriou
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+/**
+ * This module contains all the functions used by all the modules.
+ * 
+ * @module monoco
+ * @submodule monoco-helper
+ * @requires monoco-db
+ * @requires monoco-component
+ * @requires monoco-workflow
+ * @class monoco-helper
+ * @static
+ */
+
+
+&#x27;use strict&#x27;;
+
+var $db = require(&#x27;./db.js&#x27;);
+var $component = require(&#x27;./component.js&#x27;);
+var $workflow = require(&#x27;./workflow.js&#x27;);
+
+
+/* Private property */
+
+var monoco = null;
+
+
+/* Public method */
+
+
+/*
+ * Check if a Monoco instance exists
+ * @method isMonoco
+ * @return {Boolean} true if a Monoco instance exist
+ */
+function isMonoco() {
+    var result = false;
+
+    if ($db.Monoco &amp;&amp; $db.Monoco.find().length) {
+        result = true;
+    }
+
+    return result;
+}
+
+
+/*
+ * Get the instance of Monoco
+ * @method getMonoco
+ * @return {Monoco} monoco instance
+ */
+function getMonoco() {
+    var monocoId = &#x27;&#x27;;
+
+    if (!monoco) {
+        if (isMonoco()) {
+            monocoId = $db.Monoco.find()[0]._id;
+            monoco = $component.get(monocoId);
+        } else {
+            monoco = {
+                error: function error(err, data) {
+                    console.error(&#x27;monoco: &#x27; + err, data);
+                },
+                warning: function warning(message) {
+                    console.warn(&#x27;monoco: &#x27; + message);
+                }
+            };
+        }
+    }
+
+    return monoco;
+}
+
+
+/*
+ * Generate a uid
+ * @method generateId
+ * @return {String} a uid
+ */
+function generateId() {
+    function gen() {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+    }
+    return gen() + gen() + gen();
+}
+
+
+/* exports */
+
+
+/**
+ * This module contains all the functions used by all the modules.
+ * 
+ * @module monoco
+ * @submodule monoco-helper
+ * @requires monoco-db
+ * @requires monoco-component
+ * @requires monoco-workflow
+ * @class monoco-helper
+ * @static
+ */
+
+
+/**
+ * Get the instance of Monoco
+ * @method getMonoco
+ * @return {Monoco} monoco instance
+ */
+exports.getMonoco = getMonoco;
+
+
+/**
+ * Check if a Monoco instance exists
+ * @method isMonoco
+ * @return {Boolean} true if a Monoco instance exist
+ */
+exports.isMonoco = isMonoco;
+
+
+/**
+ * Generate a uid
+ * @method generateId
+ * @return {String} a uid
+ */
+exports.generateId = generateId;
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

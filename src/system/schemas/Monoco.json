@@ -1,0 +1,57 @@
+{
+    "_id": "Monoco",
+    "_name": "Monoco",
+    "_schema": "MonocoSchema",
+    "_inherit": ["MonocoComponent"],
+    "_core": true,
+    "version": {
+        "type": "string",
+        "readOnly": true,
+        "mandatory": true,
+        "default": "0.0.0"
+    },
+    "find": {
+        "params": [{
+                "name": "Class",
+                "type": "string"
+            },
+            {
+                "name": "query",
+                "type": "object",
+                "mandatory": false,
+                "default": {}
+            }
+        ],
+        "result": "array"
+    },
+    "load": {
+        "params": [{
+                "name": "url",
+                "type": "string"
+            },
+            {
+                "name": "async",
+                "type": "boolean",
+                "mandatory": false,
+                "default": true
+            }
+        ]
+    },
+    "warning": {
+        "params": [{
+                "name": "message",
+                "type": "string"
+            }
+        ]
+    },
+    "system": {
+        "params": [{
+                "name": "name",
+                "type": "string",
+                "mandatory": false
+            }
+        ],
+        "result": "object"
+    },
+    "ready": {}
+}

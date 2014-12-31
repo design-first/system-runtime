@@ -1,0 +1,27 @@
+{
+    "name": "web",
+    "version": "0.1.0",
+    "description": "Add behaviors for web",
+    "_id": "133421d0c313d2d",
+    "schemas": {},
+    "types": {},
+    "behaviors": {
+        "1aaee1e6311ff39": {
+            "_id": "1aaee1e6311ff39",
+            "component": "monoco",
+            "state": "load",
+            "action": "function load(url, async) { var xhr = null, callbackLoad = null; xhr = new XMLHttpRequest(); callbackLoad = function callbackLoad(system) { var sysId = $db.system(system); var sys = $component.get(sysId); if (sys) { sys.main(); } }; if (async) { xhr.open('GET', url, true); xhr.onreadystatechange = function () { if (xhr.readyState === 4) { if (xhr.status === 200) { callbackLoad(JSON.parse(xhr.response)); } } }; xhr.send(null); } else { xhr.open('GET', url, false); xhr.send(null); if (xhr.status === 200) { callbackLoad(JSON.parse(xhr.response)); } } }",
+            "core": true,
+            "useCoreAPI": true
+        },
+        "1f6001773a18791": {
+            "_id": "1f6001773a18791",
+            "component": "monoco",
+            "state": "ready",
+            "action": "function ready() { var systems = [], system = null, i = 0, length = 0; if (typeof document !== 'undefined') { systems = document.querySelectorAll('link[rel=system]'); length = systems.length; for (i = 0; i < length; i++) { system = systems[i]; this.load(system.href, false); } } }",
+            "core": true
+        }
+    },
+    "components": {}
+
+}

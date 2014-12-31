@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>09 - Create a component class with MSON (Metamodel JavaScript Object Notation)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/prism.css" rel="stylesheet">
+        <script src="js/prism.js"></script>
+
+        <script type="text/javascript" src="../build/monoco-min.js"></script>
+        <script type="text/javascript" src="scripts/example09.js"></script>
+
+    </head>
+    <body style="font-family:Arial">
+        <h1>Example 09 - Create a component class with MSON (Metamodel JavaScript Object Notation)</h1>
+        <hr/>
+        <p>
+            To create a component class, we need to define 2 MSON objects:<br/>
+            <br/>
+            - the metaclass schema that defines the properties, methods and events of the class and<br/>
+            - the class schema that defines the input / output of the methods, types of the properties, types of the parameters, ...
+        </p> 
+        <p>
+            Look at the console of your browser to see the result of the script.
+        </p> 
+        <pre class="line-numbers"><code class="language-javascript">// create the system
+monoco.system('exemple09');
+
+// create the model
+var metamodel = monoco.require('metamodel');
+
+metamodel.schema({
+    '_name': 'PersonSchema',
+    'description': 'string',
+    'firstName': 'property'
+});
+
+metamodel.schema({
+    '_name': 'Person',
+    '_schema': 'PersonSchema',
+    'description': 'a person',
+    'firstName': {
+        'type': 'string',
+        'readOnly': false,
+        'mandatory': true,
+        'default': ''
+    }
+});
+
+metamodel.create();
+
+// add some code
+monoco.system().on('main', function () {
+    console.log(this.require('Person').name);
+});
+
+// run the system
+monoco.system().main();</code></pre>
+    </body>
+</html>

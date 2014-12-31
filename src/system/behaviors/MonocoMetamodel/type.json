@@ -1,0 +1,7 @@
+{
+    "component": "MonocoMetamodel",
+    "state": "type",
+    "action": "function type(type) { $metamodel.type(type); }",
+    "core": true,
+    "useCoreAPI": true
+}

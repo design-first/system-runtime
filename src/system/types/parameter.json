@@ -1,0 +1,23 @@
+{
+    "name": "parameter",
+    "type": "object",
+    "schema": {
+        "name": {
+            "type": "string",
+            "mandatory": true
+        },
+        "type": {
+            "type": "string",
+            "mandatory": true
+        },
+        "mandatory": {
+            "type": "boolean",
+            "mandatory": false
+        },
+        "default": {
+            "type": "@type",
+            "mandatory": false
+        }
+    },
+    "core": true
+}
