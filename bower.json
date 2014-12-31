@@ -1,0 +1,17 @@
+{
+    "name": "monoco",
+    "version": "0.1.0",
+    "main": "build/monoco-min.js",
+    "ignore": [
+        "node_modules",
+        "bower.json",
+        "package.json",
+        "README.md"
+    ],
+    "homepage": "https://github.com/monocojs/monoco.git",
+    "author": {
+        "name": "erwan carriou",
+        "email": "erwan.carriou@mac.com",
+        "twitter": "@ecarriou"
+    }
+}
