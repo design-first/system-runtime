@@ -22,12 +22,14 @@ var metamodel = monoco.require('metamodel');
 
 metamodel.schema({
     "_name": "Example01Schema",
+    "_inherit": ["MonocoComponentSchema"],
     "hello": "method"
 });
 
 metamodel.schema({
     "_name": "Example01",
     "_schema": "Example01Schema",
+    "_inherit": ["MonocoComponent"],
     "hello": {
         "params": [
             {
