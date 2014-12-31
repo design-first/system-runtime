@@ -176,7 +176,7 @@ You will find more examples on the [/example](./example) directory.
 
 ## Installation
 
-#### bower
+#### Bower
 
 ```sh
 bower install monoco --save
@@ -184,10 +184,10 @@ bower install monoco --save
 
 Then add a `<script>` tag to your HTML page:
 ```html
-<script src="/bower_components/monoco/build/monoco-min.js"><script>
+<script src="/bower_components/monoco/build/monoco-min.js"></script>
 ```
 
-#### node
+#### Node.js
 
 ```sh
 npm install monoco --save
