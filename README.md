@@ -179,7 +179,7 @@ You will find more examples on the [/example](./example) directory.
 Install Monoco with bower:
 
 ```sh
-bower install --save monoco
+bower install monoco --save
 ```
 
 Install Monoco on node:

@@ -3,8 +3,16 @@
     "version": "0.1.0",
     "main": "build/monoco-min.js",
     "ignore": [
+        "addons",
+        "build/system",
+        "doc",
+        "example",
         "node_modules",
-        "bower.json",
+        "spec",
+        "src",
+        "build/monoco.json",
+        "Gruntfile.js",
+        "karma.conf.js",
         "package.json",
         "README.md"
     ],
