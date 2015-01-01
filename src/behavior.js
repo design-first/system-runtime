@@ -4,7 +4,7 @@
  * http://monoco.io/
  * @monocojs
  *
- * Copyright (C) 2014 - Erwan Carriou
+ * Copyright (C) 2015 - Erwan Carriou
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
