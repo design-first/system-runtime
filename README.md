@@ -1,5 +1,7 @@
 #[Monoco](http://monoco.io/)
 
+[Build Status](https://travis-ci.org/monocojs/monoco.svg?branch=master)
+
 #### What is Monoco ?
 
 Monoco is a client & server JavaScript library for managing your components.
