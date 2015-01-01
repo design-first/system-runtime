@@ -49,9 +49,9 @@ var metamodel = monoco.require('metamodel');
 
 // create a new type
 metamodel.type({
-    'name': 'sex',
+    'name': 'lasersaberColor',
     'type': 'string',
-    'value': ['male', 'female']
+    'value': ['blue', 'red']
 });
 
 // create a metaclass schema that defines the properties, 
@@ -60,7 +60,7 @@ metamodel.schema({
     '_name': 'JediSchema',
     '_inherit': ['MonocoComponentSchema'],
     'description': 'string',
-    'sex': 'property',
+    'lasersaberColor': 'property',
     'firstName': 'property',
     'lastName': 'property',
     'nickname': 'property',
@@ -75,11 +75,11 @@ metamodel.schema({
     '_schema': 'JediSchema', // the class schema must be compliant with its schema
     '_inherit': ['MonocoComponent'],
     'description': 'a jedi',
-    'sex': {
-        'type': 'sex',
+    'lasersaberColor': {
+        'type': 'lasersaberColor',
         'readOnly': false,
         'mandatory': true,
-        'default': 'male'
+        'default': 'blue'
     },
     'firstName': {
         'type': 'string',
@@ -136,16 +136,16 @@ system.on('main', function () {
     var Jedi = this.require('Jedi');
 
     var anakin = new Jedi({
-        'sex': 'male',
         'firstName': 'Anakin',
         'lastName': 'Skywalker',
-        'nickname': 'Darth Vader'
+        'nickname': 'Darth Vader',
+        'lasersaberColor': 'red'
     });
 
     var luke = new Jedi({
-        'sex': 'male',
         'firstName': 'Luke',
         'lastName': 'Skywalker',
+        'lasersaberColor': 'blue',
         'father': anakin // add the reference
     });
 
