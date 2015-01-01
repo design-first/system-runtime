@@ -34,6 +34,7 @@
     "build": "grunt build"
   },
   "devDependencies": {
+    "coveralls": "^2.11.2",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.2.1",
     "grunt-cli": "^0.1.13",
@@ -47,6 +48,7 @@
     "grunt-jsbeautifier": "^0.2.7",
     "grunt-karma": "^0.9.0",
     "grunt-merge-json": "^0.9.5",
+    "istanbul": "^0.3.5",
     "karma": "^0.12.14",
     "karma-chrome-launcher": "^0.1.3",
     "karma-coverage": "^0.2.7",

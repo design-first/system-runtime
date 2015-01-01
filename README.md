@@ -181,7 +181,7 @@ You will find more examples on the [/example](./example) directory.
 #### Bower
 
 ```sh
-bower install monoco --save
+$ bower install monoco --save
 ```
 
 Then add a `<script>` tag to your HTML page:
@@ -192,7 +192,7 @@ Then add a `<script>` tag to your HTML page:
 #### Node.js
 
 ```sh
-npm install monoco --save
+$ npm install monoco --save
 ```
 
 Then require monoco:
@@ -228,17 +228,17 @@ Grunt is used for automating the basic tasks of Monoco. You can use it to extend
 
 ```sh
 # run server tests
-grunt test
+$ grunt test
 # clean the build directory 
-grunt clean
+$ grunt clean
 # generate the documentation
-grunt doc
+$ grunt doc
 # build monoco on 'debug' mode
-grunt debug
+$ grunt debug
 # build monoco
 # it will generate the monoco core system (on /src/system/)
 # it will also run jshint and server/client tests
-grunt build
+$ grunt build
 ```
 
 ## Documentation
