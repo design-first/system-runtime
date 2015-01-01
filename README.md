@@ -145,7 +145,7 @@ system.on('main', function () {
     var luke = new Jedi({
         'sex': 'male',
         'firstName': 'Luke',
-        'lastName': 'Skywalkers',
+        'lastName': 'Skywalker',
         'father': anakin // add the reference
     });
 
@@ -169,7 +169,7 @@ monoco.require('db').system();
 
 Import the system into an another one:
 ```html
- <link rel="system" type="application/json" href="example.json"> 
+ <link rel="system" type="application/json" href="example.json"/> 
 ```
 
 You will find more examples on the [/example](./example) directory.
@@ -184,7 +184,7 @@ bower install monoco --save
 
 Then add a `<script>` tag to your HTML page:
 ```html
-<script src="/bower_components/monoco/build/monoco-min.js"></script>
+<script src="/bower_components/monoco/build/monoco-min.js" type="text/javascript"></script>
 ```
 
 #### Node.js
