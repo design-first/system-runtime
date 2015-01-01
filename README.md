@@ -1,6 +1,6 @@
 #[Monoco](http://monoco.io/)
 
-[Build Status](https://travis-ci.org/monocojs/monoco.svg?branch=master)
+[![Build Status](https://travis-ci.org/monocojs/monoco.svg?branch=master)](https://travis-ci.org/monocojs/monoco)
 
 #### What is Monoco ?
 
