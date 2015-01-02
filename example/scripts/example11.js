@@ -1,5 +1,5 @@
 /**
- * Example 11 - Create a one to one relashionship
+ * Example 11 - Create a one to one relationship
  * 
  */
  
