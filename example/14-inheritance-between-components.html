@@ -16,7 +16,12 @@
         <hr/>
         <p>
             Inheritance is defined at schema level.<br/>
-            The call to a method will follow the prototype chain of the component and at each level it finds if there is a behahior for the corresponding method (state).
+            <br/>
+            When a method is called:<br>
+            <br/>
+            - Monoco will search if there is a behahior for the corresponding method (i.e. state) and instance,<br>
+            - if not it will search a behahior for the corresponding method (i.e. state) and class name and<br>
+            - if not it will search a behahior for the corresponding method (i.e. state) at parents class level.
         </p> 
         <p>
             Look at the console of your browser to see the result of the script.
