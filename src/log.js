@@ -375,15 +375,6 @@ function canNotYetValidate(id, className) {
 }
 
 
-/*
- * Component already destroyed.
- * @method componentDestroyed
- * @param {String} id id of the component
- */
-function componentDestroyed(id) {
-    $helper.getMonoco().warning("can not call a method on component '" + id + "': the component has been destroyed");
-}
-
 /* exports */
 
 
@@ -649,11 +640,3 @@ exports.unknownType = unknownType;
  * @param {String} className name of the class
  */
 exports.canNotYetValidate = canNotYetValidate;
-
-
-/**
- * Component already destroyed.
- * @method componentDestroyed
- * @param {String} id id of the component
- */
-exports.componentDestroyed = componentDestroyed;

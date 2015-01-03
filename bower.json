@@ -1,7 +1,14 @@
 {
     "name": "monoco",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "A Model and a NoSQL Database for your Components",
+    "license": "MIT",
+    "homepage": "https://github.com/monocojs/monoco.git",
+    "author": {
+        "name": "erwan carriou",
+        "email": "erwan.carriou@mac.com",
+        "twitter": "@ecarriou"
+    },
     "main": "build/monoco-min.js",
     "keywords": [
         "metamodel",
@@ -22,13 +29,7 @@
         "build/monoco.json",
         "Gruntfile.js",
         "karma.conf.js",
-        "package.json"
-    ],
-    "homepage": "https://github.com/monocojs/monoco.git",
-    "license": "MIT",
-    "author": {
-        "name": "erwan carriou",
-        "email": "erwan.carriou@mac.com",
-        "twitter": "@ecarriou"
-    }
+        "package.json",
+        ".jshintrc"
+    ]
 }

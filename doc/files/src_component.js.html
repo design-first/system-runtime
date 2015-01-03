@@ -22,7 +22,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.1.2</b>
+                    API Docs for Version: <b>0.1.3</b>
                 </p>
             </li>
         </div>
@@ -350,15 +350,13 @@ function getEvents(id) {
 
 /*
  * Create a new class from a class definition.
- * @method createClass
- * @param {Object} definition definition of the class
+ * @method createClasss
  * @param {String} classId name of the class
  * @return {Function} the class
  * @private
  */
-function createClass(definition, classId) {
-    var config = definition,
-    body = function (config) {
+function createClass(classId) {
+    var body = function (config) {
         config = config || {};
         var body = {};
 
@@ -801,7 +799,7 @@ function factory(config) {
         classId = config.model;
     }
 
-    Class = createClass(config, classId);
+    Class = createClass(classId);
 
     store[classId] = Class;
 

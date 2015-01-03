@@ -22,7 +22,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.1.2</b>
+                    API Docs for Version: <b>0.1.3</b>
                 </p>
             </li>
         </div>
@@ -144,8 +144,6 @@
  * @module monoco
  * @submodule monoco-db
  * @requires monoco-component
- * @requires monoco-state
- * @requires monoco-behavior
  * @requires monoco-helper
  * @requires monoco-log
  * @class monoco-db
@@ -155,8 +153,6 @@
 &#x27;use strict&#x27;;
 
 var $component = require(&#x27;./component.js&#x27;);
-var $state = require(&#x27;./state.js&#x27;);
-var $behavior = require(&#x27;./behavior.js&#x27;);
 var $metamodel = require(&#x27;./metamodel.js&#x27;);
 var $helper = require(&#x27;./helper.js&#x27;);
 var $log = require(&#x27;./log.js&#x27;);
@@ -446,32 +442,6 @@ MonocoDatabaseCollection.prototype.count = function () {
 };
 
 
-/*
- * Remove all the databases (including internal ones).
- * @method clear
- * @private
- */
-function clear() {
-    var length = 0,
-    i = 0,
-    collectionName = &#x27;&#x27;;
-
-    // remove collections
-    length = collections.length;
-    for (i = 0; i &lt; length; i++) {
-        collectionName = collections[i];
-        exports[collectionName].remove();
-    }
-
-    // remove internal collections
-    length = internalDB.length;
-    for (i = 0; i &lt; length; i++) {
-        collectionName = internalDB[i];
-        exports[collectionName].remove();
-    }
-}
-
-
 /* Public methods */
 
 
@@ -759,8 +729,6 @@ function subsystem(params) {
  * @module monoco
  * @submodule monoco-db
  * @requires monoco-component
- * @requires monoco-state
- * @requires monoco-behavior
  * @requires monoco-helper
  * @requires monoco-log
  * @class monoco-db

@@ -19,12 +19,7 @@ module.exports = function (grunt) {
                 'spec/*.js'
             ],
             options: {
-                force: true,
-                node: true,
-                supernew:true,
-                globals: {
-                    'monoco': true
-                }
+                jshintrc: true
             }
         },
         jsbeautifier: {

@@ -1,7 +1,7 @@
 {
-    "predef": [
-        "monoco"
-    ],
+    "globals": {
+        "monoco": true
+    },
     "node" : true,
     "supernew": true
 }

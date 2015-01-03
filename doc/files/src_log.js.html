@@ -22,7 +22,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.1.2</b>
+                    API Docs for Version: <b>0.1.3</b>
                 </p>
             </li>
         </div>
@@ -480,15 +480,6 @@ function canNotYetValidate(id, className) {
 }
 
 
-/*
- * Component already destroyed.
- * @method componentDestroyed
- * @param {String} id id of the component
- */
-function componentDestroyed(id) {
-    $helper.getMonoco().warning(&quot;can not call a method on component &#x27;&quot; + id + &quot;&#x27;: the component has been destroyed&quot;);
-}
-
 /* exports */
 
 
@@ -754,14 +745,6 @@ exports.unknownType = unknownType;
  * @param {String} className name of the class
  */
 exports.canNotYetValidate = canNotYetValidate;
-
-
-/**
- * Component already destroyed.
- * @method componentDestroyed
- * @param {String} id id of the component
- */
-exports.componentDestroyed = componentDestroyed;
     </pre>
 </div>
 
