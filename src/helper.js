@@ -32,7 +32,6 @@
  * @submodule monoco-helper
  * @requires monoco-db
  * @requires monoco-component
- * @requires monoco-workflow
  * @class monoco-helper
  * @static
  */
@@ -42,12 +41,11 @@
 
 var $db = require('./db.js');
 var $component = require('./component.js');
-var $workflow = require('./workflow.js');
 
 
 /* Private property */
 
-var monoco = null;
+var monocoRef = null;
 
 
 /* Public method */
@@ -77,12 +75,12 @@ function isMonoco() {
 function getMonoco() {
     var monocoId = '';
 
-    if (!monoco) {
+    if (!monocoRef) {
         if (isMonoco()) {
             monocoId = $db.Monoco.find()[0]._id;
-            monoco = $component.get(monocoId);
+            monocoRef = $component.get(monocoId);
         } else {
-            monoco = {
+            monocoRef = {
                 error: function error(err, data) {
                     console.error('monoco: ' + err, data);
                 },
@@ -93,7 +91,7 @@ function getMonoco() {
         }
     }
 
-    return monoco;
+    return monocoRef;
 }
 
 
@@ -120,7 +118,6 @@ function generateId() {
  * @submodule monoco-helper
  * @requires monoco-db
  * @requires monoco-component
- * @requires monoco-workflow
  * @class monoco-helper
  * @static
  */

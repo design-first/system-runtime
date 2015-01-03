@@ -39,8 +39,6 @@
  * @module monoco
  * @submodule monoco-db
  * @requires monoco-component
- * @requires monoco-state
- * @requires monoco-behavior
  * @requires monoco-helper
  * @requires monoco-log
  * @class monoco-db
@@ -50,8 +48,6 @@
 'use strict';
 
 var $component = require('./component.js');
-var $state = require('./state.js');
-var $behavior = require('./behavior.js');
 var $metamodel = require('./metamodel.js');
 var $helper = require('./helper.js');
 var $log = require('./log.js');
@@ -341,32 +337,6 @@ MonocoDatabaseCollection.prototype.count = function () {
 };
 
 
-/*
- * Remove all the databases (including internal ones).
- * @method clear
- * @private
- */
-function clear() {
-    var length = 0,
-    i = 0,
-    collectionName = '';
-
-    // remove collections
-    length = collections.length;
-    for (i = 0; i < length; i++) {
-        collectionName = collections[i];
-        exports[collectionName].remove();
-    }
-
-    // remove internal collections
-    length = internalDB.length;
-    for (i = 0; i < length; i++) {
-        collectionName = internalDB[i];
-        exports[collectionName].remove();
-    }
-}
-
-
 /* Public methods */
 
 
@@ -654,8 +624,6 @@ function subsystem(params) {
  * @module monoco
  * @submodule monoco-db
  * @requires monoco-component
- * @requires monoco-state
- * @requires monoco-behavior
  * @requires monoco-helper
  * @requires monoco-log
  * @class monoco-db

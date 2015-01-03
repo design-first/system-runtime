@@ -1,0 +1,7 @@
+{
+    "predef": [
+        "monoco"
+    ],
+    "node" : true,
+    "supernew": true
+}

@@ -245,15 +245,13 @@ function getEvents(id) {
 
 /*
  * Create a new class from a class definition.
- * @method createClass
- * @param {Object} definition definition of the class
+ * @method createClasss
  * @param {String} classId name of the class
  * @return {Function} the class
  * @private
  */
-function createClass(definition, classId) {
-    var config = definition,
-    body = function (config) {
+function createClass(classId) {
+    var body = function (config) {
         config = config || {};
         var body = {};
 
@@ -696,7 +694,7 @@ function factory(config) {
         classId = config.model;
     }
 
-    Class = createClass(config, classId);
+    Class = createClass(classId);
 
     store[classId] = Class;
 

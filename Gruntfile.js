@@ -21,6 +21,7 @@ module.exports = function (grunt) {
             options: {
                 force: true,
                 node: true,
+                supernew:true,
                 globals: {
                     'monoco': true
                 }
