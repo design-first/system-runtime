@@ -171,7 +171,7 @@ monoco.require('db').system();
 
 Import the system into an another one:
 ```html
- <link rel="system" type="application/json" href="example.json"/> 
+ <link rel="system" type="application/json" href="example.json"> 
 ```
 
 You will find more examples on the [/example](./example) directory.
@@ -186,7 +186,7 @@ $ bower install monoco --save
 
 Then add a `<script>` tag to your HTML page:
 ```html
-<script src="/bower_components/monoco/build/monoco-min.js" type="text/javascript"></script>
+<script src="/bower_components/monoco/build/monoco-min.js"></script>
 ```
 
 #### Node.js
@@ -247,4 +247,4 @@ There is a generated [documentation](/doc/index.html) of Monoco core APIs. This 
 
 ## Licence
 
-Monoco is distributed under [MIT licence](./LICENSE).
+Monoco is distributed under [GPLv3](./LICENSE).

@@ -22,7 +22,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.1.3</b>
+                    API Docs for Version: <b>0.1.4</b>
                 </p>
             </li>
         </div>
@@ -111,23 +111,18 @@
  *
  * Copyright (C) 2015 - Erwan Carriou
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the &quot;Software&quot;), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
 
 /**
@@ -151,7 +146,7 @@
  */
 var system = {
     &quot;name&quot;: &quot;monoco&quot;,
-    &quot;version&quot;: &quot;0.1.3&quot;,
+    &quot;version&quot;: &quot;0.1.4&quot;,
     &quot;description&quot;: &quot;A Model and a NoSQL Database for your Components&quot;,
     &quot;_id&quot;: &quot;e89c617b6b15d24&quot;,
     &quot;schemas&quot;: {
@@ -749,151 +744,151 @@ var system = {
             &quot;action&quot;: &quot;function ready() { var systems = [], system = null, i = 0, length = 0; if (typeof document !== &#x27;undefined&#x27;) { systems = document.querySelectorAll(&#x27;link[rel=system]&#x27;); length = systems.length; for (i = 0; i &lt; length; i++) { system = systems[i]; this.load(system.href, false); } } }&quot;,
             &quot;core&quot;: true
         },
-        &quot;14ffb1bd0717483&quot;: {
-            &quot;_id&quot;: &quot;14ffb1bd0717483&quot;,
+        &quot;116921ee2d10686&quot;: {
+            &quot;_id&quot;: &quot;116921ee2d10686&quot;,
             &quot;component&quot;: &quot;Monoco&quot;,
             &quot;state&quot;: &quot;error&quot;,
             &quot;action&quot;: &quot;function error(data) { console.error(&#x27;monoco: &#x27; + data.message, data.error); }&quot;,
             &quot;core&quot;: true
         },
-        &quot;1875e138d11f17d&quot;: {
-            &quot;_id&quot;: &quot;1875e138d11f17d&quot;,
+        &quot;132bc1298517702&quot;: {
+            &quot;_id&quot;: &quot;132bc1298517702&quot;,
             &quot;component&quot;: &quot;Monoco&quot;,
             &quot;state&quot;: &quot;find&quot;,
             &quot;action&quot;: &quot;function find(Class, query) { var documents = [], components = [], component = null, i = 0, length = 0; if ($db[Class]) { documents = $db[Class].find(query); length = documents.length; for (i = 0; i &lt; length; i++) { component = $component.get(documents[i]._id); if (component) { components.push(component); } } } return components; }&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;133d5123e71a823&quot;: {
-            &quot;_id&quot;: &quot;133d5123e71a823&quot;,
+        &quot;13bcc16f551e071&quot;: {
+            &quot;_id&quot;: &quot;13bcc16f551e071&quot;,
             &quot;component&quot;: &quot;Monoco&quot;,
             &quot;state&quot;: &quot;system&quot;,
             &quot;action&quot;: &quot;function system(name) { var System = null, system = {}, result = [], conf = {}; if (name) { conf.master = true; conf.name = name; System = monoco.require(&#x27;MonocoSystem&#x27;); system = new System(conf); } else { result = monoco.find(&#x27;MonocoSystem&#x27;, {&#x27;master&#x27;: true}); if (result.length) { system = result[0]; } } return system; }&quot;,
             &quot;core&quot;: true
         },
-        &quot;19b101b0961b129&quot;: {
-            &quot;_id&quot;: &quot;19b101b0961b129&quot;,
+        &quot;10e6917a261e3fa&quot;: {
+            &quot;_id&quot;: &quot;10e6917a261e3fa&quot;,
             &quot;component&quot;: &quot;Monoco&quot;,
             &quot;state&quot;: &quot;warning&quot;,
             &quot;action&quot;: &quot;function warning(message) { console.warn(&#x27;monoco: &#x27; + message); }&quot;,
             &quot;core&quot;: true
         },
-        &quot;1902d1092815f23&quot;: {
-            &quot;_id&quot;: &quot;1902d1092815f23&quot;,
+        &quot;167591a7ee1d4ee&quot;: {
+            &quot;_id&quot;: &quot;167591a7ee1d4ee&quot;,
             &quot;component&quot;: &quot;MonocoClassInfo&quot;,
             &quot;state&quot;: &quot;event&quot;,
             &quot;action&quot;: &quot;function event(name) { var result = {}; if (this.metamodel()[name] === &#x27;event&#x27;) { result = this.model()[name]; } return result; }&quot;,
             &quot;core&quot;: true
         },
-        &quot;106e719385126a2&quot;: {
-            &quot;_id&quot;: &quot;106e719385126a2&quot;,
+        &quot;17e671f47c122da&quot;: {
+            &quot;_id&quot;: &quot;17e671f47c122da&quot;,
             &quot;component&quot;: &quot;MonocoClassInfo&quot;,
             &quot;state&quot;: &quot;events&quot;,
             &quot;action&quot;: &quot;function events() { var keys = Object.keys(this.metamodel()), item = &#x27;&#x27;, result = [], i = 0, length = 0; length = keys.length; for (i = 0; i &lt; length; i++) { item = keys[i]; if (this.metamodel()[item] === &#x27;event&#x27;) { result.push(item); } } return result; }&quot;,
             &quot;core&quot;: true
         },
-        &quot;14f72182f81b6c1&quot;: {
-            &quot;_id&quot;: &quot;14f72182f81b6c1&quot;,
+        &quot;171dc1aab31ab32&quot;: {
+            &quot;_id&quot;: &quot;171dc1aab31ab32&quot;,
             &quot;component&quot;: &quot;MonocoClassInfo&quot;,
             &quot;state&quot;: &quot;method&quot;,
             &quot;action&quot;: &quot;function method(name) { var result = {}; if (this.metamodel()[name] === &#x27;method&#x27;) { result = this.model()[name]; } return result; }&quot;,
             &quot;core&quot;: true
         },
-        &quot;15efc1ec7413047&quot;: {
-            &quot;_id&quot;: &quot;15efc1ec7413047&quot;,
+        &quot;1eea2128861bba3&quot;: {
+            &quot;_id&quot;: &quot;1eea2128861bba3&quot;,
             &quot;component&quot;: &quot;MonocoClassInfo&quot;,
             &quot;state&quot;: &quot;methods&quot;,
             &quot;action&quot;: &quot;function methods() { var keys = Object.keys(this.metamodel()), item = &#x27;&#x27;, result = [], i = 0, length = 0; length = keys.length; for (i = 0; i &lt; length; i++) { item = keys[i]; if (this.metamodel()[item] === &#x27;method&#x27;) { result.push(item); } } return result; }&quot;,
             &quot;core&quot;: true
         },
-        &quot;11a24102f2154d7&quot;: {
-            &quot;_id&quot;: &quot;11a24102f2154d7&quot;,
+        &quot;1d912194a010214&quot;: {
+            &quot;_id&quot;: &quot;1d912194a010214&quot;,
             &quot;component&quot;: &quot;MonocoClassInfo&quot;,
             &quot;state&quot;: &quot;properties&quot;,
             &quot;action&quot;: &quot;function properties() { var keys = Object.keys(this.metamodel()), item = &#x27;&#x27;, result = [], i = 0, length = 0; length = keys.length; for (i = 0; i &lt; length; i++) { item = keys[i]; if (this.metamodel()[item] === &#x27;property&#x27;) { result.push(item); } } return result; }&quot;,
             &quot;core&quot;: true
         },
-        &quot;1c2ff1bdbf1e24c&quot;: {
-            &quot;_id&quot;: &quot;1c2ff1bdbf1e24c&quot;,
+        &quot;1497d1eab913a5e&quot;: {
+            &quot;_id&quot;: &quot;1497d1eab913a5e&quot;,
             &quot;component&quot;: &quot;MonocoClassInfo&quot;,
             &quot;state&quot;: &quot;property&quot;,
             &quot;action&quot;: &quot;function property(name) { var result = {}; if (this.metamodel()[name] === &#x27;property&#x27;) { result = this.model()[name]; } return result; }&quot;,
             &quot;core&quot;: true
         },
-        &quot;1cacc1026d11da3&quot;: {
-            &quot;_id&quot;: &quot;1cacc1026d11da3&quot;,
+        &quot;1e25119ffc1e85f&quot;: {
+            &quot;_id&quot;: &quot;1e25119ffc1e85f&quot;,
             &quot;component&quot;: &quot;MonocoComponent&quot;,
             &quot;state&quot;: &quot;destroy&quot;,
             &quot;action&quot;: &quot;function destroy() { $component.destroy(this.id()); }&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1824a1a8021ecee&quot;: {
-            &quot;_id&quot;: &quot;1824a1a8021ecee&quot;,
+        &quot;1d7c812cd018dc1&quot;: {
+            &quot;_id&quot;: &quot;1d7c812cd018dc1&quot;,
             &quot;component&quot;: &quot;MonocoComponent&quot;,
             &quot;state&quot;: &quot;off&quot;,
             &quot;action&quot;: &quot;function off(state, behaviorId) { var args = [], i = 0, length = 0; length = arguments.length; for (i = 0; i &lt; length - 5; i++) { args.push(arguments[i]); } if ($workflow.checkParams({\&quot;component\&quot;: this, \&quot;methodName\&quot;: \&quot;off\&quot;, \&quot;args\&quot;: args})) { if ($metamodel.isValidState(state, this.constructor.name)) {$behavior.remove({\&quot;behaviorId\&quot;: behaviorId, \&quot;componentId\&quot;: this.id(), \&quot;state\&quot;: state}); } else { $helper.getMonoco().warning(\&quot;invoke &#x27;off&#x27; method of component &#x27;\&quot; + this.id() + \&quot;&#x27; with an invalid state &#x27;\&quot; + state + \&quot;&#x27;\&quot;); } } }&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1ddd0132341682c&quot;: {
-            &quot;_id&quot;: &quot;1ddd0132341682c&quot;,
+        &quot;1a5ef1ac671bc29&quot;: {
+            &quot;_id&quot;: &quot;1a5ef1ac671bc29&quot;,
             &quot;component&quot;: &quot;MonocoComponent&quot;,
             &quot;state&quot;: &quot;require&quot;,
             &quot;action&quot;: &quot;function require(id) { return $component.get(id); }&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;121721556812799&quot;: {
-            &quot;_id&quot;: &quot;121721556812799&quot;,
+        &quot;1ef891eefe15f57&quot;: {
+            &quot;_id&quot;: &quot;1ef891eefe15f57&quot;,
             &quot;component&quot;: &quot;MonocoDatabase&quot;,
             &quot;state&quot;: &quot;subsystem&quot;,
             &quot;action&quot;: &quot;function subsystem(params) { return $db.subsystem(params); }&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;140681d4ec1af17&quot;: {
-            &quot;_id&quot;: &quot;140681d4ec1af17&quot;,
+        &quot;10e12126061280a&quot;: {
+            &quot;_id&quot;: &quot;10e12126061280a&quot;,
             &quot;component&quot;: &quot;MonocoDatabase&quot;,
             &quot;state&quot;: &quot;system&quot;,
             &quot;action&quot;: &quot;function system(system) { return $db.system(system); }&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1090413a6f10796&quot;: {
-            &quot;_id&quot;: &quot;1090413a6f10796&quot;,
+        &quot;10e3c125be114d0&quot;: {
+            &quot;_id&quot;: &quot;10e3c125be114d0&quot;,
             &quot;component&quot;: &quot;MonocoMetamodel&quot;,
             &quot;state&quot;: &quot;create&quot;,
             &quot;action&quot;: &quot;function create() { $metamodel.create(); }&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1bfaa1ee5015127&quot;: {
-            &quot;_id&quot;: &quot;1bfaa1ee5015127&quot;,
+        &quot;1206f1549111cd4&quot;: {
+            &quot;_id&quot;: &quot;1206f1549111cd4&quot;,
             &quot;component&quot;: &quot;MonocoMetamodel&quot;,
             &quot;state&quot;: &quot;schema&quot;,
             &quot;action&quot;: &quot;function schema(schema) { $metamodel.schema(schema); }&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;116511739214a42&quot;: {
-            &quot;_id&quot;: &quot;116511739214a42&quot;,
+        &quot;19a61182ba15e74&quot;: {
+            &quot;_id&quot;: &quot;19a61182ba15e74&quot;,
             &quot;component&quot;: &quot;MonocoMetamodel&quot;,
             &quot;state&quot;: &quot;type&quot;,
             &quot;action&quot;: &quot;function type(type) { $metamodel.type(type); }&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;18cf1167f619d89&quot;: {
-            &quot;_id&quot;: &quot;18cf1167f619d89&quot;,
+        &quot;193081d5ee19233&quot;: {
+            &quot;_id&quot;: &quot;193081d5ee19233&quot;,
             &quot;component&quot;: &quot;MonocoSystem&quot;,
             &quot;state&quot;: &quot;sync&quot;,
             &quot;action&quot;: &quot;function sync() { var dump = $db.dump(); this.schemas(dump.schemas); this.types(dump.types); this.behaviors(dump.behaviors); this.components(dump.components); }&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1889c100971b18c&quot;: {
-            &quot;_id&quot;: &quot;1889c100971b18c&quot;,
+        &quot;181ae1c652194c8&quot;: {
+            &quot;_id&quot;: &quot;181ae1c652194c8&quot;,
             &quot;component&quot;: &quot;e89c617b6b15d24&quot;,
             &quot;state&quot;: &quot;main&quot;,
             &quot;action&quot;: &quot;function main() { var monoco = $component.get(&#x27;monoco&#x27;); monoco.ready(); }&quot;,
@@ -905,7 +900,7 @@ var system = {
         &quot;Monoco&quot;: {
             &quot;monoco&quot;: {
                 &quot;_id&quot;: &quot;monoco&quot;,
-                &quot;version&quot;: &quot;0.1.3&quot;
+                &quot;version&quot;: &quot;0.1.4&quot;
             }
         },
         &quot;MonocoDatabase&quot;: {

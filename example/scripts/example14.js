@@ -52,7 +52,7 @@ monoco.require('metamodel').schema({
 
 monoco.require('metamodel').schema({
     "_name": "Teacher",
-    "_schema": "PersonSchema",
+    "_schema": "TeacherSchema",
     "_inherit": ["Person"], // inheritance is set at class schema level
     "description": "a teacher"
 });
