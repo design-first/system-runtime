@@ -1,4 +1,4 @@
-#[Monoco](http://monoco.io/)
+#[monoco](http://monoco.io/)
 
 [![Build Status](https://travis-ci.org/monocojs/monoco.svg?branch=master)](https://travis-ci.org/monocojs/monoco) [![Coverage Status](https://img.shields.io/coveralls/monocojs/monoco.svg)](https://coveralls.io/r/monocojs/monoco)
 
@@ -13,7 +13,7 @@ Monoco contains:
  * a **micro NoSQL Database** to store your components and to export/import your system and
  * a **worflow engine** that checks if the change of the state of a component is compliant with your model.
 
-#### How Monoco works ?
+#### How monoco works ?
 
 Monoco is based on the concept of **system**:
 
@@ -215,15 +215,15 @@ Monoco core system is located on the [/src/system](./src/system) directory:
 
 #### Monoco Addons
 
-You can update Monoco core system **by composing other systems** with it. In that case, other systems are called **addons**. 
+You can update monoco core system **by composing other systems** with it. In that case, other systems are called **addons**. 
 
 Monoco addons are located on the [/addons](./addons/) directory. 
-You will find all the systems that you can import on Monoco. 
-To do so, just copy and paste a system into the [/src/addons](./src/addons/) directory and build Monoco.
+You will find all the systems that you can import on monoco. 
+To do so, just copy and paste a system into the [/src/addons](./src/addons/) directory and build msonoco.
 
 #### Grunt
 
-Grunt is used for automating the basic tasks of Monoco. You can use it to extend Monoco core system or to package your own system with Monoco.
+Grunt is used for automating the basic tasks of Monoco. You can use it to extend monoco core system or to package your own system with monoco.
 
 
 ```sh
@@ -243,7 +243,7 @@ $ grunt build
 
 ## Documentation
 
-There is a generated [documentation](/doc/index.html) of Monoco core APIs. This documentation is only usefull for using Monoco core APIs in your code (via **Dependency Injection** on Monoco behaviors).
+There is a generated [documentation](/doc/index.html) of monoco core APIs. This documentation is only usefull for using monoco core APIs in your code (via **Dependency Injection** on monoco behaviors). For more documentations, go to [monoco website](http://monoco.io/).
 
 ## Licence
 
