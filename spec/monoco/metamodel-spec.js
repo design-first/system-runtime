@@ -2,7 +2,7 @@ describe('Monoco Metamodel instance', function () {
 
     // init
     if (typeof window === 'undefined') {
-        monoco = require('../src/monoco.js');
+        monoco = require('../../src/monoco.js');
     }
 
     it('exists', function () {

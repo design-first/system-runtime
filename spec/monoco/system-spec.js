@@ -2,7 +2,7 @@ describe('A Monoco System', function () {
 
     // init
     if (typeof window === 'undefined') {
-        monoco = require('../src/monoco.js');
+        monoco = require('../../src/monoco.js');
     }
     var system = monoco.system('test5');
 

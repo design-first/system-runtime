@@ -6,13 +6,13 @@ module.exports = function (config) {
         frameworks: ['jasmine'],
         files: [
             "build/monoco-min.js",
-            "spec/monoco-spec.js",
-            "spec/component-spec.js",
-            "spec/metamodel-spec.js",
-            "spec/database-spec.js",
-            "spec/classInfo-spec.js",
-            "spec/system-spec.js",
-            "spec/mson-spec.js"
+            "spec/monoco/monoco-spec.js",
+            "spec/monoco/component-spec.js",
+            "spec/monoco/metamodel-spec.js",
+            "spec/monoco/database-spec.js",
+            "spec/monoco/classInfo-spec.js",
+            "spec/monoco/system-spec.js",
+            "spec/monoco/mson-spec.js"
         ],
         reporters: ['progress', 'coverage'],
         preprocessors: {

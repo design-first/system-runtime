@@ -2,7 +2,7 @@ describe('A MSON Schema', function () {
 
     // init
     if (typeof window === 'undefined') {
-        monoco = require('../src/monoco.js');
+        monoco = require('../../src/monoco.js');
     }
 
     it('can make inheritance at Class level', function () {

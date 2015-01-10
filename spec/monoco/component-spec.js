@@ -2,7 +2,7 @@ describe('A Monoco Component', function () {
 
     // init
     if (typeof window === 'undefined') {
-        monoco = require('../src/monoco.js');
+        monoco = require('../../src/monoco.js');
     }
     var share = '';
     function _init() {
