@@ -133,10 +133,21 @@ MonocoDatabaseCollection.prototype.find = function (query) {
     query = query || null;
 
     if (query && Object.keys(query).length) {
-        for (id in store[this.name]) {
-            object = store[this.name][id];
-            if (contains(query, object)) {
-                result.push(object);
+        if (Array.isArray(query)) {
+            query.forEach(function multi_search(criteria) {
+                for (id in store[this.name]) {
+                    object = store[this.name][id];
+                    if (contains(criteria, object)) {
+                        result.push(object);
+                    }
+                }
+            }.bind(this));
+        } else {
+            for (id in store[this.name]) {
+                object = store[this.name][id];
+                if (contains(query, object)) {
+                    result.push(object);
+                }
             }
         }
     } else {
@@ -284,19 +295,39 @@ MonocoDatabaseCollection.prototype.remove = function (query) {
 
     if (query && Object.keys(query).length) {
 
-        for (id in store[this.name]) {
-            object = store[this.name][id];
+        if (Array.isArray(query)) {
+            query.forEach(function multi_remove(criteria) {
+                for (id in store[this.name]) {
+                    object = store[this.name][id];
 
-            if (contains(query, object)) {
-                delete store[this.name][id];
-                component = $component.get(id);
-                if (component) {
-                    component.destroy();
+                    if (contains(criteria, object)) {
+                        delete store[this.name][id];
+                        component = $component.get(id);
+                        if (component) {
+                            component.destroy();
+                        }
+                        if ($helper.isMonoco()) {
+                            $helper.getMonoco().require('db').remove(this.name, id);
+                        }
+                        result++;
+                    }
                 }
-                if ($helper.isMonoco()) {
-                    $helper.getMonoco().require('db').remove(this.name, id);
+            }.bind(this));
+        } else {
+            for (id in store[this.name]) {
+                object = store[this.name][id];
+
+                if (contains(query, object)) {
+                    delete store[this.name][id];
+                    component = $component.get(id);
+                    if (component) {
+                        component.destroy();
+                    }
+                    if ($helper.isMonoco()) {
+                        $helper.getMonoco().require('db').remove(this.name, id);
+                    }
+                    result++;
                 }
-                result++;
             }
         }
     } else {
