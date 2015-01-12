@@ -1,5 +1,5 @@
 { 
 "_id": "e89c617b6b15d24",
 "name": "monoco",
-"description": "A Model and a NoSQL Database for your Components",
+"description": "The Model-Driven Components Framework",
 "version": "{version}",

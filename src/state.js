@@ -1,6 +1,6 @@
 /* 
- * Monoco
- * A Model and a NoSQL Database for your Components
+ * monoco
+ * The Model-Driven Components Framework
  * http://monoco.io/
  * @monocojs
  *
