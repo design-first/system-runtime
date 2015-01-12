@@ -1,7 +1,7 @@
 {
     "name": "monoco",
-    "version": "0.1.5",
-    "description": "The Model-Driven Components Framework",
+    "version": "0.1.6",
+    "description": "The Model-Driven Component Framework",
     "license": "GPLv3",
     "homepage": "https://github.com/monocojs/monoco.git",
     "author": {
@@ -11,6 +11,7 @@
     },
     "main": "build/monoco-min.js",
     "keywords": [
+        "mda",
         "metamodel",
         "model",
         "design",

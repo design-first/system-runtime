@@ -1,9 +1,10 @@
 {
     "name": "monoco",
-    "version": "0.1.5",
-    "description": "The Model-Driven Components Framework",
+    "version": "0.1.6",
+    "description": "The Model-Driven Component Framework",
     "homepage": "http://monoco.io",
     "keywords": [
+        "mda",
         "metamodel",
         "model",
         "design",

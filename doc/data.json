@@ -1,8 +1,8 @@
 {
     "project": {
         "name": "monoco",
-        "description": "The Model-Driven Components Framework",
-        "version": "0.1.5",
+        "description": "The Model-Driven Component Framework",
+        "version": "0.1.6",
         "url": "http://monoco.io"
     },
     "files": {

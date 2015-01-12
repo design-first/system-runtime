@@ -1,6 +1,6 @@
 /* 
  * monoco
- * The Model-Driven Components Framework
+ * The Model-Driven Component Framework
  * http://monoco.io/
  * @monocojs
  *
