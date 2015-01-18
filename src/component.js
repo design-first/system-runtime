@@ -730,6 +730,33 @@ function get(id) {
 
 
 /*
+ * Find  components with a query.
+ * @method find
+ * @param {String} query query
+ * @return {Array} components found
+ */
+function find(Class, query) {
+    var documents = [],
+    components = [],
+    component = null,
+    i = 0,
+    length = 0;
+
+    if ($db[Class]) {
+        documents = $db[Class].find(query);
+        length = documents.length;
+        for (i = 0; i < length; i++) {
+            component = exports.get(documents[i]._id);
+            if (component) {
+                components.push(component);
+            }
+        }
+    }
+    return components;
+}
+
+
+/*
  * Create a component from its configuration.
  * @method create
  * @param {Object} config
@@ -826,6 +853,15 @@ exports.create = create;
  * @return {Component}
  */
 exports.get = get;
+
+
+/**
+ * Find components with a query.
+ * @method find
+ * @param {String} query query
+ * @return {Array} components found
+ */
+exports.find = find;
 
 
 /**

@@ -22,7 +22,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.1.6</b>
+                    API Docs for Version: <b>0.2.0</b>
                 </p>
             </li>
         </div>
@@ -447,6 +447,7 @@ function callAction(component, state, action, params) {
             injectedParams.push($metamodel);
             injectedParams.push(exports);
             injectedParams.push($behavior);
+            injectedParams.push($log);
 
             result = action.action.apply(component, injectedParams);
         } else {

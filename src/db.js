@@ -52,7 +52,7 @@ var $log = require('./log.js');
 
 
 var store = {},
-collections = [],
+collections = ['MonocoBus', 'MonocoChannelEvent'],
 internalDB = [
     'Monoco',
     'MonocoSchema',
@@ -63,7 +63,11 @@ internalDB = [
     'MonocoMetamodel',
     'MonocoDatabase',
     'MonocoSystem',
-    'MonocoClassInfo'
+    'MonocoClassInfo',
+    'MonocoMessage',
+    'MonocoBus',
+    'MonocoChannelEvent',
+    'MonocoChannel'
 ];
 
 
@@ -200,12 +204,11 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
             if (Component) {
                 component = new Component(obj);
                 result.push(component.id());
+            } else {
+                if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
+                    $helper.getMonoco().require('db').insert(this.name, obj);
+                }
             }
-
-            if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
-                $helper.getMonoco().require('db').insert(this.name, obj);
-            }
-
         } else {
             $log.invalidDocumentOnDbInsert(obj, this.name);
         }

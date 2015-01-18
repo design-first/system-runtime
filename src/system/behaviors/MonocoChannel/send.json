@@ -1,0 +1,7 @@
+{
+    "component": "MonocoChannel",
+    "state": "send",
+    "action": "function send(message) { var busList = [], messageId = [], events = [], result = true; events = $db.MonocoChannelEvent.find({'name': message.event}); if (events.length && $metamodel.isValidType(message.data, events[0].type)) { busList = $component.find('MonocoBus', {}); busList.forEach(function (bus) { bus.send(message); }); } else { result = false; $log.invalidChannelEvent(message.data, message.event, events[0].type); } return result; }",
+    "core": true,
+    "useCoreAPI": true
+}

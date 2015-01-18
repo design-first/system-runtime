@@ -1,0 +1,7 @@
+{
+    "component": "MonocoChannel",
+    "state": "listen",
+    "action": "function listen(event, action) { $behavior.add('db', 'insert', function channel_insert(collectionName, document) { if (collectionName === 'MonocoMessage') { if (document.event === event) { action(document); } } }, true, true); }",
+    "core": true,
+    "useCoreAPI": true
+}

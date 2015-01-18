@@ -99,6 +99,7 @@ function createFunction(name, func, core, useCoreAPI) {
         params.push('$metamodel');
         params.push('$workflow');
         params.push('$behavior');
+        params.push('$log');
     }
 
     if (params[0] !== '') {
@@ -125,13 +126,18 @@ function createFunction(name, func, core, useCoreAPI) {
  * @param {Object} state the state on which the action will be executed 
  * @param {Object} action the action to execute when the component will have a specific state 
  * @param {Boolean} useCoreAPI if true, monoco core modules will be injected as parameters of the action (default false)
+ * @param {Boolean} core if true, behavior can not be exported
  * @return {String} id of the behavior created in Monoco Database
  */
-function add(id, state, action, useCoreAPI) {
+function add(id, state, action, useCoreAPI, core) {
     var behaviorId = $helper.generateId();
 
     if (typeof useCoreAPI === 'undefined') {
         useCoreAPI = false;
+    }
+    
+    if (typeof core === 'undefined') {
+        core = false;
     }
 
     store[behaviorId] = action;
@@ -141,7 +147,8 @@ function add(id, state, action, useCoreAPI) {
         "component": id,
         "state": state,
         "action": action.toString(),
-        "useCoreAPI": useCoreAPI
+        "useCoreAPI": useCoreAPI,
+        "core":core
     });
 
     return behaviorId;
@@ -245,6 +252,7 @@ function clear() {
  * @param {Object} state the state on which the action will be executed 
  * @param {Object} action the action to execute when the component will have a specific state 
  * @param {Boolean} useCoreAPI if true, monoco core modules will be injected as parameters of the action (default false)
+ * @param {Boolean} core if true, behavior can not be exported
  * @return {String} id of the behavior created in Monoco Database
  */
 exports.add = add;

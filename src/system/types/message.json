@@ -1,0 +1,19 @@
+{
+    "name": "message",
+    "type": "object",
+    "schema": {
+        "event": {
+            "type": "string",
+            "mandatory": true
+        },
+        "from": {
+            "type": "string",
+            "mandatory": true
+        },
+        "data": {
+            "type": "object",
+            "mandatory": true
+        }
+    },
+    "core": true
+}

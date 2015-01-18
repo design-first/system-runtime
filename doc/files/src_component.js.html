@@ -22,7 +22,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.1.6</b>
+                    API Docs for Version: <b>0.2.0</b>
                 </p>
             </li>
         </div>
@@ -835,6 +835,33 @@ function get(id) {
 
 
 /*
+ * Find  components with a query.
+ * @method find
+ * @param {String} query query
+ * @return {Array} components found
+ */
+function find(Class, query) {
+    var documents = [],
+    components = [],
+    component = null,
+    i = 0,
+    length = 0;
+
+    if ($db[Class]) {
+        documents = $db[Class].find(query);
+        length = documents.length;
+        for (i = 0; i &lt; length; i++) {
+            component = exports.get(documents[i]._id);
+            if (component) {
+                components.push(component);
+            }
+        }
+    }
+    return components;
+}
+
+
+/*
  * Create a component from its configuration.
  * @method create
  * @param {Object} config
@@ -931,6 +958,15 @@ exports.create = create;
  * @return {Component}
  */
 exports.get = get;
+
+
+/**
+ * Find components with a query.
+ * @method find
+ * @param {String} query query
+ * @return {Array} components found
+ */
+exports.find = find;
 
 
 /**

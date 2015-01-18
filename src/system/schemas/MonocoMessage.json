@@ -1,0 +1,24 @@
+{
+    "_id": "MonocoMessage",
+    "_name": "MonocoMessage",
+    "_schema": "MonocoMessageSchema",
+    "_core": true,
+    "event": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    },
+    "from": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    },
+    "data": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": true,
+        "default": {}
+    }
+}

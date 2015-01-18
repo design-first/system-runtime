@@ -2,7 +2,7 @@
     "project": {
         "name": "monoco",
         "description": "The Model-Driven Component Framework",
-        "version": "0.1.6",
+        "version": "0.2.0",
         "url": "http://monoco.io"
     },
     "files": {
@@ -151,7 +151,7 @@
             "namespaces": {},
             "tag": "main",
             "file": "build/system/system.js",
-            "line": 817,
+            "line": 1001,
             "description": "This module is the main module of Monoco. <br>\nIt inits Monoco Metamodel and loads the Monoco core system.",
             "requires": [
                 "monoco-component",
@@ -173,7 +173,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/behavior.js",
-            "line": 228,
+            "line": 235,
             "description": "This module manages the behaviors of all components. \nA behavior is a mecanism that allow users to add actions that will be executed \nwhen a specific state of a component will change.",
             "requires": [
                 "monoco-db",
@@ -193,7 +193,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/component.js",
-            "line": 796,
+            "line": 823,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by Monoco.",
             "requires": [
                 "monoco-workflow",
@@ -218,7 +218,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/db.js",
-            "line": 95,
+            "line": 99,
             "description": "This module manages Monoco Database. <br>\nMonoco Database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nMonoco Database is closely linked to Monoco Metamodel and Monoco Component because: <br>\n- all operations done by Monoco Database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "monoco-component",
@@ -259,7 +259,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/log.js",
-            "line": 376,
+            "line": 388,
             "description": "This module contains all the functions that write a log.",
             "requires": [
                 "monoco-helper"
@@ -277,7 +277,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1260,
+            "line": 1264,
             "description": "This module manages Monoco Metamodel. <br>\nMonoco Metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.",
             "requires": [
                 "monoco-db",
@@ -344,7 +344,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 817,
+            "line": 1001,
             "description": "This module contains the Monoco core system.",
             "static": 1
         }
@@ -362,7 +362,7 @@
             "submodule": "monoco-behavior",
             "namespace": "",
             "file": "src/behavior.js",
-            "line": 228,
+            "line": 235,
             "description": "This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed \nwhen a specific state of a component will change.",
             "requires": [
                 "monoco-db",
@@ -381,7 +381,7 @@
             "submodule": "monoco-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 796,
+            "line": 823,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by Monoco.",
             "requires": [
                 "monoco-workflow",
@@ -404,7 +404,7 @@
             "submodule": "monoco-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 639,
+            "line": 642,
             "description": "This module manages Monoco Database. <br>\nMonoco Database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nMonoco Database is closely linked to Monoco Metamodel because: <br>\n- all operations done by Monoco Database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "monoco-component",
@@ -424,7 +424,7 @@
             "submodule": "monoco-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 95,
+            "line": 99,
             "description": "A collection of documents managed by Monoco. <br>\nInternal collections manage core objects of Monoco (schema, type, ...). <br>\nPublic collections manage components of the same class. <br>",
             "is_constructor": 1,
             "params": [
@@ -466,7 +466,7 @@
             "submodule": "monoco-log",
             "namespace": "",
             "file": "src/log.js",
-            "line": 376,
+            "line": 388,
             "description": "This module contains all the functions that write a log.",
             "requires": [
                 "monoco-helper"
@@ -484,7 +484,7 @@
             "submodule": "monoco-metamodel",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1260,
+            "line": 1264,
             "description": "This module manages Monoco Metamodel. <br>\nMonoco Metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.",
             "requires": [
                 "monoco-db",
@@ -546,7 +546,7 @@
             "submodule": "monoco-workflow",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 573,
+            "line": 574,
             "description": "This module manages the workflow of Monoco. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and monoco. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
                 "monoco-metamodel",
@@ -593,14 +593,14 @@
             "submodule": "monoco-system",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 817,
+            "line": 1001,
             "description": "This module contains the Monoco core system."
         }
     },
     "classitems": [
         {
             "file": "src/behavior.js",
-            "line": 241,
+            "line": 248,
             "description": "Add a behavior that will be stored in Monoco Database.",
             "itemtype": "method",
             "name": "add",
@@ -624,6 +624,11 @@
                     "name": "useCoreAPI",
                     "description": "if true, monoco core modules will be injected as parameters of the action (default false)",
                     "type": "Boolean"
+                },
+                {
+                    "name": "core",
+                    "description": "if true, behavior can not be exported",
+                    "type": "Boolean"
                 }
             ],
             "return": {
@@ -636,7 +641,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 253,
+            "line": 261,
             "description": "Remove a behavior with its id or remove all the behaviors for a specific state\nof the component.",
             "itemtype": "method",
             "name": "remove",
@@ -653,7 +658,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 265,
+            "line": 273,
             "description": "Get all the actions of a behavior for a component.",
             "itemtype": "method",
             "name": "getActions",
@@ -679,7 +684,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 275,
+            "line": 283,
             "description": "Remove all the behaviors stored in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -689,7 +694,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 813,
+            "line": 840,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -710,7 +715,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 822,
+            "line": 849,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -731,7 +736,28 @@
         },
         {
             "file": "src/component.js",
-            "line": 831,
+            "line": 858,
+            "description": "Find components with a query.",
+            "itemtype": "method",
+            "name": "find",
+            "params": [
+                {
+                    "name": "query",
+                    "description": "query",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "components found",
+                "type": "Array"
+            },
+            "class": "monoco-component",
+            "module": "monoco",
+            "submodule": "monoco-component"
+        },
+        {
+            "file": "src/component.js",
+            "line": 867,
             "description": "Check if the component has for class name className.",
             "itemtype": "method",
             "name": "isInstanceOf",
@@ -757,7 +783,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 841,
+            "line": 877,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -767,7 +793,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 848,
+            "line": 884,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -788,7 +814,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 117,
+            "line": 121,
             "description": "Find a document into the collection.",
             "itemtype": "method",
             "name": "find",
@@ -812,7 +838,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 164,
+            "line": 168,
             "description": "Insert an new document into the collection. <br>\nBefore inserting the document, Monoco checks that the document is compliant\nwith its class definition. <br> \nThen, after inserting it, we create the component.",
             "itemtype": "method",
             "name": "insert",
@@ -836,7 +862,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 218,
+            "line": 221,
             "description": "Update documents into a collection.",
             "itemtype": "method",
             "name": "update",
@@ -870,7 +896,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 277,
+            "line": 280,
             "description": "Remove a document from the colllection. <br>\nWhen a document is removed, the component is destroyed.",
             "itemtype": "method",
             "name": "remove",
@@ -894,7 +920,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 351,
+            "line": 354,
             "description": "Count the number of documents in the collection.",
             "itemtype": "method",
             "name": "count",
@@ -908,7 +934,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 660,
+            "line": 663,
             "description": "Create a new {{#crossLink \"MonocoDatabaseCollection\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "collection",
@@ -925,7 +951,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 668,
+            "line": 671,
             "description": "Monoco Database store that list all the collections.",
             "itemtype": "property",
             "name": "store",
@@ -936,7 +962,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 675,
+            "line": 678,
             "description": "Dump the database.",
             "itemtype": "method",
             "name": "dump",
@@ -950,7 +976,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 687,
+            "line": 690,
             "description": "Import/Export a Monoco System into/from the database.",
             "itemtype": "method",
             "name": "system",
@@ -971,7 +997,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 696,
+            "line": 699,
             "description": "Export a Monoco sub-system.",
             "itemtype": "method",
             "name": "subsystem",
@@ -1037,7 +1063,34 @@
         },
         {
             "file": "src/log.js",
-            "line": 387,
+            "line": 373,
+            "description": "A message send by the channel is invalid",
+            "itemtype": "method",
+            "name": "invalidChannelEvent",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "message send",
+                    "type": "String"
+                },
+                {
+                    "name": "eventName",
+                    "description": "name of the event",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "expected type",
+                    "type": "String"
+                }
+            ],
+            "class": "monoco-log",
+            "module": "monoco",
+            "submodule": "monoco-log"
+        },
+        {
+            "file": "src/log.js",
+            "line": 399,
             "description": "A property of a schema is unknown.",
             "itemtype": "method",
             "name": "unknownProperty",
@@ -1059,7 +1112,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 396,
+            "line": 408,
             "description": "Invalid type for a property.",
             "itemtype": "method",
             "name": "invalidPropertyType",
@@ -1086,7 +1139,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 406,
+            "line": 418,
             "description": "Invalid value for a type enum.",
             "itemtype": "method",
             "name": "invalidEnumValue",
@@ -1108,7 +1161,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 415,
+            "line": 427,
             "description": "Invalid class name for a component.",
             "itemtype": "method",
             "name": "invalidClassName",
@@ -1135,7 +1188,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 425,
+            "line": 437,
             "description": "Missing a property.",
             "itemtype": "method",
             "name": "missingProperty",
@@ -1152,7 +1205,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 433,
+            "line": 445,
             "description": "A class definition is missing.",
             "itemtype": "method",
             "name": "missingImplementation",
@@ -1174,7 +1227,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 442,
+            "line": 454,
             "description": "Invalid type for a property of a class definition.",
             "itemtype": "method",
             "name": "invalidTypeImp",
@@ -1196,7 +1249,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 451,
+            "line": 463,
             "description": "Missing a property for a class definition.",
             "itemtype": "method",
             "name": "missingPropertyImp",
@@ -1218,7 +1271,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 460,
+            "line": 472,
             "description": "Unkown property for a class definition.",
             "itemtype": "method",
             "name": "unknownPropertyImp",
@@ -1240,7 +1293,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 469,
+            "line": 481,
             "description": "Invalid type definition.",
             "itemtype": "method",
             "name": "invalidTypeDefinition",
@@ -1257,7 +1310,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 477,
+            "line": 489,
             "description": "Invalid property type.",
             "itemtype": "method",
             "name": "invalidPropertyName",
@@ -1289,7 +1342,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 488,
+            "line": 500,
             "description": "Trying to set a read-only property.",
             "itemtype": "method",
             "name": "readOnlyProperty",
@@ -1311,7 +1364,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 497,
+            "line": 509,
             "description": "Invalid document on a Monoco Database insert operation.",
             "itemtype": "method",
             "name": "invalidDocumentOnDbInsert",
@@ -1333,7 +1386,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 506,
+            "line": 518,
             "description": "Invalid property on a Monoco Database update operation.",
             "itemtype": "method",
             "name": "invalidPropertyTypeOnDbUpdate",
@@ -1370,7 +1423,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 518,
+            "line": 530,
             "description": "Call an unknown method of a class.",
             "itemtype": "method",
             "name": "unknownMethod",
@@ -1392,7 +1445,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 527,
+            "line": 539,
             "description": "Try to create an invalid MonocoDatabaseCollection.",
             "itemtype": "method",
             "name": "invalidCollectionName",
@@ -1409,7 +1462,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 535,
+            "line": 547,
             "description": "Invalid result type of a method.",
             "itemtype": "method",
             "name": "invalidResultType",
@@ -1431,7 +1484,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 544,
+            "line": 556,
             "description": "Unknown class.",
             "itemtype": "method",
             "name": "unknownComponent",
@@ -1453,7 +1506,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 553,
+            "line": 565,
             "description": "The Monoco workflow has been restarted.",
             "itemtype": "method",
             "name": "workflowRestarted",
@@ -1463,7 +1516,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 560,
+            "line": 572,
             "description": "Invalid parameter number for a method.",
             "itemtype": "method",
             "name": "invalidParamNumber",
@@ -1480,7 +1533,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 569,
+            "line": 581,
             "description": "Invalid type parameters for a method.",
             "itemtype": "method",
             "name": "invalidParamType",
@@ -1507,7 +1560,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 580,
+            "line": 592,
             "description": "Add a more than one behavior to a state.",
             "itemtype": "method",
             "name": "behaviorNotUnique",
@@ -1529,7 +1582,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 589,
+            "line": 601,
             "description": "Can not add a behavior with an invalid state.",
             "itemtype": "method",
             "name": "invalidStateOn",
@@ -1551,7 +1604,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 598,
+            "line": 610,
             "description": "The call to a remove state of the behavior module is invalid.",
             "itemtype": "method",
             "name": "invalidStateOff",
@@ -1573,7 +1626,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 607,
+            "line": 619,
             "description": "The Master system is not found.",
             "itemtype": "method",
             "name": "masterSystemNotFound",
@@ -1583,7 +1636,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 614,
+            "line": 626,
             "description": "Invalid type.",
             "itemtype": "method",
             "name": "invalidType",
@@ -1605,7 +1658,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 623,
+            "line": 635,
             "description": "Unknown type.",
             "itemtype": "method",
             "name": "unknownType",
@@ -1622,7 +1675,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 631,
+            "line": 643,
             "description": "A component has not been alreay created.",
             "itemtype": "method",
             "name": "canNotYetValidate",
@@ -1643,8 +1696,35 @@
             "submodule": "monoco-log"
         },
         {
+            "file": "src/log.js",
+            "line": 652,
+            "description": "A message send by the channel is invalid",
+            "itemtype": "method",
+            "name": "invalidChannelEvent",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "message send",
+                    "type": "String"
+                },
+                {
+                    "name": "eventName",
+                    "description": "name of the event",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "expected type",
+                    "type": "String"
+                }
+            ],
+            "class": "monoco-log",
+            "module": "monoco",
+            "submodule": "monoco-log"
+        },
+        {
             "file": "src/metamodel.js",
-            "line": 1275,
+            "line": 1279,
             "description": "Init the metamodel.",
             "itemtype": "method",
             "name": "init",
@@ -1654,7 +1734,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1282,
+            "line": 1286,
             "description": "Remove the data of the metamodel from the memory.",
             "itemtype": "method",
             "name": "clear",
@@ -1664,7 +1744,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1289,
+            "line": 1293,
             "description": "Add a new schema.",
             "params": [
                 {
@@ -1681,7 +1761,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1297,
+            "line": 1301,
             "description": "Add a new type.",
             "params": [
                 {
@@ -1698,7 +1778,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1305,
+            "line": 1309,
             "description": "Create the metamodel.",
             "itemtype": "method",
             "name": "create",
@@ -1708,7 +1788,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1312,
+            "line": 1316,
             "description": "Get a schema.",
             "itemtype": "method",
             "name": "get",
@@ -1729,7 +1809,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1321,
+            "line": 1325,
             "description": "Get parents of a shema if any.",
             "itemtype": "method",
             "name": "getParents",
@@ -1750,7 +1830,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1340,
+            "line": 1344,
             "description": "Check if the object is compliant with the schema.\nUse it to test if the constructor of an object is compliant\nwith the definition of the class.",
             "itemtype": "method",
             "name": "isValidObject",
@@ -1786,7 +1866,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1354,
+            "line": 1358,
             "description": "Prepare the object in order to be compliant with the schema.",
             "itemtype": "method",
             "name": "prepareObject",
@@ -1808,7 +1888,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1363,
+            "line": 1367,
             "description": "Check if a value is compliant with a type.",
             "itemtype": "method",
             "name": "isValidType",
@@ -1834,7 +1914,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1372,
+            "line": 1376,
             "description": "Check if a value is compliant with a type enum.",
             "itemtype": "method",
             "name": "isValidEnum",
@@ -1860,7 +1940,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1382,
+            "line": 1386,
             "description": "Check if the name is a correct state for the component.",
             "itemtype": "method",
             "name": "isValidState",
@@ -1886,7 +1966,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1392,
+            "line": 1396,
             "description": "Check if an attribute of the schema is an event.",
             "itemtype": "method",
             "name": "isEvent",
@@ -1975,7 +2055,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 438,
+            "line": 439,
             "description": "Change the state of a component.\n\nWorklow:<br>\n<br>\n0. Check if the component has not been destroyed <br>\n1. Check if the state is a method or an event <br>\n2. Search if there is a behavior with an action for the new state <br>\n3. If so, get the action(s) <br>\n4. Check if the conditons on input are compliant with the metamodel <br>\n5. Call the action(s) <br>\n6. If not an of event, check if the conditons on input are compliant with the metamodel <br>\n7. If all is ok, the state of the component is updated <br>\n8. Return the result <br>",
             "itemtype": "method",
             "name": "state",
@@ -1992,7 +2072,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 597,
+            "line": 598,
             "description": "Change the state of a component.\n\nWorklow:<br>\n<br>\n0. Check if the component has not been destroyed <br>\n1. Check if the state is a method or an event <br>\n2. Search if there is a behavior with an action for the new state <br>\n3. If so, get the action(s) <br>\n4. Check if the conditons on input are compliant with the metamodel <br>\n5. Call the action(s) <br>\n6. If not an of event, check if the conditons on input are compliant with the metamodel <br>\n7. If all is ok, the state of the component is updated <br>\n8. Return the result <br>",
             "itemtype": "method",
             "name": "state",
@@ -2009,7 +2089,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 621,
+            "line": 622,
             "description": "Stop the workflow engine.",
             "itemtype": "method",
             "name": "stop",
@@ -2026,7 +2106,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 631,
+            "line": 632,
             "description": "Restart the workflow engine from the last state.",
             "itemtype": "method",
             "name": "restart",
@@ -2036,7 +2116,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 638,
+            "line": 639,
             "description": "Check if conditions on input are compliant with the model before calling the action.",
             "itemtype": "method",
             "name": "checkParams",
@@ -2057,7 +2137,7 @@
         },
         {
             "file": "build/system/system.js",
-            "line": 827,
+            "line": 1011,
             "description": "The Monoco core system",
             "itemtype": "property",
             "name": "system",

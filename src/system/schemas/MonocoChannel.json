@@ -1,0 +1,26 @@
+{
+    "_id": "MonocoChannel",
+    "_name": "MonocoChannel",
+    "_schema": "MonocoChannelSchema",
+    "_inherit": ["MonocoComponent"],
+    "_core": true,
+    "listen": {
+        "params": [{
+                "name": "event",
+                "type": "string"
+            },
+            {
+                "name" : "callback",
+                "type": "function"
+            }
+        ]
+    },
+    "send": {
+        "params": [{
+                "name": "message",
+                "type": "message"
+            }
+        ],
+        "result": "boolean"
+    }
+}

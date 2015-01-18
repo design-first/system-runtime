@@ -342,6 +342,7 @@ function callAction(component, state, action, params) {
             injectedParams.push($metamodel);
             injectedParams.push(exports);
             injectedParams.push($behavior);
+            injectedParams.push($log);
 
             result = action.action.apply(component, injectedParams);
         } else {

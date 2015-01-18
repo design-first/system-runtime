@@ -370,6 +370,18 @@ function canNotYetValidate(id, className) {
 }
 
 
+/**
+ * A message send by the channel is invalid
+ * @method invalidChannelEvent
+ * @param {String} message message send
+ * @param {String} eventName name of the event
+ * @param {String} type expected type
+ */
+function invalidChannelEvent(message, eventName, type) {
+    $helper.getMonoco().warning("invalid type for the message '" + JSON.stringify(message) + "': expected type '" + type + "' for event '" + eventName + "'" );
+}
+
+
 /* exports */
 
 
@@ -635,3 +647,13 @@ exports.unknownType = unknownType;
  * @param {String} className name of the class
  */
 exports.canNotYetValidate = canNotYetValidate;
+
+
+/**
+ * A message send by the channel is invalid
+ * @method invalidChannelEvent
+ * @param {String} message message send
+ * @param {String} eventName name of the event
+ * @param {String} type expected type
+ */
+exports.invalidChannelEvent = invalidChannelEvent;

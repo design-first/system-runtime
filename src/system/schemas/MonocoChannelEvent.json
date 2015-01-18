@@ -1,0 +1,19 @@
+{
+    "_id": "MonocoChannelEvent",
+    "_name": "MonocoChannelEvent",
+    "_schema": "MonocoChannelEventSchema",
+    "_inherit": ["MonocoComponent"],
+    "_core": true,
+    "name": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    },
+    "type": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    }
+}

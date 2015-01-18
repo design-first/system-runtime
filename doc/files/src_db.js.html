@@ -22,7 +22,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.1.6</b>
+                    API Docs for Version: <b>0.2.0</b>
                 </p>
             </li>
         </div>
@@ -157,7 +157,7 @@ var $log = require(&#x27;./log.js&#x27;);
 
 
 var store = {},
-collections = [],
+collections = [&#x27;MonocoBus&#x27;, &#x27;MonocoChannelEvent&#x27;],
 internalDB = [
     &#x27;Monoco&#x27;,
     &#x27;MonocoSchema&#x27;,
@@ -168,7 +168,11 @@ internalDB = [
     &#x27;MonocoMetamodel&#x27;,
     &#x27;MonocoDatabase&#x27;,
     &#x27;MonocoSystem&#x27;,
-    &#x27;MonocoClassInfo&#x27;
+    &#x27;MonocoClassInfo&#x27;,
+    &#x27;MonocoMessage&#x27;,
+    &#x27;MonocoBus&#x27;,
+    &#x27;MonocoChannelEvent&#x27;,
+    &#x27;MonocoChannel&#x27;
 ];
 
 
@@ -305,12 +309,11 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
             if (Component) {
                 component = new Component(obj);
                 result.push(component.id());
+            } else {
+                if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
+                    $helper.getMonoco().require(&#x27;db&#x27;).insert(this.name, obj);
+                }
             }
-
-            if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
-                $helper.getMonoco().require(&#x27;db&#x27;).insert(this.name, obj);
-            }
-
         } else {
             $log.invalidDocumentOnDbInsert(obj, this.name);
         }
