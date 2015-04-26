@@ -4,18 +4,19 @@
 
 #### What is monoco ?
 
-Monoco is a client & server JavaScript library for managing your components.
+A JavaScript library to design, create and store Components
 
-Monoco contains:
+monoco contains:
 
  * a **metamodel** based on a JSON format to create your model,
  * a **component factory** that creates simple JavaScript classes based on your model,
- * a **micro NoSQL Database** to store your components and to export/import your system and
- * a **worflow engine** that checks if the change of the state of a component is compliant with your model.
+ * a **micro NoSQL Database** to store your components and to export/import your system,
+ * a **worflow engine** that checks if the change of the state of a component is compliant with your model and
+ * a **channel** in which components can exchange typed messages.
 
 #### How monoco works ?
 
-Monoco is based on the concept of **system**:
+monoco is based on the concept of **system**:
 
 > A system is a set of interacting or interdependent **components** forming an integrated whole.
 
@@ -29,7 +30,7 @@ Monoco is based on the concept of **system**:
 
 > -Wikipedia
 
-In Monoco :
+In monoco :
 
 * a **system** is a set of models, components and behaviors,
 * a **component** is an immutable statefull class or object,
@@ -200,20 +201,20 @@ Then require monoco:
 var monoco = require('monoco');
 ```
 
-## Extend Monoco
+## Extend monoco
 
 
-#### Monoco Core System
+#### monoco core system
 
-Monoco has got a **customizable core system**. You can update all its components, models or behaviors to follow your needs.
+monoco has got a **customizable core system**. You can update all its components, models or behaviors to follow your needs.
 
-Monoco core system is located on the [/src/system](./src/system) directory:
-* ``` behaviors ```: contains all the behaviors of the core components of Monoco,
-* ``` components ```: contains all the core components of Monoco,
-* ``` schemas ```: contains all the schemas of the core components of Monoco and
-* ``` types ```: contains all the types of the core components of Monoco.
+monoco core system is located on the [/src/system](./src/system) directory:
+* ``` behaviors ```: contains all the behaviors of the core components of monoco,
+* ``` components ```: contains all the core components of monoco,
+* ``` schemas ```: contains all the schemas of the core components of monoco and
+* ``` types ```: contains all the types of the core components of monoco.
 
-#### Monoco Addons
+#### monoco addons
 
 You can update monoco core system **by composing other systems** with it. In that case, other systems are called **addons**. 
 
@@ -223,7 +224,7 @@ To do so, just copy and paste a system into the [/src/addons](./src/addons/) dir
 
 #### Grunt
 
-Grunt is used for automating the basic tasks of Monoco. You can use it to extend monoco core system or to package your own system with monoco.
+Grunt is used for automating the basic tasks of monoco. You can use it to extend monoco core system or to package your own system with monoco.
 
 
 ```sh
