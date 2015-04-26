@@ -4,9 +4,12 @@
 
 #### What is monoco ?
 
-A JavaScript library to design, create and store Components
+ * monoco is a JavaScript library to design, create and store Components,
+ * monoco is an **isomorphic library**: your components will work on client or server,
+ * monoco is made on **pure vanilla JavaScript**, there is no dependency on other libraries and
+ * monoco is **light**: only 12ko gzip.
 
-monoco contains:
+#### What monoco contains ?
 
  * a **metamodel** based on a JSON format to create your model,
  * a **component factory** that creates simple JavaScript classes based on your model,
