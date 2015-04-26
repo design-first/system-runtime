@@ -1,7 +1,7 @@
 {
     "name": "monoco",
-    "version": "0.2.0",
-    "description": "The Model-Driven Component Framework",
+    "version": "0.2.1",
+    "description": "A Model and a NoSQL Database for Components",
     "homepage": "http://monoco.io",
     "keywords": [
         "mda",
@@ -10,7 +10,8 @@
         "design",
         "nosql",
         "component",
-        "system"
+        "system",
+        "isomorphic"
     ],
     "main": "./src/monoco.js",
     "author": {

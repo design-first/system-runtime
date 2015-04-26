@@ -5,7 +5,6 @@ describe('Monoco Channel instance', function () {
         monoco = require('../../src/monoco.js');
     }
     var share = '';
-    var shareBus = '';
 
     it('exists', function () {
         var channel = monoco.require('channel');
@@ -24,7 +23,7 @@ describe('Monoco Channel instance', function () {
             "name": "test",
             "type": "object",
             "schema": {
-                "truc": {
+                "foo": {
                     "type": "string",
                     "mandatory": true
                 }
@@ -37,7 +36,7 @@ describe('Monoco Channel instance', function () {
             "event": "test",
             "from": "",
             "data": {
-                "truc": "toto"
+                "foo": "bar"
             }
         });
 
@@ -48,40 +47,17 @@ describe('Monoco Channel instance', function () {
         var channel = monoco.require('channel');
 
         channel.listen('test', function (message) {
-            share = message.data.truc;
+            share = message.data.foo;
         });
 
         channel.send({
             "event": "test",
             "from": "",
             "data": {
-                "truc": "toto"
+                "foo": "bar"
             }
         });
 
-        expect(share).toBe('toto');
-    });
-
-    it('can send message to a bus', function () {
-        var Bus = monoco.require('MonocoBus');
-        var testBus = new Bus({
-            'name': 'test'
-        });
-
-        testBus.on('send', function (message) {
-            shareBus = message.data.truc;
-            return true;
-        });
-
-        var channel = monoco.require('channel');
-        channel.send({
-            "event": "test",
-            "from": "",
-            "data": {
-                "truc": "titi"
-            }
-        });
-
-        expect(shareBus).toBe('titi');
+        expect(share).toBe('bar');
     });
 });

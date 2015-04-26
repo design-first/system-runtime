@@ -1,7 +1,0 @@
-{
-    "component": "MonocoBus",
-    "state": "send",
-    "action": "function send(message) { var result = false, messages = []; messages = $db.MonocoMessage.insert({ 'from': message.from, 'event': message.event, 'data': message.data }); if (messages.length) { result = true; } return result; }",
-    "core": true,
-    "useCoreAPI": true
-}

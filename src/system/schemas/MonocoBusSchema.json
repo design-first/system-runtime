@@ -1,8 +1,0 @@
-{
-    "_id": "MonocoBusSchema",
-    "_name": "MonocoBusSchema",
-    "_inherit": ["MonocoComponentSchema"],
-    "_core": true,
-    "name": "property",
-    "send": "method"
-}

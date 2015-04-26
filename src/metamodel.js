@@ -1,8 +1,7 @@
 /* 
  * monoco
- * The Model-Driven Component Framework
- * http://monoco.io/
- * @monocojs
+ * A Model and a NoSQL Database for Components
+ * @ecarriou
  *
  * Copyright (C) 2015 - Erwan Carriou
  *
