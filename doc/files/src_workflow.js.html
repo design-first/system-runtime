@@ -27,7 +27,7 @@
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/channel", "classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/channel", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
         </form>
     </div>
 </div>
@@ -38,6 +38,8 @@
     <div id="sidebar">
     <div id="classes">
         <ul id="api-classes" class="nav nav-list">
+            
+                <li><a href="../classes/channel.html">channel</a></li>
             
                 <li><a href="../classes/monoco.html">monoco</a></li>
             
@@ -140,6 +142,7 @@
  * @requires monoco-metamodel
  * @requires monoco-component
  * @requires monoco-behavior
+ * @requires monoco-channel
  * @requires monoco-state
  * @requires monoco-helper
  * @requires monoco-log
@@ -153,6 +156,7 @@
 var $metamodel = require(&#x27;./metamodel.js&#x27;);
 var $component = require(&#x27;./component.js&#x27;);
 var $behavior = require(&#x27;./behavior.js&#x27;);
+var $channel = require(&#x27;./channel.js&#x27;);
 var $state = require(&#x27;./state.js&#x27;);
 var $helper = require(&#x27;./helper.js&#x27;);
 var $log = require(&#x27;./log.js&#x27;);
@@ -448,6 +452,7 @@ function callAction(component, state, action, params) {
             injectedParams.push(exports);
             injectedParams.push($behavior);
             injectedParams.push($log);
+            injectedParams.push($channel);
 
             result = action.action.apply(component, injectedParams);
         } else {
@@ -691,6 +696,7 @@ function restart() {
  * @requires monoco-metamodel
  * @requires monoco-component
  * @requires monoco-behavior
+ * @requires monoco-channel
  * @requires monoco-state
  * @requires monoco-helper
  * @requires monoco-log

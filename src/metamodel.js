@@ -305,8 +305,6 @@ function initDbStructure() {
     $db.collection('MonocoState');
     $db.collection('MonocoType');
     $db.collection('MonocoMessage');
-    $db.collection('MonocoBus');
-    $db.collection('MonocoChannelEvent');
     $db.collection('MonocoChannel');
 }
 

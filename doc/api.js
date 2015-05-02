@@ -3,6 +3,7 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "MonocoDatabaseCollection",
         "MonocoError",
+        "channel",
         "monoco",
         "monoco-behavior",
         "monoco-component",
@@ -15,6 +16,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "monoco-workflow"
     ],
     "modules": [
+        "channel",
         "monoco",
         "monoco-behavior",
         "monoco-component",
@@ -27,6 +29,11 @@ YUI.add("yuidoc-meta", function(Y) {
         "monoco-workflow"
     ],
     "allModules": [
+        {
+            "displayName": "channel",
+            "name": "channel",
+            "description": "This module manages the channel"
+        },
         {
             "displayName": "monoco",
             "name": "monoco",

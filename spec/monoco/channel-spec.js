@@ -12,15 +12,53 @@ describe('Monoco Channel instance', function () {
     });
 
     it('can send a message', function () {
-        var ChannelEvent = monoco.require('MonocoChannelEvent');
-        var event = new ChannelEvent({
-            'name': 'test',
-            'type': 'test'
+        var metamodel = monoco.require('metamodel');
+
+        metamodel.schema({
+            "_id": "MonocoChannelSchema",
+            "_name": "MonocoChannelSchema",
+            "_inherit": ["MonocoComponentSchema"],
+            "_core": true,
+            "listen": "method",
+            "send": "method",
+            "test": "event"
         });
 
-        var metamodel = monoco.require('metamodel');
+        metamodel.schema({
+            "_id": "MonocoChannel",
+            "_name": "MonocoChannel",
+            "_schema": "MonocoChannelSchema",
+            "_inherit": ["MonocoComponent"],
+            "_core": true,
+            "listen": {
+                "params": [{
+                        "name": "event",
+                        "type": "string"
+                    },
+                    {
+                        "name": "callback",
+                        "type": "function"
+                    }
+                ]
+            },
+            "send": {
+                "params": [{
+                        "name": "message",
+                        "type": "message"
+                    }
+                ],
+                "result": "boolean"
+            },
+            "test": {
+                "params": [{
+                        "name": "event",
+                        "type": "eventTest"
+                    }]
+            }
+        });
+
         metamodel.type({
-            "name": "test",
+            "name": "eventTest",
             "type": "object",
             "schema": {
                 "foo": {
@@ -29,12 +67,15 @@ describe('Monoco Channel instance', function () {
                 }
             }
         });
+
         metamodel.create();
 
-        var channel = monoco.require('channel');
+        var MonocoChannel = monoco.require('MonocoChannel');
+        var channel = new MonocoChannel({
+            '_id': 'channel'
+        });
         var result = channel.send({
             "event": "test",
-            "from": "",
             "data": {
                 "foo": "bar"
             }
@@ -47,12 +88,11 @@ describe('Monoco Channel instance', function () {
         var channel = monoco.require('channel');
 
         channel.listen('test', function (message) {
-            share = message.data.foo;
+            share = message.foo;
         });
 
         channel.send({
             "event": "test",
-            "from": "",
             "data": {
                 "foo": "bar"
             }

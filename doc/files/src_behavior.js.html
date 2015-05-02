@@ -27,7 +27,7 @@
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/channel", "classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/channel", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
         </form>
     </div>
 </div>
@@ -38,6 +38,8 @@
     <div id="sidebar">
     <div id="classes">
         <ul id="api-classes" class="nav nav-list">
+            
+                <li><a href="../classes/channel.html">channel</a></li>
             
                 <li><a href="../classes/monoco.html">monoco</a></li>
             
@@ -134,6 +136,7 @@
  * @submodule monoco-behavior
  * @requires monoco-db
  * @requires monoco-helper
+ * @requires monoco-channel
  * @class monoco-behavior
  * @static
  */
@@ -142,6 +145,7 @@
 
 var $db = require(&#x27;./db.js&#x27;);
 var $helper = require(&#x27;./helper.js&#x27;);
+var $channel = require(&#x27;./channel.js&#x27;);
 
 
 /* Private properties */
@@ -205,6 +209,7 @@ function createFunction(name, func, core, useCoreAPI) {
         params.push(&#x27;$workflow&#x27;);
         params.push(&#x27;$behavior&#x27;);
         params.push(&#x27;$log&#x27;);
+        params.push(&#x27;$channel&#x27;);
     }
 
     if (params[0] !== &#x27;&#x27;) {
@@ -240,7 +245,7 @@ function add(id, state, action, useCoreAPI, core) {
     if (typeof useCoreAPI === &#x27;undefined&#x27;) {
         useCoreAPI = false;
     }
-    
+
     if (typeof core === &#x27;undefined&#x27;) {
         core = false;
     }
@@ -253,7 +258,7 @@ function add(id, state, action, useCoreAPI, core) {
         &quot;state&quot;: state,
         &quot;action&quot;: action.toString(),
         &quot;useCoreAPI&quot;: useCoreAPI,
-        &quot;core&quot;:core
+        &quot;core&quot;: core
     });
 
     return behaviorId;
@@ -345,6 +350,7 @@ function clear() {
  * @submodule monoco-behavior
  * @requires monoco-db
  * @requires monoco-helper
+ * @requires monoco-channel
  * @class monoco-behavior
  * @static
  */

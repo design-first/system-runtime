@@ -52,7 +52,7 @@ var $log = require('./log.js');
 
 
 var store = {},
-collections = ['MonocoBus', 'MonocoChannelEvent'],
+collections = [],
 internalDB = [
     'Monoco',
     'MonocoSchema',
@@ -65,8 +65,6 @@ internalDB = [
     'MonocoSystem',
     'MonocoClassInfo',
     'MonocoMessage',
-    'MonocoBus',
-    'MonocoChannelEvent',
     'MonocoChannel'
 ];
 
@@ -209,6 +207,13 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
                     $helper.getMonoco().require('db').insert(this.name, obj);
                 }
             }
+            
+            if (this.name === 'MonocoMessage') {
+                if ($helper.isMonoco() && $helper.getMonoco().require('channel')) {
+                    $helper.getMonoco().require('channel')[obj.event](obj.data);
+                }
+            }
+            
         } else {
             $log.invalidDocumentOnDbInsert(obj, this.name);
         }

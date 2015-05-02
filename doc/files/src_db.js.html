@@ -27,7 +27,7 @@
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/channel", "classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/channel", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
         </form>
     </div>
 </div>
@@ -38,6 +38,8 @@
     <div id="sidebar">
     <div id="classes">
         <ul id="api-classes" class="nav nav-list">
+            
+                <li><a href="../classes/channel.html">channel</a></li>
             
                 <li><a href="../classes/monoco.html">monoco</a></li>
             
@@ -157,7 +159,7 @@ var $log = require(&#x27;./log.js&#x27;);
 
 
 var store = {},
-collections = [&#x27;MonocoBus&#x27;, &#x27;MonocoChannelEvent&#x27;],
+collections = [],
 internalDB = [
     &#x27;Monoco&#x27;,
     &#x27;MonocoSchema&#x27;,
@@ -170,8 +172,6 @@ internalDB = [
     &#x27;MonocoSystem&#x27;,
     &#x27;MonocoClassInfo&#x27;,
     &#x27;MonocoMessage&#x27;,
-    &#x27;MonocoBus&#x27;,
-    &#x27;MonocoChannelEvent&#x27;,
     &#x27;MonocoChannel&#x27;
 ];
 
@@ -314,6 +314,13 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
                     $helper.getMonoco().require(&#x27;db&#x27;).insert(this.name, obj);
                 }
             }
+            
+            if (this.name === &#x27;MonocoMessage&#x27;) {
+                if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;channel&#x27;)) {
+                    $helper.getMonoco().require(&#x27;channel&#x27;)[obj.event](obj.data);
+                }
+            }
+            
         } else {
             $log.invalidDocumentOnDbInsert(obj, this.name);
         }

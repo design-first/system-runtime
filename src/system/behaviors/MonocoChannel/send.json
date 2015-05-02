@@ -1,7 +1,7 @@
 {
     "component": "MonocoChannel",
     "state": "send",
-    "action": "function send(message) {var messages = [], events = [], result = true;    events = $db.MonocoChannelEvent.find({'name': message.event});    if (events.length && $metamodel.isValidType(message.data, events[0].type)) {        messages = $db.MonocoMessage.insert({'from': message.from, 'event': message.event, 'data': message.data});        if (!messages.length) {            result = false;        }    } else {        result = false;        $log.invalidChannelEvent(message.data, message.event, events[0].type);    }    return result;}",
+    "action": "function send(message) { return $channel.send(message); }",
     "core": true,
     "useCoreAPI": true
 }

@@ -29,6 +29,7 @@
  * @submodule monoco-behavior
  * @requires monoco-db
  * @requires monoco-helper
+ * @requires monoco-channel
  * @class monoco-behavior
  * @static
  */
@@ -37,6 +38,7 @@
 
 var $db = require('./db.js');
 var $helper = require('./helper.js');
+var $channel = require('./channel.js');
 
 
 /* Private properties */
@@ -100,6 +102,7 @@ function createFunction(name, func, core, useCoreAPI) {
         params.push('$workflow');
         params.push('$behavior');
         params.push('$log');
+        params.push('$channel');
     }
 
     if (params[0] !== '') {
@@ -135,7 +138,7 @@ function add(id, state, action, useCoreAPI, core) {
     if (typeof useCoreAPI === 'undefined') {
         useCoreAPI = false;
     }
-    
+
     if (typeof core === 'undefined') {
         core = false;
     }
@@ -148,7 +151,7 @@ function add(id, state, action, useCoreAPI, core) {
         "state": state,
         "action": action.toString(),
         "useCoreAPI": useCoreAPI,
-        "core":core
+        "core": core
     });
 
     return behaviorId;
@@ -240,6 +243,7 @@ function clear() {
  * @submodule monoco-behavior
  * @requires monoco-db
  * @requires monoco-helper
+ * @requires monoco-channel
  * @class monoco-behavior
  * @static
  */

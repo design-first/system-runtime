@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>MonocoError - monoco</title>
+    <title>src/channel.js - monoco</title>
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -100,274 +100,134 @@
                 <div id="docs-main">
                     <div class="content">
                         <div class="page-header">
-    <h1>MonocoError</h1>
+    <h1>src/channel.js <small>File</small></h1>
 </div>
 
-    
+<div class="file">
+    <pre class="prettyprint linenums">
+/* 
+ * monoco
+ * A Model and a NoSQL Database for Components
+ * http://monoco.io/
+ * @ecarriou
+ *
+ * Copyright (C) 2015 - Erwan Carriou
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
 
-    
 
-    
-	<div class="well well-small">
-        
-            Module: <a href="../modules/monoco-workflow.html">monoco-workflow</a><br>
-            Parent Module: <a href="../modules/monoco.html">monoco</a>
-        
-    </div>
-    
+/**
+ * This module manages the channel
+ * 
+ * @module channel
+ * @submodule channel
+ * @requires monoco-db
+ * @requires monoco-metamodel
+ * @requires monoco-behavior
+ * @requires monoco-log
+ * @requires monoco-helper
+ * @class channel
+ * @static
+ */
 
-    
+&#x27;use strict&#x27;;
+
+var $db = require(&#x27;./db.js&#x27;);
+var $metamodel = require(&#x27;./metamodel.js&#x27;);
+var $behavior = require(&#x27;./behavior.js&#x27;);
+var $log = require(&#x27;./log.js&#x27;);
+var $helper = require(&#x27;./helper.js&#x27;);
 
 
+/* Public methods */
+
+/**
+ * Listen to an event
+ * @param {String} event name of the event
+ * @param {Function} action code to execute
+ * @returns {undefined}
+ */
+function listen(event, action) {
+    $behavior.add(&#x27;channel&#x27;, event, action, true);
+}
 
 
-<div class="yuidoc-class-description">
-<p>The MonocoError class.</p>
+/**
+ * Send a message into the channel
+ * @param {type} message
+ * @returns {Boolean} true if the message was sent
+ */
+function send(message) {
+    var messages = [],
+    result = true,
+    systemId = &#x27;&#x27;,
+    systems = [];
 
+    if ($helper.isMonoco()) {
+        systems = $helper.getMonoco().find(&#x27;MonocoSystem&#x27;, {&#x27;master&#x27;: true});
+        if (systems.length) {
+            systemId = systems[0].id();
+        }
+    }
+
+    message.from = systemId;
+
+    messages = $db.MonocoMessage.insert(message);
+
+    if (!messages.length) {
+        result = false;
+    }
+    return result;
+}
+
+
+/* exports */
+
+
+/**
+ * This module manages the channel
+ * 
+ * @module channel
+ * @submodule channel
+ * @requires monoco-db
+ * @requires monoco-metamodel
+ * @requires monoco-behavior
+ * @requires monoco-log
+ * @requires monoco-helper
+ * @class channel
+ * @static
+ */
+
+
+/**
+ * Listen to an event
+ * @param {String} event name of the event
+ * @param {Function} action code to execute
+ * @returns {undefined}
+ */
+exports.listen = listen;
+
+
+/**
+ * Send a message into the channel
+ * @param {type} message
+ * @returns {Boolean} true if the message was sent
+ */
+exports.send = send;
+    </pre>
 </div>
-
-
-<!-- table of contents -->
-
-<div id="class-toc" class="page-section">
-	<h2>Table of Contents</h2>
-    <ul>
-		
-		<li>
-			<strong>Methods</strong>
-			<ul>
-				
-				
-				<li><a href="#method-state"><span class="im">state</span>(<span class="ia">params</span>)</a></li>
-				
-				
-			</ul>
-		</li>
-		
-
-		
-
-		
-
-		
-	</ul>
-</div>
-
-<!-- details -->
-
-
-    <div class="constructor yuidoc-class-constructor page-section">
-        <h2>Constructor</h2>
-        <div class="item-list">
-        <div id="method-MonocoError" class="method item">
-	<div class="method-signature">
-	<span class="name"><code>MonocoError</code></span>
-
-	
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-			
-				<li class="arg">
-					
-						<code>message</code>
-					
-				</li>
-			
-			</ul><span class="paren">)</span>
-		</div>
-	
-	
-	</div>
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	<div class="meta">
-		
-			
-				
-				<p>
-				
-				Defined in
-				
-			
-		
-		
-		<a href="../files/src_workflow.js.html#l62"><code>src&#x2F;workflow.js:62</code></a>
-		
-		</p>
-
-
-		
-
-		
-	</div>
-
-	
-
-	
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-			
-				<li class="param">
-					
-						<code class="param-name">message</code>
-						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-					
-
-					
-
-					
-					<div class="param-description"><p>message of the error</p>
-</div>
-					
-
-					
-				</li>
-			
-			</ul>
-		</div>
-	
-
-	
-
-	
-</div>
-
-        </div>
-    </div>
-
-
-
-    <div id="methods" class="page-section">
-        <h2 class="off-left">Methods</h2>
-        <div class="item-list">
-       		
-        	
-            <div id="method-state" class="method item">
-	<div class="method-signature">
-	<span class="name"><code>state</code></span>
-
-	
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-			
-				<li class="arg">
-					
-						<code>params</code>
-					
-				</li>
-			
-			</ul><span class="paren">)</span>
-		</div>
-	
-	
-	</div>
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	<div class="meta">
-		
-			
-				
-				<p>
-				
-				Defined in
-				
-			
-		
-		
-		<a href="../files/src_workflow.js.html#l442"><code>src&#x2F;workflow.js:442</code></a>
-		
-		</p>
-
-
-		
-
-		
-	</div>
-
-	
-	<div class="description"><p>Change the state of a component.</p>
-<p>Worklow:<br>
-<br></p>
-<ol>
-<li>Check if the component has not been destroyed <br></li>
-<li>Check if the state is a method or an event <br></li>
-<li>Search if there is a behavior with an action for the new state <br></li>
-<li>If so, get the action(s) <br></li>
-<li>Check if the conditons on input are compliant with the metamodel <br></li>
-<li>Call the action(s) <br></li>
-<li>If not an of event, check if the conditons on input are compliant with the metamodel <br></li>
-<li>If all is ok, the state of the component is updated <br></li>
-<li>Return the result <br></li>
-</ol>
-</div>
-	
-
-	
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-			
-				<li class="param">
-					
-						<code class="param-name">params</code>
-						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-					
-
-					
-
-					
-					<div class="param-description"><p>params to change the state <br>
-{String} component id of the component <br>
-{String} state state of the component <br>
-{Array} data parameters to send to the action</p>
-</div>
-					
-
-					
-				</li>
-			
-			</ul>
-		</div>
-	
-
-	
-
-	
-</div>
-
-            
-        
-        </div>
-    </div>
-
-
-
-
-
-
-
-
 
                     </div>
                 </div>
