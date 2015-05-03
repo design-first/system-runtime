@@ -7,7 +7,7 @@
  * monoco is a **JavaScript library to design, create and store JavaScript components**,
  * monoco is an **isomorphic** library: the components will work on both client and server side,
  * monoco **dynamically checks the signature of all the methods of the components at runtime**,
- * monoco creates **persistant components** that are stored on a tiny NoSQL Dabatase and
+ * monoco creates **persistant components** that are stored on a tiny NoSQL Database and
  * monoco creates **composed components** thanks to its modulary system.
 
 #### What monoco contains ?
