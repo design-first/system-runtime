@@ -2,7 +2,7 @@
     "project": {
         "name": "monoco",
         "description": "A Model and a NoSQL Database for Components",
-        "version": "0.2.2",
+        "version": "0.3.0",
         "url": "http://monoco.io"
     },
     "files": {
@@ -603,7 +603,7 @@
             "submodule": "monoco-workflow",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 577,
+            "line": 586,
             "description": "This module manages the workflow of Monoco. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and monoco. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
                 "monoco-metamodel",
@@ -2199,7 +2199,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 442,
+            "line": 451,
             "description": "Change the state of a component.\n\nWorklow:<br>\n<br>\n0. Check if the component has not been destroyed <br>\n1. Check if the state is a method or an event <br>\n2. Search if there is a behavior with an action for the new state <br>\n3. If so, get the action(s) <br>\n4. Check if the conditons on input are compliant with the metamodel <br>\n5. Call the action(s) <br>\n6. If not an of event, check if the conditons on input are compliant with the metamodel <br>\n7. If all is ok, the state of the component is updated <br>\n8. Return the result <br>",
             "itemtype": "method",
             "name": "state",
@@ -2216,7 +2216,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 602,
+            "line": 611,
             "description": "Change the state of a component.\n\nWorklow:<br>\n<br>\n0. Check if the component has not been destroyed <br>\n1. Check if the state is a method or an event <br>\n2. Search if there is a behavior with an action for the new state <br>\n3. If so, get the action(s) <br>\n4. Check if the conditons on input are compliant with the metamodel <br>\n5. Call the action(s) <br>\n6. If not an of event, check if the conditons on input are compliant with the metamodel <br>\n7. If all is ok, the state of the component is updated <br>\n8. Return the result <br>",
             "itemtype": "method",
             "name": "state",
@@ -2233,7 +2233,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 626,
+            "line": 635,
             "description": "Stop the workflow engine.",
             "itemtype": "method",
             "name": "stop",
@@ -2250,7 +2250,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 636,
+            "line": 645,
             "description": "Restart the workflow engine from the last state.",
             "itemtype": "method",
             "name": "restart",
@@ -2260,7 +2260,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 643,
+            "line": 652,
             "description": "Check if conditions on input are compliant with the model before calling the action.",
             "itemtype": "method",
             "name": "checkParams",

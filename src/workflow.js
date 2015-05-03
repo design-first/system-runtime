@@ -323,9 +323,10 @@ function getActions(component, name, isEvent) {
  * @param {String} state name of the state
  * @param {Array} action action
  * @param {Array} params parameters of the action
+ * @param {Boolean} isEvent is the action a callback of an event
  * @return {Boolean} result of the action
  */
-function callAction(component, state, action, params) {
+function callAction(component, state, action, params, isEvent) {
     var result = null,
     injectedParams = [],
     i = 0,
@@ -347,9 +348,17 @@ function callAction(component, state, action, params) {
             injectedParams.push($log);
             injectedParams.push($channel);
 
-            result = action.action.apply(component, injectedParams);
+            if (isEvent) {
+                setTimeout(action.action.apply(component, injectedParams), 0);
+            } else {
+                result = action.action.apply(component, injectedParams);
+            }
         } else {
-            result = action.action.apply(component, params);
+            if (isEvent) {
+                setTimeout(action.action.apply(component, params), 0);
+            } else {
+                result = action.action.apply(component, params);
+            }
         }
     } catch (e) {
         if (e instanceof MonocoError) {
@@ -496,7 +505,7 @@ function state(params) {
 
                 if (!isEvent) {
                     action = actions[0];
-                    result = callAction(component, params.state, action, params.data);
+                    result = callAction(component, params.state, action, params.data, false);
 
                     if (checkResult({
                         "component": component,
@@ -510,7 +519,7 @@ function state(params) {
                     length = actions.length;
                     for (i = 0; i < length; i++) {
                         action = actions[i];
-                        callAction(component, params.state, action, params.data);
+                        callAction(component, params.state, action, params.data, true);
                     }
 
                     $state.set(component.id(), params.state);

@@ -5,16 +5,17 @@
 #### What is monoco ?
 
  * monoco is a **JavaScript library to design, create and store JavaScript components**,
- * monoco is an **isomorphic** library: your components will work on both client and server side,
- * monoco can create **composed components** thanks to its modulary system and
- * monoco is made on **pure vanilla JavaScript**, there is no dependency on other libraries.
+ * monoco is an **isomorphic** library: the components will work on both client and server side,
+ * monoco **dynamically checks the signature of all the methods of the components at runtime**,
+ * monoco creates **persistant components** that are stored on a tiny NoSQL Dabatase and
+ * monoco creates **composed components** thanks to its modulary system.
 
 #### What monoco contains ?
 
- * a **metamodel** based on a JSON format to create your model,
- * a **component factory** that creates simple JavaScript classes based on your model,
- * a **micro NoSQL Database** to store your components and to export/import your system,
- * a **worflow engine** that checks if the change of the state of a component is compliant with your model and
+ * a **metamodel** based on a JSON format to create a model,
+ * a **component factory** that creates stateful JavaScript classes based on a model,
+ * a **micro NoSQL Database** to store components and to export/import them,
+ * a **worflow engine** that checks at runtime if the signature of all methods are compliant with the model and
  * a **channel** in which components can exchange typed messages.
 
 #### How monoco works ?
