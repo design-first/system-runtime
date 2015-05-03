@@ -20,10 +20,10 @@
         "src/channel.js": {
             "name": "src/channel.js",
             "modules": {
-                "channel": 1
+                "monoco-channel": 1
             },
             "classes": {
-                "channel": 1
+                "monoco-channel": 1
             },
             "fors": {},
             "namespaces": {}
@@ -135,6 +135,7 @@
             "name": "monoco",
             "submodules": {
                 "monoco-behavior": 1,
+                "monoco-channel": 1,
                 "monoco-component": 1,
                 "monoco-db": 1,
                 "monoco-helper": 1,
@@ -146,6 +147,7 @@
             },
             "classes": {
                 "monoco-behavior": 1,
+                "monoco-channel": 1,
                 "monoco-component": 1,
                 "monoco-db": 1,
                 "MonocoDatabaseCollection": 1,
@@ -193,17 +195,19 @@
             ],
             "static": 1
         },
-        "channel": {
-            "name": "channel",
+        "monoco-channel": {
+            "name": "monoco-channel",
             "submodules": {},
             "classes": {
-                "channel": 1
+                "monoco-channel": 1
             },
             "fors": {},
+            "is_submodule": 1,
             "namespaces": {},
-            "module": "channel",
+            "module": "monoco",
+            "namespace": "",
             "file": "src/channel.js",
-            "line": 92,
+            "line": 91,
             "description": "This module manages the channel",
             "requires": [
                 "monoco-db",
@@ -404,19 +408,19 @@
                 "monoco-channel"
             ]
         },
-        "channel": {
-            "name": "channel",
-            "shortname": "channel",
+        "monoco-channel": {
+            "name": "monoco-channel",
+            "shortname": "monoco-channel",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "channel",
-            "submodule": "channel",
+            "module": "monoco",
+            "submodule": "monoco-channel",
             "namespace": "",
             "file": "src/channel.js",
-            "line": 92,
+            "line": 91,
             "description": "This module manages the channel",
             "requires": [
                 "monoco-db",
@@ -766,17 +770,13 @@
                     "type": "Function"
                 }
             ],
-            "return": {
-                "description": "",
-                "type": "Undefined"
-            },
-            "class": "channel",
-            "module": "channel",
-            "submodule": "channel"
+            "class": "monoco-channel",
+            "module": "monoco",
+            "submodule": "monoco-channel"
         },
         {
             "file": "src/channel.js",
-            "line": 60,
+            "line": 59,
             "description": "Send a message into the channel",
             "params": [
                 {
@@ -789,13 +789,13 @@
                 "description": "true if the message was sent",
                 "type": "Boolean"
             },
-            "class": "channel",
-            "module": "channel",
-            "submodule": "channel"
+            "class": "monoco-channel",
+            "module": "monoco",
+            "submodule": "monoco-channel"
         },
         {
             "file": "src/channel.js",
-            "line": 107,
+            "line": 106,
             "description": "Listen to an event",
             "params": [
                 {
@@ -813,13 +813,13 @@
                 "description": "",
                 "type": "Undefined"
             },
-            "class": "channel",
-            "module": "channel",
-            "submodule": "channel"
+            "class": "monoco-channel",
+            "module": "monoco",
+            "submodule": "monoco-channel"
         },
         {
             "file": "src/channel.js",
-            "line": 116,
+            "line": 115,
             "description": "Send a message into the channel",
             "params": [
                 {
@@ -832,9 +832,9 @@
                 "description": "true if the message was sent",
                 "type": "Boolean"
             },
-            "class": "channel",
-            "module": "channel",
-            "submodule": "channel"
+            "class": "monoco-channel",
+            "module": "monoco",
+            "submodule": "monoco-channel"
         },
         {
             "file": "src/component.js",
@@ -2294,19 +2294,15 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/channel.js:49"
+            "line": " src/channel.js:59"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/channel.js:60"
+            "line": " src/channel.js:106"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/channel.js:107"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src/channel.js:116"
+            "line": " src/channel.js:115"
         },
         {
             "message": "Missing item type\nListen to an event",
@@ -2314,15 +2310,15 @@
         },
         {
             "message": "Missing item type\nSend a message into the channel",
-            "line": " src/channel.js:60"
+            "line": " src/channel.js:59"
         },
         {
             "message": "Missing item type\nListen to an event",
-            "line": " src/channel.js:107"
+            "line": " src/channel.js:106"
         },
         {
             "message": "Missing item type\nSend a message into the channel",
-            "line": " src/channel.js:116"
+            "line": " src/channel.js:115"
         }
     ]
 }

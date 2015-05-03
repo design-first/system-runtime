@@ -24,14 +24,14 @@
 /**
  * This module manages the channel
  * 
- * @module channel
- * @submodule channel
+ * @module monoco
+ * @submodule monoco-channel
  * @requires monoco-db
  * @requires monoco-metamodel
  * @requires monoco-behavior
  * @requires monoco-log
  * @requires monoco-helper
- * @class channel
+ * @class monoco-channel
  * @static
  */
 
@@ -50,7 +50,6 @@ var $helper = require('./helper.js');
  * Listen to an event
  * @param {String} event name of the event
  * @param {Function} action code to execute
- * @returns {undefined}
  */
 function listen(event, action) {
     $behavior.add('channel', event, action, true);
@@ -92,14 +91,14 @@ function send(message) {
 /**
  * This module manages the channel
  * 
- * @module channel
- * @submodule channel
+ * @module monoco
+ * @submodule monoco-channel
  * @requires monoco-db
  * @requires monoco-metamodel
  * @requires monoco-behavior
  * @requires monoco-log
  * @requires monoco-helper
- * @class channel
+ * @class monoco-channel
  * @static
  */
 
