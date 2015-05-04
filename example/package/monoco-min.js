@@ -2,7 +2,7 @@
  * Monoco
  * A Model and a NoSQL Database for your Components
  * http://monoco.io/
- * @monocojs
+ * @ecarriou
  *
  * Copyright (C) 2015 - Erwan Carriou
  *
