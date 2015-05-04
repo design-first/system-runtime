@@ -50,7 +50,8 @@ monoco.version();
 ## Examples
 
 You will find examples on the [/example](./example) directory or on [monoco website](http://monoco.io/tutorial/00-intro.html).
-Remember that all the examples works both on server or on client side.
+
+Remember that **all the examples works both on server or on client side**.
 
 ## Extend monoco
 
@@ -85,7 +86,9 @@ $ grunt build
 
 ## Documentation
 
-There is a generated [documentation](/doc/index.html) of monoco core APIs. This documentation is only usefull for using monoco core APIs in your code (via **Dependency Injection** on monoco behaviors). For more documentations, go to [monoco website](http://monoco.io/).
+There is a generated [documentation](/doc/index.html) of monoco core APIs. This documentation is only usefull for using monoco core APIs in your code (via **Dependency Injection** on monoco behaviors). 
+
+For more documentations, go to [monoco website](http://monoco.io/).
 
 ## Licence
 
