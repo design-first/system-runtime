@@ -1,6 +1,6 @@
 {
     "name": "monoco",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "A Model and a NoSQL Database for Componentsk",
     "license": "GPLv3",
     "homepage": "https://github.com/monocojs/monoco.git",
@@ -34,7 +34,7 @@
         "package.json",
         ".jshintrc",
         ".travis.yml",
-        ".bowser.json",
+        ".bower.json",
         "bower.json"
     ]
 }
