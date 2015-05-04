@@ -7,7 +7,7 @@
  * monoco is a **JavaScript library to design, create and store JavaScript components**,
  * monoco is an **isomorphic** library: the components will work on both client and server side,
  * monoco **dynamically checks the signature of all the methods of the components at runtime**,
- * monoco creates **persistant components** that are stored on a tiny NoSQL Database and
+ * monoco creates **persistant components** that are stored on a micro NoSQL Database and
  * monoco creates **composed components** thanks to its modulary system.
 
 #### What monoco contains ?
@@ -37,14 +37,22 @@ var monoco = require('monoco');
 $ bower install monoco --save
 ```
 
-Then add a `<script>` tag to your HTML page:
+Add a `<script>` tag to your HTML page:
 ```html
 <script src="/bower_components/monoco/build/monoco-min.js"></script>
+```
+
+Then you can use monoco on your script:
+```js
+// example of use 
+monoco.version();
 ```
 
 ## Examples
 
 You will find examples on the [/example](./example) directory or on [monoco website](http://monoco.io/tutorial/00-intro.html).
+
+Remember that all the examples works both on server or on client side.
 
 ## Extend monoco
 
@@ -58,7 +66,7 @@ monoco core system is located on the [/src/system](./src/system) directory:
 * ``` schemas ```: contains all the schemas of the core components of monoco and
 * ``` types ```: contains all the types of the core components of monoco.
 
-When you have finished to update monoco core system, build monoco.
+When you have finished to update monoco core system, build monoco:
 
 ```sh
 $ grunt build
@@ -70,7 +78,7 @@ You can update monoco core system **by composing other systems** with it. In tha
 
 Monoco addons are located on the [/addons](./addons/) directory. 
 You will find all the systems that you can import on monoco. 
-To do so, just copy and paste a system into the [/src/addons](./src/addons/) directory and build monoco.
+To do so, just copy and paste a system into the [/src/addons](./src/addons/) directory and build monoco:
 
 ```sh
 $ grunt build
