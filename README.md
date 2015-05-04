@@ -44,14 +44,12 @@ Add a `<script>` tag to your HTML page:
 
 Then you can use monoco on your script:
 ```js
-// example of use 
 monoco.version();
 ```
 
 ## Examples
 
 You will find examples on the [/example](./example) directory or on [monoco website](http://monoco.io/tutorial/00-intro.html).
-
 Remember that all the examples works both on server or on client side.
 
 ## Extend monoco
@@ -66,7 +64,7 @@ monoco core system is located on the [/src/system](./src/system) directory:
 * ``` schemas ```: contains all the schemas of the core components of monoco and
 * ``` types ```: contains all the types of the core components of monoco.
 
-When you have finished to update monoco core system, build monoco:
+When you have finished to update monoco core system, just build monoco:
 
 ```sh
 $ grunt build
@@ -77,7 +75,8 @@ $ grunt build
 You can update monoco core system **by composing other systems** with it. In that case, other systems are called **addons**. 
 
 Monoco addons are located on the [/addons](./addons/) directory. 
-You will find all the systems that you can import on monoco. 
+You will find there all the systems that you can import. 
+
 To do so, just copy and paste a system into the [/src/addons](./src/addons/) directory and build monoco:
 
 ```sh
