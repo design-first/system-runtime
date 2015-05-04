@@ -53,6 +53,12 @@ You will find examples on the [/example](./example) directory or on [monoco webs
 
 Remember that **all the examples work both on server and browser**.
 
+## Documentation
+
+There is a generated [documentation](/doc/index.html) of monoco core APIs. This documentation is only usefull for using monoco core APIs in your code (via **Dependency Injection** on monoco behaviors). 
+
+For more documentations, go to [monoco website](http://monoco.io/).
+
 ## Extend monoco
 
 #### monoco core system
@@ -83,12 +89,6 @@ To do so, just copy and paste a system into the [/src/addons](./src/addons/) dir
 ```sh
 $ grunt build
 ```
-
-## Documentation
-
-There is a generated [documentation](/doc/index.html) of monoco core APIs. This documentation is only usefull for using monoco core APIs in your code (via **Dependency Injection** on monoco behaviors). 
-
-For more documentations, go to [monoco website](http://monoco.io/).
 
 ## Licence
 
