@@ -18,11 +18,18 @@
  * a **worflow engine** that checks at runtime if the signature of all methods are compliant with the model and
  * a **channel** in which components can exchange typed messages.
 
-## Examples
-
-You will find more examples on the [/example](./example) directory.
-
 ## Installation
+
+#### Node.js
+
+```sh
+$ npm install monoco --save
+```
+
+Then require monoco:
+```js
+var monoco = require('monoco');
+```
 
 #### Bower
 
@@ -35,16 +42,9 @@ Then add a `<script>` tag to your HTML page:
 <script src="/bower_components/monoco/build/monoco-min.js"></script>
 ```
 
-#### Node.js
+## Examples
 
-```sh
-$ npm install monoco --save
-```
-
-Then require monoco:
-```js
-var monoco = require('monoco');
-```
+You will find examples on the [/example](./example) directory or on [monoco website](http://monoco.io/tutorial/00-intro.html).
 
 ## Extend monoco
 
@@ -58,6 +58,12 @@ monoco core system is located on the [/src/system](./src/system) directory:
 * ``` schemas ```: contains all the schemas of the core components of monoco and
 * ``` types ```: contains all the types of the core components of monoco.
 
+When you have finished to update monoco core system, build monoco.
+
+```sh
+$ grunt build
+```
+
 #### monoco addons
 
 You can update monoco core system **by composing other systems** with it. In that case, other systems are called **addons**. 
@@ -67,26 +73,6 @@ You will find all the systems that you can import on monoco.
 To do so, just copy and paste a system into the [/src/addons](./src/addons/) directory and build monoco.
 
 ```sh
-$ grunt build
-```
-
-#### Grunt
-
-Grunt is used for automating the basic tasks of monoco. You can use it to extend monoco core system or to package your own system with monoco.
-
-
-```sh
-# run server tests
-$ grunt test
-# clean the build directory 
-$ grunt clean
-# generate the documentation
-$ grunt doc
-# build monoco on 'debug' mode
-$ grunt debug
-# build monoco
-# it will generate the monoco core system (on /src/system/)
-# it will also run jshint and server/client tests
 $ grunt build
 ```
 
