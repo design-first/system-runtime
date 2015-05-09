@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/monocojs/monoco.svg?branch=master)](https://travis-ci.org/monocojs/monoco) [![Coverage Status](https://img.shields.io/coveralls/monocojs/monoco.svg)](https://coveralls.io/r/monocojs/monoco)
 
-(http://monoco.io/img/logo.png)
+[monoco logo](http://monoco.io/img/logo.png)
 
 #### What is monoco ?
 
