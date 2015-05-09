@@ -21,13 +21,13 @@
  */
 
 /**
- * This module manages Monoco Database. <br>
- * Monoco Database is a micro NoSQL Database that contains: <br>
+ * This module manages monoco database. <br>
+ * monoco database is a micro NoSQL Database that contains: <br>
  * - collections to store documents (schemas, types, components, ...) and <br>
  * - APIs to import or export documents. <br>
  * 
- * Monoco Database is closely linked to Monoco Metamodel and Monoco Component because: <br>
- * - all operations done by Monoco Database must be compliant with the model before being finished, <br>
+ * monoco Database is closely linked to monoco metamodel and monoco components because: <br>
+ * - all operations done by monoco database must be compliant with the model before being finished, <br>
  * - insert operation automatically creates a component and <br>
  * - remove operation automatically destroy a component.
  *  
@@ -95,8 +95,8 @@ function contains(source, target) {
 
 
 /** 
- * A collection of documents managed by Monoco. <br>
- * Internal collections manage core objects of Monoco (schema, type, ...). <br>
+ * A collection of documents managed by monoco. <br>
+ * Internal collections manage core objects of monoco (schema, type, ...). <br>
  * Public collections manage components of the same class. <br>
  * 
  * @class MonocoDatabaseCollection
@@ -165,7 +165,7 @@ MonocoDatabaseCollection.prototype.find = function (query) {
 
 /**
  * Insert an new document into the collection. <br>
- * Before inserting the document, Monoco checks that the document is compliant
+ * Before inserting the document, monoco checks that the document is compliant
  * with its class definition. <br> 
  * Then, after inserting it, we create the component.
  * @method insert
@@ -452,10 +452,10 @@ function dump() {
 
 
 /*
- * Import/Export a Monoco System into/from the database
+ * Import/Export a monoco system into/from the database
  * @method system
- * @param {JSON} importedSystem a Monoco System to import
- * @return {String} the id of the imported Monoco System or the if of the current Monoco System  
+ * @param {JSON} importedSystem a monoco system to import
+ * @return {String} the id of the imported monoco system or the if of the current monoco system  
  */
 function system(importedSystem) {
     var result = '',
@@ -540,10 +540,10 @@ function system(importedSystem) {
 
 
 /*
- * Export a Monoco sub-system.
+ * Export a monoco sub-system.
  * @method subsystem
  * @param {JSON} params parameters
- * @return {String} a stringified Monoco sub-system
+ * @return {String} a stringified monoco sub-system
  * 
  * @example
  * $db.subsystem({"schemas":{"name":"Person"}}); // filter export on schemas <br>
@@ -645,13 +645,13 @@ function subsystem(params) {
 
 
 /**
- * This module manages Monoco Database. <br>
- * Monoco Database is a micro NoSQL Database that contains: <br>
+ * This module manages monoco database. <br>
+ * monoco database is a micro NoSQL Database that contains: <br>
  * - collections to store documents (schemas, types, components, ...) and <br>
  * - APIs to import or export documents. <br>
  * 
- * Monoco Database is closely linked to Monoco Metamodel because: <br>
- * - all operations done by Monoco Database must be compliant with the model before being finished, <br>
+ * monoco database is closely linked to monoco metamodel because: <br>
+ * - all operations done by monoco database must be compliant with the model before being finished, <br>
  * - insert operation automatically creates a component and <br>
  * - remove operation automatically destroy a component.
  *   
@@ -674,7 +674,7 @@ exports.collection = collection;
 
 
 /**
- * Monoco Database store that list all the collections.
+ * monoco database store that list all the collections.
  * @property {JSON} store
  */
 exports.store = store;
@@ -693,19 +693,19 @@ exports.dump = dump;
 
 
 /**
- * Import/Export a Monoco System into/from the database.
+ * Import/Export a monoco system into/from the database.
  * @method system
- * @param {JSON} importedSystem a Monoco System to import
- * @return {String} the id of the imported Monoco System or the current Monoco System  
+ * @param {JSON} importedSystem a monoco system to import
+ * @return {String} the id of the imported monoco system or the current monoco system  
  */
 exports.system = system;
 
 
 /**
- * Export a Monoco sub-system.
+ * Export a monoco sub-system.
  * @method subsystem
  * @param {JSON} params parameters
- * @return {String} a stringified Monoco sub-system
+ * @return {String} a stringified monoco sub-system
  * 
  * @example
  * $db.subsystem({"schemas":{"name":"Person"}}); // filter export on schemas <br>

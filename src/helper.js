@@ -47,9 +47,9 @@ var monocoRef = null;
 
 
 /*
- * Check if a Monoco instance exists
+ * Check if a monoco instance exists.
  * @method isMonoco
- * @return {Boolean} true if a Monoco instance exist
+ * @return {Boolean} true if a monoco instance exist
  */
 function isMonoco() {
     var result = false;
@@ -63,7 +63,7 @@ function isMonoco() {
 
 
 /*
- * Get the instance of Monoco
+ * Get the monoco instance.
  * @method getMonoco
  * @return {Monoco} monoco instance
  */
@@ -91,7 +91,7 @@ function getMonoco() {
 
 
 /*
- * Generate a uid
+ * Generate a uid.
  * @method generateId
  * @return {String} a uid
  */
@@ -119,7 +119,7 @@ function generateId() {
 
 
 /**
- * Get the instance of Monoco
+ * Get monoco instance.
  * @method getMonoco
  * @return {Monoco} monoco instance
  */
@@ -127,15 +127,15 @@ exports.getMonoco = getMonoco;
 
 
 /**
- * Check if a Monoco instance exists
+ * Check if a monoco instance exists.
  * @method isMonoco
- * @return {Boolean} true if a Monoco instance exist
+ * @return {Boolean} true if a monoco instance exist
  */
 exports.isMonoco = isMonoco;
 
 
 /**
- * Generate a uid
+ * Generate a uid?
  * @method generateId
  * @return {String} a uid
  */

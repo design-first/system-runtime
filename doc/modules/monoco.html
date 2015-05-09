@@ -22,7 +22,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.3.2</b>
+                    API Docs for Version: <b>0.3.3</b>
                 </p>
             </li>
         </div>
@@ -133,8 +133,8 @@
 
 
 <div class="moduledesc well well-small">
-    <p>This module is the main module of Monoco. <br>
-It inits Monoco Metamodel and loads the Monoco core system.</p>
+    <p>This module is the main module of monoco. <br>
+It inits monoco metamodel and loads monoco core system.</p>
 
 </div>
 
@@ -253,7 +253,7 @@ when a specific state of a component will change.
                     </a>
 
                     <div class="module-submodule-description">
-                        This module manages the channel
+                        This module manages the channel.
                     </div>
                 </li>
             
@@ -264,7 +264,7 @@ when a specific state of a component will change.
 
                     <div class="module-submodule-description">
                         This module manages the components. 
-It is the factory of all the components that are created by Monoco.
+It is the factory of all the components that are created by monoco.
                     </div>
                 </li>
             
@@ -274,13 +274,13 @@ It is the factory of all the components that are created by Monoco.
                     </a>
 
                     <div class="module-submodule-description">
-                        This module manages Monoco Database. <br>
-Monoco Database is a micro NoSQL Database that contains: <br>
+                        This module manages monoco database. <br>
+monoco database is a micro NoSQL Database that contains: <br>
 - collections to store documents (schemas, types, components, ...) and <br>
 - APIs to import or export documents. <br>
 
-Monoco Database is closely linked to Monoco Metamodel and Monoco Component because: <br>
-- all operations done by Monoco Database must be compliant with the model before being finished, <br>
+monoco Database is closely linked to monoco metamodel and monoco components because: <br>
+- all operations done by monoco database must be compliant with the model before being finished, <br>
 - insert operation automatically creates a component and <br>
 - remove operation automatically destroy a component.
                     </div>
@@ -312,8 +312,8 @@ Monoco Database is closely linked to Monoco Metamodel and Monoco Component becau
                     </a>
 
                     <div class="module-submodule-description">
-                        This module manages Monoco Metamodel. <br>
-Monoco Metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.
+                        This module manages monoco metamodel. <br>
+monoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.
                     </div>
                 </li>
             
@@ -333,7 +333,7 @@ Monoco Metamodel loads schemas and types, analyzes them and creates the componen
                     </a>
 
                     <div class="module-submodule-description">
-                        This module contains the Monoco core system.
+                        This module contains monoco core system.
                     </div>
                 </li>
             
@@ -343,7 +343,7 @@ Monoco Metamodel loads schemas and types, analyzes them and creates the componen
                     </a>
 
                     <div class="module-submodule-description">
-                        This module manages the workflow of Monoco. It behaves like a workflow engine. <br>
+                        This module manages the workflow of monoco. It behaves like a workflow engine. <br>
 It checks if the change of status of a component is valid to be executed. By valid, it means that:<br>
 - the state is valid for the component, <br>
 - the input (i.e. parameters) of all actions for the state are compliants with the model and <br>

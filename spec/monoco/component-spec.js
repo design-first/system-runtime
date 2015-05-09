@@ -1,4 +1,4 @@
-describe('A Monoco Component', function () {
+describe('a monoco component', function () {
 
     // init
     if (typeof window === 'undefined') {

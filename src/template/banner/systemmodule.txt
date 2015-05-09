@@ -21,7 +21,7 @@
  */
 
 /**
- * This module contains the Monoco core system.
+ * This module contains monoco core system.
  *
  * @module monoco
  * @submodule monoco-system
@@ -36,7 +36,7 @@
 
 
 /*
- * The Monoco core system
+ * monoco core system
  * @property {MonocoSystem} system
  */
 var system = 

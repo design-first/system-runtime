@@ -21,8 +21,8 @@
  */
 
 /**
- * This module is the main module of Monoco. <br>
- * It inits Monoco Metamodel and loads the Monoco core system.
+ * This module is the main module of monoco. <br>
+ * It inits monoco metamodel and loads monoco core system.
  * 
  * @module monoco
  * @requires monoco-component
@@ -53,7 +53,7 @@ system = '';
 $metamodel.init();
 
 
-/* Init Monoco from a Monoco System */
+/* Init monoco from a  system */
 
 
 sytemId = $db.system($system.system);
@@ -65,8 +65,8 @@ system.main();
 
 
 /**
- * This module is the main module of Monoco. <br>
- * It inits Monoco Metamodel and loads the Monoco core system.
+ * This module is the main module of monoco. <br>
+ * It inits monoco metamodel and loads monoco core system.
  * 
  * @module monoco
  * @requires monoco-component
@@ -79,7 +79,7 @@ system.main();
 
 
 /**
- * Monoco instance.
+ * monoco instance.
  * @property monoco
  * @type Monoco
  */

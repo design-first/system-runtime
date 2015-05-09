@@ -123,14 +123,14 @@ function createFunction(name, func, core, useCoreAPI) {
 
 
 /*
- * Add a behavior that will be stored in Monoco Database.
+ * Add a behavior that will be stored in monoco database.
  * @method add
  * @param {String} id id of the component
  * @param {Object} state the state on which the action will be executed 
  * @param {Object} action the action to execute when the component will have a specific state 
  * @param {Boolean} useCoreAPI if true, monoco core modules will be injected as parameters of the action (default false)
  * @param {Boolean} core if true, behavior can not be exported
- * @return {String} id of the behavior created in Monoco Database
+ * @return {String} id of the behavior created in monoco database
  */
 function add(id, state, action, useCoreAPI, core) {
     var behaviorId = $helper.generateId();
@@ -250,14 +250,14 @@ function clear() {
 
 
 /**
- * Add a behavior that will be stored in Monoco Database.
+ * Add a behavior that will be stored in monoco database.
  * @method add
  * @param {String} id id of the component
  * @param {Object} state the state on which the action will be executed 
  * @param {Object} action the action to execute when the component will have a specific state 
  * @param {Boolean} useCoreAPI if true, monoco core modules will be injected as parameters of the action (default false)
  * @param {Boolean} core if true, behavior can not be exported
- * @return {String} id of the behavior created in Monoco Database
+ * @return {String} id of the behavior created in monoco database
  */
 exports.add = add;
 

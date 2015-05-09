@@ -3,7 +3,7 @@
  * 
  * Inheritance is defined at schema level.
  * When a method is called:
- * - Monoco will search if there is a behahior for the corresponding method (i.e. state) and instance,
+ * - monoco will search if there is a behahior for the corresponding method (i.e. state) and instance,
  * - if not it will search a behahior for the corresponding method (i.e. state) and class name and
  * - if not it will search a behahior for the corresponding method (i.e. state) at parent class level.
  * 

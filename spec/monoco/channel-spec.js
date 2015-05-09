@@ -1,4 +1,4 @@
-describe('Monoco Channel instance', function () {
+describe('a monoco channel instance', function () {
 
     // init
     if (typeof window === 'undefined') {

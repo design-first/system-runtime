@@ -1,4 +1,4 @@
-describe('Monoco Metamodel instance', function () {
+describe('a monoco metamodel instance', function () {
 
     // init
     if (typeof window === 'undefined') {

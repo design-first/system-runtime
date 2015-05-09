@@ -1,4 +1,4 @@
-describe('Monoco Database instance', function () {
+describe('a monoco database instance', function () {
 
     // init
     if (typeof window === 'undefined') {

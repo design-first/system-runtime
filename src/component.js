@@ -22,7 +22,7 @@
 
 /**
  * This module manages the components. 
- * It is the factory of all the components that are created by Monoco.
+ * It is the factory of all the components that are created by monoco.
  * 
  * @module monoco
  * @submodule monoco-component
@@ -822,7 +822,7 @@ function clear() {
 
 /**
  * This module manages the components. 
- * It is the factory of all the components that are created by Monoco.
+ * It is the factory of all the components that are created by monoco.
  * 
  * @module monoco
  * @submodule monoco-component

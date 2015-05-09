@@ -20,8 +20,8 @@
  */
 
 /**
- * This module manages Monoco Metamodel. <br>
- * Monoco Metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.
+ * This module manages monoco metamodel. <br>
+ * monoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.
  * 
  * @module monoco
  * @submodule monoco-metamodel
@@ -1259,8 +1259,8 @@ function inheritFrom(name, parentName) {
 
 
 /**
- * This module manages Monoco Metamodel. <br>
- * Monoco Metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.
+ * This module manages monoco metamodel. <br>
+ * monoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.
  * 
  * @module monoco
  * @submodule monoco-metamodel

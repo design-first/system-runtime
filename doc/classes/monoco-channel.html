@@ -22,7 +22,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.3.2</b>
+                    API Docs for Version: <b>0.3.3</b>
                 </p>
             </li>
         </div>
@@ -122,7 +122,7 @@
 
 
 <div class="yuidoc-class-description">
-<p>This module manages the channel</p>
+<p>This module manages the channel.</p>
 
 </div>
 
@@ -132,6 +132,21 @@
 <div id="class-toc" class="page-section">
 	<h2>Table of Contents</h2>
     <ul>
+		
+		<li>
+			<strong>Methods</strong>
+			<ul>
+				
+				
+				<li><a href="#method-listen"><span class="im">listen</span>(<span class="ia">event</span><span class="ia">action</span>)</a></li>
+				
+				
+				
+				<li><a href="#method-send"><span class="im">send</span>(<span class="ia">message</span>)</a></li>
+				
+				
+			</ul>
+		</li>
 		
 
 		
@@ -146,6 +161,230 @@
 
 
 
+
+    <div id="methods" class="page-section">
+        <h2 class="off-left">Methods</h2>
+        <div class="item-list">
+       		
+        	
+            <div id="method-listen" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>listen</code></span>
+
+	
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+			
+				<li class="arg">
+					
+						<code>event</code>
+					
+				</li>
+			
+				<li class="arg">
+					
+						<code>action</code>
+					
+				</li>
+			
+			</ul><span class="paren">)</span>
+		</div>
+	
+	
+	</div>
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	<div class="meta">
+		
+			
+				
+				<p>
+				
+				Defined in
+				
+			
+		
+		
+		<a href="../files/src_channel.js.html#l108"><code>src&#x2F;channel.js:108</code></a>
+		
+		</p>
+
+
+		
+
+		
+	</div>
+
+	
+	<div class="description"><p>Listen to an event.</p>
+</div>
+	
+
+	
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+			
+				<li class="param">
+					
+						<code class="param-name">event</code>
+						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+					
+
+					
+
+					
+					<div class="param-description"><p>name of the event</p>
+</div>
+					
+
+					
+				</li>
+			
+				<li class="param">
+					
+						<code class="param-name">action</code>
+						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+					
+
+					
+
+					
+					<div class="param-description"><p>code to execute</p>
+</div>
+					
+
+					
+				</li>
+			
+			</ul>
+		</div>
+	
+
+	
+
+	
+</div>
+
+            
+        
+        	
+            <div id="method-send" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>send</code></span>
+
+	
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+			
+				<li class="arg">
+					
+						<code>message</code>
+					
+				</li>
+			
+			</ul><span class="paren">)</span>
+		</div>
+	
+	
+		<span class="returns-inline">
+			<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+		</span>
+	
+	</div>
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	<div class="meta">
+		
+			
+				
+				<p>
+				
+				Defined in
+				
+			
+		
+		
+		<a href="../files/src_channel.js.html#l117"><code>src&#x2F;channel.js:117</code></a>
+		
+		</p>
+
+
+		
+
+		
+	</div>
+
+	
+	<div class="description"><p>Send a message into the channel.</p>
+</div>
+	
+
+	
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+			
+				<li class="param">
+					
+						<code class="param-name">message</code>
+						<span class="type">Type</span>
+					
+
+					
+
+					
+
+					
+				</li>
+			
+			</ul>
+		</div>
+	
+
+	
+		<div class="returns">
+			<h4>Returns:</h4>
+
+			<div class="returns-description">
+				
+					
+						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+					
+					<p>true if the message was sent</p>
+
+				
+			</div>
+		</div>
+	
+
+	
+</div>
+
+            
+        
+        </div>
+    </div>
 
 
 

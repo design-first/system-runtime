@@ -192,7 +192,7 @@ function readOnlyProperty(id, propertyName) {
 
 
 /*
- * Invalid document on a Monoco Database insert operation.
+ * Invalid document on a monoco database insert operation.
  * @method invalidDocumentOnDbInsert
  * @param {String} doc a document
  * @param {String} collectionName the name of the colllection
@@ -203,7 +203,7 @@ function invalidObjectOnInsert(doc, collectionName) {
 
 
 /*
- * Invalid property on a Monoco Database update operation.
+ * Invalid property on a monoco database update operation.
  * @method invalidPropertyTypeOnDbUpdate
  * @param {String} collectionName the name of the colllection
  * @param {String} id id of the component
@@ -264,7 +264,7 @@ function unknownComponent(className, componentId) {
 
 
 /*
- * The Monoco workflow has been restarted.
+ * The monoco workflow has been restarted.
  * @method workflowRestarted
  */
 function workflowRestarted() {
@@ -330,7 +330,7 @@ function invalidStateOff(id, stateName) {
 
 
 /*
- * The Master system is not found.
+ * The master system is not found.
  * @method masterSystemNotFound
  */
 function masterSystemNotFound() {
@@ -507,7 +507,7 @@ exports.readOnlyProperty = readOnlyProperty;
 
 
 /**
- * Invalid document on a Monoco Database insert operation.
+ * Invalid document on a monoco database insert operation.
  * @method invalidDocumentOnDbInsert
  * @param {String} doc a document
  * @param {String} collectionName the name of the colllection
@@ -516,7 +516,7 @@ exports.invalidDocumentOnDbInsert = invalidObjectOnInsert;
 
 
 /**
- * Invalid property on a Monoco Database update operation.
+ * Invalid property on a monoco database update operation.
  * @method invalidPropertyTypeOnDbUpdate
  * @param {String} collectionName the name of the colllection
  * @param {String} id id of the component
@@ -563,7 +563,7 @@ exports.unknownComponent = unknownComponent;
 
 
 /**
- * The Monoco workflow has been restarted.
+ * The monoco workflow has been restarted.
  * @method workflowRestarted
  */
 exports.workflowRestarted = workflowRestarted;
@@ -617,7 +617,7 @@ exports.invalidStateOff = invalidStateOff;
 
 
 /**
- * The Master system is not found.
+ * The master system is not found.
  * @method masterSystemNotFound
  */
 exports.masterSystemNotFound = masterSystemNotFound;

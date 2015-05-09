@@ -1,11 +1,11 @@
-describe('A MSON Schema', function () {
+describe('a MSON schema', function () {
 
     // init
     if (typeof window === 'undefined') {
         monoco = require('../../src/monoco.js');
     }
 
-    it('can make inheritance at Class level', function () {
+    it('can make inheritance at class level', function () {
         var metamodel = monoco.require('metamodel');
 
         metamodel.schema({

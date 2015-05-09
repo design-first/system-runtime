@@ -84,7 +84,7 @@ You can update monoco core system **by composing other systems** with it. In tha
 Monoco addons are located on the [/addons](./addons/) directory. 
 You will find there all the systems that you can import. 
 
-To do so, just copy and paste a system into the [/src/addons](./src/addons/) directory and build monoco:
+To compose a system with monoco core system, just copy and paste a system into the [/src/addons](./src/addons/) directory and build monoco:
 
 ```sh
 $ grunt build

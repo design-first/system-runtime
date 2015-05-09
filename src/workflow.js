@@ -21,7 +21,7 @@
  */
 
 /**
- * This module manages the workflow of Monoco. It behaves like a workflow engine. <br>
+ * This module manages the workflow of monoco. It behaves like a workflow engine. <br>
  * It checks if the change of status of a component is valid to be executed. By valid, it means that:<br>
  * - the state is valid for the component, <br>
  * - the input (i.e. parameters) of all actions for the state are compliants with the model and <br>
@@ -273,9 +273,9 @@ function checkResult(params) {
 
 
 /*
- * Get the actions of the specified starte
+ * Get the actions of the specified state
  * @method getActions
- * @param {Object} component a Monoco Component
+ * @param {Object} component a monoco component
  * @param {String} name name of the state
  * @param {Boolean} isEvent true if the state is an event
  * @return {Array} list of the actions
@@ -448,7 +448,7 @@ function checkParams(params) {
 }
 
 
-/**
+/*
  * Change the state of a component.
  * 
  * Worklow:<br>
@@ -584,7 +584,7 @@ function restart() {
 
 
 /**
- * This module manages the workflow of Monoco. It behaves like a workflow engine. <br>
+ * This module manages the workflow of monoco. It behaves like a workflow engine. <br>
  * It checks if the change of status of a component is valid to be executed. By valid, it means that:<br>
  * - the state is valid for the component, <br>
  * - the input (i.e. parameters) of all actions for the state are compliants with the model and <br>

@@ -22,7 +22,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.3.2</b>
+                    API Docs for Version: <b>0.3.3</b>
                 </p>
             </li>
         </div>
@@ -128,13 +128,13 @@
  */
 
 /**
- * This module manages Monoco Database. &lt;br&gt;
- * Monoco Database is a micro NoSQL Database that contains: &lt;br&gt;
+ * This module manages monoco database. &lt;br&gt;
+ * monoco database is a micro NoSQL Database that contains: &lt;br&gt;
  * - collections to store documents (schemas, types, components, ...) and &lt;br&gt;
  * - APIs to import or export documents. &lt;br&gt;
  * 
- * Monoco Database is closely linked to Monoco Metamodel and Monoco Component because: &lt;br&gt;
- * - all operations done by Monoco Database must be compliant with the model before being finished, &lt;br&gt;
+ * monoco Database is closely linked to monoco metamodel and monoco components because: &lt;br&gt;
+ * - all operations done by monoco database must be compliant with the model before being finished, &lt;br&gt;
  * - insert operation automatically creates a component and &lt;br&gt;
  * - remove operation automatically destroy a component.
  *  
@@ -202,8 +202,8 @@ function contains(source, target) {
 
 
 /** 
- * A collection of documents managed by Monoco. &lt;br&gt;
- * Internal collections manage core objects of Monoco (schema, type, ...). &lt;br&gt;
+ * A collection of documents managed by monoco. &lt;br&gt;
+ * Internal collections manage core objects of monoco (schema, type, ...). &lt;br&gt;
  * Public collections manage components of the same class. &lt;br&gt;
  * 
  * @class MonocoDatabaseCollection
@@ -272,7 +272,7 @@ MonocoDatabaseCollection.prototype.find = function (query) {
 
 /**
  * Insert an new document into the collection. &lt;br&gt;
- * Before inserting the document, Monoco checks that the document is compliant
+ * Before inserting the document, monoco checks that the document is compliant
  * with its class definition. &lt;br&gt; 
  * Then, after inserting it, we create the component.
  * @method insert
@@ -559,10 +559,10 @@ function dump() {
 
 
 /*
- * Import/Export a Monoco System into/from the database
+ * Import/Export a monoco system into/from the database
  * @method system
- * @param {JSON} importedSystem a Monoco System to import
- * @return {String} the id of the imported Monoco System or the if of the current Monoco System  
+ * @param {JSON} importedSystem a monoco system to import
+ * @return {String} the id of the imported monoco system or the if of the current monoco system  
  */
 function system(importedSystem) {
     var result = &#x27;&#x27;,
@@ -647,10 +647,10 @@ function system(importedSystem) {
 
 
 /*
- * Export a Monoco sub-system.
+ * Export a monoco sub-system.
  * @method subsystem
  * @param {JSON} params parameters
- * @return {String} a stringified Monoco sub-system
+ * @return {String} a stringified monoco sub-system
  * 
  * @example
  * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;}}); // filter export on schemas &lt;br&gt;
@@ -752,13 +752,13 @@ function subsystem(params) {
 
 
 /**
- * This module manages Monoco Database. &lt;br&gt;
- * Monoco Database is a micro NoSQL Database that contains: &lt;br&gt;
+ * This module manages monoco database. &lt;br&gt;
+ * monoco database is a micro NoSQL Database that contains: &lt;br&gt;
  * - collections to store documents (schemas, types, components, ...) and &lt;br&gt;
  * - APIs to import or export documents. &lt;br&gt;
  * 
- * Monoco Database is closely linked to Monoco Metamodel because: &lt;br&gt;
- * - all operations done by Monoco Database must be compliant with the model before being finished, &lt;br&gt;
+ * monoco database is closely linked to monoco metamodel because: &lt;br&gt;
+ * - all operations done by monoco database must be compliant with the model before being finished, &lt;br&gt;
  * - insert operation automatically creates a component and &lt;br&gt;
  * - remove operation automatically destroy a component.
  *   
@@ -781,7 +781,7 @@ exports.collection = collection;
 
 
 /**
- * Monoco Database store that list all the collections.
+ * monoco database store that list all the collections.
  * @property {JSON} store
  */
 exports.store = store;
@@ -800,19 +800,19 @@ exports.dump = dump;
 
 
 /**
- * Import/Export a Monoco System into/from the database.
+ * Import/Export a monoco system into/from the database.
  * @method system
- * @param {JSON} importedSystem a Monoco System to import
- * @return {String} the id of the imported Monoco System or the current Monoco System  
+ * @param {JSON} importedSystem a monoco system to import
+ * @return {String} the id of the imported monoco system or the current monoco system  
  */
 exports.system = system;
 
 
 /**
- * Export a Monoco sub-system.
+ * Export a monoco sub-system.
  * @method subsystem
  * @param {JSON} params parameters
- * @return {String} a stringified Monoco sub-system
+ * @return {String} a stringified monoco sub-system
  * 
  * @example
  * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;}}); // filter export on schemas &lt;br&gt;

@@ -1,4 +1,4 @@
-describe('A Monoco ClassInfo instance', function () {
+describe('a monoco ClassInfo instance', function () {
 
     // init
     if (typeof window === 'undefined') {

@@ -1,4 +1,4 @@
-describe('db module', function () {
+describe('a db module', function () {
 
     // init
     var db = require('../../src/db.js');

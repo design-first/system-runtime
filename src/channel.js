@@ -22,7 +22,7 @@
 
 
 /**
- * This module manages the channel
+ * This module manages the channel.
  * 
  * @module monoco
  * @submodule monoco-channel
@@ -46,8 +46,9 @@ var $helper = require('./helper.js');
 
 /* Public methods */
 
-/**
- * Listen to an event
+/*
+ * Listen to an event.
+ * @method listen
  * @param {String} event name of the event
  * @param {Function} action code to execute
  */
@@ -56,8 +57,9 @@ function listen(event, action) {
 }
 
 
-/**
- * Send a message into the channel
+/*
+ * Send a message into the channel.
+ * @method send
  * @param {type} message
  * @returns {Boolean} true if the message was sent
  */
@@ -89,7 +91,7 @@ function send(message) {
 
 
 /**
- * This module manages the channel
+ * This module manages the channel.
  * 
  * @module monoco
  * @submodule monoco-channel
@@ -104,16 +106,17 @@ function send(message) {
 
 
 /**
- * Listen to an event
+ * Listen to an event.
+ * @method listen
  * @param {String} event name of the event
  * @param {Function} action code to execute
- * @returns {undefined}
  */
 exports.listen = listen;
 
 
 /**
- * Send a message into the channel
+ * Send a message into the channel.
+ * @method send
  * @param {type} message
  * @returns {Boolean} true if the message was sent
  */

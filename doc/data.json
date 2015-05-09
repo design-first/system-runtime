@@ -2,7 +2,7 @@
     "project": {
         "name": "monoco",
         "description": "A Model and a NoSQL Database for Components",
-        "version": "0.3.2",
+        "version": "0.3.3",
         "url": "http://monoco.io"
     },
     "files": {
@@ -165,7 +165,7 @@
             "tag": "main",
             "file": "build/system/system.js",
             "line": 924,
-            "description": "This module is the main module of Monoco. <br>\nIt inits Monoco Metamodel and loads the Monoco core system.",
+            "description": "This module is the main module of monoco. <br>\nIt inits monoco metamodel and loads monoco core system.",
             "requires": [
                 "monoco-component",
                 "monoco-metamodel",
@@ -207,8 +207,8 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/channel.js",
-            "line": 91,
-            "description": "This module manages the channel",
+            "line": 93,
+            "description": "This module manages the channel.",
             "requires": [
                 "monoco-db",
                 "monoco-metamodel",
@@ -231,7 +231,7 @@
             "namespace": "",
             "file": "src/component.js",
             "line": 823,
-            "description": "This module manages the components. \nIt is the factory of all the components that are created by Monoco.",
+            "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
                 "monoco-db",
@@ -256,7 +256,7 @@
             "namespace": "",
             "file": "src/db.js",
             "line": 97,
-            "description": "This module manages Monoco Database. <br>\nMonoco Database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nMonoco Database is closely linked to Monoco Metamodel and Monoco Component because: <br>\n- all operations done by Monoco Database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
+            "description": "This module manages monoco database. <br>\nmonoco database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nmonoco Database is closely linked to monoco metamodel and monoco components because: <br>\n- all operations done by monoco database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "monoco-component",
                 "monoco-helper",
@@ -315,7 +315,7 @@
             "namespace": "",
             "file": "src/metamodel.js",
             "line": 1261,
-            "description": "This module manages Monoco Metamodel. <br>\nMonoco Metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.",
+            "description": "This module manages monoco metamodel. <br>\nmonoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.",
             "requires": [
                 "monoco-db",
                 "monoco-log",
@@ -357,7 +357,7 @@
             "namespace": "",
             "file": "src/workflow.js",
             "line": 62,
-            "description": "This module manages the workflow of Monoco. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and monoco. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
+            "description": "This module manages the workflow of monoco. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and monoco. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
                 "monoco-metamodel",
                 "monoco-component",
@@ -383,7 +383,7 @@
             "namespace": "",
             "file": "build/system/system.js",
             "line": 924,
-            "description": "This module contains the Monoco core system.",
+            "description": "This module contains monoco core system.",
             "static": 1
         }
     },
@@ -420,8 +420,8 @@
             "submodule": "monoco-channel",
             "namespace": "",
             "file": "src/channel.js",
-            "line": 91,
-            "description": "This module manages the channel",
+            "line": 93,
+            "description": "This module manages the channel.",
             "requires": [
                 "monoco-db",
                 "monoco-metamodel",
@@ -443,7 +443,7 @@
             "namespace": "",
             "file": "src/component.js",
             "line": 823,
-            "description": "This module manages the components. \nIt is the factory of all the components that are created by Monoco.",
+            "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
                 "monoco-db",
@@ -466,7 +466,7 @@
             "namespace": "",
             "file": "src/db.js",
             "line": 647,
-            "description": "This module manages Monoco Database. <br>\nMonoco Database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nMonoco Database is closely linked to Monoco Metamodel because: <br>\n- all operations done by Monoco Database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
+            "description": "This module manages monoco database. <br>\nmonoco database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nmonoco database is closely linked to monoco metamodel because: <br>\n- all operations done by monoco database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "monoco-component",
                 "monoco-helper",
@@ -486,7 +486,7 @@
             "namespace": "",
             "file": "src/db.js",
             "line": 97,
-            "description": "A collection of documents managed by Monoco. <br>\nInternal collections manage core objects of Monoco (schema, type, ...). <br>\nPublic collections manage components of the same class. <br>",
+            "description": "A collection of documents managed by monoco. <br>\nInternal collections manage core objects of monoco (schema, type, ...). <br>\nPublic collections manage components of the same class. <br>",
             "is_constructor": 1,
             "params": [
                 {
@@ -546,7 +546,7 @@
             "namespace": "",
             "file": "src/metamodel.js",
             "line": 1261,
-            "description": "This module manages Monoco Metamodel. <br>\nMonoco Metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.",
+            "description": "This module manages monoco metamodel. <br>\nmonoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.",
             "requires": [
                 "monoco-db",
                 "monoco-log",
@@ -566,7 +566,7 @@
             "namespace": "",
             "file": "src/monoco.js",
             "line": 67,
-            "description": "This module is the main module of Monoco. <br>\nIt inits Monoco Metamodel and loads the Monoco core system.",
+            "description": "This module is the main module of monoco. <br>\nIt inits monoco metamodel and loads monoco core system.",
             "requires": [
                 "monoco-component",
                 "monoco-metamodel",
@@ -608,7 +608,7 @@
             "namespace": "",
             "file": "src/workflow.js",
             "line": 586,
-            "description": "This module manages the workflow of Monoco. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and monoco. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
+            "description": "This module manages the workflow of monoco. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and monoco. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
                 "monoco-metamodel",
                 "monoco-component",
@@ -656,14 +656,14 @@
             "namespace": "",
             "file": "build/system/system.js",
             "line": 924,
-            "description": "This module contains the Monoco core system."
+            "description": "This module contains monoco core system."
         }
     },
     "classitems": [
         {
             "file": "src/behavior.js",
             "line": 252,
-            "description": "Add a behavior that will be stored in Monoco Database.",
+            "description": "Add a behavior that will be stored in monoco database.",
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -694,7 +694,7 @@
                 }
             ],
             "return": {
-                "description": "id of the behavior created in Monoco Database",
+                "description": "id of the behavior created in monoco database",
                 "type": "String"
             },
             "class": "monoco-behavior",
@@ -756,8 +756,10 @@
         },
         {
             "file": "src/channel.js",
-            "line": 49,
-            "description": "Listen to an event",
+            "line": 108,
+            "description": "Listen to an event.",
+            "itemtype": "method",
+            "name": "listen",
             "params": [
                 {
                     "name": "event",
@@ -776,51 +778,10 @@
         },
         {
             "file": "src/channel.js",
-            "line": 59,
-            "description": "Send a message into the channel",
-            "params": [
-                {
-                    "name": "message",
-                    "description": "",
-                    "type": "Type"
-                }
-            ],
-            "return": {
-                "description": "true if the message was sent",
-                "type": "Boolean"
-            },
-            "class": "monoco-channel",
-            "module": "monoco",
-            "submodule": "monoco-channel"
-        },
-        {
-            "file": "src/channel.js",
-            "line": 106,
-            "description": "Listen to an event",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "name of the event",
-                    "type": "String"
-                },
-                {
-                    "name": "action",
-                    "description": "code to execute",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Undefined"
-            },
-            "class": "monoco-channel",
-            "module": "monoco",
-            "submodule": "monoco-channel"
-        },
-        {
-            "file": "src/channel.js",
-            "line": 115,
-            "description": "Send a message into the channel",
+            "line": 117,
+            "description": "Send a message into the channel.",
+            "itemtype": "method",
+            "name": "send",
             "params": [
                 {
                     "name": "message",
@@ -983,7 +944,7 @@
         {
             "file": "src/db.js",
             "line": 166,
-            "description": "Insert an new document into the collection. <br>\nBefore inserting the document, Monoco checks that the document is compliant\nwith its class definition. <br> \nThen, after inserting it, we create the component.",
+            "description": "Insert an new document into the collection. <br>\nBefore inserting the document, monoco checks that the document is compliant\nwith its class definition. <br> \nThen, after inserting it, we create the component.",
             "itemtype": "method",
             "name": "insert",
             "params": [
@@ -1096,7 +1057,7 @@
         {
             "file": "src/db.js",
             "line": 676,
-            "description": "Monoco Database store that list all the collections.",
+            "description": "monoco database store that list all the collections.",
             "itemtype": "property",
             "name": "store",
             "type": "JSON",
@@ -1121,18 +1082,18 @@
         {
             "file": "src/db.js",
             "line": 695,
-            "description": "Import/Export a Monoco System into/from the database.",
+            "description": "Import/Export a monoco system into/from the database.",
             "itemtype": "method",
             "name": "system",
             "params": [
                 {
                     "name": "importedSystem",
-                    "description": "a Monoco System to import",
+                    "description": "a monoco system to import",
                     "type": "JSON"
                 }
             ],
             "return": {
-                "description": "the id of the imported Monoco System or the current Monoco System",
+                "description": "the id of the imported monoco system or the current monoco system",
                 "type": "String"
             },
             "class": "monoco-db",
@@ -1142,7 +1103,7 @@
         {
             "file": "src/db.js",
             "line": 704,
-            "description": "Export a Monoco sub-system.",
+            "description": "Export a monoco sub-system.",
             "itemtype": "method",
             "name": "subsystem",
             "params": [
@@ -1153,7 +1114,7 @@
                 }
             ],
             "return": {
-                "description": "a stringified Monoco sub-system",
+                "description": "a stringified monoco sub-system",
                 "type": "String"
             },
             "example": [
@@ -1166,7 +1127,7 @@
         {
             "file": "src/helper.js",
             "line": 121,
-            "description": "Get the instance of Monoco",
+            "description": "Get monoco instance.",
             "itemtype": "method",
             "name": "getMonoco",
             "return": {
@@ -1180,11 +1141,11 @@
         {
             "file": "src/helper.js",
             "line": 129,
-            "description": "Check if a Monoco instance exists",
+            "description": "Check if a monoco instance exists.",
             "itemtype": "method",
             "name": "isMonoco",
             "return": {
-                "description": "true if a Monoco instance exist",
+                "description": "true if a monoco instance exist",
                 "type": "Boolean"
             },
             "class": "monoco-helper",
@@ -1194,7 +1155,7 @@
         {
             "file": "src/helper.js",
             "line": 137,
-            "description": "Generate a uid",
+            "description": "Generate a uid?",
             "itemtype": "method",
             "name": "generateId",
             "return": {
@@ -1509,7 +1470,7 @@
         {
             "file": "src/log.js",
             "line": 509,
-            "description": "Invalid document on a Monoco Database insert operation.",
+            "description": "Invalid document on a monoco database insert operation.",
             "itemtype": "method",
             "name": "invalidDocumentOnDbInsert",
             "params": [
@@ -1531,7 +1492,7 @@
         {
             "file": "src/log.js",
             "line": 518,
-            "description": "Invalid property on a Monoco Database update operation.",
+            "description": "Invalid property on a monoco database update operation.",
             "itemtype": "method",
             "name": "invalidPropertyTypeOnDbUpdate",
             "params": [
@@ -1651,7 +1612,7 @@
         {
             "file": "src/log.js",
             "line": 565,
-            "description": "The Monoco workflow has been restarted.",
+            "description": "The monoco workflow has been restarted.",
             "itemtype": "method",
             "name": "workflowRestarted",
             "class": "monoco-log",
@@ -1771,7 +1732,7 @@
         {
             "file": "src/log.js",
             "line": 619,
-            "description": "The Master system is not found.",
+            "description": "The master system is not found.",
             "itemtype": "method",
             "name": "masterSystemNotFound",
             "class": "monoco-log",
@@ -2137,7 +2098,7 @@
         {
             "file": "src/monoco.js",
             "line": 81,
-            "description": "Monoco instance.",
+            "description": "monoco instance.",
             "itemtype": "property",
             "name": "monoco",
             "type": "Monoco",
@@ -2196,23 +2157,6 @@
             "class": "monoco-state",
             "module": "monoco",
             "submodule": "monoco-state"
-        },
-        {
-            "file": "src/workflow.js",
-            "line": 451,
-            "description": "Change the state of a component.\n\nWorklow:<br>\n<br>\n0. Check if the component has not been destroyed <br>\n1. Check if the state is a method or an event <br>\n2. Search if there is a behavior with an action for the new state <br>\n3. If so, get the action(s) <br>\n4. Check if the conditons on input are compliant with the metamodel <br>\n5. Call the action(s) <br>\n6. If not an of event, check if the conditons on input are compliant with the metamodel <br>\n7. If all is ok, the state of the component is updated <br>\n8. Return the result <br>",
-            "itemtype": "method",
-            "name": "state",
-            "params": [
-                {
-                    "name": "params",
-                    "description": "params to change the state <br>\n{String} component id of the component <br>\n{String} state state of the component <br>\n{Array} data parameters to send to the action",
-                    "type": "Object"
-                }
-            ],
-            "class": "MonocoError",
-            "module": "monoco",
-            "submodule": "monoco-workflow"
         },
         {
             "file": "src/workflow.js",
@@ -2282,7 +2226,7 @@
         {
             "file": "build/system/system.js",
             "line": 934,
-            "description": "The Monoco core system",
+            "description": "monoco core system",
             "itemtype": "property",
             "name": "system",
             "type": "MonocoSystem",
@@ -2294,31 +2238,7 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/channel.js:59"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src/channel.js:106"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src/channel.js:115"
-        },
-        {
-            "message": "Missing item type\nListen to an event",
-            "line": " src/channel.js:49"
-        },
-        {
-            "message": "Missing item type\nSend a message into the channel",
-            "line": " src/channel.js:59"
-        },
-        {
-            "message": "Missing item type\nListen to an event",
-            "line": " src/channel.js:106"
-        },
-        {
-            "message": "Missing item type\nSend a message into the channel",
-            "line": " src/channel.js:115"
+            "line": " src/channel.js:117"
         }
     ]
 }
