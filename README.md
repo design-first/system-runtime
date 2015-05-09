@@ -2,8 +2,6 @@
 
 [![Build Status](https://travis-ci.org/monocojs/monoco.svg?branch=master)](https://travis-ci.org/monocojs/monoco) [![Coverage Status](https://img.shields.io/coveralls/monocojs/monoco.svg)](https://coveralls.io/r/monocojs/monoco)
 
-[monoco logo](http://monoco.io/img/logo.png)
-
 #### What is monoco ?
 
  * monoco is a **JavaScript library to design, create and store JavaScript components**,
@@ -63,6 +61,29 @@ There is a generated [documentation](/doc/index.html) of monoco core APIs. This 
 For more documentations, go to [monoco website](http://monoco.io/).
 
 ## Extend monoco
+
+#### Build monoco
+
+To extend monoco core system or to package your own system with monoco, you will need to close the repository and use grunt commands. Here are the different tasks you can use to automate tasks:
+
+```sh
+# run server tests (from /spec/)
+$ grunt test
+# generate the documentation (on /doc/)
+$ grunt doc
+# clean the build directory
+$ grunt clean
+# build monoco on 'debug' mode (on /build/)
+# it will generate the monoco core system (from /src/system/)
+# and package monoco client library
+# it will also run jshint and server tests
+$ grunt debug
+# build monoco (on /build/)
+# it will generate the monoco core system (from /src/system/) 
+# and package monoco client library
+# it will also run jshint and server and client tests
+$ grunt build
+```
 
 #### monoco core system
 
