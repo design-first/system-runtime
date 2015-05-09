@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/monocojs/monoco.svg?branch=master)](https://travis-ci.org/monocojs/monoco) [![Coverage Status](https://img.shields.io/coveralls/monocojs/monoco.svg)](https://coveralls.io/r/monocojs/monoco)
 
+(http://monoco.io/img/logo.png)
+
 #### What is monoco ?
 
  * monoco is a **JavaScript library to design, create and store JavaScript components**,
@@ -44,6 +46,7 @@ Add a `<script>` tag to your HTML page:
 
 Then you can use monoco on your script:
 ```js
+// example: get monoco version
 monoco.version();
 ```
 
@@ -81,7 +84,7 @@ $ grunt build
 
 You can update monoco core system **by composing other systems** with it. In that case, other systems are called **addons**. 
 
-Monoco addons are located on the [/addons](./addons/) directory. 
+monoco addons are located on the [/addons](./addons/) directory. 
 You will find there all the systems that you can import. 
 
 To compose a system with monoco core system, just copy and paste a system into the [/src/addons](./src/addons/) directory and build monoco:
@@ -92,4 +95,4 @@ $ grunt build
 
 ## Licence
 
-Monoco is distributed under [GPLv3](./LICENSE).
+monoco is distributed under [GPLv3](./LICENSE).
