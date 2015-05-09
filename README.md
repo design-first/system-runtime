@@ -62,9 +62,9 @@ For more documentations, go to [monoco website](http://monoco.io/).
 
 ## Extend monoco
 
-#### Build monoco
+#### Grunt
 
-To extend monoco core system or to package your own system with monoco, you will need to close the repository and use grunt commands. Here are the different tasks you can use to automate tasks:
+To extend monoco core system or to package your own system with monoco, you will need to clone the repository and use grunt commands. Here are the different tasks you can use to automate tasks:
 
 ```sh
 # run server tests (from /spec/)
@@ -74,12 +74,12 @@ $ grunt doc
 # clean the build directory
 $ grunt clean
 # build monoco on 'debug' mode (on /build/)
-# it will generate the monoco core system (from /src/system/)
+# it will generate monoco core system (from /src/system/)
 # and package monoco client library
 # it will also run jshint and server tests
 $ grunt debug
 # build monoco (on /build/)
-# it will generate the monoco core system (from /src/system/) 
+# it will generate monoco core system (from /src/system/) 
 # and package monoco client library
 # it will also run jshint and server and client tests
 $ grunt build
@@ -95,11 +95,7 @@ monoco core system is located on the [/src/system](./src/system) directory:
 * ``` schemas ```: contains all the schemas of the core components of monoco and
 * ``` types ```: contains all the types of the core components of monoco.
 
-When you have finished to update monoco core system, just build monoco:
-
-```sh
-$ grunt build
-```
+When you have finished to update monoco core system, just build monoco.
 
 #### monoco addons
 
@@ -108,11 +104,7 @@ You can update monoco core system **by composing other systems** with it. In tha
 monoco addons are located on the [/addons](./addons/) directory. 
 You will find there all the systems that you can import. 
 
-To compose a system with monoco core system, just copy and paste a system into the [/src/addons](./src/addons/) directory and build monoco:
-
-```sh
-$ grunt build
-```
+To compose a system with monoco core system, just copy and paste a system into the [/src/addons](./src/addons/) directory and build monoco.
 
 ## Licence
 
