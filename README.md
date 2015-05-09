@@ -58,7 +58,7 @@ Remember that **all the examples work both on server and browser**.
 
 There is a generated [documentation](/doc/index.html) of monoco core APIs. This documentation is only usefull for using monoco core APIs in your code (via **Dependency Injection** on monoco behaviors). 
 
-For more documentations, go to [monoco website](http://monoco.io/).
+For more documentations, go to [monoco website](http://monoco.io/doc/index.html).
 
 ## Extend monoco
 
@@ -99,7 +99,7 @@ When you have finished to update monoco core system, just build monoco.
 
 #### monoco addons
 
-You can update monoco core system **by composing other systems** with it. In that case, other systems are called **addons**. 
+You can extend monoco core system **by composing other systems** with it. In that case, other systems are called **addons**. 
 
 monoco addons are located on the [/addons](./addons/) directory. 
 You will find there all the systems that you can import. 
