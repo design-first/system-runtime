@@ -5,6 +5,8 @@ describe('a monoco component', function () {
         monoco = require('../../src/monoco.js');
     }
     var share = '';
+    var flag = false;
+
     function _init() {
         var metamodel = monoco.require('metamodel');
 
@@ -72,19 +74,49 @@ describe('a monoco component', function () {
     });
 
     it('can add an event', function () {
-        var db = monoco.require('db');
-        db.on('init', function () {
-            share = share + 'ok';
+        flag = false;
+
+        runs(function () {
+            var db = monoco.require('db');
+            db.on('init', function () {
+                share = share + 'ok';
+            });
+            db.init({});
+
+            setTimeout(function () {
+                flag = true;
+            }, 500);
         });
-        db.init({});
-        expect(share).toBe('ok');
+
+        waitsFor(function () {
+            return flag;
+        });
+
+        runs(function () {
+            expect(share).toBe('ok');
+        });
     });
 
     it('can remove an event', function () {
-        var db = monoco.require('db');
-        db.off('init');
-        db.init({});
-        expect(share).toBe('ok');
+        flag = false;
+
+        runs(function () {
+            var db = monoco.require('db');
+            db.off('init');
+            db.init({});
+
+            setTimeout(function () {
+                flag = true;
+            }, 500);
+        });
+
+        waitsFor(function () {
+            return flag;
+        });
+
+        runs(function () {
+            expect(share).toBe('ok');
+        });
     });
 
     it('can navigate threw relationships bewteen components', function () {
@@ -113,25 +145,47 @@ describe('a monoco component', function () {
     });
 
     it('can destroy itself', function () {
-        var anakin = monoco.find('Person', {'firstName': 'Anakin'})[0],
-        result = [];
+        flag = false;
 
-        anakin.destroy();
+        runs(function () {
+            var anakin = monoco.find('Person', {'firstName': 'Anakin'})[0];
+            anakin.destroy();
 
-        result = monoco.find('Person', {'firstName': 'Anakin'});
+            setTimeout(function () {
+                flag = true;
+            }, 500);
+        });
 
-        expect(result.length).toBe(0);
+        waitsFor(function () {
+            return flag;
+        });
+
+        runs(function () {
+            var result = monoco.find('Person', {'firstName': 'Anakin'});
+            expect(result.length).toBe(0);
+        });
     });
 
     it('can destroy a class', function () {
-        var Person = monoco.require('Person'),
-        result = [];
+        flag = false;
 
-        Person.destroy();
+        runs(function () {
+            var Person = monoco.require('Person');
+            Person.destroy();
+            
+            setTimeout(function () {
+                flag = true;
+            }, 500);
+        });
 
-        result = monoco.find('Person', {});
+        waitsFor(function () {
+            return flag;
+        });
 
-        expect(result.length).toBe(0);
+        runs(function () {
+            var result = monoco.find('Person', {});
+            expect(result.length).toBe(0);
+        });
     });
 
 });

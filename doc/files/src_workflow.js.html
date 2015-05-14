@@ -456,15 +456,15 @@ function callAction(component, state, action, params, isEvent) {
             injectedParams.push($channel);
 
             if (isEvent) {
-                setTimeout(action.action.apply(component, injectedParams), 0);
+                setTimeout(action.action.bind.apply(action.action, [component].concat(injectedParams)), 0);
             } else {
                 result = action.action.apply(component, injectedParams);
             }
         } else {
             if (isEvent) {
-                setTimeout(action.action.apply(component, params), 0);
+               setTimeout(action.action.bind.apply(action.action, [component].concat(params)), 0);
             } else {
-                result = action.action.apply(component, params);
+               result = action.action.apply(component, params);
             }
         }
     } catch (e) {
