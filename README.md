@@ -1,6 +1,6 @@
 # [monoco](http://monoco.io/)
 
-[![NPM version][npm-image]][npm-url] [![Build Status](https://travis-ci.org/monocojs/monoco.svg?branch=master)](https://travis-ci.org/monocojs/monoco) [![Coverage Status](https://img.shields.io/coveralls/monocojs/monoco.svg)](https://coveralls.io/r/monocojs/monoco)
+[![npm version](https://badge.fury.io/js/monoco.svg)](http://badge.fury.io/js/monoco) [![Build Status](https://travis-ci.org/monocojs/monoco.svg?branch=master)](https://travis-ci.org/monocojs/monoco) [![Coverage Status](https://img.shields.io/coveralls/monocojs/monoco.svg)](https://coveralls.io/r/monocojs/monoco)
 
 #### What is monoco ?
 
