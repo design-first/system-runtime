@@ -1,4 +1,4 @@
-<p align="left">
+<p align="center">
     <a href="http://monoco.io/">
         <img height="240" width="240" src="http://monoco.io/img/logo.png">
     </a>
