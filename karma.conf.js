@@ -12,7 +12,8 @@ module.exports = function (config) {
             "spec/monoco/database-spec.js",
             "spec/monoco/classInfo-spec.js",
             "spec/monoco/system-spec.js",
-            "spec/monoco/mson-spec.js"
+            "spec/monoco/mson-spec.js",
+            "spec/monoco/channel-spec.js"
         ],
         reporters: ['progress', 'coverage'],
         preprocessors: {

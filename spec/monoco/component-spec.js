@@ -5,9 +5,8 @@ describe('a monoco component', function () {
         monoco = require('../../src/monoco.js');
     }
     var share = '';
-    var flag = false;
 
-    function _init() {
+    beforeEach(function () {
         var metamodel = monoco.require('metamodel');
 
         metamodel.schema({
@@ -54,8 +53,7 @@ describe('a monoco component', function () {
         });
         metamodel.create();
 
-    }
-    _init();
+    });
 
     it('can show its id', function () {
         var id = monoco.id();
@@ -73,50 +71,28 @@ describe('a monoco component', function () {
         expect(classInfo).toBeDefined();
     });
 
-    it('can add an event', function () {
-        flag = false;
-
-        runs(function () {
-            var db = monoco.require('db');
-            db.on('init', function () {
-                share = share + 'ok';
-            });
-            db.init({});
-
-            setTimeout(function () {
-                flag = true;
-            }, 500);
+    it('can add an event', function (done) {
+        var db = monoco.require('db');
+        db.on('init', function () {
+            share = share + 'ok';
         });
+        db.init({});
 
-        waitsFor(function () {
-            return flag;
-        });
-
-        runs(function () {
+        setTimeout(function () {
             expect(share).toBe('ok');
-        });
+            done();
+        }, 1);
     });
 
-    it('can remove an event', function () {
-        flag = false;
+    it('can remove an event', function (done) {
+        var db = monoco.require('db');
+        db.off('init');
+        db.init({});
 
-        runs(function () {
-            var db = monoco.require('db');
-            db.off('init');
-            db.init({});
-
-            setTimeout(function () {
-                flag = true;
-            }, 500);
-        });
-
-        waitsFor(function () {
-            return flag;
-        });
-
-        runs(function () {
+        setTimeout(function () {
             expect(share).toBe('ok');
-        });
+            done();
+        }, 1);
     });
 
     it('can navigate threw relationships bewteen components', function () {
@@ -144,48 +120,26 @@ describe('a monoco component', function () {
         expect(leia.father().children(0).firstName()).toBe('Luke');
     });
 
-    it('can destroy itself', function () {
-        flag = false;
+    it('can destroy itself', function (done) {
+        var anakin = monoco.find('Person', {'firstName': 'Anakin'})[0];
+        anakin.destroy();
 
-        runs(function () {
-            var anakin = monoco.find('Person', {'firstName': 'Anakin'})[0];
-            anakin.destroy();
-
-            setTimeout(function () {
-                flag = true;
-            }, 500);
-        });
-
-        waitsFor(function () {
-            return flag;
-        });
-
-        runs(function () {
+        setTimeout(function () {
             var result = monoco.find('Person', {'firstName': 'Anakin'});
             expect(result.length).toBe(0);
-        });
+            done();
+        }, 1);
     });
 
-    it('can destroy a class', function () {
-        flag = false;
+    it('can destroy a class', function (done) {
+        var Person = monoco.require('Person');
+        Person.destroy();
 
-        runs(function () {
-            var Person = monoco.require('Person');
-            Person.destroy();
-            
-            setTimeout(function () {
-                flag = true;
-            }, 500);
-        });
-
-        waitsFor(function () {
-            return flag;
-        });
-
-        runs(function () {
+        setTimeout(function () {
             var result = monoco.find('Person', {});
             expect(result.length).toBe(0);
-        });
+            done();
+        }, 1);
     });
 
 });

@@ -5,7 +5,6 @@ describe('a monoco channel instance', function () {
         monoco = require('../../src/monoco.js');
     }
     var share = '';
-    var flag = false;
 
     it('exists', function () {
         var channel = monoco.require('channel');
@@ -85,32 +84,23 @@ describe('a monoco channel instance', function () {
         expect(result).toBe(true);
     });
 
-    it('can listen to a message', function () {
-        runs(function () {
-            var channel = monoco.require('channel');
+    it('can listen to a message', function (done) {
+        var channel = monoco.require('channel');
 
-            channel.listen('test', function (message) {
-                share = message.foo;
-            });
-
-            channel.send({
-                "event": "test",
-                "data": {
-                    "foo": "bar"
-                }
-            });
-
-            setTimeout(function () {
-                flag = true;
-            }, 500);
+        channel.listen('test', function (message) {
+            share = message.foo;
         });
 
-        waitsFor(function () {
-            return flag;
+        channel.send({
+            "event": "test",
+            "data": {
+                "foo": "bar"
+            }
         });
 
-        runs(function () {
+        setTimeout(function () {
             expect(share).toBe('bar');
-        });
+            done();
+        }, 1);
     });
 });

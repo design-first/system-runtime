@@ -15,7 +15,6 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-        
             monoco
         </h1>
 	<div class="nav">
@@ -35,737 +34,720 @@
     <div class="row">
         <div class="span3">
 	    <div>
-    <div id="sidebar">
-    <div id="classes">
-        <ul id="api-classes" class="nav nav-list">
-            
-                <li><a href="../classes/monoco.html">monoco</a></li>
-            
-                <li><a href="../classes/monoco-behavior.html">monoco-behavior</a></li>
-            
-                <li><a href="../classes/monoco-channel.html">monoco-channel</a></li>
-            
-                <li><a href="../classes/monoco-component.html">monoco-component</a></li>
-            
-                <li><a href="../classes/monoco-db.html">monoco-db</a></li>
-            
-                <li><a href="../classes/monoco-helper.html">monoco-helper</a></li>
-            
-                <li><a href="../classes/monoco-log.html">monoco-log</a></li>
-            
-                <li><a href="../classes/monoco-metamodel.html">monoco-metamodel</a></li>
-            
-                <li><a href="../classes/monoco-state.html">monoco-state</a></li>
-            
-                <li><a href="../classes/monoco-system.html">monoco-system</a></li>
-            
-                <li><a href="../classes/monoco-workflow.html">monoco-workflow</a></li>
-            
-                <li><a href="../classes/MonocoDatabaseCollection.html">MonocoDatabaseCollection</a></li>
-            
-                <li><a href="../classes/MonocoError.html">MonocoError</a></li>
-            
-        </ul>
-    </div>
-    </div>
-</div>
-
+	        <div id="sidebar">
+	        <div id="classes">
+	            <ul id="api-classes" class="nav nav-list">
+	                    <li><a href="../classes/monoco.html">monoco</a></li>
+	                    <li><a href="../classes/monoco-behavior.html">monoco-behavior</a></li>
+	                    <li><a href="../classes/monoco-channel.html">monoco-channel</a></li>
+	                    <li><a href="../classes/monoco-component.html">monoco-component</a></li>
+	                    <li><a href="../classes/monoco-db.html">monoco-db</a></li>
+	                    <li><a href="../classes/monoco-helper.html">monoco-helper</a></li>
+	                    <li><a href="../classes/monoco-log.html">monoco-log</a></li>
+	                    <li><a href="../classes/monoco-metamodel.html">monoco-metamodel</a></li>
+	                    <li><a href="../classes/monoco-state.html">monoco-state</a></li>
+	                    <li><a href="../classes/monoco-system.html">monoco-system</a></li>
+	                    <li><a href="../classes/monoco-workflow.html">monoco-workflow</a></li>
+	                    <li><a href="../classes/MonocoDatabaseCollection.html">MonocoDatabaseCollection</a></li>
+	                    <li><a href="../classes/MonocoError.html">MonocoError</a></li>
+	            </ul>
+	        </div>
+	        </div>
+	    </div>
         </div>
         <div class="span9">
                 <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
-
+                    Show:
+                    <label for="api-show-inherited" class="checkbox">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected" class="checkbox">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private" class="checkbox">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated" class="checkbox">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </form>
+            
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
                         <div class="page-header">
-    <h1>src/workflow.js <small>File</small></h1>
-</div>
-
-<div class="file">
-    <pre class="prettyprint linenums">
-/* 
- * monoco
- * A Model and a NoSQL Database for Components
- * http://monoco.io/
- * @ecarriou
- *
- * Copyright (C) 2015 - Erwan Carriou
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
- */
-
-/**
- * This module manages the workflow of monoco. It behaves like a workflow engine. &lt;br&gt;
- * It checks if the change of status of a component is valid to be executed. By valid, it means that:&lt;br&gt;
- * - the state is valid for the component, &lt;br&gt;
- * - the input (i.e. parameters) of all actions for the state are compliants with the model and &lt;br&gt;
- * - the output of all actions are compliants with the model. &lt;br&gt;
- * 
- * If an error occurs, the workflow will call the error state of the component and monoco. &lt;br&gt;
- * If the error can break the consistency of the current system, the worklow will stop.
- * 
- * @module monoco
- * @submodule monoco-workflow
- * @requires monoco-metamodel
- * @requires monoco-component
- * @requires monoco-behavior
- * @requires monoco-channel
- * @requires monoco-state
- * @requires monoco-helper
- * @requires monoco-log
- * @requires monoco-db
- * @class monoco-workflow 
- * @static
- */
-
-&#x27;use strict&#x27;;
-
-var $metamodel = require(&#x27;./metamodel.js&#x27;);
-var $component = require(&#x27;./component.js&#x27;);
-var $behavior = require(&#x27;./behavior.js&#x27;);
-var $channel = require(&#x27;./channel.js&#x27;);
-var $state = require(&#x27;./state.js&#x27;);
-var $helper = require(&#x27;./helper.js&#x27;);
-var $log = require(&#x27;./log.js&#x27;);
-var $db = require(&#x27;./db.js&#x27;);
-
-
-/* Private methods */
-
-
-/**
- * The MonocoError class.
- * @class MonocoError
- * @constructor
- * @param {String} message message of the error
- */
-function MonocoError(message) {
-    this.message = message;
-    this.name = &quot;MonocoError&quot;;
-}
-MonocoError.prototype = new Error();
-MonocoError.prototype.constructor = MonocoError;
-
-
-/*
- * Get all the names of the parameter of a method.
- * @method getParamNames
- * @param {String} id id of the class
- * @param {String} methodName name of the method
- * @return {Array} the names of all parameters of the method for the class
- * @private
- */
-function getParamNames(id, methodName) {
-    var method = null,
-    params = [],
-    result = [],
-    length = 0,
-    i = 0;
-
-    method = $metamodel.get(id)[methodName];
-    if (method) {
-        params = method.params;
-        if (params) {
-            length = params.length;
-            for (i = 0; i &lt; length; i++) {
-                result.push(params[i].name);
-            }
-        }
-    } else {
-        $log.unknownMethod(id, methodName);
-    }
-    return result;
-}
-
-
-/* 
- * Get the number of parameters of a method.
- * @method getParamNumber
- * @param {String} id id of the class
- * @param {String} methodName name of the method
- * @return {Array} number of parameters min and max for the method
- * @private
- */
-function getParamNumber(id, methodName) {
-    var method = null,
-    params = [],
-    result = [],
-    length = 0,
-    i = 0,
-    min = 0,
-    max = 0;
-
-    method = $metamodel.get(id)[methodName];
-    if (method) {
-        params = method.params;
-        if (params) {
-            length = params.length;
-            for (i = 0; i &lt; length; i++) {
-                if (typeof params[i].mandatory === &#x27;undefined&#x27; || params[i].mandatory === true) {
-                    min = min + 1;
-                }
-                max = max + 1;
-            }
-        }
-        result.push(min);
-        result.push(max);
-    } else {
-        $log.unknownMethod(id, methodName);
-    }
-    return result;
-}
-
-
-/* 
- * Set the default value of the non mandatory parameters of a method.
- * @method setDefaultValue
- * @param {String} id id of the class
- * @param {String} methodName name of the method
- * @param {Array} args arguments
- * @return {Array} arguments with default values
- * @private
- */
-function setDefaultValue(id, methodName, args) {
-    var method = null,
-    params = [],
-    result = [],
-    length = 0,
-    i = 0;
-
-    method = $metamodel.get(id)[methodName];
-    if (method) {
-        params = method.params;
-        if (params) {
-            length = params.length;
-            for (i = 0; i &lt; length; i++) {
-                if (params[i].mandatory === false &amp;&amp; typeof args[i] === &#x27;undefined&#x27;) {
-                    result.push(params[i].default);
-                } else {
-                    result.push(args[i]);
-                }
-            }
-        }
-    } else {
-        $log.unknownMethod(id, methodName);
-    }
-    return result;
-}
-
-
-/*
- * Get the type returned by a method.
- * @method getReturnType
- * @param {String} id id of the class
- * @param {String} methodName name of the method
- * @return {String} the type returned by the method
- * @private
- */
-function getReturnType(id, methodName) {
-    var resultType = null,
-    result = null;
-
-    resultType = $metamodel.get(id)[methodName].result;
-    if (resultType) {
-        result = resultType;
-    }
-    return result;
-}
-
-
-/*
- * Get all the type of the parameters of a method
- * @method getParamTypes
- * @param {String} id id of the class
- * @param {String} methodName name of the method
- * @return {Array} the types of the parameters of a method
- * @private
- */
-function getParamTypes(id, methodName) {
-    var method = null,
-    params = [],
-    result = [],
-    length = 0,
-    i = 0;
-
-    method = $metamodel.get(id)[methodName];
-    if (method) {
-        params = method.params;
-        if (params) {
-            length = params.length;
-            for (i = 0; i &lt; length; i++) {
-                result.push(params[i].type);
-            }
-        }
-    } else {
-        $log.unknownMethod(id, methodName);
-    }
-    return result;
-}
-
-
-/*
- * Check if conditions on output are compliant with the metamodel
- * @method checkResult
- * @param {Object} params
- * @return {Boolean} true if conditions on ouput are compliant with the metamodel
- * @private
- */
-function checkResult(params) {
-    params = params || {};
-
-    var component = params.component || null,
-    methodName = params.methodName || &#x27;&#x27;,
-    methodResult = params.methodResult || undefined,
-    componentClassName = &#x27;&#x27;,
-    returnType = null,
-    result = true;
-
-    if (component.constructor.name === &#x27;Function&#x27;) {
-        componentClassName = component.name;
-    } else {
-        componentClassName = component.constructor.name;
-    }
-
-    returnType = getReturnType(componentClassName, methodName);
-
-    if (returnType !== null) {
-        if (returnType === &#x27;array&#x27;) {
-            if (!Array.isArray(methodResult)) {
-                result = false;
-                $log.invalidResultType(component.id(), methodName);
-            }
-        } else {
-            if (typeof methodResult !== returnType) {
-                result = false;
-                $log.invalidResultType(component.id(), methodName);
-            }
-        }
-    }
-
-    return result;
-}
-
-
-/*
- * Get the actions of the specified state
- * @method getActions
- * @param {Object} component a monoco component
- * @param {String} name name of the state
- * @param {Boolean} isEvent true if the state is an event
- * @return {Array} list of the actions
- * @private
- */
-function getActions(component, name, isEvent) {
-    var action = $behavior.getActions(component.id(), name),
-    parents = [],
-    length = 0,
-    i = 0,
-    parent = null;
-
-    if (!action.length || isEvent) {
-        if (component.constructor.name !== &#x27;Function&#x27;) {
-            action = action.concat(getActions($component.get(component.constructor.name), name, isEvent));
-        } else {
-            parents = $metamodel.getParents(component.name);
-            length = parents.length;
-            for (i = 0; i &lt; length; i++) {
-                parent = $component.get(parents[i]);
-                if (parent) {
-                    action = action.concat(getActions(parent, name, isEvent));
-                } else {
-                    $log.unknownComponent(parents[i], component.name);
-                }
-                if (action.length) {
-                    break;
-                }
-            }
-        }
-    }
-
-    if (action.length) {
-        action.reverse();
-    }
-
-    return action;
-}
-
-
-/*
- * Call an action and make some Dependency Injection if it is a core action
- * @method callAction
- * @param {Component} component
- * @param {String} state name of the state
- * @param {Array} action action
- * @param {Array} params parameters of the action
- * @param {Boolean} isEvent is the action a callback of an event
- * @return {Boolean} result of the action
- */
-function callAction(component, state, action, params, isEvent) {
-    var result = null,
-    injectedParams = [],
-    i = 0,
-    length = 0;
-
-    params = setDefaultValue(component.constructor.name, state, params);
-
-    try {
-        if (action.core) {
-            length = params.length;
-            for (i = 0; i &lt; length; i++) {
-                injectedParams.push(params[i]);
-            }
-            injectedParams.push($component);
-            injectedParams.push($db);
-            injectedParams.push($metamodel);
-            injectedParams.push(exports);
-            injectedParams.push($behavior);
-            injectedParams.push($log);
-            injectedParams.push($channel);
-
-            if (isEvent) {
-                setTimeout(action.action.bind.apply(action.action, [component].concat(injectedParams)), 0);
-            } else {
-                result = action.action.apply(component, injectedParams);
-            }
-        } else {
-            if (isEvent) {
-               setTimeout(action.action.bind.apply(action.action, [component].concat(params)), 0);
-            } else {
-               result = action.action.apply(component, params);
-            }
-        }
-    } catch (e) {
-        if (e instanceof MonocoError) {
-            throw e;
-        } else {
-            if (component &amp;&amp; component.error) {
-                component.error({
-                    &quot;message&quot;: &quot;error when trying to call the method &#x27;&quot; + state + &quot;&#x27; on component &#x27;&quot; + component.id() + &quot;&#x27;&quot;,
-                    &quot;error&quot;: e
-                });
-            }
-            if ($helper.getMonoco()) {
-                $helper.getMonoco().error({
-                    &quot;message&quot;: &quot;error when when trying to call the method &#x27;&quot; + state + &quot;&#x27; on component &#x27;&quot; + component.id() + &quot;&#x27;&quot;,
-                    &quot;error&quot;: e
-                });
-            }
-        }
-    }
-
-    return result;
-}
-
-
-/* Public methods */
-
-
-/*
- * Check if conditions on input are compliant with the model before calling the action.
- * @method checkParams
- * @param {Object} params
- * @return {Boolean} true if condition on input are compliant with the model
- */
-function checkParams(params) {
-    params = params || {};
-
-    var component = params.component || null,
-    methodName = params.methodName || &#x27;&#x27;,
-    args = params.args || &#x27;&#x27;,
-    paramsName = [],
-    paramsType = [],
-    paramsNumber = [],
-    componentClassName = &#x27;&#x27;,
-    length = args.length,
-    i = 0,
-    param = null,
-    result = true;
-
-    if (component.constructor.name === &#x27;Function&#x27;) {
-        componentClassName = component.name;
-    } else {
-        componentClassName = component.constructor.name;
-    }
-
-    paramsName = getParamNames(componentClassName, methodName);
-    paramsType = getParamTypes(componentClassName, methodName);
-    paramsNumber = getParamNumber(componentClassName, methodName);
-
-    // case of object
-    if (typeof length === &#x27;undefined&#x27;) {
-        length = 1;
-    }
-
-    if (paramsNumber.indexOf(length) === -1) {
-        result = false;
-        $log.invalidParamNumber(component.id(), methodName);
-    }
-
-    for (i = 0; i &lt; length; i++) {
-        param = args[i];
-        if (typeof param === &#x27;undefined&#x27;) {
-            if (i &lt; paramsNumber[0]) {
-                result = false;
-                $log.invalidParamNumber(component.id(), methodName);
-            } else {
-                continue;
-            }
-        } else {
-            if (!$metamodel.isValidType(param, paramsType[i])) {
-                result = false;
-                $log.invalidParamType(component.id(), methodName, paramsName[i]);
-            }
-        }
-    }
-
-    return result;
-}
-
-
-/*
- * Change the state of a component.
- * 
- * Worklow:&lt;br&gt;
- * &lt;br&gt;
- * 0. Check if the component has not been destroyed &lt;br&gt;
- * 1. Check if the state is a method or an event &lt;br&gt;
- * 2. Search if there is a behavior with an action for the new state &lt;br&gt;
- * 3. If so, get the action(s) &lt;br&gt;
- * 4. Check if the conditons on input are compliant with the metamodel &lt;br&gt;
- * 5. Call the action(s) &lt;br&gt;
- * 6. If not an of event, check if the conditons on input are compliant with the metamodel &lt;br&gt;
- * 7. If all is ok, the state of the component is updated &lt;br&gt;
- * 8. Return the result &lt;br&gt;
- * 
- * @method state
- * @param {Object} params params to change the state &lt;br&gt;
- * {String} component id of the component &lt;br&gt;
- * {String} state state of the component &lt;br&gt;
- * {Array} data parameters to send to the action
- */
-function state(params) {
-
-    params = params || {};
-    params.component = params.component || &#x27;&#x27;;
-    params.state = params.state || &#x27;&#x27;;
-    params.data = params.data || [];
-
-    var component = null,
-    currentState = &#x27;&#x27;,
-    actions = [],
-    action = null,
-    result = null,
-    i = 0,
-    length = 0,
-    isEvent = false;
-
-    currentState = $state.get(params.component);
-
-    if (currentState !== &#x27;destroy&#x27;) {
-
-        component = $component.get(params.component);
-        if (component) {
-            isEvent = $metamodel.isEvent(params.state, component.constructor.name);
-            actions = getActions(component, params.state, isEvent);
-        }
-
-        if (actions.length) {
-
-            if (checkParams({
-                &quot;component&quot;: component,
-                &quot;methodName&quot;: params.state,
-                &quot;args&quot;: params.data
-            })) {
-
-                if (!isEvent) {
-                    action = actions[0];
-                    result = callAction(component, params.state, action, params.data, false);
-
-                    if (checkResult({
-                        &quot;component&quot;: component,
-                        &quot;methodName&quot;: params.state,
-                        &quot;methodResult&quot;: result
-                    })) {
-                        $state.set(component.id(), params.state);
-                    }
-                } else {
-
-                    length = actions.length;
-                    for (i = 0; i &lt; length; i++) {
-                        action = actions[i];
-                        callAction(component, params.state, action, params.data, true);
-                    }
-
-                    $state.set(component.id(), params.state);
-                }
-            }
-            return result;
-        } else {
-            if (component) {
-                $state.set(component.id(), params.state);
-            }
-        }
-    } else {
-        exports.stop({
-            &quot;error&quot;: true,
-            &quot;message&quot;: &quot;trying to change the state of a destroyed component &#x27;&quot; + params.component + &quot;&#x27;&quot;
-        });
-    }
-}
-
-
-/*
- * Stop the workflow engine.
- * @method stop
- * @param {Object} params parameters &lt;br&gt;
- * {Boolean} error true if the stop of the workflow is due to an error (default false) &lt;br&gt;
- * {String} message error message to log (default &#x27;&#x27;)
- */
-function stop(params) {
-    params = params || {};
-
-    if (typeof params.error === &#x27;undefined&#x27;) {
-        params.error = false;
-    }
-    params.message = params.message || &#x27;&#x27;;
-
-    exports.state = function () {
-    };
-
-    if (params.error) {
-        if (params.message) {
-            throw new MonocoError(&quot;monoco has been stopped because &quot; + params.message);
-        } else {
-            throw new MonocoError(&quot;monoco has been stopped because of an unknown error&quot;);
-        }
-    } else {
-        console.warn(&#x27;monoco: monoco has been stopped&#x27;);
-    }
-}
-
-
-/*
- * Restart the workflow engine from the last state.
- * @method restart
- */
-function restart() {
-    exports.state = state;
-    $log.workflowRestarted();
-}
-
-
-/* exports */
-
-
-/**
- * This module manages the workflow of monoco. It behaves like a workflow engine. &lt;br&gt;
- * It checks if the change of status of a component is valid to be executed. By valid, it means that:&lt;br&gt;
- * - the state is valid for the component, &lt;br&gt;
- * - the input (i.e. parameters) of all actions for the state are compliants with the model and &lt;br&gt;
- * - the output of all actions are compliants with the model. &lt;br&gt;
- * 
- * If an error occurs, the workflow will call the error state of the component and monoco. &lt;br&gt;
- * If the error can break the consistency of the current system, the worklow will stop.
- * 
- * @module monoco
- * @submodule monoco-workflow
- * @requires monoco-metamodel
- * @requires monoco-component
- * @requires monoco-behavior
- * @requires monoco-channel
- * @requires monoco-state
- * @requires monoco-helper
- * @requires monoco-log
- * @requires monoco-db
- * @class monoco-workflow 
- * @static
- */
-
-
-/**
- * Change the state of a component.
- * 
- * Worklow:&lt;br&gt;
- * &lt;br&gt;
- * 0. Check if the component has not been destroyed &lt;br&gt;
- * 1. Check if the state is a method or an event &lt;br&gt;
- * 2. Search if there is a behavior with an action for the new state &lt;br&gt;
- * 3. If so, get the action(s) &lt;br&gt;
- * 4. Check if the conditons on input are compliant with the metamodel &lt;br&gt;
- * 5. Call the action(s) &lt;br&gt;
- * 6. If not an of event, check if the conditons on input are compliant with the metamodel &lt;br&gt;
- * 7. If all is ok, the state of the component is updated &lt;br&gt;
- * 8. Return the result &lt;br&gt;
- * 
- * @method state
- * @param {Object} params params to change the state &lt;br&gt;
- * {String} component id of the component &lt;br&gt;
- * {String} state state of the component &lt;br&gt;
- * {Array} data parameters to send to the action
- */
-exports.state = state;
-
-
-/**
- * Stop the workflow engine.
- * @method stop
- * @param {Object} params parameters &lt;br&gt;
- * {Boolean} error true if the stop of the workflow is due to an error (default false) &lt;br&gt;
- * {String} message error message to log (default &#x27;&#x27;)
- */
-exports.stop = stop;
-
-
-/**
- * Restart the workflow engine from the last state.
- * @method restart
- */
-exports.restart = restart;
-
-
-/**
- * Check if conditions on input are compliant with the model before calling the action.
- * @method checkParams
- * @param {Object} params
- * @return {Boolean} true if condition on input are compliant with the model
- */
-exports.checkParams = checkParams;
-    </pre>
-</div>
-
+                            <h1>src/workflow.js <small>File</small></h1>
+                        </div>
+                        
+                        <div class="file">
+                            <pre class="prettyprint linenums">
+                        /* 
+                         * monoco
+                         * A Model and a NoSQL Database for Components
+                         * http://monoco.io/
+                         * @ecarriou
+                         *
+                         * Copyright (C) 2015 - Erwan Carriou
+                         *
+                         * This program is free software: you can redistribute it and/or modify
+                         * it under the terms of the GNU General Public License as published by
+                         * the Free Software Foundation, either version 3 of the License, or
+                         * (at your option) any later version.
+                         *
+                         * This program is distributed in the hope that it will be useful,
+                         * but WITHOUT ANY WARRANTY; without even the implied warranty of
+                         * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                         * GNU General Public License for more details.
+                         *
+                         * You should have received a copy of the GNU General Public License
+                         * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+                         */
+                        
+                        /**
+                         * This module manages the workflow of monoco. It behaves like a workflow engine. &lt;br&gt;
+                         * It checks if the change of status of a component is valid to be executed. By valid, it means that:&lt;br&gt;
+                         * - the state is valid for the component, &lt;br&gt;
+                         * - the input (i.e. parameters) of all actions for the state are compliants with the model and &lt;br&gt;
+                         * - the output of all actions are compliants with the model. &lt;br&gt;
+                         * 
+                         * If an error occurs, the workflow will call the error state of the component and monoco. &lt;br&gt;
+                         * If the error can break the consistency of the current system, the worklow will stop.
+                         * 
+                         * @module monoco
+                         * @submodule monoco-workflow
+                         * @requires monoco-metamodel
+                         * @requires monoco-component
+                         * @requires monoco-behavior
+                         * @requires monoco-channel
+                         * @requires monoco-state
+                         * @requires monoco-helper
+                         * @requires monoco-log
+                         * @requires monoco-db
+                         * @class monoco-workflow 
+                         * @static
+                         */
+                        
+                        &#x27;use strict&#x27;;
+                        
+                        var $metamodel = require(&#x27;./metamodel.js&#x27;);
+                        var $component = require(&#x27;./component.js&#x27;);
+                        var $behavior = require(&#x27;./behavior.js&#x27;);
+                        var $channel = require(&#x27;./channel.js&#x27;);
+                        var $state = require(&#x27;./state.js&#x27;);
+                        var $helper = require(&#x27;./helper.js&#x27;);
+                        var $log = require(&#x27;./log.js&#x27;);
+                        var $db = require(&#x27;./db.js&#x27;);
+                        
+                        
+                        /* Private methods */
+                        
+                        
+                        /**
+                         * The MonocoError class.
+                         * @class MonocoError
+                         * @constructor
+                         * @param {String} message message of the error
+                         */
+                        function MonocoError(message) {
+                            this.message = message;
+                            this.name = &quot;MonocoError&quot;;
+                        }
+                        MonocoError.prototype = new Error();
+                        MonocoError.prototype.constructor = MonocoError;
+                        
+                        
+                        /*
+                         * Get all the names of the parameter of a method.
+                         * @method getParamNames
+                         * @param {String} id id of the class
+                         * @param {String} methodName name of the method
+                         * @return {Array} the names of all parameters of the method for the class
+                         * @private
+                         */
+                        function getParamNames(id, methodName) {
+                            var method = null,
+                            params = [],
+                            result = [],
+                            length = 0,
+                            i = 0;
+                        
+                            method = $metamodel.get(id)[methodName];
+                            if (method) {
+                                params = method.params;
+                                if (params) {
+                                    length = params.length;
+                                    for (i = 0; i &lt; length; i++) {
+                                        result.push(params[i].name);
+                                    }
+                                }
+                            } else {
+                                $log.unknownMethod(id, methodName);
+                            }
+                            return result;
+                        }
+                        
+                        
+                        /* 
+                         * Get the number of parameters of a method.
+                         * @method getParamNumber
+                         * @param {String} id id of the class
+                         * @param {String} methodName name of the method
+                         * @return {Array} number of parameters min and max for the method
+                         * @private
+                         */
+                        function getParamNumber(id, methodName) {
+                            var method = null,
+                            params = [],
+                            result = [],
+                            length = 0,
+                            i = 0,
+                            min = 0,
+                            max = 0;
+                        
+                            method = $metamodel.get(id)[methodName];
+                            if (method) {
+                                params = method.params;
+                                if (params) {
+                                    length = params.length;
+                                    for (i = 0; i &lt; length; i++) {
+                                        if (typeof params[i].mandatory === &#x27;undefined&#x27; || params[i].mandatory === true) {
+                                            min = min + 1;
+                                        }
+                                        max = max + 1;
+                                    }
+                                }
+                                result.push(min);
+                                result.push(max);
+                            } else {
+                                $log.unknownMethod(id, methodName);
+                            }
+                            return result;
+                        }
+                        
+                        
+                        /* 
+                         * Set the default value of the non mandatory parameters of a method.
+                         * @method setDefaultValue
+                         * @param {String} id id of the class
+                         * @param {String} methodName name of the method
+                         * @param {Array} args arguments
+                         * @return {Array} arguments with default values
+                         * @private
+                         */
+                        function setDefaultValue(id, methodName, args) {
+                            var method = null,
+                            params = [],
+                            result = [],
+                            length = 0,
+                            i = 0;
+                        
+                            method = $metamodel.get(id)[methodName];
+                            if (method) {
+                                params = method.params;
+                                if (params) {
+                                    length = params.length;
+                                    for (i = 0; i &lt; length; i++) {
+                                        if (params[i].mandatory === false &amp;&amp; typeof args[i] === &#x27;undefined&#x27;) {
+                                            result.push(params[i].default);
+                                        } else {
+                                            result.push(args[i]);
+                                        }
+                                    }
+                                }
+                            } else {
+                                $log.unknownMethod(id, methodName);
+                            }
+                            return result;
+                        }
+                        
+                        
+                        /*
+                         * Get the type returned by a method.
+                         * @method getReturnType
+                         * @param {String} id id of the class
+                         * @param {String} methodName name of the method
+                         * @return {String} the type returned by the method
+                         * @private
+                         */
+                        function getReturnType(id, methodName) {
+                            var resultType = null,
+                            result = null;
+                        
+                            resultType = $metamodel.get(id)[methodName].result;
+                            if (resultType) {
+                                result = resultType;
+                            }
+                            return result;
+                        }
+                        
+                        
+                        /*
+                         * Get all the type of the parameters of a method
+                         * @method getParamTypes
+                         * @param {String} id id of the class
+                         * @param {String} methodName name of the method
+                         * @return {Array} the types of the parameters of a method
+                         * @private
+                         */
+                        function getParamTypes(id, methodName) {
+                            var method = null,
+                            params = [],
+                            result = [],
+                            length = 0,
+                            i = 0;
+                        
+                            method = $metamodel.get(id)[methodName];
+                            if (method) {
+                                params = method.params;
+                                if (params) {
+                                    length = params.length;
+                                    for (i = 0; i &lt; length; i++) {
+                                        result.push(params[i].type);
+                                    }
+                                }
+                            } else {
+                                $log.unknownMethod(id, methodName);
+                            }
+                            return result;
+                        }
+                        
+                        
+                        /*
+                         * Check if conditions on output are compliant with the metamodel
+                         * @method checkResult
+                         * @param {Object} params
+                         * @return {Boolean} true if conditions on ouput are compliant with the metamodel
+                         * @private
+                         */
+                        function checkResult(params) {
+                            params = params || {};
+                        
+                            var component = params.component || null,
+                            methodName = params.methodName || &#x27;&#x27;,
+                            methodResult = params.methodResult || undefined,
+                            componentClassName = &#x27;&#x27;,
+                            returnType = null,
+                            result = true;
+                        
+                            if (component.constructor.name === &#x27;Function&#x27;) {
+                                componentClassName = component.name;
+                            } else {
+                                componentClassName = component.constructor.name;
+                            }
+                        
+                            returnType = getReturnType(componentClassName, methodName);
+                        
+                            if (returnType !== null) {
+                                if (returnType === &#x27;array&#x27;) {
+                                    if (!Array.isArray(methodResult)) {
+                                        result = false;
+                                        $log.invalidResultType(component.id(), methodName);
+                                    }
+                                } else {
+                                    if (typeof methodResult !== returnType) {
+                                        result = false;
+                                        $log.invalidResultType(component.id(), methodName);
+                                    }
+                                }
+                            }
+                        
+                            return result;
+                        }
+                        
+                        
+                        /*
+                         * Get the actions of the specified state
+                         * @method getActions
+                         * @param {Object} component a monoco component
+                         * @param {String} name name of the state
+                         * @param {Boolean} isEvent true if the state is an event
+                         * @return {Array} list of the actions
+                         * @private
+                         */
+                        function getActions(component, name, isEvent) {
+                            var action = $behavior.getActions(component.id(), name),
+                            parents = [],
+                            length = 0,
+                            i = 0,
+                            parent = null;
+                        
+                            if (!action.length || isEvent) {
+                                if (component.constructor.name !== &#x27;Function&#x27;) {
+                                    action = action.concat(getActions($component.get(component.constructor.name), name, isEvent));
+                                } else {
+                                    parents = $metamodel.getParents(component.name);
+                                    length = parents.length;
+                                    for (i = 0; i &lt; length; i++) {
+                                        parent = $component.get(parents[i]);
+                                        if (parent) {
+                                            action = action.concat(getActions(parent, name, isEvent));
+                                        } else {
+                                            $log.unknownComponent(parents[i], component.name);
+                                        }
+                                        if (action.length) {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        
+                            if (action.length) {
+                                action.reverse();
+                            }
+                        
+                            return action;
+                        }
+                        
+                        
+                        /*
+                         * Call an action and make some Dependency Injection if it is a core action
+                         * @method callAction
+                         * @param {Component} component
+                         * @param {String} state name of the state
+                         * @param {Array} action action
+                         * @param {Array} params parameters of the action
+                         * @param {Boolean} isEvent is the action a callback of an event
+                         * @return {Boolean} result of the action
+                         */
+                        function callAction(component, state, action, params, isEvent) {
+                            var result = null,
+                            injectedParams = [],
+                            i = 0,
+                            length = 0;
+                        
+                            params = setDefaultValue(component.constructor.name, state, params);
+                        
+                            try {
+                                if (action.core) {
+                                    length = params.length;
+                                    for (i = 0; i &lt; length; i++) {
+                                        injectedParams.push(params[i]);
+                                    }
+                                    injectedParams.push($component);
+                                    injectedParams.push($db);
+                                    injectedParams.push($metamodel);
+                                    injectedParams.push(exports);
+                                    injectedParams.push($behavior);
+                                    injectedParams.push($log);
+                                    injectedParams.push($channel);
+                        
+                                    if (isEvent) {
+                                        setTimeout(action.action.bind.apply(action.action, [component].concat(injectedParams)), 0);
+                                    } else {
+                                        result = action.action.apply(component, injectedParams);
+                                    }
+                                } else {
+                                    if (isEvent) {
+                                       setTimeout(action.action.bind.apply(action.action, [component].concat(params)), 0);
+                                    } else {
+                                       result = action.action.apply(component, params);
+                                    }
+                                }
+                            } catch (e) {
+                                if (e instanceof MonocoError) {
+                                    throw e;
+                                } else {
+                                    if (component &amp;&amp; component.error) {
+                                        component.error({
+                                            &quot;message&quot;: &quot;error when trying to call the method &#x27;&quot; + state + &quot;&#x27; on component &#x27;&quot; + component.id() + &quot;&#x27;&quot;,
+                                            &quot;error&quot;: e
+                                        });
+                                    }
+                                    if ($helper.getMonoco()) {
+                                        $helper.getMonoco().error({
+                                            &quot;message&quot;: &quot;error when when trying to call the method &#x27;&quot; + state + &quot;&#x27; on component &#x27;&quot; + component.id() + &quot;&#x27;&quot;,
+                                            &quot;error&quot;: e
+                                        });
+                                    }
+                                }
+                            }
+                        
+                            return result;
+                        }
+                        
+                        
+                        /* Public methods */
+                        
+                        
+                        /*
+                         * Check if conditions on input are compliant with the model before calling the action.
+                         * @method checkParams
+                         * @param {Object} params
+                         * @return {Boolean} true if condition on input are compliant with the model
+                         */
+                        function checkParams(params) {
+                            params = params || {};
+                        
+                            var component = params.component || null,
+                            methodName = params.methodName || &#x27;&#x27;,
+                            args = params.args || &#x27;&#x27;,
+                            paramsName = [],
+                            paramsType = [],
+                            paramsNumber = [],
+                            componentClassName = &#x27;&#x27;,
+                            length = args.length,
+                            i = 0,
+                            param = null,
+                            result = true;
+                        
+                            if (component.constructor.name === &#x27;Function&#x27;) {
+                                componentClassName = component.name;
+                            } else {
+                                componentClassName = component.constructor.name;
+                            }
+                        
+                            paramsName = getParamNames(componentClassName, methodName);
+                            paramsType = getParamTypes(componentClassName, methodName);
+                            paramsNumber = getParamNumber(componentClassName, methodName);
+                        
+                            // case of object
+                            if (typeof length === &#x27;undefined&#x27;) {
+                                length = 1;
+                            }
+                        
+                            if (paramsNumber.indexOf(length) === -1) {
+                                result = false;
+                                $log.invalidParamNumber(component.id(), methodName);
+                            }
+                        
+                            for (i = 0; i &lt; length; i++) {
+                                param = args[i];
+                                if (typeof param === &#x27;undefined&#x27;) {
+                                    if (i &lt; paramsNumber[0]) {
+                                        result = false;
+                                        $log.invalidParamNumber(component.id(), methodName);
+                                    } else {
+                                        continue;
+                                    }
+                                } else {
+                                    if (!$metamodel.isValidType(param, paramsType[i])) {
+                                        result = false;
+                                        $log.invalidParamType(component.id(), methodName, paramsName[i]);
+                                    }
+                                }
+                            }
+                        
+                            return result;
+                        }
+                        
+                        
+                        /*
+                         * Change the state of a component.
+                         * 
+                         * Worklow:&lt;br&gt;
+                         * &lt;br&gt;
+                         * 0. Check if the component has not been destroyed &lt;br&gt;
+                         * 1. Check if the state is a method or an event &lt;br&gt;
+                         * 2. Search if there is a behavior with an action for the new state &lt;br&gt;
+                         * 3. If so, get the action(s) &lt;br&gt;
+                         * 4. Check if the conditons on input are compliant with the metamodel &lt;br&gt;
+                         * 5. Call the action(s) &lt;br&gt;
+                         * 6. If not an of event, check if the conditons on input are compliant with the metamodel &lt;br&gt;
+                         * 7. If all is ok, the state of the component is updated &lt;br&gt;
+                         * 8. Return the result &lt;br&gt;
+                         * 
+                         * @method state
+                         * @param {Object} params params to change the state &lt;br&gt;
+                         * {String} component id of the component &lt;br&gt;
+                         * {String} state state of the component &lt;br&gt;
+                         * {Array} data parameters to send to the action
+                         */
+                        function state(params) {
+                        
+                            params = params || {};
+                            params.component = params.component || &#x27;&#x27;;
+                            params.state = params.state || &#x27;&#x27;;
+                            params.data = params.data || [];
+                        
+                            var component = null,
+                            currentState = &#x27;&#x27;,
+                            actions = [],
+                            action = null,
+                            result = null,
+                            i = 0,
+                            length = 0,
+                            isEvent = false;
+                        
+                            currentState = $state.get(params.component);
+                        
+                            if (currentState !== &#x27;destroy&#x27;) {
+                        
+                                component = $component.get(params.component);
+                                if (component) {
+                                    isEvent = $metamodel.isEvent(params.state, component.constructor.name);
+                                    actions = getActions(component, params.state, isEvent);
+                                }
+                        
+                                if (actions.length) {
+                        
+                                    if (checkParams({
+                                        &quot;component&quot;: component,
+                                        &quot;methodName&quot;: params.state,
+                                        &quot;args&quot;: params.data
+                                    })) {
+                        
+                                        if (!isEvent) {
+                                            action = actions[0];
+                                            result = callAction(component, params.state, action, params.data, false);
+                        
+                                            if (checkResult({
+                                                &quot;component&quot;: component,
+                                                &quot;methodName&quot;: params.state,
+                                                &quot;methodResult&quot;: result
+                                            })) {
+                                                $state.set(component.id(), params.state);
+                                            }
+                                        } else {
+                        
+                                            length = actions.length;
+                                            for (i = 0; i &lt; length; i++) {
+                                                action = actions[i];
+                                                callAction(component, params.state, action, params.data, true);
+                                            }
+                        
+                                            $state.set(component.id(), params.state);
+                                        }
+                                    }
+                                    return result;
+                                } else {
+                                    if (component) {
+                                        $state.set(component.id(), params.state);
+                                    }
+                                }
+                            } else {
+                                exports.stop({
+                                    &quot;error&quot;: true,
+                                    &quot;message&quot;: &quot;trying to change the state of a destroyed component &#x27;&quot; + params.component + &quot;&#x27;&quot;
+                                });
+                            }
+                        }
+                        
+                        
+                        /*
+                         * Stop the workflow engine.
+                         * @method stop
+                         * @param {Object} params parameters &lt;br&gt;
+                         * {Boolean} error true if the stop of the workflow is due to an error (default false) &lt;br&gt;
+                         * {String} message error message to log (default &#x27;&#x27;)
+                         */
+                        function stop(params) {
+                            params = params || {};
+                        
+                            if (typeof params.error === &#x27;undefined&#x27;) {
+                                params.error = false;
+                            }
+                            params.message = params.message || &#x27;&#x27;;
+                        
+                            exports.state = function () {
+                            };
+                        
+                            if (params.error) {
+                                if (params.message) {
+                                    throw new MonocoError(&quot;monoco has been stopped because &quot; + params.message);
+                                } else {
+                                    throw new MonocoError(&quot;monoco has been stopped because of an unknown error&quot;);
+                                }
+                            } else {
+                                console.warn(&#x27;monoco: monoco has been stopped&#x27;);
+                            }
+                        }
+                        
+                        
+                        /*
+                         * Restart the workflow engine from the last state.
+                         * @method restart
+                         */
+                        function restart() {
+                            exports.state = state;
+                            $log.workflowRestarted();
+                        }
+                        
+                        
+                        /* exports */
+                        
+                        
+                        /**
+                         * This module manages the workflow of monoco. It behaves like a workflow engine. &lt;br&gt;
+                         * It checks if the change of status of a component is valid to be executed. By valid, it means that:&lt;br&gt;
+                         * - the state is valid for the component, &lt;br&gt;
+                         * - the input (i.e. parameters) of all actions for the state are compliants with the model and &lt;br&gt;
+                         * - the output of all actions are compliants with the model. &lt;br&gt;
+                         * 
+                         * If an error occurs, the workflow will call the error state of the component and monoco. &lt;br&gt;
+                         * If the error can break the consistency of the current system, the worklow will stop.
+                         * 
+                         * @module monoco
+                         * @submodule monoco-workflow
+                         * @requires monoco-metamodel
+                         * @requires monoco-component
+                         * @requires monoco-behavior
+                         * @requires monoco-channel
+                         * @requires monoco-state
+                         * @requires monoco-helper
+                         * @requires monoco-log
+                         * @requires monoco-db
+                         * @class monoco-workflow 
+                         * @static
+                         */
+                        
+                        
+                        /**
+                         * Change the state of a component.
+                         * 
+                         * Worklow:&lt;br&gt;
+                         * &lt;br&gt;
+                         * 0. Check if the component has not been destroyed &lt;br&gt;
+                         * 1. Check if the state is a method or an event &lt;br&gt;
+                         * 2. Search if there is a behavior with an action for the new state &lt;br&gt;
+                         * 3. If so, get the action(s) &lt;br&gt;
+                         * 4. Check if the conditons on input are compliant with the metamodel &lt;br&gt;
+                         * 5. Call the action(s) &lt;br&gt;
+                         * 6. If not an of event, check if the conditons on input are compliant with the metamodel &lt;br&gt;
+                         * 7. If all is ok, the state of the component is updated &lt;br&gt;
+                         * 8. Return the result &lt;br&gt;
+                         * 
+                         * @method state
+                         * @param {Object} params params to change the state &lt;br&gt;
+                         * {String} component id of the component &lt;br&gt;
+                         * {String} state state of the component &lt;br&gt;
+                         * {Array} data parameters to send to the action
+                         */
+                        exports.state = state;
+                        
+                        
+                        /**
+                         * Stop the workflow engine.
+                         * @method stop
+                         * @param {Object} params parameters &lt;br&gt;
+                         * {Boolean} error true if the stop of the workflow is due to an error (default false) &lt;br&gt;
+                         * {String} message error message to log (default &#x27;&#x27;)
+                         */
+                        exports.stop = stop;
+                        
+                        
+                        /**
+                         * Restart the workflow engine from the last state.
+                         * @method restart
+                         */
+                        exports.restart = restart;
+                        
+                        
+                        /**
+                         * Check if conditions on input are compliant with the model before calling the action.
+                         * @method checkParams
+                         * @param {Object} params
+                         * @return {Boolean} true if condition on input are compliant with the model
+                         */
+                        exports.checkParams = checkParams;
+                            </pre>
+                        </div>
                     </div>
                 </div>
             </div>

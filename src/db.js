@@ -314,7 +314,7 @@ MonocoDatabaseCollection.prototype.remove = function (query) {
                         if (component) {
                             component.destroy();
                         }
-                        if ($helper.isMonoco()) {
+                        if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
                             $helper.getMonoco().require('db').remove(this.name, id);
                         }
                         result++;
@@ -331,7 +331,7 @@ MonocoDatabaseCollection.prototype.remove = function (query) {
                     if (component) {
                         component.destroy();
                     }
-                    if ($helper.isMonoco()) {
+                    if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
                         $helper.getMonoco().require('db').remove(this.name, id);
                     }
                     result++;

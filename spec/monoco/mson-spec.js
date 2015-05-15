@@ -78,6 +78,8 @@ describe('a MSON schema', function () {
 
         var Person = monoco.require('Person');
 
+        Person.off('getFullName');
+        
         Person.on('getFullName', function () {
             return this.firstName() + ' ' + this.lastName();
         });

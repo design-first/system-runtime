@@ -15,7 +15,6 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-        
             monoco
         </h1>
 	<div class="nav">
@@ -35,969 +34,952 @@
     <div class="row">
         <div class="span3">
 	    <div>
-    <div id="sidebar">
-    <div id="classes">
-        <ul id="api-classes" class="nav nav-list">
-            
-                <li><a href="../classes/monoco.html">monoco</a></li>
-            
-                <li><a href="../classes/monoco-behavior.html">monoco-behavior</a></li>
-            
-                <li><a href="../classes/monoco-channel.html">monoco-channel</a></li>
-            
-                <li><a href="../classes/monoco-component.html">monoco-component</a></li>
-            
-                <li><a href="../classes/monoco-db.html">monoco-db</a></li>
-            
-                <li><a href="../classes/monoco-helper.html">monoco-helper</a></li>
-            
-                <li><a href="../classes/monoco-log.html">monoco-log</a></li>
-            
-                <li><a href="../classes/monoco-metamodel.html">monoco-metamodel</a></li>
-            
-                <li><a href="../classes/monoco-state.html">monoco-state</a></li>
-            
-                <li><a href="../classes/monoco-system.html">monoco-system</a></li>
-            
-                <li><a href="../classes/monoco-workflow.html">monoco-workflow</a></li>
-            
-                <li><a href="../classes/MonocoDatabaseCollection.html">MonocoDatabaseCollection</a></li>
-            
-                <li><a href="../classes/MonocoError.html">MonocoError</a></li>
-            
-        </ul>
-    </div>
-    </div>
-</div>
-
+	        <div id="sidebar">
+	        <div id="classes">
+	            <ul id="api-classes" class="nav nav-list">
+	                    <li><a href="../classes/monoco.html">monoco</a></li>
+	                    <li><a href="../classes/monoco-behavior.html">monoco-behavior</a></li>
+	                    <li><a href="../classes/monoco-channel.html">monoco-channel</a></li>
+	                    <li><a href="../classes/monoco-component.html">monoco-component</a></li>
+	                    <li><a href="../classes/monoco-db.html">monoco-db</a></li>
+	                    <li><a href="../classes/monoco-helper.html">monoco-helper</a></li>
+	                    <li><a href="../classes/monoco-log.html">monoco-log</a></li>
+	                    <li><a href="../classes/monoco-metamodel.html">monoco-metamodel</a></li>
+	                    <li><a href="../classes/monoco-state.html">monoco-state</a></li>
+	                    <li><a href="../classes/monoco-system.html">monoco-system</a></li>
+	                    <li><a href="../classes/monoco-workflow.html">monoco-workflow</a></li>
+	                    <li><a href="../classes/MonocoDatabaseCollection.html">MonocoDatabaseCollection</a></li>
+	                    <li><a href="../classes/MonocoError.html">MonocoError</a></li>
+	            </ul>
+	        </div>
+	        </div>
+	    </div>
         </div>
         <div class="span9">
                 <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
-
+                    Show:
+                    <label for="api-show-inherited" class="checkbox">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected" class="checkbox">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private" class="checkbox">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated" class="checkbox">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </form>
+            
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
                         <div class="page-header">
-    <h1>src/component.js <small>File</small></h1>
-</div>
-
-<div class="file">
-    <pre class="prettyprint linenums">
-/* 
- * monoco
- * A Model and a NoSQL Database for Components
- * http://monoco.io/
- * @ecarriou
- *
- * Copyright (C) 2015 - Erwan Carriou
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
- */
-
-/**
- * This module manages the components. 
- * It is the factory of all the components that are created by monoco.
- * 
- * @module monoco
- * @submodule monoco-component
- * @requires monoco-workflow
- * @requires monoco-db
- * @requires monoco-metamodel
- * @requires monoco-behavior
- * @requires monoco-helper
- * @requires monoco-log
- * @class monoco-component
- * @static 
- */
-
-&#x27;use strict&#x27;;
-
-var $workflow = require(&#x27;./workflow.js&#x27;);
-var $db = require(&#x27;./db.js&#x27;);
-var $metamodel = require(&#x27;./metamodel.js&#x27;);
-var $behavior = require(&#x27;./behavior.js&#x27;);
-var $helper = require(&#x27;./helper.js&#x27;);
-var $log = require(&#x27;./log.js&#x27;);
-
-
-/* Private properties */
-
-
-var PROPERTY_TYPE = &#x27;property&#x27;,
-COLLECTION_TYPE = &#x27;collection&#x27;,
-METHOD_TYPE = &#x27;method&#x27;,
-EVENT_TYPE = &#x27;event&#x27;,
-store = {};
-
-
-/* Private methods */
-
-
-/*
- * Sub class to override push and pop method of Array Class.
- * @class monocoArray
- * @param {Object} conf
- * {String} classId name of the class
- * {String} type type of the array
- * {Array} arr array
- * @private
- */
-function monocoArray(conf) {
-    var arr = [],
-    arrDb = [],
-    classId = &#x27;&#x27;,
-    type = &#x27;&#x27;;
-
-    conf = conf || {};
-    classId = conf.classId || &#x27;&#x27;;
-    type = conf.type || &#x27;&#x27;;
-    arrDb = conf.arr || [];
-
-    arrDb.forEach(function (val) {
-        if (type.indexOf(&#x27;@&#x27;) !== -1) {
-            arr.push(monoco.require(val));
-        } else {
-            arr.push(val);
-        }
-    });
-
-    arr.push = function (val) {
-        if (val &amp;&amp; (val.constructor.name === classId || $metamodel.chekSchema(val, classId))) {
-            this[this.length] = val;
-            arrDb.push(val.id());
-        }
-    };
-
-    arr.pop = function () {
-        var result = null;
-        arrDb.pop();
-        if (this.length !== 0) {
-            result = this.splice(this.length - 1, 1);
-        } else {
-            result = this;
-        }
-        return result;
-    };
-
-    /* jshint -W103 */
-    arr.__proto__ = monocoArray.prototype;
-    /* jshint +W103 */
-    return arr;
-}
-
-/* jshint -W058 */
-monocoArray.prototype = new Array;
-/* jshint +W058 */
-
-
-/*
- * Get all the names of method parameters.
- * @method getParamNames
- * @param {String} id id of the class
- * @param {String} methodName name of the method
- * @return {Array} all the names of method parameters of the class
- * @private
- */
-function getParamNames(id, methodName) {
-    var params = [],
-    result = [],
-    length = 0,
-    i = 0;
-
-    params = $metamodel.get(id)[methodName].params;
-    if (params) {
-        length = params.length;
-        for (i = 0; i &lt; length; i++) {
-            result.push(params[i].name);
-        }
-    }
-    return result;
-}
-
-
-/*
- * Get all the property of a class.
- * @method getProperties
- * @param {String} id id of the class
- * @return {Array} all the properties of the class
- * @private
- */
-function getProperties(id) {
-    var model = null,
-    schema = null,
-    propNames = &#x27;&#x27;,
-    length = 0,
-    i = 0,
-    result = [];
-
-    model = $metamodel.get(id);
-    schema = $metamodel.get(model._schema);
-
-    propNames = Object.keys(schema);
-
-    length = propNames.length;
-    for (i = 0; i &lt; length; i++) {
-        if (schema[propNames[i]] === PROPERTY_TYPE || schema[propNames[i]] === COLLECTION_TYPE) {
-            result.push({
-                &quot;name&quot;: propNames[i],
-                &quot;type&quot;: model[propNames[i]].type,
-                &quot;readOnly&quot;: model[propNames[i]].readOnly
-            });
-        }
-    }
-
-    return result;
-}
-
-
-/*
- * Get all the method of a class.
- * @method getMethods
- * @param {String} id id of the class
- * @return {Array} all the methods of the class
- * @private
- */
-function getMethods(id) {
-    var model = null,
-    schema = null,
-    propNames = &#x27;&#x27;,
-    length = 0,
-    i = 0,
-    result = [];
-
-    model = $metamodel.get(id);
-    schema = $metamodel.get(model._schema);
-
-    propNames = Object.keys(schema);
-
-    length = propNames.length;
-    for (i = 0; i &lt; length; i++) {
-        if (schema[propNames[i]] === METHOD_TYPE) {
-            result.push(propNames[i]);
-        }
-    }
-
-    return result;
-}
-
-
-/*
- * Get all the event of a class.
- * @method getEvents
- * @param {String} id id of the class
- * @return {Array} all the events of the class
- * @private
- */
-function getEvents(id) {
-    var model = null,
-    schema = null,
-    propNames = &#x27;&#x27;,
-    length = 0,
-    i = 0,
-    result = [];
-
-    model = $metamodel.get(id);
-    schema = $metamodel.get(model._schema);
-
-    propNames = Object.keys(schema);
-
-    length = propNames.length;
-    for (i = 0; i &lt; length; i++) {
-        if (schema[propNames[i]] === EVENT_TYPE) {
-            result.push(propNames[i]);
-        }
-    }
-
-    return result;
-}
-
-
-/*
- * Create a new class from a class definition.
- * @method createClasss
- * @param {String} classId name of the class
- * @return {Function} the class
- * @private
- */
-function createClass(classId) {
-    var body = function (config) {
-        config = config || {};
-        var body = {};
-
-        if ($metamodel.isValidObject(config, $metamodel.get(classId), true, true)) {
-            $metamodel.prepareObject(config, $metamodel.get(classId));
-        } else {
-            $workflow.stop({
-                &quot;error&quot;: true,
-                &quot;message&quot;: &quot;the parameters for creating a component of class &#x27;&quot; + classId + &quot;&#x27; are not compliant with the model&quot;
-            });
-        }
-
-        if (typeof config._id === &#x27;undefined&#x27;) {
-            config._id = $helper.generateId();
-        }
-        store[config._id] = this;
-
-        // id
-        body = function () {
-            return config._id;
-        };
-        /* jshint -W054 */
-        this.id = new Function(&quot;body&quot;, &quot;return function id () { return body.call(this) };&quot;)(body);
-        /* jshint +W054 */
-
-        // classInfo
-        config.classInfo = classId + &#x27;Info&#x27;;
-
-        // create link to db
-        $db.store[classId][config._id] = config;
-
-        if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
-            $helper.getMonoco().require(&#x27;db&#x27;).insert(classId, config);
-        }
-
-        Object.freeze(this);
-
-        if (this.init) {
-            this.init(config);
-        }
-    };
-    /* jshint -W054 */
-    return new Function(&quot;body&quot;, &quot;return function &quot; + classId + &quot; (config) { body.call(this,config) };&quot;)(body);
-    /* jshint +W054 */
-}
-
-
-/*
- * Add an id method to a class that will return its id.
- * @method addId
- * @param {Function} Class a class
- * @param {String} classId name of the class
- * @private
- */
-function addId(Class, classId) {
-    var body = function () {
-        return classId;
-    };
-    /* jshint -W054 */
-    Class.id = new Function(&quot;body&quot;, &quot;return function id (prop, val) { return body.call(this, prop, val) };&quot;)(body);
-    /* jshint +W054 */
-}
-
-
-/*
- * Add properties to a component. All these properties will be accessed by a method with the same name.
- * Some checks can be done in order to see if the set of properties is compliant with the model.
- * @example
- * laure.age(); // get the age of a person
- * laure.age(22); // set the age of a person
- * @method addProperties
- * @param {String} model model name
- * @param {Function} Class Class
- * @param {String} classId name of the class
- * @private
- */
-function addProperties(model, Class, classId) {
-    var properties = getProperties(model);
-
-    properties.forEach(function property(prop) {
-        var body = {},
-        propertyName = &#x27;&#x27;,
-        propertyType = &#x27;&#x27;,
-        propertyReadOnly = &#x27;&#x27;;
-
-        propertyName = prop.name;
-        propertyType = prop.type;
-        propertyReadOnly = prop.readOnly;
-
-        if (Array.isArray(propertyType)) { // in case of array, return a sub array
-            body = function body(position, value) {
-                var search = [],
-                component = null,
-                monocoArr = null,
-                val = null;
-
-                if (typeof value === &#x27;undefined&#x27;) {
-                    if (typeof position === &#x27;undefined&#x27;) {
-
-                        monocoArr = new monocoArray({
-                            &quot;classId&quot;: classId,
-                            &quot;type&quot;: propertyType[0],
-                            &quot;arr&quot;: $db.store[classId][this.id()][propertyName]
-                        });
-
-                        return monocoArr;
-                    } else {
-                        val = $db.store[classId][this.id()][propertyName][position];
-                        if (val) {
-                            return monoco.require(val);
-                        }
-                    }
-                } else {
-                    if (propertyReadOnly) {
-                        $log.readOnlyProperty(this.id(), propertyName);
-                    } else {
-                        if ($metamodel.isValidType(value, propertyType)) {
-                            search = $db[classId].find({&quot;_id&quot;: this.id()});
-                            if (search.length) {
-                                component = search[0];
-                                component[propertyName][0] = value.id();
-
-                                if ($helper.isMonoco()) {
-                                    $helper.getMonoco().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, value.id());
-                                }
-
-                                $workflow.state({
-                                    &quot;component&quot;: this.id(),
-                                    &quot;state&quot;: propertyName,
-                                    &quot;data&quot;: arguments
-                                });
-                            } else {
-                                $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
-                            }
-                        }
-                    }
-                }
-            };
-            /* jshint -W054 */
-            Class.prototype[propertyName] = new Function(&quot;body&quot;, &quot;return function &quot; + propertyName + &quot; (position, value) { return body.call(this, position, value) };&quot;)(body);
-            /* jshint +W054 */
-        } else {
-            body = function body(value) {
-                var search = [],
-                component = null,
-                propertyValue = null;
-
-                if (typeof value === &#x27;undefined&#x27;) {
-                    component = $db.store[classId][this.id()];
-                    if (component) {
-                        propertyValue = component[propertyName];
-
-                        if (propertyType.indexOf(&#x27;@&#x27;) !== -1) {
-                            propertyValue = get(propertyValue);
-                        }
-                        return propertyValue;
-                    } else {
-                        $workflow.stop({
-                            &quot;error&quot;: true,
-                            &quot;message&quot;: &quot;trying to get the property &#x27;&quot; + propertyName + &quot;&#x27; on the destroyed component &#x27;&quot; + this.id() + &quot;&#x27;&quot;
-                        });
-                    }
-                } else {
-                    if (propertyReadOnly) {
-                        $log.readOnlyProperty(this.id(), propertyName);
-                    } else {
-                        if ($metamodel.isValidType(value, propertyType)) {
-                            search = $db[classId].find({&quot;_id&quot;: this.id()});
-                            if (search.length) {
-                                component = search[0];
-
-                                if (propertyType.indexOf(&#x27;@&#x27;) !== -1) {
-                                    component[propertyName] = value.id();
+                            <h1>src/component.js <small>File</small></h1>
+                        </div>
+                        
+                        <div class="file">
+                            <pre class="prettyprint linenums">
+                        /* 
+                         * monoco
+                         * A Model and a NoSQL Database for Components
+                         * http://monoco.io/
+                         * @ecarriou
+                         *
+                         * Copyright (C) 2015 - Erwan Carriou
+                         *
+                         * This program is free software: you can redistribute it and/or modify
+                         * it under the terms of the GNU General Public License as published by
+                         * the Free Software Foundation, either version 3 of the License, or
+                         * (at your option) any later version.
+                         *
+                         * This program is distributed in the hope that it will be useful,
+                         * but WITHOUT ANY WARRANTY; without even the implied warranty of
+                         * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                         * GNU General Public License for more details.
+                         *
+                         * You should have received a copy of the GNU General Public License
+                         * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+                         */
+                        
+                        /**
+                         * This module manages the components. 
+                         * It is the factory of all the components that are created by monoco.
+                         * 
+                         * @module monoco
+                         * @submodule monoco-component
+                         * @requires monoco-workflow
+                         * @requires monoco-db
+                         * @requires monoco-metamodel
+                         * @requires monoco-behavior
+                         * @requires monoco-helper
+                         * @requires monoco-log
+                         * @class monoco-component
+                         * @static 
+                         */
+                        
+                        &#x27;use strict&#x27;;
+                        
+                        var $workflow = require(&#x27;./workflow.js&#x27;);
+                        var $db = require(&#x27;./db.js&#x27;);
+                        var $metamodel = require(&#x27;./metamodel.js&#x27;);
+                        var $behavior = require(&#x27;./behavior.js&#x27;);
+                        var $helper = require(&#x27;./helper.js&#x27;);
+                        var $log = require(&#x27;./log.js&#x27;);
+                        
+                        
+                        /* Private properties */
+                        
+                        
+                        var PROPERTY_TYPE = &#x27;property&#x27;,
+                        COLLECTION_TYPE = &#x27;collection&#x27;,
+                        METHOD_TYPE = &#x27;method&#x27;,
+                        EVENT_TYPE = &#x27;event&#x27;,
+                        store = {};
+                        
+                        
+                        /* Private methods */
+                        
+                        
+                        /*
+                         * Sub class to override push and pop method of Array Class.
+                         * @class monocoArray
+                         * @param {Object} conf
+                         * {String} classId name of the class
+                         * {String} type type of the array
+                         * {Array} arr array
+                         * @private
+                         */
+                        function monocoArray(conf) {
+                            var arr = [],
+                            arrDb = [],
+                            classId = &#x27;&#x27;,
+                            type = &#x27;&#x27;;
+                        
+                            conf = conf || {};
+                            classId = conf.classId || &#x27;&#x27;;
+                            type = conf.type || &#x27;&#x27;;
+                            arrDb = conf.arr || [];
+                        
+                            arrDb.forEach(function (val) {
+                                if (type.indexOf(&#x27;@&#x27;) !== -1) {
+                                    arr.push(monoco.require(val));
                                 } else {
-                                    component[propertyName] = value;
+                                    arr.push(val);
                                 }
-
+                            });
+                        
+                            arr.push = function (val) {
+                                if (val &amp;&amp; (val.constructor.name === classId || $metamodel.chekSchema(val, classId))) {
+                                    this[this.length] = val;
+                                    arrDb.push(val.id());
+                                }
+                            };
+                        
+                            arr.pop = function () {
+                                var result = null;
+                                arrDb.pop();
+                                if (this.length !== 0) {
+                                    result = this.splice(this.length - 1, 1);
+                                } else {
+                                    result = this;
+                                }
+                                return result;
+                            };
+                        
+                            /* jshint -W103 */
+                            arr.__proto__ = monocoArray.prototype;
+                            /* jshint +W103 */
+                            return arr;
+                        }
+                        
+                        /* jshint -W058 */
+                        monocoArray.prototype = new Array;
+                        /* jshint +W058 */
+                        
+                        
+                        /*
+                         * Get all the names of method parameters.
+                         * @method getParamNames
+                         * @param {String} id id of the class
+                         * @param {String} methodName name of the method
+                         * @return {Array} all the names of method parameters of the class
+                         * @private
+                         */
+                        function getParamNames(id, methodName) {
+                            var params = [],
+                            result = [],
+                            length = 0,
+                            i = 0;
+                        
+                            params = $metamodel.get(id)[methodName].params;
+                            if (params) {
+                                length = params.length;
+                                for (i = 0; i &lt; length; i++) {
+                                    result.push(params[i].name);
+                                }
+                            }
+                            return result;
+                        }
+                        
+                        
+                        /*
+                         * Get all the property of a class.
+                         * @method getProperties
+                         * @param {String} id id of the class
+                         * @return {Array} all the properties of the class
+                         * @private
+                         */
+                        function getProperties(id) {
+                            var model = null,
+                            schema = null,
+                            propNames = &#x27;&#x27;,
+                            length = 0,
+                            i = 0,
+                            result = [];
+                        
+                            model = $metamodel.get(id);
+                            schema = $metamodel.get(model._schema);
+                        
+                            propNames = Object.keys(schema);
+                        
+                            length = propNames.length;
+                            for (i = 0; i &lt; length; i++) {
+                                if (schema[propNames[i]] === PROPERTY_TYPE || schema[propNames[i]] === COLLECTION_TYPE) {
+                                    result.push({
+                                        &quot;name&quot;: propNames[i],
+                                        &quot;type&quot;: model[propNames[i]].type,
+                                        &quot;readOnly&quot;: model[propNames[i]].readOnly
+                                    });
+                                }
+                            }
+                        
+                            return result;
+                        }
+                        
+                        
+                        /*
+                         * Get all the method of a class.
+                         * @method getMethods
+                         * @param {String} id id of the class
+                         * @return {Array} all the methods of the class
+                         * @private
+                         */
+                        function getMethods(id) {
+                            var model = null,
+                            schema = null,
+                            propNames = &#x27;&#x27;,
+                            length = 0,
+                            i = 0,
+                            result = [];
+                        
+                            model = $metamodel.get(id);
+                            schema = $metamodel.get(model._schema);
+                        
+                            propNames = Object.keys(schema);
+                        
+                            length = propNames.length;
+                            for (i = 0; i &lt; length; i++) {
+                                if (schema[propNames[i]] === METHOD_TYPE) {
+                                    result.push(propNames[i]);
+                                }
+                            }
+                        
+                            return result;
+                        }
+                        
+                        
+                        /*
+                         * Get all the event of a class.
+                         * @method getEvents
+                         * @param {String} id id of the class
+                         * @return {Array} all the events of the class
+                         * @private
+                         */
+                        function getEvents(id) {
+                            var model = null,
+                            schema = null,
+                            propNames = &#x27;&#x27;,
+                            length = 0,
+                            i = 0,
+                            result = [];
+                        
+                            model = $metamodel.get(id);
+                            schema = $metamodel.get(model._schema);
+                        
+                            propNames = Object.keys(schema);
+                        
+                            length = propNames.length;
+                            for (i = 0; i &lt; length; i++) {
+                                if (schema[propNames[i]] === EVENT_TYPE) {
+                                    result.push(propNames[i]);
+                                }
+                            }
+                        
+                            return result;
+                        }
+                        
+                        
+                        /*
+                         * Create a new class from a class definition.
+                         * @method createClasss
+                         * @param {String} classId name of the class
+                         * @return {Function} the class
+                         * @private
+                         */
+                        function createClass(classId) {
+                            var body = function (config) {
+                                config = config || {};
+                                var body = {};
+                        
+                                if ($metamodel.isValidObject(config, $metamodel.get(classId), true, true)) {
+                                    $metamodel.prepareObject(config, $metamodel.get(classId));
+                                } else {
+                                    $workflow.stop({
+                                        &quot;error&quot;: true,
+                                        &quot;message&quot;: &quot;the parameters for creating a component of class &#x27;&quot; + classId + &quot;&#x27; are not compliant with the model&quot;
+                                    });
+                                }
+                        
+                                if (typeof config._id === &#x27;undefined&#x27;) {
+                                    config._id = $helper.generateId();
+                                }
+                                store[config._id] = this;
+                        
+                                // id
+                                body = function () {
+                                    return config._id;
+                                };
+                                /* jshint -W054 */
+                                this.id = new Function(&quot;body&quot;, &quot;return function id () { return body.call(this) };&quot;)(body);
+                                /* jshint +W054 */
+                        
+                                // classInfo
+                                config.classInfo = classId + &#x27;Info&#x27;;
+                        
+                                // create link to db
+                                $db.store[classId][config._id] = config;
+                        
                                 if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
-                                    $helper.getMonoco().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, value);
+                                    $helper.getMonoco().require(&#x27;db&#x27;).insert(classId, config);
                                 }
-
+                        
+                                Object.freeze(this);
+                        
+                                if (this.init) {
+                                    this.init(config);
+                                }
+                            };
+                            /* jshint -W054 */
+                            return new Function(&quot;body&quot;, &quot;return function &quot; + classId + &quot; (config) { body.call(this,config) };&quot;)(body);
+                            /* jshint +W054 */
+                        }
+                        
+                        
+                        /*
+                         * Add an id method to a class that will return its id.
+                         * @method addId
+                         * @param {Function} Class a class
+                         * @param {String} classId name of the class
+                         * @private
+                         */
+                        function addId(Class, classId) {
+                            var body = function () {
+                                return classId;
+                            };
+                            /* jshint -W054 */
+                            Class.id = new Function(&quot;body&quot;, &quot;return function id (prop, val) { return body.call(this, prop, val) };&quot;)(body);
+                            /* jshint +W054 */
+                        }
+                        
+                        
+                        /*
+                         * Add properties to a component. All these properties will be accessed by a method with the same name.
+                         * Some checks can be done in order to see if the set of properties is compliant with the model.
+                         * @example
+                         * laure.age(); // get the age of a person
+                         * laure.age(22); // set the age of a person
+                         * @method addProperties
+                         * @param {String} model model name
+                         * @param {Function} Class Class
+                         * @param {String} classId name of the class
+                         * @private
+                         */
+                        function addProperties(model, Class, classId) {
+                            var properties = getProperties(model);
+                        
+                            properties.forEach(function property(prop) {
+                                var body = {},
+                                propertyName = &#x27;&#x27;,
+                                propertyType = &#x27;&#x27;,
+                                propertyReadOnly = &#x27;&#x27;;
+                        
+                                propertyName = prop.name;
+                                propertyType = prop.type;
+                                propertyReadOnly = prop.readOnly;
+                        
+                                if (Array.isArray(propertyType)) { // in case of array, return a sub array
+                                    body = function body(position, value) {
+                                        var search = [],
+                                        component = null,
+                                        monocoArr = null,
+                                        val = null;
+                        
+                                        if (typeof value === &#x27;undefined&#x27;) {
+                                            if (typeof position === &#x27;undefined&#x27;) {
+                        
+                                                monocoArr = new monocoArray({
+                                                    &quot;classId&quot;: classId,
+                                                    &quot;type&quot;: propertyType[0],
+                                                    &quot;arr&quot;: $db.store[classId][this.id()][propertyName]
+                                                });
+                        
+                                                return monocoArr;
+                                            } else {
+                                                val = $db.store[classId][this.id()][propertyName][position];
+                                                if (val) {
+                                                    return monoco.require(val);
+                                                }
+                                            }
+                                        } else {
+                                            if (propertyReadOnly) {
+                                                $log.readOnlyProperty(this.id(), propertyName);
+                                            } else {
+                                                if ($metamodel.isValidType(value, propertyType)) {
+                                                    search = $db[classId].find({&quot;_id&quot;: this.id()});
+                                                    if (search.length) {
+                                                        component = search[0];
+                                                        component[propertyName][0] = value.id();
+                        
+                                                        if ($helper.isMonoco()) {
+                                                            $helper.getMonoco().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, value.id());
+                                                        }
+                        
+                                                        $workflow.state({
+                                                            &quot;component&quot;: this.id(),
+                                                            &quot;state&quot;: propertyName,
+                                                            &quot;data&quot;: arguments
+                                                        });
+                                                    } else {
+                                                        $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    };
+                                    /* jshint -W054 */
+                                    Class.prototype[propertyName] = new Function(&quot;body&quot;, &quot;return function &quot; + propertyName + &quot; (position, value) { return body.call(this, position, value) };&quot;)(body);
+                                    /* jshint +W054 */
+                                } else {
+                                    body = function body(value) {
+                                        var search = [],
+                                        component = null,
+                                        propertyValue = null;
+                        
+                                        if (typeof value === &#x27;undefined&#x27;) {
+                                            component = $db.store[classId][this.id()];
+                                            if (component) {
+                                                propertyValue = component[propertyName];
+                        
+                                                if (propertyType.indexOf(&#x27;@&#x27;) !== -1) {
+                                                    propertyValue = get(propertyValue);
+                                                }
+                                                return propertyValue;
+                                            } else {
+                                                $workflow.stop({
+                                                    &quot;error&quot;: true,
+                                                    &quot;message&quot;: &quot;trying to get the property &#x27;&quot; + propertyName + &quot;&#x27; on the destroyed component &#x27;&quot; + this.id() + &quot;&#x27;&quot;
+                                                });
+                                            }
+                                        } else {
+                                            if (propertyReadOnly) {
+                                                $log.readOnlyProperty(this.id(), propertyName);
+                                            } else {
+                                                if ($metamodel.isValidType(value, propertyType)) {
+                                                    search = $db[classId].find({&quot;_id&quot;: this.id()});
+                                                    if (search.length) {
+                                                        component = search[0];
+                        
+                                                        if (propertyType.indexOf(&#x27;@&#x27;) !== -1) {
+                                                            component[propertyName] = value.id();
+                                                        } else {
+                                                            component[propertyName] = value;
+                                                        }
+                        
+                                                        if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
+                                                            $helper.getMonoco().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, value);
+                                                        }
+                        
+                                                        $workflow.state({
+                                                            &quot;component&quot;: this.id(),
+                                                            &quot;state&quot;: propertyName,
+                                                            &quot;data&quot;: arguments
+                                                        });
+                                                    }
+                                                } else {
+                                                    $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
+                                                }
+                                            }
+                                        }
+                                    };
+                                    /* jshint -W054 */
+                                    Class.prototype[propertyName] = new Function(&quot;body&quot;, &quot;return function &quot; + propertyName + &quot; (value) { return body.call(this,value) };&quot;)(body);
+                                    /* jshint +W054 */
+                                }
+                            });
+                        }
+                        
+                        
+                        /*
+                         * Add methods to a component.
+                         * The call to these methods will invoke the workflow in order to check that inpouts / outputs are compliant with the model.
+                         * @method addMethods
+                         * @param {String} model model name
+                         * @param {Function} Class Class
+                         * @param {String} classId name of the class
+                         * @private
+                         */
+                        function addMethods(model, Class, classId) {
+                            var methods = getMethods(model);
+                        
+                            methods.forEach(function method(methodName) {
+                                var paramsName = getParamNames(classId, methodName),
+                                params = paramsName.join(&#x27;,&#x27;),
+                                body = function () {
+                                    var result = null;
+                        
+                                    result = $workflow.state({
+                                        &quot;component&quot;: this.id(),
+                                        &quot;state&quot;: methodName,
+                                        &quot;data&quot;: arguments
+                                    });
+                        
+                                    return result;
+                                };
+                                if (params) {
+                                    /* jshint -W054 */
+                                    Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; (&quot; + params + &quot;) { return body.call(this,&quot; + params + &quot;) };&quot;)(body);
+                                    /* jshint +W054 */
+                                } else {
+                                    /* jshint -W054 */
+                                    Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; () { return body.call(this) };&quot;)(body);
+                                    /* jshint +W054 */
+                                }
+                            });
+                        }
+                        
+                        
+                        /*
+                         * Add events to a component.
+                         * The call to these methods will invoke the workflow in order to check that inpouts are compliant with the model.
+                         * @method addEvents
+                         * @param {String} model model name
+                         * @param {Function} Class Class
+                         * @param {String} classId name of the class
+                         * @private
+                         */
+                        function addEvents(model, Class, classId) {
+                            var events = getEvents(model);
+                            events.forEach(function event(methodName) {
+                                var paramsName = getParamNames(classId, methodName),
+                                params = paramsName.join(&#x27;,&#x27;),
+                                body = function () {
+                                    $workflow.state({
+                                        &quot;component&quot;: this.id(),
+                                        &quot;state&quot;: methodName,
+                                        &quot;data&quot;: arguments
+                                    });
+                                };
+                                if (params) {
+                                    /* jshint -W054 */
+                                    Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; (&quot; + params + &quot;) { return body.call(this,&quot; + params + &quot;) };&quot;)(body);
+                                    /* jshint +W054 */
+                                } else {
+                                    /* jshint -W054 */
+                                    Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; () { return body.call(this) };&quot;)(body);
+                                    /* jshint +W054 */
+                                }
+                            });
+                        }
+                        
+                        
+                        /*
+                         * Add a on method to a component to add behaviors to the component.
+                         * @method addOn
+                         * @param {Function} Class Class
+                         * @param {String} classId name of the class
+                         * @private
+                         */
+                        function addOn(Class, classId) {
+                            var body = function (state, handler, useCoreAPI) {
+                                var result = &#x27;&#x27;;
+                                if ($workflow.checkParams({
+                                    &quot;component&quot;: this,
+                                    &quot;methodName&quot;: &quot;on&quot;,
+                                    &quot;args&quot;: arguments
+                                })) {
+                                    if ($metamodel.isValidState(state, classId)) {
+                                        if (
+                                        !$metamodel.isEvent(state, classId) &amp;&amp;
+                                        $db.MonocoBehavior.find({
+                                            &quot;component&quot;: this.id(),
+                                            &quot;state&quot;: state}).length &gt;= 1) {
+                                            $log.behaviorNotUnique(classId, state);
+                                        } else {
+                                            result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                                        }
+                                    } else {
+                                        $log.invalidStateOn(classId, state);
+                                    }
+                                }
+                                return result;
+                            };
+                            /* jshint -W054 */
+                            Class.prototype.on = new Function(&quot;body&quot;, &quot;return function on (state,handler,useCoreAPI) { return body.call(this,state,handler,useCoreAPI) };&quot;)(body);
+                            /* jshint +W054 */
+                        }
+                        
+                        
+                        /*
+                         * Add a on method to a class component to add behaviors to the class.
+                         * @method addOnClass
+                         * @param {Function} Class Class
+                         * @param {String} classId name of the class
+                         * @private
+                         */
+                        function addOnClass(Class, classId) {
+                            var body = function (state, handler, useCoreAPI) {
+                                var result = &#x27;&#x27;;
+                                if ($workflow.checkParams({
+                                    &quot;component&quot;: this,
+                                    &quot;methodName&quot;: &quot;on&quot;,
+                                    &quot;args&quot;: arguments
+                                })) {
+                                    if ($metamodel.isValidState(state, classId)) {
+                                        if (
+                                        !$metamodel.isEvent(state, classId) &amp;&amp;
+                                        $db.MonocoBehavior.find({
+                                            &quot;component&quot;: this.id(),
+                                            &quot;state&quot;: state}).length &gt;= 1) {
+                                            $log.behaviorNotUnique(classId, state);
+                                        } else {
+                                            result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                                        }
+                                    } else {
+                                        $log.invalidStateOn(classId, state);
+                                    }
+                                }
+                                return result;
+                            };
+                            /* jshint -W054 */
+                            Class.on = new Function(&quot;body&quot;, &quot;return function on (state,handler,useCoreAPI) { return body.call(this, state, handler, useCoreAPI) };&quot;)(body);
+                            /* jshint -W054 */
+                        }
+                        
+                        
+                        /*
+                         * Add a off method to a class component to remove behaviors from the class.
+                         * @method addOffClass
+                         * @param {Object} Class Class
+                         * @param {String} classId name of the class
+                         * @private
+                         */
+                        function addOffClass(Class, classId) {
+                            var body = function (state, behaviorId) {
+                                if ($workflow.checkParams({
+                                    &quot;component&quot;: this,
+                                    &quot;methodName&quot;: &quot;off&quot;,
+                                    &quot;args&quot;: arguments
+                                })) {
+                                    if ($metamodel.isValidState(state, classId)) {
+                                        $behavior.remove({
+                                            &quot;behaviorId&quot;: behaviorId,
+                                            &quot;componentId&quot;: classId,
+                                            &quot;state&quot;: state
+                                        });
+                                    } else {
+                                        $log.InvalidStateOff(classId, state);
+                                    }
+                                }
+                            };
+                            /* jshint -W054 */
+                            Class.off = new Function(&quot;body&quot;, &quot;return function off (state, behaviorId) { return body.call(this, state, behaviorId) };&quot;)(body);
+                            /* jshint +W054 */
+                        }
+                        
+                        
+                        /*
+                         * Add a destroy method to a class component to detroy the class and all the components of the same class.
+                         * @method addDestroyClass
+                         * @param {Object} Class Class
+                         * @private
+                         */
+                        function addDestroyClass(Class) {
+                            var body = function () {
+                                var id = this.id();
+                                // if not virtual component
+                                if ($db[id]) {
+                                    $db[id].remove();
+                                }
+                        
+                                delete store[id];
+                        
                                 $workflow.state({
-                                    &quot;component&quot;: this.id(),
-                                    &quot;state&quot;: propertyName,
-                                    &quot;data&quot;: arguments
+                                    &quot;component&quot;: id,
+                                    &quot;state&quot;: &quot;destroy&quot;
+                                });
+                            };
+                            /* jshint -W054 */
+                            Class.destroy = new Function(&quot;body&quot;, &quot;return function destroy () { return body.call(this) };&quot;)(body);
+                            /* jshint +W054 */
+                        }
+                        
+                        
+                        
+                        /*
+                         * Add the addClassInfo method on a class.
+                         * @method addClassInfoClass
+                         * @param {Object} Class Class
+                         * @private
+                         */
+                        function addClassInfoClass(Class) {
+                            var body = function () {
+                                return get(this.id() + &#x27;Info&#x27;);
+                            };
+                            /* jshint -W054 */
+                            Class.classInfo = new Function(&quot;body&quot;, &quot;return function classInfo () { return body.call(this) };&quot;)(body);
+                            /* jshint +W054 */
+                        }
+                        
+                        
+                        /*
+                         * Create a component from its configuration.
+                         * @method factory
+                         * @param {JSON} config configuration of the component
+                         * @return {Component} the created component
+                         * @private
+                         */
+                        function factory(config) {
+                            config = config || {};
+                        
+                            var Class = {},
+                            classId = &#x27;&#x27;;
+                        
+                            if (typeof config.model === &#x27;undefined&#x27;) {
+                                classId = $helper.generateId();
+                            } else {
+                                classId = config.model;
+                            }
+                        
+                            Class = createClass(classId);
+                        
+                            store[classId] = Class;
+                        
+                            addId(Class, classId);
+                        
+                            addProperties(config.model, Class, classId);
+                            addMethods(config.model, Class, classId);
+                            addEvents(config.model, Class, classId);
+                        
+                            // add default properties/methods only if the component
+                            // inherit from MonocoComponent
+                            if ($metamodel.inheritFrom(classId, &#x27;MonocoComponent&#x27;)) {
+                                addOn(Class, classId);
+                                addOnClass(Class, classId);
+                                addOffClass(Class, classId);
+                                addDestroyClass(Class);
+                                addClassInfoClass(Class);
+                            }
+                        
+                            Object.freeze(Class);
+                        
+                            return Class;
+                        }
+                        
+                        
+                        /* Public methods */
+                        
+                        
+                        /*
+                         * Get a component by its id.
+                         * @method get
+                         * @param {String} id
+                         * @return {Component}
+                         */
+                        function get(id) {
+                            return store[id];
+                        }
+                        
+                        
+                        /*
+                         * Find  components with a query.
+                         * @method find
+                         * @param {String} query query
+                         * @return {Array} components found
+                         */
+                        function find(Class, query) {
+                            var documents = [],
+                            components = [],
+                            component = null,
+                            i = 0,
+                            length = 0;
+                        
+                            if ($db[Class]) {
+                                documents = $db[Class].find(query);
+                                length = documents.length;
+                                for (i = 0; i &lt; length; i++) {
+                                    component = exports.get(documents[i]._id);
+                                    if (component) {
+                                        components.push(component);
+                                    }
+                                }
+                            }
+                            return components;
+                        }
+                        
+                        
+                        /*
+                         * Create a component from its configuration.
+                         * @method create
+                         * @param {Object} config
+                         * @return {Component}
+                         */
+                        function create(config) {
+                            return factory(config);
+                        }
+                        
+                        /*
+                         * Check if the component has for class name className.
+                         * @method isInstanceOf
+                         * @param {type} component component
+                         * @param {type} className name of the class
+                         * @return {Boolean} true if the component has for class name className  
+                         */
+                        function isInstanceOf(component, className) {
+                            var result = false,
+                            componentClassName = &#x27;&#x27;;
+                        
+                            componentClassName = component.constructor.name;
+                        
+                            if (componentClassName === &#x27;Function&#x27;) {
+                                componentClassName = component.name;
+                            }
+                            result = component === className;
+                        
+                            return result;
+                        }
+                        
+                        
+                        /*
+                         * Destroy a component from its id.
+                         * @method destroy
+                         * @param {String} id id of the component to destroy
+                         */
+                        function destroy(id) {
+                            var component = store[id],
+                            classId = &#x27;&#x27;;
+                        
+                            if (component) {
+                                delete store[id];
+                                classId = component.constructor.name;
+                                $db[classId].remove({
+                                    &quot;_id&quot;: id
                                 });
                             }
-                        } else {
-                            $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
                         }
-                    }
-                }
-            };
-            /* jshint -W054 */
-            Class.prototype[propertyName] = new Function(&quot;body&quot;, &quot;return function &quot; + propertyName + &quot; (value) { return body.call(this,value) };&quot;)(body);
-            /* jshint +W054 */
-        }
-    });
-}
-
-
-/*
- * Add methods to a component.
- * The call to these methods will invoke the workflow in order to check that inpouts / outputs are compliant with the model.
- * @method addMethods
- * @param {String} model model name
- * @param {Function} Class Class
- * @param {String} classId name of the class
- * @private
- */
-function addMethods(model, Class, classId) {
-    var methods = getMethods(model);
-
-    methods.forEach(function method(methodName) {
-        var paramsName = getParamNames(classId, methodName),
-        params = paramsName.join(&#x27;,&#x27;),
-        body = function () {
-            var result = null;
-
-            result = $workflow.state({
-                &quot;component&quot;: this.id(),
-                &quot;state&quot;: methodName,
-                &quot;data&quot;: arguments
-            });
-
-            return result;
-        };
-        if (params) {
-            /* jshint -W054 */
-            Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; (&quot; + params + &quot;) { return body.call(this,&quot; + params + &quot;) };&quot;)(body);
-            /* jshint +W054 */
-        } else {
-            /* jshint -W054 */
-            Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; () { return body.call(this) };&quot;)(body);
-            /* jshint +W054 */
-        }
-    });
-}
-
-
-/*
- * Add events to a component.
- * The call to these methods will invoke the workflow in order to check that inpouts are compliant with the model.
- * @method addEvents
- * @param {String} model model name
- * @param {Function} Class Class
- * @param {String} classId name of the class
- * @private
- */
-function addEvents(model, Class, classId) {
-    var events = getEvents(model);
-    events.forEach(function event(methodName) {
-        var paramsName = getParamNames(classId, methodName),
-        params = paramsName.join(&#x27;,&#x27;),
-        body = function () {
-            $workflow.state({
-                &quot;component&quot;: this.id(),
-                &quot;state&quot;: methodName,
-                &quot;data&quot;: arguments
-            });
-        };
-        if (params) {
-            /* jshint -W054 */
-            Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; (&quot; + params + &quot;) { return body.call(this,&quot; + params + &quot;) };&quot;)(body);
-            /* jshint +W054 */
-        } else {
-            /* jshint -W054 */
-            Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; () { return body.call(this) };&quot;)(body);
-            /* jshint +W054 */
-        }
-    });
-}
-
-
-/*
- * Add a on method to a component to add behaviors to the component.
- * @method addOn
- * @param {Function} Class Class
- * @param {String} classId name of the class
- * @private
- */
-function addOn(Class, classId) {
-    var body = function (state, handler, useCoreAPI) {
-        var result = &#x27;&#x27;;
-        if ($workflow.checkParams({
-            &quot;component&quot;: this,
-            &quot;methodName&quot;: &quot;on&quot;,
-            &quot;args&quot;: arguments
-        })) {
-            if ($metamodel.isValidState(state, classId)) {
-                if (
-                !$metamodel.isEvent(state, classId) &amp;&amp;
-                $db.MonocoBehavior.find({
-                    &quot;component&quot;: this.id(),
-                    &quot;state&quot;: state}).length &gt;= 1) {
-                    $log.behaviorNotUnique(classId, state);
-                } else {
-                    result = $behavior.add(this.id(), state, handler, useCoreAPI);
-                }
-            } else {
-                $log.invalidStateOn(classId, state);
-            }
-        }
-        return result;
-    };
-    /* jshint -W054 */
-    Class.prototype.on = new Function(&quot;body&quot;, &quot;return function on (state,handler,useCoreAPI) { return body.call(this,state,handler,useCoreAPI) };&quot;)(body);
-    /* jshint +W054 */
-}
-
-
-/*
- * Add a on method to a class component to add behaviors to the class.
- * @method addOnClass
- * @param {Function} Class Class
- * @param {String} classId name of the class
- * @private
- */
-function addOnClass(Class, classId) {
-    var body = function (state, handler, useCoreAPI) {
-        var result = &#x27;&#x27;;
-        if ($workflow.checkParams({
-            &quot;component&quot;: this,
-            &quot;methodName&quot;: &quot;on&quot;,
-            &quot;args&quot;: arguments
-        })) {
-            if ($metamodel.isValidState(state, classId)) {
-                if (
-                !$metamodel.isEvent(state, classId) &amp;&amp;
-                $db.MonocoBehavior.find({
-                    &quot;component&quot;: this.id(),
-                    &quot;state&quot;: state}).length &gt;= 1) {
-                    $log.behaviorNotUnique(classId, state);
-                } else {
-                    result = $behavior.add(this.id(), state, handler, useCoreAPI);
-                }
-            } else {
-                $log.invalidStateOn(classId, state);
-            }
-        }
-        return result;
-    };
-    /* jshint -W054 */
-    Class.on = new Function(&quot;body&quot;, &quot;return function on (state,handler,useCoreAPI) { return body.call(this, state, handler, useCoreAPI) };&quot;)(body);
-    /* jshint -W054 */
-}
-
-
-/*
- * Add a off method to a class component to remove behaviors from the class.
- * @method addOffClass
- * @param {Object} Class Class
- * @param {String} classId name of the class
- * @private
- */
-function addOffClass(Class, classId) {
-    var body = function (state, behaviorId) {
-        if ($workflow.checkParams({
-            &quot;component&quot;: this,
-            &quot;methodName&quot;: &quot;off&quot;,
-            &quot;args&quot;: arguments
-        })) {
-            if ($metamodel.isValidState(state, classId)) {
-                $behavior.remove({
-                    &quot;behaviorId&quot;: behaviorId,
-                    &quot;componentId&quot;: classId,
-                    &quot;state&quot;: state
-                });
-            } else {
-                $log.InvalidStateOff(classId, state);
-            }
-        }
-    };
-    /* jshint -W054 */
-    Class.off = new Function(&quot;body&quot;, &quot;return function off (state, behaviorId) { return body.call(this, state, behaviorId) };&quot;)(body);
-    /* jshint +W054 */
-}
-
-
-/*
- * Add a destroy method to a class component to detroy the class and all the components of the same class.
- * @method addDestroyClass
- * @param {Object} Class Class
- * @private
- */
-function addDestroyClass(Class) {
-    var body = function () {
-        var id = this.id();
-        // if not virtual component
-        if ($db[id]) {
-            $db[id].remove();
-        }
-
-        delete store[id];
-
-        $workflow.state({
-            &quot;component&quot;: id,
-            &quot;state&quot;: &quot;destroy&quot;
-        });
-    };
-    /* jshint -W054 */
-    Class.destroy = new Function(&quot;body&quot;, &quot;return function destroy () { return body.call(this) };&quot;)(body);
-    /* jshint +W054 */
-}
-
-
-
-/*
- * Add the addClassInfo method on a class.
- * @method addClassInfoClass
- * @param {Object} Class Class
- * @private
- */
-function addClassInfoClass(Class) {
-    var body = function () {
-        return get(this.id() + &#x27;Info&#x27;);
-    };
-    /* jshint -W054 */
-    Class.classInfo = new Function(&quot;body&quot;, &quot;return function classInfo () { return body.call(this) };&quot;)(body);
-    /* jshint +W054 */
-}
-
-
-/*
- * Create a component from its configuration.
- * @method factory
- * @param {JSON} config configuration of the component
- * @return {Component} the created component
- * @private
- */
-function factory(config) {
-    config = config || {};
-
-    var Class = {},
-    classId = &#x27;&#x27;;
-
-    if (typeof config.model === &#x27;undefined&#x27;) {
-        classId = $helper.generateId();
-    } else {
-        classId = config.model;
-    }
-
-    Class = createClass(classId);
-
-    store[classId] = Class;
-
-    addId(Class, classId);
-
-    addProperties(config.model, Class, classId);
-    addMethods(config.model, Class, classId);
-    addEvents(config.model, Class, classId);
-
-    // add default properties/methods only if the component
-    // inherit from MonocoComponent
-    if ($metamodel.inheritFrom(classId, &#x27;MonocoComponent&#x27;)) {
-        addOn(Class, classId);
-        addOnClass(Class, classId);
-        addOffClass(Class, classId);
-        addDestroyClass(Class);
-        addClassInfoClass(Class);
-    }
-
-    Object.freeze(Class);
-
-    return Class;
-}
-
-
-/* Public methods */
-
-
-/*
- * Get a component by its id.
- * @method get
- * @param {String} id
- * @return {Component}
- */
-function get(id) {
-    return store[id];
-}
-
-
-/*
- * Find  components with a query.
- * @method find
- * @param {String} query query
- * @return {Array} components found
- */
-function find(Class, query) {
-    var documents = [],
-    components = [],
-    component = null,
-    i = 0,
-    length = 0;
-
-    if ($db[Class]) {
-        documents = $db[Class].find(query);
-        length = documents.length;
-        for (i = 0; i &lt; length; i++) {
-            component = exports.get(documents[i]._id);
-            if (component) {
-                components.push(component);
-            }
-        }
-    }
-    return components;
-}
-
-
-/*
- * Create a component from its configuration.
- * @method create
- * @param {Object} config
- * @return {Component}
- */
-function create(config) {
-    return factory(config);
-}
-
-/*
- * Check if the component has for class name className.
- * @method isInstanceOf
- * @param {type} component component
- * @param {type} className name of the class
- * @return {Boolean} true if the component has for class name className  
- */
-function isInstanceOf(component, className) {
-    var result = false,
-    componentClassName = &#x27;&#x27;;
-
-    componentClassName = component.constructor.name;
-
-    if (componentClassName === &#x27;Function&#x27;) {
-        componentClassName = component.name;
-    }
-    result = component === className;
-
-    return result;
-}
-
-
-/*
- * Destroy a component from its id.
- * @method destroy
- * @param {String} id id of the component to destroy
- */
-function destroy(id) {
-    var component = store[id],
-    classId = &#x27;&#x27;;
-
-    if (component) {
-        delete store[id];
-        classId = component.constructor.name;
-        $db[classId].remove({
-            &quot;_id&quot;: id
-        });
-    }
-}
-
-
-
-/*
- * Remove all the components store in the memory.
- * @method clear
- */
-function clear() {
-    store = {};
-}
-
-
-/* exports */
-
-
-/**
- * This module manages the components. 
- * It is the factory of all the components that are created by monoco.
- * 
- * @module monoco
- * @submodule monoco-component
- * @requires monoco-workflow
- * @requires monoco-db
- * @requires monoco-metamodel
- * @requires monoco-behavior
- * @requires monoco-helper
- * @requires monoco-log
- * @class monoco-component
- * @static 
- */
-
-
-/**
- * Create a component from its configuration.
- * @method create
- * @param {Object} config
- * @return {Component}
- */
-exports.create = create;
-
-
-/**
- * Get a component by its id.
- * @method get
- * @param {String} id
- * @return {Component}
- */
-exports.get = get;
-
-
-/**
- * Find components with a query.
- * @method find
- * @param {String} query query
- * @return {Array} components found
- */
-exports.find = find;
-
-
-/**
- * Check if the component has for class name className.
- * @method isInstanceOf
- * @param {type} component component
- * @param {type} className name of the class
- * @return {Boolean} true if the component has for class name className  
- */
-exports.isInstanceOf = isInstanceOf;
-
-
-/**
- * Remove all the components store in memory.
- * @method clear
- */
-exports.clear = clear;
-
-
-/**
- * Destroy a component from its id.
- * @method destroy
- * @param {String} id id of the component to destroy
- * @return {Boolean} if the component has been destroyed
- */
-exports.destroy = destroy;
-    </pre>
-</div>
-
+                        
+                        
+                        
+                        /*
+                         * Remove all the components store in the memory.
+                         * @method clear
+                         */
+                        function clear() {
+                            store = {};
+                        }
+                        
+                        
+                        /* exports */
+                        
+                        
+                        /**
+                         * This module manages the components. 
+                         * It is the factory of all the components that are created by monoco.
+                         * 
+                         * @module monoco
+                         * @submodule monoco-component
+                         * @requires monoco-workflow
+                         * @requires monoco-db
+                         * @requires monoco-metamodel
+                         * @requires monoco-behavior
+                         * @requires monoco-helper
+                         * @requires monoco-log
+                         * @class monoco-component
+                         * @static 
+                         */
+                        
+                        
+                        /**
+                         * Create a component from its configuration.
+                         * @method create
+                         * @param {Object} config
+                         * @return {Component}
+                         */
+                        exports.create = create;
+                        
+                        
+                        /**
+                         * Get a component by its id.
+                         * @method get
+                         * @param {String} id
+                         * @return {Component}
+                         */
+                        exports.get = get;
+                        
+                        
+                        /**
+                         * Find components with a query.
+                         * @method find
+                         * @param {String} query query
+                         * @return {Array} components found
+                         */
+                        exports.find = find;
+                        
+                        
+                        /**
+                         * Check if the component has for class name className.
+                         * @method isInstanceOf
+                         * @param {type} component component
+                         * @param {type} className name of the class
+                         * @return {Boolean} true if the component has for class name className  
+                         */
+                        exports.isInstanceOf = isInstanceOf;
+                        
+                        
+                        /**
+                         * Remove all the components store in memory.
+                         * @method clear
+                         */
+                        exports.clear = clear;
+                        
+                        
+                        /**
+                         * Destroy a component from its id.
+                         * @method destroy
+                         * @param {String} id id of the component to destroy
+                         * @return {Boolean} if the component has been destroyed
+                         */
+                        exports.destroy = destroy;
+                            </pre>
+                        </div>
                     </div>
                 </div>
             </div>
