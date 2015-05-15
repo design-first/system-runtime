@@ -88,7 +88,6 @@ $ npm install -g grunt-cli
 $ npm install
 # build monoco
 $ npm build
-
 ```
 
 #### Grunt
