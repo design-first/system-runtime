@@ -84,7 +84,7 @@ $ npm install -g jasmine-node
 $ npm install -g browserify
 # needed by grunt (maybe you have this installed already)
 $ npm install -g grunt-cli
-# install dev depedencies
+# install dev dependencies
 $ npm install
 # build monoco
 $ npm build
