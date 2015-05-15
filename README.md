@@ -73,9 +73,27 @@ For more documentations, go to [monoco website](http://monoco.io/doc/index.html)
 
 ## Extend monoco
 
+#### Build your own version of monoco
+
+Once you have cloned the repository:
+
+```sh
+# for server tests (maybe you have this installed already)
+$ npm install -g jasmine-node 
+# for client build (maybe you have this installed already)
+$ npm install -g browserify
+# needed by grunt (maybe you have this installed already)
+$ npm install -g grunt-cli
+# install dev depedencies
+$ npm install
+# build monoco
+$ npm build
+
+```
+
 #### Grunt
 
-To extend monoco core system or to package your own system with monoco, you will need to clone the repository and use grunt commands. Here are the different tasks you can use to automate tasks:
+To extend monoco core system or to package your own system with monoco, you will need to use grunt commands. Here are the different tasks you can use to automate tasks:
 
 ```sh
 # run server tests (from /spec/)
