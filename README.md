@@ -1,4 +1,11 @@
-# [monoco](http://monoco.io/)
+<p align="center">
+    <a href="http://monoco.io/">
+        <img height="240" width="240" src="http://monoco.io/img/logo.png">
+    </a>
+</p>
+
+
+# monoco
 
 [![npm version](https://badge.fury.io/js/monoco.svg)](http://badge.fury.io/js/monoco)
 [![Build Status](https://travis-ci.org/monocojs/monoco.svg?branch=master)](https://travis-ci.org/monocojs/monoco)
