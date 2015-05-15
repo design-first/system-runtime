@@ -118,6 +118,6 @@ exports.listen = listen;
  * Send a message into the channel.
  * @method send
  * @param {type} message
- * @returns {Boolean} true if the message was sent
+ * @return {Boolean} true if the message was sent
  */
 exports.send = send;

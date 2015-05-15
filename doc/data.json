@@ -2235,10 +2235,5 @@
             "submodule": "monoco-system"
         }
     ],
-    "warnings": [
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src/channel.js:117"
-        }
-    ]
+    "warnings": []
 }
