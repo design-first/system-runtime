@@ -4,7 +4,6 @@
     </a>
 </p>
 
-
 # monoco
 
 [![npm version](https://badge.fury.io/js/monoco.svg)](http://badge.fury.io/js/monoco)
@@ -87,7 +86,7 @@ $ npm install -g grunt-cli
 # install dev dependencies
 $ npm install
 # build monoco
-$ npm build
+$ grunt build
 ```
 
 #### Grunt
