@@ -71,11 +71,9 @@ store = {};
 function monocoArray(conf) {
     var arr = [],
     arrDb = [],
-    classId = '',
     type = '';
 
     conf = conf || {};
-    classId = conf.classId || '';
     type = conf.type || '';
     arrDb = conf.arr || [];
 
@@ -88,9 +86,21 @@ function monocoArray(conf) {
     });
 
     arr.push = function (val) {
-        if (val && (val.constructor.name === classId || $metamodel.chekSchema(val, classId))) {
-            this[this.length] = val;
-            arrDb.push(val.id());
+        var isValid = false,
+        isClass = false;
+
+        isClass = type.indexOf('@') !== -1;
+
+        if (isClass) {
+            if (val && (val.constructor.name === type.replace('@', ''))) {
+                this[this.length] = val;
+                arrDb.push(val.id());
+            }
+        } else { // TODO collection of object usefull ?
+            if (val && $metamodel.isValidType(val, type)) {
+                this[this.length] = val;
+                arrDb.push(val);
+            }
         }
     };
 
@@ -341,7 +351,8 @@ function addProperties(model, Class, classId) {
                 var search = [],
                 component = null,
                 monocoArr = null,
-                val = null;
+                val = null,
+                realVal = null;
 
                 if (typeof value === 'undefined') {
                     if (typeof position === 'undefined') {
@@ -356,21 +367,33 @@ function addProperties(model, Class, classId) {
                     } else {
                         val = $db.store[classId][this.id()][propertyName][position];
                         if (val) {
-                            return monoco.require(val);
+                            if (propertyType[0].indexOf('@') !== -1) {
+                                realVal = monoco.require(val);
+                            } else {
+                                realVal = val;
+                            }
+                            return realVal;
                         }
                     }
                 } else {
                     if (propertyReadOnly) {
                         $log.readOnlyProperty(this.id(), propertyName);
                     } else {
-                        if ($metamodel.isValidType(value, propertyType)) {
+                        if ($metamodel.isValidType(value, propertyType[0])) {
                             search = $db[classId].find({"_id": this.id()});
                             if (search.length) {
+
+                                if (propertyType[0].indexOf('@') !== -1) {
+                                    realVal = value.id();
+                                } else {
+                                    realVal = value;
+                                }
+
                                 component = search[0];
-                                component[propertyName][0] = value.id();
+                                component[propertyName][position] = realVal;
 
                                 if ($helper.isMonoco()) {
-                                    $helper.getMonoco().require('db').update(classId, this.id(), propertyName, value.id());
+                                    $helper.getMonoco().require('db').update(classId, this.id(), propertyName, realVal);
                                 }
 
                                 $workflow.state({

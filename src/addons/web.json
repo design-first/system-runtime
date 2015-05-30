@@ -3,7 +3,14 @@
     "version": "0.1.0",
     "description": "Add behaviors for web",
     "_id": "133421d0c313d2d",
-    "schemas": {},
+    "schemas": {
+        "MonocoSchema": {
+            "systemLoaded": "event"
+        },
+        "Monoco": {
+            "systemLoaded": {}
+        }
+    },
     "types": {},
     "behaviors": {
         "1aaee1e6311ff39": {
@@ -18,7 +25,7 @@
             "_id": "1f6001773a18791",
             "component": "monoco",
             "state": "ready",
-            "action": "function ready() { var systems = [], system = null, i = 0, length = 0; if (typeof document !== 'undefined') { systems = document.querySelectorAll('link[rel=system]'); length = systems.length; for (i = 0; i < length; i++) { system = systems[i]; this.load(system.href, false); } } }",
+            "action": "function ready() { var systems = [], system = null, i = 0, length = 0; if (typeof document !== 'undefined') { systems = document.querySelectorAll('link[rel=system]'); length = systems.length; for (i = 0; i < length; i++) { system = systems[i]; this.load(system.href, false); this.systemLoaded();} } }",
             "core": true
         }
     },

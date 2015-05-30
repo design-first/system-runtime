@@ -161,11 +161,9 @@
                         function monocoArray(conf) {
                             var arr = [],
                             arrDb = [],
-                            classId = &#x27;&#x27;,
                             type = &#x27;&#x27;;
                         
                             conf = conf || {};
-                            classId = conf.classId || &#x27;&#x27;;
                             type = conf.type || &#x27;&#x27;;
                             arrDb = conf.arr || [];
                         
@@ -178,9 +176,21 @@
                             });
                         
                             arr.push = function (val) {
-                                if (val &amp;&amp; (val.constructor.name === classId || $metamodel.chekSchema(val, classId))) {
-                                    this[this.length] = val;
-                                    arrDb.push(val.id());
+                                var isValid = false,
+                                isClass = false;
+                        
+                                isClass = type.indexOf(&#x27;@&#x27;) !== -1;
+                        
+                                if (isClass) {
+                                    if (val &amp;&amp; (val.constructor.name === type.replace(&#x27;@&#x27;, &#x27;&#x27;))) {
+                                        this[this.length] = val;
+                                        arrDb.push(val.id());
+                                    }
+                                } else { // TODO collection of object usefull ?
+                                    if (val &amp;&amp; $metamodel.isValidType(val, type)) {
+                                        this[this.length] = val;
+                                        arrDb.push(val);
+                                    }
                                 }
                             };
                         
@@ -431,7 +441,8 @@
                                         var search = [],
                                         component = null,
                                         monocoArr = null,
-                                        val = null;
+                                        val = null,
+                                        realVal = null;
                         
                                         if (typeof value === &#x27;undefined&#x27;) {
                                             if (typeof position === &#x27;undefined&#x27;) {
@@ -446,21 +457,33 @@
                                             } else {
                                                 val = $db.store[classId][this.id()][propertyName][position];
                                                 if (val) {
-                                                    return monoco.require(val);
+                                                    if (propertyType[0].indexOf(&#x27;@&#x27;) !== -1) {
+                                                        realVal = monoco.require(val);
+                                                    } else {
+                                                        realVal = val;
+                                                    }
+                                                    return realVal;
                                                 }
                                             }
                                         } else {
                                             if (propertyReadOnly) {
                                                 $log.readOnlyProperty(this.id(), propertyName);
                                             } else {
-                                                if ($metamodel.isValidType(value, propertyType)) {
+                                                if ($metamodel.isValidType(value, propertyType[0])) {
                                                     search = $db[classId].find({&quot;_id&quot;: this.id()});
                                                     if (search.length) {
+                        
+                                                        if (propertyType[0].indexOf(&#x27;@&#x27;) !== -1) {
+                                                            realVal = value.id();
+                                                        } else {
+                                                            realVal = value;
+                                                        }
+                        
                                                         component = search[0];
-                                                        component[propertyName][0] = value.id();
+                                                        component[propertyName][position] = realVal;
                         
                                                         if ($helper.isMonoco()) {
-                                                            $helper.getMonoco().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, value.id());
+                                                            $helper.getMonoco().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, realVal);
                                                         }
                         
                                                         $workflow.state({
