@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.3.5</b>
+                    API Docs for Version: <b>0.3.6</b>
                 </p>
             </li>
         </div>
@@ -805,7 +805,7 @@
                                 var typeRef = getReference(typeName);
                                 if (getClassName(value) !== typeRef) {
                                     isValid = false;
-                                    $log.invalidType(value.id(), typeName);
+                                    $log.invalidType(value, typeName.replace(&#x27;@&#x27;, &#x27;&#x27;));
                                 }
                                 return isValid;
                             }

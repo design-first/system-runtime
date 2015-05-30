@@ -715,7 +715,7 @@ function isValidType(value, typeName) {
         var typeRef = getReference(typeName);
         if (getClassName(value) !== typeRef) {
             isValid = false;
-            $log.invalidType(value.id(), typeName);
+            $log.invalidType(value, typeName.replace('@', ''));
         }
         return isValid;
     }
