@@ -16,7 +16,7 @@
 
 It is a **4-in-1 JavaScript library**:
 
-* it is **a metamodel** that help you to design components,
+* it is **a metamodel** that helps you to design components,
 * it is **a component factory** that creates components based on your design,
 * it is **a worflow engine** that checks at runtime if the signature of all methods of your components are compliant with your model and
 * it is **a micro NoSQL Database** that stores your components and can export/import them into another monoco NoSQL Database.
