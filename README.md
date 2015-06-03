@@ -1,9 +1,3 @@
-<p align="center">
-    <a href="http://monoco.io/">
-        <img height="240" width="240" src="http://monoco.io/img/logo.png">
-    </a>
-</p>
-
 # monoco
 
 [![npm version](https://badge.fury.io/js/monoco.svg)](http://badge.fury.io/js/monoco)
@@ -12,21 +6,22 @@
 [![Dependency Status](https://david-dm.org/monocojs/monoco.svg)](https://david-dm.org/monocojs/monoco)
 [![devDependency Status](https://david-dm.org/monocojs/monoco/dev-status.svg)](https://david-dm.org/monocojs/monoco#info=devDependencies)
 
+<p align="center">
+    <a href="http://monoco.io/">
+        <img height="240" width="240" src="http://monoco.io/img/logo.png">
+    </a>
+</p>
+
 #### What is monoco ?
 
- * monoco is a **JavaScript library to design, create and store JavaScript components**,
- * monoco is an **isomorphic** library: the components will work on server and browser,
- * monoco **dynamically checks the signature of all the methods of the components at runtime**,
- * monoco creates **persistant components** that are stored on a micro NoSQL Database and
- * monoco creates **composed components** thanks to its modulary system.
+It is a 4-in-1 library:
 
-#### What monoco contains ?
+* it is a metamodel that help you to design components,
+* it is a factory that creates components based on your design,
+* it is a worflow engine that checks at runtime if the signature of all methods of your components are compliant with your model and
+* it is a micro NoSQL Database that stores your components and can export/import them into another monoco NoSQL Database.
 
- * a **metamodel** based on a JSON format to create a model,
- * a **component factory** that creates stateful JavaScript classes based on a model,
- * a **micro NoSQL Database** to store components and to export/import them,
- * a **worflow engine** that checks at runtime if the signature of all methods are compliant with the model and
- * a **channel** in which components can exchange typed messages.
+Finally monoco help you to design, create and store components.
 
 ## Installation
 
