@@ -36,6 +36,16 @@
     "methods": {
         "result": "array"
     },
+    "collection": {
+        "params": [{
+                "name": "name",
+                "type": "string"
+            }],
+        "result": "object"
+    },
+    "collections": {
+        "result": "array"
+    },
     "event": {
         "params": [{
                 "name": "name",

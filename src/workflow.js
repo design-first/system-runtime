@@ -331,8 +331,10 @@ function callAction(component, state, action, params, isEvent) {
     injectedParams = [],
     i = 0,
     length = 0;
-
-    params = setDefaultValue(component.constructor.name, state, params);
+    
+    if (!$metamodel.isProperty(state, component.constructor.name)) {
+        params = setDefaultValue(component.constructor.name, state, params);
+    }  
 
     try {
         if (action.core) {
@@ -405,7 +407,8 @@ function checkParams(params) {
     length = args.length,
     i = 0,
     param = null,
-    result = true;
+    result = true,
+    isProperty = false;
 
     if (component.constructor.name === 'Function') {
         componentClassName = component.name;
@@ -413,9 +416,16 @@ function checkParams(params) {
         componentClassName = component.constructor.name;
     }
 
+    isProperty = $metamodel.isProperty(methodName, componentClassName);
     paramsName = getParamNames(componentClassName, methodName);
-    paramsType = getParamTypes(componentClassName, methodName);
-    paramsNumber = getParamNumber(componentClassName, methodName);
+    
+    if (isProperty) {
+        paramsType = [$metamodel.get(componentClassName)[methodName].type];
+        paramsNumber = [1,1];
+    } else {
+        paramsType = getParamTypes(componentClassName, methodName);
+        paramsNumber = getParamNumber(componentClassName, methodName);
+    }
 
     // case of object
     if (typeof length === 'undefined') {
@@ -483,6 +493,7 @@ function state(params) {
     result = null,
     i = 0,
     length = 0,
+    isProperty = false,
     isEvent = false;
 
     currentState = $state.get(params.component);
@@ -492,6 +503,7 @@ function state(params) {
         component = $component.get(params.component);
         if (component) {
             isEvent = $metamodel.isEvent(params.state, component.constructor.name);
+            isProperty = $metamodel.isProperty(params.state, component.constructor.name);
             actions = getActions(component, params.state, isEvent);
         }
 
@@ -503,7 +515,7 @@ function state(params) {
                 "args": params.data
             })) {
 
-                if (!isEvent) {
+                if (!isEvent && !isProperty) {
                     action = actions[0];
                     result = callAction(component, params.state, action, params.data, false);
 

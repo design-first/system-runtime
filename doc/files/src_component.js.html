@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.3.6</b>
+                    API Docs for Version: <b>0.3.7</b>
                 </p>
             </li>
         </div>
@@ -489,7 +489,7 @@
                                                         $workflow.state({
                                                             &quot;component&quot;: this.id(),
                                                             &quot;state&quot;: propertyName,
-                                                            &quot;data&quot;: arguments
+                                                            &quot;data&quot;: [realVal]
                                                         });
                                                     } else {
                                                         $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
@@ -544,7 +544,7 @@
                                                         $workflow.state({
                                                             &quot;component&quot;: this.id(),
                                                             &quot;state&quot;: propertyName,
-                                                            &quot;data&quot;: arguments
+                                                            &quot;data&quot;: [value]
                                                         });
                                                     }
                                                 } else {
@@ -652,9 +652,11 @@
                                     if ($metamodel.isValidState(state, classId)) {
                                         if (
                                         !$metamodel.isEvent(state, classId) &amp;&amp;
+                                        !$metamodel.isProperty(state, classId) &amp;&amp;
                                         $db.MonocoBehavior.find({
                                             &quot;component&quot;: this.id(),
-                                            &quot;state&quot;: state}).length &gt;= 1) {
+                                            &quot;state&quot;: state
+                                            }).length &gt;= 1) {
                                             $log.behaviorNotUnique(classId, state);
                                         } else {
                                             result = $behavior.add(this.id(), state, handler, useCoreAPI);
@@ -689,9 +691,11 @@
                                     if ($metamodel.isValidState(state, classId)) {
                                         if (
                                         !$metamodel.isEvent(state, classId) &amp;&amp;
+                                        !$metamodel.isProperty(state, classId) &amp;&amp;
                                         $db.MonocoBehavior.find({
                                             &quot;component&quot;: this.id(),
-                                            &quot;state&quot;: state}).length &gt;= 1) {
+                                            &quot;state&quot;: state
+                                            }).length &gt;= 1) {
                                             $log.behaviorNotUnique(classId, state);
                                         } else {
                                             result = $behavior.add(this.id(), state, handler, useCoreAPI);

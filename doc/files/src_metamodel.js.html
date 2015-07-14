@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.3.6</b>
+                    API Docs for Version: <b>0.3.7</b>
                 </p>
             </li>
         </div>
@@ -141,6 +141,7 @@
                         CLASS = &#x27;_class&#x27;,
                         CORE = &#x27;_core&#x27;,
                         EVENT_TYPE = &#x27;event&#x27;,
+                        PROPERTY_TYPE = &#x27;property&#x27;,
                         internalTypes = [&#x27;property&#x27;, &#x27;collection&#x27;, &#x27;method&#x27;, &#x27;event&#x27;],
                         defaultTypes = [&#x27;boolean&#x27;, &#x27;string&#x27;, &#x27;number&#x27;, &#x27;object&#x27;, &#x27;function&#x27;, &#x27;array&#x27;],
                         store = {
@@ -757,6 +758,33 @@
                             if (componentSchema) {
                                 attributeType = componentSchema[name];
                                 if (attributeType === EVENT_TYPE) {
+                                    result = true;
+                                }
+                            }
+                        
+                            return result;
+                        }
+                        
+                        
+                        /*
+                         * Check if an attribute of the schema is a property.
+                         * @method isProperty
+                         * @param {String} name
+                         * @param {String} id component id
+                         * @return {Boolean} true if the attribute is a property
+                         */
+                        function isProperty(name, id) {
+                            var result = false,
+                            componentSchema = store.model[id],
+                            attributeType = &#x27;&#x27;;
+                        
+                            if (componentSchema &amp;&amp; componentSchema[SCHEMA]) {
+                                componentSchema = store.model[componentSchema[SCHEMA]];
+                            }
+                        
+                            if (componentSchema) {
+                                attributeType = componentSchema[name];
+                                if (attributeType === PROPERTY_TYPE) {
                                     result = true;
                                 }
                             }
@@ -1488,6 +1516,16 @@
                          * @return {Boolean} true if the attribute is an event
                          */
                         exports.isEvent = isEvent;
+                        
+                        
+                        /*
+                         * Check if an attribute of the schema is a property.
+                         * @method isProperty
+                         * @param {String} name
+                         * @param {String} id component id
+                         * @return {Boolean} true if the attribute is a property
+                         */
+                        exports.isProperty = isProperty;
                             </pre>
                         </div>
                     </div>

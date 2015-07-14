@@ -1,0 +1,6 @@
+{
+    "component": "MonocoClassInfo",
+    "state": "collections",
+    "action": "function collections() { var keys = Object.keys(this.metamodel()), item = '', result = [], i = 0, length = 0; length = keys.length; for (i = 0; i < length; i++) { item = keys[i]; if (this.metamodel()[item] === 'collection') { result.push(item); } } return result; }",
+    "core": true
+}

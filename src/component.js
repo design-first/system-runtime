@@ -399,7 +399,7 @@ function addProperties(model, Class, classId) {
                                 $workflow.state({
                                     "component": this.id(),
                                     "state": propertyName,
-                                    "data": arguments
+                                    "data": [realVal]
                                 });
                             } else {
                                 $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
@@ -454,7 +454,7 @@ function addProperties(model, Class, classId) {
                                 $workflow.state({
                                     "component": this.id(),
                                     "state": propertyName,
-                                    "data": arguments
+                                    "data": [value]
                                 });
                             }
                         } else {
@@ -562,9 +562,11 @@ function addOn(Class, classId) {
             if ($metamodel.isValidState(state, classId)) {
                 if (
                 !$metamodel.isEvent(state, classId) &&
+                !$metamodel.isProperty(state, classId) &&
                 $db.MonocoBehavior.find({
                     "component": this.id(),
-                    "state": state}).length >= 1) {
+                    "state": state
+                    }).length >= 1) {
                     $log.behaviorNotUnique(classId, state);
                 } else {
                     result = $behavior.add(this.id(), state, handler, useCoreAPI);
@@ -599,9 +601,11 @@ function addOnClass(Class, classId) {
             if ($metamodel.isValidState(state, classId)) {
                 if (
                 !$metamodel.isEvent(state, classId) &&
+                !$metamodel.isProperty(state, classId) &&
                 $db.MonocoBehavior.find({
                     "component": this.id(),
-                    "state": state}).length >= 1) {
+                    "state": state
+                    }).length >= 1) {
                     $log.behaviorNotUnique(classId, state);
                 } else {
                     result = $behavior.add(this.id(), state, handler, useCoreAPI);

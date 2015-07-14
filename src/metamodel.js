@@ -51,6 +51,7 @@ SCHEMA = '_schema',
 CLASS = '_class',
 CORE = '_core',
 EVENT_TYPE = 'event',
+PROPERTY_TYPE = 'property',
 internalTypes = ['property', 'collection', 'method', 'event'],
 defaultTypes = ['boolean', 'string', 'number', 'object', 'function', 'array'],
 store = {
@@ -667,6 +668,33 @@ function isEvent(name, id) {
     if (componentSchema) {
         attributeType = componentSchema[name];
         if (attributeType === EVENT_TYPE) {
+            result = true;
+        }
+    }
+
+    return result;
+}
+
+
+/*
+ * Check if an attribute of the schema is a property.
+ * @method isProperty
+ * @param {String} name
+ * @param {String} id component id
+ * @return {Boolean} true if the attribute is a property
+ */
+function isProperty(name, id) {
+    var result = false,
+    componentSchema = store.model[id],
+    attributeType = '';
+
+    if (componentSchema && componentSchema[SCHEMA]) {
+        componentSchema = store.model[componentSchema[SCHEMA]];
+    }
+
+    if (componentSchema) {
+        attributeType = componentSchema[name];
+        if (attributeType === PROPERTY_TYPE) {
             result = true;
         }
     }
@@ -1398,3 +1426,13 @@ exports.isValidState = isValidState;
  * @return {Boolean} true if the attribute is an event
  */
 exports.isEvent = isEvent;
+
+
+/*
+ * Check if an attribute of the schema is a property.
+ * @method isProperty
+ * @param {String} name
+ * @param {String} id component id
+ * @return {Boolean} true if the attribute is a property
+ */
+exports.isProperty = isProperty;

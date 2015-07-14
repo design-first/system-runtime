@@ -34,6 +34,16 @@ describe('a monoco ClassInfo instance', function () {
         var methods = monoco.classInfo().methods();
         expect(Array.isArray(methods)).toBe(true);
     });
+    
+    it('can show a definition of a collection', function () {
+        var collection = monoco.classInfo().collection('system');
+        expect(collection.result).toBe(undefined);
+    });
+
+    it('can show its collections', function () {
+        var collections = monoco.classInfo().collections();
+        expect(Array.isArray(collections)).toBe(true);
+    });
 
     it('can show the definition of an event', function () {
         var event = monoco.classInfo().event('error');

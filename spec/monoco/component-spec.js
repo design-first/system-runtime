@@ -94,6 +94,33 @@ describe('a monoco component', function () {
             done();
         }, 1);
     });
+    
+    it('can add an event on a property change', function (done) {
+        var system = monoco.system();
+        share = '';
+        
+        system.on('version', function (val) {
+            share = share + 'version';
+        });
+        system.version('0.0.0');
+
+        setTimeout(function () {
+            expect(share).toBe('version');
+            done();
+        }, 1);
+    });
+
+    it('can remove an event on a property change', function (done) {
+        var system = monoco.system();
+        system.off('version');
+        
+        system.version('0.0.0');
+
+        setTimeout(function () {
+            expect(share).toBe('version');
+            done();
+        }, 1);
+    });
 
     it('can navigate threw relationships bewteen components', function () {
         var Person = monoco.require('Person');

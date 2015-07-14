@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.3.6</b>
+                    API Docs for Version: <b>0.3.7</b>
                 </p>
             </li>
         </div>
@@ -421,8 +421,10 @@
                             injectedParams = [],
                             i = 0,
                             length = 0;
-                        
-                            params = setDefaultValue(component.constructor.name, state, params);
+                            
+                            if (!$metamodel.isProperty(state, component.constructor.name)) {
+                                params = setDefaultValue(component.constructor.name, state, params);
+                            }  
                         
                             try {
                                 if (action.core) {
@@ -495,7 +497,8 @@
                             length = args.length,
                             i = 0,
                             param = null,
-                            result = true;
+                            result = true,
+                            isProperty = false;
                         
                             if (component.constructor.name === &#x27;Function&#x27;) {
                                 componentClassName = component.name;
@@ -503,9 +506,16 @@
                                 componentClassName = component.constructor.name;
                             }
                         
+                            isProperty = $metamodel.isProperty(methodName, componentClassName);
                             paramsName = getParamNames(componentClassName, methodName);
-                            paramsType = getParamTypes(componentClassName, methodName);
-                            paramsNumber = getParamNumber(componentClassName, methodName);
+                            
+                            if (isProperty) {
+                                paramsType = [$metamodel.get(componentClassName)[methodName].type];
+                                paramsNumber = [1,1];
+                            } else {
+                                paramsType = getParamTypes(componentClassName, methodName);
+                                paramsNumber = getParamNumber(componentClassName, methodName);
+                            }
                         
                             // case of object
                             if (typeof length === &#x27;undefined&#x27;) {
@@ -573,6 +583,7 @@
                             result = null,
                             i = 0,
                             length = 0,
+                            isProperty = false,
                             isEvent = false;
                         
                             currentState = $state.get(params.component);
@@ -582,6 +593,7 @@
                                 component = $component.get(params.component);
                                 if (component) {
                                     isEvent = $metamodel.isEvent(params.state, component.constructor.name);
+                                    isProperty = $metamodel.isProperty(params.state, component.constructor.name);
                                     actions = getActions(component, params.state, isEvent);
                                 }
                         
@@ -593,7 +605,7 @@
                                         &quot;args&quot;: params.data
                                     })) {
                         
-                                        if (!isEvent) {
+                                        if (!isEvent &amp;&amp; !isProperty) {
                                             action = actions[0];
                                             result = callAction(component, params.state, action, params.data, false);
                         

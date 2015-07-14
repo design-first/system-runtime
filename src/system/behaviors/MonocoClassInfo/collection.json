@@ -1,0 +1,6 @@
+{
+    "component": "MonocoClassInfo",
+    "state": "collection",
+    "action": "function collection(name) { var result = {}; if (this.metamodel()[name] === 'collection') { result = this.model()[name]; } return result; }",
+    "core": true
+}
