@@ -168,6 +168,8 @@ function add(id, state, action, useCoreAPI, core) {
  * {String} behaviorId id of the behavior (optional)) <br>
  */
 function remove(params) {
+    var result = [];
+    
     params = params || {};
     params.behaviorId = params.behaviorId || '';
     params.componentId = params.componentId || '';
@@ -180,13 +182,27 @@ function remove(params) {
                 "component": params.componentId,
                 "state": params.state
             });
+            delete store[params.behaviorId];
         } else {
-            $db.MonocoBehavior.remove({
+            result = $db.MonocoBehavior.remove({
                 "component": params.componentId,
                 "state": params.state
             });
+            result.forEach(function(id) {
+                delete store[id];
+            });
         }
     }
+}
+
+
+/*
+ * Remove a behavior with its id from the memory.
+ * @method removeFromMemory
+ * @param {String} id id of the component
+ */
+function removeFromMemory(id) {
+    delete store[id];
 }
 
 
@@ -289,3 +305,11 @@ exports.getActions = getActions;
  * @method clear
  */
 exports.clear = clear;
+
+
+/**
+ * Remove a behavior with its id from the memory.
+ * @method removeFromMemory
+ * @param {String} id id of the component
+ */
+exports.removeFromMemory = removeFromMemory;

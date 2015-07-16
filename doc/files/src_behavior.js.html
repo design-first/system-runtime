@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.3.7</b>
+                    API Docs for Version: <b>0.4.0</b>
                 </p>
             </li>
         </div>
@@ -157,13 +157,13 @@
                          */
                         function createFunction(name, func, core, useCoreAPI) {
                             var funcName = &#x27;&#x27;,
-                            beginBody = -1,
-                            funcParams = &#x27;&#x27;,
-                            params = [],
-                            paramsClean = [],
-                            funcBody = &#x27;&#x27;,
-                            header = &#x27;&#x27;,
-                            action = null;
+                                    beginBody = -1,
+                                    funcParams = &#x27;&#x27;,
+                                    params = [],
+                                    paramsClean = [],
+                                    funcBody = &#x27;&#x27;,
+                                    header = &#x27;&#x27;,
+                                    action = null;
                         
                             beginBody = func.indexOf(&#x27;{&#x27;);
                             header = func.substring(0, beginBody);
@@ -258,6 +258,8 @@
                          * {String} behaviorId id of the behavior (optional)) &lt;br&gt;
                          */
                         function remove(params) {
+                            var result = [];
+                        
                             params = params || {};
                             params.behaviorId = params.behaviorId || &#x27;&#x27;;
                             params.componentId = params.componentId || &#x27;&#x27;;
@@ -270,13 +272,27 @@
                                         &quot;component&quot;: params.componentId,
                                         &quot;state&quot;: params.state
                                     });
+                                    delete store[params.behaviorId];
                                 } else {
-                                    $db.MonocoBehavior.remove({
+                                    result = $db.MonocoBehavior.remove({
                                         &quot;component&quot;: params.componentId,
                                         &quot;state&quot;: params.state
                                     });
+                                    result.forEach(function (id) {
+                                        delete store[id];
+                                    });
                                 }
                             }
+                        }
+                        
+                        
+                        /*
+                         * Remove a behavior with its id from the memory.
+                         * @method removeFromMemory
+                         * @param {String} id id of the component
+                         */
+                        function removeFromMemory(id) {
+                            delete store[id];
                         }
                         
                         
@@ -289,8 +305,8 @@
                          */
                         function getActions(id, state) {
                             var result = [],
-                            dbResult = [],
-                            action = null;
+                                    dbResult = [],
+                                    action = null;
                         
                             dbResult = $db.MonocoBehavior.find({
                                 &quot;component&quot;: id,
@@ -379,6 +395,14 @@
                          * @method clear
                          */
                         exports.clear = clear;
+                        
+                        
+                        /**
+                         * Remove a behavior with its id from the memory.
+                         * @method removeFromMemory
+                         * @param {String} id id of the component
+                         */
+                        exports.removeFromMemory = removeFromMemory;
                             </pre>
                         </div>
                     </div>

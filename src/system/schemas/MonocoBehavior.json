@@ -2,8 +2,8 @@
     "_id": "MonocoBehavior",
     "_name": "MonocoBehavior",
     "_schema": "MonocoBehaviorSchema",
+    "_inherit": ["MonocoComponent"],
     "_core": true,
-    "_class": false,
     "core": {
         "type": "boolean",
         "readOnly": false,

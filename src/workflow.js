@@ -83,10 +83,10 @@ MonocoError.prototype.constructor = MonocoError;
  */
 function getParamNames(id, methodName) {
     var method = null,
-    params = [],
-    result = [],
-    length = 0,
-    i = 0;
+        params = [],
+        result = [],
+        length = 0,
+        i = 0;
 
     method = $metamodel.get(id)[methodName];
     if (method) {
@@ -114,12 +114,12 @@ function getParamNames(id, methodName) {
  */
 function getParamNumber(id, methodName) {
     var method = null,
-    params = [],
-    result = [],
-    length = 0,
-    i = 0,
-    min = 0,
-    max = 0;
+        params = [],
+        result = [],
+        length = 0,
+        i = 0,
+        min = 0,
+        max = 0;
 
     method = $metamodel.get(id)[methodName];
     if (method) {
@@ -153,10 +153,10 @@ function getParamNumber(id, methodName) {
  */
 function setDefaultValue(id, methodName, args) {
     var method = null,
-    params = [],
-    result = [],
-    length = 0,
-    i = 0;
+        params = [],
+        result = [],
+        length = 0,
+        i = 0;
 
     method = $metamodel.get(id)[methodName];
     if (method) {
@@ -188,7 +188,7 @@ function setDefaultValue(id, methodName, args) {
  */
 function getReturnType(id, methodName) {
     var resultType = null,
-    result = null;
+        result = null;
 
     resultType = $metamodel.get(id)[methodName].result;
     if (resultType) {
@@ -208,10 +208,10 @@ function getReturnType(id, methodName) {
  */
 function getParamTypes(id, methodName) {
     var method = null,
-    params = [],
-    result = [],
-    length = 0,
-    i = 0;
+        params = [],
+        result = [],
+        length = 0,
+        i = 0;
 
     method = $metamodel.get(id)[methodName];
     if (method) {
@@ -240,11 +240,11 @@ function checkResult(params) {
     params = params || {};
 
     var component = params.component || null,
-    methodName = params.methodName || '',
-    methodResult = params.methodResult || undefined,
-    componentClassName = '',
-    returnType = null,
-    result = true;
+        methodName = params.methodName ||  '',
+        methodResult = params.methodResult || undefined,
+        componentClassName = '',
+        returnType = null,
+        result = true;
 
     if (component.constructor.name === 'Function') {
         componentClassName = component.name;
@@ -283,10 +283,10 @@ function checkResult(params) {
  */
 function getActions(component, name, isEvent) {
     var action = $behavior.getActions(component.id(), name),
-    parents = [],
-    length = 0,
-    i = 0,
-    parent = null;
+        parents = [],
+        length = 0,
+        i = 0,
+        parent = null;
 
     if (!action.length || isEvent) {
         if (component.constructor.name !== 'Function') {
@@ -328,13 +328,13 @@ function getActions(component, name, isEvent) {
  */
 function callAction(component, state, action, params, isEvent) {
     var result = null,
-    injectedParams = [],
-    i = 0,
-    length = 0;
-    
+        injectedParams = [],
+        i = 0,
+        length = 0;
+
     if (!$metamodel.isProperty(state, component.constructor.name)) {
         params = setDefaultValue(component.constructor.name, state, params);
-    }  
+    }
 
     try {
         if (action.core) {
@@ -357,9 +357,9 @@ function callAction(component, state, action, params, isEvent) {
             }
         } else {
             if (isEvent) {
-               setTimeout(action.action.bind.apply(action.action, [component].concat(params)), 0);
+                setTimeout(action.action.bind.apply(action.action, [component].concat(params)), 0);
             } else {
-               result = action.action.apply(component, params);
+                result = action.action.apply(component, params);
             }
         }
     } catch (e) {
@@ -398,17 +398,17 @@ function checkParams(params) {
     params = params || {};
 
     var component = params.component || null,
-    methodName = params.methodName || '',
-    args = params.args || '',
-    paramsName = [],
-    paramsType = [],
-    paramsNumber = [],
-    componentClassName = '',
-    length = args.length,
-    i = 0,
-    param = null,
-    result = true,
-    isProperty = false;
+        methodName = params.methodName ||  '',
+        args = params.args ||  '',
+        paramsName = [],
+        paramsType = [],
+        paramsNumber = [],
+        componentClassName = '',
+        length = args.length,
+        i = 0,
+        param = null,
+        result = true,
+        isProperty = false;
 
     if (component.constructor.name === 'Function') {
         componentClassName = component.name;
@@ -418,10 +418,10 @@ function checkParams(params) {
 
     isProperty = $metamodel.isProperty(methodName, componentClassName);
     paramsName = getParamNames(componentClassName, methodName);
-    
+
     if (isProperty) {
         paramsType = [$metamodel.get(componentClassName)[methodName].type];
-        paramsNumber = [1,1];
+        paramsNumber = [1, 1];
     } else {
         paramsType = getParamTypes(componentClassName, methodName);
         paramsNumber = getParamNumber(componentClassName, methodName);
@@ -464,12 +464,12 @@ function checkParams(params) {
  * Worklow:<br>
  * <br>
  * 0. Check if the component has not been destroyed <br>
- * 1. Check if the state is a method or an event <br>
- * 2. Search if there is a behavior with an action for the new state <br>
+ * 1. Check if the state is a method, a property or an event <br>
+ * 2. Search if there is a behavior with actions for the new state <br>
  * 3. If so, get the action(s) <br>
- * 4. Check if the conditons on input are compliant with the metamodel <br>
+ * 4. Check if the inputs are compliants with the metamodel <br>
  * 5. Call the action(s) <br>
- * 6. If not an of event, check if the conditons on input are compliant with the metamodel <br>
+ * 6. If a method, check if the output are compliants with the metamodel <br>
  * 7. If all is ok, the state of the component is updated <br>
  * 8. Return the result <br>
  * 
@@ -487,14 +487,14 @@ function state(params) {
     params.data = params.data || [];
 
     var component = null,
-    currentState = '',
-    actions = [],
-    action = null,
-    result = null,
-    i = 0,
-    length = 0,
-    isProperty = false,
-    isEvent = false;
+        currentState = '',
+        actions = [],
+        action = null,
+        result = null,
+        i = 0,
+        length = 0,
+        isProperty = false,
+        isEvent = false;
 
     currentState = $state.get(params.component);
 
@@ -515,7 +515,8 @@ function state(params) {
                 "args": params.data
             })) {
 
-                if (!isEvent && !isProperty) {
+                if (!isEvent &&
+                    !isProperty) {
                     action = actions[0];
                     result = callAction(component, params.state, action, params.data, false);
 

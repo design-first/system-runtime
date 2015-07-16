@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.3.7</b>
+                    API Docs for Version: <b>0.4.0</b>
                 </p>
             </li>
         </div>
@@ -142,21 +142,21 @@
                         
                         
                         var store = {},
-                        collections = [],
-                        internalDB = [
-                            &#x27;Monoco&#x27;,
-                            &#x27;MonocoSchema&#x27;,
-                            &#x27;MonocoExtendedSchema&#x27;,
-                            &#x27;MonocoBehavior&#x27;,
-                            &#x27;MonocoState&#x27;,
-                            &#x27;MonocoType&#x27;,
-                            &#x27;MonocoMetamodel&#x27;,
-                            &#x27;MonocoDatabase&#x27;,
-                            &#x27;MonocoSystem&#x27;,
-                            &#x27;MonocoClassInfo&#x27;,
-                            &#x27;MonocoMessage&#x27;,
-                            &#x27;MonocoChannel&#x27;
-                        ];
+                                collections = [],
+                                internalDB = [
+                                    &#x27;Monoco&#x27;,
+                                    &#x27;MonocoSchema&#x27;,
+                                    &#x27;MonocoExtendedSchema&#x27;,
+                                    &#x27;MonocoBehavior&#x27;,
+                                    &#x27;MonocoState&#x27;,
+                                    &#x27;MonocoType&#x27;,
+                                    &#x27;MonocoMetamodel&#x27;,
+                                    &#x27;MonocoDatabase&#x27;,
+                                    &#x27;MonocoSystem&#x27;,
+                                    &#x27;MonocoClassInfo&#x27;,
+                                    &#x27;MonocoMessage&#x27;,
+                                    &#x27;MonocoChannel&#x27;
+                                ];
                         
                         
                         /* Private methods */
@@ -172,7 +172,7 @@
                          */
                         function contains(source, target) {
                             var result = true,
-                            property = {};
+                                    property = {};
                         
                             for (property in source) {
                                 if (typeof target[property] === &#x27;undefined&#x27; || target[property] !== source[property]) {
@@ -219,8 +219,8 @@
                          */
                         MonocoDatabaseCollection.prototype.find = function (query) {
                             var result = [],
-                            id = &#x27;&#x27;,
-                            object = {};
+                                    id = &#x27;&#x27;,
+                                    object = {};
                         
                             query = query || null;
                         
@@ -271,8 +271,8 @@
                          */
                         MonocoDatabaseCollection.prototype.insert = function (document) {
                             var doc = [],
-                            Component = null,
-                            result = [];
+                                    Component = null,
+                                    result = [];
                         
                             if (Array.isArray(document)) {
                                 doc = document;
@@ -297,13 +297,13 @@
                                             $helper.getMonoco().require(&#x27;db&#x27;).insert(this.name, obj);
                                         }
                                     }
-                                    
+                        
                                     if (this.name === &#x27;MonocoMessage&#x27;) {
                                         if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;channel&#x27;)) {
                                             $helper.getMonoco().require(&#x27;channel&#x27;)[obj.event](obj.data);
                                         }
                                     }
-                                    
+                        
                                 } else {
                                     $log.invalidDocumentOnDbInsert(obj, this.name);
                                 }
@@ -329,11 +329,11 @@
                          */
                         MonocoDatabaseCollection.prototype.update = function (query, update, options) {
                             var docs = this.find(query),
-                            updated = 0,
-                            i = 0,
-                            length = docs.length,
-                            attributeName = &#x27;&#x27;,
-                            schema = $metamodel.get(this.name);
+                                    updated = 0,
+                                    i = 0,
+                                    length = docs.length,
+                                    attributeName = &#x27;&#x27;,
+                                    schema = $metamodel.get(this.name);
                         
                             options = options || {};
                             if (typeof options.upsert === &#x27;undefined&#x27;) {
@@ -377,17 +377,17 @@
                          * When a document is removed, the component is destroyed.
                          * @method remove
                          * @param {Object|Array} query query to find the documents to remove
-                         * @return {Number} number of documents removed
+                         * @return {Array} list of documents id removed
                          * 
                          * @example 
                          * $db.Cars.remove({&quot;code&quot;: &quot;AZD-71&quot;}); &lt;br&gt;
                          * $db.Cars.remove([{&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;code&quot;: &quot;AZD-65&quot;}]); &lt;br&gt;
                          */
                         MonocoDatabaseCollection.prototype.remove = function (query) {
-                            var result = 0,
-                            id = &#x27;&#x27;,
-                            component = null,
-                            object = {};
+                            var result = [],
+                                    id = &#x27;&#x27;,
+                                    component = null,
+                                    object = {};
                         
                             query = query || null;
                         
@@ -407,7 +407,7 @@
                                                 if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
                                                     $helper.getMonoco().require(&#x27;db&#x27;).remove(this.name, id);
                                                 }
-                                                result++;
+                                                result.push(id);
                                             }
                                         }
                                     }.bind(this));
@@ -424,7 +424,7 @@
                                             if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
                                                 $helper.getMonoco().require(&#x27;db&#x27;).remove(this.name, id);
                                             }
-                                            result++;
+                                            result.push(id);
                                         }
                                     }
                                 }
@@ -438,7 +438,7 @@
                                     if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
                                         $helper.getMonoco().require(&#x27;db&#x27;).remove(this.name, id);
                                     }
-                                    result++;
+                                    result.push(id);
                                 }
                             }
                         
@@ -453,7 +453,7 @@
                          */
                         MonocoDatabaseCollection.prototype.count = function () {
                             var result = 0,
-                            objectId = &#x27;&#x27;;
+                                    objectId = &#x27;&#x27;;
                             for (objectId in store[this.name]) {
                                 result++;
                             }
@@ -485,15 +485,15 @@
                          */
                         function dump() {
                             var dbDump = {},
-                            collectionName = &#x27;&#x27;,
-                            behaviorId = &#x27;&#x27;,
-                            typeId = &#x27;&#x27;,
-                            type = null,
-                            behavior = null,
-                            schema = null,
-                            schemaId = &#x27;&#x27;,
-                            length = 0,
-                            i = 0;
+                                    collectionName = &#x27;&#x27;,
+                                    behaviorId = &#x27;&#x27;,
+                                    typeId = &#x27;&#x27;,
+                                    type = null,
+                                    behavior = null,
+                                    schema = null,
+                                    schemaId = &#x27;&#x27;,
+                                    length = 0,
+                                    i = 0;
                         
                             // schemas
                             dbDump.schemas = {};
@@ -549,16 +549,16 @@
                          */
                         function system(importedSystem) {
                             var result = &#x27;&#x27;,
-                            collectionName = &#x27;&#x27;,
-                            componentId = &#x27;&#x27;,
-                            typeName = &#x27;&#x27;,
-                            schemaName = &#x27;&#x27;,
-                            behaviorId = &#x27;&#x27;,
-                            systems = [],
-                            id = null,
-                            mastersystem = null,
-                            behavior = null,
-                            exportedSystem = {};
+                                    collectionName = &#x27;&#x27;,
+                                    componentId = &#x27;&#x27;,
+                                    typeName = &#x27;&#x27;,
+                                    schemaName = &#x27;&#x27;,
+                                    behaviorId = &#x27;&#x27;,
+                                    systems = [],
+                                    id = null,
+                                    mastersystem = null,
+                                    behavior = null,
+                                    exportedSystem = {};
                         
                             if (importedSystem) { // import
                         
@@ -644,15 +644,15 @@
                          */
                         function subsystem(params) {
                             var system = {},
-                            result = [],
-                            defaultName = &#x27;&#x27;,
-                            i = 0,
-                            length = 0,
-                            schema = null,
-                            type = null,
-                            behavior = null,
-                            component = null,
-                            className = &#x27;&#x27;;
+                                    result = [],
+                                    defaultName = &#x27;&#x27;,
+                                    i = 0,
+                                    length = 0,
+                                    schema = null,
+                                    type = null,
+                                    behavior = null,
+                                    component = null,
+                                    className = &#x27;&#x27;;
                         
                             // default values
                             result = monoco.find(&#x27;MonocoSystem&#x27;, {

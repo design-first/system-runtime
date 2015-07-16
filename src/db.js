@@ -287,14 +287,14 @@ MonocoDatabaseCollection.prototype.update = function (query, update, options) {
  * When a document is removed, the component is destroyed.
  * @method remove
  * @param {Object|Array} query query to find the documents to remove
- * @return {Number} number of documents removed
+ * @return {Array} list of documents id removed
  * 
  * @example 
  * $db.Cars.remove({"code": "AZD-71"}); <br>
  * $db.Cars.remove([{"code": "AZD-71"}, {"code": "AZD-65"}]); <br>
  */
 MonocoDatabaseCollection.prototype.remove = function (query) {
-    var result = 0,
+    var result = [],
     id = '',
     component = null,
     object = {};
@@ -317,7 +317,7 @@ MonocoDatabaseCollection.prototype.remove = function (query) {
                         if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
                             $helper.getMonoco().require('db').remove(this.name, id);
                         }
-                        result++;
+                        result.push(id);
                     }
                 }
             }.bind(this));
@@ -334,7 +334,7 @@ MonocoDatabaseCollection.prototype.remove = function (query) {
                     if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
                         $helper.getMonoco().require('db').remove(this.name, id);
                     }
-                    result++;
+                    result.push(id);
                 }
             }
         }
@@ -348,7 +348,7 @@ MonocoDatabaseCollection.prototype.remove = function (query) {
             if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
                 $helper.getMonoco().require('db').remove(this.name, id);
             }
-            result++;
+            result.push(id);
         }
     }
 

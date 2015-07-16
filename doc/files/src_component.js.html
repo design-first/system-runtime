@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.3.7</b>
+                    API Docs for Version: <b>0.4.0</b>
                 </p>
             </li>
         </div>
@@ -140,10 +140,10 @@
                         
                         
                         var PROPERTY_TYPE = &#x27;property&#x27;,
-                        COLLECTION_TYPE = &#x27;collection&#x27;,
-                        METHOD_TYPE = &#x27;method&#x27;,
-                        EVENT_TYPE = &#x27;event&#x27;,
-                        store = {};
+                                COLLECTION_TYPE = &#x27;collection&#x27;,
+                                METHOD_TYPE = &#x27;method&#x27;,
+                                EVENT_TYPE = &#x27;event&#x27;,
+                                store = {};
                         
                         
                         /* Private methods */
@@ -160,11 +160,11 @@
                          */
                         function monocoArray(conf) {
                             var arr = [],
-                            arrDb = [],
-                            type = &#x27;&#x27;;
+                                    arrDb = [],
+                                    type = &#x27;&#x27;;
                         
                             conf = conf || {};
-                            type = conf.type || &#x27;&#x27;;
+                            type = conf.type ||  &#x27;&#x27;;
                             arrDb = conf.arr || [];
                         
                             arrDb.forEach(function (val) {
@@ -177,7 +177,7 @@
                         
                             arr.push = function (val) {
                                 var isValid = false,
-                                isClass = false;
+                                        isClass = false;
                         
                                 isClass = type.indexOf(&#x27;@&#x27;) !== -1;
                         
@@ -226,9 +226,9 @@
                          */
                         function getParamNames(id, methodName) {
                             var params = [],
-                            result = [],
-                            length = 0,
-                            i = 0;
+                                    result = [],
+                                    length = 0,
+                                    i = 0;
                         
                             params = $metamodel.get(id)[methodName].params;
                             if (params) {
@@ -250,11 +250,11 @@
                          */
                         function getProperties(id) {
                             var model = null,
-                            schema = null,
-                            propNames = &#x27;&#x27;,
-                            length = 0,
-                            i = 0,
-                            result = [];
+                                    schema = null,
+                                    propNames = &#x27;&#x27;,
+                                    length = 0,
+                                    i = 0,
+                                    result = [];
                         
                             model = $metamodel.get(id);
                             schema = $metamodel.get(model._schema);
@@ -263,7 +263,7 @@
                         
                             length = propNames.length;
                             for (i = 0; i &lt; length; i++) {
-                                if (schema[propNames[i]] === PROPERTY_TYPE || schema[propNames[i]] === COLLECTION_TYPE) {
+                                if (schema[propNames[i]] === PROPERTY_TYPE ||  schema[propNames[i]] === COLLECTION_TYPE) {
                                     result.push({
                                         &quot;name&quot;: propNames[i],
                                         &quot;type&quot;: model[propNames[i]].type,
@@ -285,11 +285,11 @@
                          */
                         function getMethods(id) {
                             var model = null,
-                            schema = null,
-                            propNames = &#x27;&#x27;,
-                            length = 0,
-                            i = 0,
-                            result = [];
+                                    schema = null,
+                                    propNames = &#x27;&#x27;,
+                                    length = 0,
+                                    i = 0,
+                                    result = [];
                         
                             model = $metamodel.get(id);
                             schema = $metamodel.get(model._schema);
@@ -316,11 +316,11 @@
                          */
                         function getEvents(id) {
                             var model = null,
-                            schema = null,
-                            propNames = &#x27;&#x27;,
-                            length = 0,
-                            i = 0,
-                            result = [];
+                                    schema = null,
+                                    propNames = &#x27;&#x27;,
+                                    length = 0,
+                                    i = 0,
+                                    result = [];
                         
                             model = $metamodel.get(id);
                             schema = $metamodel.get(model._schema);
@@ -428,9 +428,9 @@
                         
                             properties.forEach(function property(prop) {
                                 var body = {},
-                                propertyName = &#x27;&#x27;,
-                                propertyType = &#x27;&#x27;,
-                                propertyReadOnly = &#x27;&#x27;;
+                                        propertyName = &#x27;&#x27;,
+                                        propertyType = &#x27;&#x27;,
+                                        propertyReadOnly = &#x27;&#x27;;
                         
                                 propertyName = prop.name;
                                 propertyType = prop.type;
@@ -439,10 +439,10 @@
                                 if (Array.isArray(propertyType)) { // in case of array, return a sub array
                                     body = function body(position, value) {
                                         var search = [],
-                                        component = null,
-                                        monocoArr = null,
-                                        val = null,
-                                        realVal = null;
+                                                component = null,
+                                                monocoArr = null,
+                                                val = null,
+                                                realVal = null;
                         
                                         if (typeof value === &#x27;undefined&#x27;) {
                                             if (typeof position === &#x27;undefined&#x27;) {
@@ -504,8 +504,8 @@
                                 } else {
                                     body = function body(value) {
                                         var search = [],
-                                        component = null,
-                                        propertyValue = null;
+                                                component = null,
+                                                propertyValue = null;
                         
                                         if (typeof value === &#x27;undefined&#x27;) {
                                             component = $db.store[classId][this.id()];
@@ -539,6 +539,11 @@
                         
                                                         if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
                                                             $helper.getMonoco().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, value);
+                                                        }
+                        
+                                                        // case of MonocoBehavior
+                                                        if (classId === &#x27;MonocoBehavior&#x27;) {
+                                                            $behavior.removeFromMemory(this.id());
                                                         }
                         
                                                         $workflow.state({
@@ -575,18 +580,18 @@
                         
                             methods.forEach(function method(methodName) {
                                 var paramsName = getParamNames(classId, methodName),
-                                params = paramsName.join(&#x27;,&#x27;),
-                                body = function () {
-                                    var result = null;
+                                        params = paramsName.join(&#x27;,&#x27;),
+                                        body = function () {
+                                            var result = null;
                         
-                                    result = $workflow.state({
-                                        &quot;component&quot;: this.id(),
-                                        &quot;state&quot;: methodName,
-                                        &quot;data&quot;: arguments
-                                    });
+                                            result = $workflow.state({
+                                                &quot;component&quot;: this.id(),
+                                                &quot;state&quot;: methodName,
+                                                &quot;data&quot;: arguments
+                                            });
                         
-                                    return result;
-                                };
+                                            return result;
+                                        };
                                 if (params) {
                                     /* jshint -W054 */
                                     Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; (&quot; + params + &quot;) { return body.call(this,&quot; + params + &quot;) };&quot;)(body);
@@ -613,14 +618,14 @@
                             var events = getEvents(model);
                             events.forEach(function event(methodName) {
                                 var paramsName = getParamNames(classId, methodName),
-                                params = paramsName.join(&#x27;,&#x27;),
-                                body = function () {
-                                    $workflow.state({
-                                        &quot;component&quot;: this.id(),
-                                        &quot;state&quot;: methodName,
-                                        &quot;data&quot;: arguments
-                                    });
-                                };
+                                        params = paramsName.join(&#x27;,&#x27;),
+                                        body = function () {
+                                            $workflow.state({
+                                                &quot;component&quot;: this.id(),
+                                                &quot;state&quot;: methodName,
+                                                &quot;data&quot;: arguments
+                                            });
+                                        };
                                 if (params) {
                                     /* jshint -W054 */
                                     Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; (&quot; + params + &quot;) { return body.call(this,&quot; + params + &quot;) };&quot;)(body);
@@ -651,12 +656,12 @@
                                 })) {
                                     if ($metamodel.isValidState(state, classId)) {
                                         if (
-                                        !$metamodel.isEvent(state, classId) &amp;&amp;
-                                        !$metamodel.isProperty(state, classId) &amp;&amp;
-                                        $db.MonocoBehavior.find({
-                                            &quot;component&quot;: this.id(),
-                                            &quot;state&quot;: state
-                                            }).length &gt;= 1) {
+                                                !$metamodel.isEvent(state, classId) &amp;&amp;
+                                                !$metamodel.isProperty(state, classId) &amp;&amp;
+                                                $db.MonocoBehavior.find({
+                                                    &quot;component&quot;: this.id(),
+                                                    &quot;state&quot;: state
+                                                }).length &gt;= 1) {
                                             $log.behaviorNotUnique(classId, state);
                                         } else {
                                             result = $behavior.add(this.id(), state, handler, useCoreAPI);
@@ -690,12 +695,12 @@
                                 })) {
                                     if ($metamodel.isValidState(state, classId)) {
                                         if (
-                                        !$metamodel.isEvent(state, classId) &amp;&amp;
-                                        !$metamodel.isProperty(state, classId) &amp;&amp;
-                                        $db.MonocoBehavior.find({
-                                            &quot;component&quot;: this.id(),
-                                            &quot;state&quot;: state
-                                            }).length &gt;= 1) {
+                                                !$metamodel.isEvent(state, classId) &amp;&amp;
+                                                !$metamodel.isProperty(state, classId) &amp;&amp;
+                                                $db.MonocoBehavior.find({
+                                                    &quot;component&quot;: this.id(),
+                                                    &quot;state&quot;: state
+                                                }).length &gt;= 1) {
                                             $log.behaviorNotUnique(classId, state);
                                         } else {
                                             result = $behavior.add(this.id(), state, handler, useCoreAPI);
@@ -798,7 +803,7 @@
                             config = config || {};
                         
                             var Class = {},
-                            classId = &#x27;&#x27;;
+                                    classId = &#x27;&#x27;;
                         
                             if (typeof config.model === &#x27;undefined&#x27;) {
                                 classId = $helper.generateId();
@@ -854,10 +859,10 @@
                          */
                         function find(Class, query) {
                             var documents = [],
-                            components = [],
-                            component = null,
-                            i = 0,
-                            length = 0;
+                                    components = [],
+                                    component = null,
+                                    i = 0,
+                                    length = 0;
                         
                             if ($db[Class]) {
                                 documents = $db[Class].find(query);
@@ -892,7 +897,7 @@
                          */
                         function isInstanceOf(component, className) {
                             var result = false,
-                            componentClassName = &#x27;&#x27;;
+                                    componentClassName = &#x27;&#x27;;
                         
                             componentClassName = component.constructor.name;
                         
@@ -912,7 +917,7 @@
                          */
                         function destroy(id) {
                             var component = store[id],
-                            classId = &#x27;&#x27;;
+                                    classId = &#x27;&#x27;;
                         
                             if (component) {
                                 delete store[id];
@@ -920,6 +925,10 @@
                                 $db[classId].remove({
                                     &quot;_id&quot;: id
                                 });
+                                // case of Behavior
+                                if (classId === &#x27;MonocoBehavior&#x27;) {
+                                    $behavior.removeFromMemory(id);
+                                }
                             }
                         }
                         

@@ -6,7 +6,7 @@
     "classInfo": "property",
     "off": "method",
     "require": "method",
-    "destroy": "event",
-    "init": "event",
+    "destroy": "method",
+    "init": "method",
     "error": "event"
 }

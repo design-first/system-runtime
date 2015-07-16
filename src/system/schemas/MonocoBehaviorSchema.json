@@ -1,6 +1,7 @@
 {
     "_id": "MonocoBehaviorSchema",
     "_name": "MonocoBehaviorSchema",
+    "_inherit": ["MonocoComponentSchema"],
     "_core": true,
     "core": "property",
     "component": "property",
