@@ -2,7 +2,7 @@
     "project": {
         "name": "monoco",
         "description": "A Model and a NoSQL Database for Components",
-        "version": "0.4.1",
+        "version": "0.4.2",
         "url": "http://monoco.io"
     },
     "files": {
@@ -164,7 +164,7 @@
             "namespaces": {},
             "tag": "main",
             "file": "build/system/system.js",
-            "line": 957,
+            "line": 969,
             "description": "This module is the main module of monoco. <br>\nIt inits monoco metamodel and loads monoco core system.",
             "requires": [
                 "monoco-component",
@@ -230,7 +230,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/component.js",
-            "line": 879,
+            "line": 885,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -382,7 +382,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 957,
+            "line": 969,
             "description": "This module contains monoco core system.",
             "static": 1
         }
@@ -442,7 +442,7 @@
             "submodule": "monoco-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 879,
+            "line": 885,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -655,7 +655,7 @@
             "submodule": "monoco-system",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 957,
+            "line": 969,
             "description": "This module contains monoco core system."
         }
     },
@@ -816,7 +816,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 896,
+            "line": 902,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -837,7 +837,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 905,
+            "line": 911,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -858,7 +858,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 914,
+            "line": 920,
             "description": "Find components with a query.",
             "itemtype": "method",
             "name": "find",
@@ -879,7 +879,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 923,
+            "line": 929,
             "description": "Check if the component has for class name className.",
             "itemtype": "method",
             "name": "isInstanceOf",
@@ -905,7 +905,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 933,
+            "line": 939,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -915,7 +915,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 940,
+            "line": 946,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -2320,7 +2320,7 @@
         },
         {
             "file": "build/system/system.js",
-            "line": 967,
+            "line": 979,
             "description": "monoco core system",
             "itemtype": "property",
             "name": "system",

@@ -103,7 +103,7 @@ function monocoArray(conf) {
                 $workflow.state({
                     "component": id,
                     "state": propertyName,
-                    "data": [arrDb.length - 1, val.id()]
+                    "data": [arrDb.length, val.id(), 'add']
                 });
             }
         } else { // TODO collection of object usefull ?
@@ -114,7 +114,7 @@ function monocoArray(conf) {
                 $workflow.state({
                     "component": id,
                     "state": propertyName,
-                    "data": [arrDb.length - 1, val]
+                    "data": [arrDb.length, val, 'add']
                 });
             }
         }
@@ -124,7 +124,13 @@ function monocoArray(conf) {
         var result = null;
         arrDb.pop();
         if (this.length !== 0) {
+            var data = this[this.length -1];
             result = this.splice(this.length - 1, 1);
+            $workflow.state({
+                "component": id,
+                "state": propertyName,
+                "data": [arrDb.length - 1, data, 'remove']
+            });
         } else {
             result = this;
         }
@@ -417,7 +423,7 @@ function addProperties(model, Class, classId) {
                                 $workflow.state({
                                     "component": this.id(),
                                     "state": propertyName,
-                                    "data": [position, realVal]
+                                    "data": [position, realVal, 'add']
                                 });
                             } else {
                                 $log.invalidPropertyName(this.id(), propertyName, value, propertyType);

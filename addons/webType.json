@@ -1,0 +1,23 @@
+{
+	"name": "webType",
+	"version": "0.1.0",
+	"description": "Add types for web",
+	"_id": "1f6ff194df1c37a",
+	"schemas": {},
+	"types": {
+		"html": {
+			"name": "html",
+			"type": "string"
+		},
+		"css": {
+			"name": "css",
+			"type": "string"
+		},
+		"javascript": {
+			"name": "javascript",
+			"type": "string"
+		}
+	},
+	"behaviors": {},
+	"components": {}
+}

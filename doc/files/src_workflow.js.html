@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.4.1</b>
+                    API Docs for Version: <b>0.4.2</b>
                 </p>
             </li>
         </div>
@@ -513,8 +513,8 @@
                         
                             switch (true) {
                                 case isCollection:
-                                    paramsType = [&#x27;number&#x27;, $metamodel.get(componentClassName)[methodName].type[0]];
-                                    paramsNumber = [1, 2];
+                                    paramsType = [&#x27;number&#x27;, $metamodel.get(componentClassName)[methodName].type[0], &#x27;string&#x27;];
+                                    paramsNumber = [3, 3];
                                     break;
                                 case isProperty:
                                     paramsType = [$metamodel.get(componentClassName)[methodName].type];

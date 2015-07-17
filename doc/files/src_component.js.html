@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.4.1</b>
+                    API Docs for Version: <b>0.4.2</b>
                 </p>
             </li>
         </div>
@@ -193,7 +193,7 @@
                                         $workflow.state({
                                             &quot;component&quot;: id,
                                             &quot;state&quot;: propertyName,
-                                            &quot;data&quot;: [arrDb.length - 1, val.id()]
+                                            &quot;data&quot;: [arrDb.length, val.id(), &#x27;add&#x27;]
                                         });
                                     }
                                 } else { // TODO collection of object usefull ?
@@ -204,7 +204,7 @@
                                         $workflow.state({
                                             &quot;component&quot;: id,
                                             &quot;state&quot;: propertyName,
-                                            &quot;data&quot;: [arrDb.length - 1, val]
+                                            &quot;data&quot;: [arrDb.length, val, &#x27;add&#x27;]
                                         });
                                     }
                                 }
@@ -214,7 +214,13 @@
                                 var result = null;
                                 arrDb.pop();
                                 if (this.length !== 0) {
+                                    var data = this[this.length -1];
                                     result = this.splice(this.length - 1, 1);
+                                    $workflow.state({
+                                        &quot;component&quot;: id,
+                                        &quot;state&quot;: propertyName,
+                                        &quot;data&quot;: [arrDb.length - 1, data, &#x27;remove&#x27;]
+                                    });
                                 } else {
                                     result = this;
                                 }
@@ -507,7 +513,7 @@
                                                         $workflow.state({
                                                             &quot;component&quot;: this.id(),
                                                             &quot;state&quot;: propertyName,
-                                                            &quot;data&quot;: [position, realVal]
+                                                            &quot;data&quot;: [position, realVal, &#x27;add&#x27;]
                                                         });
                                                     } else {
                                                         $log.invalidPropertyName(this.id(), propertyName, value, propertyType);

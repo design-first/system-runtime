@@ -423,8 +423,8 @@ function checkParams(params) {
 
     switch (true) {
         case isCollection:
-            paramsType = ['number', $metamodel.get(componentClassName)[methodName].type[0]];
-            paramsNumber = [1, 2];
+            paramsType = ['number', $metamodel.get(componentClassName)[methodName].type[0], 'string'];
+            paramsNumber = [3, 3];
             break;
         case isProperty:
             paramsType = [$metamodel.get(componentClassName)[methodName].type];
