@@ -187,7 +187,7 @@ function invalidPropertyName(id, propertyName, propertyValue, type) {
  * @param {String} propertyName name of the property
  */
 function readOnlyProperty(id, propertyName) {
-    $helper.getMonoco().warning("can not set read-only property " + propertyName + " on component '" + id + "'");
+    $helper.getMonoco().warning("can not set read-only property '" + propertyName + "' on component '" + id + "'");
 }
 
 
@@ -378,7 +378,7 @@ function canNotYetValidate(id, className) {
  * @param {String} type expected type
  */
 function invalidChannelEvent(message, eventName, type) {
-    $helper.getMonoco().warning("invalid type for the message '" + JSON.stringify(message) + "': expected type '" + type + "' for event '" + eventName + "'" );
+    $helper.getMonoco().warning("invalid type for the message '" + JSON.stringify(message) + "': expected type '" + type + "' for event '" + eventName + "'");
 }
 
 

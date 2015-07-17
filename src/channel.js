@@ -65,12 +65,12 @@ function listen(event, action) {
  */
 function send(message) {
     var messages = [],
-    result = true,
-    systemId = '',
-    systems = [];
+        result = true,
+        systemId = '',
+        systems = [];
 
     if ($helper.isMonoco()) {
-        systems = $helper.getMonoco().find('MonocoSystem', {'master': true});
+        systems = $helper.getMonoco().find('MonocoSystem', { 'master': true });
         if (systems.length) {
             systemId = systems[0].id();
         }

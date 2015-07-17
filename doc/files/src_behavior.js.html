@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.4.0</b>
+                    API Docs for Version: <b>0.4.1</b>
                 </p>
             </li>
         </div>
@@ -157,13 +157,13 @@
                          */
                         function createFunction(name, func, core, useCoreAPI) {
                             var funcName = &#x27;&#x27;,
-                                    beginBody = -1,
-                                    funcParams = &#x27;&#x27;,
-                                    params = [],
-                                    paramsClean = [],
-                                    funcBody = &#x27;&#x27;,
-                                    header = &#x27;&#x27;,
-                                    action = null;
+                                beginBody = -1,
+                                funcParams = &#x27;&#x27;,
+                                params = [],
+                                paramsClean = [],
+                                funcBody = &#x27;&#x27;,
+                                header = &#x27;&#x27;,
+                                action = null;
                         
                             beginBody = func.indexOf(&#x27;{&#x27;);
                             header = func.substring(0, beginBody);
@@ -305,8 +305,8 @@
                          */
                         function getActions(id, state) {
                             var result = [],
-                                    dbResult = [],
-                                    action = null;
+                                dbResult = [],
+                                action = null;
                         
                             dbResult = $db.MonocoBehavior.find({
                                 &quot;component&quot;: id,

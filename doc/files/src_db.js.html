@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.4.0</b>
+                    API Docs for Version: <b>0.4.1</b>
                 </p>
             </li>
         </div>
@@ -142,21 +142,21 @@
                         
                         
                         var store = {},
-                                collections = [],
-                                internalDB = [
-                                    &#x27;Monoco&#x27;,
-                                    &#x27;MonocoSchema&#x27;,
-                                    &#x27;MonocoExtendedSchema&#x27;,
-                                    &#x27;MonocoBehavior&#x27;,
-                                    &#x27;MonocoState&#x27;,
-                                    &#x27;MonocoType&#x27;,
-                                    &#x27;MonocoMetamodel&#x27;,
-                                    &#x27;MonocoDatabase&#x27;,
-                                    &#x27;MonocoSystem&#x27;,
-                                    &#x27;MonocoClassInfo&#x27;,
-                                    &#x27;MonocoMessage&#x27;,
-                                    &#x27;MonocoChannel&#x27;
-                                ];
+                            collections = [],
+                            internalDB = [
+                                &#x27;Monoco&#x27;,
+                                &#x27;MonocoSchema&#x27;,
+                                &#x27;MonocoExtendedSchema&#x27;,
+                                &#x27;MonocoBehavior&#x27;,
+                                &#x27;MonocoState&#x27;,
+                                &#x27;MonocoType&#x27;,
+                                &#x27;MonocoMetamodel&#x27;,
+                                &#x27;MonocoDatabase&#x27;,
+                                &#x27;MonocoSystem&#x27;,
+                                &#x27;MonocoClassInfo&#x27;,
+                                &#x27;MonocoMessage&#x27;,
+                                &#x27;MonocoChannel&#x27;
+                            ];
                         
                         
                         /* Private methods */
@@ -172,7 +172,7 @@
                          */
                         function contains(source, target) {
                             var result = true,
-                                    property = {};
+                                property = {};
                         
                             for (property in source) {
                                 if (typeof target[property] === &#x27;undefined&#x27; || target[property] !== source[property]) {
@@ -194,7 +194,7 @@
                          * @param {String} name name of the new collection
                          */
                         var MonocoDatabaseCollection = function (name) {
-                            if ($metamodel.get(name) || internalDB.indexOf(name) !== -1) {
+                            if ($metamodel.get(name) || internalDB.indexOf(name) !== -1) {
                                 store[name] = {};
                                 this.name = name;
                                 if (internalDB.indexOf(name) === -1) {
@@ -219,8 +219,8 @@
                          */
                         MonocoDatabaseCollection.prototype.find = function (query) {
                             var result = [],
-                                    id = &#x27;&#x27;,
-                                    object = {};
+                                id = &#x27;&#x27;,
+                                object = {};
                         
                             query = query || null;
                         
@@ -271,8 +271,8 @@
                          */
                         MonocoDatabaseCollection.prototype.insert = function (document) {
                             var doc = [],
-                                    Component = null,
-                                    result = [];
+                                Component = null,
+                                result = [];
                         
                             if (Array.isArray(document)) {
                                 doc = document;
@@ -329,11 +329,11 @@
                          */
                         MonocoDatabaseCollection.prototype.update = function (query, update, options) {
                             var docs = this.find(query),
-                                    updated = 0,
-                                    i = 0,
-                                    length = docs.length,
-                                    attributeName = &#x27;&#x27;,
-                                    schema = $metamodel.get(this.name);
+                                updated = 0,
+                                i = 0,
+                                length = docs.length,
+                                attributeName = &#x27;&#x27;,
+                                schema = $metamodel.get(this.name);
                         
                             options = options || {};
                             if (typeof options.upsert === &#x27;undefined&#x27;) {
@@ -385,9 +385,9 @@
                          */
                         MonocoDatabaseCollection.prototype.remove = function (query) {
                             var result = [],
-                                    id = &#x27;&#x27;,
-                                    component = null,
-                                    object = {};
+                                id = &#x27;&#x27;,
+                                component = null,
+                                object = {};
                         
                             query = query || null;
                         
@@ -453,7 +453,7 @@
                          */
                         MonocoDatabaseCollection.prototype.count = function () {
                             var result = 0,
-                                    objectId = &#x27;&#x27;;
+                                objectId = &#x27;&#x27;;
                             for (objectId in store[this.name]) {
                                 result++;
                             }
@@ -485,15 +485,15 @@
                          */
                         function dump() {
                             var dbDump = {},
-                                    collectionName = &#x27;&#x27;,
-                                    behaviorId = &#x27;&#x27;,
-                                    typeId = &#x27;&#x27;,
-                                    type = null,
-                                    behavior = null,
-                                    schema = null,
-                                    schemaId = &#x27;&#x27;,
-                                    length = 0,
-                                    i = 0;
+                                collectionName = &#x27;&#x27;,
+                                behaviorId = &#x27;&#x27;,
+                                typeId = &#x27;&#x27;,
+                                type = null,
+                                behavior = null,
+                                schema = null,
+                                schemaId = &#x27;&#x27;,
+                                length = 0,
+                                i = 0;
                         
                             // schemas
                             dbDump.schemas = {};
@@ -549,16 +549,16 @@
                          */
                         function system(importedSystem) {
                             var result = &#x27;&#x27;,
-                                    collectionName = &#x27;&#x27;,
-                                    componentId = &#x27;&#x27;,
-                                    typeName = &#x27;&#x27;,
-                                    schemaName = &#x27;&#x27;,
-                                    behaviorId = &#x27;&#x27;,
-                                    systems = [],
-                                    id = null,
-                                    mastersystem = null,
-                                    behavior = null,
-                                    exportedSystem = {};
+                                collectionName = &#x27;&#x27;,
+                                componentId = &#x27;&#x27;,
+                                typeName = &#x27;&#x27;,
+                                schemaName = &#x27;&#x27;,
+                                behaviorId = &#x27;&#x27;,
+                                systems = [],
+                                id = null,
+                                mastersystem = null,
+                                behavior = null,
+                                exportedSystem = {};
                         
                             if (importedSystem) { // import
                         
@@ -587,7 +587,7 @@
                                 }
                         
                                 // reset info if already a master system
-                                systems = exports.MonocoSystem.find({&#x27;master&#x27;: true});
+                                systems = exports.MonocoSystem.find({ &#x27;master&#x27;: true });
                                 if (systems.length &amp;&amp; systems[0]._id === importedSystem._id) {
                                     importedSystem.master = true;
                                 } else {
@@ -603,7 +603,7 @@
                                 exportedSystem = dump();
                         
                                 // get id of the master system
-                                systems = exports.MonocoSystem.find({&#x27;master&#x27;: true});
+                                systems = exports.MonocoSystem.find({ &#x27;master&#x27;: true });
                         
                                 if (systems.length) {
                                     mastersystem = systems[0];
@@ -644,15 +644,15 @@
                          */
                         function subsystem(params) {
                             var system = {},
-                                    result = [],
-                                    defaultName = &#x27;&#x27;,
-                                    i = 0,
-                                    length = 0,
-                                    schema = null,
-                                    type = null,
-                                    behavior = null,
-                                    component = null,
-                                    className = &#x27;&#x27;;
+                                result = [],
+                                defaultName = &#x27;&#x27;,
+                                i = 0,
+                                length = 0,
+                                schema = null,
+                                type = null,
+                                behavior = null,
+                                component = null,
+                                className = &#x27;&#x27;;
                         
                             // default values
                             result = monoco.find(&#x27;MonocoSystem&#x27;, {
@@ -664,7 +664,7 @@
                         
                             system.name = params.name || &#x27;sub_&#x27; + defaultName;
                             system.version = params.version || &#x27;0.0.1&#x27;;
-                            system.description = params.description || &#x27;&#x27;;
+                            system.description = params.description || &#x27;&#x27;;
                         
                             system.subsystem = true;
                         

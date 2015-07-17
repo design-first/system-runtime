@@ -67,13 +67,13 @@ var store = {};
  */
 function createFunction(name, func, core, useCoreAPI) {
     var funcName = '',
-    beginBody = -1,
-    funcParams = '',
-    params = [],
-    paramsClean = [],
-    funcBody = '',
-    header = '',
-    action = null;
+        beginBody = -1,
+        funcParams = '',
+        params = [],
+        paramsClean = [],
+        funcBody = '',
+        header = '',
+        action = null;
 
     beginBody = func.indexOf('{');
     header = func.substring(0, beginBody);
@@ -169,7 +169,7 @@ function add(id, state, action, useCoreAPI, core) {
  */
 function remove(params) {
     var result = [];
-    
+
     params = params || {};
     params.behaviorId = params.behaviorId || '';
     params.componentId = params.componentId || '';
@@ -188,7 +188,7 @@ function remove(params) {
                 "component": params.componentId,
                 "state": params.state
             });
-            result.forEach(function(id) {
+            result.forEach(function (id) {
                 delete store[id];
             });
         }
@@ -215,8 +215,8 @@ function removeFromMemory(id) {
  */
 function getActions(id, state) {
     var result = [],
-    dbResult = [],
-    action = null;
+        dbResult = [],
+        action = null;
 
     dbResult = $db.MonocoBehavior.find({
         "component": id,

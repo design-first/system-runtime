@@ -52,21 +52,21 @@ var $log = require('./log.js');
 
 
 var store = {},
-collections = [],
-internalDB = [
-    'Monoco',
-    'MonocoSchema',
-    'MonocoExtendedSchema',
-    'MonocoBehavior',
-    'MonocoState',
-    'MonocoType',
-    'MonocoMetamodel',
-    'MonocoDatabase',
-    'MonocoSystem',
-    'MonocoClassInfo',
-    'MonocoMessage',
-    'MonocoChannel'
-];
+    collections = [],
+    internalDB = [
+        'Monoco',
+        'MonocoSchema',
+        'MonocoExtendedSchema',
+        'MonocoBehavior',
+        'MonocoState',
+        'MonocoType',
+        'MonocoMetamodel',
+        'MonocoDatabase',
+        'MonocoSystem',
+        'MonocoClassInfo',
+        'MonocoMessage',
+        'MonocoChannel'
+    ];
 
 
 /* Private methods */
@@ -82,7 +82,7 @@ internalDB = [
  */
 function contains(source, target) {
     var result = true,
-    property = {};
+        property = {};
 
     for (property in source) {
         if (typeof target[property] === 'undefined' || target[property] !== source[property]) {
@@ -104,7 +104,7 @@ function contains(source, target) {
  * @param {String} name name of the new collection
  */
 var MonocoDatabaseCollection = function (name) {
-    if ($metamodel.get(name) || internalDB.indexOf(name) !== -1) {
+    if ($metamodel.get(name) || internalDB.indexOf(name) !== -1) {
         store[name] = {};
         this.name = name;
         if (internalDB.indexOf(name) === -1) {
@@ -129,8 +129,8 @@ var MonocoDatabaseCollection = function (name) {
  */
 MonocoDatabaseCollection.prototype.find = function (query) {
     var result = [],
-    id = '',
-    object = {};
+        id = '',
+        object = {};
 
     query = query || null;
 
@@ -181,8 +181,8 @@ MonocoDatabaseCollection.prototype.find = function (query) {
  */
 MonocoDatabaseCollection.prototype.insert = function (document) {
     var doc = [],
-    Component = null,
-    result = [];
+        Component = null,
+        result = [];
 
     if (Array.isArray(document)) {
         doc = document;
@@ -207,13 +207,13 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
                     $helper.getMonoco().require('db').insert(this.name, obj);
                 }
             }
-            
+
             if (this.name === 'MonocoMessage') {
                 if ($helper.isMonoco() && $helper.getMonoco().require('channel')) {
                     $helper.getMonoco().require('channel')[obj.event](obj.data);
                 }
             }
-            
+
         } else {
             $log.invalidDocumentOnDbInsert(obj, this.name);
         }
@@ -239,11 +239,11 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
  */
 MonocoDatabaseCollection.prototype.update = function (query, update, options) {
     var docs = this.find(query),
-    updated = 0,
-    i = 0,
-    length = docs.length,
-    attributeName = '',
-    schema = $metamodel.get(this.name);
+        updated = 0,
+        i = 0,
+        length = docs.length,
+        attributeName = '',
+        schema = $metamodel.get(this.name);
 
     options = options || {};
     if (typeof options.upsert === 'undefined') {
@@ -295,9 +295,9 @@ MonocoDatabaseCollection.prototype.update = function (query, update, options) {
  */
 MonocoDatabaseCollection.prototype.remove = function (query) {
     var result = [],
-    id = '',
-    component = null,
-    object = {};
+        id = '',
+        component = null,
+        object = {};
 
     query = query || null;
 
@@ -363,7 +363,7 @@ MonocoDatabaseCollection.prototype.remove = function (query) {
  */
 MonocoDatabaseCollection.prototype.count = function () {
     var result = 0,
-    objectId = '';
+        objectId = '';
     for (objectId in store[this.name]) {
         result++;
     }
@@ -395,15 +395,15 @@ function collection(name) {
  */
 function dump() {
     var dbDump = {},
-    collectionName = '',
-    behaviorId = '',
-    typeId = '',
-    type = null,
-    behavior = null,
-    schema = null,
-    schemaId = '',
-    length = 0,
-    i = 0;
+        collectionName = '',
+        behaviorId = '',
+        typeId = '',
+        type = null,
+        behavior = null,
+        schema = null,
+        schemaId = '',
+        length = 0,
+        i = 0;
 
     // schemas
     dbDump.schemas = {};
@@ -459,16 +459,16 @@ function dump() {
  */
 function system(importedSystem) {
     var result = '',
-    collectionName = '',
-    componentId = '',
-    typeName = '',
-    schemaName = '',
-    behaviorId = '',
-    systems = [],
-    id = null,
-    mastersystem = null,
-    behavior = null,
-    exportedSystem = {};
+        collectionName = '',
+        componentId = '',
+        typeName = '',
+        schemaName = '',
+        behaviorId = '',
+        systems = [],
+        id = null,
+        mastersystem = null,
+        behavior = null,
+        exportedSystem = {};
 
     if (importedSystem) { // import
 
@@ -497,7 +497,7 @@ function system(importedSystem) {
         }
 
         // reset info if already a master system
-        systems = exports.MonocoSystem.find({'master': true});
+        systems = exports.MonocoSystem.find({ 'master': true });
         if (systems.length && systems[0]._id === importedSystem._id) {
             importedSystem.master = true;
         } else {
@@ -513,7 +513,7 @@ function system(importedSystem) {
         exportedSystem = dump();
 
         // get id of the master system
-        systems = exports.MonocoSystem.find({'master': true});
+        systems = exports.MonocoSystem.find({ 'master': true });
 
         if (systems.length) {
             mastersystem = systems[0];
@@ -554,15 +554,15 @@ function system(importedSystem) {
  */
 function subsystem(params) {
     var system = {},
-    result = [],
-    defaultName = '',
-    i = 0,
-    length = 0,
-    schema = null,
-    type = null,
-    behavior = null,
-    component = null,
-    className = '';
+        result = [],
+        defaultName = '',
+        i = 0,
+        length = 0,
+        schema = null,
+        type = null,
+        behavior = null,
+        component = null,
+        className = '';
 
     // default values
     result = monoco.find('MonocoSystem', {
@@ -574,7 +574,7 @@ function subsystem(params) {
 
     system.name = params.name || 'sub_' + defaultName;
     system.version = params.version || '0.0.1';
-    system.description = params.description || '';
+    system.description = params.description || '';
 
     system.subsystem = true;
 

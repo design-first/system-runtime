@@ -53,7 +53,7 @@ var store = {};
  */
 function set(id, state) {
     store[id] = state;
-    $db.store.MonocoState[id] = {"name": state};
+    $db.store.MonocoState[id] = { "name": state };
 }
 
 

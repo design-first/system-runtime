@@ -2,7 +2,7 @@
     "project": {
         "name": "monoco",
         "description": "A Model and a NoSQL Database for Components",
-        "version": "0.4.0",
+        "version": "0.4.1",
         "url": "http://monoco.io"
     },
     "files": {
@@ -230,7 +230,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/component.js",
-            "line": 859,
+            "line": 879,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -314,7 +314,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1289,
+            "line": 1316,
             "description": "This module manages monoco metamodel. <br>\nmonoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.",
             "requires": [
                 "monoco-db",
@@ -356,7 +356,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 59,
+            "line": 62,
             "description": "This module manages the workflow of monoco. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and monoco. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
                 "monoco-metamodel",
@@ -442,7 +442,7 @@
             "submodule": "monoco-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 859,
+            "line": 879,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -545,7 +545,7 @@
             "submodule": "monoco-metamodel",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1289,
+            "line": 1316,
             "description": "This module manages monoco metamodel. <br>\nmonoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.",
             "requires": [
                 "monoco-db",
@@ -607,7 +607,7 @@
             "submodule": "monoco-workflow",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 573,
+            "line": 611,
             "description": "This module manages the workflow of monoco. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and monoco. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
                 "monoco-metamodel",
@@ -632,7 +632,7 @@
             "submodule": "monoco-workflow",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 59,
+            "line": 62,
             "description": "The MonocoError class.",
             "is_constructor": 1,
             "params": [
@@ -816,7 +816,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 876,
+            "line": 896,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -837,7 +837,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 885,
+            "line": 905,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -858,7 +858,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 894,
+            "line": 914,
             "description": "Find components with a query.",
             "itemtype": "method",
             "name": "find",
@@ -879,7 +879,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 903,
+            "line": 923,
             "description": "Check if the component has for class name className.",
             "itemtype": "method",
             "name": "isInstanceOf",
@@ -905,7 +905,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 913,
+            "line": 933,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -915,7 +915,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 920,
+            "line": 940,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -1846,7 +1846,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1304,
+            "line": 1331,
             "description": "Init the metamodel.",
             "itemtype": "method",
             "name": "init",
@@ -1856,7 +1856,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1311,
+            "line": 1338,
             "description": "Remove the data of the metamodel from the memory.",
             "itemtype": "method",
             "name": "clear",
@@ -1866,7 +1866,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1318,
+            "line": 1345,
             "description": "Add a new schema.",
             "params": [
                 {
@@ -1883,7 +1883,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1326,
+            "line": 1353,
             "description": "Add a new type.",
             "params": [
                 {
@@ -1900,7 +1900,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1334,
+            "line": 1361,
             "description": "Create the metamodel.",
             "itemtype": "method",
             "name": "create",
@@ -1910,7 +1910,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1341,
+            "line": 1368,
             "description": "Get a schema.",
             "itemtype": "method",
             "name": "get",
@@ -1931,7 +1931,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1350,
+            "line": 1377,
             "description": "Get parents of a shema if any.",
             "itemtype": "method",
             "name": "getParents",
@@ -1952,7 +1952,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1369,
+            "line": 1396,
             "description": "Check if the object is compliant with the schema.\nUse it to test if the constructor of an object is compliant\nwith the definition of the class.",
             "itemtype": "method",
             "name": "isValidObject",
@@ -1988,7 +1988,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1383,
+            "line": 1410,
             "description": "Prepare the object in order to be compliant with the schema.",
             "itemtype": "method",
             "name": "prepareObject",
@@ -2010,7 +2010,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1392,
+            "line": 1419,
             "description": "Check if a value is compliant with a type.",
             "itemtype": "method",
             "name": "isValidType",
@@ -2036,7 +2036,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1401,
+            "line": 1428,
             "description": "Check if a value is compliant with a type enum.",
             "itemtype": "method",
             "name": "isValidEnum",
@@ -2062,7 +2062,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1411,
+            "line": 1438,
             "description": "Check if the name is a correct state for the component.",
             "itemtype": "method",
             "name": "isValidState",
@@ -2088,7 +2088,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1421,
+            "line": 1448,
             "description": "Check if an attribute of the schema is an event.",
             "itemtype": "method",
             "name": "isEvent",
@@ -2106,6 +2106,84 @@
             ],
             "return": {
                 "description": "true if the attribute is an event",
+                "type": "Boolean"
+            },
+            "class": "monoco-metamodel",
+            "module": "monoco",
+            "submodule": "monoco-metamodel"
+        },
+        {
+            "file": "src/metamodel.js",
+            "line": 1458,
+            "description": "Check if an attribute of the schema is a property.",
+            "itemtype": "method",
+            "name": "isProperty",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "component id",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the attribute is a property",
+                "type": "Boolean"
+            },
+            "class": "monoco-metamodel",
+            "module": "monoco",
+            "submodule": "monoco-metamodel"
+        },
+        {
+            "file": "src/metamodel.js",
+            "line": 1468,
+            "description": "Check if an attribute of the schema is a collection.",
+            "itemtype": "method",
+            "name": "isCollection",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "component id",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the attribute is a collection",
+                "type": "Boolean"
+            },
+            "class": "monoco-metamodel",
+            "module": "monoco",
+            "submodule": "monoco-metamodel"
+        },
+        {
+            "file": "src/metamodel.js",
+            "line": 1478,
+            "description": "Check if an attribute of the schema is a method.",
+            "itemtype": "method",
+            "name": "isMethod",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "component id",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the attribute is a method",
                 "type": "Boolean"
             },
             "class": "monoco-metamodel",
@@ -2177,7 +2255,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 598,
+            "line": 636,
             "description": "Change the state of a component.\n\nWorklow:<br>\n<br>\n0. Check if the component has not been destroyed <br>\n1. Check if the state is a method or an event <br>\n2. Search if there is a behavior with an action for the new state <br>\n3. If so, get the action(s) <br>\n4. Check if the conditons on input are compliant with the metamodel <br>\n5. Call the action(s) <br>\n6. If not an of event, check if the conditons on input are compliant with the metamodel <br>\n7. If all is ok, the state of the component is updated <br>\n8. Return the result <br>",
             "itemtype": "method",
             "name": "state",
@@ -2194,7 +2272,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 620,
+            "line": 660,
             "description": "Stop the workflow engine.",
             "itemtype": "method",
             "name": "stop",
@@ -2211,7 +2289,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 628,
+            "line": 670,
             "description": "Restart the workflow engine from the last state.",
             "itemtype": "method",
             "name": "restart",
@@ -2221,7 +2299,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 633,
+            "line": 677,
             "description": "Check if conditions on input are compliant with the model before calling the action.",
             "itemtype": "method",
             "name": "checkParams",

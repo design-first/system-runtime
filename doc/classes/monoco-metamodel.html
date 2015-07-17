@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.4.0</b>
+                    API Docs for Version: <b>0.4.1</b>
                 </p>
             </li>
         </div>
@@ -114,7 +114,10 @@
                         				<li><a href="#method-get"><span class="im">get</span>(<span class="ia">id</span>)</a></li>
                         				<li><a href="#method-getParents"><span class="im">getParents</span>(<span class="ia">id</span>)</a></li>
                         				<li><a href="#method-init"><span class="im">init</span>()</a></li>
+                        				<li><a href="#method-isCollection"><span class="im">isCollection</span>(<span class="ia">name</span><span class="ia">id</span>)</a></li>
                         				<li><a href="#method-isEvent"><span class="im">isEvent</span>(<span class="ia">name</span><span class="ia">id</span>)</a></li>
+                        				<li><a href="#method-isMethod"><span class="im">isMethod</span>(<span class="ia">name</span><span class="ia">id</span>)</a></li>
+                        				<li><a href="#method-isProperty"><span class="im">isProperty</span>(<span class="ia">name</span><span class="ia">id</span>)</a></li>
                         				<li><a href="#method-isValidEnum"><span class="im">isValidEnum</span>(<span class="ia">value</span><span class="ia">schema</span>)</a></li>
                         				<li><a href="#method-isValidObject"><span class="im">isValidObject</span>(<span class="ia">object</span><span class="ia">schema</span><span class="ia">strict</span><span class="ia">cleanRef</span>)</a></li>
                         				<li><a href="#method-isValidState"><span class="im">isValidState</span>(<span class="ia">name</span><span class="ia">id</span>)</a></li>
@@ -151,7 +154,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1311"><code>src&#x2F;metamodel.js:1311</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1338"><code>src&#x2F;metamodel.js:1338</code></a>
                                     		</p>
                                     
                                     
@@ -179,7 +182,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1334"><code>src&#x2F;metamodel.js:1334</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1361"><code>src&#x2F;metamodel.js:1361</code></a>
                                     		</p>
                                     
                                     
@@ -216,7 +219,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1341"><code>src&#x2F;metamodel.js:1341</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1368"><code>src&#x2F;metamodel.js:1368</code></a>
                                     		</p>
                                     
                                     
@@ -277,7 +280,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1350"><code>src&#x2F;metamodel.js:1350</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1377"><code>src&#x2F;metamodel.js:1377</code></a>
                                     		</p>
                                     
                                     
@@ -329,7 +332,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1304"><code>src&#x2F;metamodel.js:1304</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1331"><code>src&#x2F;metamodel.js:1331</code></a>
                                     		</p>
                                     
                                     
@@ -340,6 +343,77 @@
                                     </div>
                                     
                                     
+                                    
+                                    </div>
+                                    <div id="method-isCollection" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>isCollection</code></span>
+                                    
+                                    		<div class="args">
+                                    			<span class="paren">(</span><ul class="args-list inline commas">
+                                    				<li class="arg">
+                                    						<code>name</code>
+                                    				</li>
+                                    				<li class="arg">
+                                    						<code>id</code>
+                                    				</li>
+                                    			</ul><span class="paren">)</span>
+                                    		</div>
+                                    		<span class="returns-inline">
+                                    			<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                    		</span>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_metamodel.js.html#l1468"><code>src&#x2F;metamodel.js:1468</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Check if an attribute of the schema is a collection.</p>
+                                    </div>
+                                    
+                                    		<div class="params">
+                                    			<h4>Parameters:</h4>
+                                    
+                                    			<ul class="params-list">
+                                    				<li class="param">
+                                    						<code class="param-name">name</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    
+                                    				</li>
+                                    				<li class="param">
+                                    						<code class="param-name">id</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>component id</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    			</ul>
+                                    		</div>
+                                    
+                                    		<div class="returns">
+                                    			<h4>Returns:</h4>
+                                    
+                                    			<div class="returns-description">
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                                    					<p>true if the attribute is a collection</p>
+                                    
+                                    			</div>
+                                    		</div>
                                     
                                     </div>
                                     <div id="method-isEvent" class="method item">
@@ -369,7 +443,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1421"><code>src&#x2F;metamodel.js:1421</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1448"><code>src&#x2F;metamodel.js:1448</code></a>
                                     		</p>
                                     
                                     
@@ -415,6 +489,148 @@
                                     		</div>
                                     
                                     </div>
+                                    <div id="method-isMethod" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>isMethod</code></span>
+                                    
+                                    		<div class="args">
+                                    			<span class="paren">(</span><ul class="args-list inline commas">
+                                    				<li class="arg">
+                                    						<code>name</code>
+                                    				</li>
+                                    				<li class="arg">
+                                    						<code>id</code>
+                                    				</li>
+                                    			</ul><span class="paren">)</span>
+                                    		</div>
+                                    		<span class="returns-inline">
+                                    			<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                    		</span>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_metamodel.js.html#l1478"><code>src&#x2F;metamodel.js:1478</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Check if an attribute of the schema is a method.</p>
+                                    </div>
+                                    
+                                    		<div class="params">
+                                    			<h4>Parameters:</h4>
+                                    
+                                    			<ul class="params-list">
+                                    				<li class="param">
+                                    						<code class="param-name">name</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    
+                                    				</li>
+                                    				<li class="param">
+                                    						<code class="param-name">id</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>component id</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    			</ul>
+                                    		</div>
+                                    
+                                    		<div class="returns">
+                                    			<h4>Returns:</h4>
+                                    
+                                    			<div class="returns-description">
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                                    					<p>true if the attribute is a method</p>
+                                    
+                                    			</div>
+                                    		</div>
+                                    
+                                    </div>
+                                    <div id="method-isProperty" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>isProperty</code></span>
+                                    
+                                    		<div class="args">
+                                    			<span class="paren">(</span><ul class="args-list inline commas">
+                                    				<li class="arg">
+                                    						<code>name</code>
+                                    				</li>
+                                    				<li class="arg">
+                                    						<code>id</code>
+                                    				</li>
+                                    			</ul><span class="paren">)</span>
+                                    		</div>
+                                    		<span class="returns-inline">
+                                    			<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                    		</span>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_metamodel.js.html#l1458"><code>src&#x2F;metamodel.js:1458</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Check if an attribute of the schema is a property.</p>
+                                    </div>
+                                    
+                                    		<div class="params">
+                                    			<h4>Parameters:</h4>
+                                    
+                                    			<ul class="params-list">
+                                    				<li class="param">
+                                    						<code class="param-name">name</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    
+                                    				</li>
+                                    				<li class="param">
+                                    						<code class="param-name">id</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>component id</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    			</ul>
+                                    		</div>
+                                    
+                                    		<div class="returns">
+                                    			<h4>Returns:</h4>
+                                    
+                                    			<div class="returns-description">
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                                    					<p>true if the attribute is a property</p>
+                                    
+                                    			</div>
+                                    		</div>
+                                    
+                                    </div>
                                     <div id="method-isValidEnum" class="method item">
                                     	<div class="method-signature">
                                     	<span class="name"><code>isValidEnum</code></span>
@@ -442,7 +658,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1401"><code>src&#x2F;metamodel.js:1401</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1428"><code>src&#x2F;metamodel.js:1428</code></a>
                                     		</p>
                                     
                                     
@@ -517,7 +733,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1369"><code>src&#x2F;metamodel.js:1369</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1396"><code>src&#x2F;metamodel.js:1396</code></a>
                                     		</p>
                                     
                                     
@@ -602,7 +818,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1411"><code>src&#x2F;metamodel.js:1411</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1438"><code>src&#x2F;metamodel.js:1438</code></a>
                                     		</p>
                                     
                                     
@@ -675,7 +891,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1392"><code>src&#x2F;metamodel.js:1392</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1419"><code>src&#x2F;metamodel.js:1419</code></a>
                                     		</p>
                                     
                                     
@@ -741,7 +957,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1383"><code>src&#x2F;metamodel.js:1383</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1410"><code>src&#x2F;metamodel.js:1410</code></a>
                                     		</p>
                                     
                                     
@@ -795,7 +1011,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1318"><code>src&#x2F;metamodel.js:1318</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1345"><code>src&#x2F;metamodel.js:1345</code></a>
                                     		</p>
                                     
                                     
@@ -842,7 +1058,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_metamodel.js.html#l1326"><code>src&#x2F;metamodel.js:1326</code></a>
+                                    		<a href="../files/src_metamodel.js.html#l1353"><code>src&#x2F;metamodel.js:1353</code></a>
                                     		</p>
                                     
                                     

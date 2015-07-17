@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.4.0</b>
+                    API Docs for Version: <b>0.4.1</b>
                 </p>
             </li>
         </div>
@@ -277,7 +277,7 @@
                          * @param {String} propertyName name of the property
                          */
                         function readOnlyProperty(id, propertyName) {
-                            $helper.getMonoco().warning(&quot;can not set read-only property &quot; + propertyName + &quot; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                            $helper.getMonoco().warning(&quot;can not set read-only property &#x27;&quot; + propertyName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -468,7 +468,7 @@
                          * @param {String} type expected type
                          */
                         function invalidChannelEvent(message, eventName, type) {
-                            $helper.getMonoco().warning(&quot;invalid type for the message &#x27;&quot; + JSON.stringify(message) + &quot;&#x27;: expected type &#x27;&quot; + type + &quot;&#x27; for event &#x27;&quot; + eventName + &quot;&#x27;&quot; );
+                            $helper.getMonoco().warning(&quot;invalid type for the message &#x27;&quot; + JSON.stringify(message) + &quot;&#x27;: expected type &#x27;&quot; + type + &quot;&#x27; for event &#x27;&quot; + eventName + &quot;&#x27;&quot;);
                         }
                         
                         

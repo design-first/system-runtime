@@ -71,10 +71,14 @@ var PROPERTY_TYPE = 'property',
 function monocoArray(conf) {
     var arr = [],
         arrDb = [],
-        type = '';
+        type = '',
+        id = '',
+        propertyName = '';
 
     conf = conf || {};
     type = conf.type || '';
+    id = conf.id || '';
+    propertyName = conf.propertyName || '';
     arrDb = conf.arr || [];
 
     arrDb.forEach(function (val) {
@@ -95,11 +99,23 @@ function monocoArray(conf) {
             if (val && (val.constructor.name === type.replace('@', ''))) {
                 this[this.length] = val;
                 arrDb.push(val.id());
+
+                $workflow.state({
+                    "component": id,
+                    "state": propertyName,
+                    "data": [arrDb.length - 1, val.id()]
+                });
             }
         } else { // TODO collection of object usefull ?
             if (val && $metamodel.isValidType(val, type)) {
                 this[this.length] = val;
                 arrDb.push(val);
+
+                $workflow.state({
+                    "component": id,
+                    "state": propertyName,
+                    "data": [arrDb.length - 1, val]
+                });
             }
         }
     };
@@ -358,6 +374,8 @@ function addProperties(model, Class, classId) {
                     if (typeof position === 'undefined') {
 
                         monocoArr = new monocoArray({
+                            "id": this.id(),
+                            "propertyName": propertyName,
                             "classId": classId,
                             "type": propertyType[0],
                             "arr": $db.store[classId][this.id()][propertyName]
@@ -399,7 +417,7 @@ function addProperties(model, Class, classId) {
                                 $workflow.state({
                                     "component": this.id(),
                                     "state": propertyName,
-                                    "data": [realVal]
+                                    "data": [position, realVal]
                                 });
                             } else {
                                 $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
@@ -409,7 +427,7 @@ function addProperties(model, Class, classId) {
                 }
             };
             /* jshint -W054 */
-            Class.prototype[propertyName] = new Function("body", "return function " + propertyName + " (position, value) { return body.call(this, position, value) };")(body);
+            Class.prototype[propertyName] = new Function("body", "return function " + propertyName + " (position,value) { return body.call(this, position, value) };")(body);
             /* jshint +W054 */
         } else {
             body = function body(value) {
@@ -568,6 +586,7 @@ function addOn(Class, classId) {
                 if (
                     !$metamodel.isEvent(state, classId) &&
                     !$metamodel.isProperty(state, classId) &&
+                    !$metamodel.isCollection(state, classId) &&
                     $db.MonocoBehavior.find({
                         "component": this.id(),
                         "state": state
@@ -607,6 +626,7 @@ function addOnClass(Class, classId) {
                 if (
                     !$metamodel.isEvent(state, classId) &&
                     !$metamodel.isProperty(state, classId) &&
+                    !$metamodel.isCollection(state, classId) &&
                     $db.MonocoBehavior.find({
                         "component": this.id(),
                         "state": state

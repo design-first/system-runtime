@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.4.0</b>
+                    API Docs for Version: <b>0.4.1</b>
                 </p>
             </li>
         </div>
@@ -135,25 +135,27 @@
                         
                         
                         var ID = &#x27;_id&#x27;,
-                        NAME = &#x27;_name&#x27;,
-                        INHERITS = &#x27;_inherit&#x27;,
-                        SCHEMA = &#x27;_schema&#x27;,
-                        CLASS = &#x27;_class&#x27;,
-                        CORE = &#x27;_core&#x27;,
-                        EVENT_TYPE = &#x27;event&#x27;,
-                        PROPERTY_TYPE = &#x27;property&#x27;,
-                        internalTypes = [&#x27;property&#x27;, &#x27;collection&#x27;, &#x27;method&#x27;, &#x27;event&#x27;],
-                        defaultTypes = [&#x27;boolean&#x27;, &#x27;string&#x27;, &#x27;number&#x27;, &#x27;object&#x27;, &#x27;function&#x27;, &#x27;array&#x27;],
-                        store = {
-                            metadef: {},
-                            catalog: {},
-                            inheritance: {},
-                            inheritanceTree: {},
-                            model: {},
-                            states: {},
-                            type: {},
-                            implementation: {}
-                        };
+                            NAME = &#x27;_name&#x27;,
+                            INHERITS = &#x27;_inherit&#x27;,
+                            SCHEMA = &#x27;_schema&#x27;,
+                            CLASS = &#x27;_class&#x27;,
+                            CORE = &#x27;_core&#x27;,
+                            METHOD_TYPE = &#x27;method&#x27;,
+                            EVENT_TYPE = &#x27;event&#x27;,
+                            PROPERTY_TYPE = &#x27;property&#x27;,
+                            COLLECTION_TYPE = &#x27;collection&#x27;,
+                            internalTypes = [&#x27;property&#x27;, &#x27;collection&#x27;, &#x27;method&#x27;, &#x27;event&#x27;],
+                            defaultTypes = [&#x27;boolean&#x27;, &#x27;string&#x27;, &#x27;number&#x27;, &#x27;object&#x27;, &#x27;function&#x27;, &#x27;array&#x27;],
+                            store = {
+                                metadef: {},
+                                catalog: {},
+                                inheritance: {},
+                                inheritanceTree: {},
+                                model: {},
+                                states: {},
+                                type: {},
+                                implementation: {}
+                            };
                         
                         
                         /* Private methods */
@@ -166,8 +168,8 @@
                          */
                         function createInheritanceTree() {
                             var id = null,
-                            fatherId = null,
-                            newId = null;
+                                fatherId = null,
+                                newId = null;
                         
                             for (id in store.inheritance) {
                                 fatherId = store.inheritance[id];
@@ -191,12 +193,12 @@
                          */
                         function extend(id) {
                             var sonExtend = {},
-                            son = store.catalog[id],
-                            ancestors = store.inheritanceTree[id],
-                            length = 0,
-                            i = 0,
-                            ancestor = null,
-                            prop = &#x27;&#x27;;
+                                son = store.catalog[id],
+                                ancestors = store.inheritanceTree[id],
+                                length = 0,
+                                i = 0,
+                                ancestor = null,
+                                prop = &#x27;&#x27;;
                         
                             if (ancestors) {
                                 length = ancestors.length;
@@ -237,8 +239,8 @@
                          */
                         function checkImplementation() {
                             var id = &#x27;&#x27;,
-                            classDef = null,
-                            classImp = &#x27;&#x27;;
+                                classDef = null,
+                                classImp = &#x27;&#x27;;
                         
                             for (id in store.model) {
                                 classDef = store.model[id];
@@ -262,10 +264,10 @@
                          */
                         function checkStates() {
                             var id = &#x27;&#x27;,
-                            classDef = null,
-                            type = &#x27;&#x27;,
-                            states = [],
-                            attribute = &#x27;&#x27;;
+                                classDef = null,
+                                type = &#x27;&#x27;,
+                                states = [],
+                                attribute = &#x27;&#x27;;
                         
                             for (id in store.model) {
                                 states = [];
@@ -292,14 +294,14 @@
                          */
                         function checkImp(classDef, classImp) {
                             var property = &#x27;&#x27;,
-                            value = null;
+                                value = null;
                             for (property in classImp) {
                                 if (property !== ID &amp;&amp;
-                                property !== NAME &amp;&amp;
-                                property !== INHERITS &amp;&amp;
-                                property !== SCHEMA &amp;&amp;
-                                property !== CLASS &amp;&amp;
-                                property !== CORE) {
+                                    property !== NAME &amp;&amp;
+                                    property !== INHERITS &amp;&amp;
+                                    property !== SCHEMA &amp;&amp;
+                                    property !== CLASS &amp;&amp;
+                                    property !== CORE) {
                                     if (typeof classDef[property] !== &#x27;undefined&#x27;) {
                                         value = classDef[property];
                                         if (!checkSchema(value, classImp[property])) {
@@ -313,11 +315,11 @@
                             // check if all properties are there
                             for (property in classDef) {
                                 if (property !== ID &amp;&amp;
-                                property !== NAME &amp;&amp;
-                                property !== INHERITS &amp;&amp;
-                                property !== SCHEMA &amp;&amp;
-                                property !== CLASS &amp;&amp;
-                                property !== CORE) {
+                                    property !== NAME &amp;&amp;
+                                    property !== INHERITS &amp;&amp;
+                                    property !== SCHEMA &amp;&amp;
+                                    property !== CLASS &amp;&amp;
+                                    property !== CORE) {
                                     if (typeof classImp[property] === &#x27;undefined&#x27;) {
                                         $log.unknownPropertyImp(property, classDef[ID]);
                                     }
@@ -355,9 +357,9 @@
                          */
                         function checkCustomSchema(value, typeName) {
                             var result = true,
-                            typeDef = store.type[typeName],
-                            length = 0,
-                            i = 0;
+                                typeDef = store.type[typeName],
+                                length = 0,
+                                i = 0;
                         
                             if (!hasType(typeDef, &#x27;undefined&#x27;)) {
                                 if (!hasType(value, &#x27;undefined&#x27;)) {
@@ -407,15 +409,15 @@
                          */
                         function createDbStructure() {
                             var modelName = &#x27;&#x27;,
-                            modelDef = {},
-                            typeName = &#x27;&#x27;;
+                                modelDef = {},
+                                typeName = &#x27;&#x27;;
                         
                             for (modelName in store.catalog) {
                                 modelDef = store.catalog[modelName];
                                 $db.MonocoSchema.insert(modelDef);
                                 if (typeof modelDef[SCHEMA] !== &#x27;undefined&#x27; &amp;&amp;
-                                typeof $db[modelDef[ID]] === &#x27;undefined&#x27; &amp;&amp;
-                                modelDef[CLASS] !== false) {
+                                    typeof $db[modelDef[ID]] === &#x27;undefined&#x27; &amp;&amp;
+                                    modelDef[CLASS] !== false) {
                                     $db.collection(modelDef[ID]);
                                 }
                             }
@@ -440,7 +442,7 @@
                          */
                         function createClass() {
                             var modelName = &#x27;&#x27;,
-                            modelDef = {};
+                                modelDef = {};
                         
                             for (modelName in store.model) {
                                 modelDef = store.model[modelName];
@@ -460,7 +462,7 @@
                          */
                         function createClassInfo() {
                             var modelName = &#x27;&#x27;,
-                            modelDef = {};
+                                modelDef = {};
                         
                             for (modelName in store.model) {
                                 modelDef = store.model[modelName];
@@ -496,8 +498,8 @@
                          */
                         function isCustomType(value) {
                             var result = hasType(value, &#x27;string&#x27;) &amp;&amp;
-                            defaultTypes.indexOf(value) === -1 &amp;&amp;
-                            !isReference(value);
+                                defaultTypes.indexOf(value) === -1 &amp;&amp;
+                                !isReference(value);
                         
                             return result;
                         }
@@ -582,6 +584,34 @@
                         }
                         
                         
+                        /*
+                         * Check if an attribute of the schema has a specific type.
+                         * @method isCollection
+                         * @param {String} name
+                         * @param {String} id component id
+                         * @param {String} type type to check
+                         * @return {Boolean} true if the attribute has for type type
+                         */
+                        function checkType(name, id, type) {
+                            var result = false,
+                                componentSchema = store.model[id],
+                                attributeType = &#x27;&#x27;;
+                        
+                            if (componentSchema &amp;&amp; componentSchema[SCHEMA]) {
+                                componentSchema = store.model[componentSchema[SCHEMA]];
+                            }
+                        
+                            if (componentSchema) {
+                                attributeType = componentSchema[name];
+                                if (attributeType === type) {
+                                    result = true;
+                                }
+                            }
+                        
+                            return result;
+                        }
+                        
+                        
                         /* Public methods */
                         
                         
@@ -592,10 +622,10 @@
                          */
                         function schema(importedSchema) {
                             var id = importedSchema[ID],
-                            inherit = importedSchema[INHERITS],
-                            name = importedSchema[NAME],
-                            length = 0,
-                            i = 0;
+                                inherit = importedSchema[INHERITS],
+                                name = importedSchema[NAME],
+                                length = 0,
+                                i = 0;
                         
                             // if no id, it will be the name by default
                             if (hasType(id, &#x27;undefined&#x27;)) {
@@ -747,22 +777,7 @@
                          * @return {Boolean} true if the attribute is an event
                          */
                         function isEvent(name, id) {
-                            var result = false,
-                            componentSchema = store.model[id],
-                            attributeType = &#x27;&#x27;;
-                        
-                            if (componentSchema &amp;&amp; componentSchema[SCHEMA]) {
-                                componentSchema = store.model[componentSchema[SCHEMA]];
-                            }
-                        
-                            if (componentSchema) {
-                                attributeType = componentSchema[name];
-                                if (attributeType === EVENT_TYPE) {
-                                    result = true;
-                                }
-                            }
-                        
-                            return result;
+                            return checkType(name, id, EVENT_TYPE);
                         }
                         
                         
@@ -774,22 +789,31 @@
                          * @return {Boolean} true if the attribute is a property
                          */
                         function isProperty(name, id) {
-                            var result = false,
-                            componentSchema = store.model[id],
-                            attributeType = &#x27;&#x27;;
+                            return checkType(name, id, PROPERTY_TYPE);
+                        }
                         
-                            if (componentSchema &amp;&amp; componentSchema[SCHEMA]) {
-                                componentSchema = store.model[componentSchema[SCHEMA]];
-                            }
                         
-                            if (componentSchema) {
-                                attributeType = componentSchema[name];
-                                if (attributeType === PROPERTY_TYPE) {
-                                    result = true;
-                                }
-                            }
+                        /*
+                         * Check if an attribute of the schema is a collection.
+                         * @method isCollection
+                         * @param {String} name
+                         * @param {String} id component id
+                         * @return {Boolean} true if the attribute is a collection
+                         */
+                        function isCollection(name, id) {
+                            return checkType(name, id, COLLECTION_TYPE);
+                        }
                         
-                            return result;
+                        
+                        /*
+                         * Check if an attribute of the schema is a method.
+                         * @method isMethod
+                         * @param {String} name
+                         * @param {String} id component id
+                         * @return {Boolean} true if the attribute is a method
+                         */
+                        function isMethod(name, id) {
+                            return checkType(name, id, METHOD_TYPE);
                         }
                         
                         
@@ -802,8 +826,8 @@
                          */
                         function isValidState(name, id) {
                             var result = false,
-                            componentSchema = store.model[id],
-                            state = {};
+                                componentSchema = store.model[id],
+                                state = {};
                         
                             if (componentSchema &amp;&amp; componentSchema[SCHEMA]) {
                                 componentSchema = store.model[componentSchema[SCHEMA]];
@@ -831,6 +855,9 @@
                             function _checkReference(value, typeName) {
                                 var isValid = true;
                                 var typeRef = getReference(typeName);
+                                if (hasType(value, &#x27;string&#x27;)) {
+                                   value = $component.get(value);      
+                                }   
                                 if (getClassName(value) !== typeRef) {
                                     isValid = false;
                                     $log.invalidType(value, typeName.replace(&#x27;@&#x27;, &#x27;&#x27;));
@@ -896,14 +923,14 @@
                          */
                         function isValidSchema(object, schema) {
                             var fieldName = &#x27;&#x27;,
-                            field = null,
-                            result = true,
-                            mandatory = true,
-                            typeSchema = &#x27;&#x27;,
-                            typeRef = &#x27;&#x27;,
-                            realType = &#x27;&#x27;,
-                            length = 0,
-                            i = 0;
+                                field = null,
+                                result = true,
+                                mandatory = true,
+                                typeSchema = &#x27;&#x27;,
+                                typeRef = &#x27;&#x27;,
+                                realType = &#x27;&#x27;,
+                                length = 0,
+                                i = 0;
                         
                             /*
                              * Check if a field is compliant with the type of the reference.
@@ -912,7 +939,7 @@
                              */
                             function _isValidReference() {
                                 var isValid = true,
-                                enumValue = [];
+                                    enumValue = [];
                         
                                 typeRef = getReference(typeSchema);
                                 typeRef = object[typeRef];
@@ -1040,14 +1067,14 @@
                          */
                         function isValidObject(object, schema, strict, cleanRef) {
                             var fieldName = &#x27;&#x27;,
-                            field = null,
-                            result = true,
-                            mandatory = true,
-                            typeSchema = &#x27;&#x27;,
-                            typeRef = &#x27;&#x27;,
-                            realType = &#x27;&#x27;,
-                            length = 0,
-                            i = 0;
+                                field = null,
+                                result = true,
+                                mandatory = true,
+                                typeSchema = &#x27;&#x27;,
+                                typeRef = &#x27;&#x27;,
+                                realType = &#x27;&#x27;,
+                                length = 0,
+                                i = 0;
                         
                             if (hasType(strict, &#x27;undefined&#x27;)) {
                                 strict = true;
@@ -1085,8 +1112,8 @@
                              */
                             function _isValidReference() {
                                 var isValid = true,
-                                comp = null,
-                                isComponent = false;
+                                    comp = null,
+                                    isComponent = false;
                         
                                 typeRef = getReference(typeSchema);
                                 if (field &amp;&amp; field.id) {
@@ -1126,7 +1153,7 @@
                              */
                             function _isValidType() {
                                 var isValid = true,
-                                typeArray = &#x27;&#x27;;
+                                    typeArray = &#x27;&#x27;;
                         
                                 realType = getType(typeSchema);
                                 switch (realType) {
@@ -1257,9 +1284,9 @@
                          */
                         function prepareObject(object, schema) {
                             var fieldName = &#x27;&#x27;,
-                            field = null,
-                            mandatory = true,
-                            defaultValue = &#x27;&#x27;;
+                                field = null,
+                                mandatory = true,
+                                defaultValue = &#x27;&#x27;;
                         
                             // mandatory &amp; default value
                             for (fieldName in schema) {
@@ -1298,7 +1325,7 @@
                          */
                         function getParents(id) {
                             var result = [],
-                            model = null;
+                                model = null;
                         
                             model = store.model[id];
                             if (model) {
@@ -1320,9 +1347,9 @@
                          */
                         function inheritFrom(name, parentName) {
                             var result = false,
-                            parents = [],
-                            i = 0,
-                            length = 0;
+                                parents = [],
+                                i = 0,
+                                length = 0;
                         
                             /*
                              * 
@@ -1335,9 +1362,9 @@
                              */
                             function _searchParent(className, ancestorName) {
                                 var isAncestor = false,
-                                parents = [],
-                                i = 0,
-                                length = 0;
+                                    parents = [],
+                                    i = 0,
+                                    length = 0;
                         
                                 parents = getParents(className);
                                 if (parents.length !== 0) {
@@ -1518,7 +1545,7 @@
                         exports.isEvent = isEvent;
                         
                         
-                        /*
+                        /**
                          * Check if an attribute of the schema is a property.
                          * @method isProperty
                          * @param {String} name
@@ -1526,6 +1553,26 @@
                          * @return {Boolean} true if the attribute is a property
                          */
                         exports.isProperty = isProperty;
+                        
+                        
+                        /**
+                         * Check if an attribute of the schema is a collection.
+                         * @method isCollection
+                         * @param {String} name
+                         * @param {String} id component id
+                         * @return {Boolean} true if the attribute is a collection
+                         */
+                        exports.isCollection = isCollection;
+                        
+                        
+                        /**
+                         * Check if an attribute of the schema is a method.
+                         * @method isMethod
+                         * @param {String} name
+                         * @param {String} id component id
+                         * @return {Boolean} true if the attribute is a method
+                         */
+                        exports.isMethod = isMethod;
                             </pre>
                         </div>
                     </div>

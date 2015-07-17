@@ -240,7 +240,7 @@ function checkResult(params) {
     params = params || {};
 
     var component = params.component || null,
-        methodName = params.methodName ||  '',
+        methodName = params.methodName || '',
         methodResult = params.methodResult || undefined,
         componentClassName = '',
         returnType = null,
@@ -332,7 +332,7 @@ function callAction(component, state, action, params, isEvent) {
         i = 0,
         length = 0;
 
-    if (!$metamodel.isProperty(state, component.constructor.name)) {
+    if (!$metamodel.isProperty(state, component.constructor.name) && !$metamodel.isCollection(state, component.constructor.name)) {
         params = setDefaultValue(component.constructor.name, state, params);
     }
 
@@ -398,8 +398,8 @@ function checkParams(params) {
     params = params || {};
 
     var component = params.component || null,
-        methodName = params.methodName ||  '',
-        args = params.args ||  '',
+        methodName = params.methodName || '',
+        args = params.args || '',
         paramsName = [],
         paramsType = [],
         paramsNumber = [],
@@ -408,7 +408,8 @@ function checkParams(params) {
         i = 0,
         param = null,
         result = true,
-        isProperty = false;
+        isProperty = false,
+        isCollection = false;
 
     if (component.constructor.name === 'Function') {
         componentClassName = component.name;
@@ -417,14 +418,22 @@ function checkParams(params) {
     }
 
     isProperty = $metamodel.isProperty(methodName, componentClassName);
+    isCollection = $metamodel.isCollection(methodName, componentClassName);
     paramsName = getParamNames(componentClassName, methodName);
 
-    if (isProperty) {
-        paramsType = [$metamodel.get(componentClassName)[methodName].type];
-        paramsNumber = [1, 1];
-    } else {
-        paramsType = getParamTypes(componentClassName, methodName);
-        paramsNumber = getParamNumber(componentClassName, methodName);
+    switch (true) {
+        case isCollection:
+            paramsType = ['number', $metamodel.get(componentClassName)[methodName].type[0]];
+            paramsNumber = [1, 2];
+            break;
+        case isProperty:
+            paramsType = [$metamodel.get(componentClassName)[methodName].type];
+            paramsNumber = [1, 1];
+            break;
+        default:
+            paramsType = getParamTypes(componentClassName, methodName);
+            paramsNumber = getParamNumber(componentClassName, methodName);
+            break;
     }
 
     // case of object
@@ -494,6 +503,7 @@ function state(params) {
         i = 0,
         length = 0,
         isProperty = false,
+        isCollection = false,
         isEvent = false;
 
     currentState = $state.get(params.component);
@@ -504,6 +514,7 @@ function state(params) {
         if (component) {
             isEvent = $metamodel.isEvent(params.state, component.constructor.name);
             isProperty = $metamodel.isProperty(params.state, component.constructor.name);
+            isCollection = $metamodel.isCollection(params.state, component.constructor.name);
             actions = getActions(component, params.state, isEvent);
         }
 
@@ -516,7 +527,8 @@ function state(params) {
             })) {
 
                 if (!isEvent &&
-                    !isProperty) {
+                    !isProperty &&
+                    !isCollection) {
                     action = actions[0];
                     result = callAction(component, params.state, action, params.data, false);
 

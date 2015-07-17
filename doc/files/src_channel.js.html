@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.4.0</b>
+                    API Docs for Version: <b>0.4.1</b>
                 </p>
             </li>
         </div>
@@ -155,12 +155,12 @@
                          */
                         function send(message) {
                             var messages = [],
-                            result = true,
-                            systemId = &#x27;&#x27;,
-                            systems = [];
+                                result = true,
+                                systemId = &#x27;&#x27;,
+                                systems = [];
                         
                             if ($helper.isMonoco()) {
-                                systems = $helper.getMonoco().find(&#x27;MonocoSystem&#x27;, {&#x27;master&#x27;: true});
+                                systems = $helper.getMonoco().find(&#x27;MonocoSystem&#x27;, { &#x27;master&#x27;: true });
                                 if (systems.length) {
                                     systemId = systems[0].id();
                                 }
