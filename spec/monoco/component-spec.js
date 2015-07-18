@@ -40,7 +40,7 @@ describe('a monoco component', function () {
             },
             'lastName': {
                 'type': 'string',
-                'readOnly': true,
+                'readOnly': false,
                 'mandatory': true,
                 'default': ''
             },
@@ -94,11 +94,11 @@ describe('a monoco component', function () {
             done();
         }, 1);
     });
-    
+
     it('can add an event on a property change', function (done) {
         var system = monoco.system();
         share = '';
-        
+
         system.on('version', function (val) {
             share = share + 'version';
         });
@@ -113,7 +113,7 @@ describe('a monoco component', function () {
     it('can remove an event on a property change', function (done) {
         var system = monoco.system();
         system.off('version');
-        
+
         system.version('0.0.0');
 
         setTimeout(function () {
@@ -147,12 +147,39 @@ describe('a monoco component', function () {
         expect(leia.father().children(0).firstName()).toBe('Luke');
     });
 
+    it('can get a property', function (done) {
+        setTimeout(function () {
+            var anakin = monoco.find('Person', { 'firstName': 'Anakin' })[0];
+            expect(anakin.firstName()).toBe('Anakin');
+            done();
+        }, 1);
+    });
+
+    it('can set a property', function (done) {
+        var anakin = monoco.find('Person', { 'firstName': 'Anakin' })[0];
+        anakin.lastName('Vador');
+
+        setTimeout(function () {
+            var anakin = monoco.find('Person', { 'firstName': 'Anakin' })[0];
+            expect(anakin.lastName()).toBe('Vador');
+            done();
+        }, 1);
+    });
+ 
+    it('can get a collection', function (done) {
+        setTimeout(function () {
+            var anakin = monoco.find('Person', { 'firstName': 'Anakin' })[0];
+            expect(anakin.children().length).toBe(1);
+            done();
+        }, 1);
+    });
+
     it('can destroy itself', function (done) {
-        var anakin = monoco.find('Person', {'firstName': 'Anakin'})[0];
+        var anakin = monoco.find('Person', { 'firstName': 'Anakin' })[0];
         anakin.destroy();
 
         setTimeout(function () {
-            var result = monoco.find('Person', {'firstName': 'Anakin'});
+            var result = monoco.find('Person', { 'firstName': 'Anakin' });
             expect(result.length).toBe(0);
             done();
         }, 1);
