@@ -2,7 +2,7 @@
     "project": {
         "name": "monoco",
         "description": "A Model and a NoSQL Database for Components",
-        "version": "0.4.2",
+        "version": "0.5.0",
         "url": "http://monoco.io"
     },
     "files": {
