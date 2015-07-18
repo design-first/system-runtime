@@ -276,13 +276,21 @@ function checkCustomSchema(value, typeName) {
             if (typeDef.type === 'array') {
                 length = value.length;
                 for (i = 0; i < length; i++) {
-                    result = isValidSchema(value[i], typeDef.schema);
+                    if (!hasType(typeDef.schema, 'undefined')) {
+                        result = isValidSchema(value[i], typeDef.schema);
+                    } else {
+                        result = isValidType(value[i], typeDef.type);   
+                    }
                     if (result === false) {
                         break;
                     }
                 }
             } else {
-                result = isValidSchema(value, typeDef.schema);
+                if (!hasType(typeDef.schema, 'undefined')) {
+                    result = isValidSchema(value, typeDef.schema);
+                } else {
+                    result = isValidType(value, typeDef.type);
+                }
             }
         } else {
             result = false;
@@ -766,8 +774,8 @@ function isValidType(value, typeName) {
         var isValid = true;
         var typeRef = getReference(typeName);
         if (hasType(value, 'string')) {
-           value = $component.get(value);      
-        }   
+            value = $component.get(value);
+        }
         if (getClassName(value) !== typeRef) {
             isValid = false;
             $log.invalidType(value, typeName.replace('@', ''));
@@ -999,15 +1007,22 @@ function isValidObject(object, schema, strict, cleanRef) {
      * @return {Boolean} the field is compliant with the custom type
      * @private
      */
-    function _isValidCustomType() {
-        var isValid = true;
+    function _isValidCustomType(field, typeSchema) {
+        var isValid = true,
+            realType = '';
 
-        typeSchema = store.type[typeSchema];
-        if (typeSchema) {
-            if (typeSchema.schema) {
-                isValid = isValidObject(field, typeSchema.schema);
-            } else {
-                isValid = isValidEnum(field, typeSchema);
+        realType = store.type[typeSchema];
+        if (realType) {
+            switch (true) {
+                case !hasType(realType.schema, 'undefined'):
+                    isValid = isValidObject(field, realType.schema);
+                    break;
+                case !hasType(realType.value, 'undefined'):
+                    isValid = isValidEnum(field, realType);
+                    break;
+                default:
+                    isValid = isValidType(field, realType.type);
+                    break;
             }
         } else {
             isValid = false;
@@ -1020,7 +1035,7 @@ function isValidObject(object, schema, strict, cleanRef) {
      * @return {Boolean} the field is compliant with the type of the reference
      * @private
      */
-    function _isValidReference() {
+    function _isValidReference(field, typeSchema) {
         var isValid = true,
             comp = null,
             isComponent = false;
@@ -1061,7 +1076,7 @@ function isValidObject(object, schema, strict, cleanRef) {
      * @return {Boolean} the field is compliant with the type
      * @private
      */
-    function _isValidType() {
+    function _isValidType(field, typeSchema) {
         var isValid = true,
             typeArray = '';
 
@@ -1159,13 +1174,13 @@ function isValidObject(object, schema, strict, cleanRef) {
 
         switch (true) {
             case isCustomType(typeSchema):
-                result = _isValidCustomType();
+                result = _isValidCustomType(field, typeSchema);
                 break;
             case isReference(typeSchema):
-                result = _isValidReference();
+                result = _isValidReference(field, typeSchema);
                 break;
             default:
-                result = _isValidType();
+                result = _isValidType(field, typeSchema);
                 break;
         }
     }

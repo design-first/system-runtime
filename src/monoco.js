@@ -44,7 +44,7 @@ var $system = require('../build/system/system.js');
 /* Private Property */
 
 var sytemId = '',
-	system = '';
+    system = '';
 
 
 /* Init Metamodel */

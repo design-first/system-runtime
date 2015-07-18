@@ -366,13 +366,21 @@
                                     if (typeDef.type === &#x27;array&#x27;) {
                                         length = value.length;
                                         for (i = 0; i &lt; length; i++) {
-                                            result = isValidSchema(value[i], typeDef.schema);
+                                            if (!hasType(typeDef.schema, &#x27;undefined&#x27;)) {
+                                                result = isValidSchema(value[i], typeDef.schema);
+                                            } else {
+                                                result = isValidType(value[i], typeDef.type);   
+                                            }
                                             if (result === false) {
                                                 break;
                                             }
                                         }
                                     } else {
-                                        result = isValidSchema(value, typeDef.schema);
+                                        if (!hasType(typeDef.schema, &#x27;undefined&#x27;)) {
+                                            result = isValidSchema(value, typeDef.schema);
+                                        } else {
+                                            result = isValidType(value, typeDef.type);
+                                        }
                                     }
                                 } else {
                                     result = false;
@@ -856,8 +864,8 @@
                                 var isValid = true;
                                 var typeRef = getReference(typeName);
                                 if (hasType(value, &#x27;string&#x27;)) {
-                                   value = $component.get(value);      
-                                }   
+                                    value = $component.get(value);
+                                }
                                 if (getClassName(value) !== typeRef) {
                                     isValid = false;
                                     $log.invalidType(value, typeName.replace(&#x27;@&#x27;, &#x27;&#x27;));
@@ -1089,15 +1097,22 @@
                              * @return {Boolean} the field is compliant with the custom type
                              * @private
                              */
-                            function _isValidCustomType() {
-                                var isValid = true;
+                            function _isValidCustomType(field, typeSchema) {
+                                var isValid = true,
+                                    realType = &#x27;&#x27;;
                         
-                                typeSchema = store.type[typeSchema];
-                                if (typeSchema) {
-                                    if (typeSchema.schema) {
-                                        isValid = isValidObject(field, typeSchema.schema);
-                                    } else {
-                                        isValid = isValidEnum(field, typeSchema);
+                                realType = store.type[typeSchema];
+                                if (realType) {
+                                    switch (true) {
+                                        case !hasType(realType.schema, &#x27;undefined&#x27;):
+                                            isValid = isValidObject(field, realType.schema);
+                                            break;
+                                        case !hasType(realType.value, &#x27;undefined&#x27;):
+                                            isValid = isValidEnum(field, realType);
+                                            break;
+                                        default:
+                                            isValid = isValidType(field, realType.type);
+                                            break;
                                     }
                                 } else {
                                     isValid = false;
@@ -1110,7 +1125,7 @@
                              * @return {Boolean} the field is compliant with the type of the reference
                              * @private
                              */
-                            function _isValidReference() {
+                            function _isValidReference(field, typeSchema) {
                                 var isValid = true,
                                     comp = null,
                                     isComponent = false;
@@ -1151,7 +1166,7 @@
                              * @return {Boolean} the field is compliant with the type
                              * @private
                              */
-                            function _isValidType() {
+                            function _isValidType(field, typeSchema) {
                                 var isValid = true,
                                     typeArray = &#x27;&#x27;;
                         
@@ -1249,13 +1264,13 @@
                         
                                 switch (true) {
                                     case isCustomType(typeSchema):
-                                        result = _isValidCustomType();
+                                        result = _isValidCustomType(field, typeSchema);
                                         break;
                                     case isReference(typeSchema):
-                                        result = _isValidReference();
+                                        result = _isValidReference(field, typeSchema);
                                         break;
                                     default:
-                                        result = _isValidType();
+                                        result = _isValidType(field, typeSchema);
                                         break;
                                 }
                             }
