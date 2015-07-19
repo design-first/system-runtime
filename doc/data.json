@@ -2,7 +2,7 @@
     "project": {
         "name": "monoco",
         "description": "A Model and a NoSQL Database for Components",
-        "version": "0.5.0",
+        "version": "0.5.1",
         "url": "http://monoco.io"
     },
     "files": {
@@ -164,7 +164,7 @@
             "namespaces": {},
             "tag": "main",
             "file": "build/system/system.js",
-            "line": 969,
+            "line": 972,
             "description": "This module is the main module of monoco. <br>\nIt inits monoco metamodel and loads monoco core system.",
             "requires": [
                 "monoco-component",
@@ -186,7 +186,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/behavior.js",
-            "line": 254,
+            "line": 257,
             "description": "This module manages the behaviors of all components. \nA behavior is a mecanism that allow users to add actions that will be executed \nwhen a specific state of a component will change.",
             "requires": [
                 "monoco-db",
@@ -382,7 +382,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 969,
+            "line": 972,
             "description": "This module contains monoco core system.",
             "static": 1
         }
@@ -400,7 +400,7 @@
             "submodule": "monoco-behavior",
             "namespace": "",
             "file": "src/behavior.js",
-            "line": 254,
+            "line": 257,
             "description": "This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed \nwhen a specific state of a component will change.",
             "requires": [
                 "monoco-db",
@@ -655,14 +655,14 @@
             "submodule": "monoco-system",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 969,
+            "line": 972,
             "description": "This module contains monoco core system."
         }
     },
     "classitems": [
         {
             "file": "src/behavior.js",
-            "line": 268,
+            "line": 271,
             "description": "Add a behavior that will be stored in monoco database.",
             "itemtype": "method",
             "name": "add",
@@ -703,7 +703,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 281,
+            "line": 284,
             "description": "Remove a behavior with its id or remove all the behaviors for a specific state\nof the component.",
             "itemtype": "method",
             "name": "remove",
@@ -720,7 +720,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 293,
+            "line": 296,
             "description": "Get all the actions of a behavior for a component.",
             "itemtype": "method",
             "name": "getActions",
@@ -746,7 +746,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 303,
+            "line": 306,
             "description": "Remove all the behaviors stored in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -756,7 +756,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 310,
+            "line": 313,
             "description": "Remove a behavior with its id from the memory.",
             "itemtype": "method",
             "name": "removeFromMemory",
@@ -2320,7 +2320,7 @@
         },
         {
             "file": "build/system/system.js",
-            "line": 979,
+            "line": 982,
             "description": "monoco core system",
             "itemtype": "property",
             "name": "system",

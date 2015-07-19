@@ -135,14 +135,17 @@ function createFunction(name, func, core, useCoreAPI) {
 function add(id, state, action, useCoreAPI, core) {
     var behaviorId = $helper.generateId();
 
+    if (typeof core === 'undefined') {
+        core = false;
+    }
     if (typeof useCoreAPI === 'undefined') {
         useCoreAPI = false;
     }
 
-    if (typeof core === 'undefined') {
-        core = false;
+    if (useCoreAPI) {
+        action = createFunction(state, action.toString(), core, useCoreAPI);
     }
-
+    
     store[behaviorId] = action;
 
     $db.MonocoBehavior.insert({
@@ -230,7 +233,7 @@ function getActions(id, state) {
             store[behavior._id] = action;
         }
         result.push({
-            "core": behavior.core,
+            "useCoreAPI": behavior.useCoreAPI,
             "action": action
         });
     });

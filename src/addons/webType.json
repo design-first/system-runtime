@@ -7,15 +7,18 @@
 	"types": {
 		"html": {
 			"name": "html",
-			"type": "string"
+			"type": "string",
+			"core": true
 		},
 		"css": {
 			"name": "css",
-			"type": "string"
+			"type": "string",
+			"core": true
 		},
 		"javascript": {
 			"name": "javascript",
-			"type": "string"
+			"type": "string",
+			"core": true
 		}
 	},
 	"behaviors": {},

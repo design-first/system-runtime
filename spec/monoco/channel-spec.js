@@ -4,7 +4,6 @@ describe('a monoco channel instance', function () {
     if (typeof window === 'undefined') {
         monoco = require('../../src/monoco.js');
     }
-    var share = '';
 
     it('exists', function () {
         var channel = monoco.require('channel');
@@ -21,7 +20,8 @@ describe('a monoco channel instance', function () {
             "_core": true,
             "listen": "method",
             "send": "method",
-            "test": "event"
+            "test": "event",
+            "message": "property"
         });
 
         metamodel.schema({
@@ -32,9 +32,9 @@ describe('a monoco channel instance', function () {
             "_core": true,
             "listen": {
                 "params": [{
-                        "name": "event",
-                        "type": "string"
-                    },
+                    "name": "event",
+                    "type": "string"
+                },
                     {
                         "name": "callback",
                         "type": "function"
@@ -43,17 +43,23 @@ describe('a monoco channel instance', function () {
             },
             "send": {
                 "params": [{
-                        "name": "message",
-                        "type": "message"
-                    }
+                    "name": "message",
+                    "type": "message"
+                }
                 ],
                 "result": "boolean"
             },
             "test": {
                 "params": [{
-                        "name": "event",
-                        "type": "eventTest"
-                    }]
+                    "name": "event",
+                    "type": "eventTest"
+                }]
+            },
+            "message": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
             }
         });
 
@@ -88,7 +94,7 @@ describe('a monoco channel instance', function () {
         var channel = monoco.require('channel');
 
         channel.listen('test', function (message) {
-            share = message.foo;
+            this.message(message.foo);
         });
 
         channel.send({
@@ -99,7 +105,7 @@ describe('a monoco channel instance', function () {
         });
 
         setTimeout(function () {
-            expect(share).toBe('bar');
+            expect(monoco.require('channel').message()).toBe('bar');
             done();
         }, 1);
     });

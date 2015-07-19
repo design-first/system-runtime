@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.0</b>
+                    API Docs for Version: <b>0.5.1</b>
                 </p>
             </li>
         </div>
@@ -225,14 +225,17 @@
                         function add(id, state, action, useCoreAPI, core) {
                             var behaviorId = $helper.generateId();
                         
+                            if (typeof core === &#x27;undefined&#x27;) {
+                                core = false;
+                            }
                             if (typeof useCoreAPI === &#x27;undefined&#x27;) {
                                 useCoreAPI = false;
                             }
                         
-                            if (typeof core === &#x27;undefined&#x27;) {
-                                core = false;
+                            if (useCoreAPI) {
+                                action = createFunction(state, action.toString(), core, useCoreAPI);
                             }
-                        
+                            
                             store[behaviorId] = action;
                         
                             $db.MonocoBehavior.insert({
@@ -320,7 +323,7 @@
                                     store[behavior._id] = action;
                                 }
                                 result.push({
-                                    &quot;core&quot;: behavior.core,
+                                    &quot;useCoreAPI&quot;: behavior.useCoreAPI,
                                     &quot;action&quot;: action
                                 });
                             });

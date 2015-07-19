@@ -337,7 +337,7 @@ function callAction(component, state, action, params, isEvent) {
     }
 
     try {
-        if (action.core) {
+        if (action.useCoreAPI) {
             length = params.length;
             for (i = 0; i < length; i++) {
                 injectedParams.push(params[i]);
