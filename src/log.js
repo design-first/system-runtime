@@ -27,7 +27,7 @@
  * @submodule monoco-log
  * @requires monoco-helper
  * @class monoco-log
- * @@static
+ * @static
  */
 
 'use strict';
@@ -276,7 +276,7 @@ function workflowRestarted() {
  * invalid parameter number for a method.
  * @method invalidParamNumber
  * @param {String} id id of the component
- * @@param {String} methodName name of the component
+ * @param {String} methodName name of the component
  */
 function invalidParamNumber(id, methodName) {
     $helper.getMonoco().warning("invalid number of parameters when calling the method '" + methodName + "' on component '" + id + "'");
@@ -382,6 +382,17 @@ function invalidChannelEvent(message, eventName, type) {
 }
 
 
+/*
+ * invalid parameter number for an action add with on method.
+ * @method invalidParamNumberMethodOn
+ * @param {String} id id of the component
+ * @param {String} methodName name of the component
+ */
+function invalidParamNumberMethodOn(id, methodName) {
+    $helper.getMonoco().warning("invalid number of parameters when adding an action on method '" + methodName + "' on component '" + id + "'");
+}
+
+
 /* exports */
 
 
@@ -392,7 +403,7 @@ function invalidChannelEvent(message, eventName, type) {
  * @submodule monoco-log
  * @requires monoco-helper
  * @class monoco-log
- * @@static
+ * @static
  */
 
 
@@ -573,7 +584,7 @@ exports.workflowRestarted = workflowRestarted;
  * Invalid parameter number for a method.
  * @method invalidParamNumber
  * @param {String} id id of the component
- * @@param {String} methodName name of the component
+ * @param {String} methodName name of the component
  */
 exports.invalidParamNumber = invalidParamNumber;
 
@@ -657,3 +668,12 @@ exports.canNotYetValidate = canNotYetValidate;
  * @param {String} type expected type
  */
 exports.invalidChannelEvent = invalidChannelEvent;
+
+
+/**
+ * invalid parameter number for an action add with on method.
+ * @method invalidParamNumberMethodOn
+ * @param {String} id id of the component
+ * @param {String} methodName name of the component
+ */
+exports.invalidParamNumberMethodOn = invalidParamNumberMethodOn;

@@ -264,6 +264,7 @@ MonocoDatabaseCollection.prototype.update = function (query, update, options) {
         for (i = 0; i < length; i++) {
             for (attributeName in update) {
                 if (typeof docs[i][attributeName] !== 'undefined') {
+                    // TODO case of _id
                     if (schema[attributeName] && schema[attributeName].type && $metamodel.isValidType(update[attributeName], schema[attributeName].type)) {
                         docs[i][attributeName] = update[attributeName];
                         updated = updated + 1;

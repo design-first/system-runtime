@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.1</b>
+                    API Docs for Version: <b>0.5.2</b>
                 </p>
             </li>
         </div>
@@ -120,6 +120,7 @@
                         				<li><a href="#method-restart"><span class="im">restart</span>()</a></li>
                         				<li><a href="#method-state"><span class="im">state</span>(<span class="ia">params</span>)</a></li>
                         				<li><a href="#method-stop"><span class="im">stop</span>(<span class="ia">params</span>)</a></li>
+                        				<li><a href="#method-validParamNumbers"><span class="im">validParamNumbers</span>(<span class="ia">className</span><span class="ia">state</span><span class="ia">action</span>)</a></li>
                         			</ul>
                         		</li>
                         
@@ -158,7 +159,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_workflow.js.html#l677"><code>src&#x2F;workflow.js:677</code></a>
+                                    		<a href="../files/src_workflow.js.html#l733"><code>src&#x2F;workflow.js:733</code></a>
                                     		</p>
                                     
                                     
@@ -208,7 +209,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_workflow.js.html#l670"><code>src&#x2F;workflow.js:670</code></a>
+                                    		<a href="../files/src_workflow.js.html#l726"><code>src&#x2F;workflow.js:726</code></a>
                                     		</p>
                                     
                                     
@@ -242,7 +243,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_workflow.js.html#l636"><code>src&#x2F;workflow.js:636</code></a>
+                                    		<a href="../files/src_workflow.js.html#l692"><code>src&#x2F;workflow.js:692</code></a>
                                     		</p>
                                     
                                     
@@ -307,7 +308,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_workflow.js.html#l660"><code>src&#x2F;workflow.js:660</code></a>
+                                    		<a href="../files/src_workflow.js.html#l716"><code>src&#x2F;workflow.js:716</code></a>
                                     		</p>
                                     
                                     
@@ -335,6 +336,91 @@
                                     			</ul>
                                     		</div>
                                     
+                                    
+                                    </div>
+                                    <div id="method-validParamNumbers" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>validParamNumbers</code></span>
+                                    
+                                    		<div class="args">
+                                    			<span class="paren">(</span><ul class="args-list inline commas">
+                                    				<li class="arg">
+                                    						<code>className</code>
+                                    				</li>
+                                    				<li class="arg">
+                                    						<code>state</code>
+                                    				</li>
+                                    				<li class="arg">
+                                    						<code>action</code>
+                                    				</li>
+                                    			</ul><span class="paren">)</span>
+                                    		</div>
+                                    		<span class="returns-inline">
+                                    			<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                    		</span>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_workflow.js.html#l742"><code>src&#x2F;workflow.js:742</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Check if an action has the valid number of parameter.</p>
+                                    </div>
+                                    
+                                    		<div class="params">
+                                    			<h4>Parameters:</h4>
+                                    
+                                    			<ul class="params-list">
+                                    				<li class="param">
+                                    						<code class="param-name">className</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>name the class</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    				<li class="param">
+                                    						<code class="param-name">state</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>state on which the action applied</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    				<li class="param">
+                                    						<code class="param-name">action</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>action</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    			</ul>
+                                    		</div>
+                                    
+                                    		<div class="returns">
+                                    			<h4>Returns:</h4>
+                                    
+                                    			<div class="returns-description">
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                                    					<p>true if the action is the valid number of parameters</p>
+                                    
+                                    			</div>
+                                    		</div>
                                     
                                     </div>
                                 </div>

@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.1</b>
+                    API Docs for Version: <b>0.5.2</b>
                 </p>
             </li>
         </div>
@@ -117,7 +117,7 @@
                          * @submodule monoco-log
                          * @requires monoco-helper
                          * @class monoco-log
-                         * @@static
+                         * @static
                          */
                         
                         &#x27;use strict&#x27;;
@@ -366,7 +366,7 @@
                          * invalid parameter number for a method.
                          * @method invalidParamNumber
                          * @param {String} id id of the component
-                         * @@param {String} methodName name of the component
+                         * @param {String} methodName name of the component
                          */
                         function invalidParamNumber(id, methodName) {
                             $helper.getMonoco().warning(&quot;invalid number of parameters when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
@@ -472,6 +472,17 @@
                         }
                         
                         
+                        /*
+                         * invalid parameter number for an action add with on method.
+                         * @method invalidParamNumberMethodOn
+                         * @param {String} id id of the component
+                         * @param {String} methodName name of the component
+                         */
+                        function invalidParamNumberMethodOn(id, methodName) {
+                            $helper.getMonoco().warning(&quot;invalid number of parameters when adding an action on method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                        }
+                        
+                        
                         /* exports */
                         
                         
@@ -482,7 +493,7 @@
                          * @submodule monoco-log
                          * @requires monoco-helper
                          * @class monoco-log
-                         * @@static
+                         * @static
                          */
                         
                         
@@ -663,7 +674,7 @@
                          * Invalid parameter number for a method.
                          * @method invalidParamNumber
                          * @param {String} id id of the component
-                         * @@param {String} methodName name of the component
+                         * @param {String} methodName name of the component
                          */
                         exports.invalidParamNumber = invalidParamNumber;
                         
@@ -747,6 +758,15 @@
                          * @param {String} type expected type
                          */
                         exports.invalidChannelEvent = invalidChannelEvent;
+                        
+                        
+                        /**
+                         * invalid parameter number for an action add with on method.
+                         * @method invalidParamNumberMethodOn
+                         * @param {String} id id of the component
+                         * @param {String} methodName name of the component
+                         */
+                        exports.invalidParamNumberMethodOn = invalidParamNumberMethodOn;
                             </pre>
                         </div>
                     </div>

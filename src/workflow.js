@@ -389,6 +389,62 @@ function callAction(component, state, action, params, isEvent) {
 
 
 /*
+ * Check if an action has the valid number of parameter.
+ * @method validParamNumbers
+ * @param {String} className name the class
+ * @param {String} state state on which the action applied
+ * @param {Function} action action
+ * @return {Boolean} true if the action is the valid number of parameters
+ */
+function validParamNumbers(className, state, action) {
+    var func = '',
+        beginBody = -1,
+        header = '',
+        funcParams = '',
+        params = [],
+        paramNumber = 0,
+        modelNumberParam = [],
+        isProperty = false,
+        isCollection = false,
+        result = false;
+
+    // check number of parameters of the action
+    func = action.toString();
+    beginBody = func.indexOf('{');
+    header = func.substring(0, beginBody);
+    funcParams = header.split('(')[1].replace(')', '').trim();
+    params = funcParams.split(',');
+    if (params[0] === '') {
+        params = [];
+    }
+    paramNumber = params.length;
+
+    // get the number min and max of valid parameters
+    isProperty = $metamodel.isProperty(state, className);
+    isCollection = $metamodel.isCollection(state, className);
+
+    switch (true) {
+        case isCollection:
+            modelNumberParam = [3, 3];
+            break;
+        case isProperty:
+            modelNumberParam = [1, 1];
+            break;
+        default:
+            modelNumberParam = getParamNumber(className, state);
+            break;
+    }
+
+    // compare
+    if (modelNumberParam[0] <= paramNumber && paramNumber <= modelNumberParam[1]) {
+        result = true;
+    }
+    
+    return result;
+}
+
+
+/*
  * Check if conditions on input are compliant with the model before calling the action.
  * @method checkParams
  * @param {Object} params
@@ -681,3 +737,14 @@ exports.restart = restart;
  * @return {Boolean} true if condition on input are compliant with the model
  */
 exports.checkParams = checkParams;
+
+
+/**
+ * Check if an action has the valid number of parameter.
+ * @method validParamNumbers
+ * @param {String} className name the class
+ * @param {String} state state on which the action applied
+ * @param {Function} action action
+ * @return {Boolean} true if the action is the valid number of parameters
+ */
+exports.validParamNumbers = validParamNumbers;

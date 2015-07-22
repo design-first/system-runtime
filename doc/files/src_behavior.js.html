@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.1</b>
+                    API Docs for Version: <b>0.5.2</b>
                 </p>
             </li>
         </div>
@@ -223,7 +223,8 @@
                          * @return {String} id of the behavior created in monoco database
                          */
                         function add(id, state, action, useCoreAPI, core) {
-                            var behaviorId = $helper.generateId();
+                            var behaviorId = $helper.generateId(),
+                            strAction = action.toString();
                         
                             if (typeof core === &#x27;undefined&#x27;) {
                                 core = false;
@@ -233,7 +234,7 @@
                             }
                         
                             if (useCoreAPI) {
-                                action = createFunction(state, action.toString(), core, useCoreAPI);
+                                action = createFunction(state, strAction, core, useCoreAPI);
                             }
                             
                             store[behaviorId] = action;
@@ -242,7 +243,7 @@
                                 &quot;_id&quot;: behaviorId,
                                 &quot;component&quot;: id,
                                 &quot;state&quot;: state,
-                                &quot;action&quot;: action.toString(),
+                                &quot;action&quot;: strAction,
                                 &quot;useCoreAPI&quot;: useCoreAPI,
                                 &quot;core&quot;: core
                             });

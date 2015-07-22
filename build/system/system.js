@@ -41,7 +41,7 @@
  */
 var system = {
     "name": "monoco",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "description": "A Model and a NoSQL Database for Components",
     "_id": "e89c617b6b15d24",
     "schemas": {
@@ -759,181 +759,181 @@ var system = {
             "action": "function ready() {    var systems = [],        system = null,        i = 0,        length = 0;    if (typeof document !== 'undefined') {        systems = document.querySelectorAll('link[rel=system]');        length = systems.length;        for (i = 0; i < length; i++) {            system = systems[i];            if (system.getAttribute('async') === 'true') {                this.load(system.href, true);            } else {                this.load(system.href, false);            }        }    }}",
             "core": true
         },
-        "1ab6c1120813cd4": {
-            "_id": "1ab6c1120813cd4",
+        "165d7138981b5fd": {
+            "_id": "165d7138981b5fd",
             "component": "Monoco",
             "state": "error",
             "action": "function error(data) { console.error('monoco: ' + data.message, data.error); }",
             "core": true
         },
-        "1dd5b12d7018528": {
-            "_id": "1dd5b12d7018528",
+        "12fa41bbe21ebea": {
+            "_id": "12fa41bbe21ebea",
             "component": "Monoco",
             "state": "find",
             "action": "function find(Class, query) { return $component.find(Class, query);}",
             "core": true,
             "useCoreAPI": true
         },
-        "198d3192131c8cf": {
-            "_id": "198d3192131c8cf",
+        "17e0c1585319f98": {
+            "_id": "17e0c1585319f98",
             "component": "Monoco",
             "state": "system",
             "action": "function system(name) { var System = null, system = {}, result = [], conf = {}; if (name) { conf.master = true; conf.name = name; System = this.require('MonocoSystem'); system = new System(conf); } else { result = this.find('MonocoSystem', {'master': true}); if (result.length) { system = result[0]; } } return system; }",
             "core": true
         },
-        "1a82914e86119a9": {
-            "_id": "1a82914e86119a9",
+        "1b9381e2b71dbfb": {
+            "_id": "1b9381e2b71dbfb",
             "component": "Monoco",
             "state": "warning",
             "action": "function warning(message) { console.warn('monoco: ' + message); }",
             "core": true
         },
-        "1adee1f0551d3b3": {
-            "_id": "1adee1f0551d3b3",
+        "13651149071abcc": {
+            "_id": "13651149071abcc",
             "component": "MonocoChannel",
             "state": "listen",
             "action": "function listen(event, action) { $channel.listen(event, action); }",
             "core": true,
             "useCoreAPI": true
         },
-        "11ed51fcbc1efd4": {
-            "_id": "11ed51fcbc1efd4",
+        "1c0a81c78e13485": {
+            "_id": "1c0a81c78e13485",
             "component": "MonocoChannel",
             "state": "send",
             "action": "function send(message) { return $channel.send(message); }",
             "core": true,
             "useCoreAPI": true
         },
-        "1f1cb12dc915b94": {
-            "_id": "1f1cb12dc915b94",
+        "101091f20e19997": {
+            "_id": "101091f20e19997",
             "component": "MonocoClassInfo",
             "state": "collection",
             "action": "function collection(name) { var result = {}; if (this.metamodel()[name] === 'collection') { result = this.model()[name]; } return result; }",
             "core": true
         },
-        "1cbd813e6017b36": {
-            "_id": "1cbd813e6017b36",
+        "156b41f10715cd3": {
+            "_id": "156b41f10715cd3",
             "component": "MonocoClassInfo",
             "state": "collections",
             "action": "function collections() { var keys = Object.keys(this.metamodel()), item = '', result = [], i = 0, length = 0; length = keys.length; for (i = 0; i < length; i++) { item = keys[i]; if (this.metamodel()[item] === 'collection') { result.push(item); } } return result; }",
             "core": true
         },
-        "1bada164f41208d": {
-            "_id": "1bada164f41208d",
+        "1f42716da8168bb": {
+            "_id": "1f42716da8168bb",
             "component": "MonocoClassInfo",
             "state": "event",
             "action": "function event(name) { var result = {}; if (this.metamodel()[name] === 'event') { result = this.model()[name]; } return result; }",
             "core": true
         },
-        "18c93111c61cd38": {
-            "_id": "18c93111c61cd38",
+        "1aa6e132e11ddc6": {
+            "_id": "1aa6e132e11ddc6",
             "component": "MonocoClassInfo",
             "state": "events",
             "action": "function events() { var keys = Object.keys(this.metamodel()), item = '', result = [], i = 0, length = 0; length = keys.length; for (i = 0; i < length; i++) { item = keys[i]; if (this.metamodel()[item] === 'event') { result.push(item); } } return result; }",
             "core": true
         },
-        "14f2c16ce419477": {
-            "_id": "14f2c16ce419477",
+        "10035104eb10a1a": {
+            "_id": "10035104eb10a1a",
             "component": "MonocoClassInfo",
             "state": "method",
             "action": "function method(name) { var result = {}; if (this.metamodel()[name] === 'method') { result = this.model()[name]; } return result; }",
             "core": true
         },
-        "16073199f8139dc": {
-            "_id": "16073199f8139dc",
+        "10b391126a1634b": {
+            "_id": "10b391126a1634b",
             "component": "MonocoClassInfo",
             "state": "methods",
             "action": "function methods() { var keys = Object.keys(this.metamodel()), item = '', result = [], i = 0, length = 0; length = keys.length; for (i = 0; i < length; i++) { item = keys[i]; if (this.metamodel()[item] === 'method') { result.push(item); } } return result; }",
             "core": true
         },
-        "11b4a1ed2c11947": {
-            "_id": "11b4a1ed2c11947",
+        "1718d13d1c10b45": {
+            "_id": "1718d13d1c10b45",
             "component": "MonocoClassInfo",
             "state": "properties",
             "action": "function properties() { var keys = Object.keys(this.metamodel()), item = '', result = [], i = 0, length = 0; length = keys.length; for (i = 0; i < length; i++) { item = keys[i]; if (this.metamodel()[item] === 'property') { result.push(item); } } return result; }",
             "core": true
         },
-        "18708169141823a": {
-            "_id": "18708169141823a",
+        "1792f1f6f3118dc": {
+            "_id": "1792f1f6f3118dc",
             "component": "MonocoClassInfo",
             "state": "property",
             "action": "function property(name) { var result = {}; if (this.metamodel()[name] === 'property') { result = this.model()[name]; } return result; }",
             "core": true
         },
-        "18b46153d51fd8a": {
-            "_id": "18b46153d51fd8a",
+        "1b437190c51afe4": {
+            "_id": "1b437190c51afe4",
             "component": "MonocoComponent",
             "state": "destroy",
             "action": "function destroy() { $component.destroy(this.id()); }",
             "core": true,
             "useCoreAPI": true
         },
-        "16ea9113ba12e55": {
-            "_id": "16ea9113ba12e55",
+        "109c116a2c17164": {
+            "_id": "109c116a2c17164",
             "component": "MonocoComponent",
             "state": "off",
             "action": "function off(state, behaviorId) { var args = [], i = 0, length = 0; length = arguments.length; for (i = 0; i < length - 7; i++) { args.push(arguments[i]); } if ($workflow.checkParams({\"component\": this, \"methodName\": \"off\", \"args\": args})) { if ($metamodel.isValidState(state, this.constructor.name)) {$behavior.remove({\"behaviorId\": behaviorId, \"componentId\": this.id(), \"state\": state}); } else { $helper.getMonoco().warning({ \"message\":\"invoke 'off' method of component '\" + this.id() + \"' with an invalid state '\" + state + \"'\"}); } } }",
             "core": true,
             "useCoreAPI": true
         },
-        "126b51ea801654a": {
-            "_id": "126b51ea801654a",
+        "1d07e1115b10a9d": {
+            "_id": "1d07e1115b10a9d",
             "component": "MonocoComponent",
             "state": "require",
             "action": "function require(id) { return $component.get(id); }",
             "core": true,
             "useCoreAPI": true
         },
-        "1286c1612a1822f": {
-            "_id": "1286c1612a1822f",
+        "195541e3c9137cb": {
+            "_id": "195541e3c9137cb",
             "component": "MonocoDatabase",
             "state": "subsystem",
             "action": "function subsystem(params) { return $db.subsystem(params); }",
             "core": true,
             "useCoreAPI": true
         },
-        "177e615c721c6a0": {
-            "_id": "177e615c721c6a0",
+        "1b06e16b3c176ed": {
+            "_id": "1b06e16b3c176ed",
             "component": "MonocoDatabase",
             "state": "system",
             "action": "function system(system) { return $db.system(system); }",
             "core": true,
             "useCoreAPI": true
         },
-        "1bc661e40718c2e": {
-            "_id": "1bc661e40718c2e",
+        "1e8b31f1fb18dfc": {
+            "_id": "1e8b31f1fb18dfc",
             "component": "MonocoMetamodel",
             "state": "create",
             "action": "function create() { $metamodel.create(); }",
             "core": true,
             "useCoreAPI": true
         },
-        "11f02174d81367d": {
-            "_id": "11f02174d81367d",
+        "1f3f41430a170cf": {
+            "_id": "1f3f41430a170cf",
             "component": "MonocoMetamodel",
             "state": "schema",
             "action": "function schema(schema) { $metamodel.schema(schema); }",
             "core": true,
             "useCoreAPI": true
         },
-        "170f11b18216fbf": {
-            "_id": "170f11b18216fbf",
+        "13a201059413949": {
+            "_id": "13a201059413949",
             "component": "MonocoMetamodel",
             "state": "type",
             "action": "function type(type) { $metamodel.type(type); }",
             "core": true,
             "useCoreAPI": true
         },
-        "181dd19ee51dbfa": {
-            "_id": "181dd19ee51dbfa",
+        "1f53713acf1f5ce": {
+            "_id": "1f53713acf1f5ce",
             "component": "MonocoSystem",
             "state": "sync",
             "action": "function sync() { var dump = $db.dump(); this.schemas(dump.schemas); this.types(dump.types); this.behaviors(dump.behaviors); this.components(dump.components); }",
             "core": true,
             "useCoreAPI": true
         },
-        "1dc0718cfc18cd5": {
-            "_id": "1dc0718cfc18cd5",
+        "1557318a1c1306f": {
+            "_id": "1557318a1c1306f",
             "component": "e89c617b6b15d24",
             "state": "main",
             "action": "function main() { var monoco = $component.get('monoco'); monoco.ready(); }",
@@ -945,7 +945,7 @@ var system = {
         "Monoco": {
             "monoco": {
                 "_id": "monoco",
-                "version": "0.5.1"
+                "version": "0.5.2"
             }
         },
         "MonocoChannel": {

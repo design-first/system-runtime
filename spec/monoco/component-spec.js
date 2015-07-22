@@ -73,7 +73,7 @@ describe('a monoco component', function () {
 
     it('can add an event', function (done) {
         var db = monoco.require('db');
-        db.on('init', function () {
+        db.on('init', function (conf) {
             share = share + 'ok';
         });
         db.init({});

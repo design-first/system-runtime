@@ -44,7 +44,7 @@ var $metamodel = require('./metamodel.js');
 var $behavior = require('./behavior.js');
 var $helper = require('./helper.js');
 var $log = require('./log.js');
-
+var $worklow = require('./workflow.js');
 
 /* Private properties */
 
@@ -124,7 +124,7 @@ function monocoArray(conf) {
         var result = null;
         arrDb.pop();
         if (this.length !== 0) {
-            var data = this[this.length -1];
+            var data = this[this.length - 1];
             result = this.splice(this.length - 1, 1);
             $workflow.state({
                 "component": id,
@@ -599,7 +599,11 @@ function addOn(Class, classId) {
                     }).length >= 1) {
                     $log.behaviorNotUnique(classId, state);
                 } else {
-                    result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                    if ($worklow.validParamNumbers(classId, state, handler)) {
+                        result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                    } else {
+                        $log.invalidParamNumberMethodOn(this.id(), state);
+                    }
                 }
             } else {
                 $log.invalidStateOn(classId, state);
@@ -639,7 +643,11 @@ function addOnClass(Class, classId) {
                     }).length >= 1) {
                     $log.behaviorNotUnique(classId, state);
                 } else {
-                    result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                    if ($worklow.validParamNumbers(classId, state, handler)) {
+                        result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                    } else {
+                        $log.invalidParamNumberMethodOn(this.id(), state);
+                    }
                 }
             } else {
                 $log.invalidStateOn(classId, state);

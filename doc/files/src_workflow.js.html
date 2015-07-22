@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.1</b>
+                    API Docs for Version: <b>0.5.2</b>
                 </p>
             </li>
         </div>
@@ -479,6 +479,62 @@
                         
                         
                         /*
+                         * Check if an action has the valid number of parameter.
+                         * @method validParamNumbers
+                         * @param {String} className name the class
+                         * @param {String} state state on which the action applied
+                         * @param {Function} action action
+                         * @return {Boolean} true if the action is the valid number of parameters
+                         */
+                        function validParamNumbers(className, state, action) {
+                            var func = &#x27;&#x27;,
+                                beginBody = -1,
+                                header = &#x27;&#x27;,
+                                funcParams = &#x27;&#x27;,
+                                params = [],
+                                paramNumber = 0,
+                                modelNumberParam = [],
+                                isProperty = false,
+                                isCollection = false,
+                                result = false;
+                        
+                            // check number of parameters of the action
+                            func = action.toString();
+                            beginBody = func.indexOf(&#x27;{&#x27;);
+                            header = func.substring(0, beginBody);
+                            funcParams = header.split(&#x27;(&#x27;)[1].replace(&#x27;)&#x27;, &#x27;&#x27;).trim();
+                            params = funcParams.split(&#x27;,&#x27;);
+                            if (params[0] === &#x27;&#x27;) {
+                                params = [];
+                            }
+                            paramNumber = params.length;
+                        
+                            // get the number min and max of valid parameters
+                            isProperty = $metamodel.isProperty(state, className);
+                            isCollection = $metamodel.isCollection(state, className);
+                        
+                            switch (true) {
+                                case isCollection:
+                                    modelNumberParam = [3, 3];
+                                    break;
+                                case isProperty:
+                                    modelNumberParam = [1, 1];
+                                    break;
+                                default:
+                                    modelNumberParam = getParamNumber(className, state);
+                                    break;
+                            }
+                        
+                            // compare
+                            if (modelNumberParam[0] &lt;= paramNumber &amp;&amp; paramNumber &lt;= modelNumberParam[1]) {
+                                result = true;
+                            }
+                            
+                            return result;
+                        }
+                        
+                        
+                        /*
                          * Check if conditions on input are compliant with the model before calling the action.
                          * @method checkParams
                          * @param {Object} params
@@ -771,6 +827,17 @@
                          * @return {Boolean} true if condition on input are compliant with the model
                          */
                         exports.checkParams = checkParams;
+                        
+                        
+                        /**
+                         * Check if an action has the valid number of parameter.
+                         * @method validParamNumbers
+                         * @param {String} className name the class
+                         * @param {String} state state on which the action applied
+                         * @param {Function} action action
+                         * @return {Boolean} true if the action is the valid number of parameters
+                         */
+                        exports.validParamNumbers = validParamNumbers;
                             </pre>
                         </div>
                     </div>

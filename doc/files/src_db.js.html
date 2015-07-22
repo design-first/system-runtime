@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.1</b>
+                    API Docs for Version: <b>0.5.2</b>
                 </p>
             </li>
         </div>
@@ -354,6 +354,7 @@
                                 for (i = 0; i &lt; length; i++) {
                                     for (attributeName in update) {
                                         if (typeof docs[i][attributeName] !== &#x27;undefined&#x27;) {
+                                            // TODO case of _id
                                             if (schema[attributeName] &amp;&amp; schema[attributeName].type &amp;&amp; $metamodel.isValidType(update[attributeName], schema[attributeName].type)) {
                                                 docs[i][attributeName] = update[attributeName];
                                                 updated = updated + 1;

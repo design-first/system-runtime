@@ -133,7 +133,8 @@ function createFunction(name, func, core, useCoreAPI) {
  * @return {String} id of the behavior created in monoco database
  */
 function add(id, state, action, useCoreAPI, core) {
-    var behaviorId = $helper.generateId();
+    var behaviorId = $helper.generateId(),
+    strAction = action.toString();
 
     if (typeof core === 'undefined') {
         core = false;
@@ -143,7 +144,7 @@ function add(id, state, action, useCoreAPI, core) {
     }
 
     if (useCoreAPI) {
-        action = createFunction(state, action.toString(), core, useCoreAPI);
+        action = createFunction(state, strAction, core, useCoreAPI);
     }
     
     store[behaviorId] = action;
@@ -152,7 +153,7 @@ function add(id, state, action, useCoreAPI, core) {
         "_id": behaviorId,
         "component": id,
         "state": state,
-        "action": action.toString(),
+        "action": strAction,
         "useCoreAPI": useCoreAPI,
         "core": core
     });

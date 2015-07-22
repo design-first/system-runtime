@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.1</b>
+                    API Docs for Version: <b>0.5.2</b>
                 </p>
             </li>
         </div>
@@ -134,7 +134,7 @@
                         var $behavior = require(&#x27;./behavior.js&#x27;);
                         var $helper = require(&#x27;./helper.js&#x27;);
                         var $log = require(&#x27;./log.js&#x27;);
-                        
+                        var $worklow = require(&#x27;./workflow.js&#x27;);
                         
                         /* Private properties */
                         
@@ -214,7 +214,7 @@
                                 var result = null;
                                 arrDb.pop();
                                 if (this.length !== 0) {
-                                    var data = this[this.length -1];
+                                    var data = this[this.length - 1];
                                     result = this.splice(this.length - 1, 1);
                                     $workflow.state({
                                         &quot;component&quot;: id,
@@ -689,7 +689,11 @@
                                             }).length &gt;= 1) {
                                             $log.behaviorNotUnique(classId, state);
                                         } else {
-                                            result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                                            if ($worklow.validParamNumbers(classId, state, handler)) {
+                                                result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                                            } else {
+                                                $log.invalidParamNumberMethodOn(this.id(), state);
+                                            }
                                         }
                                     } else {
                                         $log.invalidStateOn(classId, state);
@@ -729,7 +733,11 @@
                                             }).length &gt;= 1) {
                                             $log.behaviorNotUnique(classId, state);
                                         } else {
-                                            result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                                            if ($worklow.validParamNumbers(classId, state, handler)) {
+                                                result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                                            } else {
+                                                $log.invalidParamNumberMethodOn(this.id(), state);
+                                            }
                                         }
                                     } else {
                                         $log.invalidStateOn(classId, state);
