@@ -40,15 +40,29 @@ module.exports = function (grunt) {
                 }
             }
         },
-        jasmine_node: {
+        jasmine_nodejs: {
             options: {
-                forceExit: true,
-                match: '.',
-                matchall: false,
-                extensions: 'js',
-                specNameMatcher: 'spec'
+                specNameSuffix: "spec.js",
+                helperNameSuffix: "helper.js",
+                useHelpers: false,
+                stopOnFailure: false,
+                reporters: {
+                    console: {
+                        colors: true,
+                        cleanStack: 1,
+                        verbosity: 4,
+                        listStyle: "indent",
+                        activity: false
+                    },
+                },
+                customReporters: []
             },
-            all: ['spec/']
+            monoco: {
+                specs: [
+                    "spec/module/**",
+                    "spec/monoco/**"
+                ]
+            }
         },
         karma: {
             monoco: {
@@ -88,7 +102,7 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var uid = generateId(),
-                        result = '';
+                            result = '';
 
                         function generateId() {
                             function gen() {
@@ -125,7 +139,7 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result = '',
-                        uid = '';
+                            uid = '';
 
                         if (filepath.indexOf('build') !== -1) {
                             result = src + '},\n"schemas" : {';
@@ -144,7 +158,7 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result = '',
-                        uid = '';
+                            uid = '';
 
                         if (filepath.indexOf('build') !== -1) {
                             result = src + '},\n"types" : {';
@@ -163,8 +177,8 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result = '',
-                        uid = '',
-                        collectionName = '';
+                            uid = '',
+                            collectionName = '';
 
                         if (filepath.indexOf('build') !== -1) {
                             result = src + '},\n"components" : {';
@@ -229,7 +243,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-jsbeautifier');
-    grunt.loadNpmTasks('grunt-jasmine-node');
+    grunt.loadNpmTasks('grunt-jasmine-nodejs');
     grunt.loadNpmTasks('grunt-merge-json');
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-karma');
@@ -257,7 +271,7 @@ module.exports = function (grunt) {
 
     // test task
     grunt.registerTask('test', [
-        'jasmine_node'
+        'jasmine_nodejs:monoco'
     ]);
 
     // debug task
