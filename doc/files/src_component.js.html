@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.2</b>
+                    API Docs for Version: <b>0.5.3</b>
                 </p>
             </li>
         </div>
@@ -384,6 +384,11 @@
                                 if (typeof config._id === &#x27;undefined&#x27;) {
                                     config._id = $helper.generateId();
                                 }
+                        
+                                if (typeof store[config._id] !== &#x27;undefined&#x27;) {
+                                    $log.idAlreadyUsed(config._id);
+                                }
+                        
                                 store[config._id] = this;
                         
                                 // id
@@ -857,7 +862,10 @@
                         
                             // add default properties/methods only if the component
                             // inherit from MonocoComponent
-                            if ($metamodel.inheritFrom(classId, &#x27;MonocoComponent&#x27;)) {
+                            if (
+                                $metamodel.inheritFrom(classId, &#x27;MonocoComponent&#x27;) ||
+                                classId === &#x27;MonocoComponent&#x27;
+                                ) {
                                 addOn(Class, classId);
                                 addOnClass(Class, classId);
                                 addOffClass(Class, classId);

@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.2</b>
+                    API Docs for Version: <b>0.5.3</b>
                 </p>
             </li>
         </div>
@@ -110,12 +110,14 @@
                         			<ul>
                         				<li><a href="#method-behaviorNotUnique"><span class="im">behaviorNotUnique</span>(<span class="ia">id</span><span class="ia">stateName</span>)</a></li>
                         				<li><a href="#method-canNotYetValidate"><span class="im">canNotYetValidate</span>(<span class="ia">id</span><span class="ia">className</span>)</a></li>
+                        				<li><a href="#method-idAlreadyUsed"><span class="im">idAlreadyUsed</span>(<span class="ia">id</span>)</a></li>
                         				<li><a href="#method-invalidChannelEvent"><span class="im">invalidChannelEvent</span>(<span class="ia">message</span><span class="ia">eventName</span><span class="ia">type</span>)</a></li>
                         				<li><a href="#method-invalidChannelEvent"><span class="im">invalidChannelEvent</span>(<span class="ia">message</span><span class="ia">eventName</span><span class="ia">type</span>)</a></li>
                         				<li><a href="#method-invalidClassName"><span class="im">invalidClassName</span>(<span class="ia">componentId</span><span class="ia">type</span><span class="ia">constructorName</span>)</a></li>
                         				<li><a href="#method-invalidCollectionName"><span class="im">invalidCollectionName</span>(<span class="ia">name</span>)</a></li>
                         				<li><a href="#method-invalidDocumentOnDbInsert"><span class="im">invalidDocumentOnDbInsert</span>(<span class="ia">doc</span><span class="ia">collectionName</span>)</a></li>
                         				<li><a href="#method-invalidEnumValue"><span class="im">invalidEnumValue</span>(<span class="ia">value</span><span class="ia">type</span>)</a></li>
+                        				<li><a href="#method-invalideUseOfComponent"><span class="im">invalideUseOfComponent</span>(<span class="ia">id</span>)</a></li>
                         				<li><a href="#method-invalidParamNumber"><span class="im">invalidParamNumber</span>(<span class="ia">id</span><span class="ia">methodName</span>)</a></li>
                         				<li><a href="#method-invalidParamNumberMethodOn"><span class="im">invalidParamNumberMethodOn</span>(<span class="ia">id</span><span class="ia">methodName</span>)</a></li>
                         				<li><a href="#method-invalidParamType"><span class="im">invalidParamType</span>(<span class="ia">id</span><span class="ia">methodName</span><span class="ia">paramName</span>)</a></li>
@@ -137,7 +139,9 @@
                         				<li><a href="#method-unknownMethod"><span class="im">unknownMethod</span>(<span class="ia">classId</span><span class="ia">methodName</span>)</a></li>
                         				<li><a href="#method-unknownProperty"><span class="im">unknownProperty</span>(<span class="ia">propertyName</span><span class="ia">schema</span>)</a></li>
                         				<li><a href="#method-unknownPropertyImp"><span class="im">unknownPropertyImp</span>(<span class="ia">property</span><span class="ia">schema</span>)</a></li>
+                        				<li><a href="#method-unknownPropertyOnDbUpdate"><span class="im">unknownPropertyOnDbUpdate</span>(<span class="ia">propertyName</span><span class="ia">id</span>)</a></li>
                         				<li><a href="#method-unknownType"><span class="im">unknownType</span>(<span class="ia">value</span>)</a></li>
+                        				<li><a href="#method-updateUuid"><span class="im">updateUuid</span>(<span class="ia">currentId</span><span class="ia">newId</span><span class="ia">alreadyUsed</span>)</a></li>
                         				<li><a href="#method-workflowRestarted"><span class="im">workflowRestarted</span>()</a></li>
                         			</ul>
                         		</li>
@@ -177,7 +181,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l603"><code>src&#x2F;log.js:603</code></a>
+                                    		<a href="../files/src_log.js.html#l650"><code>src&#x2F;log.js:650</code></a>
                                     		</p>
                                     
                                     
@@ -238,7 +242,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l654"><code>src&#x2F;log.js:654</code></a>
+                                    		<a href="../files/src_log.js.html#l701"><code>src&#x2F;log.js:701</code></a>
                                     		</p>
                                     
                                     
@@ -275,6 +279,55 @@
                                     
                                     
                                     </div>
+                                    <div id="method-idAlreadyUsed" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>idAlreadyUsed</code></span>
+                                    
+                                    		<div class="args">
+                                    			<span class="paren">(</span><ul class="args-list inline commas">
+                                    				<li class="arg">
+                                    						<code>id</code>
+                                    				</li>
+                                    			</ul><span class="paren">)</span>
+                                    		</div>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_log.js.html#l729"><code>src&#x2F;log.js:729</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Create a component with an id that is already used.</p>
+                                    </div>
+                                    
+                                    		<div class="params">
+                                    			<h4>Parameters:</h4>
+                                    
+                                    			<ul class="params-list">
+                                    				<li class="param">
+                                    						<code class="param-name">id</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>id of the component</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    			</ul>
+                                    		</div>
+                                    
+                                    
+                                    </div>
                                     <div id="method-invalidChannelEvent" class="method item">
                                     	<div class="method-signature">
                                     	<span class="name"><code>invalidChannelEvent</code></span>
@@ -302,7 +355,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l373"><code>src&#x2F;log.js:373</code></a>
+                                    		<a href="../files/src_log.js.html#l385"><code>src&#x2F;log.js:385</code></a>
                                     		</p>
                                     
                                     
@@ -375,7 +428,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l663"><code>src&#x2F;log.js:663</code></a>
+                                    		<a href="../files/src_log.js.html#l710"><code>src&#x2F;log.js:710</code></a>
                                     		</p>
                                     
                                     
@@ -448,7 +501,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l438"><code>src&#x2F;log.js:438</code></a>
+                                    		<a href="../files/src_log.js.html#l485"><code>src&#x2F;log.js:485</code></a>
                                     		</p>
                                     
                                     
@@ -515,7 +568,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l550"><code>src&#x2F;log.js:550</code></a>
+                                    		<a href="../files/src_log.js.html#l597"><code>src&#x2F;log.js:597</code></a>
                                     		</p>
                                     
                                     
@@ -567,7 +620,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l520"><code>src&#x2F;log.js:520</code></a>
+                                    		<a href="../files/src_log.js.html#l567"><code>src&#x2F;log.js:567</code></a>
                                     		</p>
                                     
                                     
@@ -628,7 +681,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l429"><code>src&#x2F;log.js:429</code></a>
+                                    		<a href="../files/src_log.js.html#l476"><code>src&#x2F;log.js:476</code></a>
                                     		</p>
                                     
                                     
@@ -665,6 +718,55 @@
                                     
                                     
                                     </div>
+                                    <div id="method-invalideUseOfComponent" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>invalideUseOfComponent</code></span>
+                                    
+                                    		<div class="args">
+                                    			<span class="paren">(</span><ul class="args-list inline commas">
+                                    				<li class="arg">
+                                    						<code>id</code>
+                                    				</li>
+                                    			</ul><span class="paren">)</span>
+                                    		</div>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_log.js.html#l756"><code>src&#x2F;log.js:756</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Try to change the state of a component that has been destroyed</p>
+                                    </div>
+                                    
+                                    		<div class="params">
+                                    			<h4>Parameters:</h4>
+                                    
+                                    			<ul class="params-list">
+                                    				<li class="param">
+                                    						<code class="param-name">id</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>id of the component</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    			</ul>
+                                    		</div>
+                                    
+                                    
+                                    </div>
                                     <div id="method-invalidParamNumber" class="method item">
                                     	<div class="method-signature">
                                     	<span class="name"><code>invalidParamNumber</code></span>
@@ -689,7 +791,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l583"><code>src&#x2F;log.js:583</code></a>
+                                    		<a href="../files/src_log.js.html#l630"><code>src&#x2F;log.js:630</code></a>
                                     		</p>
                                     
                                     
@@ -750,7 +852,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l673"><code>src&#x2F;log.js:673</code></a>
+                                    		<a href="../files/src_log.js.html#l720"><code>src&#x2F;log.js:720</code></a>
                                     		</p>
                                     
                                     
@@ -814,7 +916,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l592"><code>src&#x2F;log.js:592</code></a>
+                                    		<a href="../files/src_log.js.html#l639"><code>src&#x2F;log.js:639</code></a>
                                     		</p>
                                     
                                     
@@ -890,7 +992,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l500"><code>src&#x2F;log.js:500</code></a>
+                                    		<a href="../files/src_log.js.html#l547"><code>src&#x2F;log.js:547</code></a>
                                     		</p>
                                     
                                     
@@ -972,7 +1074,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l419"><code>src&#x2F;log.js:419</code></a>
+                                    		<a href="../files/src_log.js.html#l466"><code>src&#x2F;log.js:466</code></a>
                                     		</p>
                                     
                                     
@@ -1051,7 +1153,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l529"><code>src&#x2F;log.js:529</code></a>
+                                    		<a href="../files/src_log.js.html#l576"><code>src&#x2F;log.js:576</code></a>
                                     		</p>
                                     
                                     
@@ -1139,7 +1241,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l558"><code>src&#x2F;log.js:558</code></a>
+                                    		<a href="../files/src_log.js.html#l605"><code>src&#x2F;log.js:605</code></a>
                                     		</p>
                                     
                                     
@@ -1200,7 +1302,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l621"><code>src&#x2F;log.js:621</code></a>
+                                    		<a href="../files/src_log.js.html#l668"><code>src&#x2F;log.js:668</code></a>
                                     		</p>
                                     
                                     
@@ -1261,7 +1363,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l612"><code>src&#x2F;log.js:612</code></a>
+                                    		<a href="../files/src_log.js.html#l659"><code>src&#x2F;log.js:659</code></a>
                                     		</p>
                                     
                                     
@@ -1322,7 +1424,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l637"><code>src&#x2F;log.js:637</code></a>
+                                    		<a href="../files/src_log.js.html#l684"><code>src&#x2F;log.js:684</code></a>
                                     		</p>
                                     
                                     
@@ -1380,7 +1482,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l492"><code>src&#x2F;log.js:492</code></a>
+                                    		<a href="../files/src_log.js.html#l539"><code>src&#x2F;log.js:539</code></a>
                                     		</p>
                                     
                                     
@@ -1432,7 +1534,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l465"><code>src&#x2F;log.js:465</code></a>
+                                    		<a href="../files/src_log.js.html#l512"><code>src&#x2F;log.js:512</code></a>
                                     		</p>
                                     
                                     
@@ -1484,7 +1586,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l630"><code>src&#x2F;log.js:630</code></a>
+                                    		<a href="../files/src_log.js.html#l677"><code>src&#x2F;log.js:677</code></a>
                                     		</p>
                                     
                                     
@@ -1521,7 +1623,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l456"><code>src&#x2F;log.js:456</code></a>
+                                    		<a href="../files/src_log.js.html#l503"><code>src&#x2F;log.js:503</code></a>
                                     		</p>
                                     
                                     
@@ -1579,7 +1681,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l448"><code>src&#x2F;log.js:448</code></a>
+                                    		<a href="../files/src_log.js.html#l495"><code>src&#x2F;log.js:495</code></a>
                                     		</p>
                                     
                                     
@@ -1631,7 +1733,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l474"><code>src&#x2F;log.js:474</code></a>
+                                    		<a href="../files/src_log.js.html#l521"><code>src&#x2F;log.js:521</code></a>
                                     		</p>
                                     
                                     
@@ -1692,7 +1794,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l511"><code>src&#x2F;log.js:511</code></a>
+                                    		<a href="../files/src_log.js.html#l558"><code>src&#x2F;log.js:558</code></a>
                                     		</p>
                                     
                                     
@@ -1753,7 +1855,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l567"><code>src&#x2F;log.js:567</code></a>
+                                    		<a href="../files/src_log.js.html#l614"><code>src&#x2F;log.js:614</code></a>
                                     		</p>
                                     
                                     
@@ -1812,7 +1914,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l541"><code>src&#x2F;log.js:541</code></a>
+                                    		<a href="../files/src_log.js.html#l588"><code>src&#x2F;log.js:588</code></a>
                                     		</p>
                                     
                                     
@@ -1873,7 +1975,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l410"><code>src&#x2F;log.js:410</code></a>
+                                    		<a href="../files/src_log.js.html#l457"><code>src&#x2F;log.js:457</code></a>
                                     		</p>
                                     
                                     
@@ -1934,7 +2036,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l483"><code>src&#x2F;log.js:483</code></a>
+                                    		<a href="../files/src_log.js.html#l530"><code>src&#x2F;log.js:530</code></a>
                                     		</p>
                                     
                                     
@@ -1971,6 +2073,67 @@
                                     
                                     
                                     </div>
+                                    <div id="method-unknownPropertyOnDbUpdate" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>unknownPropertyOnDbUpdate</code></span>
+                                    
+                                    		<div class="args">
+                                    			<span class="paren">(</span><ul class="args-list inline commas">
+                                    				<li class="arg">
+                                    						<code>propertyName</code>
+                                    				</li>
+                                    				<li class="arg">
+                                    						<code>id</code>
+                                    				</li>
+                                    			</ul><span class="paren">)</span>
+                                    		</div>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_log.js.html#l747"><code>src&#x2F;log.js:747</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Unkonw property on a monoco database update operation.</p>
+                                    </div>
+                                    
+                                    		<div class="params">
+                                    			<h4>Parameters:</h4>
+                                    
+                                    			<ul class="params-list">
+                                    				<li class="param">
+                                    						<code class="param-name">propertyName</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>name of the property</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    				<li class="param">
+                                    						<code class="param-name">id</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>id of the component</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    			</ul>
+                                    		</div>
+                                    
+                                    
+                                    </div>
                                     <div id="method-unknownType" class="method item">
                                     	<div class="method-signature">
                                     	<span class="name"><code>unknownType</code></span>
@@ -1992,7 +2155,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l646"><code>src&#x2F;log.js:646</code></a>
+                                    		<a href="../files/src_log.js.html#l693"><code>src&#x2F;log.js:693</code></a>
                                     		</p>
                                     
                                     
@@ -2020,6 +2183,79 @@
                                     
                                     
                                     </div>
+                                    <div id="method-updateUuid" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>updateUuid</code></span>
+                                    
+                                    		<div class="args">
+                                    			<span class="paren">(</span><ul class="args-list inline commas">
+                                    				<li class="arg">
+                                    						<code>currentId</code>
+                                    				</li>
+                                    				<li class="arg">
+                                    						<code>newId</code>
+                                    				</li>
+                                    				<li class="arg">
+                                    						<code>alreadyUsed</code>
+                                    				</li>
+                                    			</ul><span class="paren">)</span>
+                                    		</div>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_log.js.html#l737"><code>src&#x2F;log.js:737</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Change the id of a component.</p>
+                                    </div>
+                                    
+                                    		<div class="params">
+                                    			<h4>Parameters:</h4>
+                                    
+                                    			<ul class="params-list">
+                                    				<li class="param">
+                                    						<code class="param-name">currentId</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>id of the component</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    				<li class="param">
+                                    						<code class="param-name">newId</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>of the component</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    				<li class="param">
+                                    						<code class="param-name">alreadyUsed</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>newId already used</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    			</ul>
+                                    		</div>
+                                    
+                                    
+                                    </div>
                                     <div id="method-workflowRestarted" class="method item">
                                     	<div class="method-signature">
                                     	<span class="name"><code>workflowRestarted</code></span>
@@ -2035,7 +2271,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_log.js.html#l576"><code>src&#x2F;log.js:576</code></a>
+                                    		<a href="../files/src_log.js.html#l623"><code>src&#x2F;log.js:623</code></a>
                                     		</p>
                                     
                                     

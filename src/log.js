@@ -197,7 +197,7 @@ function readOnlyProperty(id, propertyName) {
  * @param {String} doc a document
  * @param {String} collectionName the name of the colllection
  */
-function invalidObjectOnInsert(doc, collectionName) {
+function invalidDocumentOnDbInsert(doc, collectionName) {
     $helper.getMonoco().warning("invalid document " + JSON.stringify(doc) + " on an insert operation on collection " + collectionName);
 }
 
@@ -213,10 +213,22 @@ function invalidObjectOnInsert(doc, collectionName) {
  */
 function invalidPropertyTypeOnDbUpdate(collectionName, id, propertyName, propertyValue, type) {
     if (type.indexOf("#") !== -1) {
-        $helper.getMonoco().warning("invalid type for property '" + propertyName + "' on an update operation on collection " + collectionName + ": expected '" + type + "' instead of '" + propertyValue + "' on component '" + id + "'");
+        $helper.getMonoco().warning("invalid type for property '" + propertyName + "' on an update operation on collection '" + collectionName + "': expected '" + type + "' instead of '" + propertyValue + "' on component '" + id + "'");
     } else {
-        $helper.getMonoco().warning("invalid type for property '" + propertyName + "' on an update operation on collection " + collectionName + ": expected '" + type + "' instead of '" + typeof propertyValue + "' on component '" + id + "'");
+        $helper.getMonoco().warning("invalid type for property '" + propertyName + "' on an update operation on collection '" + collectionName + "': expected '" + type + "' instead of '" + typeof propertyValue + "' on component '" + id + "'");
     }
+}
+
+
+
+/*
+ * Unkonw property on a monoco database update operation.
+ * @method unknownPropertyOnDbUpdate
+ * @param {String} propertyName name of the property
+ * @param {String} id id of the component
+ */
+function unknownPropertyOnDbUpdate(propertyName, id) {
+    $helper.getMonoco().warning("unknown property '" + propertyName + "' on an update operation on component '" + id + "'");
 }
 
 
@@ -393,6 +405,41 @@ function invalidParamNumberMethodOn(id, methodName) {
 }
 
 
+/*
+ * Create a component with an id that is already used.
+ * @method idAlreadyUsed
+ * @param {String} id id of the component
+ */
+function idAlreadyUsed(id) {
+    $helper.getMonoco().warning("try to create a component with the id '" + id + "' that is already used by another component");
+}
+
+
+/*
+ * Change the id of a component.
+ * @method updateUuid
+ * @param {String} currentId id of the component
+ * @param {String} newId of the component
+ * @param {Boolean} alreadyUsed newId already used
+ */
+function updateUuid(currentId, newId, alreadyUsed) {
+    if (alreadyUsed) {
+        $helper.getMonoco().warning("try to update a component of id '" + currentId + "' with the new id '" + newId + "' that is already used");
+    } else {
+        $helper.getMonoco().warning("try to update a component of id '" + currentId + "' with the new id '" + newId + "'");
+    }
+}
+
+/*
+ * Try to change the state of a component that has been destroyed
+ * @method invalidUseOfComponent
+ * @param {String} id id of the component
+ */
+function invalidUseOfComponent(id) {
+    $helper.getMonoco().warning("try to change the state of the destroyed component '" + id + "'");
+}
+
+
 /* exports */
 
 
@@ -523,7 +570,7 @@ exports.readOnlyProperty = readOnlyProperty;
  * @param {String} doc a document
  * @param {String} collectionName the name of the colllection
  */
-exports.invalidDocumentOnDbInsert = invalidObjectOnInsert;
+exports.invalidDocumentOnDbInsert = invalidDocumentOnDbInsert;
 
 
 /**
@@ -677,3 +724,38 @@ exports.invalidChannelEvent = invalidChannelEvent;
  * @param {String} methodName name of the component
  */
 exports.invalidParamNumberMethodOn = invalidParamNumberMethodOn;
+
+
+/**
+ * Create a component with an id that is already used.
+ * @method idAlreadyUsed
+ * @param {String} id id of the component
+ */
+exports.idAlreadyUsed = idAlreadyUsed;
+
+
+/**
+ * Change the id of a component.
+ * @method updateUuid
+ * @param {String} currentId id of the component
+ * @param {String} newId of the component
+ * @param {Boolean} alreadyUsed newId already used
+ */
+exports.updateUuid = updateUuid;
+
+
+/**
+ * Unkonw property on a monoco database update operation.
+ * @method unknownPropertyOnDbUpdate
+ * @param {String} propertyName name of the property
+ * @param {String} id id of the component
+ */
+exports.unknownPropertyOnDbUpdate = unknownPropertyOnDbUpdate;
+
+
+/**
+ * Try to change the state of a component that has been destroyed
+ * @method invalideUseOfComponent
+ * @param {String} id id of the component
+ */
+exports.invalidUseOfComponent = invalidUseOfComponent;

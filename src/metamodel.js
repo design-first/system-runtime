@@ -279,7 +279,7 @@ function checkCustomSchema(value, typeName) {
                     if (!hasType(typeDef.schema, 'undefined')) {
                         result = isValidSchema(value[i], typeDef.schema);
                     } else {
-                        result = isValidType(value[i], typeDef.type);   
+                        result = isValidType(value[i], typeDef.type);
                     }
                     if (result === false) {
                         break;
@@ -380,13 +380,20 @@ function createClass() {
  */
 function createClassInfo() {
     var modelName = '',
-        modelDef = {};
+        modelDef = {},
+        id = '';
 
     for (modelName in store.model) {
         modelDef = store.model[modelName];
-        if (typeof modelDef[SCHEMA] !== 'undefined' && modelDef[CLASS] !== false) {
+        id = modelDef._id + 'Info';
+
+        if (
+            typeof modelDef[SCHEMA] !== 'undefined' &&
+            modelDef[CLASS] !== false &&
+            !$component.get(id)
+            ) {
             $db.MonocoClassInfo.insert({
-                "_id": modelDef._id + 'Info',
+                "_id": id,
                 "metamodel": store.model[modelDef[SCHEMA]],
                 "model": modelDef
             });
@@ -1243,6 +1250,18 @@ function get(id) {
 
 
 /*
+ * Get the definition of the metamodel.
+ * @method getMetaDef
+ * @param {String} id of the schema
+ * @return {Object} the metadefinition of the metamodel
+ */
+function getMetaDef() {
+    var result = store.metadef.schema;
+    return result;
+}
+
+
+/*
  * Get parents of a shema if any.
  * @method get
  * @param {String} id of the schema
@@ -1387,6 +1406,15 @@ exports.create = create;
  * @return {Object} the schema
  */
 exports.get = get;
+
+
+/**
+ * Get the definition of the metamodel.
+ * @method getMetaDef
+ * @param {String} id of the schema
+ * @return {Object} the metadefinition of the metamodel
+ */
+exports.getMetaDef = getMetaDef;
 
 
 /**

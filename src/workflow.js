@@ -439,7 +439,7 @@ function validParamNumbers(className, state, action) {
     if (modelNumberParam[0] <= paramNumber && paramNumber <= modelNumberParam[1]) {
         result = true;
     }
-    
+
     return result;
 }
 
@@ -564,59 +564,55 @@ function state(params) {
 
     currentState = $state.get(params.component);
 
-    if (currentState !== 'destroy') {
+    if (currentState === 'destroy') {
+        $log.invalidUseOfComponent(params.component);
+    }
 
-        component = $component.get(params.component);
-        if (component) {
-            isEvent = $metamodel.isEvent(params.state, component.constructor.name);
-            isProperty = $metamodel.isProperty(params.state, component.constructor.name);
-            isCollection = $metamodel.isCollection(params.state, component.constructor.name);
-            actions = getActions(component, params.state, isEvent);
-        }
+    component = $component.get(params.component);
+    if (component) {
+        isEvent = $metamodel.isEvent(params.state, component.constructor.name);
+        isProperty = $metamodel.isProperty(params.state, component.constructor.name);
+        isCollection = $metamodel.isCollection(params.state, component.constructor.name);
+        actions = getActions(component, params.state, isEvent);
+    }
 
-        if (actions.length) {
+    if (actions.length) {
 
-            if (checkParams({
-                "component": component,
-                "methodName": params.state,
-                "args": params.data
-            })) {
+        if (checkParams({
+            "component": component,
+            "methodName": params.state,
+            "args": params.data
+        })) {
 
-                if (!isEvent &&
-                    !isProperty &&
-                    !isCollection) {
-                    action = actions[0];
-                    result = callAction(component, params.state, action, params.data, false);
+            if (!isEvent &&
+                !isProperty &&
+                !isCollection) {
+                action = actions[0];
+                result = callAction(component, params.state, action, params.data, false);
 
-                    if (checkResult({
-                        "component": component,
-                        "methodName": params.state,
-                        "methodResult": result
-                    })) {
-                        $state.set(component.id(), params.state);
-                    }
-                } else {
-
-                    length = actions.length;
-                    for (i = 0; i < length; i++) {
-                        action = actions[i];
-                        callAction(component, params.state, action, params.data, true);
-                    }
-
+                if (checkResult({
+                    "component": component,
+                    "methodName": params.state,
+                    "methodResult": result
+                })) {
                     $state.set(component.id(), params.state);
                 }
-            }
-            return result;
-        } else {
-            if (component) {
+            } else {
+
+                length = actions.length;
+                for (i = 0; i < length; i++) {
+                    action = actions[i];
+                    callAction(component, params.state, action, params.data, true);
+                }
+
                 $state.set(component.id(), params.state);
             }
         }
+        return result;
     } else {
-        exports.stop({
-            "error": true,
-            "message": "trying to change the state of a destroyed component '" + params.component + "'"
-        });
+        if (component) {
+            $state.set(component.id(), params.state);
+        }
     }
 }
 

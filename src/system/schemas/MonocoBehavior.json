@@ -23,7 +23,7 @@
         "default": ""
     },
     "action": {
-        "type": "string",
+        "type": "javascript",
         "readOnly": false,
         "mandatory": true,
         "default": ""

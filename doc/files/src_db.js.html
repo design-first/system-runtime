@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.2</b>
+                    API Docs for Version: <b>0.5.3</b>
                 </p>
             </li>
         </div>
@@ -136,6 +136,9 @@
                         var $metamodel = require(&#x27;./metamodel.js&#x27;);
                         var $helper = require(&#x27;./helper.js&#x27;);
                         var $log = require(&#x27;./log.js&#x27;);
+                        var $behavior = require(&#x27;./behavior.js&#x27;);
+                        var $state = require(&#x27;./state.js&#x27;);
+                        var $worklow = require(&#x27;./workflow.js&#x27;);
                         
                         
                         /* Private properties */
@@ -166,7 +169,7 @@
                          * Test if an object contains another one.
                          * @method contains
                          * @param {Object} source source object 
-                         * @param {Object} target otarget bject 
+                         * @param {Object} target target object 
                          * @return {Boolean} true if the source object contains the target object
                          * @private
                          */
@@ -282,30 +285,39 @@
                         
                             doc.forEach(function multi_insert(obj) {
                                 var component = null;
-                                if (this.name === &#x27;MonocoSchema&#x27; || this.name === &#x27;MonocoType&#x27; || this.name === &#x27;MonocoExtendedSchema&#x27; || $metamodel.isValidObject(obj, $metamodel.get(this.name))) {
-                                    if (typeof obj._id === &#x27;undefined&#x27;) {
-                                        obj._id = $helper.generateId();
-                                    }
                         
-                                    store[this.name][obj._id] = obj;
-                                    Component = $component.get(this.name);
-                                    if (Component) {
-                                        component = new Component(obj);
-                                        result.push(component.id());
-                                    } else {
-                                        if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
-                                            $helper.getMonoco().require(&#x27;db&#x27;).insert(this.name, obj);
+                                switch (true) {
+                                    case this.name === &#x27;MonocoSchema&#x27;:
+                                    case this.name === &#x27;MonocoType&#x27;:
+                                    case this.name === &#x27;MonocoExtendedSchema&#x27;:
+                                    case $metamodel.isValidObject(obj, $metamodel.get(this.name)):
+                        
+                                        if (typeof obj._id === &#x27;undefined&#x27;) {
+                                            obj._id = $helper.generateId();
                                         }
-                                    }
                         
-                                    if (this.name === &#x27;MonocoMessage&#x27;) {
-                                        if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;channel&#x27;)) {
-                                            $helper.getMonoco().require(&#x27;channel&#x27;)[obj.event](obj.data);
+                                        store[this.name][obj._id] = obj;
+                        
+                                        Component = $component.get(this.name);
+                                        if (Component) {
+                                            component = new Component(obj);
+                                            result.push(component.id());
+                                        } else {
+                                            if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
+                                                $helper.getMonoco().require(&#x27;db&#x27;).insert(this.name, obj);
+                                            }
                                         }
-                                    }
                         
-                                } else {
-                                    $log.invalidDocumentOnDbInsert(obj, this.name);
+                                        if (this.name === &#x27;MonocoMessage&#x27;) {
+                                            if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;channel&#x27;)) {
+                                                $helper.getMonoco().require(&#x27;channel&#x27;)[obj.event](obj.data);
+                                            }
+                                        }
+                        
+                                        break;
+                                    default:
+                                        $log.invalidDocumentOnDbInsert(obj, this.name);
+                                        break;
                                 }
                             }.bind(this));
                         
@@ -333,7 +345,8 @@
                                 i = 0,
                                 length = docs.length,
                                 attributeName = &#x27;&#x27;,
-                                schema = $metamodel.get(this.name);
+                                schema = $metamodel.get(this.name),
+                                type = &#x27;&#x27;;
                         
                             options = options || {};
                             if (typeof options.upsert === &#x27;undefined&#x27;) {
@@ -352,17 +365,35 @@
                                 }
                         
                                 for (i = 0; i &lt; length; i++) {
+                                    // case of update of _id
+                                    if (typeof update._id !== &#x27;undefined&#x27; &amp;&amp; update._id !== docs[i]._id) {
+                                        $log.updateUuid(docs[i]._id, update._id, typeof $component.get(update._id) !== &#x27;undefined&#x27;);
+                                    }
+                        
                                     for (attributeName in update) {
                                         if (typeof docs[i][attributeName] !== &#x27;undefined&#x27;) {
-                                            // TODO case of _id
-                                            if (schema[attributeName] &amp;&amp; schema[attributeName].type &amp;&amp; $metamodel.isValidType(update[attributeName], schema[attributeName].type)) {
-                                                docs[i][attributeName] = update[attributeName];
-                                                updated = updated + 1;
-                                                if ($helper.isMonoco()) {
-                                                    $helper.getMonoco().require(&#x27;db&#x27;).update(this.name, docs[i]._id, attributeName, update[attributeName]);
+                        
+                                            // check type
+                                            type = &#x27;&#x27;;
+                                            if (attributeName.indexOf(&#x27;_&#x27;) !== 0) {
+                                                type = schema[attributeName].type;
+                                            } else {
+                                                if ($metamodel.getMetaDef()[attributeName]) {
+                                                    type = $metamodel.getMetaDef()[attributeName].type;
+                                                }
+                                            }
+                                            if (type) {
+                                                if ($metamodel.isValidType(update[attributeName], type)) {
+                                                    docs[i][attributeName] = update[attributeName];
+                                                    updated = updated + 1;
+                                                    if ($helper.isMonoco()) {
+                                                        $helper.getMonoco().require(&#x27;db&#x27;).update(this.name, docs[i]._id, attributeName, update[attributeName]);
+                                                    }
+                                                } else {
+                                                    $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName]);
                                                 }
                                             } else {
-                                                $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName]);
+                                                $log.unknownPropertyOnDbUpdate(attributeName, docs[i]._id);
                                             }
                                         }
                                     }
@@ -546,7 +577,7 @@
                          * Import/Export a monoco system into/from the database
                          * @method system
                          * @param {JSON} importedSystem a monoco system to import
-                         * @return {String} the id of the imported monoco system or the if of the current monoco system  
+                         * @return {String} the id of the imported monoco system or the if of the current monoco system
                          */
                         function system(importedSystem) {
                             var result = &#x27;&#x27;,
@@ -732,6 +763,57 @@
                         }
                         
                         
+                        /*
+                         * Clear the database.
+                         * @method clear
+                         */
+                        function clear() {
+                            var length = 0,
+                                i = 0,
+                                collectionName = &#x27;&#x27;;
+                        
+                            // remove collections
+                            length = collections.length;
+                            for (i = 0; i &lt; length; i++) {
+                                collectionName = collections[i];
+                                exports[collectionName].remove();
+                            }
+                        
+                            // remove internal collections
+                            length = internalDB.length;
+                            for (i = 0; i &lt; length; i++) {
+                                collectionName = internalDB[i];
+                                exports[collectionName].remove();
+                            }
+                        }
+                        
+                        
+                        /*
+                         * Init the database.
+                         * @method init
+                         */
+                        function init() {
+                            var monocoSystemId = &#x27;&#x27;,
+                                monocoSystem = null;
+                        
+                            monocoSystem = exports.MonocoSystem.find({ &#x27;_id&#x27;: &#x27;e89c617b6b15d24&#x27; })[0];
+                        
+                            // clear all the data in memory
+                            exports.clear();
+                            $component.clear();
+                            $metamodel.clear();
+                            $state.clear();
+                            $behavior.clear();
+                        
+                            // init metamodel
+                            $metamodel.init();
+                            
+                            // reimport monoco core system
+                            monocoSystemId = exports.system(monocoSystem);
+                            $component.get(monocoSystemId).main();
+                        }
+                        
+                        
                         /* exports */
                         
                         
@@ -806,6 +888,20 @@
                          * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;},&quot;components&quot;:{&quot;Person&quot;: {&quot;country&quot;: &quot;France&quot;}}}); // combine filters
                          */
                         exports.subsystem = subsystem;
+                        
+                        
+                        /**
+                         * Clear the database.
+                         * @method clear
+                         */
+                        exports.clear = clear;
+                         
+                         
+                        /**
+                         * Init the database.
+                         * @method init
+                         */
+                        exports.init = init;
                             </pre>
                         </div>
                     </div>

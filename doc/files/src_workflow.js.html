@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.2</b>
+                    API Docs for Version: <b>0.5.3</b>
                 </p>
             </li>
         </div>
@@ -529,7 +529,7 @@
                             if (modelNumberParam[0] &lt;= paramNumber &amp;&amp; paramNumber &lt;= modelNumberParam[1]) {
                                 result = true;
                             }
-                            
+                        
                             return result;
                         }
                         
@@ -654,59 +654,55 @@
                         
                             currentState = $state.get(params.component);
                         
-                            if (currentState !== &#x27;destroy&#x27;) {
+                            if (currentState === &#x27;destroy&#x27;) {
+                                $log.invalidUseOfComponent(params.component);
+                            }
                         
-                                component = $component.get(params.component);
-                                if (component) {
-                                    isEvent = $metamodel.isEvent(params.state, component.constructor.name);
-                                    isProperty = $metamodel.isProperty(params.state, component.constructor.name);
-                                    isCollection = $metamodel.isCollection(params.state, component.constructor.name);
-                                    actions = getActions(component, params.state, isEvent);
-                                }
+                            component = $component.get(params.component);
+                            if (component) {
+                                isEvent = $metamodel.isEvent(params.state, component.constructor.name);
+                                isProperty = $metamodel.isProperty(params.state, component.constructor.name);
+                                isCollection = $metamodel.isCollection(params.state, component.constructor.name);
+                                actions = getActions(component, params.state, isEvent);
+                            }
                         
-                                if (actions.length) {
+                            if (actions.length) {
                         
-                                    if (checkParams({
-                                        &quot;component&quot;: component,
-                                        &quot;methodName&quot;: params.state,
-                                        &quot;args&quot;: params.data
-                                    })) {
+                                if (checkParams({
+                                    &quot;component&quot;: component,
+                                    &quot;methodName&quot;: params.state,
+                                    &quot;args&quot;: params.data
+                                })) {
                         
-                                        if (!isEvent &amp;&amp;
-                                            !isProperty &amp;&amp;
-                                            !isCollection) {
-                                            action = actions[0];
-                                            result = callAction(component, params.state, action, params.data, false);
+                                    if (!isEvent &amp;&amp;
+                                        !isProperty &amp;&amp;
+                                        !isCollection) {
+                                        action = actions[0];
+                                        result = callAction(component, params.state, action, params.data, false);
                         
-                                            if (checkResult({
-                                                &quot;component&quot;: component,
-                                                &quot;methodName&quot;: params.state,
-                                                &quot;methodResult&quot;: result
-                                            })) {
-                                                $state.set(component.id(), params.state);
-                                            }
-                                        } else {
-                        
-                                            length = actions.length;
-                                            for (i = 0; i &lt; length; i++) {
-                                                action = actions[i];
-                                                callAction(component, params.state, action, params.data, true);
-                                            }
-                        
+                                        if (checkResult({
+                                            &quot;component&quot;: component,
+                                            &quot;methodName&quot;: params.state,
+                                            &quot;methodResult&quot;: result
+                                        })) {
                                             $state.set(component.id(), params.state);
                                         }
-                                    }
-                                    return result;
-                                } else {
-                                    if (component) {
+                                    } else {
+                        
+                                        length = actions.length;
+                                        for (i = 0; i &lt; length; i++) {
+                                            action = actions[i];
+                                            callAction(component, params.state, action, params.data, true);
+                                        }
+                        
                                         $state.set(component.id(), params.state);
                                     }
                                 }
+                                return result;
                             } else {
-                                exports.stop({
-                                    &quot;error&quot;: true,
-                                    &quot;message&quot;: &quot;trying to change the state of a destroyed component &#x27;&quot; + params.component + &quot;&#x27;&quot;
-                                });
+                                if (component) {
+                                    $state.set(component.id(), params.state);
+                                }
                             }
                         }
                         

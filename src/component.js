@@ -294,6 +294,11 @@ function createClass(classId) {
         if (typeof config._id === 'undefined') {
             config._id = $helper.generateId();
         }
+
+        if (typeof store[config._id] !== 'undefined') {
+            $log.idAlreadyUsed(config._id);
+        }
+
         store[config._id] = this;
 
         // id
@@ -767,7 +772,10 @@ function factory(config) {
 
     // add default properties/methods only if the component
     // inherit from MonocoComponent
-    if ($metamodel.inheritFrom(classId, 'MonocoComponent')) {
+    if (
+        $metamodel.inheritFrom(classId, 'MonocoComponent') ||
+        classId === 'MonocoComponent'
+        ) {
         addOn(Class, classId);
         addOnClass(Class, classId);
         addOffClass(Class, classId);

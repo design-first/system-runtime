@@ -91,9 +91,9 @@ function getMonoco() {
 
 
 /*
- * Generate a uid.
+ * Generate a uuid.
  * @method generateId
- * @return {String} a uid
+ * @return {String} a uuid
  */
 function generateId() {
     function gen() {
@@ -135,8 +135,8 @@ exports.isMonoco = isMonoco;
 
 
 /**
- * Generate a uid?
+ * Generate a uuid.
  * @method generateId
- * @return {String} a uid
+ * @return {String} a uuid
  */
 exports.generateId = generateId;

@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.2</b>
+                    API Docs for Version: <b>0.5.3</b>
                 </p>
             </li>
         </div>
@@ -369,7 +369,7 @@
                                             if (!hasType(typeDef.schema, &#x27;undefined&#x27;)) {
                                                 result = isValidSchema(value[i], typeDef.schema);
                                             } else {
-                                                result = isValidType(value[i], typeDef.type);   
+                                                result = isValidType(value[i], typeDef.type);
                                             }
                                             if (result === false) {
                                                 break;
@@ -470,13 +470,20 @@
                          */
                         function createClassInfo() {
                             var modelName = &#x27;&#x27;,
-                                modelDef = {};
+                                modelDef = {},
+                                id = &#x27;&#x27;;
                         
                             for (modelName in store.model) {
                                 modelDef = store.model[modelName];
-                                if (typeof modelDef[SCHEMA] !== &#x27;undefined&#x27; &amp;&amp; modelDef[CLASS] !== false) {
+                                id = modelDef._id + &#x27;Info&#x27;;
+                        
+                                if (
+                                    typeof modelDef[SCHEMA] !== &#x27;undefined&#x27; &amp;&amp;
+                                    modelDef[CLASS] !== false &amp;&amp;
+                                    !$component.get(id)
+                                    ) {
                                     $db.MonocoClassInfo.insert({
-                                        &quot;_id&quot;: modelDef._id + &#x27;Info&#x27;,
+                                        &quot;_id&quot;: id,
                                         &quot;metamodel&quot;: store.model[modelDef[SCHEMA]],
                                         &quot;model&quot;: modelDef
                                     });
@@ -1333,6 +1340,18 @@
                         
                         
                         /*
+                         * Get the definition of the metamodel.
+                         * @method getMetaDef
+                         * @param {String} id of the schema
+                         * @return {Object} the metadefinition of the metamodel
+                         */
+                        function getMetaDef() {
+                            var result = store.metadef.schema;
+                            return result;
+                        }
+                        
+                        
+                        /*
                          * Get parents of a shema if any.
                          * @method get
                          * @param {String} id of the schema
@@ -1477,6 +1496,15 @@
                          * @return {Object} the schema
                          */
                         exports.get = get;
+                        
+                        
+                        /**
+                         * Get the definition of the metamodel.
+                         * @method getMetaDef
+                         * @param {String} id of the schema
+                         * @return {Object} the metadefinition of the metamodel
+                         */
+                        exports.getMetaDef = getMetaDef;
                         
                         
                         /**
