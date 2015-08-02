@@ -1,8 +1,8 @@
 {
     "name": "monoco",
-    "version": "0.5.5",
-    "description": "A Model and a NoSQL Database for Componentsk",
-    "license": "GPLv3",
+    "version": "0.5.6",
+    "description": "A Model and a NoSQL Database for Component",
+    "license": "GPL-3.0",
     "homepage": "https://github.com/monocojs/monoco.git",
     "author": {
         "name": "erwan carriou",

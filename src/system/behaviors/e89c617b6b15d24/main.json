@@ -1,7 +1,0 @@
-{
-    "component": "e89c617b6b15d24",
-    "state": "main",
-    "action": "function main() { var monoco = $component.get('monoco'); monoco.ready(); }",
-    "core": true,
-    "useCoreAPI": true
-}

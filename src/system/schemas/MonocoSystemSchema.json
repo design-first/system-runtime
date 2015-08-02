@@ -14,5 +14,5 @@
     "components": "property",
     "ready": "event",
     "sync": "method",
-    "main": "event"
+    "main": "method"
 }

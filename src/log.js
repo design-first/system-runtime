@@ -149,7 +149,7 @@ function missingPropertyImp(property, className) {
  * @param {Object} schema a schema
  */
 function unknownPropertyImp(property, schema) {
-    $helper.getMonoco().warning("unknown property '" + property + "' for the definition of '" + schema[ID] + "'");
+    $helper.getMonoco().warning("unknown property '" + property + "' for the definition of '" + schema + "'");
 }
 
 

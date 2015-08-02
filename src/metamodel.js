@@ -1252,7 +1252,6 @@ function get(id) {
 /*
  * Get the definition of the metamodel.
  * @method getMetaDef
- * @param {String} id of the schema
  * @return {Object} the metadefinition of the metamodel
  */
 function getMetaDef() {
@@ -1411,7 +1410,6 @@ exports.get = get;
 /**
  * Get the definition of the metamodel.
  * @method getMetaDef
- * @param {String} id of the schema
  * @return {Object} the metadefinition of the metamodel
  */
 exports.getMetaDef = getMetaDef;
