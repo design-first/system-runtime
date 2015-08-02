@@ -3,6 +3,14 @@
     "version": "0.1.0",
     "description": "Add behaviors for web",
     "_id": "133421d0c313d2d",
+    "schemas": {
+        "MonocoSchema": {
+            "ready": "event"
+        },
+        "Monoco": {
+            "ready": {}
+        }
+    },
     "types": {},
     "behaviors": {
         "1aaee1e6311ff39": {

@@ -7,6 +7,5 @@
     "find": "method",
     "load": "method",
     "system": "method",
-    "warning": "event",
-    "ready": "event"
+    "warning": "event"
 }
