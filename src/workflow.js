@@ -595,7 +595,7 @@ function state(params) {
                     "methodName": params.state,
                     "methodResult": result
                 })) {
-                    $state.set(component.id(), params.state);
+                   // $state.set(component.id(), params.state, params.data);
                 }
             } else {
 
@@ -605,13 +605,13 @@ function state(params) {
                     callAction(component, params.state, action, params.data, true);
                 }
 
-                $state.set(component.id(), params.state);
+                $state.set(component.id(), params.state, params.data);
             }
         }
         return result;
     } else {
-        if (component) {
-            $state.set(component.id(), params.state);
+        if (component && (isEvent || isProperty || isCollection)) {
+            $state.set(component.id(), params.state, params.data);
         }
     }
 }

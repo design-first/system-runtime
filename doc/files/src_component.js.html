@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.6</b>
+                    API Docs for Version: <b>0.6.0</b>
                 </p>
             </li>
         </div>
@@ -135,6 +135,7 @@
                         var $helper = require(&#x27;./helper.js&#x27;);
                         var $log = require(&#x27;./log.js&#x27;);
                         var $worklow = require(&#x27;./workflow.js&#x27;);
+                        var $state = require(&#x27;./state.js&#x27;);
                         
                         /* Private properties */
                         
@@ -696,6 +697,17 @@
                                         } else {
                                             if ($worklow.validParamNumbers(classId, state, handler)) {
                                                 result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                                                
+                                                // experimental
+                                                var currentState = $state.get(this.id());
+                                                if (currentState &amp;&amp; state === currentState.name) {
+                                                    $workflow.state({
+                                                        &quot;component&quot;: this.id(),
+                                                        &quot;state&quot;: state,
+                                                        &quot;data&quot;: currentState.parameters.data
+                                                    });
+                                                }
+                        
                                             } else {
                                                 $log.invalidParamNumberMethodOn(this.id(), state);
                                             }
@@ -740,6 +752,17 @@
                                         } else {
                                             if ($worklow.validParamNumbers(classId, state, handler)) {
                                                 result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                                                
+                                                // experimental
+                                                var currentState = $state.get(this.id());
+                                                if (currentState &amp;&amp; state === currentState.name) {
+                                                    $workflow.state({
+                                                        &quot;component&quot;: this.id(),
+                                                        &quot;state&quot;: state,
+                                                        &quot;data&quot;: currentState.parameters.data
+                                                    });
+                                                }
+                        
                                             } else {
                                                 $log.invalidParamNumberMethodOn(this.id(), state);
                                             }

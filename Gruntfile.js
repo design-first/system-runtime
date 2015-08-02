@@ -102,7 +102,7 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var uid = generateId(),
-                            result = '';
+                                result = '';
 
                         function generateId() {
                             function gen() {
@@ -139,7 +139,7 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result = '',
-                            uid = '';
+                                uid = '';
 
                         if (filepath.indexOf('build') !== -1) {
                             result = src + '},\n"schemas" : {';
@@ -158,7 +158,7 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result = '',
-                            uid = '';
+                                uid = '';
 
                         if (filepath.indexOf('build') !== -1) {
                             result = src + '},\n"types" : {';
@@ -177,8 +177,8 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result = '',
-                            uid = '',
-                            collectionName = '';
+                                uid = '',
+                                collectionName = '';
 
                         if (filepath.indexOf('build') !== -1) {
                             result = src + '},\n"components" : {';

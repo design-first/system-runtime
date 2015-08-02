@@ -50,10 +50,21 @@ var store = {};
  * @method set
  * @param {String} id component id on which change the state
  * @param {String} state the new state of the component
+ * @param {Object} parameters parameters
  */
-function set(id, state) {
-    store[id] = state;
-    $db.store.MonocoState[id] = { "name": state };
+function set(id, state, parameters) {
+    store[id] = {
+        "name": state,
+        "parameters": {
+            "data": parameters
+        }
+    };
+    $db.store.MonocoState[id] = {
+        "name": state,
+        "parameters": {
+            "data": parameters
+        }
+    };
 }
 
 

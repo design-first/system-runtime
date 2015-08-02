@@ -45,6 +45,7 @@ var $behavior = require('./behavior.js');
 var $helper = require('./helper.js');
 var $log = require('./log.js');
 var $worklow = require('./workflow.js');
+var $state = require('./state.js');
 
 /* Private properties */
 
@@ -606,6 +607,17 @@ function addOn(Class, classId) {
                 } else {
                     if ($worklow.validParamNumbers(classId, state, handler)) {
                         result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                        
+                        // experimental
+                        var currentState = $state.get(this.id());
+                        if (currentState && state === currentState.name) {
+                            $workflow.state({
+                                "component": this.id(),
+                                "state": state,
+                                "data": currentState.parameters.data
+                            });
+                        }
+
                     } else {
                         $log.invalidParamNumberMethodOn(this.id(), state);
                     }
@@ -650,6 +662,17 @@ function addOnClass(Class, classId) {
                 } else {
                     if ($worklow.validParamNumbers(classId, state, handler)) {
                         result = $behavior.add(this.id(), state, handler, useCoreAPI);
+                        
+                        // experimental
+                        var currentState = $state.get(this.id());
+                        if (currentState && state === currentState.name) {
+                            $workflow.state({
+                                "component": this.id(),
+                                "state": state,
+                                "data": currentState.parameters.data
+                            });
+                        }
+
                     } else {
                         $log.invalidParamNumberMethodOn(this.id(), state);
                     }

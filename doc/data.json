@@ -2,7 +2,7 @@
     "project": {
         "name": "monoco",
         "description": "A Model and a NoSQL Database for Components",
-        "version": "0.5.6",
+        "version": "0.6.0",
         "url": "http://monoco.io"
     },
     "files": {
@@ -164,7 +164,7 @@
             "namespaces": {},
             "tag": "main",
             "file": "build/system/system.js",
-            "line": 962,
+            "line": 969,
             "description": "This module is the main module of monoco. <br>\nIt inits monoco metamodel and loads monoco core system.",
             "requires": [
                 "monoco-component",
@@ -230,7 +230,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/component.js",
-            "line": 901,
+            "line": 924,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -337,7 +337,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/state.js",
-            "line": 83,
+            "line": 94,
             "description": "This module manages the states of all thecomponents.",
             "requires": [
                 "monoco-db"
@@ -383,7 +383,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 962,
+            "line": 969,
             "description": "This module contains monoco core system.",
             "static": 1
         }
@@ -443,7 +443,7 @@
             "submodule": "monoco-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 901,
+            "line": 924,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -590,7 +590,7 @@
             "submodule": "monoco-state",
             "namespace": "",
             "file": "src/state.js",
-            "line": 83,
+            "line": 94,
             "description": "This module manages the states of all the components.",
             "requires": [
                 "monoco-db"
@@ -656,7 +656,7 @@
             "submodule": "monoco-system",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 962,
+            "line": 969,
             "description": "This module contains monoco core system."
         }
     },
@@ -817,7 +817,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 918,
+            "line": 941,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -838,7 +838,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 927,
+            "line": 950,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -859,7 +859,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 936,
+            "line": 959,
             "description": "Find components with a query.",
             "itemtype": "method",
             "name": "find",
@@ -880,7 +880,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 945,
+            "line": 968,
             "description": "Check if the component has for class name className.",
             "itemtype": "method",
             "name": "isInstanceOf",
@@ -906,7 +906,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 955,
+            "line": 978,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -916,7 +916,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 962,
+            "line": 985,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -2347,7 +2347,7 @@
         },
         {
             "file": "src/state.js",
-            "line": 94,
+            "line": 105,
             "description": "Set the state of a component.",
             "itemtype": "method",
             "name": "set",
@@ -2369,7 +2369,7 @@
         },
         {
             "file": "src/state.js",
-            "line": 103,
+            "line": 114,
             "description": "Get the state of a component.",
             "itemtype": "method",
             "name": "get",
@@ -2390,7 +2390,7 @@
         },
         {
             "file": "src/state.js",
-            "line": 112,
+            "line": 123,
             "description": "Remove all the states of the components from the memory.",
             "itemtype": "method",
             "name": "clear",
@@ -2496,7 +2496,7 @@
         },
         {
             "file": "build/system/system.js",
-            "line": 972,
+            "line": 979,
             "description": "monoco core system",
             "itemtype": "property",
             "name": "system",

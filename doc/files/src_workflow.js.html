@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.6</b>
+                    API Docs for Version: <b>0.6.0</b>
                 </p>
             </li>
         </div>
@@ -685,7 +685,7 @@
                                             &quot;methodName&quot;: params.state,
                                             &quot;methodResult&quot;: result
                                         })) {
-                                            $state.set(component.id(), params.state);
+                                           // $state.set(component.id(), params.state, params.data);
                                         }
                                     } else {
                         
@@ -695,13 +695,13 @@
                                             callAction(component, params.state, action, params.data, true);
                                         }
                         
-                                        $state.set(component.id(), params.state);
+                                        $state.set(component.id(), params.state, params.data);
                                     }
                                 }
                                 return result;
                             } else {
-                                if (component) {
-                                    $state.set(component.id(), params.state);
+                                if (component &amp;&amp; (isEvent || isProperty || isCollection)) {
+                                    $state.set(component.id(), params.state, params.data);
                                 }
                             }
                         }

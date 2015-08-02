@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.5.6</b>
+                    API Docs for Version: <b>0.6.0</b>
                 </p>
             </li>
         </div>
@@ -140,10 +140,21 @@
                          * @method set
                          * @param {String} id component id on which change the state
                          * @param {String} state the new state of the component
+                         * @param {Object} parameters parameters
                          */
-                        function set(id, state) {
-                            store[id] = state;
-                            $db.store.MonocoState[id] = { &quot;name&quot;: state };
+                        function set(id, state, parameters) {
+                            store[id] = {
+                                &quot;name&quot;: state,
+                                &quot;parameters&quot;: {
+                                    &quot;data&quot;: parameters
+                                }
+                            };
+                            $db.store.MonocoState[id] = {
+                                &quot;name&quot;: state,
+                                &quot;parameters&quot;: {
+                                    &quot;data&quot;: parameters
+                                }
+                            };
                         }
                         
                         

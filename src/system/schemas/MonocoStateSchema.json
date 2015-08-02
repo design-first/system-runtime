@@ -2,5 +2,6 @@
     "_id": "MonocoStateSchema",
     "_name": "MonocoStateSchema",
     "_core": true,
-    "name": "property"
+    "name": "property",
+    "parameters": "property"
 }
