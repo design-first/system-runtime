@@ -252,6 +252,17 @@ function clear() {
 }
 
 
+/*
+ * Get a behavior by its id.
+ * @method get
+ * @param {String} id
+ * @return {Behavior} the behavior
+ */
+function get(id) {
+    return store[id];
+}
+
+
 /* exports */
 
 
@@ -280,6 +291,15 @@ function clear() {
  * @return {String} id of the behavior created in monoco database
  */
 exports.add = add;
+
+
+/**
+ * Get a behavior by its id.
+ * @method get
+ * @param {String} id
+ * @return {Behavior} the behavior
+ */
+exports.get = get;
 
 
 /**

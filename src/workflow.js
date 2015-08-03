@@ -321,7 +321,7 @@ function getActions(component, name, isEvent) {
  * @method callAction
  * @param {Component} component
  * @param {String} state name of the state
- * @param {Array} action action
+ * @param {Object} action action
  * @param {Array} params parameters of the action
  * @param {Boolean} isEvent is the action a callback of an event
  * @return {Boolean} result of the action
@@ -524,6 +524,47 @@ function checkParams(params) {
 
 
 /*
+ * Call an action that comes from an event.
+ * @method action
+ * @param {String} behaviorId id of the behavior
+ * @param {Array} params parameters
+ */
+function action(behaviorId, params) {
+    var isEvent = false,
+        isProperty = false,
+        isCollection = false,
+        behaviors = [],
+        behavior = null,
+        component = null,
+        actionFromMemory = null;
+
+    behaviors = $db.MonocoBehavior.find({
+        "_id": behaviorId
+    });
+
+    actionFromMemory = $behavior.get(behaviorId);
+
+    if (behaviors.length === 1) {
+        behavior = behaviors[0];
+
+        component = $component.get(behavior.component);
+        if (component) {
+            isEvent = $metamodel.isEvent(behavior.state, component.constructor.name);
+            isProperty = $metamodel.isProperty(behavior.state, component.constructor.name);
+            isCollection = $metamodel.isCollection(behavior.state, component.constructor.name);
+
+            if (isEvent || isProperty || isCollection) {
+                callAction(component, behavior.state, {
+                    "useCoreAPI": behavior.useCoreAPI,
+                    "action": actionFromMemory
+                }, params, true);
+            }
+        }
+    }
+}
+
+
+/*
  * Change the state of a component.
  * 
  * Worklow:<br>
@@ -590,13 +631,12 @@ function state(params) {
                 action = actions[0];
                 result = callAction(component, params.state, action, params.data, false);
 
-                if (checkResult({
+                checkResult({
                     "component": component,
                     "methodName": params.state,
                     "methodResult": result
-                })) {
-                   // $state.set(component.id(), params.state, params.data);
-                }
+                });
+
             } else {
 
                 length = actions.length;
@@ -610,7 +650,7 @@ function state(params) {
         }
         return result;
     } else {
-        if (component && (isEvent || isProperty || isCollection)) {
+        if (component && (isEvent || isProperty || isCollection)) {
             $state.set(component.id(), params.state, params.data);
         }
     }
@@ -744,3 +784,12 @@ exports.checkParams = checkParams;
  * @return {Boolean} true if the action is the valid number of parameters
  */
 exports.validParamNumbers = validParamNumbers;
+
+
+/**
+ * Call an action that comes from an event.
+ * @method action
+ * @param {String} behaviorId id of the behavior
+ * @param {Array} params parameters
+ */
+exports.action = action;

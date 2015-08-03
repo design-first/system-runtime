@@ -588,7 +588,9 @@ function addEvents(model, Class, classId) {
  */
 function addOn(Class, classId) {
     var body = function (state, handler, useCoreAPI) {
-        var result = '';
+        var behaviorId = '',
+            currentState = '';
+
         if ($workflow.checkParams({
             "component": this,
             "methodName": "on",
@@ -606,16 +608,11 @@ function addOn(Class, classId) {
                     $log.behaviorNotUnique(classId, state);
                 } else {
                     if ($worklow.validParamNumbers(classId, state, handler)) {
-                        result = $behavior.add(this.id(), state, handler, useCoreAPI);
-                        
-                        // experimental
-                        var currentState = $state.get(this.id());
+                        behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI);
+
+                        currentState = $state.get(this.id());
                         if (currentState && state === currentState.name) {
-                            $workflow.state({
-                                "component": this.id(),
-                                "state": state,
-                                "data": currentState.parameters.data
-                            });
+                            $workflow.action(behaviorId, behaviorId);
                         }
 
                     } else {
@@ -626,7 +623,7 @@ function addOn(Class, classId) {
                 $log.invalidStateOn(classId, state);
             }
         }
-        return result;
+        return behaviorId;
     };
     /* jshint -W054 */
     Class.prototype.on = new Function("body", "return function on (state,handler,useCoreAPI) { return body.call(this,state,handler,useCoreAPI) };")(body);
@@ -643,7 +640,9 @@ function addOn(Class, classId) {
  */
 function addOnClass(Class, classId) {
     var body = function (state, handler, useCoreAPI) {
-        var result = '';
+        var behaviorId = '',
+            currentState = '';
+
         if ($workflow.checkParams({
             "component": this,
             "methodName": "on",
@@ -661,16 +660,11 @@ function addOnClass(Class, classId) {
                     $log.behaviorNotUnique(classId, state);
                 } else {
                     if ($worklow.validParamNumbers(classId, state, handler)) {
-                        result = $behavior.add(this.id(), state, handler, useCoreAPI);
-                        
-                        // experimental
-                        var currentState = $state.get(this.id());
+                        behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI);
+
+                        currentState = $state.get(this.id());
                         if (currentState && state === currentState.name) {
-                            $workflow.state({
-                                "component": this.id(),
-                                "state": state,
-                                "data": currentState.parameters.data
-                            });
+                            $workflow.action(behaviorId, behaviorId);
                         }
 
                     } else {
@@ -681,7 +675,7 @@ function addOnClass(Class, classId) {
                 $log.invalidStateOn(classId, state);
             }
         }
-        return result;
+        return behaviorId;
     };
     /* jshint -W054 */
     Class.on = new Function("body", "return function on (state,handler,useCoreAPI) { return body.call(this, state, handler, useCoreAPI) };")(body);
@@ -745,7 +739,6 @@ function addDestroyClass(Class) {
     Class.destroy = new Function("body", "return function destroy () { return body.call(this) };")(body);
     /* jshint +W054 */
 }
-
 
 
 /*
@@ -827,10 +820,16 @@ function get(id) {
 
 
 /*
- * Find  components with a query.
+ * Find components with a query.
  * @method find
- * @param {String} query query
+ * @param {String} Class class name of the component to search
+ * @param {Object|Array} query query
  * @return {Array} components found
+ *
+ * @example 
+ * $component.find("Student", {"name": "laure"}); <br>
+ * $component.find("Student", {"name": "laure", "age" : 24}); <br>
+ * $component.find("Student", [{"name": "rene"}, {"name": "robert"}]);
  */
 function find(Class, query) {
     var documents = [],
@@ -959,8 +958,14 @@ exports.get = get;
 /**
  * Find components with a query.
  * @method find
- * @param {String} query query
+ * @param {String} Class class name of the component to search
+ * @param {Object|Array} query query
  * @return {Array} components found
+ *
+ * @example 
+ * $component.find("Student", {"name": "laure"}); <br>
+ * $component.find("Student", {"name": "laure", "age" : 24}); <br>
+ * $component.find("Student", [{"name": "rene"}, {"name": "robert"}]);
  */
 exports.find = find;
 
