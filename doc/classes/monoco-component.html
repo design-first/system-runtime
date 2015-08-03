@@ -112,7 +112,7 @@
                         				<li><a href="#method-clear"><span class="im">clear</span>()</a></li>
                         				<li><a href="#method-create"><span class="im">create</span>(<span class="ia">config</span>)</a></li>
                         				<li><a href="#method-destroy"><span class="im">destroy</span>(<span class="ia">id</span>)</a></li>
-                        				<li><a href="#method-find"><span class="im">find</span>(<span class="ia">query</span>)</a></li>
+                        				<li><a href="#method-find"><span class="im">find</span>(<span class="ia">Class</span><span class="ia">query</span>)</a></li>
                         				<li><a href="#method-get"><span class="im">get</span>(<span class="ia">id</span>)</a></li>
                         				<li><a href="#method-isInstanceOf"><span class="im">isInstanceOf</span>(<span class="ia">component</span><span class="ia">className</span>)</a></li>
                         			</ul>
@@ -144,7 +144,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_component.js.html#l978"><code>src&#x2F;component.js:978</code></a>
+                                    		<a href="../files/src_component.js.html#l983"><code>src&#x2F;component.js:983</code></a>
                                     		</p>
                                     
                                     
@@ -181,7 +181,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_component.js.html#l941"><code>src&#x2F;component.js:941</code></a>
+                                    		<a href="../files/src_component.js.html#l940"><code>src&#x2F;component.js:940</code></a>
                                     		</p>
                                     
                                     
@@ -238,7 +238,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_component.js.html#l985"><code>src&#x2F;component.js:985</code></a>
+                                    		<a href="../files/src_component.js.html#l990"><code>src&#x2F;component.js:990</code></a>
                                     		</p>
                                     
                                     
@@ -282,6 +282,9 @@
                                     		<div class="args">
                                     			<span class="paren">(</span><ul class="args-list inline commas">
                                     				<li class="arg">
+                                    						<code>Class</code>
+                                    				</li>
+                                    				<li class="arg">
                                     						<code>query</code>
                                     				</li>
                                     			</ul><span class="paren">)</span>
@@ -299,7 +302,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_component.js.html#l959"><code>src&#x2F;component.js:959</code></a>
+                                    		<a href="../files/src_component.js.html#l958"><code>src&#x2F;component.js:958</code></a>
                                     		</p>
                                     
                                     
@@ -314,8 +317,17 @@
                                     
                                     			<ul class="params-list">
                                     				<li class="param">
-                                    						<code class="param-name">query</code>
+                                    						<code class="param-name">Class</code>
                                     						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>class name of the component to search</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    				<li class="param">
+                                    						<code class="param-name">query</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a>  |  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
                                     
                                     
                                     					<div class="param-description"><p>query</p>
@@ -335,6 +347,16 @@
                                     			</div>
                                     		</div>
                                     
+                                    		<div class="example">
+                                    			<h4>Example:</h4>
+                                    
+                                    			<div class="example-content">
+                                    				<p>$component.find("Student", {"name": "laure"}); <br>
+                                    $component.find("Student", {"name": "laure", "age" : 24}); <br>
+                                    $component.find("Student", [{"name": "rene"}, {"name": "robert"}]);</p>
+                                    
+                                    			</div>
+                                    		</div>
                                     </div>
                                     <div id="method-get" class="method item">
                                     	<div class="method-signature">
@@ -360,7 +382,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_component.js.html#l950"><code>src&#x2F;component.js:950</code></a>
+                                    		<a href="../files/src_component.js.html#l949"><code>src&#x2F;component.js:949</code></a>
                                     		</p>
                                     
                                     
@@ -420,7 +442,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_component.js.html#l968"><code>src&#x2F;component.js:968</code></a>
+                                    		<a href="../files/src_component.js.html#l973"><code>src&#x2F;component.js:973</code></a>
                                     		</p>
                                     
                                     

@@ -1,5 +1,27 @@
+/* 
+ * monoco
+ * A Model and a NoSQL Database for Components
+ * http://monoco.io/
+ * @ecarriou
+ *
+ * Copyright (C) 2015 - Erwan Carriou
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+
 module.exports = function (grunt) {
-    // config
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
@@ -98,11 +120,10 @@ module.exports = function (grunt) {
             }
         },
         concat: {
-            systemBehaviors: {
+            systemInfos: {
                 options: {
                     process: function (src, filepath) {
-                        var uid = generateId(),
-                                result = '';
+                        var result = '';
 
                         function generateId() {
                             function gen() {
@@ -111,41 +132,64 @@ module.exports = function (grunt) {
                             return gen() + gen() + gen();
                         }
 
-                        if (filepath.indexOf('banner') !== -1 || filepath.indexOf('footer') !== -1) {
+                        // ID & version
+                        src = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
+                        result = src.replace('{id}', generateId());
 
-                            if (filepath.indexOf('banner') !== -1) {
+                        return result;
+                    }
+                },
+                files: {
+                    'build/monoco.json': ['src/template/banner/system.txt']
+                }
+            },
+            systemBehaviors: {
+                options: {
+                    process: function (src, filepath) {
+                        var result = '',
+                            uuid = '',
+                            behaviors = {};
 
-                                // ID & version
-                                src = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
-                                src = src.replace('{id}', generateId());
-
-                                result = src + '\n"behaviors" : {';
-                            } else {
-                                result = src;
+                        function generateId() {
+                            function gen() {
+                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
                             }
+                            return gen() + gen() + gen();
+                        }
 
+                        if (filepath.indexOf('build') !== -1) {
+                            grunt.option('behaviors', {});
+                            result = src + '\n"behaviors" : {},';
                         } else {
-                            src = src.replace('{', '{"_id":"' + uid + '",');
-                            result = '\"' + uid + '\"' + ':' + src.trim() + ',';
+                            behaviors = grunt.option('behaviors');
+                            uuid = JSON.parse(src)._id;
+                            if (typeof uuid === 'undefined') {
+                                uuid = generateId();
+                                src = src.replace('{', '{"_id":"' + uuid + '",');
+                            }
+                            behaviors[uuid] = JSON.parse(src);
                         }
                         return result;
                     }
                 },
                 files: {
-                    'build/monoco.json': ['src/template/banner/system.txt', 'src/system/behaviors/*/*.json']
+                    'build/monoco.json': ['build/monoco.json', 'src/system/behaviors/*/*.json']
                 }
             },
             systemSchemas: {
                 options: {
                     process: function (src, filepath) {
                         var result = '',
-                                uid = '';
+                            uuid = '',
+                            schemas = {};
 
                         if (filepath.indexOf('build') !== -1) {
-                            result = src + '},\n"schemas" : {';
+                            grunt.option('schemas', {});
+                            result = src + '\n"schemas" : {},';
                         } else {
-                            uid = JSON.parse(src)._id;
-                            result = '\"' + uid + '\"' + ':' + src.trim() + ',';
+                            uuid = JSON.parse(src)._id;
+                            schemas = grunt.option('schemas');
+                            schemas[uuid] = JSON.parse(src);
                         }
                         return result;
                     }
@@ -158,13 +202,16 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result = '',
-                                uid = '';
+                            uuid = '',
+                            types = {};
 
                         if (filepath.indexOf('build') !== -1) {
-                            result = src + '},\n"types" : {';
+                            grunt.option('types', {});
+                            result = src + '\n"types" : {},';
                         } else {
-                            uid = JSON.parse(src).name;
-                            result = '\"' + uid + '\"' + ':' + src.trim() + ',';
+                            uuid = JSON.parse(src).name;
+                            types = grunt.option('types');
+                            types[uuid] = JSON.parse(src);
                         }
                         return result;
                     }
@@ -177,18 +224,28 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result = '',
-                                uid = '',
-                                collectionName = '';
+                            uuid = '',
+                            collectionName = '',
+                            components = {};
 
                         if (filepath.indexOf('build') !== -1) {
-                            result = src + '},\n"components" : {';
+                            result = src + '\n"components" : {}\n}';
+                            grunt.option('components', {});
                         } else {
-                            uid = JSON.parse(src)._id;
+                            components = grunt.option('components');
+
+                            uuid = JSON.parse(src)._id;
 
                             collectionName = filepath.split('components/')[1];
                             collectionName = collectionName.split('/')[0];
+
                             src = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
-                            result = '\"' + collectionName + '\": {\"' + uid + '\"' + ':' + src.trim() + '},';
+
+                            if (typeof components[collectionName] === 'undefined') {
+                                components[collectionName] = {};
+                            }
+
+                            components[collectionName][uuid] = JSON.parse(src);
                         }
                         return result;
                     }
@@ -197,23 +254,22 @@ module.exports = function (grunt) {
                     'build/monoco.json': ['build/monoco.json', 'src/system/components/*/*.json']
                 }
             },
-            systemClean: {
+            systemFill: {
                 options: {
                     process: function (src, filepath) {
-                        var result = '';
+                        var system = {};
 
-                        if (filepath.indexOf('build') !== -1) {
-                            src = src.replace(/\}\,\}\,/g, '}},');
-                            result = src.substring(0, src.length - 1);
-                        } else {
-                            result = src;
-                        }
+                        system = JSON.parse(src);
+                        system.components = grunt.option('components');
+                        system.schemas = grunt.option('schemas');
+                        system.types = grunt.option('types');
+                        system.behaviors = grunt.option('behaviors');
 
-                        return result;
+                        return JSON.stringify(system);
                     }
                 },
                 files: {
-                    'build/monoco.json': ['build/monoco.json', 'src/template/footer/system.txt']
+                    'build/monoco.json': ['build/monoco.json']
                 }
             },
             systemModule: {
@@ -235,6 +291,7 @@ module.exports = function (grunt) {
 
     });
 
+
     // default tasks
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -251,11 +308,12 @@ module.exports = function (grunt) {
 
     // system JSON task
     grunt.registerTask('system-json', [
+        'concat:systemInfos',
         'concat:systemBehaviors',
         'concat:systemSchemas',
-        'concat:systemComponents',
         'concat:systemTypes',
-        'concat:systemClean'
+        'concat:systemComponents',
+        'concat:systemFill'
     ]);
 
     // system node task

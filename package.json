@@ -56,7 +56,6 @@
     "karma-coverage": "^0.4.2",
     "karma-firefox-launcher": "^0.1.6",
     "karma-jasmine": "^0.3.6",
-    "karma-safari-launcher": "^0.1.1",
     "karma-script-launcher": "^0.1.0",
     "yuidoc-lucid-theme": "^0.1.1"
   }

@@ -186,7 +186,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/behavior.js",
-            "line": 258,
+            "line": 269,
             "description": "This module manages the behaviors of all components. \nA behavior is a mecanism that allow users to add actions that will be executed \nwhen a specific state of a component will change.",
             "requires": [
                 "monoco-db",
@@ -230,7 +230,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/component.js",
-            "line": 924,
+            "line": 923,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -401,7 +401,7 @@
             "submodule": "monoco-behavior",
             "namespace": "",
             "file": "src/behavior.js",
-            "line": 258,
+            "line": 269,
             "description": "This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed \nwhen a specific state of a component will change.",
             "requires": [
                 "monoco-db",
@@ -443,7 +443,7 @@
             "submodule": "monoco-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 924,
+            "line": 923,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -608,7 +608,7 @@
             "submodule": "monoco-workflow",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 663,
+            "line": 703,
             "description": "This module manages the workflow of monoco. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and monoco. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
                 "monoco-metamodel",
@@ -663,7 +663,7 @@
     "classitems": [
         {
             "file": "src/behavior.js",
-            "line": 272,
+            "line": 283,
             "description": "Add a behavior that will be stored in monoco database.",
             "itemtype": "method",
             "name": "add",
@@ -704,7 +704,28 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 285,
+            "line": 296,
+            "description": "Get a behavior by its id.",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the behavior",
+                "type": "Behavior"
+            },
+            "class": "monoco-behavior",
+            "module": "monoco",
+            "submodule": "monoco-behavior"
+        },
+        {
+            "file": "src/behavior.js",
+            "line": 305,
             "description": "Remove a behavior with its id or remove all the behaviors for a specific state\nof the component.",
             "itemtype": "method",
             "name": "remove",
@@ -721,7 +742,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 297,
+            "line": 317,
             "description": "Get all the actions of a behavior for a component.",
             "itemtype": "method",
             "name": "getActions",
@@ -747,7 +768,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 307,
+            "line": 327,
             "description": "Remove all the behaviors stored in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -757,7 +778,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 314,
+            "line": 334,
             "description": "Remove a behavior with its id from the memory.",
             "itemtype": "method",
             "name": "removeFromMemory",
@@ -817,7 +838,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 941,
+            "line": 940,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -838,7 +859,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 950,
+            "line": 949,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -859,28 +880,36 @@
         },
         {
             "file": "src/component.js",
-            "line": 959,
+            "line": 958,
             "description": "Find components with a query.",
             "itemtype": "method",
             "name": "find",
             "params": [
                 {
+                    "name": "Class",
+                    "description": "class name of the component to search",
+                    "type": "String"
+                },
+                {
                     "name": "query",
                     "description": "query",
-                    "type": "String"
+                    "type": "Object|Array"
                 }
             ],
             "return": {
                 "description": "components found",
                 "type": "Array"
             },
+            "example": [
+                " \n$component.find(\"Student\", {\"name\": \"laure\"}); <br>\n$component.find(\"Student\", {\"name\": \"laure\", \"age\" : 24}); <br>\n$component.find(\"Student\", [{\"name\": \"rene\"}, {\"name\": \"robert\"}]);"
+            ],
             "class": "monoco-component",
             "module": "monoco",
             "submodule": "monoco-component"
         },
         {
             "file": "src/component.js",
-            "line": 968,
+            "line": 973,
             "description": "Check if the component has for class name className.",
             "itemtype": "method",
             "name": "isInstanceOf",
@@ -906,7 +935,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 978,
+            "line": 983,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -916,7 +945,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 985,
+            "line": 990,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -2400,7 +2429,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 688,
+            "line": 728,
             "description": "Change the state of a component.\n\nWorklow:<br>\n<br>\n0. Check if the component has not been destroyed <br>\n1. Check if the state is a method or an event <br>\n2. Search if there is a behavior with an action for the new state <br>\n3. If so, get the action(s) <br>\n4. Check if the conditons on input are compliant with the metamodel <br>\n5. Call the action(s) <br>\n6. If not an of event, check if the conditons on input are compliant with the metamodel <br>\n7. If all is ok, the state of the component is updated <br>\n8. Return the result <br>",
             "itemtype": "method",
             "name": "state",
@@ -2417,7 +2446,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 712,
+            "line": 752,
             "description": "Stop the workflow engine.",
             "itemtype": "method",
             "name": "stop",
@@ -2434,7 +2463,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 722,
+            "line": 762,
             "description": "Restart the workflow engine from the last state.",
             "itemtype": "method",
             "name": "restart",
@@ -2444,7 +2473,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 729,
+            "line": 769,
             "description": "Check if conditions on input are compliant with the model before calling the action.",
             "itemtype": "method",
             "name": "checkParams",
@@ -2465,7 +2494,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 738,
+            "line": 778,
             "description": "Check if an action has the valid number of parameter.",
             "itemtype": "method",
             "name": "validParamNumbers",
@@ -2490,6 +2519,28 @@
                 "description": "true if the action is the valid number of parameters",
                 "type": "Boolean"
             },
+            "class": "monoco-workflow",
+            "module": "monoco",
+            "submodule": "monoco-workflow"
+        },
+        {
+            "file": "src/workflow.js",
+            "line": 789,
+            "description": "Call an action that comes from an event.",
+            "itemtype": "method",
+            "name": "action",
+            "params": [
+                {
+                    "name": "behaviorId",
+                    "description": "id of the behavior",
+                    "type": "String"
+                },
+                {
+                    "name": "params",
+                    "description": "parameters",
+                    "type": "Array"
+                }
+            ],
             "class": "monoco-workflow",
             "module": "monoco",
             "submodule": "monoco-workflow"

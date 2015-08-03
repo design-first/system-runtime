@@ -411,7 +411,7 @@
                          * @method callAction
                          * @param {Component} component
                          * @param {String} state name of the state
-                         * @param {Array} action action
+                         * @param {Object} action action
                          * @param {Array} params parameters of the action
                          * @param {Boolean} isEvent is the action a callback of an event
                          * @return {Boolean} result of the action
@@ -614,6 +614,47 @@
                         
                         
                         /*
+                         * Call an action that comes from an event.
+                         * @method action
+                         * @param {String} behaviorId id of the behavior
+                         * @param {Array} params parameters
+                         */
+                        function action(behaviorId, params) {
+                            var isEvent = false,
+                                isProperty = false,
+                                isCollection = false,
+                                behaviors = [],
+                                behavior = null,
+                                component = null,
+                                actionFromMemory = null;
+                        
+                            behaviors = $db.MonocoBehavior.find({
+                                &quot;_id&quot;: behaviorId
+                            });
+                        
+                            actionFromMemory = $behavior.get(behaviorId);
+                        
+                            if (behaviors.length === 1) {
+                                behavior = behaviors[0];
+                        
+                                component = $component.get(behavior.component);
+                                if (component) {
+                                    isEvent = $metamodel.isEvent(behavior.state, component.constructor.name);
+                                    isProperty = $metamodel.isProperty(behavior.state, component.constructor.name);
+                                    isCollection = $metamodel.isCollection(behavior.state, component.constructor.name);
+                        
+                                    if (isEvent || isProperty || isCollection) {
+                                        callAction(component, behavior.state, {
+                                            &quot;useCoreAPI&quot;: behavior.useCoreAPI,
+                                            &quot;action&quot;: actionFromMemory
+                                        }, params, true);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        
+                        /*
                          * Change the state of a component.
                          * 
                          * Worklow:&lt;br&gt;
@@ -680,13 +721,12 @@
                                         action = actions[0];
                                         result = callAction(component, params.state, action, params.data, false);
                         
-                                        if (checkResult({
+                                        checkResult({
                                             &quot;component&quot;: component,
                                             &quot;methodName&quot;: params.state,
                                             &quot;methodResult&quot;: result
-                                        })) {
-                                           // $state.set(component.id(), params.state, params.data);
-                                        }
+                                        });
+                        
                                     } else {
                         
                                         length = actions.length;
@@ -700,7 +740,7 @@
                                 }
                                 return result;
                             } else {
-                                if (component &amp;&amp; (isEvent || isProperty || isCollection)) {
+                                if (component &amp;&amp; (isEvent || isProperty || isCollection)) {
                                     $state.set(component.id(), params.state, params.data);
                                 }
                             }
@@ -834,6 +874,15 @@
                          * @return {Boolean} true if the action is the valid number of parameters
                          */
                         exports.validParamNumbers = validParamNumbers;
+                        
+                        
+                        /**
+                         * Call an action that comes from an event.
+                         * @method action
+                         * @param {String} behaviorId id of the behavior
+                         * @param {Array} params parameters
+                         */
+                        exports.action = action;
                             </pre>
                         </div>
                     </div>
