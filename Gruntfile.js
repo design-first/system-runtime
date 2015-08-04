@@ -38,7 +38,7 @@ module.exports = function (grunt) {
             files: [
                 'src/*.js',
                 'build/system/*.js',
-                'spec/*.js'
+                'test/*.js'
             ],
             options: {
                 jshintrc: true
@@ -81,8 +81,8 @@ module.exports = function (grunt) {
             },
             monoco: {
                 specs: [
-                    "spec/module/**",
-                    "spec/monoco/**"
+                    "test/module/**",
+                    "test/monoco/**"
                 ]
             }
         },

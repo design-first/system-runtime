@@ -27,14 +27,14 @@ module.exports = function (config) {
         frameworks: ['jasmine'],
         files: [
             "build/monoco-min.js",
-            "spec/monoco/monoco-spec.js",
-            "spec/monoco/component-spec.js",
-            "spec/monoco/metamodel-spec.js",
-            "spec/monoco/database-spec.js",
-            "spec/monoco/classInfo-spec.js",
-            "spec/monoco/system-spec.js",
-            "spec/monoco/mson-spec.js",
-            "spec/monoco/channel-spec.js"
+            "test/monoco/monoco-spec.js",
+            "test/monoco/component-spec.js",
+            "test/monoco/metamodel-spec.js",
+            "test/monoco/database-spec.js",
+            "test/monoco/classInfo-spec.js",
+            "test/monoco/system-spec.js",
+            "test/monoco/mson-spec.js",
+            "test/monoco/channel-spec.js"
         ],
         reporters: ['progress', 'coverage'],
         preprocessors: {
