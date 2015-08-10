@@ -14,11 +14,12 @@
 
 #### What is monoco ?
 
-It is a **4-in-1 JavaScript library**:
+It is a **5-in-1 JavaScript library**:
 
 * it is **a metamodel** that helps you to design components,
 * it is **a component factory** that creates components based on your design,
-* it is **a worflow engine** that checks at runtime if the signatures of invoked methods are compliant with your model and
+* it is **a worflow engine** that checks at runtime if the signatures of invoked methods are compliant with your model,
+* it is an **ODM (Object Document Mapper)** to manage your components as NoSQL documents and
 * it is **a micro NoSQL Database** that stores your components and can export/import them into another monoco NoSQL Database.
 
 Finally monoco helps you to design, create and store components.
@@ -89,7 +90,7 @@ $ grunt build
 To extend monoco core system or to package your own system with monoco, you will need to use grunt commands. Here are the different tasks you can use to automate tasks:
 
 ```sh
-# run server tests (from /spec/)
+# run server tests (from /test/)
 $ grunt test
 # generate the documentation (on /doc/)
 $ grunt doc

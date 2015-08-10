@@ -69,6 +69,12 @@ var store = {},
         'MonocoClassInfo',
         'MonocoMessage',
         'MonocoChannel'
+    ],
+    coreDb = [
+        'MonocoSchema',
+        'MonocoExtendedSchema',
+        'MonocoState',
+        'MonocoType'
     ];
 
 
@@ -220,7 +226,9 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
 
                 if (this.name === 'MonocoMessage') {
                     if ($helper.isMonoco() && $helper.getMonoco().require('channel')) {
-                        $helper.getMonoco().require('channel')[obj.event](obj.data);
+                        if (!store.MonocoSystem[obj.from]) { // TODO check also master system ?
+                            $helper.getMonoco().require('channel')[obj.event](obj.data);
+                        }
                     }
                 }
 
@@ -373,9 +381,12 @@ MonocoDatabaseCollection.prototype.remove = function (query) {
     } else {
         for (id in store[this.name]) {
             delete store[this.name][id];
-            component = $component.get(id);
-            if (component) {
-                component.destroy();
+
+            if (coreDb.indexOf(this.name) == -1) {
+                component = $component.get(id);
+                if (component) {
+                    component.destroy();
+                }
             }
             if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
                 $helper.getMonoco().require('db').remove(this.name, id);
@@ -681,7 +692,7 @@ function clear() {
     var length = 0,
         i = 0,
         collectionName = '';
-
+    
     // remove collections
     length = collections.length;
     for (i = 0; i < length; i++) {

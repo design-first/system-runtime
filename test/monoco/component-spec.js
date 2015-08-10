@@ -28,7 +28,7 @@ describe('a monoco component', function () {
             'description': 'a person',
             'children': {
                 'type': ['@Person'],
-                'readOnly': true,
+                'readOnly': false,
                 'mandatory': false,
                 'default': []
             },
@@ -96,7 +96,7 @@ describe('a monoco component', function () {
     });
 
     it('can add an event on a property change', function (done) {
-        var system = monoco.system();
+        var system = monoco.system('testEventAdd');
         share = '';
 
         system.on('version', function (val) {
@@ -111,7 +111,7 @@ describe('a monoco component', function () {
     });
 
     it('can remove an event on a property change', function (done) {
-        var system = monoco.system();
+        var system = monoco.system('testEventRemove');
         system.off('version');
 
         system.version('0.0.0');
@@ -165,7 +165,7 @@ describe('a monoco component', function () {
             done();
         }, 1);
     });
- 
+
     it('can get a collection', function (done) {
         setTimeout(function () {
             var anakin = monoco.find('Person', { 'firstName': 'Anakin' })[0];

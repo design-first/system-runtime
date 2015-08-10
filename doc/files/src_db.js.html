@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.6.0</b>
+                    API Docs for Version: <b>0.6.1</b>
                 </p>
             </li>
         </div>
@@ -159,6 +159,12 @@
                                 &#x27;MonocoClassInfo&#x27;,
                                 &#x27;MonocoMessage&#x27;,
                                 &#x27;MonocoChannel&#x27;
+                            ],
+                            coreDb = [
+                                &#x27;MonocoSchema&#x27;,
+                                &#x27;MonocoExtendedSchema&#x27;,
+                                &#x27;MonocoState&#x27;,
+                                &#x27;MonocoType&#x27;
                             ];
                         
                         
@@ -310,7 +316,9 @@
                         
                                         if (this.name === &#x27;MonocoMessage&#x27;) {
                                             if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;channel&#x27;)) {
-                                                $helper.getMonoco().require(&#x27;channel&#x27;)[obj.event](obj.data);
+                                                if (!store.MonocoSystem[obj.from]) { // TODO check also master system ?
+                                                    $helper.getMonoco().require(&#x27;channel&#x27;)[obj.event](obj.data);
+                                                }
                                             }
                                         }
                         
@@ -463,9 +471,12 @@
                             } else {
                                 for (id in store[this.name]) {
                                     delete store[this.name][id];
-                                    component = $component.get(id);
-                                    if (component) {
-                                        component.destroy();
+                        
+                                    if (coreDb.indexOf(this.name) == -1) {
+                                        component = $component.get(id);
+                                        if (component) {
+                                            component.destroy();
+                                        }
                                     }
                                     if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
                                         $helper.getMonoco().require(&#x27;db&#x27;).remove(this.name, id);
@@ -771,7 +782,7 @@
                             var length = 0,
                                 i = 0,
                                 collectionName = &#x27;&#x27;;
-                        
+                            
                             // remove collections
                             length = collections.length;
                             for (i = 0; i &lt; length; i++) {

@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.6.0</b>
+                    API Docs for Version: <b>0.6.1</b>
                 </p>
             </li>
         </div>
@@ -145,7 +145,7 @@
                             METHOD_TYPE = &#x27;method&#x27;,
                             EVENT_TYPE = &#x27;event&#x27;,
                             store = {};
-                        
+                            
                         
                         /* Private methods */
                         
@@ -164,13 +164,18 @@
                                 arrDb = [],
                                 type = &#x27;&#x27;,
                                 id = &#x27;&#x27;,
-                                propertyName = &#x27;&#x27;;
+                                propertyName = &#x27;&#x27;,
+                                isReadOnly = false;
                         
                             conf = conf || {};
                             type = conf.type || &#x27;&#x27;;
                             id = conf.id || &#x27;&#x27;;
                             propertyName = conf.propertyName || &#x27;&#x27;;
                             arrDb = conf.arr || [];
+                        
+                            if (typeof conf.readOnly !== &#x27;undefined&#x27;) {
+                                isReadOnly = conf.readOnly;
+                            }
                         
                             arrDb.forEach(function (val) {
                                 if (type.indexOf(&#x27;@&#x27;) !== -1) {
@@ -181,49 +186,62 @@
                             });
                         
                             arr.push = function (val) {
-                                var isValid = false,
-                                    isClass = false;
+                                var isClass = false;
                         
-                                isClass = type.indexOf(&#x27;@&#x27;) !== -1;
+                                if (!isReadOnly) {
                         
-                                if (isClass) {
-                                    if (val &amp;&amp; (val.constructor.name === type.replace(&#x27;@&#x27;, &#x27;&#x27;))) {
-                                        this[this.length] = val;
-                                        arrDb.push(val.id());
+                                    isClass = type.indexOf(&#x27;@&#x27;) !== -1;
                         
-                                        $workflow.state({
-                                            &quot;component&quot;: id,
-                                            &quot;state&quot;: propertyName,
-                                            &quot;data&quot;: [arrDb.length, val.id(), &#x27;add&#x27;]
-                                        });
+                                    if (isClass) {
+                                        if (val &amp;&amp; $metamodel.inheritFrom(val.constructor.name, type.replace(&#x27;@&#x27;, &#x27;&#x27;))) {
+                                            this[this.length] = val;
+                                            arrDb.push(val.id());
+                        
+                                            $workflow.state({
+                                                &quot;component&quot;: id,
+                                                &quot;state&quot;: propertyName,
+                                                &quot;data&quot;: [arrDb.length, val.id(), &#x27;add&#x27;]
+                                            });
+                                        } else {
+                                            $log.invalidPropertyName(id, propertyName, val.id(), type);
+                                        }
+                                    } else { // TODO collection of object usefull ?
+                                        if (val &amp;&amp; $metamodel.isValidType(val, type)) {
+                                            this[this.length] = val;
+                                            arrDb.push(val);
+                        
+                                            $workflow.state({
+                                                &quot;component&quot;: id,
+                                                &quot;state&quot;: propertyName,
+                                                &quot;data&quot;: [arrDb.length, val, &#x27;add&#x27;]
+                                            });
+                                        } else {
+                                            $log.invalidPropertyName(id, propertyName, val.id(), type);
+                                        }
                                     }
-                                } else { // TODO collection of object usefull ?
-                                    if (val &amp;&amp; $metamodel.isValidType(val, type)) {
-                                        this[this.length] = val;
-                                        arrDb.push(val);
-                        
-                                        $workflow.state({
-                                            &quot;component&quot;: id,
-                                            &quot;state&quot;: propertyName,
-                                            &quot;data&quot;: [arrDb.length, val, &#x27;add&#x27;]
-                                        });
-                                    }
+                                } else {
+                                    $log.readOnlyProperty(id, propertyName);
                                 }
                             };
                         
                             arr.pop = function () {
                                 var result = null;
-                                arrDb.pop();
-                                if (this.length !== 0) {
-                                    var data = this[this.length - 1];
-                                    result = this.splice(this.length - 1, 1);
-                                    $workflow.state({
-                                        &quot;component&quot;: id,
-                                        &quot;state&quot;: propertyName,
-                                        &quot;data&quot;: [arrDb.length - 1, data, &#x27;remove&#x27;]
-                                    });
+                        
+                                if (!isReadOnly) {
+                                    arrDb.pop();
+                                    if (this.length !== 0) {
+                                        var data = this[this.length - 1];
+                                        result = this.splice(this.length - 1, 1);
+                                        $workflow.state({
+                                            &quot;component&quot;: id,
+                                            &quot;state&quot;: propertyName,
+                                            &quot;data&quot;: [arrDb.length - 1, data, &#x27;remove&#x27;]
+                                        });
+                                    } else {
+                                        result = this;
+                                    }
                                 } else {
-                                    result = this;
+                                    $log.readOnlyProperty(id, propertyName);
                                 }
                                 return result;
                             };
@@ -478,6 +496,7 @@
                                                 monocoArr = new monocoArray({
                                                     &quot;id&quot;: this.id(),
                                                     &quot;propertyName&quot;: propertyName,
+                                                    &quot;readOnly&quot;: propertyReadOnly,
                                                     &quot;classId&quot;: classId,
                                                     &quot;type&quot;: propertyType[0],
                                                     &quot;arr&quot;: $db.store[classId][this.id()][propertyName]
@@ -499,8 +518,13 @@
                                             if (propertyReadOnly) {
                                                 $log.readOnlyProperty(this.id(), propertyName);
                                             } else {
-                                                if ($metamodel.isValidType(value, propertyType[0])) {
-                                                    search = $db[classId].find({ &quot;_id&quot;: this.id() });
+                                                if (
+                                                    $metamodel.isValidType(value, propertyType[0]) ||
+                                                    ($metamodel.inheritFrom(value.constructor.name, propertyType[0].replace(&#x27;@&#x27;, &#x27;&#x27;)) &amp;&amp; (propertyType[0].indexOf(&#x27;@&#x27;) !== -1))
+                                                    ) {
+                                                    search = $db[classId].find({
+                                                        &quot;_id&quot;: this.id()
+                                                    });
                                                     if (search.length) {
                         
                                                         if (propertyType[0].indexOf(&#x27;@&#x27;) !== -1) {

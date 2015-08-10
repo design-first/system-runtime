@@ -1,10 +1,14 @@
 describe('a monoco system', function () {
 
+    var system = null;
+    
     // init
-    if (typeof window === 'undefined') {
-        monoco = require('../../src/monoco.js');
-    }
-    var system = monoco.system('test5');
+    beforeEach(function () {
+        if (typeof window === 'undefined') {
+            monoco = require('../../src/monoco.js');
+        }
+        system = monoco.system('test5');
+    });
 
     it('has a name', function () {
         expect(system.name()).toBe('test5');

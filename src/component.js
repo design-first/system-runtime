@@ -55,7 +55,7 @@ var PROPERTY_TYPE = 'property',
     METHOD_TYPE = 'method',
     EVENT_TYPE = 'event',
     store = {};
-
+    
 
 /* Private methods */
 
@@ -74,13 +74,18 @@ function monocoArray(conf) {
         arrDb = [],
         type = '',
         id = '',
-        propertyName = '';
+        propertyName = '',
+        isReadOnly = false;
 
     conf = conf || {};
     type = conf.type || '';
     id = conf.id || '';
     propertyName = conf.propertyName || '';
     arrDb = conf.arr || [];
+
+    if (typeof conf.readOnly !== 'undefined') {
+        isReadOnly = conf.readOnly;
+    }
 
     arrDb.forEach(function (val) {
         if (type.indexOf('@') !== -1) {
@@ -91,49 +96,62 @@ function monocoArray(conf) {
     });
 
     arr.push = function (val) {
-        var isValid = false,
-            isClass = false;
+        var isClass = false;
 
-        isClass = type.indexOf('@') !== -1;
+        if (!isReadOnly) {
 
-        if (isClass) {
-            if (val && (val.constructor.name === type.replace('@', ''))) {
-                this[this.length] = val;
-                arrDb.push(val.id());
+            isClass = type.indexOf('@') !== -1;
 
-                $workflow.state({
-                    "component": id,
-                    "state": propertyName,
-                    "data": [arrDb.length, val.id(), 'add']
-                });
+            if (isClass) {
+                if (val && $metamodel.inheritFrom(val.constructor.name, type.replace('@', ''))) {
+                    this[this.length] = val;
+                    arrDb.push(val.id());
+
+                    $workflow.state({
+                        "component": id,
+                        "state": propertyName,
+                        "data": [arrDb.length, val.id(), 'add']
+                    });
+                } else {
+                    $log.invalidPropertyName(id, propertyName, val.id(), type);
+                }
+            } else { // TODO collection of object usefull ?
+                if (val && $metamodel.isValidType(val, type)) {
+                    this[this.length] = val;
+                    arrDb.push(val);
+
+                    $workflow.state({
+                        "component": id,
+                        "state": propertyName,
+                        "data": [arrDb.length, val, 'add']
+                    });
+                } else {
+                    $log.invalidPropertyName(id, propertyName, val.id(), type);
+                }
             }
-        } else { // TODO collection of object usefull ?
-            if (val && $metamodel.isValidType(val, type)) {
-                this[this.length] = val;
-                arrDb.push(val);
-
-                $workflow.state({
-                    "component": id,
-                    "state": propertyName,
-                    "data": [arrDb.length, val, 'add']
-                });
-            }
+        } else {
+            $log.readOnlyProperty(id, propertyName);
         }
     };
 
     arr.pop = function () {
         var result = null;
-        arrDb.pop();
-        if (this.length !== 0) {
-            var data = this[this.length - 1];
-            result = this.splice(this.length - 1, 1);
-            $workflow.state({
-                "component": id,
-                "state": propertyName,
-                "data": [arrDb.length - 1, data, 'remove']
-            });
+
+        if (!isReadOnly) {
+            arrDb.pop();
+            if (this.length !== 0) {
+                var data = this[this.length - 1];
+                result = this.splice(this.length - 1, 1);
+                $workflow.state({
+                    "component": id,
+                    "state": propertyName,
+                    "data": [arrDb.length - 1, data, 'remove']
+                });
+            } else {
+                result = this;
+            }
         } else {
-            result = this;
+            $log.readOnlyProperty(id, propertyName);
         }
         return result;
     };
@@ -388,6 +406,7 @@ function addProperties(model, Class, classId) {
                         monocoArr = new monocoArray({
                             "id": this.id(),
                             "propertyName": propertyName,
+                            "readOnly": propertyReadOnly,
                             "classId": classId,
                             "type": propertyType[0],
                             "arr": $db.store[classId][this.id()][propertyName]
@@ -409,8 +428,13 @@ function addProperties(model, Class, classId) {
                     if (propertyReadOnly) {
                         $log.readOnlyProperty(this.id(), propertyName);
                     } else {
-                        if ($metamodel.isValidType(value, propertyType[0])) {
-                            search = $db[classId].find({ "_id": this.id() });
+                        if (
+                            $metamodel.isValidType(value, propertyType[0]) ||
+                            ($metamodel.inheritFrom(value.constructor.name, propertyType[0].replace('@', '')) && (propertyType[0].indexOf('@') !== -1))
+                            ) {
+                            search = $db[classId].find({
+                                "_id": this.id()
+                            });
                             if (search.length) {
 
                                 if (propertyType[0].indexOf('@') !== -1) {

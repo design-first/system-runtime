@@ -2,7 +2,7 @@
     "project": {
         "name": "monoco",
         "description": "A Model and a NoSQL Database for Components",
-        "version": "0.6.0",
+        "version": "0.6.1",
         "url": "http://monoco.io"
     },
     "files": {
@@ -230,7 +230,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/component.js",
-            "line": 923,
+            "line": 947,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -255,7 +255,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/db.js",
-            "line": 100,
+            "line": 106,
             "description": "This module manages monoco database. <br>\nmonoco database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nmonoco Database is closely linked to monoco metamodel and monoco components because: <br>\n- all operations done by monoco database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "monoco-component",
@@ -443,7 +443,7 @@
             "submodule": "monoco-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 923,
+            "line": 947,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -466,7 +466,7 @@
             "submodule": "monoco-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 730,
+            "line": 741,
             "description": "This module manages monoco database. <br>\nmonoco database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nmonoco database is closely linked to monoco metamodel because: <br>\n- all operations done by monoco database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "monoco-component",
@@ -486,7 +486,7 @@
             "submodule": "monoco-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 100,
+            "line": 106,
             "description": "A collection of documents managed by monoco. <br>\nInternal collections manage core objects of monoco (schema, type, ...). <br>\nPublic collections manage components of the same class. <br>",
             "is_constructor": 1,
             "params": [
@@ -838,7 +838,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 940,
+            "line": 964,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -859,7 +859,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 949,
+            "line": 973,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -880,7 +880,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 958,
+            "line": 982,
             "description": "Find components with a query.",
             "itemtype": "method",
             "name": "find",
@@ -909,7 +909,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 973,
+            "line": 997,
             "description": "Check if the component has for class name className.",
             "itemtype": "method",
             "name": "isInstanceOf",
@@ -935,7 +935,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 983,
+            "line": 1007,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -945,7 +945,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 990,
+            "line": 1014,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -966,7 +966,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 122,
+            "line": 128,
             "description": "Find a document into the collection.",
             "itemtype": "method",
             "name": "find",
@@ -990,7 +990,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 169,
+            "line": 175,
             "description": "Insert an new document into the collection. <br>\nBefore inserting the document, monoco checks that the document is compliant\nwith its class definition. <br> \nThen, after inserting it, we create the component.",
             "itemtype": "method",
             "name": "insert",
@@ -1014,7 +1014,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 238,
+            "line": 246,
             "description": "Update documents into a collection.",
             "itemtype": "method",
             "name": "update",
@@ -1048,7 +1048,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 317,
+            "line": 325,
             "description": "Remove a document from the colllection. <br>\nWhen a document is removed, the component is destroyed.",
             "itemtype": "method",
             "name": "remove",
@@ -1072,7 +1072,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 391,
+            "line": 402,
             "description": "Count the number of documents in the collection.",
             "itemtype": "method",
             "name": "count",
@@ -1086,7 +1086,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 751,
+            "line": 762,
             "description": "Create a new {{#crossLink \"MonocoDatabaseCollection\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "collection",
@@ -1103,7 +1103,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 759,
+            "line": 770,
             "description": "monoco database store that list all the collections.",
             "itemtype": "property",
             "name": "store",
@@ -1114,7 +1114,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 766,
+            "line": 777,
             "description": "Dump the database.",
             "itemtype": "method",
             "name": "dump",
@@ -1128,7 +1128,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 778,
+            "line": 789,
             "description": "Import/Export a monoco system into/from the database.",
             "itemtype": "method",
             "name": "system",
@@ -1149,7 +1149,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 787,
+            "line": 798,
             "description": "Export a monoco sub-system.",
             "itemtype": "method",
             "name": "subsystem",
@@ -1173,7 +1173,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 803,
+            "line": 814,
             "description": "Clear the database.",
             "itemtype": "method",
             "name": "clear",
@@ -1183,7 +1183,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 810,
+            "line": 821,
             "description": "Init the database.",
             "itemtype": "method",
             "name": "init",

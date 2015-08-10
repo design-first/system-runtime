@@ -89,24 +89,4 @@ describe('a monoco channel instance', function () {
 
         expect(result).toBe(true);
     });
-
-    it('can listen to a message', function (done) {
-        var channel = monoco.require('channel');
-
-        channel.listen('test', function (message) {
-            this.message(message.foo);
-        });
-
-        channel.send({
-            "event": "test",
-            "data": {
-                "foo": "bar"
-            }
-        });
-
-        setTimeout(function () {
-            expect(monoco.require('channel').message()).toBe('bar');
-            done();
-        }, 1);
-    });
 });
