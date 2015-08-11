@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.6.1</b>
+                    API Docs for Version: <b>0.6.5</b>
                 </p>
             </li>
         </div>
@@ -160,9 +160,11 @@
                                 systems = [];
                         
                             if ($helper.isMonoco()) {
-                                systems = $helper.getMonoco().find(&#x27;MonocoSystem&#x27;, { &#x27;master&#x27;: true });
+                                systems = $db.MonocoSystem.find({
+                                    &#x27;master&#x27;: true
+                                });
                                 if (systems.length) {
-                                    systemId = systems[0].id();
+                                    systemId = systems[0]._id;
                                 }
                             }
                         

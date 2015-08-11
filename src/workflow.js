@@ -347,7 +347,7 @@ function callAction(component, state, action, params, isEvent) {
             injectedParams.push($metamodel);
             injectedParams.push(exports);
             injectedParams.push($behavior);
-            injectedParams.push($log);
+            injectedParams.push($state);
             injectedParams.push($channel);
 
             if (isEvent) {

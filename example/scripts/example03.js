@@ -55,7 +55,7 @@ var exportedSystem = {
 monoco.require('db').system(exportedSystem);
 
 // find the component
-var example02 = monoco.find('Example02', {})[0];
+var example02 = monoco.require('Example02');
 
 var message = example02.hello('world');
 

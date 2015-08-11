@@ -70,9 +70,11 @@ function send(message) {
         systems = [];
 
     if ($helper.isMonoco()) {
-        systems = $helper.getMonoco().find('MonocoSystem', { 'master': true });
+        systems = $db.MonocoSystem.find({
+            'master': true
+        });
         if (systems.length) {
-            systemId = systems[0].id();
+            systemId = systems[0]._id;
         }
     }
 

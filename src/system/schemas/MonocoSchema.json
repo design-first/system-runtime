@@ -4,7 +4,6 @@
     "_inherit": ["MonocoComponentSchema"],
     "_core": true,
     "version": "property",
-    "find": "method",
     "load": "method",
     "system": "method",
     "warning": "event"

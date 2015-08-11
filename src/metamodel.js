@@ -1293,7 +1293,7 @@ function inheritFrom(name, parentName) {
         parents = [],
         i = 0,
         length = 0;
-
+        
     /*
      * 
      * Check if a class inherits from another one
@@ -1311,7 +1311,7 @@ function inheritFrom(name, parentName) {
 
         parents = getParents(className);
         if (parents.length !== 0) {
-            if (parents.indexOf(ancestorName) !== 1) {
+            if (parents.indexOf(ancestorName) !== -1) {
                 isAncestor = true;
             } else {
                 for (i = 0; i < length; i++) {
@@ -1325,18 +1325,22 @@ function inheritFrom(name, parentName) {
         return isAncestor;
     }
 
-    parents = getParents(name);
-    if (parents.length !== 0) {
-        if (parents.indexOf(parentName) !== 1) {
-            result = true;
-        } else {
-            for (i = 0; i < length; i++) {
-                result = _searchParent(parents[i], parentName);
-                if (result) {
-                    break;
+    if (name !== parentName) {
+        parents = getParents(name);
+        if (parents.length !== 0) {
+            if (parents.indexOf(parentName) !== -1) {
+                result = true;
+            } else {
+                for (i = 0; i < length; i++) {
+                    result = _searchParent(parents[i], parentName);
+                    if (result) {
+                        break;
+                    }
                 }
             }
         }
+    } else {
+        result = true;
     }
 
     return result;

@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.6.1</b>
+                    API Docs for Version: <b>0.6.5</b>
                 </p>
             </li>
         </div>
@@ -191,7 +191,7 @@
                                 params.push(&#x27;$metamodel&#x27;);
                                 params.push(&#x27;$workflow&#x27;);
                                 params.push(&#x27;$behavior&#x27;);
-                                params.push(&#x27;$log&#x27;);
+                                params.push(&#x27;$state&#x27;);
                                 params.push(&#x27;$channel&#x27;);
                             }
                         
@@ -230,7 +230,7 @@
                                 core = false;
                             }
                             if (typeof useCoreAPI === &#x27;undefined&#x27;) {
-                                useCoreAPI = false;
+                                useCoreAPI = true;
                             }
                         
                             if (useCoreAPI) {

@@ -606,13 +606,13 @@ function subsystem(params) {
         behavior = null,
         component = null,
         className = '';
-
+    
     // default values
-    result = monoco.find('MonocoSystem', {
+    result = exports.MonocoSystem.find({
         'master': true
     });
     if (result.length) {
-        defaultName = result[0].name();
+        defaultName = result[0].name;
     }
 
     system.name = params.name || 'sub_' + defaultName;

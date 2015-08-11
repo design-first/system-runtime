@@ -1,7 +1,0 @@
-{
-    "component": "Monoco",
-    "state": "find",
-    "action": "function find(Class, query) { return $component.find(Class, query);}",
-    "core": true,
-    "useCoreAPI": true
-}

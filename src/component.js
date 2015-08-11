@@ -126,7 +126,7 @@ function monocoArray(conf) {
                         "data": [arrDb.length, val, 'add']
                     });
                 } else {
-                    $log.invalidPropertyName(id, propertyName, val.id(), type);
+                    $log.invalidPropertyName(id, propertyName, val, type);
                 }
             }
         } else {
@@ -812,10 +812,7 @@ function factory(config) {
 
     // add default properties/methods only if the component
     // inherit from MonocoComponent
-    if (
-        $metamodel.inheritFrom(classId, 'MonocoComponent') ||
-        classId === 'MonocoComponent'
-        ) {
+    if ($metamodel.inheritFrom(classId, 'MonocoComponent')) {
         addOn(Class, classId);
         addOnClass(Class, classId);
         addOffClass(Class, classId);

@@ -14,21 +14,6 @@ describe('a monoco instance', function () {
         expect(typeof version).toBe('string');
     });
 
-    it('can find all components from a class', function () {
-        var result = monoco.find('MonocoDatabase');
-        expect(result.length).toBe(1);
-    });
-
-    it('can find components with a search criteria of JSON type', function () {
-        var result = monoco.find('MonocoDatabase', {'_id': 'db'});
-        expect(result.length).toBe(1);
-    });
-
-    it('can find components from a search criteria of array type', function () {
-        var result = monoco.find('MonocoDatabase', [{'_id': 'db'}]);
-        expect(result.length).toBe(1);
-    });
-
     it('can create a system', function () {
         var id = monoco.system('a system');
         expect(id).toBeDefined();

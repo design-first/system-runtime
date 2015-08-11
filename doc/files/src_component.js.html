@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.6.1</b>
+                    API Docs for Version: <b>0.6.5</b>
                 </p>
             </li>
         </div>
@@ -216,7 +216,7 @@
                                                 &quot;data&quot;: [arrDb.length, val, &#x27;add&#x27;]
                                             });
                                         } else {
-                                            $log.invalidPropertyName(id, propertyName, val.id(), type);
+                                            $log.invalidPropertyName(id, propertyName, val, type);
                                         }
                                     }
                                 } else {
@@ -902,10 +902,7 @@
                         
                             // add default properties/methods only if the component
                             // inherit from MonocoComponent
-                            if (
-                                $metamodel.inheritFrom(classId, &#x27;MonocoComponent&#x27;) ||
-                                classId === &#x27;MonocoComponent&#x27;
-                                ) {
+                            if ($metamodel.inheritFrom(classId, &#x27;MonocoComponent&#x27;)) {
                                 addOn(Class, classId);
                                 addOnClass(Class, classId);
                                 addOffClass(Class, classId);

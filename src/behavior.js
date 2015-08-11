@@ -101,7 +101,7 @@ function createFunction(name, func, core, useCoreAPI) {
         params.push('$metamodel');
         params.push('$workflow');
         params.push('$behavior');
-        params.push('$log');
+        params.push('$state');
         params.push('$channel');
     }
 
@@ -140,7 +140,7 @@ function add(id, state, action, useCoreAPI, core) {
         core = false;
     }
     if (typeof useCoreAPI === 'undefined') {
-        useCoreAPI = false;
+        useCoreAPI = true;
     }
 
     if (useCoreAPI) {

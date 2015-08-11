@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.6.1</b>
+                    API Docs for Version: <b>0.6.5</b>
                 </p>
             </li>
         </div>
@@ -696,13 +696,13 @@
                                 behavior = null,
                                 component = null,
                                 className = &#x27;&#x27;;
-                        
+                            
                             // default values
-                            result = monoco.find(&#x27;MonocoSystem&#x27;, {
+                            result = exports.MonocoSystem.find({
                                 &#x27;master&#x27;: true
                             });
                             if (result.length) {
-                                defaultName = result[0].name();
+                                defaultName = result[0].name;
                             }
                         
                             system.name = params.name || &#x27;sub_&#x27; + defaultName;

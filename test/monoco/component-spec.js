@@ -4,7 +4,6 @@ describe('a monoco component', function () {
     if (typeof window === 'undefined') {
         monoco = require('../../src/monoco.js');
     }
-    var share = '';
 
     beforeEach(function () {
         var metamodel = monoco.require('metamodel');
@@ -17,7 +16,9 @@ describe('a monoco component', function () {
             'children': 'collection',
             'firstName': 'property',
             'lastName': 'property',
-            'father': 'property'
+            'father': 'property',
+            'adress': 'property',
+            'moving': 'event'
         });
 
         metamodel.schema({
@@ -49,7 +50,14 @@ describe('a monoco component', function () {
                 'readOnly': false,
                 'mandatory': false,
                 'default': {}
-            }
+            },
+            'adress': {
+                'type': 'string',
+                'readOnly': false,
+                'mandatory': false,
+                'default': ''
+            },
+            'moving': {}
         });
         metamodel.create();
 
@@ -72,52 +80,79 @@ describe('a monoco component', function () {
     });
 
     it('can add an event', function (done) {
-        var db = monoco.require('db');
-        db.on('init', function (conf) {
-            share = share + 'ok';
+        var Person = monoco.require('Person');
+        var yoda = new Person({
+            'firstName': 'Yoda',
+            'lastName': 'Master'
         });
-        db.init({});
+
+        yoda.on('moving', function () {
+            this.adress('Dagobah');
+        });
+        yoda.moving();
 
         setTimeout(function () {
-            expect(share).toBe('ok');
+            expect(yoda.adress()).toBe('Dagobah');
             done();
         }, 1);
     });
 
     it('can remove an event', function (done) {
-        var db = monoco.require('db');
-        db.off('init');
-        db.init({});
+        var Person = monoco.require('Person');
+        var yoda = new Person({
+            'firstName': 'Yoda',
+            'lastName': 'Master'
+        });
+
+        yoda.on('moving', function () {
+            this.adress('Dagobah');
+        });
+        yoda.off('moving');
+
+        yoda.moving();
 
         setTimeout(function () {
-            expect(share).toBe('ok');
+            expect(yoda.adress()).toBe('');
             done();
         }, 1);
     });
 
     it('can add an event on a property change', function (done) {
-        var system = monoco.system('testEventAdd');
-        share = '';
+        var Person = monoco.require('Person');
+        var yoda = new Person({
+            'firstName': 'Yoda',
+            'lastName': 'Master'
+        })
 
-        system.on('version', function (val) {
-            share = share + 'version';
+        yoda.on('lastName', function (val) {
+            this.adress('Dagobah');
         });
-        system.version('0.0.0');
+
+        yoda.lastName('Grand Jedi Master');
 
         setTimeout(function () {
-            expect(share).toBe('version');
+            expect(yoda.adress()).toBe('Dagobah');
             done();
         }, 1);
     });
 
     it('can remove an event on a property change', function (done) {
-        var system = monoco.system('testEventRemove');
-        system.off('version');
+        var Person = monoco.require('Person');
+        var yoda = new Person({
+            'firstName': 'Yoda',
+            'lastName': 'Master'
+        })
 
-        system.version('0.0.0');
+        yoda.on('lastName', function (val) {
+            this.adress('Dagobah');
+        });
+        
+        yoda.off('lastName');
+
+        yoda.lastName('Grand Jedi Master');
 
         setTimeout(function () {
-            expect(share).toBe('version');
+            expect(yoda.adress()).toBe('');
             done();
         }, 1);
     });
@@ -147,53 +182,61 @@ describe('a monoco component', function () {
         expect(leia.father().children(0).firstName()).toBe('Luke');
     });
 
-    it('can get a property', function (done) {
-        setTimeout(function () {
-            var anakin = monoco.find('Person', { 'firstName': 'Anakin' })[0];
-            expect(anakin.firstName()).toBe('Anakin');
-            done();
-        }, 1);
+    it('can get a property', function () {
+        var Person = monoco.require('Person');
+        var yoda = new Person({
+            'firstName': 'Yoda',
+            'lastName': 'Master'
+        });
+        expect(yoda.firstName()).toBe('Yoda');
     });
 
-    it('can set a property', function (done) {
-        var anakin = monoco.find('Person', { 'firstName': 'Anakin' })[0];
-        anakin.lastName('Vador');
+    it('can set a property', function () {
+        var Person = monoco.require('Person');
+        var yoda = new Person({
+            'firstName': 'Yoda',
+            'lastName': 'Master'
+        });
+        yoda.lastName('Grand Jedi Master');
 
-        setTimeout(function () {
-            var anakin = monoco.find('Person', { 'firstName': 'Anakin' })[0];
-            expect(anakin.lastName()).toBe('Vador');
-            done();
-        }, 1);
+        expect(yoda.lastName()).toBe('Grand Jedi Master');
     });
 
-    it('can get a collection', function (done) {
-        setTimeout(function () {
-            var anakin = monoco.find('Person', { 'firstName': 'Anakin' })[0];
-            expect(anakin.children().length).toBe(1);
-            done();
-        }, 1);
+    it('can get a collection', function () {
+        var Person = monoco.require('Person');
+
+        var luke = new Person({
+            'firstName': 'Luke',
+            'lastName': 'Skywalker'
+        });
+
+        var anakin = new Person({
+            'firstName': 'Anakin',
+            'lastName': 'Skywalker',
+            'children': [luke]
+        });
+
+        expect(anakin.children().length).toBe(1);
     });
 
-    it('can destroy itself', function (done) {
-        var anakin = monoco.find('Person', { 'firstName': 'Anakin' })[0];
-        anakin.destroy();
+    it('can destroy itself', function () {
+        var Person = monoco.require('Person');
+        var yoda = new Person({
+            'firstName': 'Yoda',
+            'lastName': 'Master'
+        });
+        var id = yoda.id();
+        yoda.destroy();
 
-        setTimeout(function () {
-            var result = monoco.find('Person', { 'firstName': 'Anakin' });
-            expect(result.length).toBe(0);
-            done();
-        }, 1);
+        expect(monoco.require(id)).toBe(undefined);
     });
 
-    it('can destroy a class', function (done) {
+    it('can destroy a class', function () {
         var Person = monoco.require('Person');
         Person.destroy();
 
-        setTimeout(function () {
-            var result = monoco.find('Person', {});
-            expect(result.length).toBe(0);
-            done();
-        }, 1);
+        var result = monoco.require('Person');
+        expect(result).toBe(undefined);
     });
 
 });

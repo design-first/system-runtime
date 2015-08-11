@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.6.1</b>
+                    API Docs for Version: <b>0.6.5</b>
                 </p>
             </li>
         </div>
@@ -1383,7 +1383,7 @@
                                 parents = [],
                                 i = 0,
                                 length = 0;
-                        
+                                
                             /*
                              * 
                              * Check if a class inherits from another one
@@ -1401,7 +1401,7 @@
                         
                                 parents = getParents(className);
                                 if (parents.length !== 0) {
-                                    if (parents.indexOf(ancestorName) !== 1) {
+                                    if (parents.indexOf(ancestorName) !== -1) {
                                         isAncestor = true;
                                     } else {
                                         for (i = 0; i &lt; length; i++) {
@@ -1415,18 +1415,22 @@
                                 return isAncestor;
                             }
                         
-                            parents = getParents(name);
-                            if (parents.length !== 0) {
-                                if (parents.indexOf(parentName) !== 1) {
-                                    result = true;
-                                } else {
-                                    for (i = 0; i &lt; length; i++) {
-                                        result = _searchParent(parents[i], parentName);
-                                        if (result) {
-                                            break;
+                            if (name !== parentName) {
+                                parents = getParents(name);
+                                if (parents.length !== 0) {
+                                    if (parents.indexOf(parentName) !== -1) {
+                                        result = true;
+                                    } else {
+                                        for (i = 0; i &lt; length; i++) {
+                                            result = _searchParent(parents[i], parentName);
+                                            if (result) {
+                                                break;
+                                            }
                                         }
                                     }
                                 }
+                            } else {
+                                result = true;
                             }
                         
                             return result;

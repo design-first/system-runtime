@@ -2,7 +2,7 @@
     "project": {
         "name": "monoco",
         "description": "A Model and a NoSQL Database for Components",
-        "version": "0.6.1",
+        "version": "0.6.5",
         "url": "http://monoco.io"
     },
     "files": {
@@ -164,7 +164,7 @@
             "namespaces": {},
             "tag": "main",
             "file": "build/system/system.js",
-            "line": 969,
+            "line": 948,
             "description": "This module is the main module of monoco. <br>\nIt inits monoco metamodel and loads monoco core system.",
             "requires": [
                 "monoco-component",
@@ -207,7 +207,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/channel.js",
-            "line": 93,
+            "line": 95,
             "description": "This module manages the channel.",
             "requires": [
                 "monoco-db",
@@ -230,7 +230,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/component.js",
-            "line": 947,
+            "line": 944,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -315,7 +315,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1349,
+            "line": 1353,
             "description": "This module manages monoco metamodel. <br>\nmonoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.",
             "requires": [
                 "monoco-db",
@@ -383,7 +383,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 969,
+            "line": 948,
             "description": "This module contains monoco core system.",
             "static": 1
         }
@@ -421,7 +421,7 @@
             "submodule": "monoco-channel",
             "namespace": "",
             "file": "src/channel.js",
-            "line": 93,
+            "line": 95,
             "description": "This module manages the channel.",
             "requires": [
                 "monoco-db",
@@ -443,7 +443,7 @@
             "submodule": "monoco-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 947,
+            "line": 944,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -546,7 +546,7 @@
             "submodule": "monoco-metamodel",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1349,
+            "line": 1353,
             "description": "This module manages monoco metamodel. <br>\nmonoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.",
             "requires": [
                 "monoco-db",
@@ -656,7 +656,7 @@
             "submodule": "monoco-system",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 969,
+            "line": 948,
             "description": "This module contains monoco core system."
         }
     },
@@ -795,7 +795,7 @@
         },
         {
             "file": "src/channel.js",
-            "line": 108,
+            "line": 110,
             "description": "Listen to an event.",
             "itemtype": "method",
             "name": "listen",
@@ -817,7 +817,7 @@
         },
         {
             "file": "src/channel.js",
-            "line": 117,
+            "line": 119,
             "description": "Send a message into the channel.",
             "itemtype": "method",
             "name": "send",
@@ -838,7 +838,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 964,
+            "line": 961,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -859,7 +859,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 973,
+            "line": 970,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -880,7 +880,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 982,
+            "line": 979,
             "description": "Find components with a query.",
             "itemtype": "method",
             "name": "find",
@@ -909,7 +909,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 997,
+            "line": 994,
             "description": "Check if the component has for class name className.",
             "itemtype": "method",
             "name": "isInstanceOf",
@@ -935,7 +935,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 1007,
+            "line": 1004,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -945,7 +945,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 1014,
+            "line": 1011,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -2006,7 +2006,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1364,
+            "line": 1368,
             "description": "Init the metamodel.",
             "itemtype": "method",
             "name": "init",
@@ -2016,7 +2016,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1371,
+            "line": 1375,
             "description": "Remove the data of the metamodel from the memory.",
             "itemtype": "method",
             "name": "clear",
@@ -2026,7 +2026,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1378,
+            "line": 1382,
             "description": "Add a new schema.",
             "params": [
                 {
@@ -2043,7 +2043,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1386,
+            "line": 1390,
             "description": "Add a new type.",
             "params": [
                 {
@@ -2060,7 +2060,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1394,
+            "line": 1398,
             "description": "Create the metamodel.",
             "itemtype": "method",
             "name": "create",
@@ -2070,7 +2070,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1401,
+            "line": 1405,
             "description": "Get a schema.",
             "itemtype": "method",
             "name": "get",
@@ -2091,7 +2091,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1410,
+            "line": 1414,
             "description": "Get the definition of the metamodel.",
             "itemtype": "method",
             "name": "getMetaDef",
@@ -2105,7 +2105,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1418,
+            "line": 1422,
             "description": "Get parents of a shema if any.",
             "itemtype": "method",
             "name": "getParents",
@@ -2126,7 +2126,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1437,
+            "line": 1441,
             "description": "Check if the object is compliant with the schema.\nUse it to test if the constructor of an object is compliant\nwith the definition of the class.",
             "itemtype": "method",
             "name": "isValidObject",
@@ -2162,7 +2162,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1451,
+            "line": 1455,
             "description": "Prepare the object in order to be compliant with the schema.",
             "itemtype": "method",
             "name": "prepareObject",
@@ -2184,7 +2184,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1460,
+            "line": 1464,
             "description": "Check if a value is compliant with a type.",
             "itemtype": "method",
             "name": "isValidType",
@@ -2210,7 +2210,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1469,
+            "line": 1473,
             "description": "Check if a value is compliant with a type enum.",
             "itemtype": "method",
             "name": "isValidEnum",
@@ -2236,7 +2236,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1479,
+            "line": 1483,
             "description": "Check if the name is a correct state for the component.",
             "itemtype": "method",
             "name": "isValidState",
@@ -2262,7 +2262,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1489,
+            "line": 1493,
             "description": "Check if an attribute of the schema is an event.",
             "itemtype": "method",
             "name": "isEvent",
@@ -2288,7 +2288,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1499,
+            "line": 1503,
             "description": "Check if an attribute of the schema is a property.",
             "itemtype": "method",
             "name": "isProperty",
@@ -2314,7 +2314,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1509,
+            "line": 1513,
             "description": "Check if an attribute of the schema is a collection.",
             "itemtype": "method",
             "name": "isCollection",
@@ -2340,7 +2340,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1519,
+            "line": 1523,
             "description": "Check if an attribute of the schema is a method.",
             "itemtype": "method",
             "name": "isMethod",
@@ -2547,7 +2547,7 @@
         },
         {
             "file": "build/system/system.js",
-            "line": 979,
+            "line": 958,
             "description": "monoco core system",
             "itemtype": "property",
             "name": "system",
