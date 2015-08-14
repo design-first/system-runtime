@@ -5,9 +5,24 @@
     "_id": "133421d0c313d2d",
     "schemas": {
         "MonocoSchema": {
+            "load": "method",
             "ready": "event"
         },
         "Monoco": {
+            "load": {
+                "params": [
+                    {
+                        "name": "url",
+                        "type": "string"
+                    },
+                    {
+                        "name": "async",
+                        "type": "boolean",
+                        "mandatory": false,
+                        "default": true
+                    }
+                ]
+            },
             "ready": {}
         }
     },

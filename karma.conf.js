@@ -42,11 +42,10 @@ module.exports = function (config) {
         },
         colors: true,
         autoWatch: true,
-        browsers: ['Chrome', 'Firefox'],
+        browsers: ['Firefox'],
         plugins: [
             'karma-coverage',
             'karma-script-launcher',
-            'karma-chrome-launcher',
             'karma-firefox-launcher',
             'karma-jasmine'
         ],

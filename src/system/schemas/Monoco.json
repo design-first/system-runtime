@@ -12,20 +12,6 @@
         "mandatory": true,
         "default": "0.0.0"
     },
-    "load": {
-        "params": [
-            {
-                "name": "url",
-                "type": "string"
-            },
-            {
-                "name": "async",
-                "type": "boolean",
-                "mandatory": false,
-                "default": true
-            }
-        ]
-    },
     "warning": {
         "params": [
             {
