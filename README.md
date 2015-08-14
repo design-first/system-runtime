@@ -5,6 +5,8 @@
 [![Coverage Status](https://img.shields.io/coveralls/monocojs/monoco.svg)](https://coveralls.io/r/monocojs/monoco)
 [![Dependency Status](https://david-dm.org/monocojs/monoco.svg)](https://david-dm.org/monocojs/monoco)
 [![devDependency Status](https://david-dm.org/monocojs/monoco/dev-status.svg)](https://david-dm.org/monocojs/monoco#info=devDependencies)
+[![npm downloads](https://img.shields.io/npm/dm/monoco.svg)](https://www.npmjs.com/package/monoco)
+[![license](https://img.shields.io/npm/dm/monoco.svg)](https://www.npmjs.com/package/monoco)
 
 <p align="center">
     <a href="http://monoco.io/">
@@ -56,7 +58,7 @@ monoco.version();
 
 ## Examples
 
-You will find examples on the [/example](./example) directory or on [monoco website](http://monoco.io/tutorial/00-intro.html).
+You will find examples on [monoco website](http://monoco.io/tutorial/00-intro.html).
 
 Remember that **all the examples work both on server and browser**.
 
