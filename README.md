@@ -8,12 +8,6 @@
 [![npm downloads](https://img.shields.io/npm/dm/monoco.svg)](https://www.npmjs.com/package/monoco)
 [![license](https://img.shields.io/npm/l/monoco.svg)](https://www.npmjs.com/package/monoco)
 
-<p align="center">
-    <a href="http://monoco.io/">
-        <img height="240" width="240" src="http://monoco.io/img/logo.png">
-    </a>
-</p>
-
 #### What is monoco ?
 
 It is a **5-in-1 JavaScript library**:

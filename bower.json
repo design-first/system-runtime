@@ -25,7 +25,6 @@
         "addons",
         "build/system",
         "doc",
-        "example",
         "node_modules",
         "test",
         "src",
