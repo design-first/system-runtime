@@ -6,7 +6,7 @@
 [![Dependency Status](https://david-dm.org/monocojs/monoco.svg)](https://david-dm.org/monocojs/monoco)
 [![devDependency Status](https://david-dm.org/monocojs/monoco/dev-status.svg)](https://david-dm.org/monocojs/monoco#info=devDependencies)
 [![npm downloads](https://img.shields.io/npm/dm/monoco.svg)](https://www.npmjs.com/package/monoco)
-[![license](https://img.shields.io/npm/dm/monoco.svg)](https://www.npmjs.com/package/monoco)
+[![license](https://img.shields.io/npm/l/monoco.svg)](https://www.npmjs.com/package/monoco)
 
 <p align="center">
     <a href="http://monoco.io/">
