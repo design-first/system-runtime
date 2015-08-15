@@ -3,10 +3,8 @@
 [![npm version](https://badge.fury.io/js/monoco.svg)](http://badge.fury.io/js/monoco)
 [![Build Status](https://travis-ci.org/monocojs/monoco.svg?branch=master)](https://travis-ci.org/monocojs/monoco)
 [![Coverage Status](https://img.shields.io/coveralls/monocojs/monoco.svg)](https://coveralls.io/r/monocojs/monoco)
-[![Dependency Status](https://david-dm.org/monocojs/monoco.svg)](https://david-dm.org/monocojs/monoco)
 [![devDependency Status](https://david-dm.org/monocojs/monoco/dev-status.svg)](https://david-dm.org/monocojs/monoco#info=devDependencies)
 [![npm downloads](https://img.shields.io/npm/dm/monoco.svg)](https://www.npmjs.com/package/monoco)
-[![license](https://img.shields.io/npm/l/monoco.svg)](https://www.npmjs.com/package/monoco)
 
 #### What is monoco ?
 
