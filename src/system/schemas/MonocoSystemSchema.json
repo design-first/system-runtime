@@ -12,7 +12,7 @@
     "behaviors": "property",
     "types": "property",
     "components": "property",
-    "ready": "event",
     "sync": "method",
-    "main": "method"
+    "main": "method",
+    "ready": "event"
 }
