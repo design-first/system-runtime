@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.6.7</b>
+                    API Docs for Version: <b>0.7.0</b>
                 </p>
             </li>
         </div>
@@ -181,7 +181,7 @@
                          */
                         function contains(source, target) {
                             var result = true,
-                                property = {};
+                                property = &#x27;&#x27;;
                         
                             for (property in source) {
                                 if (typeof target[property] === &#x27;undefined&#x27; || target[property] !== source[property]) {
@@ -630,7 +630,9 @@
                                 }
                         
                                 // reset info if already a master system
-                                systems = exports.MonocoSystem.find({ &#x27;master&#x27;: true });
+                                systems = exports.MonocoSystem.find({
+                                    &#x27;master&#x27;: true
+                                });
                                 if (systems.length &amp;&amp; systems[0]._id === importedSystem._id) {
                                     importedSystem.master = true;
                                 } else {
@@ -646,7 +648,9 @@
                                 exportedSystem = dump();
                         
                                 // get id of the master system
-                                systems = exports.MonocoSystem.find({ &#x27;master&#x27;: true });
+                                systems = exports.MonocoSystem.find({
+                                    &#x27;master&#x27;: true
+                                });
                         
                                 if (systems.length) {
                                     mastersystem = systems[0];
@@ -807,7 +811,9 @@
                             var monocoSystemId = &#x27;&#x27;,
                                 monocoSystem = null;
                         
-                            monocoSystem = exports.MonocoSystem.find({ &#x27;_id&#x27;: &#x27;e89c617b6b15d24&#x27; })[0];
+                            monocoSystem = exports.MonocoSystem.find({
+                                &#x27;_id&#x27;: &#x27;e89c617b6b15d24&#x27;
+                            })[0];
                         
                             // clear all the data in memory
                             exports.clear();
@@ -859,7 +865,7 @@
                         
                         /**
                          * monoco database store that list all the collections.
-                         * @property {JSON} store
+                         * @property {JSON} store monoco database store
                          */
                         exports.store = store;
                         

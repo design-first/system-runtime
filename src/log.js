@@ -268,7 +268,7 @@ function invalidResultType(id, methodName) {
  * Unknown class.
  * @method unknownComponent
  * @param {String} id id of the class
- * @param {String} componentId
+ * @param {String} componentId if of the component
  */
 function unknownComponent(className, componentId) {
     $helper.getMonoco().warning("unkown class component '" + className + "' for component '" + componentId + "'");
@@ -615,7 +615,7 @@ exports.invalidResultType = invalidResultType;
  * Unknown class.
  * @method unknownComponent
  * @param {String} id id of the class
- * @param {String} componentId
+ * @param {String} componentId if of the component
  */
 exports.unknownComponent = unknownComponent;
 

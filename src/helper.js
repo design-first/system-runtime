@@ -40,6 +40,7 @@ var $component = require('./component.js');
 
 /* Private property */
 
+
 var monocoRef = null;
 
 

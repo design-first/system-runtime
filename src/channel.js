@@ -46,6 +46,7 @@ var $helper = require('./helper.js');
 
 /* Public methods */
 
+
 /*
  * Listen to an event.
  * @method listen
@@ -60,8 +61,8 @@ function listen(event, action) {
 /*
  * Send a message into the channel.
  * @method send
- * @param {type} message
- * @returns {Boolean} true if the message was sent
+ * @param {Object} message the message to send
+ * @return {Boolean} true if the message was sent
  */
 function send(message) {
     var messages = [],
@@ -119,7 +120,7 @@ exports.listen = listen;
 /**
  * Send a message into the channel.
  * @method send
- * @param {type} message
+ * @param {Object} message the message to send
  * @return {Boolean} true if the message was sent
  */
 exports.send = send;

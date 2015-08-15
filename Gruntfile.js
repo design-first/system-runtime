@@ -19,7 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 
 module.exports = function (grunt) {
     grunt.initConfig({
@@ -264,6 +264,26 @@ module.exports = function (grunt) {
                         system.schemas = grunt.option('schemas');
                         system.types = grunt.option('types');
                         system.behaviors = grunt.option('behaviors');
+                        
+                        // process addon in order to insert subsytem                 
+                        system.components.MonocoSystem = {};
+
+                        grunt.file.recurse('src/addons', loadSubSystem);
+
+                        function loadSubSystem(abspath, rootdir, subdir, filename) {
+                            if (filename.indexOf('.') !== 0) {
+                                var subSystem = grunt.file.readJSON(abspath);
+
+                                system.components.MonocoSystem[subSystem._id] = {
+                                    "_id": subSystem._id,
+                                    "name": subSystem.name,
+                                    "version": subSystem.version,
+                                    "description": subSystem.description,
+                                    "subsystem": true,
+                                    "master": false
+                                };
+                            }
+                        }
 
                         return JSON.stringify(system);
                     }

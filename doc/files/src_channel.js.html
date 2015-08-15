@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.6.7</b>
+                    API Docs for Version: <b>0.7.0</b>
                 </p>
             </li>
         </div>
@@ -136,6 +136,7 @@
                         
                         /* Public methods */
                         
+                        
                         /*
                          * Listen to an event.
                          * @method listen
@@ -150,8 +151,8 @@
                         /*
                          * Send a message into the channel.
                          * @method send
-                         * @param {type} message
-                         * @returns {Boolean} true if the message was sent
+                         * @param {Object} message the message to send
+                         * @return {Boolean} true if the message was sent
                          */
                         function send(message) {
                             var messages = [],
@@ -209,7 +210,7 @@
                         /**
                          * Send a message into the channel.
                          * @method send
-                         * @param {type} message
+                         * @param {Object} message the message to send
                          * @return {Boolean} true if the message was sent
                          */
                         exports.send = send;

@@ -580,7 +580,7 @@ function schema(importedSchema) {
 /*
  * Add a new type.
  * @method type
- * @param {JSON} importedType
+ * @param {JSON} importedType type to add
  */
 function type(importedType) {
     var name = importedType.name;
@@ -668,6 +668,7 @@ function init() {
  */
 function clear() {
     store = {
+        metadef: {},
         catalog: {},
         inheritance: {},
         inheritanceTree: {},
@@ -709,7 +710,7 @@ function isEvent(name, id) {
 /*
  * Check if an attribute of the schema is a property.
  * @method isProperty
- * @param {String} name
+ * @param {String} name name of the property
  * @param {String} id component id
  * @return {Boolean} true if the attribute is a property
  */
@@ -721,7 +722,7 @@ function isProperty(name, id) {
 /*
  * Check if an attribute of the schema is a collection.
  * @method isCollection
- * @param {String} name
+ * @param {String} name name of the collection
  * @param {String} id component id
  * @return {Boolean} true if the attribute is a collection
  */
@@ -733,7 +734,7 @@ function isCollection(name, id) {
 /*
  * Check if an attribute of the schema is a method.
  * @method isMethod
- * @param {String} name
+ * @param {String} name name of the method
  * @param {String} id component id
  * @return {Boolean} true if the attribute is a method
  */
@@ -770,8 +771,8 @@ function isValidState(name, id) {
 /*
  * Check if a value is compliant with a type.
  * @method isValidType
- * @param {Object} value
- * @param {String} typeName
+ * @param {Object} object object to validate
+ * @param {String} type type to use for validation
  * @return {Boolean} true if the object is compliant with the type
  */
 function isValidType(value, typeName) {
@@ -811,10 +812,10 @@ function isValidType(value, typeName) {
 
 
 /*
- * Check if a value is compliant with a enum type.
+ * Check if a value is compliant with a type enum.
  * @method isValidEnum
- * @param {String|Object} value
- * @param {Object} schema
+ * @param {String|Object} value value to validate
+ * @param {Schema} schema schela to use for validation
  * @return {Boolean} true if the object is compliant with the enum
  */
 function isValidEnum(value, schema) {
@@ -984,10 +985,10 @@ function isValidSchema(object, schema) {
  * Use it to test if the constructor of an object is compliant
  * with the definition of the class.
  * @method isValidObject
- * @param {Object} object
- * @param {Object} schema
- * @param {Boolean} strict
- * @param {Boolean} cleanRef
+ * @param {Object} object object to validate
+ * @param {Object} schema schema that validates the object
+ * @param {Boolean} strict true if validation is strict
+ * @param {Boolean} cleanRef true if we remove the reference to the object
  * @return {Boolean} true is the object is compliant with the schema
  */
 function isValidObject(object, schema, strict, cleanRef) {
@@ -1067,7 +1068,7 @@ function isValidObject(object, schema, strict, cleanRef) {
         } else {
             // check for default value of an object ({} or null)
             switch (true) {
-                case (hasType(field, 'object') && field !== null && Object.keys(field).length):
+                case (hasType(field, 'object') && field !== null && Object.keys(field).length > 0):
                 case hasType(field, 'string'):
                     $log.canNotYetValidate(field, typeRef);
                     break;
@@ -1211,8 +1212,8 @@ function isValidObject(object, schema, strict, cleanRef) {
 /*
  * Prepare the object in order to be compliant with the schema.
  * @method prepareObject
- * @param {Object} object
- * @param {Object} schema
+ * @param {Object} object object to prepate
+ * @param {Object} schema schema that validates the object
  */
 function prepareObject(object, schema) {
     var fieldName = '',
@@ -1381,16 +1382,16 @@ exports.clear = clear;
 
 /**
  * Add a new schema.
- * @param {JSON} schema
  * @method schema
+ * @param {JSON} importedSchema a schema to add
  */
 exports.schema = schema;
 
 
 /**
  * Add a new type.
- * @param {JSON} type
  * @method type
+ * @param {JSON} importedType type to add
  */
 exports.type = type;
 
@@ -1443,10 +1444,10 @@ exports.inheritFrom = inheritFrom;
  * Use it to test if the constructor of an object is compliant
  * with the definition of the class.
  * @method isValidObject
- * @param {Object} object
- * @param {Object} schema
- * @param {Boolean} strict
- * @param {Boolean} cleanRef
+ * @param {Object} object object to validate
+ * @param {Object} schema schema that validates the object
+ * @param {Boolean} strict true if validation is strict
+ * @param {Boolean} cleanRef true if we remove the reference to the object
  * @return {Boolean} true is the object is compliant with the schema
  */
 exports.isValidObject = isValidObject;
@@ -1455,8 +1456,8 @@ exports.isValidObject = isValidObject;
 /**
  * Prepare the object in order to be compliant with the schema.
  * @method prepareObject
- * @param {Object} object
- * @param {Object} schema
+ * @param {Object} object object to prepate
+ * @param {Object} schema schema that validates the object
  */
 exports.prepareObject = prepareObject;
 
@@ -1464,17 +1465,18 @@ exports.prepareObject = prepareObject;
 /**
  * Check if a value is compliant with a type.
  * @method isValidType
- * @param {Object} object
- * @param {String} type
+ * @param {Object} object object to validate
+ * @param {String} type type to use for validation
  * @return {Boolean} true if the object is compliant with the type
  */
 exports.isValidType = isValidType;
 
+
 /**
  * Check if a value is compliant with a type enum.
  * @method isValidEnum
- * @param {String|Object} value
- * @param {Schema} schema
+ * @param {String|Object} value value to validate
+ * @param {Schema} schema schela to use for validation
  * @return {Boolean} true if the object is compliant with the enum
  */
 exports.isValidEnum = isValidEnum;
@@ -1503,7 +1505,7 @@ exports.isEvent = isEvent;
 /**
  * Check if an attribute of the schema is a property.
  * @method isProperty
- * @param {String} name
+ * @param {String} name name of the property
  * @param {String} id component id
  * @return {Boolean} true if the attribute is a property
  */
@@ -1513,7 +1515,7 @@ exports.isProperty = isProperty;
 /**
  * Check if an attribute of the schema is a collection.
  * @method isCollection
- * @param {String} name
+ * @param {String} name of the collection
  * @param {String} id component id
  * @return {Boolean} true if the attribute is a collection
  */
@@ -1523,7 +1525,7 @@ exports.isCollection = isCollection;
 /**
  * Check if an attribute of the schema is a method.
  * @method isMethod
- * @param {String} name
+ * @param {String} name name of the method
  * @param {String} id component id
  * @return {Boolean} true if the attribute is a method
  */

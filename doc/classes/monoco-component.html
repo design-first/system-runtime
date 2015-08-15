@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.6.7</b>
+                    API Docs for Version: <b>0.7.0</b>
                 </p>
             </li>
         </div>
@@ -112,7 +112,6 @@
                         				<li><a href="#method-clear"><span class="im">clear</span>()</a></li>
                         				<li><a href="#method-create"><span class="im">create</span>(<span class="ia">config</span>)</a></li>
                         				<li><a href="#method-destroy"><span class="im">destroy</span>(<span class="ia">id</span>)</a></li>
-                        				<li><a href="#method-find"><span class="im">find</span>(<span class="ia">Class</span><span class="ia">query</span>)</a></li>
                         				<li><a href="#method-get"><span class="im">get</span>(<span class="ia">id</span>)</a></li>
                         				<li><a href="#method-isInstanceOf"><span class="im">isInstanceOf</span>(<span class="ia">component</span><span class="ia">className</span>)</a></li>
                         			</ul>
@@ -144,7 +143,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_component.js.html#l1004"><code>src&#x2F;component.js:1004</code></a>
+                                    		<a href="../files/src_component.js.html#l961"><code>src&#x2F;component.js:961</code></a>
                                     		</p>
                                     
                                     
@@ -181,7 +180,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_component.js.html#l961"><code>src&#x2F;component.js:961</code></a>
+                                    		<a href="../files/src_component.js.html#l932"><code>src&#x2F;component.js:932</code></a>
                                     		</p>
                                     
                                     
@@ -200,6 +199,8 @@
                                     						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                                     
                                     
+                                    					<div class="param-description"><br>
+                                    {String} model model name <br></div>
                                     
                                     				</li>
                                     			</ul>
@@ -209,7 +210,9 @@
                                     			<h4>Returns:</h4>
                                     
                                     			<div class="returns-description">
-                                    						<span class="type">Component</span>
+                                    						<span class="type">Component</span>:
+                                    					<p>component</p>
+                                    
                                     			</div>
                                     		</div>
                                     
@@ -238,7 +241,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_component.js.html#l1011"><code>src&#x2F;component.js:1011</code></a>
+                                    		<a href="../files/src_component.js.html#l968"><code>src&#x2F;component.js:968</code></a>
                                     		</p>
                                     
                                     
@@ -275,89 +278,6 @@
                                     		</div>
                                     
                                     </div>
-                                    <div id="method-find" class="method item">
-                                    	<div class="method-signature">
-                                    	<span class="name"><code>find</code></span>
-                                    
-                                    		<div class="args">
-                                    			<span class="paren">(</span><ul class="args-list inline commas">
-                                    				<li class="arg">
-                                    						<code>Class</code>
-                                    				</li>
-                                    				<li class="arg">
-                                    						<code>query</code>
-                                    				</li>
-                                    			</ul><span class="paren">)</span>
-                                    		</div>
-                                    		<span class="returns-inline">
-                                    			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-                                    		</span>
-                                    	</div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    	<div class="meta">
-                                    				<p>
-                                    				Defined in
-                                    		<a href="../files/src_component.js.html#l979"><code>src&#x2F;component.js:979</code></a>
-                                    		</p>
-                                    
-                                    
-                                    
-                                    	</div>
-                                    
-                                    	<div class="description"><p>Find components with a query.</p>
-                                    </div>
-                                    
-                                    		<div class="params">
-                                    			<h4>Parameters:</h4>
-                                    
-                                    			<ul class="params-list">
-                                    				<li class="param">
-                                    						<code class="param-name">Class</code>
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                    
-                                    
-                                    					<div class="param-description"><p>class name of the component to search</p>
-                                    </div>
-                                    
-                                    				</li>
-                                    				<li class="param">
-                                    						<code class="param-name">query</code>
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a>  |  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-                                    
-                                    
-                                    					<div class="param-description"><p>query</p>
-                                    </div>
-                                    
-                                    				</li>
-                                    			</ul>
-                                    		</div>
-                                    
-                                    		<div class="returns">
-                                    			<h4>Returns:</h4>
-                                    
-                                    			<div class="returns-description">
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
-                                    					<p>components found</p>
-                                    
-                                    			</div>
-                                    		</div>
-                                    
-                                    		<div class="example">
-                                    			<h4>Example:</h4>
-                                    
-                                    			<div class="example-content">
-                                    				<p>$component.find("Student", {"name": "laure"}); <br>
-                                    $component.find("Student", {"name": "laure", "age" : 24}); <br>
-                                    $component.find("Student", [{"name": "rene"}, {"name": "robert"}]);</p>
-                                    
-                                    			</div>
-                                    		</div>
-                                    </div>
                                     <div id="method-get" class="method item">
                                     	<div class="method-signature">
                                     	<span class="name"><code>get</code></span>
@@ -382,7 +302,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_component.js.html#l970"><code>src&#x2F;component.js:970</code></a>
+                                    		<a href="../files/src_component.js.html#l942"><code>src&#x2F;component.js:942</code></a>
                                     		</p>
                                     
                                     
@@ -401,6 +321,8 @@
                                     						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                                     
                                     
+                                    					<div class="param-description"><p>id of the component</p>
+                                    </div>
                                     
                                     				</li>
                                     			</ul>
@@ -410,7 +332,9 @@
                                     			<h4>Returns:</h4>
                                     
                                     			<div class="returns-description">
-                                    						<span class="type">Component</span>
+                                    						<span class="type">Component</span>:
+                                    					<p>component</p>
+                                    
                                     			</div>
                                     		</div>
                                     
@@ -442,7 +366,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_component.js.html#l994"><code>src&#x2F;component.js:994</code></a>
+                                    		<a href="../files/src_component.js.html#l951"><code>src&#x2F;component.js:951</code></a>
                                     		</p>
                                     
                                     

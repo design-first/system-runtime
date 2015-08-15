@@ -91,7 +91,7 @@ var store = {},
  */
 function contains(source, target) {
     var result = true,
-        property = {};
+        property = '';
 
     for (property in source) {
         if (typeof target[property] === 'undefined' || target[property] !== source[property]) {
@@ -540,7 +540,9 @@ function system(importedSystem) {
         }
 
         // reset info if already a master system
-        systems = exports.MonocoSystem.find({ 'master': true });
+        systems = exports.MonocoSystem.find({
+            'master': true
+        });
         if (systems.length && systems[0]._id === importedSystem._id) {
             importedSystem.master = true;
         } else {
@@ -556,7 +558,9 @@ function system(importedSystem) {
         exportedSystem = dump();
 
         // get id of the master system
-        systems = exports.MonocoSystem.find({ 'master': true });
+        systems = exports.MonocoSystem.find({
+            'master': true
+        });
 
         if (systems.length) {
             mastersystem = systems[0];
@@ -717,7 +721,9 @@ function init() {
     var monocoSystemId = '',
         monocoSystem = null;
 
-    monocoSystem = exports.MonocoSystem.find({ '_id': 'e89c617b6b15d24' })[0];
+    monocoSystem = exports.MonocoSystem.find({
+        '_id': 'e89c617b6b15d24'
+    })[0];
 
     // clear all the data in memory
     exports.clear();
@@ -769,7 +775,7 @@ exports.collection = collection;
 
 /**
  * monoco database store that list all the collections.
- * @property {JSON} store
+ * @property {JSON} store monoco database store
  */
 exports.store = store;
 

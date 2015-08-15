@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.6.7</b>
+                    API Docs for Version: <b>0.7.0</b>
                 </p>
             </li>
         </div>
@@ -137,6 +137,7 @@
                         var $worklow = require(&#x27;./workflow.js&#x27;);
                         var $state = require(&#x27;./state.js&#x27;);
                         
+                        
                         /* Private properties */
                         
                         
@@ -185,7 +186,7 @@
                                 }
                             });
                         
-                            arr.push = function (val) {
+                            arr.push = function push(val) {
                                 var isClass = false;
                         
                                 if (!isReadOnly) {
@@ -205,7 +206,7 @@
                                         } else {
                                             $log.invalidPropertyName(id, propertyName, val.id(), type);
                                         }
-                                    } else { // TODO collection of object usefull ?
+                                    } else {
                                         if (val &amp;&amp; $metamodel.isValidType(val, type)) {
                                             this[this.length] = val;
                                             arrDb.push(val);
@@ -224,7 +225,7 @@
                                 }
                             };
                         
-                            arr.pop = function () {
+                            arr.pop = function pop() {
                                 var result = null;
                         
                                 if (!isReadOnly) {
@@ -292,7 +293,7 @@
                         function getProperties(id) {
                             var model = null,
                                 schema = null,
-                                propNames = &#x27;&#x27;,
+                                propNames = [],
                                 length = 0,
                                 i = 0,
                                 result = [];
@@ -327,7 +328,7 @@
                         function getMethods(id) {
                             var model = null,
                                 schema = null,
-                                propNames = &#x27;&#x27;,
+                                propNames = [],
                                 length = 0,
                                 i = 0,
                                 result = [];
@@ -358,7 +359,7 @@
                         function getEvents(id) {
                             var model = null,
                                 schema = null,
-                                propNames = &#x27;&#x27;,
+                                propNames = [],
                                 length = 0,
                                 i = 0,
                                 result = [];
@@ -837,6 +838,7 @@
                         function addDestroyClass(Class) {
                             var body = function () {
                                 var id = this.id();
+                                
                                 // if not virtual component
                                 if ($db[id]) {
                                     $db[id].remove();
@@ -922,8 +924,8 @@
                         /*
                          * Get a component by its id.
                          * @method get
-                         * @param {String} id
-                         * @return {Component}
+                         * @param {String} id of the component
+                         * @return {Component} component
                          */
                         function get(id) {
                             return store[id];
@@ -931,47 +933,16 @@
                         
                         
                         /*
-                         * Find components with a query.
-                         * @method find
-                         * @param {String} Class class name of the component to search
-                         * @param {Object|Array} query query
-                         * @return {Array} components found
-                         *
-                         * @example 
-                         * $component.find(&quot;Student&quot;, {&quot;name&quot;: &quot;laure&quot;}); &lt;br&gt;
-                         * $component.find(&quot;Student&quot;, {&quot;name&quot;: &quot;laure&quot;, &quot;age&quot; : 24}); &lt;br&gt;
-                         * $component.find(&quot;Student&quot;, [{&quot;name&quot;: &quot;rene&quot;}, {&quot;name&quot;: &quot;robert&quot;}]);
-                         */
-                        function find(Class, query) {
-                            var documents = [],
-                                components = [],
-                                component = null,
-                                i = 0,
-                                length = 0;
-                        
-                            if ($db[Class]) {
-                                documents = $db[Class].find(query);
-                                length = documents.length;
-                                for (i = 0; i &lt; length; i++) {
-                                    component = exports.get(documents[i]._id);
-                                    if (component) {
-                                        components.push(component);
-                                    }
-                                }
-                            }
-                            return components;
-                        }
-                        
-                        
-                        /*
                          * Create a component from its configuration.
                          * @method create
-                         * @param {Object} config
+                         * @param {Object} config &lt;br&gt;
+                         * {String} model model name &lt;br&gt;
                          * @return {Component}
                          */
                         function create(config) {
                             return factory(config);
                         }
+                        
                         
                         /*
                          * Check if the component has for class name className.
@@ -1051,8 +1022,9 @@
                         /**
                          * Create a component from its configuration.
                          * @method create
-                         * @param {Object} config
-                         * @return {Component}
+                         * @param {Object} config &lt;br&gt;
+                         * {String} model model name &lt;br&gt;
+                         * @return {Component} component
                          */
                         exports.create = create;
                         
@@ -1060,25 +1032,10 @@
                         /**
                          * Get a component by its id.
                          * @method get
-                         * @param {String} id
-                         * @return {Component}
+                         * @param {String} id id of the component
+                         * @return {Component} component
                          */
                         exports.get = get;
-                        
-                        
-                        /**
-                         * Find components with a query.
-                         * @method find
-                         * @param {String} Class class name of the component to search
-                         * @param {Object|Array} query query
-                         * @return {Array} components found
-                         *
-                         * @example 
-                         * $component.find(&quot;Student&quot;, {&quot;name&quot;: &quot;laure&quot;}); &lt;br&gt;
-                         * $component.find(&quot;Student&quot;, {&quot;name&quot;: &quot;laure&quot;, &quot;age&quot; : 24}); &lt;br&gt;
-                         * $component.find(&quot;Student&quot;, [{&quot;name&quot;: &quot;rene&quot;}, {&quot;name&quot;: &quot;robert&quot;}]);
-                         */
-                        exports.find = find;
                         
                         
                         /**
