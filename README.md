@@ -56,9 +56,9 @@ Remember that **all the examples work both on server and browser**.
 
 ## Documentation
 
-There is a generated documentation of monoco core APIs on the [/doc](./doc) directory. This documentation is only usefull for using monoco core APIs in your code (via **Dependency Injection** on monoco behaviors). 
+You will find documentations on [monoco website](http://monoco.io/doc/index.html).
 
-For more documentations, go to [monoco website](http://monoco.io/doc/index.html).
+There is a generated documentation of monoco core APIs on the [/doc](./doc) directory. This documentation is only usefull for using monoco core APIs in your code (via **Dependency Injection** on monoco behaviors). 
 
 ## Extend monoco
 
