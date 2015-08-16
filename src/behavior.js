@@ -102,8 +102,6 @@ function createFunction(name, func, core, useCoreAPI) {
         params.push('$behavior');
         params.push('$state');
         params.push('$channel');
-    } else {
-        params.push('$db');
     }
 
     if (params[0] !== '') {

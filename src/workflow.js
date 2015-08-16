@@ -349,8 +349,6 @@ function callAction(component, state, action, params, isEvent) {
             injectedParams.push($behavior);
             injectedParams.push($state);
             injectedParams.push($channel);
-        } else {
-            injectedParams.push($db);
         }
 
         if (isEvent) {

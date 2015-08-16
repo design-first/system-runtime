@@ -2,10 +2,13 @@
     "_id": "MonocoDatabase",
     "_name": "MonocoDatabase",
     "_schema": "MonocoDatabaseSchema",
-    "_inherit": ["MonocoComponent"],
+    "_inherit": [
+        "MonocoComponent"
+    ],
     "_core": true,
     "system": {
-        "params": [{
+        "params": [
+            {
                 "name": "system",
                 "type": "object",
                 "mandatory": false
@@ -14,28 +17,36 @@
         "result": "string"
     },
     "subsystem": {
-        "params": [{
+        "params": [
+            {
                 "name": "params",
                 "type": "object"
             }
         ],
         "result": "string"
     },
+    "collections": {
+        "result": "object"
+    },
     "insert": {
-        "params": [{
+        "params": [
+            {
                 "name": "classId",
                 "type": "string"
-            }, {
+            },
+            {
                 "name": "object",
                 "type": "object"
             }
         ]
     },
     "update": {
-        "params": [{
+        "params": [
+            {
                 "name": "schema",
                 "type": "string"
-            }, {
+            },
+            {
                 "name": "componentId",
                 "type": "string"
             },
@@ -50,10 +61,12 @@
         ]
     },
     "remove": {
-        "params": [{
+        "params": [
+            {
                 "name": "classId",
                 "type": "string"
-            }, {
+            },
+            {
                 "name": "object",
                 "type": "string"
             }

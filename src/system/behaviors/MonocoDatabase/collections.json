@@ -1,0 +1,7 @@
+{
+    "component": "MonocoDatabase",
+    "state": "collections",
+    "action": "function collections() { var result = {}, collectionName = ''; for (collectionName in $db.store) { if ($db.store.hasOwnProperty(collectionName) && collectionName.indexOf('Monoco') !== 0) { result[collectionName] = $db[collectionName]; } } return result;}",
+    "core": true,
+    "useCoreAPI": true
+}

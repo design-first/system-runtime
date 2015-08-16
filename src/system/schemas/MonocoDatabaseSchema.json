@@ -5,6 +5,7 @@
     "_core": true,
     "system": "method",
     "subsystem": "method",
+    "collections": "method",
     "insert": "event",
     "update": "event",
     "remove": "event"
