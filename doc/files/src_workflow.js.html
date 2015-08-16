@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.7.0</b>
+                    API Docs for Version: <b>0.7.1</b>
                 </p>
             </li>
         </div>
@@ -427,11 +427,11 @@
                             }
                         
                             try {
+                                length = params.length;
+                                for (i = 0; i &lt; length; i++) {
+                                    injectedParams.push(params[i]);
+                                }
                                 if (action.useCoreAPI) {
-                                    length = params.length;
-                                    for (i = 0; i &lt; length; i++) {
-                                        injectedParams.push(params[i]);
-                                    }
                                     injectedParams.push($component);
                                     injectedParams.push($db);
                                     injectedParams.push($metamodel);
@@ -439,18 +439,14 @@
                                     injectedParams.push($behavior);
                                     injectedParams.push($state);
                                     injectedParams.push($channel);
-                        
-                                    if (isEvent) {
-                                        setTimeout(action.action.bind.apply(action.action, [component].concat(injectedParams)), 0);
-                                    } else {
-                                        result = action.action.apply(component, injectedParams);
-                                    }
                                 } else {
-                                    if (isEvent) {
-                                        setTimeout(action.action.bind.apply(action.action, [component].concat(params)), 0);
-                                    } else {
-                                        result = action.action.apply(component, params);
-                                    }
+                                    injectedParams.push($db);
+                                }
+                        
+                                if (isEvent) {
+                                    setTimeout(action.action.bind.apply(action.action, [component].concat(injectedParams)), 0);
+                                } else {
+                                    result = action.action.apply(component, injectedParams);
                                 }
                             } catch (e) {
                                 if (e instanceof MonocoError) {

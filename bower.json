@@ -1,6 +1,6 @@
 {
     "name": "monoco",
-    "version": "0.7.0",
+    "version": "0.7.1",
     "description": "A Model and a NoSQL Database for Components",
     "license": "GPL-3.0",
     "homepage": "https://github.com/monocojs/monoco.git",

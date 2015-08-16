@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.7.0</b>
+                    API Docs for Version: <b>0.7.1</b>
                 </p>
             </li>
         </div>
@@ -121,7 +121,6 @@
                         			<ul>
                         				<li><a href="#method-clear"><span class="im">clear</span>()</a></li>
                         				<li><a href="#method-collection"><span class="im">collection</span>(<span class="ia">name</span>)</a></li>
-                        				<li><a href="#method-dump"><span class="im">dump</span>()</a></li>
                         				<li><a href="#method-init"><span class="im">init</span>()</a></li>
                         				<li><a href="#method-subsystem"><span class="im">subsystem</span>(<span class="ia">params</span>)</a></li>
                         				<li><a href="#method-system"><span class="im">system</span>(<span class="ia">importedSystem</span>)</a></li>
@@ -131,7 +130,7 @@
                         		<li>
                         			<strong>Properties</strong>
                         			<ul>
-                        				<li><a href="#prop-store monoco database store"><span class="ip">store monoco database store</span></a></li>
+                        				<li><a href="#prop-store"><span class="ip">store</span></a></li>
                         			</ul>
                         		</li>
                         
@@ -160,7 +159,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_db.js.html#l820"><code>src&#x2F;db.js:820</code></a>
+                                    		<a href="../files/src_db.js.html#l809"><code>src&#x2F;db.js:809</code></a>
                                     		</p>
                                     
                                     
@@ -194,7 +193,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_db.js.html#l768"><code>src&#x2F;db.js:768</code></a>
+                                    		<a href="../files/src_db.js.html#l769"><code>src&#x2F;db.js:769</code></a>
                                     		</p>
                                     
                                     
@@ -222,50 +221,6 @@
                                     
                                     
                                     </div>
-                                    <div id="method-dump" class="method item">
-                                    	<div class="method-signature">
-                                    	<span class="name"><code>dump</code></span>
-                                    
-                                    		<span class="paren">()</span>
-                                    		<span class="returns-inline">
-                                    			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                                    		</span>
-                                    	</div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    	<div class="meta">
-                                    				<p>
-                                    				Defined in
-                                    		<a href="../files/src_db.js.html#l783"><code>src&#x2F;db.js:783</code></a>
-                                    		</p>
-                                    
-                                    
-                                    
-                                    	</div>
-                                    
-                                    	<div class="description"><p>Dump the database.</p>
-                                    </div>
-                                    
-                                    
-                                    		<div class="returns">
-                                    			<h4>Returns:</h4>
-                                    
-                                    			<div class="returns-description">
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
-                                    					<p>the dump of the database. The dump is an object that contains: <br>
-                                    {Object} schemas the schemas store in the database <br>
-                                    {Object} types the types store in the database <br>
-                                    {Object} behaviors the behaviors store in the database <br>
-                                    {Object} components the components store in the database</p>
-                                    
-                                    			</div>
-                                    		</div>
-                                    
-                                    </div>
                                     <div id="method-init" class="method item">
                                     	<div class="method-signature">
                                     	<span class="name"><code>init</code></span>
@@ -281,7 +236,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_db.js.html#l827"><code>src&#x2F;db.js:827</code></a>
+                                    		<a href="../files/src_db.js.html#l816"><code>src&#x2F;db.js:816</code></a>
                                     		</p>
                                     
                                     
@@ -318,7 +273,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_db.js.html#l804"><code>src&#x2F;db.js:804</code></a>
+                                    		<a href="../files/src_db.js.html#l793"><code>src&#x2F;db.js:793</code></a>
                                     		</p>
                                     
                                     
@@ -391,7 +346,7 @@
                                     	<div class="meta">
                                     				<p>
                                     				Defined in
-                                    		<a href="../files/src_db.js.html#l795"><code>src&#x2F;db.js:795</code></a>
+                                    		<a href="../files/src_db.js.html#l784"><code>src&#x2F;db.js:784</code></a>
                                     		</p>
                                     
                                     
@@ -435,8 +390,8 @@
                                 <h2 class="off-left">Properties</h2>
                         
                                 <div class="item-list">
-                                    <div id="prop-store monoco database store" class="property item">
-                                        <h3 class="name"><code>store monoco database store</code></h3>
+                                    <div id="prop-store" class="property item">
+                                        <h3 class="name"><code>store</code></h3>
                                         <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON" class="crosslink external" target="_blank">JSON</a></span>
                                     
                                     
@@ -446,14 +401,14 @@
                                         <div class="meta">
                                                     <p>
                                                     Defined in
-                                            <a href="../files/src_db.js.html#l776"><code>src&#x2F;db.js:776</code></a>
+                                            <a href="../files/src_db.js.html#l777"><code>src&#x2F;db.js:777</code></a>
                                             </p>
                                     
                                     
                                         </div>
                                     
                                         <div class="description">
-                                            <p>monoco database store that list all the collections.</p>
+                                            <p>monoco database store that lists all the collections.</p>
                                     
                                         </div>
                                     

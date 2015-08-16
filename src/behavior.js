@@ -91,11 +91,10 @@ function createFunction(name, func, core, useCoreAPI) {
 
     funcName = funcName || name;
 
-    // for accessing monoco core APIs
+    if (params[0] === '') {
+        params = [];
+    }
     if (useCoreAPI) {
-        if (params[0] === '') {
-            params = [];
-        }
         params.push('$component');
         params.push('$db');
         params.push('$metamodel');
@@ -103,6 +102,8 @@ function createFunction(name, func, core, useCoreAPI) {
         params.push('$behavior');
         params.push('$state');
         params.push('$channel');
+    } else {
+        params.push('$db');
     }
 
     if (params[0] !== '') {
@@ -140,12 +141,10 @@ function add(id, state, action, useCoreAPI, core) {
         core = false;
     }
     if (typeof useCoreAPI === 'undefined') {
-        useCoreAPI = true;
+        useCoreAPI = false;
     }
 
-    if (useCoreAPI) {
-        action = createFunction(state, strAction, core, useCoreAPI);
-    }
+    action = createFunction(state, strAction, core, useCoreAPI);
 
     store[behaviorId] = action;
 

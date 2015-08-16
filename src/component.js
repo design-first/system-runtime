@@ -855,28 +855,6 @@ function create(config) {
 
 
 /*
- * Check if the component has for class name className.
- * @method isInstanceOf
- * @param {type} component component
- * @param {type} className name of the class
- * @return {Boolean} true if the component has for class name className  
- */
-function isInstanceOf(component, className) {
-    var result = false,
-        componentClassName = '';
-
-    componentClassName = component.constructor.name;
-
-    if (componentClassName === 'Function') {
-        componentClassName = component.name;
-    }
-    result = component === className;
-
-    return result;
-}
-
-
-/*
  * Destroy a component from its id.
  * @method destroy
  * @param {String} id id of the component to destroy
@@ -946,16 +924,6 @@ exports.create = create;
  * @return {Component} component
  */
 exports.get = get;
-
-
-/**
- * Check if the component has for class name className.
- * @method isInstanceOf
- * @param {type} component component
- * @param {type} className name of the class
- * @return {Boolean} true if the component has for class name className  
- */
-exports.isInstanceOf = isInstanceOf;
 
 
 /**

@@ -82,6 +82,74 @@ var store = {},
 
 
 /*
+ * Dump the database.
+ * @method dump
+ * @return {Object} the dump of the database. The dump is an object that contains: <br>
+ * {Object} schemas the schemas store in the database <br>
+ * {Object} types the types store in the database <br>
+ * {Object} behaviors the behaviors store in the database <br>
+ * {Object} components the components store in the database
+ * @private
+ */
+function dump() {
+    var dbDump = {},
+        collectionName = '',
+        behaviorId = '',
+        typeId = '',
+        type = null,
+        behavior = null,
+        schema = null,
+        schemaId = '',
+        length = 0,
+        i = 0;
+
+    // schemas
+    dbDump.schemas = {};
+    if (exports.MonocoSchema.count()) {
+        for (schemaId in store.MonocoSchema) {
+            schema = store.MonocoSchema[schemaId];
+            if (!schema._core) {
+                dbDump.schemas[schemaId] = schema;
+            }
+        }
+    }
+
+    // types
+    dbDump.types = {};
+    if (exports.MonocoType.count()) {
+        for (typeId in store.MonocoType) {
+            type = JSON.parse(JSON.stringify(store.MonocoType[typeId]));
+            delete type._id;
+            if (!type.core) {
+                dbDump.types[type.name] = type;
+            }
+        }
+    }
+
+    // behaviors
+    dbDump.behaviors = {};
+    for (behaviorId in store.MonocoBehavior) {
+        behavior = JSON.parse(JSON.stringify(store.MonocoBehavior[behaviorId]));
+        if (!behavior.core) {
+            dbDump.behaviors[behaviorId] = behavior;
+        }
+    }
+
+    // components
+    dbDump.components = {};
+    length = collections.length;
+    for (i = 0; i < length; i++) {
+        collectionName = collections[i];
+        if (exports[collectionName].count()) {
+            dbDump.components[collectionName] = store[collectionName];
+        }
+    }
+
+    return dbDump;
+}
+
+
+/*
  * Test if an object contains another one.
  * @method contains
  * @param {Object} source source object 
@@ -428,73 +496,6 @@ function collection(name) {
 
 
 /*
- * Dump the database.
- * @method dump
- * @return {Object} the dump of the database. The dump is an object that contains: <br>
- * {Object} schemas the schemas store in the database <br>
- * {Object} types the types store in the database <br>
- * {Object} behaviors the behaviors store in the database <br>
- * {Object} components the components store in the database
- */
-function dump() {
-    var dbDump = {},
-        collectionName = '',
-        behaviorId = '',
-        typeId = '',
-        type = null,
-        behavior = null,
-        schema = null,
-        schemaId = '',
-        length = 0,
-        i = 0;
-
-    // schemas
-    dbDump.schemas = {};
-    if (exports.MonocoSchema.count()) {
-        for (schemaId in store.MonocoSchema) {
-            schema = store.MonocoSchema[schemaId];
-            if (!schema._core) {
-                dbDump.schemas[schemaId] = schema;
-            }
-        }
-    }
-
-    // types
-    dbDump.types = {};
-    if (exports.MonocoType.count()) {
-        for (typeId in store.MonocoType) {
-            type = JSON.parse(JSON.stringify(store.MonocoType[typeId]));
-            delete type._id;
-            if (!type.core) {
-                dbDump.types[type.name] = type;
-            }
-        }
-    }
-
-    // behaviors
-    dbDump.behaviors = {};
-    for (behaviorId in store.MonocoBehavior) {
-        behavior = JSON.parse(JSON.stringify(store.MonocoBehavior[behaviorId]));
-        if (!behavior.core) {
-            dbDump.behaviors[behaviorId] = behavior;
-        }
-    }
-
-    // components
-    dbDump.components = {};
-    length = collections.length;
-    for (i = 0; i < length; i++) {
-        collectionName = collections[i];
-        if (exports[collectionName].count()) {
-            dbDump.components[collectionName] = store[collectionName];
-        }
-    }
-
-    return dbDump;
-}
-
-
-/*
  * Import/Export a monoco system into/from the database
  * @method system
  * @param {JSON} importedSystem a monoco system to import
@@ -774,22 +775,10 @@ exports.collection = collection;
 
 
 /**
- * monoco database store that list all the collections.
- * @property {JSON} store monoco database store
+ * monoco database store that lists all the collections.
+ * @property {JSON} store
  */
 exports.store = store;
-
-
-/**
- * Dump the database.
- * @method dump
- * @return {Object} the dump of the database. The dump is an object that contains: <br>
- * {Object} schemas the schemas store in the database <br>
- * {Object} types the types store in the database <br>
- * {Object} behaviors the behaviors store in the database <br>
- * {Object} components the components store in the database
- */
-exports.dump = dump;
 
 
 /**

@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.7.0</b>
+                    API Docs for Version: <b>0.7.1</b>
                 </p>
             </li>
         </div>
@@ -945,28 +945,6 @@
                         
                         
                         /*
-                         * Check if the component has for class name className.
-                         * @method isInstanceOf
-                         * @param {type} component component
-                         * @param {type} className name of the class
-                         * @return {Boolean} true if the component has for class name className  
-                         */
-                        function isInstanceOf(component, className) {
-                            var result = false,
-                                componentClassName = &#x27;&#x27;;
-                        
-                            componentClassName = component.constructor.name;
-                        
-                            if (componentClassName === &#x27;Function&#x27;) {
-                                componentClassName = component.name;
-                            }
-                            result = component === className;
-                        
-                            return result;
-                        }
-                        
-                        
-                        /*
                          * Destroy a component from its id.
                          * @method destroy
                          * @param {String} id id of the component to destroy
@@ -1036,16 +1014,6 @@
                          * @return {Component} component
                          */
                         exports.get = get;
-                        
-                        
-                        /**
-                         * Check if the component has for class name className.
-                         * @method isInstanceOf
-                         * @param {type} component component
-                         * @param {type} className name of the class
-                         * @return {Boolean} true if the component has for class name className  
-                         */
-                        exports.isInstanceOf = isInstanceOf;
                         
                         
                         /**

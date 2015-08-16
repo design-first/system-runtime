@@ -14,7 +14,7 @@
         "type": "boolean",
         "readOnly": false,
         "mandatory": false,
-        "default": true
+        "default": false
     },
     "component": {
         "type": "string",

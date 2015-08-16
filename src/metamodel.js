@@ -815,14 +815,28 @@ function isValidType(value, typeName) {
  * Check if a value is compliant with a type enum.
  * @method isValidEnum
  * @param {String|Object} value value to validate
- * @param {Schema} schema schela to use for validation
+ * @param {Schema} schema schema to use for validation
  * @return {Boolean} true if the object is compliant with the enum
  */
 function isValidEnum(value, schema) {
     var result = true;
 
+    function _isInstanceOf(component, className) {
+        var result = false,
+            componentClassName = '';
+
+        componentClassName = component.constructor.name;
+
+        if (componentClassName === 'Function') {
+            componentClassName = component.name;
+        }
+        result = componentClassName === className;
+
+        return result;
+    }
+
     if (isReference(schema.type)) {
-        result = $component.isInstanceOf($component.get(value), getReference(schema.type)) && schema.value.indexOf(value) !== -1;
+        result = _isInstanceOf($component.get(value), getReference(schema.type)) && schema.value.indexOf(value) !== -1;
         if (!result) {
             $log.invalidEnumValue(value, schema.type);
         }
@@ -1264,8 +1278,8 @@ function getMetaDef() {
 /*
  * Get parents of a shema if any.
  * @method get
- * @param {String} id of the schema
- * @return {Array} id of the parents
+ * @param {String} id id of the schema
+ * @return {Array} id id of the parents
  */
 function getParents(id) {
     var result = [],
@@ -1406,7 +1420,7 @@ exports.create = create;
 /**
  * Get a schema.
  * @method get
- * @param {String} id of the schema
+ * @param {String} id id of the schema
  * @return {Object} the schema
  */
 exports.get = get;
@@ -1423,8 +1437,8 @@ exports.getMetaDef = getMetaDef;
 /**
  * Get parents of a shema if any.
  * @method getParents
- * @param {String} id of the schema
- * @return {Array} id of the parents
+ * @param {String} id id of the schema
+ * @return {Array} id id of the parents
  */
 exports.getParents = getParents;
 
@@ -1456,7 +1470,7 @@ exports.isValidObject = isValidObject;
 /**
  * Prepare the object in order to be compliant with the schema.
  * @method prepareObject
- * @param {Object} object object to prepate
+ * @param {Object} object object to prepare
  * @param {Object} schema schema that validates the object
  */
 exports.prepareObject = prepareObject;
@@ -1476,7 +1490,7 @@ exports.isValidType = isValidType;
  * Check if a value is compliant with a type enum.
  * @method isValidEnum
  * @param {String|Object} value value to validate
- * @param {Schema} schema schela to use for validation
+ * @param {Schema} schema schema to use for validation
  * @return {Boolean} true if the object is compliant with the enum
  */
 exports.isValidEnum = isValidEnum;
@@ -1515,7 +1529,7 @@ exports.isProperty = isProperty;
 /**
  * Check if an attribute of the schema is a collection.
  * @method isCollection
- * @param {String} name of the collection
+ * @param {String} name name of the collection
  * @param {String} id component id
  * @return {Boolean} true if the attribute is a collection
  */

@@ -337,11 +337,11 @@ function callAction(component, state, action, params, isEvent) {
     }
 
     try {
+        length = params.length;
+        for (i = 0; i < length; i++) {
+            injectedParams.push(params[i]);
+        }
         if (action.useCoreAPI) {
-            length = params.length;
-            for (i = 0; i < length; i++) {
-                injectedParams.push(params[i]);
-            }
             injectedParams.push($component);
             injectedParams.push($db);
             injectedParams.push($metamodel);
@@ -349,18 +349,14 @@ function callAction(component, state, action, params, isEvent) {
             injectedParams.push($behavior);
             injectedParams.push($state);
             injectedParams.push($channel);
-
-            if (isEvent) {
-                setTimeout(action.action.bind.apply(action.action, [component].concat(injectedParams)), 0);
-            } else {
-                result = action.action.apply(component, injectedParams);
-            }
         } else {
-            if (isEvent) {
-                setTimeout(action.action.bind.apply(action.action, [component].concat(params)), 0);
-            } else {
-                result = action.action.apply(component, params);
-            }
+            injectedParams.push($db);
+        }
+
+        if (isEvent) {
+            setTimeout(action.action.bind.apply(action.action, [component].concat(injectedParams)), 0);
+        } else {
+            result = action.action.apply(component, injectedParams);
         }
     } catch (e) {
         if (e instanceof MonocoError) {
