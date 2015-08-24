@@ -56,7 +56,7 @@ You will find examples on [monoco website](https://monoco.readme.io/docs/a-basic
 
 You will find documentations on [monoco website](https://monoco.readme.io).
 
-## Build your own version of monoco
+## Build monoco
 
 Once you have cloned the repository:
 
