@@ -50,19 +50,13 @@ monoco.version();
 
 ## Examples
 
-You will find examples on [monoco website](http://monoco.io/tutorial/00-intro.html).
-
-Remember that **all the examples work both on server and browser**.
+You will find examples on [monoco website](https://monoco.readme.io/docs/a-basic-hello-world).
 
 ## Documentation
 
-You will find documentations on [monoco website](http://monoco.io/doc/index.html).
+You will find documentations on [monoco website](https://monoco.readme.io).
 
-There is a generated documentation of monoco core APIs on the [/doc](./doc) directory. This documentation is only usefull for using monoco core APIs in your code (via **Dependency Injection** on monoco behaviors). 
-
-## Extend monoco
-
-#### Build your own version of monoco
+## Build your own version of monoco
 
 Once you have cloned the repository:
 
