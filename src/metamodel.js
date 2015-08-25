@@ -1,6 +1,6 @@
 /* 
  * monoco
- * A Model and a NoSQL Database for Components
+ * Design.Create.Compose
  * @ecarriou
  *
  * Copyright (C) 2015 - Erwan Carriou

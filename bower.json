@@ -1,7 +1,7 @@
 {
     "name": "monoco",
-    "version": "0.7.2",
-    "description": "A Model and a NoSQL Database for Components",
+    "version": "0.7.5",
+    "description": "Design.Create.Compose",
     "license": "GPL-3.0",
     "homepage": "https://github.com/monocojs/monoco.git",
     "author": {
@@ -13,6 +13,7 @@
     "keywords": [
         "mda",
         "metamodel",
+        "schema",
         "odm",
         "model",
         "design",

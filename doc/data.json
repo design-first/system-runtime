@@ -1,8 +1,8 @@
 {
     "project": {
         "name": "monoco",
-        "description": "A Model and a NoSQL Database for Components",
-        "version": "0.7.2",
+        "description": "Design.Create.Compose",
+        "version": "0.7.5",
         "url": "http://monoco.io"
     },
     "files": {

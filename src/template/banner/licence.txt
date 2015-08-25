@@ -1,6 +1,6 @@
 /* 
  * monoco
- * A Model and a NoSQL Database for Components
+ * Design.Create.Compose
  * http://monoco.io/
  * @ecarriou
  *

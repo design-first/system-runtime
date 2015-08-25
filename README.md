@@ -16,7 +16,7 @@ It is a **5-in-1 JavaScript library**:
 * it is an **ODM (Object Document Mapper)** to manage your components as NoSQL documents and
 * it is **a micro NoSQL Database** that stores your components and can export/import them into another monoco NoSQL Database.
 
-Finally monoco helps you to design, create and store components.
+Finally monoco helps you to design, create and compose components.
 
 ## Installation
 
@@ -54,7 +54,7 @@ You will find examples on [monoco website](https://monoco.readme.io/docs/a-basic
 
 ## Documentation
 
-You will find documentations on [monoco website](https://monoco.readme.io).
+You will find documentations on [monoco website](https://monoco.readme.io/docs).
 
 ## Build monoco
 
