@@ -90,7 +90,7 @@ function monocoArray(conf) {
 
     arrDb.forEach(function (val) {
         if (type.indexOf('@') !== -1) {
-            arr.push(monoco.require(val));
+            arr.push($helper.getMonoco().require(val));
         } else {
             arr.push(val);
         }
@@ -418,7 +418,7 @@ function addProperties(model, Class, classId) {
                         val = $db.store[classId][this.id()][propertyName][position];
                         if (val) {
                             if (propertyType[0].indexOf('@') !== -1) {
-                                realVal = monoco.require(val);
+                                realVal = $helper.getMonoco().require(val);
                             } else {
                                 realVal = val;
                             }

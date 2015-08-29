@@ -2,7 +2,7 @@
     "project": {
         "name": "monoco",
         "description": "Design.Create.Compose",
-        "version": "0.7.5",
+        "version": "0.7.6",
         "url": "http://monoco.io"
     },
     "files": {

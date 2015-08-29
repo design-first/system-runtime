@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.7.5</b>
+                    API Docs for Version: <b>0.7.6</b>
                 </p>
             </li>
         </div>
@@ -180,7 +180,7 @@
                         
                             arrDb.forEach(function (val) {
                                 if (type.indexOf(&#x27;@&#x27;) !== -1) {
-                                    arr.push(monoco.require(val));
+                                    arr.push($helper.getMonoco().require(val));
                                 } else {
                                     arr.push(val);
                                 }
@@ -508,7 +508,7 @@
                                                 val = $db.store[classId][this.id()][propertyName][position];
                                                 if (val) {
                                                     if (propertyType[0].indexOf(&#x27;@&#x27;) !== -1) {
-                                                        realVal = monoco.require(val);
+                                                        realVal = $helper.getMonoco().require(val);
                                                     } else {
                                                         realVal = val;
                                                     }

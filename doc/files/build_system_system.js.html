@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.7.5</b>
+                    API Docs for Version: <b>0.7.6</b>
                 </p>
             </li>
         </div>
@@ -131,7 +131,7 @@
                          */
                         var system = {
                             &quot;name&quot;: &quot;monoco&quot;,
-                            &quot;version&quot;: &quot;0.7.5&quot;,
+                            &quot;version&quot;: &quot;0.7.6&quot;,
                             &quot;description&quot;: &quot;Design.Create.Compose&quot;,
                             &quot;_id&quot;: &quot;e89c617b6b15d24&quot;,
                             &quot;schemas&quot;: {
@@ -846,174 +846,174 @@
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;1f65512ec013b6f&quot;: {
-                                    &quot;_id&quot;: &quot;1f65512ec013b6f&quot;,
+                                &quot;133d51ca9616b49&quot;: {
+                                    &quot;_id&quot;: &quot;133d51ca9616b49&quot;,
                                     &quot;component&quot;: &quot;Monoco&quot;,
                                     &quot;state&quot;: &quot;error&quot;,
                                     &quot;action&quot;: &quot;function error(data) { console.error(&#x27;monoco: &#x27; + data.message, data.error); }&quot;,
                                     &quot;core&quot;: true
                                 },
-                                &quot;15b1813caa13bd0&quot;: {
-                                    &quot;_id&quot;: &quot;15b1813caa13bd0&quot;,
+                                &quot;11e251ccef1f7f6&quot;: {
+                                    &quot;_id&quot;: &quot;11e251ccef1f7f6&quot;,
                                     &quot;component&quot;: &quot;Monoco&quot;,
                                     &quot;state&quot;: &quot;system&quot;,
                                     &quot;action&quot;: &quot;function system(name) {    var System = null,        system = {},        systemId = &#x27;&#x27;,        result = [],        conf = {};    if (name) {        conf.master = true;        conf.name = name;        System = this.require(&#x27;MonocoSystem&#x27;);        system = new System(conf);    } else {        result = $db.MonocoSystem.find({            &#x27;master&#x27;: true        });        if (result.length) {            systemId = result[0]._id;            system = $component.get(systemId);        }    }    return system;}&quot;,
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;16aba117271b489&quot;: {
-                                    &quot;_id&quot;: &quot;16aba117271b489&quot;,
+                                &quot;1675911cdc1102d&quot;: {
+                                    &quot;_id&quot;: &quot;1675911cdc1102d&quot;,
                                     &quot;component&quot;: &quot;Monoco&quot;,
                                     &quot;state&quot;: &quot;warning&quot;,
                                     &quot;action&quot;: &quot;function warning(message) { console.warn(&#x27;monoco: &#x27; + message); }&quot;,
                                     &quot;core&quot;: true
                                 },
-                                &quot;16d5d16d9316831&quot;: {
-                                    &quot;_id&quot;: &quot;16d5d16d9316831&quot;,
+                                &quot;1a419120fb149dc&quot;: {
+                                    &quot;_id&quot;: &quot;1a419120fb149dc&quot;,
                                     &quot;component&quot;: &quot;MonocoChannel&quot;,
                                     &quot;state&quot;: &quot;listen&quot;,
                                     &quot;action&quot;: &quot;function listen(event, action) { $channel.listen(event, action); }&quot;,
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;1301e1aa6b14cf5&quot;: {
-                                    &quot;_id&quot;: &quot;1301e1aa6b14cf5&quot;,
+                                &quot;1098e1156616850&quot;: {
+                                    &quot;_id&quot;: &quot;1098e1156616850&quot;,
                                     &quot;component&quot;: &quot;MonocoChannel&quot;,
                                     &quot;state&quot;: &quot;send&quot;,
                                     &quot;action&quot;: &quot;function send(message) { return $channel.send(message); }&quot;,
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;14b591512e19970&quot;: {
-                                    &quot;_id&quot;: &quot;14b591512e19970&quot;,
+                                &quot;1bc47124fc11bfb&quot;: {
+                                    &quot;_id&quot;: &quot;1bc47124fc11bfb&quot;,
                                     &quot;component&quot;: &quot;MonocoClassInfo&quot;,
                                     &quot;state&quot;: &quot;collection&quot;,
                                     &quot;action&quot;: &quot;function collection(name) { var result = {}; if (this.metamodel()[name] === &#x27;collection&#x27;) { result = this.model()[name]; } return result; }&quot;,
                                     &quot;core&quot;: true
                                 },
-                                &quot;14a121399a19e01&quot;: {
-                                    &quot;_id&quot;: &quot;14a121399a19e01&quot;,
+                                &quot;1416b17e5815995&quot;: {
+                                    &quot;_id&quot;: &quot;1416b17e5815995&quot;,
                                     &quot;component&quot;: &quot;MonocoClassInfo&quot;,
                                     &quot;state&quot;: &quot;collections&quot;,
                                     &quot;action&quot;: &quot;function collections() { var keys = Object.keys(this.metamodel()), item = &#x27;&#x27;, result = [], i = 0, length = 0; length = keys.length; for (i = 0; i &lt; length; i++) { item = keys[i]; if (this.metamodel()[item] === &#x27;collection&#x27;) { result.push(item); } } return result; }&quot;,
                                     &quot;core&quot;: true
                                 },
-                                &quot;1357017b7e1cba4&quot;: {
-                                    &quot;_id&quot;: &quot;1357017b7e1cba4&quot;,
+                                &quot;167af1eb4918291&quot;: {
+                                    &quot;_id&quot;: &quot;167af1eb4918291&quot;,
                                     &quot;component&quot;: &quot;MonocoClassInfo&quot;,
                                     &quot;state&quot;: &quot;event&quot;,
                                     &quot;action&quot;: &quot;function event(name) { var result = {}; if (this.metamodel()[name] === &#x27;event&#x27;) { result = this.model()[name]; } return result; }&quot;,
                                     &quot;core&quot;: true
                                 },
-                                &quot;1c792155191651e&quot;: {
-                                    &quot;_id&quot;: &quot;1c792155191651e&quot;,
+                                &quot;1f18b1371211f2b&quot;: {
+                                    &quot;_id&quot;: &quot;1f18b1371211f2b&quot;,
                                     &quot;component&quot;: &quot;MonocoClassInfo&quot;,
                                     &quot;state&quot;: &quot;events&quot;,
                                     &quot;action&quot;: &quot;function events() { var keys = Object.keys(this.metamodel()), item = &#x27;&#x27;, result = [], i = 0, length = 0; length = keys.length; for (i = 0; i &lt; length; i++) { item = keys[i]; if (this.metamodel()[item] === &#x27;event&#x27;) { result.push(item); } } return result; }&quot;,
                                     &quot;core&quot;: true
                                 },
-                                &quot;1ba18147491758c&quot;: {
-                                    &quot;_id&quot;: &quot;1ba18147491758c&quot;,
+                                &quot;1cba613c961c79e&quot;: {
+                                    &quot;_id&quot;: &quot;1cba613c961c79e&quot;,
                                     &quot;component&quot;: &quot;MonocoClassInfo&quot;,
                                     &quot;state&quot;: &quot;method&quot;,
                                     &quot;action&quot;: &quot;function method(name) { var result = {}; if (this.metamodel()[name] === &#x27;method&#x27;) { result = this.model()[name]; } return result; }&quot;,
                                     &quot;core&quot;: true
                                 },
-                                &quot;171ec1bf3216fb5&quot;: {
-                                    &quot;_id&quot;: &quot;171ec1bf3216fb5&quot;,
+                                &quot;185c21b42a10f35&quot;: {
+                                    &quot;_id&quot;: &quot;185c21b42a10f35&quot;,
                                     &quot;component&quot;: &quot;MonocoClassInfo&quot;,
                                     &quot;state&quot;: &quot;methods&quot;,
                                     &quot;action&quot;: &quot;function methods() { var keys = Object.keys(this.metamodel()), item = &#x27;&#x27;, result = [], i = 0, length = 0; length = keys.length; for (i = 0; i &lt; length; i++) { item = keys[i]; if (this.metamodel()[item] === &#x27;method&#x27;) { result.push(item); } } return result; }&quot;,
                                     &quot;core&quot;: true
                                 },
-                                &quot;1bbe418c891734c&quot;: {
-                                    &quot;_id&quot;: &quot;1bbe418c891734c&quot;,
+                                &quot;1a851141ee12c1c&quot;: {
+                                    &quot;_id&quot;: &quot;1a851141ee12c1c&quot;,
                                     &quot;component&quot;: &quot;MonocoClassInfo&quot;,
                                     &quot;state&quot;: &quot;properties&quot;,
                                     &quot;action&quot;: &quot;function properties() { var keys = Object.keys(this.metamodel()), item = &#x27;&#x27;, result = [], i = 0, length = 0; length = keys.length; for (i = 0; i &lt; length; i++) { item = keys[i]; if (this.metamodel()[item] === &#x27;property&#x27;) { result.push(item); } } return result; }&quot;,
                                     &quot;core&quot;: true
                                 },
-                                &quot;1eafb1c64011fc4&quot;: {
-                                    &quot;_id&quot;: &quot;1eafb1c64011fc4&quot;,
+                                &quot;18cfe1ea8a14b99&quot;: {
+                                    &quot;_id&quot;: &quot;18cfe1ea8a14b99&quot;,
                                     &quot;component&quot;: &quot;MonocoClassInfo&quot;,
                                     &quot;state&quot;: &quot;property&quot;,
                                     &quot;action&quot;: &quot;function property(name) { var result = {}; if (this.metamodel()[name] === &#x27;property&#x27;) { result = this.model()[name]; } return result; }&quot;,
                                     &quot;core&quot;: true
                                 },
-                                &quot;19c8b1e6861ae6b&quot;: {
-                                    &quot;_id&quot;: &quot;19c8b1e6861ae6b&quot;,
+                                &quot;1555e17fb21d83f&quot;: {
+                                    &quot;_id&quot;: &quot;1555e17fb21d83f&quot;,
                                     &quot;component&quot;: &quot;MonocoComponent&quot;,
                                     &quot;state&quot;: &quot;destroy&quot;,
                                     &quot;action&quot;: &quot;function destroy() { $component.destroy(this.id()); }&quot;,
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;103d1199d31cf03&quot;: {
-                                    &quot;_id&quot;: &quot;103d1199d31cf03&quot;,
+                                &quot;18c7910524115cf&quot;: {
+                                    &quot;_id&quot;: &quot;18c7910524115cf&quot;,
                                     &quot;component&quot;: &quot;MonocoComponent&quot;,
                                     &quot;state&quot;: &quot;off&quot;,
                                     &quot;action&quot;: &quot;function off(state, behaviorId) { var args = [], i = 0, length = 0; length = arguments.length; for (i = 0; i &lt; length - 7; i++) { args.push(arguments[i]); } if ($workflow.checkParams({\&quot;component\&quot;: this, \&quot;methodName\&quot;: \&quot;off\&quot;, \&quot;args\&quot;: args})) { if ($metamodel.isValidState(state, this.constructor.name)) {$behavior.remove({\&quot;behaviorId\&quot;: behaviorId, \&quot;componentId\&quot;: this.id(), \&quot;state\&quot;: state}); } else { $helper.getMonoco().warning({ \&quot;message\&quot;:\&quot;invoke &#x27;off&#x27; method of component &#x27;\&quot; + this.id() + \&quot;&#x27; with an invalid state &#x27;\&quot; + state + \&quot;&#x27;\&quot;}); } } }&quot;,
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;17006155fe1267a&quot;: {
-                                    &quot;_id&quot;: &quot;17006155fe1267a&quot;,
+                                &quot;1adde179321fa6c&quot;: {
+                                    &quot;_id&quot;: &quot;1adde179321fa6c&quot;,
                                     &quot;component&quot;: &quot;MonocoComponent&quot;,
                                     &quot;state&quot;: &quot;require&quot;,
                                     &quot;action&quot;: &quot;function require(id) { return $component.get(id); }&quot;,
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;182341cc6e11bfb&quot;: {
-                                    &quot;_id&quot;: &quot;182341cc6e11bfb&quot;,
+                                &quot;1f8b61fcc818520&quot;: {
+                                    &quot;_id&quot;: &quot;1f8b61fcc818520&quot;,
                                     &quot;component&quot;: &quot;MonocoDatabase&quot;,
                                     &quot;state&quot;: &quot;collections&quot;,
                                     &quot;action&quot;: &quot;function collections() { var result = {}, collectionName = &#x27;&#x27;; for (collectionName in $db.store) { if ($db.store.hasOwnProperty(collectionName) &amp;&amp; collectionName.indexOf(&#x27;Monoco&#x27;) !== 0) { result[collectionName] = $db[collectionName]; } } return result;}&quot;,
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;1701b1ff081f949&quot;: {
-                                    &quot;_id&quot;: &quot;1701b1ff081f949&quot;,
+                                &quot;1979b193d915e7e&quot;: {
+                                    &quot;_id&quot;: &quot;1979b193d915e7e&quot;,
                                     &quot;component&quot;: &quot;MonocoDatabase&quot;,
                                     &quot;state&quot;: &quot;subsystem&quot;,
                                     &quot;action&quot;: &quot;function subsystem(params) { return $db.subsystem(params); }&quot;,
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;1fac41a5c51b890&quot;: {
-                                    &quot;_id&quot;: &quot;1fac41a5c51b890&quot;,
+                                &quot;1e8f71e0ef1c483&quot;: {
+                                    &quot;_id&quot;: &quot;1e8f71e0ef1c483&quot;,
                                     &quot;component&quot;: &quot;MonocoDatabase&quot;,
                                     &quot;state&quot;: &quot;system&quot;,
                                     &quot;action&quot;: &quot;function system(system) { return $db.system(system); }&quot;,
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;10cc81833e1f00e&quot;: {
-                                    &quot;_id&quot;: &quot;10cc81833e1f00e&quot;,
+                                &quot;1095a1b7e513360&quot;: {
+                                    &quot;_id&quot;: &quot;1095a1b7e513360&quot;,
                                     &quot;component&quot;: &quot;MonocoMetamodel&quot;,
                                     &quot;state&quot;: &quot;create&quot;,
                                     &quot;action&quot;: &quot;function create() { $metamodel.create(); }&quot;,
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;1fbe5137b31060f&quot;: {
-                                    &quot;_id&quot;: &quot;1fbe5137b31060f&quot;,
+                                &quot;14aa6161391ba69&quot;: {
+                                    &quot;_id&quot;: &quot;14aa6161391ba69&quot;,
                                     &quot;component&quot;: &quot;MonocoMetamodel&quot;,
                                     &quot;state&quot;: &quot;schema&quot;,
                                     &quot;action&quot;: &quot;function schema(schema) { $metamodel.schema(schema); }&quot;,
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;1843715b8714404&quot;: {
-                                    &quot;_id&quot;: &quot;1843715b8714404&quot;,
+                                &quot;1dbe41c15d14c8c&quot;: {
+                                    &quot;_id&quot;: &quot;1dbe41c15d14c8c&quot;,
                                     &quot;component&quot;: &quot;MonocoMetamodel&quot;,
                                     &quot;state&quot;: &quot;type&quot;,
                                     &quot;action&quot;: &quot;function type(type) { $metamodel.type(type); }&quot;,
                                     &quot;core&quot;: true,
                                     &quot;useCoreAPI&quot;: true
                                 },
-                                &quot;1fb091b05f172fd&quot;: {
-                                    &quot;_id&quot;: &quot;1fb091b05f172fd&quot;,
+                                &quot;10af61768e150dc&quot;: {
+                                    &quot;_id&quot;: &quot;10af61768e150dc&quot;,
                                     &quot;component&quot;: &quot;MonocoSystem&quot;,
                                     &quot;state&quot;: &quot;sync&quot;,
                                     &quot;action&quot;: &quot;function sync() { var system = JSON.parse($db.system()); this.schemas(system.schemas); this.types(system.types); this.behaviors(system.behaviors); this.components(system.components); }&quot;,
@@ -1025,7 +1025,7 @@
                                 &quot;Monoco&quot;: {
                                     &quot;monoco&quot;: {
                                         &quot;_id&quot;: &quot;monoco&quot;,
-                                        &quot;version&quot;: &quot;0.7.5&quot;
+                                        &quot;version&quot;: &quot;0.7.6&quot;
                                     }
                                 },
                                 &quot;MonocoChannel&quot;: {
