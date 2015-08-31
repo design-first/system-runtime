@@ -48,11 +48,11 @@ Then you can use monoco on your script:
 monoco.version();
 ```
 
-## Documentations
+## Documentation
 
-* [Quick Start](https://monoco.readme.io/docs/quick-start).
-* [Examples](https://monoco.readme.io/docs/a-basic-hello-world).
-* [Documentation](https://monoco.readme.io/docs).
+* [Quick Start](https://monoco.readme.io/docs/quick-start)
+* [Guide](https://monoco.readme.io/docs/installation)
+* [Examples](https://monoco.readme.io/docs/a-basic-hello-world)
 * [Build monoco](https://monoco.readme.io/docs/extend-monoco)
 
 ## Licence
