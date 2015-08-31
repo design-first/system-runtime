@@ -48,74 +48,12 @@ Then you can use monoco on your script:
 monoco.version();
 ```
 
-## Examples
+## Documentations
 
-You will find examples on [monoco website](https://monoco.readme.io/docs/a-basic-hello-world).
-
-## Documentation
-
-You will find documentations on [monoco website](https://monoco.readme.io/docs).
-
-## Build monoco
-
-Once you have cloned the repository:
-
-```sh
-# for server tests (maybe you have this installed already)
-$ npm install -g jasmine-node 
-# for client build (maybe you have this installed already)
-$ npm install -g browserify
-# needed by grunt (maybe you have this installed already)
-$ npm install -g grunt-cli
-# install dev dependencies
-$ npm install
-# build monoco
-$ grunt build
-```
-
-#### Grunt
-
-To extend monoco core system or to package your own system with monoco, you will need to use grunt commands. Here are the different tasks you can use to automate tasks:
-
-```sh
-# run server tests (from /test/)
-$ grunt test
-# generate the documentation (on /doc/)
-$ grunt doc
-# clean the build directory
-$ grunt clean
-# build monoco on 'debug' mode (on /build/)
-# it will generate monoco core system (from /src/system/)
-# and package monoco client library
-# it will also run jshint and server tests
-$ grunt debug
-# build monoco (on /build/)
-# it will generate monoco core system (from /src/system/) 
-# and package monoco client library
-# it will also run jshint and server and client tests
-$ grunt build
-```
-
-#### monoco core system
-
-monoco has got a **customizable core system**. You can update all its components, models or behaviors to follow your needs.
-
-monoco core system is located on the [/src/system](./src/system) directory:
-* ``` behaviors ```: contains all the behaviors of the core components of monoco,
-* ``` components ```: contains all the core components of monoco,
-* ``` schemas ```: contains all the schemas of the core components of monoco and
-* ``` types ```: contains all the types of the core components of monoco.
-
-When you have finished to update monoco core system, just build monoco.
-
-#### monoco addons
-
-You can extend monoco core system **by composing other systems** with it. In that case, other systems are called **addons**. 
-
-monoco addons are located on the [/addons](./addons/) directory. 
-You will find there all the systems that you can import. 
-
-To compose a system with monoco core system, just copy and paste a system into the [/src/addons](./src/addons/) directory and build monoco.
+* [Quick Start](https://monoco.readme.io/docs/quick-start).
+* [Examples](https://monoco.readme.io/docs/a-basic-hello-world).
+* [Documentation](https://monoco.readme.io/docs).
+* [Build monoco](https://monoco.readme.io/docs/extend-monoco)
 
 ## Licence
 
