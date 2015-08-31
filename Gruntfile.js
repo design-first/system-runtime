@@ -371,9 +371,11 @@ module.exports = function (grunt) {
         'jsbeautifier',
         'jshint',
         'test',
+        'browserify:monocoDebug',
         'browserify:monoco',
         'uglify',
         'concat:licence',
-        'karma:monoco'
+        'karma:monoco',
+        'yuidoc'
     ]);
 };

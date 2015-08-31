@@ -230,7 +230,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/component.js",
-            "line": 893,
+            "line": 905,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -443,7 +443,7 @@
             "submodule": "monoco-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 893,
+            "line": 905,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -838,7 +838,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 910,
+            "line": 922,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -859,7 +859,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 920,
+            "line": 932,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -880,7 +880,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 929,
+            "line": 941,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -890,7 +890,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 936,
+            "line": 948,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",

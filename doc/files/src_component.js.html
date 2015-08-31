@@ -153,14 +153,14 @@
                         
                         /*
                          * Sub class to override push and pop method of Array Class.
-                         * @class monocoArray
+                         * @class MonocoArray
                          * @param {Object} conf
                          * {String} classId name of the class
                          * {String} type type of the array
                          * {Array} arr array
                          * @private
                          */
-                        function monocoArray(conf) {
+                        function MonocoArray(conf) {
                             var arr = [],
                                 arrDb = [],
                                 type = &#x27;&#x27;,
@@ -178,6 +178,7 @@
                                 isReadOnly = conf.readOnly;
                             }
                         
+                            // init
                             arrDb.forEach(function (val) {
                                 if (type.indexOf(&#x27;@&#x27;) !== -1) {
                                     arr.push($helper.getMonoco().require(val));
@@ -186,6 +187,10 @@
                                 }
                             });
                         
+                            /* Override push method.
+                             * @push
+                             * @param {MonocoComponent|Object} value
+                             */
                             arr.push = function push(val) {
                                 var isClass = false;
                         
@@ -195,7 +200,6 @@
                         
                                     if (isClass) {
                                         if (val &amp;&amp; $metamodel.inheritFrom(val.constructor.name, type.replace(&#x27;@&#x27;, &#x27;&#x27;))) {
-                                            this[this.length] = val;
                                             arrDb.push(val.id());
                         
                                             $workflow.state({
@@ -208,7 +212,6 @@
                                         }
                                     } else {
                                         if (val &amp;&amp; $metamodel.isValidType(val, type)) {
-                                            this[this.length] = val;
                                             arrDb.push(val);
                         
                                             $workflow.state({
@@ -223,23 +226,35 @@
                                 } else {
                                     $log.readOnlyProperty(id, propertyName);
                                 }
+                                return arrDb.length;
                             };
                         
+                            /* Override pop method.
+                             * @pop
+                             * @return {MonocoComponent|Object} value
+                             */
                             arr.pop = function pop() {
-                                var result = null;
+                                var result,
+                                    val = null,
+                                    isClass = false;
                         
                                 if (!isReadOnly) {
-                                    arrDb.pop();
-                                    if (this.length !== 0) {
-                                        var data = this[this.length - 1];
-                                        result = this.splice(this.length - 1, 1);
+                                    if (arrDb.length !== 0) {
+                                        val = arrDb.pop();
+                        
                                         $workflow.state({
-                                            &quot;component&quot;: id,
+                                            &quot;component&quot;: val,
                                             &quot;state&quot;: propertyName,
-                                            &quot;data&quot;: [arrDb.length - 1, data, &#x27;remove&#x27;]
+                                            &quot;data&quot;: [arrDb.length - 1, val, &#x27;remove&#x27;]
                                         });
-                                    } else {
-                                        result = this;
+                        
+                                        isClass = type.indexOf(&#x27;@&#x27;) !== -1;
+                        
+                                        if (isClass) {
+                                            result = store[val];
+                                        } else {
+                                            result = val;
+                                        }
                                     }
                                 } else {
                                     $log.readOnlyProperty(id, propertyName);
@@ -247,14 +262,11 @@
                                 return result;
                             };
                         
-                            /* jshint -W103 */
-                            arr.__proto__ = monocoArray.prototype;
-                            /* jshint +W103 */
                             return arr;
                         }
                         
                         /* jshint -W058 */
-                        monocoArray.prototype = new Array;
+                        MonocoArray.prototype = new Array;
                         /* jshint +W058 */
                         
                         
@@ -494,7 +506,7 @@
                                         if (typeof value === &#x27;undefined&#x27;) {
                                             if (typeof position === &#x27;undefined&#x27;) {
                         
-                                                monocoArr = new monocoArray({
+                                                monocoArr = new MonocoArray({
                                                     &quot;id&quot;: this.id(),
                                                     &quot;propertyName&quot;: propertyName,
                                                     &quot;readOnly&quot;: propertyReadOnly,

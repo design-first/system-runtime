@@ -146,7 +146,7 @@ describe('a monoco component', function () {
         yoda.on('lastName', function (val) {
             this.adress('Dagobah');
         });
-        
+
         yoda.off('lastName');
 
         yoda.lastName('Grand Jedi Master');
@@ -202,7 +202,7 @@ describe('a monoco component', function () {
         expect(yoda.lastName()).toBe('Grand Jedi Master');
     });
 
-    it('can get a collection', function () {
+    it('can add an item in a collection in the config', function () {
         var Person = monoco.require('Person');
 
         var luke = new Person({
@@ -216,7 +216,60 @@ describe('a monoco component', function () {
             'children': [luke]
         });
 
-        expect(anakin.children().length).toBe(1);
+        expect(anakin.children(0).id()).toBe(luke.id());
+    });
+
+    it('can add an item in a collection with api', function () {
+        var Person = monoco.require('Person');
+
+        var luke = new Person({
+            'firstName': 'Luke',
+            'lastName': 'Skywalker'
+        });
+
+        var anakin = new Person({
+            'firstName': 'Anakin',
+            'lastName': 'Skywalker'
+        });
+
+        anakin.children(0, luke);
+
+        expect(anakin.children(0).id()).toBe(luke.id());
+    });
+
+    it('can remove an item of a collection with pop', function () {
+        var Person = monoco.require('Person');
+
+        var luke = new Person({
+            'firstName': 'Luke',
+            'lastName': 'Skywalker'
+        });
+
+        var anakin = new Person({
+            'firstName': 'Anakin',
+            'lastName': 'Skywalker',
+            'children': [luke]
+        });
+
+        expect(anakin.children().pop().id()).toBe(luke.id());
+    });
+
+    it('can add a item of a collection with push', function () {
+        var Person = monoco.require('Person');
+
+        var luke = new Person({
+            'firstName': 'Luke',
+            'lastName': 'Skywalker'
+        });
+
+        var anakin = new Person({
+            'firstName': 'Anakin',
+            'lastName': 'Skywalker'
+        });
+
+        anakin.children().push(luke);
+
+        expect(anakin.children(0).id()).toBe(luke.id());
     });
 
     it('can destroy itself', function () {

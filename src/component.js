@@ -63,14 +63,14 @@ var PROPERTY_TYPE = 'property',
 
 /*
  * Sub class to override push and pop method of Array Class.
- * @class monocoArray
+ * @class MonocoArray
  * @param {Object} conf
  * {String} classId name of the class
  * {String} type type of the array
  * {Array} arr array
  * @private
  */
-function monocoArray(conf) {
+function MonocoArray(conf) {
     var arr = [],
         arrDb = [],
         type = '',
@@ -88,6 +88,7 @@ function monocoArray(conf) {
         isReadOnly = conf.readOnly;
     }
 
+    // init
     arrDb.forEach(function (val) {
         if (type.indexOf('@') !== -1) {
             arr.push($helper.getMonoco().require(val));
@@ -96,6 +97,10 @@ function monocoArray(conf) {
         }
     });
 
+    /* Override push method.
+     * @push
+     * @param {MonocoComponent|Object} value
+     */
     arr.push = function push(val) {
         var isClass = false;
 
@@ -105,7 +110,6 @@ function monocoArray(conf) {
 
             if (isClass) {
                 if (val && $metamodel.inheritFrom(val.constructor.name, type.replace('@', ''))) {
-                    this[this.length] = val;
                     arrDb.push(val.id());
 
                     $workflow.state({
@@ -118,7 +122,6 @@ function monocoArray(conf) {
                 }
             } else {
                 if (val && $metamodel.isValidType(val, type)) {
-                    this[this.length] = val;
                     arrDb.push(val);
 
                     $workflow.state({
@@ -133,23 +136,35 @@ function monocoArray(conf) {
         } else {
             $log.readOnlyProperty(id, propertyName);
         }
+        return arrDb.length;
     };
 
+    /* Override pop method.
+     * @pop
+     * @return {MonocoComponent|Object} value
+     */
     arr.pop = function pop() {
-        var result = null;
+        var result,
+            val = null,
+            isClass = false;
 
         if (!isReadOnly) {
-            arrDb.pop();
-            if (this.length !== 0) {
-                var data = this[this.length - 1];
-                result = this.splice(this.length - 1, 1);
+            if (arrDb.length !== 0) {
+                val = arrDb.pop();
+
                 $workflow.state({
-                    "component": id,
+                    "component": val,
                     "state": propertyName,
-                    "data": [arrDb.length - 1, data, 'remove']
+                    "data": [arrDb.length - 1, val, 'remove']
                 });
-            } else {
-                result = this;
+
+                isClass = type.indexOf('@') !== -1;
+
+                if (isClass) {
+                    result = store[val];
+                } else {
+                    result = val;
+                }
             }
         } else {
             $log.readOnlyProperty(id, propertyName);
@@ -157,14 +172,11 @@ function monocoArray(conf) {
         return result;
     };
 
-    /* jshint -W103 */
-    arr.__proto__ = monocoArray.prototype;
-    /* jshint +W103 */
     return arr;
 }
 
 /* jshint -W058 */
-monocoArray.prototype = new Array;
+MonocoArray.prototype = new Array;
 /* jshint +W058 */
 
 
@@ -404,7 +416,7 @@ function addProperties(model, Class, classId) {
                 if (typeof value === 'undefined') {
                     if (typeof position === 'undefined') {
 
-                        monocoArr = new monocoArray({
+                        monocoArr = new MonocoArray({
                             "id": this.id(),
                             "propertyName": propertyName,
                             "readOnly": propertyReadOnly,
