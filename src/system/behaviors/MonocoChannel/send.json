@@ -1,7 +1,0 @@
-{
-    "component": "MonocoChannel",
-    "state": "send",
-    "action": "function send(message) { return $channel.send(message); }",
-    "core": true,
-    "useCoreAPI": true
-}

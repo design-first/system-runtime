@@ -597,6 +597,32 @@ function addEvents(model, Class, classId) {
         var paramsName = getParamNames(classId, methodName),
             params = paramsName.join(','),
             body = function () {
+                var systems = [],
+                    systemId = -1,
+                    data = [],
+                    i = 0,
+                    length = -1,
+                    message = {};
+
+                if (classId === 'MonocoChannel') {
+                    systems = $db.MonocoSystem.find({
+                        'master': true
+                    });
+                    if (systems.length) {
+                        systemId = systems[0]._id;
+
+                        message.from = systemId;
+                        length = arguments.length;
+                        for (i = 0; i < length; i++) {
+                            data.push(arguments[i]);                          
+                        }
+                        message.data = data;
+                        message.event = methodName;
+
+                        $db.MonocoMessage.insert(message);
+                    }
+                }
+
                 $workflow.state({
                     "component": this.id(),
                     "state": methodName,

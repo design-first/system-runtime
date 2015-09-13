@@ -16,9 +16,9 @@
         "default": ""
     },
     "data": {
-        "type": "object",
+        "type": "array",
         "readOnly": false,
         "mandatory": true,
-        "default": {}
+        "default": []
     }
 }

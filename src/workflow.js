@@ -49,7 +49,6 @@
 var $metamodel = require('./metamodel.js');
 var $component = require('./component.js');
 var $behavior = require('./behavior.js');
-var $channel = require('./channel.js');
 var $state = require('./state.js');
 var $helper = require('./helper.js');
 var $log = require('./log.js');
@@ -348,7 +347,6 @@ function callAction(component, state, action, params, isEvent) {
             injectedParams.push(exports);
             injectedParams.push($behavior);
             injectedParams.push($state);
-            injectedParams.push($channel);
         }
 
         if (isEvent) {

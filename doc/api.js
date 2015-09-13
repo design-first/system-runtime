@@ -5,7 +5,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "MonocoError",
         "monoco",
         "monoco-behavior",
-        "monoco-channel",
         "monoco-component",
         "monoco-db",
         "monoco-helper",
@@ -18,7 +17,6 @@ YUI.add("yuidoc-meta", function(Y) {
     "modules": [
         "monoco",
         "monoco-behavior",
-        "monoco-channel",
         "monoco-component",
         "monoco-db",
         "monoco-helper",
@@ -38,11 +36,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "monoco-behavior",
             "name": "monoco-behavior",
             "description": "This module manages the behaviors of all components. \nA behavior is a mecanism that allow users to add actions that will be executed \nwhen a specific state of a component will change."
-        },
-        {
-            "displayName": "monoco-channel",
-            "name": "monoco-channel",
-            "description": "This module manages the channel."
         },
         {
             "displayName": "monoco-component",

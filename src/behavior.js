@@ -38,7 +38,6 @@
 
 var $db = require('./db.js');
 var $helper = require('./helper.js');
-var $channel = require('./channel.js');
 
 
 /* Private properties */
@@ -101,7 +100,6 @@ function createFunction(name, func, core, useCoreAPI) {
         params.push('$workflow');
         params.push('$behavior');
         params.push('$state');
-        params.push('$channel');
     }
 
     if (params[0] !== '') {

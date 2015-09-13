@@ -268,7 +268,9 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
     }
 
     doc.forEach(function multi_insert(obj) {
-        var component = null;
+        var component = null,
+            channels = [],
+            channel = null;
 
         switch (true) {
             case this.name === 'MonocoSchema':
@@ -293,9 +295,13 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
                 }
 
                 if (this.name === 'MonocoMessage') {
-                    if ($helper.isMonoco() && $helper.getMonoco().require('channel')) {
+                    if ($helper.isMonoco()) {
                         if (!store.MonocoSystem[obj.from]) { // TODO check also master system ?
-                            $helper.getMonoco().require('channel')[obj.event](obj.data);
+                            channels = exports.MonocoChannel.find({});
+                            if (channels.length > 0) {
+                                channel = $helper.getMonoco().require(channels[0]._id);
+                                channel[obj.event].apply(channel, obj.data);
+                            }
                         }
                     }
                 }

@@ -21,12 +21,12 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.7.6</b>
+                    API Docs for Version: <b>0.7.7</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/monoco", "classes/monoco-behavior", "classes/monoco-channel", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/monoco", "modules/monoco-behavior", "modules/monoco-channel", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
         </form>
     </div>
 </div>
@@ -39,7 +39,6 @@
 	            <ul id="api-classes" class="nav nav-list">
 	                    <li><a href="../classes/monoco.html">monoco</a></li>
 	                    <li><a href="../classes/monoco-behavior.html">monoco-behavior</a></li>
-	                    <li><a href="../classes/monoco-channel.html">monoco-channel</a></li>
 	                    <li><a href="../classes/monoco-component.html">monoco-component</a></li>
 	                    <li><a href="../classes/monoco-db.html">monoco-db</a></li>
 	                    <li><a href="../classes/monoco-helper.html">monoco-helper</a></li>
@@ -168,17 +167,35 @@
                          */
                         function createInheritanceTree() {
                             var id = null,
-                                fatherId = null,
-                                newId = null;
+                                ancestorId = null,
+                                i = 0,
+                                nbParents = 0;
+                        
+                            function _getAncestors(id, ancestorId) {
+                                var i = 0,
+                                    nbParents = 0;
+                        
+                                if (store.inheritance[ancestorId]) {
+                                    nbParents = store.inheritance[ancestorId].length;
+                                    if (nbParents) {
+                                        store.inheritanceTree[id] = store.inheritanceTree[id].concat(store.inheritance[ancestorId]);
+                                        for (i = 0; i &lt; nbParents; i++) {
+                                            _getAncestors(id, store.inheritance[id][i]);
+                                        }
+                                    }
+                                }
+                            }
                         
                             for (id in store.inheritance) {
-                                fatherId = store.inheritance[id];
-                                store.inheritanceTree[id] = [];
                         
-                                while (fatherId) {
-                                    store.inheritanceTree[id].push(fatherId);
-                                    newId = fatherId;
-                                    fatherId = store.inheritance[newId];
+                                nbParents = store.inheritance[id].length;
+                                if (nbParents) {
+                                    store.inheritanceTree[id] = store.inheritance[id];
+                                }
+                                for (i = 0; i &lt; nbParents; i++) {
+                                    ancestorId = store.inheritance[id][i];
+                        
+                                    _getAncestors(id, ancestorId);
                                 }
                             }
                         }
@@ -479,14 +496,23 @@
                         
                                 if (
                                     typeof modelDef[SCHEMA] !== &#x27;undefined&#x27; &amp;&amp;
-                                    modelDef[CLASS] !== false &amp;&amp;
-                                    !$component.get(id)
+                                    modelDef[CLASS] !== false
                                     ) {
-                                    $db.MonocoClassInfo.insert({
-                                        &quot;_id&quot;: id,
-                                        &quot;metamodel&quot;: store.model[modelDef[SCHEMA]],
-                                        &quot;model&quot;: modelDef
-                                    });
+                                    if (!$component.get(id)) {
+                                        $db.MonocoClassInfo.insert({
+                                            &quot;_id&quot;: id,
+                                            &quot;metamodel&quot;: store.model[modelDef[SCHEMA]],
+                                            &quot;model&quot;: modelDef
+                                        });
+                                    } else {
+                                        $db.MonocoClassInfo.update({
+                                            &quot;_id&quot;: id
+                                        }, {
+                                                &quot;_id&quot;: id,
+                                                &quot;metamodel&quot;: store.model[modelDef[SCHEMA]],
+                                                &quot;model&quot;: modelDef
+                                            });
+                                    }
                                 }
                             }
                         }
@@ -638,9 +664,7 @@
                         function schema(importedSchema) {
                             var id = importedSchema[ID],
                                 inherit = importedSchema[INHERITS],
-                                name = importedSchema[NAME],
-                                length = 0,
-                                i = 0;
+                                name = importedSchema[NAME];
                         
                             // if no id, it will be the name by default
                             if (hasType(id, &#x27;undefined&#x27;)) {
@@ -653,10 +677,7 @@
                         
                                 store.catalog[id] = importedSchema;
                                 if (inherit) {
-                                    length = inherit.length;
-                                    for (i = 0; i &lt; length; i++) {
-                                        store.inheritance[id] = inherit[i];
-                                    }
+                                    store.inheritance[id] = inherit;
                                 }
                             } else {
                                 $workflow.stop({
@@ -1432,6 +1453,8 @@
                         
                             if (name !== parentName) {
                                 parents = getParents(name);
+                                length = parents.length;
+                        
                                 if (parents.length !== 0) {
                                     if (parents.indexOf(parentName) !== -1) {
                                         result = true;
@@ -1533,7 +1556,7 @@
                         exports.getParents = getParents;
                         
                         
-                        /*
+                        /**
                          * Check if a class inherits from another one
                          * @method inheritFrom
                          * @param {String} name name of the class

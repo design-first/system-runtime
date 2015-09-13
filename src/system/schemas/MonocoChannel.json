@@ -2,7 +2,7 @@
     "_id": "MonocoChannel",
     "_name": "MonocoChannel",
     "_schema": "MonocoChannelSchema",
-    "_inherit": ["MonocoComponent"],
+    "_inherit": ["MonocoComponent", "MonocoChannelEvent"],
     "_core": true,
     "listen": {
         "params": [{

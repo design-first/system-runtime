@@ -78,17 +78,35 @@ var ID = '_id',
  */
 function createInheritanceTree() {
     var id = null,
-        fatherId = null,
-        newId = null;
+        ancestorId = null,
+        i = 0,
+        nbParents = 0;
+
+    function _getAncestors(id, ancestorId) {
+        var i = 0,
+            nbParents = 0;
+
+        if (store.inheritance[ancestorId]) {
+            nbParents = store.inheritance[ancestorId].length;
+            if (nbParents) {
+                store.inheritanceTree[id] = store.inheritanceTree[id].concat(store.inheritance[ancestorId]);
+                for (i = 0; i < nbParents; i++) {
+                    _getAncestors(id, store.inheritance[id][i]);
+                }
+            }
+        }
+    }
 
     for (id in store.inheritance) {
-        fatherId = store.inheritance[id];
-        store.inheritanceTree[id] = [];
 
-        while (fatherId) {
-            store.inheritanceTree[id].push(fatherId);
-            newId = fatherId;
-            fatherId = store.inheritance[newId];
+        nbParents = store.inheritance[id].length;
+        if (nbParents) {
+            store.inheritanceTree[id] = store.inheritance[id];
+        }
+        for (i = 0; i < nbParents; i++) {
+            ancestorId = store.inheritance[id][i];
+
+            _getAncestors(id, ancestorId);
         }
     }
 }
@@ -389,14 +407,23 @@ function createClassInfo() {
 
         if (
             typeof modelDef[SCHEMA] !== 'undefined' &&
-            modelDef[CLASS] !== false &&
-            !$component.get(id)
+            modelDef[CLASS] !== false
             ) {
-            $db.MonocoClassInfo.insert({
-                "_id": id,
-                "metamodel": store.model[modelDef[SCHEMA]],
-                "model": modelDef
-            });
+            if (!$component.get(id)) {
+                $db.MonocoClassInfo.insert({
+                    "_id": id,
+                    "metamodel": store.model[modelDef[SCHEMA]],
+                    "model": modelDef
+                });
+            } else {
+                $db.MonocoClassInfo.update({
+                    "_id": id
+                }, {
+                        "_id": id,
+                        "metamodel": store.model[modelDef[SCHEMA]],
+                        "model": modelDef
+                    });
+            }
         }
     }
 }
@@ -548,9 +575,7 @@ function checkType(name, id, type) {
 function schema(importedSchema) {
     var id = importedSchema[ID],
         inherit = importedSchema[INHERITS],
-        name = importedSchema[NAME],
-        length = 0,
-        i = 0;
+        name = importedSchema[NAME];
 
     // if no id, it will be the name by default
     if (hasType(id, 'undefined')) {
@@ -563,10 +588,7 @@ function schema(importedSchema) {
 
         store.catalog[id] = importedSchema;
         if (inherit) {
-            length = inherit.length;
-            for (i = 0; i < length; i++) {
-                store.inheritance[id] = inherit[i];
-            }
+            store.inheritance[id] = inherit;
         }
     } else {
         $workflow.stop({
@@ -1342,6 +1364,8 @@ function inheritFrom(name, parentName) {
 
     if (name !== parentName) {
         parents = getParents(name);
+        length = parents.length;
+
         if (parents.length !== 0) {
             if (parents.indexOf(parentName) !== -1) {
                 result = true;
@@ -1443,7 +1467,7 @@ exports.getMetaDef = getMetaDef;
 exports.getParents = getParents;
 
 
-/*
+/**
  * Check if a class inherits from another one
  * @method inheritFrom
  * @param {String} name name of the class

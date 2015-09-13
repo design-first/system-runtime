@@ -33,8 +33,7 @@ module.exports = function (config) {
             "test/monoco/database-spec.js",
             "test/monoco/classInfo-spec.js",
             "test/monoco/system-spec.js",
-            "test/monoco/mson-spec.js",
-            "test/monoco/channel-spec.js"
+            "test/monoco/mson-spec.js"
         ],
         reporters: ['progress', 'coverage'],
         preprocessors: {

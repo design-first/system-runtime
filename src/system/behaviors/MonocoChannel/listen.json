@@ -1,7 +1,0 @@
-{
-    "component": "MonocoChannel",
-    "state": "listen",
-    "action": "function listen(event, action) { $channel.listen(event, action); }",
-    "core": true,
-    "useCoreAPI": true
-}
