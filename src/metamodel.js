@@ -91,7 +91,7 @@ function createInheritanceTree() {
             if (nbParents) {
                 store.inheritanceTree[id] = store.inheritanceTree[id].concat(store.inheritance[ancestorId]);
                 for (i = 0; i < nbParents; i++) {
-                    _getAncestors(id, store.inheritance[id][i]);
+                    _getAncestors(id, store.inheritance[ancestorId][i]);
                 }
             }
         }
