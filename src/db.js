@@ -48,7 +48,7 @@ var $helper = require('./helper.js');
 var $log = require('./log.js');
 var $behavior = require('./behavior.js');
 var $state = require('./state.js');
-var $worklow = require('./workflow.js');
+var $workflow = require('./workflow.js');
 
 
 /* Private properties */
@@ -270,7 +270,8 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
     doc.forEach(function multi_insert(obj) {
         var component = null,
             channels = [],
-            channel = null;
+            channel = null,
+            systems = [];
 
         switch (true) {
             case this.name === 'MonocoSchema':
@@ -296,11 +297,18 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
 
                 if (this.name === 'MonocoMessage') {
                     if ($helper.isMonoco()) {
-                        if (!store.MonocoSystem[obj.from]) { // TODO check also master system ?
+                        systems = exports.MonocoSystem.find({
+                            'master': true
+                        });
+                        if (systems.length && systems[0]._id !== obj.from) {
                             channels = exports.MonocoChannel.find({});
                             if (channels.length > 0) {
                                 channel = $helper.getMonoco().require(channels[0]._id);
-                                channel[obj.event].apply(channel, obj.data);
+                                $workflow.state({
+                                    "component": channels[0]._id,
+                                    "state": obj.event,
+                                    "data": obj.data
+                                });
                             }
                         }
                     }

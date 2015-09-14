@@ -137,7 +137,7 @@
                         var $log = require(&#x27;./log.js&#x27;);
                         var $behavior = require(&#x27;./behavior.js&#x27;);
                         var $state = require(&#x27;./state.js&#x27;);
-                        var $worklow = require(&#x27;./workflow.js&#x27;);
+                        var $workflow = require(&#x27;./workflow.js&#x27;);
                         
                         
                         /* Private properties */
@@ -359,7 +359,8 @@
                             doc.forEach(function multi_insert(obj) {
                                 var component = null,
                                     channels = [],
-                                    channel = null;
+                                    channel = null,
+                                    systems = [];
                         
                                 switch (true) {
                                     case this.name === &#x27;MonocoSchema&#x27;:
@@ -385,11 +386,18 @@
                         
                                         if (this.name === &#x27;MonocoMessage&#x27;) {
                                             if ($helper.isMonoco()) {
-                                                if (!store.MonocoSystem[obj.from]) { // TODO check also master system ?
+                                                systems = exports.MonocoSystem.find({
+                                                    &#x27;master&#x27;: true
+                                                });
+                                                if (systems.length &amp;&amp; systems[0]._id !== obj.from) {
                                                     channels = exports.MonocoChannel.find({});
                                                     if (channels.length &gt; 0) {
                                                         channel = $helper.getMonoco().require(channels[0]._id);
-                                                        channel[obj.event].apply(channel, obj.data);
+                                                        $workflow.state({
+                                                            &quot;component&quot;: channels[0]._id,
+                                                            &quot;state&quot;: obj.event,
+                                                            &quot;data&quot;: obj.data
+                                                        });
                                                     }
                                                 }
                                             }

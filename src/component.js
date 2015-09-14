@@ -614,12 +614,22 @@ function addEvents(model, Class, classId) {
                         message.from = systemId;
                         length = arguments.length;
                         for (i = 0; i < length; i++) {
-                            data.push(arguments[i]);                          
+                            data.push(arguments[i]);
                         }
                         message.data = data;
                         message.event = methodName;
-
+                        
                         $db.MonocoMessage.insert(message);
+
+                        $workflow.state({
+                            "component": this.id(),
+                            "state": "send",
+                            "data": [{
+                                "event": message.event,
+                                "from": message.from,
+                                "data": message.data
+                            }]
+                        });
                     }
                 }
 

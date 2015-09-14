@@ -3,6 +3,5 @@
     "_name": "MonocoChannelSchema",
     "_inherit": ["MonocoComponentSchema", "MonocoChannelEventSchema"],
     "_core": true,
-    "listen": "method",
-    "send": "method"
+    "send": "event"
 }

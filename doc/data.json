@@ -151,7 +151,7 @@
             "namespaces": {},
             "tag": "main",
             "file": "build/system/system.js",
-            "line": 970,
+            "line": 959,
             "description": "This module is the main module of monoco. <br>\nIt inits monoco metamodel and loads monoco core system.",
             "requires": [
                 "monoco-component",
@@ -194,7 +194,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "src/component.js",
-            "line": 931,
+            "line": 941,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -347,7 +347,7 @@
             "module": "monoco",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 970,
+            "line": 959,
             "description": "This module contains monoco core system.",
             "static": 1
         }
@@ -385,7 +385,7 @@
             "submodule": "monoco-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 931,
+            "line": 941,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
             "requires": [
                 "monoco-workflow",
@@ -408,7 +408,7 @@
             "submodule": "monoco-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 754,
+            "line": 762,
             "description": "This module manages monoco database. <br>\nmonoco database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nmonoco database is closely linked to monoco metamodel because: <br>\n- all operations done by monoco database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "monoco-component",
@@ -598,7 +598,7 @@
             "submodule": "monoco-system",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 970,
+            "line": 959,
             "description": "This module contains monoco core system."
         }
     },
@@ -737,7 +737,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 948,
+            "line": 958,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -758,7 +758,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 958,
+            "line": 968,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -779,7 +779,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 967,
+            "line": 977,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -789,7 +789,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 974,
+            "line": 984,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -858,7 +858,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 320,
+            "line": 328,
             "description": "Update documents into a collection.",
             "itemtype": "method",
             "name": "update",
@@ -892,7 +892,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 399,
+            "line": 407,
             "description": "Remove a document from the colllection. <br>\nWhen a document is removed, the component is destroyed.",
             "itemtype": "method",
             "name": "remove",
@@ -916,7 +916,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 476,
+            "line": 484,
             "description": "Count the number of documents in the collection.",
             "itemtype": "method",
             "name": "count",
@@ -930,7 +930,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 775,
+            "line": 783,
             "description": "Create a new {{#crossLink \"MonocoDatabaseCollection\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "collection",
@@ -947,7 +947,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 783,
+            "line": 791,
             "description": "monoco database store that lists all the collections.",
             "itemtype": "property",
             "name": "store",
@@ -958,7 +958,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 790,
+            "line": 798,
             "description": "Import/Export a monoco system into/from the database.",
             "itemtype": "method",
             "name": "system",
@@ -979,7 +979,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 799,
+            "line": 807,
             "description": "Export a monoco sub-system.",
             "itemtype": "method",
             "name": "subsystem",
@@ -1003,7 +1003,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 815,
+            "line": 823,
             "description": "Clear the database.",
             "itemtype": "method",
             "name": "clear",
@@ -1013,7 +1013,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 822,
+            "line": 830,
             "description": "Init the database.",
             "itemtype": "method",
             "name": "init",
@@ -2403,7 +2403,7 @@
         },
         {
             "file": "build/system/system.js",
-            "line": 980,
+            "line": 969,
             "description": "monoco core system",
             "itemtype": "property",
             "name": "system",
