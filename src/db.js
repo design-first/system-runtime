@@ -300,7 +300,7 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
                         systems = exports.MonocoSystem.find({
                             'master': true
                         });
-                        if (systems.length && systems[0]._id !== obj.from) {
+                        if (!systems.length || (systems.length && systems[0]._id !== obj.from)) {
                             channels = exports.MonocoChannel.find({});
                             if (channels.length > 0) {
                                 channel = $helper.getMonoco().require(channels[0]._id);
@@ -558,10 +558,12 @@ function system(importedSystem) {
         systems = exports.MonocoSystem.find({
             'master': true
         });
-        if (systems.length && systems[0]._id === importedSystem._id) {
-            importedSystem.master = true;
-        } else {
-            importedSystem.master = false;
+        if (systems.length) {
+            if (systems[0]._id === importedSystem._id) {
+                importedSystem.master = true;
+            } else {
+                importedSystem.master = false;
+            }
         }
 
         // insert the system in DB

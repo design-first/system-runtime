@@ -2,7 +2,7 @@
     "project": {
         "name": "monoco",
         "description": "Design.Create.Compose",
-        "version": "0.8.0",
+        "version": "0.8.1",
         "url": "http://monoco.io"
     },
     "files": {
@@ -408,7 +408,7 @@
             "submodule": "monoco-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 762,
+            "line": 764,
             "description": "This module manages monoco database. <br>\nmonoco database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nmonoco database is closely linked to monoco metamodel because: <br>\n- all operations done by monoco database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "monoco-component",
@@ -930,7 +930,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 783,
+            "line": 785,
             "description": "Create a new {{#crossLink \"MonocoDatabaseCollection\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "collection",
@@ -947,7 +947,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 791,
+            "line": 793,
             "description": "monoco database store that lists all the collections.",
             "itemtype": "property",
             "name": "store",
@@ -958,7 +958,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 798,
+            "line": 800,
             "description": "Import/Export a monoco system into/from the database.",
             "itemtype": "method",
             "name": "system",
@@ -979,7 +979,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 807,
+            "line": 809,
             "description": "Export a monoco sub-system.",
             "itemtype": "method",
             "name": "subsystem",
@@ -1003,7 +1003,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 823,
+            "line": 825,
             "description": "Clear the database.",
             "itemtype": "method",
             "name": "clear",
@@ -1013,7 +1013,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 830,
+            "line": 832,
             "description": "Init the database.",
             "itemtype": "method",
             "name": "init",
