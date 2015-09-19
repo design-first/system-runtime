@@ -366,7 +366,7 @@ function callAction(component, state, action, params, isEvent) {
             }
             if ($helper.getMonoco()) {
                 $helper.getMonoco().error({
-                    "message": "error when when trying to call the method '" + state + "' on component '" + component.id() + "'",
+                    "message": "error when trying to call the method '" + state + "' on component '" + component.id() + "'",
                     "error": e
                 });
             }

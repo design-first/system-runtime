@@ -83,7 +83,7 @@ function invalidPropertyType(propertyName, type, property) {
  * @param {String} type the type defined by the schema
  */
 function invalidEnumValue(value, type) {
-    $helper.getMonoco().warning("invalid value for the enum value '" + value + "': expected '" + type + "' instead of " + typeof value + "'");
+    $helper.getMonoco().warning("invalid value for the enum value '" + value + "': expected '" + type + "' instead of '" + typeof value + "'");
 }
 
 
@@ -159,7 +159,7 @@ function unknownPropertyImp(property, schema) {
  * @param {Object} def a type definition
  */
 function invalidTypeDefinition(def) {
-    $helper.getMonoco().warning("can not load the type definition " + def);
+    $helper.getMonoco().warning("can not load the definition of type '" + def + "'");
 }
 
 
@@ -198,7 +198,7 @@ function readOnlyProperty(id, propertyName) {
  * @param {String} collectionName the name of the colllection
  */
 function invalidDocumentOnDbInsert(doc, collectionName) {
-    $helper.getMonoco().warning("invalid document " + JSON.stringify(doc) + " on an insert operation on collection " + collectionName);
+    $helper.getMonoco().warning("invalid document '" + JSON.stringify(doc) + "' on an insert operation on collection '" + collectionName + "'");
 }
 
 

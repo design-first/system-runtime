@@ -172,7 +172,7 @@
                          * @param {String} type the type defined by the schema
                          */
                         function invalidEnumValue(value, type) {
-                            $helper.getMonoco().warning(&quot;invalid value for the enum value &#x27;&quot; + value + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &quot; + typeof value + &quot;&#x27;&quot;);
+                            $helper.getMonoco().warning(&quot;invalid value for the enum value &#x27;&quot; + value + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof value + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -248,7 +248,7 @@
                          * @param {Object} def a type definition
                          */
                         function invalidTypeDefinition(def) {
-                            $helper.getMonoco().warning(&quot;can not load the type definition &quot; + def);
+                            $helper.getMonoco().warning(&quot;can not load the definition of type &#x27;&quot; + def + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -287,7 +287,7 @@
                          * @param {String} collectionName the name of the colllection
                          */
                         function invalidDocumentOnDbInsert(doc, collectionName) {
-                            $helper.getMonoco().warning(&quot;invalid document &quot; + JSON.stringify(doc) + &quot; on an insert operation on collection &quot; + collectionName);
+                            $helper.getMonoco().warning(&quot;invalid document &#x27;&quot; + JSON.stringify(doc) + &quot;&#x27; on an insert operation on collection &#x27;&quot; + collectionName + &quot;&#x27;&quot;);
                         }
                         
                         
