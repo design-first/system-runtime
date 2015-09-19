@@ -1,7 +1,7 @@
 {
-    "component": "MonocoComponent",
-    "state": "destroy",
-    "action": "function destroy() { $component.destroy(this.id()); }",
-    "core": true,
-    "useCoreAPI": true
+	"component": "MonocoComponent",
+	"state": "destroy",
+	"action": "function destroy() {\n    $component.destroy(this.id());\n}",
+	"core": true,
+	"useCoreAPI": true
 }

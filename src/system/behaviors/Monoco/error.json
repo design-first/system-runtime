@@ -1,6 +1,6 @@
 {
-    "component": "Monoco",
-    "state": "error",
-    "action": "function error(data) { console.error('monoco: ' + data.message, data.error); }",
-    "core": true
+	"component": "Monoco",
+	"state": "error",
+	"action": "function error(data) {\n    console.error('monoco: ' + data.message, data.error);\n}",
+	"core": true
 }

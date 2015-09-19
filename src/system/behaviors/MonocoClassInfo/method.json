@@ -1,6 +1,6 @@
 {
-    "component": "MonocoClassInfo",
-    "state": "method",
-    "action": "function method(name) { var result = {}; if (this.metamodel()[name] === 'method') { result = this.model()[name]; } return result; }",
-    "core": true
+	"component": "MonocoClassInfo",
+	"state": "method",
+	"action": "function method(name) {\n    var result = {};\n    if (this.metamodel()[name] === 'method') {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}",
+	"core": true
 }

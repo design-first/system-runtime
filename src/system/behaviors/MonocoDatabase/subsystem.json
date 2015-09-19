@@ -1,7 +1,7 @@
 {
-    "component": "MonocoDatabase",
-    "state": "subsystem",
-    "action": "function subsystem(params) { return $db.subsystem(params); }",
-    "core": true,
-    "useCoreAPI": true
+	"component": "MonocoDatabase",
+	"state": "subsystem",
+	"action": "function subsystem(params) {\n    return $db.subsystem(params);\n}",
+	"core": true,
+	"useCoreAPI": true
 }
