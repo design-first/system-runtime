@@ -1,7 +1,7 @@
 {
     "name": "monoco",
     "version": "0.8.2",
-    "description": "A runtime for your system",
+    "description": "A runtime for system",
     "license": "GPL-3.0",
     "homepage": "https://github.com/monocojs/monoco.git",
     "author": {
@@ -20,7 +20,8 @@
         "nosql",
         "component",
         "system",
-        "isomorphic"
+        "isomorphic",
+        "runtime"
     ],
     "ignore": [
         "addons",

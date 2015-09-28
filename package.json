@@ -1,7 +1,7 @@
 {
   "name": "monoco",
   "version": "0.8.2",
-  "description": "A runtime for your system",
+  "description": "A runtime for system",
   "homepage": "http://monoco.io",
   "keywords": [
     "mda",
@@ -13,7 +13,8 @@
     "nosql",
     "component",
     "system",
-    "isomorphic"
+    "isomorphic",
+    "runtime"
   ],
   "main": "./src/monoco.js",
   "author": {
