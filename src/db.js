@@ -1,6 +1,6 @@
 /* 
  * monoco
- * Design.Create.Compose
+ * A runtime for system
  * http://monoco.io/
  * @ecarriou
  *
@@ -99,15 +99,17 @@ function dump() {
         type = null,
         behavior = null,
         schema = null,
+        collection = null,
         schemaId = '',
         length = 0,
-        i = 0;
+        i = 0,
+        id = '';
 
     // schemas
     dbDump.schemas = {};
     if (exports.MonocoSchema.count()) {
         for (schemaId in store.MonocoSchema) {
-            schema = store.MonocoSchema[schemaId];
+            schema = JSON.parse(JSON.stringify(store.MonocoSchema[schemaId]));
             if (!schema._core) {
                 dbDump.schemas[schemaId] = schema;
             }
@@ -130,6 +132,8 @@ function dump() {
     dbDump.behaviors = {};
     for (behaviorId in store.MonocoBehavior) {
         behavior = JSON.parse(JSON.stringify(store.MonocoBehavior[behaviorId]));
+        delete behavior.classInfo;
+        
         if (!behavior.core) {
             dbDump.behaviors[behaviorId] = behavior;
         }
@@ -141,7 +145,13 @@ function dump() {
     for (i = 0; i < length; i++) {
         collectionName = collections[i];
         if (exports[collectionName].count()) {
-            dbDump.components[collectionName] = store[collectionName];
+            collection = JSON.parse(JSON.stringify(store[collectionName]));
+
+            for (id in collection) {
+                delete collection[id].classInfo;
+            }
+
+            dbDump.components[collectionName] = collection;
         }
     }
 

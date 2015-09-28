@@ -1,6 +1,6 @@
 /* 
  * monoco
- * Design.Create.Compose
+ * A runtime for system
  * @ecarriou
  *
  * Copyright (C) 2015 - Erwan Carriou

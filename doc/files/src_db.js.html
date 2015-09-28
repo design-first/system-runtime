@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.8.1</b>
+                    API Docs for Version: <b>0.8.2</b>
                 </p>
             </li>
         </div>
@@ -89,7 +89,7 @@
                             <pre class="prettyprint linenums">
                         /* 
                          * monoco
-                         * Design.Create.Compose
+                         * A runtime for system
                          * http://monoco.io/
                          * @ecarriou
                          *
@@ -188,15 +188,17 @@
                                 type = null,
                                 behavior = null,
                                 schema = null,
+                                collection = null,
                                 schemaId = &#x27;&#x27;,
                                 length = 0,
-                                i = 0;
+                                i = 0,
+                                id = &#x27;&#x27;;
                         
                             // schemas
                             dbDump.schemas = {};
                             if (exports.MonocoSchema.count()) {
                                 for (schemaId in store.MonocoSchema) {
-                                    schema = store.MonocoSchema[schemaId];
+                                    schema = JSON.parse(JSON.stringify(store.MonocoSchema[schemaId]));
                                     if (!schema._core) {
                                         dbDump.schemas[schemaId] = schema;
                                     }
@@ -219,6 +221,8 @@
                             dbDump.behaviors = {};
                             for (behaviorId in store.MonocoBehavior) {
                                 behavior = JSON.parse(JSON.stringify(store.MonocoBehavior[behaviorId]));
+                                delete behavior.classInfo;
+                                
                                 if (!behavior.core) {
                                     dbDump.behaviors[behaviorId] = behavior;
                                 }
@@ -230,7 +234,13 @@
                             for (i = 0; i &lt; length; i++) {
                                 collectionName = collections[i];
                                 if (exports[collectionName].count()) {
-                                    dbDump.components[collectionName] = store[collectionName];
+                                    collection = JSON.parse(JSON.stringify(store[collectionName]));
+                        
+                                    for (id in collection) {
+                                        delete collection[id].classInfo;
+                                    }
+                        
+                                    dbDump.components[collectionName] = collection;
                                 }
                             }
                         

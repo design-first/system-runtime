@@ -1,6 +1,6 @@
 /* 
  * monoco
- * Design.Create.Compose
+ * A runtime for system
  * http://monoco.io/
  * @ecarriou
  *

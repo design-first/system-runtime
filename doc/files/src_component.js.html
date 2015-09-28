@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.8.1</b>
+                    API Docs for Version: <b>0.8.2</b>
                 </p>
             </li>
         </div>
@@ -89,7 +89,7 @@
                             <pre class="prettyprint linenums">
                         /* 
                          * monoco
-                         * Design.Create.Compose
+                         * A runtime for system
                          * http://monoco.io/
                          * @ecarriou
                          *
@@ -774,7 +774,7 @@
                         
                                                 currentState = $state.get(this.id());
                                                 if (currentState &amp;&amp; state === currentState.name) {
-                                                    $workflow.action(behaviorId, behaviorId);
+                                                    $workflow.action(behaviorId, currentState.parameters.data);
                                                 }
                         
                                             } else {
@@ -826,7 +826,7 @@
                         
                                                 currentState = $state.get(this.id());
                                                 if (currentState &amp;&amp; state === currentState.name) {
-                                                    $workflow.action(behaviorId, behaviorId);
+                                                    $workflow.action(behaviorId, currentState.parameters.data);
                                                 }
                         
                                             } else {

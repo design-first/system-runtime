@@ -1,6 +1,6 @@
 /* 
  * monoco
- * Design.Create.Compose
+ * A runtime for system
  * http://monoco.io/
  * @ecarriou
  *
@@ -685,7 +685,7 @@ function addOn(Class, classId) {
 
                         currentState = $state.get(this.id());
                         if (currentState && state === currentState.name) {
-                            $workflow.action(behaviorId, behaviorId);
+                            $workflow.action(behaviorId, currentState.parameters.data);
                         }
 
                     } else {
@@ -737,7 +737,7 @@ function addOnClass(Class, classId) {
 
                         currentState = $state.get(this.id());
                         if (currentState && state === currentState.name) {
-                            $workflow.action(behaviorId, behaviorId);
+                            $workflow.action(behaviorId, currentState.parameters.data);
                         }
 
                     } else {
