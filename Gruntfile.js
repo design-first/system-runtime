@@ -1,6 +1,6 @@
 /* 
  * monoco
- * A runtime for system
+ * A Model and a NoSQL Database for Components
  * http://monoco.io/
  * @ecarriou
  *
@@ -104,7 +104,7 @@ module.exports = function (grunt) {
             },
             monoco: {
                 src: ['src/monoco.js'],
-                dest: 'build/monoco-min.js',
+                dest: 'build/monoco.min.js',
                 options: {
                     browserifyOptions: {
                         standalone: 'monoco'
@@ -115,7 +115,7 @@ module.exports = function (grunt) {
         uglify: {
             dist: {
                 files: {
-                    'build/<%= pkg.name %>-min.js': ['<%= browserify.monoco.dest %>']
+                    'build/<%= pkg.name %>.min.js': ['<%= browserify.monoco.dest %>']
                 }
             }
         },
@@ -298,8 +298,8 @@ module.exports = function (grunt) {
                 }
             },
             licence: {
-                src: ['src/template/banner/licence.txt', 'build/monoco-min.js'],
-                dest: 'build/monoco-min.js'
+                src: ['src/template/banner/licence.txt', 'build/monoco.min.js'],
+                dest: 'build/monoco.min.js'
             }
         },
         "merge-json": {

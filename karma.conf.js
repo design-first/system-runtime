@@ -1,6 +1,6 @@
 /* 
  * monoco
- * A runtime for system
+ * A Model and a NoSQL Database for Components
  * http://monoco.io/
  * @ecarriou
  *
@@ -26,7 +26,7 @@ module.exports = function (config) {
         basePath: './',
         frameworks: ['jasmine'],
         files: [
-            "build/monoco-min.js",
+            "build/monoco.min.js",
             "test/monoco/monoco-spec.js",
             "test/monoco/component-spec.js",
             "test/monoco/metamodel-spec.js",
@@ -37,7 +37,7 @@ module.exports = function (config) {
         ],
         reporters: ['progress', 'coverage'],
         preprocessors: {
-            'build/monoco-min.js': ['coverage']
+            'build/monoco.min.js': ['coverage']
         },
         colors: true,
         autoWatch: true,

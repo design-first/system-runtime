@@ -1,8 +1,8 @@
 {
     "project": {
         "name": "monoco",
-        "description": "A runtime for your system",
-        "version": "0.8.2",
+        "description": "A Model and a NoSQL Database for Components",
+        "version": "0.8.3",
         "url": "http://monoco.io"
     },
     "files": {

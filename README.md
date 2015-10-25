@@ -38,7 +38,7 @@ $ bower install monoco --save
 
 Add a `<script>` tag to your HTML page:
 ```html
-<script src="/bower_components/monoco/build/monoco-min.js"></script>
+<script src="/bower_components/monoco/build/monoco.min.js"></script>
 ```
 
 Then you can use monoco on your script:

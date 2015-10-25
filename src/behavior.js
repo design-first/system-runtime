@@ -1,6 +1,6 @@
 /* 
  * monoco
- * A runtime for system
+ * A Model and a NoSQL Database for Components
  * http://monoco.io/
  * @ecarriou
  *
