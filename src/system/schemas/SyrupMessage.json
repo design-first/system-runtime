@@ -1,0 +1,24 @@
+{
+    "_id": "SyrupMessage",
+    "_name": "SyrupMessage",
+    "_schema": "SyrupMessageSchema",
+    "_core": true,
+    "event": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    },
+    "from": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    },
+    "data": {
+        "type": "array",
+        "readOnly": false,
+        "mandatory": true,
+        "default": []
+    }
+}

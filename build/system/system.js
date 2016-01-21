@@ -1,31 +1,36 @@
-/* 
- * monoco
- * A Model and a NoSQL Database for Components
- * http://monoco.io/
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
  * @ecarriou
- *
- * Copyright (C) 2015 - Erwan Carriou
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
  */
 
 /**
- * This module contains monoco core system.
+ * This module contains syrup core system.
  *
- * @module monoco
- * @submodule monoco-system
- * @class monoco-system
+ * @module syrup
+ * @submodule syrup-system
+ * @class syrup-system
  * @static 
  */
 
@@ -36,29 +41,29 @@
 
 
 /*
- * monoco core system
- * @property {MonocoSystem} system
+ * syrup core system
+ * @property {SyrupSystem} system
  */
 var system = {
-    "name": "monoco",
-    "version": "0.8.3",
-    "description": "A Model and a NoSQL Database for Components",
+    "name": "syrup",
+    "version": "0.9.1",
+    "description": "The System Runtime Platform",
     "_id": "e89c617b6b15d24",
     "schemas": {
-        "MonocoSchema": {
+        "SyrupSchema": {
             "load": "method",
             "ready": "event",
-            "_id": "MonocoSchema",
-            "_name": "MonocoSchema",
+            "_id": "SyrupSchema",
+            "_name": "SyrupSchema",
             "_inherit": [
-                "MonocoComponentSchema"
+                "SyrupComponentSchema"
             ],
             "_core": true,
             "version": "property",
             "system": "method",
             "warning": "event"
         },
-        "Monoco": {
+        "Syrup": {
             "load": {
                 "params": [{
                     "name": "url",
@@ -71,11 +76,11 @@ var system = {
                 }]
             },
             "ready": {},
-            "_id": "Monoco",
-            "_name": "Monoco",
-            "_schema": "MonocoSchema",
+            "_id": "Syrup",
+            "_name": "Syrup",
+            "_schema": "SyrupSchema",
             "_inherit": [
-                "MonocoComponent"
+                "SyrupComponent"
             ],
             "_core": true,
             "version": {
@@ -99,12 +104,12 @@ var system = {
                 "result": "object"
             }
         },
-        "MonocoBehavior": {
-            "_id": "MonocoBehavior",
-            "_name": "MonocoBehavior",
-            "_schema": "MonocoBehaviorSchema",
+        "SyrupBehavior": {
+            "_id": "SyrupBehavior",
+            "_name": "SyrupBehavior",
+            "_schema": "SyrupBehaviorSchema",
             "_inherit": [
-                "MonocoComponent"
+                "SyrupComponent"
             ],
             "_core": true,
             "core": {
@@ -138,11 +143,11 @@ var system = {
                 "default": ""
             }
         },
-        "MonocoBehaviorSchema": {
-            "_id": "MonocoBehaviorSchema",
-            "_name": "MonocoBehaviorSchema",
+        "SyrupBehaviorSchema": {
+            "_id": "SyrupBehaviorSchema",
+            "_name": "SyrupBehaviorSchema",
             "_inherit": [
-                "MonocoComponentSchema"
+                "SyrupComponentSchema"
             ],
             "_core": true,
             "core": "property",
@@ -151,13 +156,13 @@ var system = {
             "state": "property",
             "useCoreAPI": "property"
         },
-        "MonocoChannel": {
-            "_id": "MonocoChannel",
-            "_name": "MonocoChannel",
-            "_schema": "MonocoChannelSchema",
+        "SyrupChannel": {
+            "_id": "SyrupChannel",
+            "_name": "SyrupChannel",
+            "_schema": "SyrupChannelSchema",
             "_inherit": [
-                "MonocoComponent",
-                "MonocoChannelEvent"
+                "SyrupComponent",
+                "SyrupChannelEvent"
             ],
             "_core": true,
             "send": {
@@ -167,31 +172,31 @@ var system = {
                 }]
             }
         },
-        "MonocoChannelEvent": {
-            "_id": "MonocoChannelEvent",
-            "_name": "MonocoChannelEvent",
-            "_schema": "MonocoChannelEventSchema"
+        "SyrupChannelEvent": {
+            "_id": "SyrupChannelEvent",
+            "_name": "SyrupChannelEvent",
+            "_schema": "SyrupChannelEventSchema"
         },
-        "MonocoChannelEventSchema": {
-            "_id": "MonocoChannelEventSchema",
-            "_name": "MonocoChannelEventSchema"
+        "SyrupChannelEventSchema": {
+            "_id": "SyrupChannelEventSchema",
+            "_name": "SyrupChannelEventSchema"
         },
-        "MonocoChannelSchema": {
-            "_id": "MonocoChannelSchema",
-            "_name": "MonocoChannelSchema",
+        "SyrupChannelSchema": {
+            "_id": "SyrupChannelSchema",
+            "_name": "SyrupChannelSchema",
             "_inherit": [
-                "MonocoComponentSchema",
-                "MonocoChannelEventSchema"
+                "SyrupComponentSchema",
+                "SyrupChannelEventSchema"
             ],
             "_core": true,
             "send": "event"
         },
-        "MonocoClassInfo": {
-            "_id": "MonocoClassInfo",
-            "_name": "MonocoClassInfo",
-            "_schema": "MonocoClassInfoSchema",
+        "SyrupClassInfo": {
+            "_id": "SyrupClassInfo",
+            "_name": "SyrupClassInfo",
+            "_schema": "SyrupClassInfoSchema",
             "_inherit": [
-                "MonocoComponent"
+                "SyrupComponent"
             ],
             "_core": true,
             "metamodel": {
@@ -247,11 +252,11 @@ var system = {
                 "result": "array"
             }
         },
-        "MonocoClassInfoSchema": {
-            "_id": "MonocoClassInfoSchema",
-            "_name": "MonocoClassInfoSchema",
+        "SyrupClassInfoSchema": {
+            "_id": "SyrupClassInfoSchema",
+            "_name": "SyrupClassInfoSchema",
             "_inherit": [
-                "MonocoComponentSchema"
+                "SyrupComponentSchema"
             ],
             "_core": true,
             "model": "property",
@@ -265,10 +270,10 @@ var system = {
             "event": "method",
             "events": "method"
         },
-        "MonocoComponent": {
-            "_id": "MonocoComponent",
-            "_name": "MonocoComponent",
-            "_schema": "MonocoComponentSchema",
+        "SyrupComponent": {
+            "_id": "SyrupComponent",
+            "_name": "SyrupComponent",
+            "_schema": "SyrupComponentSchema",
             "_core": true,
             "on": {
                 "params": [{
@@ -303,7 +308,7 @@ var system = {
                 "params": []
             },
             "classInfo": {
-                "type": "@MonocoClassInfo",
+                "type": "@SyrupClassInfo",
                 "readOnly": false,
                 "mandatory": false,
                 "default": {}
@@ -321,9 +326,9 @@ var system = {
                 }]
             }
         },
-        "MonocoComponentSchema": {
-            "_id": "MonocoComponentSchema",
-            "_name": "MonocoComponentSchema",
+        "SyrupComponentSchema": {
+            "_id": "SyrupComponentSchema",
+            "_name": "SyrupComponentSchema",
             "_core": true,
             "classInfo": "property",
             "on": "method",
@@ -333,12 +338,12 @@ var system = {
             "init": "method",
             "error": "event"
         },
-        "MonocoDatabase": {
-            "_id": "MonocoDatabase",
-            "_name": "MonocoDatabase",
-            "_schema": "MonocoDatabaseSchema",
+        "SyrupDatabase": {
+            "_id": "SyrupDatabase",
+            "_name": "SyrupDatabase",
+            "_schema": "SyrupDatabaseSchema",
             "_inherit": [
-                "MonocoComponent"
+                "SyrupComponent"
             ],
             "_core": true,
             "system": {
@@ -393,11 +398,11 @@ var system = {
                 }]
             }
         },
-        "MonocoDatabaseSchema": {
-            "_id": "MonocoDatabaseSchema",
-            "_name": "MonocoDatabaseSchema",
+        "SyrupDatabaseSchema": {
+            "_id": "SyrupDatabaseSchema",
+            "_name": "SyrupDatabaseSchema",
             "_inherit": [
-                "MonocoComponentSchema"
+                "SyrupComponentSchema"
             ],
             "_core": true,
             "system": "method",
@@ -407,10 +412,10 @@ var system = {
             "update": "event",
             "remove": "event"
         },
-        "MonocoMessage": {
-            "_id": "MonocoMessage",
-            "_name": "MonocoMessage",
-            "_schema": "MonocoMessageSchema",
+        "SyrupMessage": {
+            "_id": "SyrupMessage",
+            "_name": "SyrupMessage",
+            "_schema": "SyrupMessageSchema",
             "_core": true,
             "event": {
                 "type": "string",
@@ -431,20 +436,20 @@ var system = {
                 "default": []
             }
         },
-        "MonocoMessageSchema": {
-            "_id": "MonocoMessageSchema",
-            "_name": "MonocoMessageSchema",
+        "SyrupMessageSchema": {
+            "_id": "SyrupMessageSchema",
+            "_name": "SyrupMessageSchema",
             "_core": true,
             "event": "property",
             "from": "property",
             "data": "property"
         },
-        "MonocoMetamodel": {
-            "_id": "MonocoMetamodel",
-            "_name": "MonocoMetamodel",
-            "_schema": "MonocoMetamodelSchema",
+        "SyrupMetamodel": {
+            "_id": "SyrupMetamodel",
+            "_name": "SyrupMetamodel",
+            "_schema": "SyrupMetamodelSchema",
             "_inherit": [
-                "MonocoComponent"
+                "SyrupComponent"
             ],
             "_core": true,
             "schema": {
@@ -463,21 +468,21 @@ var system = {
                 "params": []
             }
         },
-        "MonocoMetamodelSchema": {
-            "_id": "MonocoMetamodelSchema",
-            "_name": "MonocoMetamodelSchema",
+        "SyrupMetamodelSchema": {
+            "_id": "SyrupMetamodelSchema",
+            "_name": "SyrupMetamodelSchema",
             "_inherit": [
-                "MonocoComponentSchema"
+                "SyrupComponentSchema"
             ],
             "_core": true,
             "schema": "method",
             "type": "method",
             "create": "method"
         },
-        "MonocoState": {
-            "_id": "MonocoState",
-            "_name": "MonocoState",
-            "_schema": "MonocoStateSchema",
+        "SyrupState": {
+            "_id": "SyrupState",
+            "_name": "SyrupState",
+            "_schema": "SyrupStateSchema",
             "_class": false,
             "_core": true,
             "name": {
@@ -493,19 +498,19 @@ var system = {
                 "default": {}
             }
         },
-        "MonocoStateSchema": {
-            "_id": "MonocoStateSchema",
-            "_name": "MonocoStateSchema",
+        "SyrupStateSchema": {
+            "_id": "SyrupStateSchema",
+            "_name": "SyrupStateSchema",
             "_core": true,
             "name": "property",
             "parameters": "property"
         },
-        "MonocoSystem": {
-            "_id": "MonocoSystem",
-            "_name": "MonocoSystem",
-            "_schema": "MonocoSystemSchema",
+        "SyrupSystem": {
+            "_id": "SyrupSystem",
+            "_name": "SyrupSystem",
+            "_schema": "SyrupSystemSchema",
             "_inherit": [
-                "MonocoComponent"
+                "SyrupComponent"
             ],
             "_core": true,
             "name": {
@@ -566,11 +571,11 @@ var system = {
             "sync": {},
             "main": {}
         },
-        "MonocoSystemSchema": {
-            "_id": "MonocoSystemSchema",
-            "_name": "MonocoSystemSchema",
+        "SyrupSystemSchema": {
+            "_id": "SyrupSystemSchema",
+            "_name": "SyrupSystemSchema",
             "_inherit": [
-                "MonocoComponentSchema"
+                "SyrupComponentSchema"
             ],
             "_core": true,
             "name": "property",
@@ -742,9 +747,9 @@ var system = {
     "behaviors": {
         "1aaee1e6311ff39": {
             "_id": "1aaee1e6311ff39",
-            "component": "monoco",
+            "component": "syrup",
             "state": "load",
-            "action": "function load(url, async) {\n    var xhr = null,\n    callbackLoad = null;\n    xhr = new XMLHttpRequest();\n    \n    callbackLoad = function callbackLoad(system) {\n        var sysId = $db.system(system),\n        sys = $component.get(sysId),\n        systems = document.querySelectorAll('link[rel=system]'),\n        nbSubsystem = $db.MonocoSystem.find({\n            'subsystem': true\n        }); \n        if (sys) {\n            sys.main();\n        } \n        if (systems.length + 1 + nbSubsystem.length === $db.MonocoSystem.count()) {\n            $component.get('monoco').ready();\n        }\n    };\n    \n    if (async) {\n        xhr.open('GET', url, true);\n        xhr.onreadystatechange = function () {\n            if (xhr.readyState === 4) {\n                if (xhr.status === 200) {\n                    callbackLoad(JSON.parse(xhr.response));\n                }\n            }\n        };\n        xhr.send(null);\n    } else {\n        xhr.open('GET', url, false);\n        xhr.send(null);\n        if (xhr.status === 200) {\n            callbackLoad(JSON.parse(xhr.response));\n        }\n    }\n}",
+            "action": "function load(url, async) {\n    var xhr = null,\n    callbackLoad = null;\n    xhr = new XMLHttpRequest();\n    \n    callbackLoad = function callbackLoad(system) {\n        var sysId = $db.system(system),\n        sys = $component.get(sysId),\n        systems = document.querySelectorAll('link[rel=system]'),\n        nbSubsystem = $db.SyrupSystem.find({\n            'subsystem': true\n        }); \n        if (sys) {\n            sys.main();\n        } \n        if (systems.length + 1 + nbSubsystem.length === $db.SyrupSystem.count()) {\n            $component.get('syrup').ready();\n        }\n    };\n    \n    if (async) {\n        xhr.open('GET', url, true);\n        xhr.onreadystatechange = function () {\n            if (xhr.readyState === 4) {\n                if (xhr.status === 200) {\n                    callbackLoad(JSON.parse(xhr.response));\n                }\n            }\n        };\n        xhr.send(null);\n    } else {\n        xhr.open('GET', url, false);\n        xhr.send(null);\n        if (xhr.status === 200) {\n            callbackLoad(JSON.parse(xhr.response));\n        }\n    }\n}",
             "core": true,
             "useCoreAPI": true
         },
@@ -752,163 +757,163 @@ var system = {
             "_id": "1f6001773a18791",
             "component": "e89c617b6b15d24",
             "state": "main",
-            "action": "function main() {\n    var subsystems = [],\n    systems = [],\n    system = null,\n    i = 0,\n    length = 0;\n    \n    subsystems = $db.MonocoSystem.find({\n        'subsystem': true\n    });\n    subsystems.forEach(function (subsystem) {\n        var subsystemId = subsystem._id;\n        this.require(subsystemId).main();\n    }, this); \n    \n    if (typeof document !== 'undefined') {\n        systems = document.querySelectorAll('link[rel=system]');\n        length = systems.length;\n        \n        for (i = 0; i < length; i++) {\n            system = systems[i];\n            \n            if (system.getAttribute('async') === 'false') {\n                this.require('monoco').load(system.href, false);\n            } else {\n                this.require('monoco').load(system.href, true);\n            }\n        }\n        if (length === 0) {\n            this.require('monoco').ready();\n        }\n    }\n}",
+            "action": "function main() {\n    var subsystems = [],\n    systems = [],\n    system = null,\n    i = 0,\n    length = 0;\n    \n    subsystems = $db.SyrupSystem.find({\n        'subsystem': true\n    });\n    subsystems.forEach(function (subsystem) {\n        var subsystemId = subsystem._id;\n        this.require(subsystemId).main();\n    }, this); \n    \n    if (typeof document !== 'undefined') {\n        systems = document.querySelectorAll('link[rel=system]');\n        length = systems.length;\n        \n        for (i = 0; i < length; i++) {\n            system = systems[i];\n            \n            if (system.getAttribute('async') === 'false') {\n                this.require('syrup').load(system.href, false);\n            } else {\n                this.require('syrup').load(system.href, true);\n            }\n        }\n        if (length === 0) {\n            this.require('syrup').ready();\n        }\n    }\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1c2f41acb315c8c": {
-            "_id": "1c2f41acb315c8c",
-            "component": "Monoco",
+        "142b9162681cb0b": {
+            "_id": "142b9162681cb0b",
+            "component": "Syrup",
             "state": "error",
-            "action": "function error(data) {\n    console.error('monoco: ' + data.message, data.error);\n}",
+            "action": "function error(data) {\n    console.error('syrup: ' + data.message, data.error);\n}",
             "core": true
         },
-        "13bab17ef013b8a": {
-            "_id": "13bab17ef013b8a",
-            "component": "Monoco",
+        "15bcc171841f7f9": {
+            "_id": "15bcc171841f7f9",
+            "component": "Syrup",
             "state": "system",
-            "action": "function system(name) {\n    var System = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        System = this.require('MonocoSystem');\n        system = new System(conf);\n    } else {\n        result = $db.MonocoSystem.find({\n            'master': true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}",
+            "action": "function system(name) {\n    var System = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        System = this.require('SyrupSystem');\n        system = new System(conf);\n    } else {\n        result = $db.SyrupSystem.find({\n            'master': true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "174381507119687": {
-            "_id": "174381507119687",
-            "component": "Monoco",
+        "1c238108481745f": {
+            "_id": "1c238108481745f",
+            "component": "Syrup",
             "state": "warning",
-            "action": "function warning(message) {\n    console.warn('monoco: ' + message);\n}",
+            "action": "function warning(message) {\n    console.warn('syrup: ' + message);\n}",
             "core": true
         },
-        "1ae2318e731d752": {
-            "_id": "1ae2318e731d752",
-            "component": "MonocoClassInfo",
+        "1fd191b6c11928f": {
+            "_id": "1fd191b6c11928f",
+            "component": "SyrupClassInfo",
             "state": "collection",
             "action": "function collection(name) {\n    var result = {};\n    if (this.metamodel()[name] === 'collection') {\n        result = this.model()[name];\n    } \n    \n    return result; \n}",
             "core": true
         },
-        "1186c141a51599e": {
-            "_id": "1186c141a51599e",
-            "component": "MonocoClassInfo",
+        "145b91b3d01368e": {
+            "_id": "145b91b3d01368e",
+            "component": "SyrupClassInfo",
             "state": "collections",
             "action": "function collections() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length; \n    \n    for (i = 0; i < length; i++) { \n        item = keys[i]; \n        if (this.metamodel()[item] === 'collection') {\n            result.push(item);\n        }\n    }\n    \n    return result;\n}",
             "core": true
         },
-        "1c7f31751112a50": {
-            "_id": "1c7f31751112a50",
-            "component": "MonocoClassInfo",
+        "1767c1e04a1bc64": {
+            "_id": "1767c1e04a1bc64",
+            "component": "SyrupClassInfo",
             "state": "event",
             "action": "function event(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'event') {\n        result = this.model()[name];\n    } \n    \n    return result;\n}",
             "core": true
         },
-        "12e951cdaa1e7dc": {
-            "_id": "12e951cdaa1e7dc",
-            "component": "MonocoClassInfo",
+        "188ac1f5bc12461": {
+            "_id": "188ac1f5bc12461",
+            "component": "SyrupClassInfo",
             "state": "events",
             "action": "function events() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'event') {\n            result.push(item);\n        }\n    } \n    return result;\n}",
             "core": true
         },
-        "1011c161d21748a": {
-            "_id": "1011c161d21748a",
-            "component": "MonocoClassInfo",
+        "16b4911960144c4": {
+            "_id": "16b4911960144c4",
+            "component": "SyrupClassInfo",
             "state": "method",
             "action": "function method(name) {\n    var result = {};\n    if (this.metamodel()[name] === 'method') {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}",
             "core": true
         },
-        "1ea35140d5159f5": {
-            "_id": "1ea35140d5159f5",
-            "component": "MonocoClassInfo",
+        "12b33194d513d68": {
+            "_id": "12b33194d513d68",
+            "component": "SyrupClassInfo",
             "state": "methods",
             "action": "function methods() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'method') {\n            result.push(item);\n        }\n    } \n    \n    return result;\n}",
             "core": true
         },
-        "1b71c16ec7135e2": {
-            "_id": "1b71c16ec7135e2",
-            "component": "MonocoClassInfo",
+        "1fba217c801c43a": {
+            "_id": "1fba217c801c43a",
+            "component": "SyrupClassInfo",
             "state": "properties",
             "action": "function properties() { \n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'property') {\n            result.push(item);\n        }\n    } return result;\n}",
             "core": true
         },
-        "111961a1471bb58": {
-            "_id": "111961a1471bb58",
-            "component": "MonocoClassInfo",
+        "14f2c142e412bc0": {
+            "_id": "14f2c142e412bc0",
+            "component": "SyrupClassInfo",
             "state": "property",
             "action": "function property(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'property') {\n        result = this.model()[name];\n    }\n    return result;\n}",
             "core": true
         },
-        "1bc2e1a34e1b349": {
-            "_id": "1bc2e1a34e1b349",
-            "component": "MonocoComponent",
+        "15ee71fd4b17255": {
+            "_id": "15ee71fd4b17255",
+            "component": "SyrupComponent",
             "state": "destroy",
             "action": "function destroy() {\n    $component.destroy(this.id());\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "12c4b1bb8d130c5": {
-            "_id": "12c4b1bb8d130c5",
-            "component": "MonocoComponent",
+        "1a43512c3a10a19": {
+            "_id": "1a43512c3a10a19",
+            "component": "SyrupComponent",
             "state": "off",
-            "action": "function off(state, behaviorId) {\n    var args = [],\n    i = 0,\n    length = 0;\n    length = arguments.length;\n    \n    for (i = 0; i < length - 6; i++) {\n        args.push(arguments[i]);\n    }\n    \n    if ($workflow.checkParams({\"component\": this, \"methodName\": \"off\", \"args\": args})) {\n        if ($metamodel.isValidState(state, this.constructor.name)) {\n            $behavior.remove({\"behaviorId\": behaviorId, \"componentId\": this.id(), \"state\": state});\n        } else { $helper.getMonoco().warning({ \"message\":\"invoke 'off' method of component '\" + this.id() + \"' with an invalid state '\" + state + \"'\"}); \n        }\n    }\n}",
+            "action": "function off(state, behaviorId) {\n    var args = [],\n    i = 0,\n    length = 0;\n    length = arguments.length;\n    \n    for (i = 0; i < length - 6; i++) {\n        args.push(arguments[i]);\n    }\n    \n    if ($workflow.checkParams({\"component\": this, \"methodName\": \"off\", \"args\": args})) {\n        if ($metamodel.isValidState(state, this.constructor.name)) {\n            $behavior.remove({\"behaviorId\": behaviorId, \"componentId\": this.id(), \"state\": state});\n        } else { $helper.getSyrup().warning({ \"message\":\"invoke 'off' method of component '\" + this.id() + \"' with an invalid state '\" + state + \"'\"}); \n        }\n    }\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1063f1f67d1196d": {
-            "_id": "1063f1f67d1196d",
-            "component": "MonocoComponent",
+        "138e912ce51f80e": {
+            "_id": "138e912ce51f80e",
+            "component": "SyrupComponent",
             "state": "require",
             "action": "function require(id) {\n    return $component.get(id);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1fea61d6521c94a": {
-            "_id": "1fea61d6521c94a",
-            "component": "MonocoDatabase",
+        "1765d18e34172e8": {
+            "_id": "1765d18e34172e8",
+            "component": "SyrupDatabase",
             "state": "collections",
-            "action": "function collections() {\n    var result = {},\n    collectionName = '';\n    \n    for (collectionName in $db.store) {\n        if ($db.store.hasOwnProperty(collectionName) && collectionName.indexOf('Monoco') !== 0) {\n            result[collectionName] = $db[collectionName];\n            \n        }\n    }\n    return result;\n}",
+            "action": "function collections() {\n    var result = {},\n    collectionName = '';\n    \n    for (collectionName in $db.store) {\n        if ($db.store.hasOwnProperty(collectionName) && collectionName.indexOf('Syrup') !== 0) {\n            result[collectionName] = $db[collectionName];\n            \n        }\n    }\n    return result;\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1f4c216ebc1401e": {
-            "_id": "1f4c216ebc1401e",
-            "component": "MonocoDatabase",
+        "1f6cf1c68e168ea": {
+            "_id": "1f6cf1c68e168ea",
+            "component": "SyrupDatabase",
             "state": "subsystem",
             "action": "function subsystem(params) {\n    return $db.subsystem(params);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1df5b1ecbd1a4a8": {
-            "_id": "1df5b1ecbd1a4a8",
-            "component": "MonocoDatabase",
+        "1472c1b9c51c43a": {
+            "_id": "1472c1b9c51c43a",
+            "component": "SyrupDatabase",
             "state": "system",
             "action": "function system(system) {\n    return $db.system(system);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1f1511041a12190": {
-            "_id": "1f1511041a12190",
-            "component": "MonocoMetamodel",
+        "16007162fe1178f": {
+            "_id": "16007162fe1178f",
+            "component": "SyrupMetamodel",
             "state": "create",
             "action": "function create() {\n    $metamodel.create();\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1cd01165a911d04": {
-            "_id": "1cd01165a911d04",
-            "component": "MonocoMetamodel",
+        "154ae1fd3f1225d": {
+            "_id": "154ae1fd3f1225d",
+            "component": "SyrupMetamodel",
             "state": "schema",
             "action": "function schema(schema) {\n    $metamodel.schema(schema);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1abb01ed9b1a9d5": {
-            "_id": "1abb01ed9b1a9d5",
-            "component": "MonocoMetamodel",
+        "177a21bd101bdc9": {
+            "_id": "177a21bd101bdc9",
+            "component": "SyrupMetamodel",
             "state": "type",
             "action": "function type(type) {\n    $metamodel.type(type);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "178e4178b116350": {
-            "_id": "178e4178b116350",
-            "component": "MonocoSystem",
+        "1b661117e41ce25": {
+            "_id": "1b661117e41ce25",
+            "component": "SyrupSystem",
             "state": "sync",
             "action": "function sync() {\n    var system = JSON.parse($db.system());\n    \n    this.schemas(system.schemas);\n    this.types(system.types);\n    this.behaviors(system.behaviors);\n    this.components(system.components);\n}",
             "core": true,
@@ -916,23 +921,23 @@ var system = {
         }
     },
     "components": {
-        "Monoco": {
-            "monoco": {
-                "_id": "monoco",
-                "version": "0.8.3"
+        "Syrup": {
+            "syrup": {
+                "_id": "syrup",
+                "version": "0.9.1"
             }
         },
-        "MonocoDatabase": {
+        "SyrupDatabase": {
             "db": {
                 "_id": "db"
             }
         },
-        "MonocoMetamodel": {
+        "SyrupMetamodel": {
             "metamodel": {
                 "_id": "metamodel"
             }
         },
-        "MonocoSystem": {
+        "SyrupSystem": {
             "133421d0c313d2d": {
                 "_id": "133421d0c313d2d",
                 "name": "web",
@@ -957,17 +962,17 @@ var system = {
 
 
 /**
- * This module contains monoco core system.
+ * This module contains syrup core system.
  *
- * @module monoco
- * @submodule monoco-system
- * @class monoco-system
+ * @module syrup
+ * @submodule syrup-system
+ * @class syrup-system
  * @static 
  */
 
 
 /**
- * monoco core system
- * @property {MonocoSystem} system
+ * syrup core system
+ * @property {SyrupSystem} system
  */
 exports.system = system;

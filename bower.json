@@ -1,15 +1,19 @@
 {
-    "name": "monoco",
-    "version": "0.8.3",
-    "description": "A Model and a NoSQL Database for Components",
-    "license": "GPL-3.0",
-    "homepage": "https://github.com/monocojs/monoco.git",
+    "name": "system-runtime",
+    "version": "0.9.1",
+    "description": "SyrupJS, the System Runtime Platform",
+    "license": "MIT",
+    "homepage": "http://syrupjs.systemdesigner.io",
     "author": {
         "name": "erwan carriou",
         "email": "erwan.carriou@mac.com",
         "twitter": "@ecarriou"
     },
-    "main": "build/monoco.min.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/system-designer/system-designer.git"
+    },
+    "main": "build/system-runtime.min.js",
     "keywords": [
         "mda",
         "metamodel",
@@ -30,7 +34,7 @@
         "node_modules",
         "test",
         "src",
-        "build/monoco.json",
+        "build/syrup.json",
         "Gruntfile.js",
         "karma.conf.js",
         "package.json",

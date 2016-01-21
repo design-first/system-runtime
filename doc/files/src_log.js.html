@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/log.js - monoco</title>
+    <title>src/log.js - system-runtime</title>
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -15,18 +15,18 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-            monoco
+            system-runtime
         </h1>
 	<div class="nav">
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.8.3</b>
+                    API Docs for Version: <b>0.9.1</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/syrup", "classes/syrup-behavior", "classes/syrup-component", "classes/syrup-db", "classes/syrup-helper", "classes/syrup-log", "classes/syrup-metamodel", "classes/syrup-state", "classes/syrup-system", "classes/syrup-workflow", "classes/SyrupDatabaseCollection", "classes/SyrupError", "modules/syrup", "modules/syrup-behavior", "modules/syrup-component", "modules/syrup-db", "modules/syrup-helper", "modules/syrup-log", "modules/syrup-metamodel", "modules/syrup-state", "modules/syrup-system", "modules/syrup-workflow"]'>
         </form>
     </div>
 </div>
@@ -37,18 +37,18 @@
 	        <div id="sidebar">
 	        <div id="classes">
 	            <ul id="api-classes" class="nav nav-list">
-	                    <li><a href="../classes/monoco.html">monoco</a></li>
-	                    <li><a href="../classes/monoco-behavior.html">monoco-behavior</a></li>
-	                    <li><a href="../classes/monoco-component.html">monoco-component</a></li>
-	                    <li><a href="../classes/monoco-db.html">monoco-db</a></li>
-	                    <li><a href="../classes/monoco-helper.html">monoco-helper</a></li>
-	                    <li><a href="../classes/monoco-log.html">monoco-log</a></li>
-	                    <li><a href="../classes/monoco-metamodel.html">monoco-metamodel</a></li>
-	                    <li><a href="../classes/monoco-state.html">monoco-state</a></li>
-	                    <li><a href="../classes/monoco-system.html">monoco-system</a></li>
-	                    <li><a href="../classes/monoco-workflow.html">monoco-workflow</a></li>
-	                    <li><a href="../classes/MonocoDatabaseCollection.html">MonocoDatabaseCollection</a></li>
-	                    <li><a href="../classes/MonocoError.html">MonocoError</a></li>
+	                    <li><a href="../classes/syrup.html">syrup</a></li>
+	                    <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
+	                    <li><a href="../classes/syrup-component.html">syrup-component</a></li>
+	                    <li><a href="../classes/syrup-db.html">syrup-db</a></li>
+	                    <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
+	                    <li><a href="../classes/syrup-log.html">syrup-log</a></li>
+	                    <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
+	                    <li><a href="../classes/syrup-state.html">syrup-state</a></li>
+	                    <li><a href="../classes/syrup-system.html">syrup-system</a></li>
+	                    <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
+	                    <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
+	                    <li><a href="../classes/SyrupError.html">SyrupError</a></li>
 	            </ul>
 	        </div>
 	        </div>
@@ -87,35 +87,40 @@
                         
                         <div class="file">
                             <pre class="prettyprint linenums">
-                        /* 
-                         * monoco
-                         * A Model and a NoSQL Database for Components
-                         * http://monoco.io/
+                        /*
+                         * SyrupJS
+                         * The System Runtime Platform
+                         * http://syrupjs.systemdesigner.io
                          * @ecarriou
-                         *
-                         * Copyright (C) 2015 - Erwan Carriou
-                         *
-                         * This program is free software: you can redistribute it and/or modify
-                         * it under the terms of the GNU General Public License as published by
-                         * the Free Software Foundation, either version 3 of the License, or
-                         * (at your option) any later version.
-                         *
-                         * This program is distributed in the hope that it will be useful,
-                         * but WITHOUT ANY WARRANTY; without even the implied warranty of
-                         * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                         * GNU General Public License for more details.
-                         *
-                         * You should have received a copy of the GNU General Public License
-                         * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+                         *  
+                         * Copyright (c) 2016 Erwan Carriou
+                         * 
+                         * Permission is hereby granted, free of charge, to any person obtaining a copy
+                         * of this software and associated documentation files (the &quot;Software&quot;), to deal
+                         * in the Software without restriction, including without limitation the rights
+                         * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                         * copies of the Software, and to permit persons to whom the Software is
+                         * furnished to do so, subject to the following conditions:
+                         * 
+                         * The above copyright notice and this permission notice shall be included in all
+                         * copies or substantial portions of the Software.
+                         * 
+                         * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                         * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                         * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                         * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                         * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                         * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                         * SOFTWARE. 
                          */
                         
                         /**
                          * This module contains all the functions that write a log.
                          * 
-                         * @module monoco
-                         * @submodule monoco-log
-                         * @requires monoco-helper
-                         * @class monoco-log
+                         * @module syrup
+                         * @submodule syrup-log
+                         * @requires syrup-helper
+                         * @class syrup-log
                          * @static
                          */
                         
@@ -149,7 +154,7 @@
                                 message = &quot;unknown property &#x27;&quot; + propertyName + &quot;&#x27; for the meta attribute &quot; + JSON.stringify(schema);
                             }
                         
-                            $helper.getMonoco().warning(message);
+                            $helper.getSyrup().warning(message);
                         }
                         
                         
@@ -161,7 +166,7 @@
                          * @param {String} property the property
                          */
                         function invalidPropertyType(propertyName, type, property) {
-                            $helper.getMonoco().warning(&quot;invalid type for property &#x27;&quot; + JSON.stringify(propertyName) + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof property + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;invalid type for property &#x27;&quot; + JSON.stringify(propertyName) + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof property + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -172,7 +177,7 @@
                          * @param {String} type the type defined by the schema
                          */
                         function invalidEnumValue(value, type) {
-                            $helper.getMonoco().warning(&quot;invalid value for the enum value &#x27;&quot; + value + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof value + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;invalid value for the enum value &#x27;&quot; + value + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof value + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -184,7 +189,7 @@
                          * @param {String} constructorName name of the component class
                          */
                         function invalidClassName(componentId, type, constructorName) {
-                            $helper.getMonoco().warning(&quot;invalid class name for component &#x27;&quot; + componentId + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + constructorName + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;invalid class name for component &#x27;&quot; + componentId + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + constructorName + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -194,7 +199,7 @@
                          * @param {String} propertyName name of the property
                          */
                         function missingProperty(propertyName) {
-                            $helper.getMonoco().warning(&quot;missing property &#x27;&quot; + propertyName + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;missing property &#x27;&quot; + propertyName + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -205,7 +210,7 @@
                          * @param {String} classToImp the class to implement
                          */
                         function missingImplementation(classSource, classToImp) {
-                            $helper.getMonoco().warning(&quot;class &#x27;&quot; + classSource + &quot;&#x27; is missing for the implementation of the class &#x27;&quot; + classToImp + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;class &#x27;&quot; + classSource + &quot;&#x27; is missing for the implementation of the class &#x27;&quot; + classToImp + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -216,7 +221,7 @@
                          * @param {String} className a class name
                          */
                         function invalidTypeImp(property, className) {
-                            $helper.getMonoco().warning(&quot;invalid type for property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + className + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;invalid type for property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + className + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -227,7 +232,7 @@
                          * @param {String} className a class name
                          */
                         function missingPropertyImp(property, className) {
-                            $helper.getMonoco().warning(&quot;missing property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + className + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;missing property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + className + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -238,7 +243,7 @@
                          * @param {Object} schema a schema
                          */
                         function unknownPropertyImp(property, schema) {
-                            $helper.getMonoco().warning(&quot;unknown property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + schema + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;unknown property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + schema + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -248,7 +253,7 @@
                          * @param {Object} def a type definition
                          */
                         function invalidTypeDefinition(def) {
-                            $helper.getMonoco().warning(&quot;can not load the definition of type &#x27;&quot; + def + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;can not load the definition of type &#x27;&quot; + def + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -262,9 +267,9 @@
                          */
                         function invalidPropertyName(id, propertyName, propertyValue, type) {
                             if (type.indexOf(&quot;#&quot;) !== -1) {
-                                $helper.getMonoco().warning(&quot;invalid name for property &#x27;&quot; + propertyName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                                $helper.getSyrup().warning(&quot;invalid name for property &#x27;&quot; + propertyName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
                             } else {
-                                $helper.getMonoco().warning(&quot;invalid name for property &#x27;&quot; + propertyName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                                $helper.getSyrup().warning(&quot;invalid name for property &#x27;&quot; + propertyName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
                             }
                         }
                         
@@ -276,23 +281,23 @@
                          * @param {String} propertyName name of the property
                          */
                         function readOnlyProperty(id, propertyName) {
-                            $helper.getMonoco().warning(&quot;can not set read-only property &#x27;&quot; + propertyName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;can not set read-only property &#x27;&quot; + propertyName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
                         }
                         
                         
                         /*
-                         * Invalid document on a monoco database insert operation.
+                         * Invalid document on a syrup database insert operation.
                          * @method invalidDocumentOnDbInsert
                          * @param {String} doc a document
                          * @param {String} collectionName the name of the colllection
                          */
                         function invalidDocumentOnDbInsert(doc, collectionName) {
-                            $helper.getMonoco().warning(&quot;invalid document &#x27;&quot; + JSON.stringify(doc) + &quot;&#x27; on an insert operation on collection &#x27;&quot; + collectionName + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;invalid document &#x27;&quot; + JSON.stringify(doc) + &quot;&#x27; on an insert operation on collection &#x27;&quot; + collectionName + &quot;&#x27;&quot;);
                         }
                         
                         
                         /*
-                         * Invalid property on a monoco database update operation.
+                         * Invalid property on a syrup database update operation.
                          * @method invalidPropertyTypeOnDbUpdate
                          * @param {String} collectionName the name of the colllection
                          * @param {String} id id of the component
@@ -302,22 +307,22 @@
                          */
                         function invalidPropertyTypeOnDbUpdate(collectionName, id, propertyName, propertyValue, type) {
                             if (type.indexOf(&quot;#&quot;) !== -1) {
-                                $helper.getMonoco().warning(&quot;invalid type for property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on collection &#x27;&quot; + collectionName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                                $helper.getSyrup().warning(&quot;invalid type for property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on collection &#x27;&quot; + collectionName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
                             } else {
-                                $helper.getMonoco().warning(&quot;invalid type for property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on collection &#x27;&quot; + collectionName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                                $helper.getSyrup().warning(&quot;invalid type for property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on collection &#x27;&quot; + collectionName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
                             }
                         }
                         
                         
                         
                         /*
-                         * Unkonw property on a monoco database update operation.
+                         * Unkonw property on a syrup database update operation.
                          * @method unknownPropertyOnDbUpdate
                          * @param {String} propertyName name of the property
                          * @param {String} id id of the component
                          */
                         function unknownPropertyOnDbUpdate(propertyName, id) {
-                            $helper.getMonoco().warning(&quot;unknown property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;unknown property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on component &#x27;&quot; + id + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -328,17 +333,17 @@
                          * @param {String} methodName name of the method
                          */
                         function unknownMethod(classId, methodName) {
-                            $helper.getMonoco().warning(&quot;try to call an unknown method &#x27;&quot; + methodName + &quot;&#x27; for the class &#x27;&quot; + classId + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;try to call an unknown method &#x27;&quot; + methodName + &quot;&#x27; for the class &#x27;&quot; + classId + &quot;&#x27;&quot;);
                         }
                         
                         
                         /*
-                         * Try to create an invalid MonocoDatabaseCollection.
+                         * Try to create an invalid SyrupDatabaseCollection.
                          * @method invalidCollectionName
                          * @param {String} name name of the collection
                          */
                         function invalidCollectionName(name) {
-                            $helper.getMonoco().warning(&quot;invalid name for creating the collection &#x27;&quot; + name + &quot;&#x27;: there is no schema &#x27;&quot; + name + &quot;&#x27; in the metamodel&quot;);
+                            $helper.getSyrup().warning(&quot;invalid name for creating the collection &#x27;&quot; + name + &quot;&#x27;: there is no schema &#x27;&quot; + name + &quot;&#x27; in the metamodel&quot;);
                         }
                         
                         
@@ -349,7 +354,7 @@
                          * @param {String} methodName name ot the method
                          */
                         function invalidResultType(id, methodName) {
-                            $helper.getMonoco().warning(&quot;invalid type on the result of method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;invalid type on the result of method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -360,16 +365,16 @@
                          * @param {String} componentId if of the component
                          */
                         function unknownComponent(className, componentId) {
-                            $helper.getMonoco().warning(&quot;unkown class component &#x27;&quot; + className + &quot;&#x27; for component &#x27;&quot; + componentId + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;unkown class component &#x27;&quot; + className + &quot;&#x27; for component &#x27;&quot; + componentId + &quot;&#x27;&quot;);
                         }
                         
                         
                         /*
-                         * The monoco workflow has been restarted.
+                         * The syrup workflow has been restarted.
                          * @method workflowRestarted
                          */
                         function workflowRestarted() {
-                            $helper.getMonoco().warning(&#x27;monoco has been restarted&#x27;);
+                            $helper.getSyrup().warning(&#x27;syrup has been restarted&#x27;);
                         }
                         
                         
@@ -380,7 +385,7 @@
                          * @param {String} methodName name of the component
                          */
                         function invalidParamNumber(id, methodName) {
-                            $helper.getMonoco().warning(&quot;invalid number of parameters when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;invalid number of parameters when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -393,7 +398,7 @@
                          * 
                          */
                         function invalidParamType(id, methodName, paramName) {
-                            $helper.getMonoco().warning(&quot;invalid type for the parameter &#x27;&quot; + paramName + &quot;&#x27; when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;invalid type for the parameter &#x27;&quot; + paramName + &quot;&#x27; when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -404,7 +409,7 @@
                          * @param {String} stateName name of the state
                          */
                         function behaviorNotUnique(id, stateName) {
-                            $helper.getMonoco().warning(&quot;try to add more than one behavior for the state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;try to add more than one behavior for the state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -415,7 +420,7 @@
                          * @param {String} stateName name of the state
                          */
                         function invalidStateOn(id, stateName) {
-                            $helper.getMonoco().warning(&quot;try to add a behavior with an unkwown state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;try to add a behavior with an unkwown state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -426,7 +431,7 @@
                          * @param {String} stateName name of the state
                          */
                         function invalidStateOff(id, stateName) {
-                            $helper.getMonoco().warning(&quot;try to remove a behavior from an unkwown state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;try to remove a behavior from an unkwown state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -435,7 +440,7 @@
                          * @method masterSystemNotFound
                          */
                         function masterSystemNotFound() {
-                            $helper.getMonoco().warning(&quot;the master system is not found&quot;);
+                            $helper.getSyrup().warning(&quot;the master system is not found&quot;);
                         }
                         
                         
@@ -446,7 +451,7 @@
                          * @param {String} typeName expectec type defined by the schema
                          */
                         function invalidType(value, typeName) {
-                            $helper.getMonoco().warning(&quot;invalid type for value &#x27;&quot; + JSON.stringify(value) + &quot;&#x27;: expected &#x27;&quot; + typeName + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;invalid type for value &#x27;&quot; + JSON.stringify(value) + &quot;&#x27;: expected &#x27;&quot; + typeName + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -456,7 +461,7 @@
                          * @param {String} value value
                          */
                         function unknownType(value) {
-                            $helper.getMonoco().warning(&quot;unknown type for value &#x27;&quot; + JSON.stringify(value) + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;unknown type for value &#x27;&quot; + JSON.stringify(value) + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -467,7 +472,7 @@
                          * @param {String} className name of the class
                          */
                         function canNotYetValidate(id, className) {
-                            $helper.getMonoco().warning(&quot;can not yet validate if the component &#x27;&quot; + JSON.stringify(id) + &quot;&#x27; is an instance of &#x27;&quot; + className + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;can not yet validate if the component &#x27;&quot; + JSON.stringify(id) + &quot;&#x27; is an instance of &#x27;&quot; + className + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -479,7 +484,7 @@
                          * @param {String} type expected type
                          */
                         function invalidChannelEvent(message, eventName, type) {
-                            $helper.getMonoco().warning(&quot;invalid type for the message &#x27;&quot; + JSON.stringify(message) + &quot;&#x27;: expected type &#x27;&quot; + type + &quot;&#x27; for event &#x27;&quot; + eventName + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;invalid type for the message &#x27;&quot; + JSON.stringify(message) + &quot;&#x27;: expected type &#x27;&quot; + type + &quot;&#x27; for event &#x27;&quot; + eventName + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -490,7 +495,7 @@
                          * @param {String} methodName name of the component
                          */
                         function invalidParamNumberMethodOn(id, methodName) {
-                            $helper.getMonoco().warning(&quot;invalid number of parameters when adding an action on method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;invalid number of parameters when adding an action on method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -500,7 +505,7 @@
                          * @param {String} id id of the component
                          */
                         function idAlreadyUsed(id) {
-                            $helper.getMonoco().warning(&quot;try to create a component with the id &#x27;&quot; + id + &quot;&#x27; that is already used by another component&quot;);
+                            $helper.getSyrup().warning(&quot;try to create a component with the id &#x27;&quot; + id + &quot;&#x27; that is already used by another component&quot;);
                         }
                         
                         
@@ -513,9 +518,9 @@
                          */
                         function updateUuid(currentId, newId, alreadyUsed) {
                             if (alreadyUsed) {
-                                $helper.getMonoco().warning(&quot;try to update a component of id &#x27;&quot; + currentId + &quot;&#x27; with the new id &#x27;&quot; + newId + &quot;&#x27; that is already used&quot;);
+                                $helper.getSyrup().warning(&quot;try to update a component of id &#x27;&quot; + currentId + &quot;&#x27; with the new id &#x27;&quot; + newId + &quot;&#x27; that is already used&quot;);
                             } else {
-                                $helper.getMonoco().warning(&quot;try to update a component of id &#x27;&quot; + currentId + &quot;&#x27; with the new id &#x27;&quot; + newId + &quot;&#x27;&quot;);
+                                $helper.getSyrup().warning(&quot;try to update a component of id &#x27;&quot; + currentId + &quot;&#x27; with the new id &#x27;&quot; + newId + &quot;&#x27;&quot;);
                             }
                         }
                         
@@ -525,7 +530,7 @@
                          * @param {String} id id of the component
                          */
                         function invalidUseOfComponent(id) {
-                            $helper.getMonoco().warning(&quot;try to change the state of the destroyed component &#x27;&quot; + id + &quot;&#x27;&quot;);
+                            $helper.getSyrup().warning(&quot;try to change the state of the destroyed component &#x27;&quot; + id + &quot;&#x27;&quot;);
                         }
                         
                         
@@ -535,10 +540,10 @@
                         /**
                          * This module contains all the functions that write a log.
                          * 
-                         * @module monoco
-                         * @submodule monoco-log
-                         * @requires monoco-helper
-                         * @class monoco-log
+                         * @module syrup
+                         * @submodule syrup-log
+                         * @requires syrup-helper
+                         * @class syrup-log
                          * @static
                          */
                         
@@ -654,7 +659,7 @@
                         
                         
                         /**
-                         * Invalid document on a monoco database insert operation.
+                         * Invalid document on a syrup database insert operation.
                          * @method invalidDocumentOnDbInsert
                          * @param {String} doc a document
                          * @param {String} collectionName the name of the colllection
@@ -663,7 +668,7 @@
                         
                         
                         /**
-                         * Invalid property on a monoco database update operation.
+                         * Invalid property on a syrup database update operation.
                          * @method invalidPropertyTypeOnDbUpdate
                          * @param {String} collectionName the name of the colllection
                          * @param {String} id id of the component
@@ -684,7 +689,7 @@
                         
                         
                         /**
-                         * Try to create an invalid MonocoDatabaseCollection.
+                         * Try to create an invalid SyrupDatabaseCollection.
                          * @method invalidCollectionName
                          * @param {String} name name of the collection
                          */
@@ -710,7 +715,7 @@
                         
                         
                         /**
-                         * The monoco workflow has been restarted.
+                         * The syrup workflow has been restarted.
                          * @method workflowRestarted
                          */
                         exports.workflowRestarted = workflowRestarted;
@@ -834,7 +839,7 @@
                         
                         
                         /**
-                         * Unkonw property on a monoco database update operation.
+                         * Unkonw property on a syrup database update operation.
                          * @method unknownPropertyOnDbUpdate
                          * @param {String} propertyName name of the property
                          * @param {String} id id of the component

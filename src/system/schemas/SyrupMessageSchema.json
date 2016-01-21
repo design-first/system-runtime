@@ -1,0 +1,8 @@
+{
+    "_id": "SyrupMessageSchema",
+    "_name": "SyrupMessageSchema",
+    "_core": true,
+    "event": "property",
+    "from": "property",
+    "data": "property"
+}

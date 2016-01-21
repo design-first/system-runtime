@@ -1,23 +1,28 @@
-/* 
- * monoco
- * A Model and a NoSQL Database for Components
- * http://monoco.io/
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
  * @ecarriou
- *
- * Copyright (C) 2015 - Erwan Carriou
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
  */
 
 /**
@@ -25,12 +30,12 @@
  * A behavior is a mecanism that allow users to add actions that will be executed 
  * when a specific state of a component will change.
  * 
- * @module monoco
- * @submodule monoco-behavior
- * @requires monoco-db
- * @requires monoco-helper
- * @requires monoco-channel
- * @class monoco-behavior
+ * @module syrup
+ * @submodule syrup-behavior
+ * @requires syrup-db
+ * @requires syrup-helper
+ * @requires syrup-channel
+ * @class syrup-behavior
  * @static
  */
 
@@ -58,9 +63,9 @@ var store = {};
  * @method createFunction
  * @param {String} name default name of the function 
  * @param {String} func a stringified function
- * @param {Boolean} core if true, the behavior will be treated as a monoco core behavior.
+ * @param {Boolean} core if true, the behavior will be treated as a syrup core behavior.
  * In that case, the behavior can not be exported in a system (default false)
- * @param {Boolean} useCoreAPI if true, monoco core modules will be injected as parameters of the function (default false)
+ * @param {Boolean} useCoreAPI if true, syrup core modules will be injected as parameters of the function (default false)
  * @return {Function} the created function
  * @private
  */
@@ -120,14 +125,14 @@ function createFunction(name, func, core, useCoreAPI) {
 
 
 /*
- * Add a behavior that will be stored in monoco database.
+ * Add a behavior that will be stored in syrup database.
  * @method add
  * @param {String} id id of the component
  * @param {Object} state the state on which the action will be executed 
  * @param {Object} action the action to execute when the component will have a specific state 
- * @param {Boolean} useCoreAPI if true, monoco core modules will be injected as parameters of the action (default false)
+ * @param {Boolean} useCoreAPI if true, syrup core modules will be injected as parameters of the action (default false)
  * @param {Boolean} core if true, behavior can not be exported
- * @return {String} id of the behavior created in monoco database
+ * @return {String} id of the behavior created in syrup database
  */
 function add(id, state, action, useCoreAPI, core) {
     var behaviorId = $helper.generateId(),
@@ -144,7 +149,7 @@ function add(id, state, action, useCoreAPI, core) {
 
     store[behaviorId] = action;
 
-    $db.MonocoBehavior.insert({
+    $db.SyrupBehavior.insert({
         "_id": behaviorId,
         "component": id,
         "state": state,
@@ -176,14 +181,14 @@ function remove(params) {
 
     if (params.componentId) {
         if (params.behaviorId) {
-            $db.MonocoBehavior.remove({
+            $db.SyrupBehavior.remove({
                 "_id": params.behaviorId,
                 "component": params.componentId,
                 "state": params.state
             });
             delete store[params.behaviorId];
         } else {
-            result = $db.MonocoBehavior.remove({
+            result = $db.SyrupBehavior.remove({
                 "component": params.componentId,
                 "state": params.state
             });
@@ -217,7 +222,7 @@ function getActions(id, state) {
         dbResult = [],
         action = null;
 
-    dbResult = $db.MonocoBehavior.find({
+    dbResult = $db.SyrupBehavior.find({
         "component": id,
         "state": state
     });
@@ -265,25 +270,25 @@ function get(id) {
  * This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed 
  * when a specific state of a component will change.
  * 
- * @module monoco
- * @submodule monoco-behavior
- * @requires monoco-db
- * @requires monoco-helper
- * @requires monoco-channel
- * @class monoco-behavior
+ * @module syrup
+ * @submodule syrup-behavior
+ * @requires syrup-db
+ * @requires syrup-helper
+ * @requires syrup-channel
+ * @class syrup-behavior
  * @static
  */
 
 
 /**
- * Add a behavior that will be stored in monoco database.
+ * Add a behavior that will be stored in syrup database.
  * @method add
  * @param {String} id id of the component
  * @param {Object} state the state on which the action will be executed 
  * @param {Object} action the action to execute when the component will have a specific state 
- * @param {Boolean} useCoreAPI if true, monoco core modules will be injected as parameters of the action (default false)
+ * @param {Boolean} useCoreAPI if true, syrup core modules will be injected as parameters of the action (default false)
  * @param {Boolean} core if true, behavior can not be exported
- * @return {String} id of the behavior created in monoco database
+ * @return {String} id of the behavior created in syrup database
  */
 exports.add = add;
 

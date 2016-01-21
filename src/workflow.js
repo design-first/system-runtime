@@ -1,46 +1,51 @@
-/* 
- * monoco
- * A Model and a NoSQL Database for Components
- * http://monoco.io/
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
  * @ecarriou
- *
- * Copyright (C) 2015 - Erwan Carriou
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
  */
 
 /**
- * This module manages the workflow of monoco. It behaves like a workflow engine. <br>
+ * This module manages the workflow of syrup. It behaves like a workflow engine. <br>
  * It checks if the change of status of a component is valid to be executed. By valid, it means that:<br>
  * - the state is valid for the component, <br>
  * - the input (i.e. parameters) of all actions for the state are compliants with the model and <br>
  * - the output of all actions are compliants with the model. <br>
  * 
- * If an error occurs, the workflow will call the error state of the component and monoco. <br>
+ * If an error occurs, the workflow will call the error state of the component and syrup. <br>
  * If the error can break the consistency of the current system, the worklow will stop.
  * 
- * @module monoco
- * @submodule monoco-workflow
- * @requires monoco-metamodel
- * @requires monoco-component
- * @requires monoco-behavior
- * @requires monoco-channel
- * @requires monoco-state
- * @requires monoco-helper
- * @requires monoco-log
- * @requires monoco-db
- * @class monoco-workflow 
+ * @module syrup
+ * @submodule syrup-workflow
+ * @requires syrup-metamodel
+ * @requires syrup-component
+ * @requires syrup-behavior
+ * @requires syrup-channel
+ * @requires syrup-state
+ * @requires syrup-helper
+ * @requires syrup-log
+ * @requires syrup-db
+ * @class syrup-workflow 
  * @static
  */
 
@@ -59,17 +64,17 @@ var $db = require('./db.js');
 
 
 /**
- * The MonocoError class.
- * @class MonocoError
+ * The SyrupError class.
+ * @class SyrupError
  * @constructor
  * @param {String} message message of the error
  */
-function MonocoError(message) {
+function SyrupError(message) {
     this.message = message;
-    this.name = "MonocoError";
+    this.name = "SyrupError";
 }
-MonocoError.prototype = new Error();
-MonocoError.prototype.constructor = MonocoError;
+SyrupError.prototype = new Error();
+SyrupError.prototype.constructor = SyrupError;
 
 
 /*
@@ -274,7 +279,7 @@ function checkResult(params) {
 /*
  * Get the actions of the specified state
  * @method getActions
- * @param {Object} component a monoco component
+ * @param {Object} component a syrup component
  * @param {String} name name of the state
  * @param {Boolean} isEvent true if the state is an event
  * @return {Array} list of the actions
@@ -355,7 +360,7 @@ function callAction(component, state, action, params, isEvent) {
             result = action.action.apply(component, injectedParams);
         }
     } catch (e) {
-        if (e instanceof MonocoError) {
+        if (e instanceof SyrupError) {
             throw e;
         } else {
             if (component && component.error) {
@@ -364,8 +369,8 @@ function callAction(component, state, action, params, isEvent) {
                     "error": e
                 });
             }
-            if ($helper.getMonoco()) {
-                $helper.getMonoco().error({
+            if ($helper.getSyrup()) {
+                $helper.getSyrup().error({
                     "message": "error when trying to call the method '" + state + "' on component '" + component.id() + "'",
                     "error": e
                 });
@@ -530,7 +535,7 @@ function action(behaviorId, params) {
         component = null,
         actionFromMemory = null;
 
-    behaviors = $db.MonocoBehavior.find({
+    behaviors = $db.SyrupBehavior.find({
         "_id": behaviorId
     });
 
@@ -669,12 +674,12 @@ function stop(params) {
 
     if (params.error) {
         if (params.message) {
-            throw new MonocoError("monoco has been stopped because " + params.message);
+            throw new SyrupError("syrup has been stopped because " + params.message);
         } else {
-            throw new MonocoError("monoco has been stopped because of an unknown error");
+            throw new SyrupError("syrup has been stopped because of an unknown error");
         }
     } else {
-        console.warn('monoco: monoco has been stopped');
+        console.warn('syrup: syrup has been stopped');
     }
 }
 
@@ -693,26 +698,26 @@ function restart() {
 
 
 /**
- * This module manages the workflow of monoco. It behaves like a workflow engine. <br>
+ * This module manages the workflow of syrup. It behaves like a workflow engine. <br>
  * It checks if the change of status of a component is valid to be executed. By valid, it means that:<br>
  * - the state is valid for the component, <br>
  * - the input (i.e. parameters) of all actions for the state are compliants with the model and <br>
  * - the output of all actions are compliants with the model. <br>
  * 
- * If an error occurs, the workflow will call the error state of the component and monoco. <br>
+ * If an error occurs, the workflow will call the error state of the component and syrup. <br>
  * If the error can break the consistency of the current system, the worklow will stop.
  * 
- * @module monoco
- * @submodule monoco-workflow
- * @requires monoco-metamodel
- * @requires monoco-component
- * @requires monoco-behavior
- * @requires monoco-channel
- * @requires monoco-state
- * @requires monoco-helper
- * @requires monoco-log
- * @requires monoco-db
- * @class monoco-workflow 
+ * @module syrup
+ * @submodule syrup-workflow
+ * @requires syrup-metamodel
+ * @requires syrup-component
+ * @requires syrup-behavior
+ * @requires syrup-channel
+ * @requires syrup-state
+ * @requires syrup-helper
+ * @requires syrup-log
+ * @requires syrup-db
+ * @class syrup-workflow 
  * @static
  */
 

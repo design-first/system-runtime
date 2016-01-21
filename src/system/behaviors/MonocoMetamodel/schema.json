@@ -1,7 +1,0 @@
-{
-	"component": "MonocoMetamodel",
-	"state": "schema",
-	"action": "function schema(schema) {\n    $metamodel.schema(schema);\n}",
-	"core": true,
-	"useCoreAPI": true
-}

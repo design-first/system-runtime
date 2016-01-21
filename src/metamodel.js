@@ -1,35 +1,41 @@
-/* 
- * monoco
- * A Model and a NoSQL Database for Components
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
  * @ecarriou
- *
- * Copyright (C) 2015 - Erwan Carriou
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
  */
 
 /**
- * This module manages monoco metamodel. <br>
- * monoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.
+ * This module manages syrup metamodel. <br>
+ * syrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.
  * 
- * @module monoco
- * @submodule monoco-metamodel
- * @requires monoco-db
- * @requires monoco-log
- * @requires monoco-component
- * @requires monoco-workflow
- * @class monoco-metamodel
+ * @module syrup
+ * @submodule syrup-metamodel
+ * @requires syrup-db
+ * @requires syrup-log
+ * @requires syrup-component
+ * @requires syrup-workflow
+ * @class syrup-metamodel
  * @static
  */
 
@@ -327,19 +333,19 @@ function checkCustomSchema(value, typeName) {
  * @private
  */
 function initDbStructure() {
-    $db.collection('MonocoSchema');
-    $db.collection('MonocoExtendedSchema');
-    $db.collection('MonocoClassInfo');
-    $db.collection('MonocoBehavior');
-    $db.collection('MonocoState');
-    $db.collection('MonocoType');
-    $db.collection('MonocoMessage');
-    $db.collection('MonocoChannel');
+    $db.collection('SyrupSchema');
+    $db.collection('SyrupExtendedSchema');
+    $db.collection('SyrupClassInfo');
+    $db.collection('SyrupBehavior');
+    $db.collection('SyrupState');
+    $db.collection('SyrupType');
+    $db.collection('SyrupMessage');
+    $db.collection('SyrupChannel');
 }
 
 
 /*
- * Create the Database structure (i.e. MonocoDatabaseCollection).
+ * Create the Database structure (i.e. SyrupDatabaseCollection).
  * @method createDbStructure
  * @private
  */
@@ -350,7 +356,7 @@ function createDbStructure() {
 
     for (modelName in store.catalog) {
         modelDef = store.catalog[modelName];
-        $db.MonocoSchema.insert(modelDef);
+        $db.SyrupSchema.insert(modelDef);
         if (typeof modelDef[SCHEMA] !== 'undefined' &&
             typeof $db[modelDef[ID]] === 'undefined' &&
             modelDef[CLASS] !== false) {
@@ -360,13 +366,13 @@ function createDbStructure() {
 
     for (modelName in store.model) {
         modelDef = store.model[modelName];
-        $db.MonocoExtendedSchema.insert(modelDef);
+        $db.SyrupExtendedSchema.insert(modelDef);
     }
 
     for (typeName in store.type) {
         modelDef = store.type[typeName];
         modelDef._id = modelDef.name;
-        $db.MonocoType.insert(modelDef);
+        $db.SyrupType.insert(modelDef);
     }
 }
 
@@ -410,13 +416,13 @@ function createClassInfo() {
             modelDef[CLASS] !== false
             ) {
             if (!$component.get(id)) {
-                $db.MonocoClassInfo.insert({
+                $db.SyrupClassInfo.insert({
                     "_id": id,
                     "metamodel": store.model[modelDef[SCHEMA]],
                     "model": modelDef
                 });
             } else {
-                $db.MonocoClassInfo.update({
+                $db.SyrupClassInfo.update({
                     "_id": id
                 }, {
                         "_id": id,
@@ -1390,16 +1396,16 @@ function inheritFrom(name, parentName) {
 
 
 /**
- * This module manages monoco metamodel. <br>
- * monoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.
+ * This module manages syrup metamodel. <br>
+ * syrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.
  * 
- * @module monoco
- * @submodule monoco-metamodel
- * @requires monoco-db
- * @requires monoco-log
- * @requires monoco-component
- * @requires monoco-workflow
- * @class monoco-metamodel
+ * @module syrup
+ * @submodule syrup-metamodel
+ * @requires syrup-db
+ * @requires syrup-log
+ * @requires syrup-component
+ * @requires syrup-workflow
+ * @class syrup-metamodel
  * @static
  */
 

@@ -1,25 +1,29 @@
-/* 
- * monoco
- * A Model and a NoSQL Database for Components
- * http://monoco.io/
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
  * @ecarriou
- *
- * Copyright (C) 2015 - Erwan Carriou
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
  */
-
 
 module.exports = function (grunt) {
     grunt.initConfig({
@@ -48,7 +52,7 @@ module.exports = function (grunt) {
             files: ['build/system/*.js', 'build/system/*.json']
         },
         yuidoc: {
-            monoco: {
+            syrup: {
                 name: '<%= pkg.name %>',
                 description: '<%= pkg.description %>',
                 version: '<%= pkg.version %>',
@@ -79,35 +83,35 @@ module.exports = function (grunt) {
                 },
                 customReporters: []
             },
-            monoco: {
+            syrup: {
                 specs: [
                     "test/module/**",
-                    "test/monoco/**"
+                    "test/syrup/**"
                 ]
             }
         },
         karma: {
-            monoco: {
+            syrup: {
                 configFile: 'karma.conf.js'
             }
         },
         browserify: {
-            monocoDebug: {
-                src: ['src/monoco.js'],
-                dest: 'build/monoco.js',
+            syrupDebug: {
+                src: ['src/syrup.js'],
+                dest: 'build/system-runtime.js',
                 options: {
                     browserifyOptions: {
-                        standalone: 'monoco',
+                        standalone: 'syrup',
                         debug: true
                     }
                 }
             },
-            monoco: {
-                src: ['src/monoco.js'],
-                dest: 'build/monoco.min.js',
+            syrup: {
+                src: ['src/syrup.js'],
+                dest: 'build/system-runtime.min.js',
                 options: {
                     browserifyOptions: {
-                        standalone: 'monoco'
+                        standalone: 'syrup'
                     }
                 }
             }
@@ -115,7 +119,7 @@ module.exports = function (grunt) {
         uglify: {
             dist: {
                 files: {
-                    'build/<%= pkg.name %>.min.js': ['<%= browserify.monoco.dest %>']
+                    'build/<%= pkg.name %>.min.js': ['<%= browserify.syrup.dest %>']
                 }
             }
         },
@@ -140,7 +144,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/monoco.json': ['src/template/banner/system.txt']
+                    'build/syrup.json': ['src/template/banner/system.txt']
                 }
             },
             systemBehaviors: {
@@ -173,7 +177,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/monoco.json': ['build/monoco.json', 'src/system/behaviors/*/*.json']
+                    'build/syrup.json': ['build/syrup.json', 'src/system/behaviors/*/*.json']
                 }
             },
             systemSchemas: {
@@ -195,7 +199,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/monoco.json': ['build/monoco.json', 'src/system/schemas/*.json']
+                    'build/syrup.json': ['build/syrup.json', 'src/system/schemas/*.json']
                 }
             },
             systemTypes: {
@@ -217,7 +221,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/monoco.json': ['build/monoco.json', 'src/system/types/*.json']
+                    'build/syrup.json': ['build/syrup.json', 'src/system/types/*.json']
                 }
             },
             systemComponents: {
@@ -251,7 +255,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/monoco.json': ['build/monoco.json', 'src/system/components/*/*.json']
+                    'build/syrup.json': ['build/syrup.json', 'src/system/components/*/*.json']
                 }
             },
             systemFill: {
@@ -266,7 +270,7 @@ module.exports = function (grunt) {
                         system.behaviors = grunt.option('behaviors');
                         
                         // process addon in order to insert subsytem                 
-                        system.components.MonocoSystem = {};
+                        system.components.SyrupSystem = {};
 
                         grunt.file.recurse('src/addons', loadSubSystem);
 
@@ -274,7 +278,7 @@ module.exports = function (grunt) {
                             if (filename.indexOf('.') !== 0) {
                                 var subSystem = grunt.file.readJSON(abspath);
 
-                                system.components.MonocoSystem[subSystem._id] = {
+                                system.components.SyrupSystem[subSystem._id] = {
                                     "_id": subSystem._id,
                                     "name": subSystem.name,
                                     "version": subSystem.version,
@@ -289,23 +293,23 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/monoco.json': ['build/monoco.json']
+                    'build/syrup.json': ['build/syrup.json']
                 }
             },
             systemModule: {
                 files: {
-                    'build/system/system.js': ['src/template/banner/systemmodule.txt', 'build/monoco.json', 'src/template/footer/systemmodule.txt']
+                    'build/system/system.js': ['src/template/banner/systemmodule.txt', 'build/syrup.json', 'src/template/footer/systemmodule.txt']
                 }
             },
             licence: {
-                src: ['src/template/banner/licence.txt', 'build/monoco.min.js'],
-                dest: 'build/monoco.min.js'
+                src: ['src/template/banner/licence.txt', 'build/system-runtime.min.js'],
+                dest: 'build/system-runtime.min.js'
             }
         },
         "merge-json": {
-            monoco: {
-                src: ["src/addons/*.json", "build/monoco.json"],
-                dest: "build/monoco.json"
+            syrup: {
+                src: ["src/addons/*.json", "build/syrup.json"],
+                dest: "build/syrup.json"
             }
         }
 
@@ -349,7 +353,7 @@ module.exports = function (grunt) {
 
     // test task
     grunt.registerTask('test', [
-        'jasmine_nodejs:monoco'
+        'jasmine_nodejs:syrup'
     ]);
 
     // debug task
@@ -360,7 +364,7 @@ module.exports = function (grunt) {
         'jsbeautifier',
         'jshint',
         'test',
-        'browserify:monocoDebug'
+        'browserify:syrupDebug'
     ]);
 
     // build task
@@ -371,11 +375,11 @@ module.exports = function (grunt) {
         'jsbeautifier',
         'jshint',
         'test',
-        'browserify:monocoDebug',
-        'browserify:monoco',
+        'browserify:syrupDebug',
+        'browserify:syrup',
         'uglify',
         'concat:licence',
-        'karma:monoco',
+        'karma:syrup',
         'yuidoc'
     ]);
 };

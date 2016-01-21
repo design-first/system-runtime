@@ -4,17 +4,17 @@
 
 
 /**
- * This module contains monoco core system.
+ * This module contains syrup core system.
  *
- * @module monoco
- * @submodule monoco-system
- * @class monoco-system
+ * @module syrup
+ * @submodule syrup-system
+ * @class syrup-system
  * @static 
  */
 
 
 /**
- * monoco core system
- * @property {MonocoSystem} system
+ * syrup core system
+ * @property {SyrupSystem} system
  */
 exports.system = system;

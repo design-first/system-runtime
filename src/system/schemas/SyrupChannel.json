@@ -1,0 +1,18 @@
+{
+    "_id": "SyrupChannel",
+    "_name": "SyrupChannel",
+    "_schema": "SyrupChannelSchema",
+    "_inherit": [
+        "SyrupComponent",
+        "SyrupChannelEvent"
+    ],
+    "_core": true,
+    "send": {
+        "params": [
+            {
+                "name": "message",
+                "type": "object"
+            }
+        ]
+    }
+}

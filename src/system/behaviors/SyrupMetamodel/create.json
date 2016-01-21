@@ -1,0 +1,7 @@
+{
+	"component": "SyrupMetamodel",
+	"state": "create",
+	"action": "function create() {\n    $metamodel.create();\n}",
+	"core": true,
+	"useCoreAPI": true
+}

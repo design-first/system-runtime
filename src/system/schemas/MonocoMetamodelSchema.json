@@ -1,9 +1,0 @@
-{
-    "_id": "MonocoMetamodelSchema",
-    "_name": "MonocoMetamodelSchema",
-    "_inherit": ["MonocoComponentSchema"],
-    "_core": true,
-    "schema": "method",
-    "type": "method",
-    "create": "method"
-}

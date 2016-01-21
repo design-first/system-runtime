@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/workflow.js - monoco</title>
+    <title>src/workflow.js - system-runtime</title>
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -15,18 +15,18 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-            monoco
+            system-runtime
         </h1>
 	<div class="nav">
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.8.3</b>
+                    API Docs for Version: <b>0.9.1</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/syrup", "classes/syrup-behavior", "classes/syrup-component", "classes/syrup-db", "classes/syrup-helper", "classes/syrup-log", "classes/syrup-metamodel", "classes/syrup-state", "classes/syrup-system", "classes/syrup-workflow", "classes/SyrupDatabaseCollection", "classes/SyrupError", "modules/syrup", "modules/syrup-behavior", "modules/syrup-component", "modules/syrup-db", "modules/syrup-helper", "modules/syrup-log", "modules/syrup-metamodel", "modules/syrup-state", "modules/syrup-system", "modules/syrup-workflow"]'>
         </form>
     </div>
 </div>
@@ -37,18 +37,18 @@
 	        <div id="sidebar">
 	        <div id="classes">
 	            <ul id="api-classes" class="nav nav-list">
-	                    <li><a href="../classes/monoco.html">monoco</a></li>
-	                    <li><a href="../classes/monoco-behavior.html">monoco-behavior</a></li>
-	                    <li><a href="../classes/monoco-component.html">monoco-component</a></li>
-	                    <li><a href="../classes/monoco-db.html">monoco-db</a></li>
-	                    <li><a href="../classes/monoco-helper.html">monoco-helper</a></li>
-	                    <li><a href="../classes/monoco-log.html">monoco-log</a></li>
-	                    <li><a href="../classes/monoco-metamodel.html">monoco-metamodel</a></li>
-	                    <li><a href="../classes/monoco-state.html">monoco-state</a></li>
-	                    <li><a href="../classes/monoco-system.html">monoco-system</a></li>
-	                    <li><a href="../classes/monoco-workflow.html">monoco-workflow</a></li>
-	                    <li><a href="../classes/MonocoDatabaseCollection.html">MonocoDatabaseCollection</a></li>
-	                    <li><a href="../classes/MonocoError.html">MonocoError</a></li>
+	                    <li><a href="../classes/syrup.html">syrup</a></li>
+	                    <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
+	                    <li><a href="../classes/syrup-component.html">syrup-component</a></li>
+	                    <li><a href="../classes/syrup-db.html">syrup-db</a></li>
+	                    <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
+	                    <li><a href="../classes/syrup-log.html">syrup-log</a></li>
+	                    <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
+	                    <li><a href="../classes/syrup-state.html">syrup-state</a></li>
+	                    <li><a href="../classes/syrup-system.html">syrup-system</a></li>
+	                    <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
+	                    <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
+	                    <li><a href="../classes/SyrupError.html">SyrupError</a></li>
 	            </ul>
 	        </div>
 	        </div>
@@ -87,49 +87,54 @@
                         
                         <div class="file">
                             <pre class="prettyprint linenums">
-                        /* 
-                         * monoco
-                         * A Model and a NoSQL Database for Components
-                         * http://monoco.io/
+                        /*
+                         * SyrupJS
+                         * The System Runtime Platform
+                         * http://syrupjs.systemdesigner.io
                          * @ecarriou
-                         *
-                         * Copyright (C) 2015 - Erwan Carriou
-                         *
-                         * This program is free software: you can redistribute it and/or modify
-                         * it under the terms of the GNU General Public License as published by
-                         * the Free Software Foundation, either version 3 of the License, or
-                         * (at your option) any later version.
-                         *
-                         * This program is distributed in the hope that it will be useful,
-                         * but WITHOUT ANY WARRANTY; without even the implied warranty of
-                         * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                         * GNU General Public License for more details.
-                         *
-                         * You should have received a copy of the GNU General Public License
-                         * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+                         *  
+                         * Copyright (c) 2016 Erwan Carriou
+                         * 
+                         * Permission is hereby granted, free of charge, to any person obtaining a copy
+                         * of this software and associated documentation files (the &quot;Software&quot;), to deal
+                         * in the Software without restriction, including without limitation the rights
+                         * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                         * copies of the Software, and to permit persons to whom the Software is
+                         * furnished to do so, subject to the following conditions:
+                         * 
+                         * The above copyright notice and this permission notice shall be included in all
+                         * copies or substantial portions of the Software.
+                         * 
+                         * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                         * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                         * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                         * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                         * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                         * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                         * SOFTWARE. 
                          */
                         
                         /**
-                         * This module manages the workflow of monoco. It behaves like a workflow engine. &lt;br&gt;
+                         * This module manages the workflow of syrup. It behaves like a workflow engine. &lt;br&gt;
                          * It checks if the change of status of a component is valid to be executed. By valid, it means that:&lt;br&gt;
                          * - the state is valid for the component, &lt;br&gt;
                          * - the input (i.e. parameters) of all actions for the state are compliants with the model and &lt;br&gt;
                          * - the output of all actions are compliants with the model. &lt;br&gt;
                          * 
-                         * If an error occurs, the workflow will call the error state of the component and monoco. &lt;br&gt;
+                         * If an error occurs, the workflow will call the error state of the component and syrup. &lt;br&gt;
                          * If the error can break the consistency of the current system, the worklow will stop.
                          * 
-                         * @module monoco
-                         * @submodule monoco-workflow
-                         * @requires monoco-metamodel
-                         * @requires monoco-component
-                         * @requires monoco-behavior
-                         * @requires monoco-channel
-                         * @requires monoco-state
-                         * @requires monoco-helper
-                         * @requires monoco-log
-                         * @requires monoco-db
-                         * @class monoco-workflow 
+                         * @module syrup
+                         * @submodule syrup-workflow
+                         * @requires syrup-metamodel
+                         * @requires syrup-component
+                         * @requires syrup-behavior
+                         * @requires syrup-channel
+                         * @requires syrup-state
+                         * @requires syrup-helper
+                         * @requires syrup-log
+                         * @requires syrup-db
+                         * @class syrup-workflow 
                          * @static
                          */
                         
@@ -148,17 +153,17 @@
                         
                         
                         /**
-                         * The MonocoError class.
-                         * @class MonocoError
+                         * The SyrupError class.
+                         * @class SyrupError
                          * @constructor
                          * @param {String} message message of the error
                          */
-                        function MonocoError(message) {
+                        function SyrupError(message) {
                             this.message = message;
-                            this.name = &quot;MonocoError&quot;;
+                            this.name = &quot;SyrupError&quot;;
                         }
-                        MonocoError.prototype = new Error();
-                        MonocoError.prototype.constructor = MonocoError;
+                        SyrupError.prototype = new Error();
+                        SyrupError.prototype.constructor = SyrupError;
                         
                         
                         /*
@@ -363,7 +368,7 @@
                         /*
                          * Get the actions of the specified state
                          * @method getActions
-                         * @param {Object} component a monoco component
+                         * @param {Object} component a syrup component
                          * @param {String} name name of the state
                          * @param {Boolean} isEvent true if the state is an event
                          * @return {Array} list of the actions
@@ -444,7 +449,7 @@
                                     result = action.action.apply(component, injectedParams);
                                 }
                             } catch (e) {
-                                if (e instanceof MonocoError) {
+                                if (e instanceof SyrupError) {
                                     throw e;
                                 } else {
                                     if (component &amp;&amp; component.error) {
@@ -453,8 +458,8 @@
                                             &quot;error&quot;: e
                                         });
                                     }
-                                    if ($helper.getMonoco()) {
-                                        $helper.getMonoco().error({
+                                    if ($helper.getSyrup()) {
+                                        $helper.getSyrup().error({
                                             &quot;message&quot;: &quot;error when trying to call the method &#x27;&quot; + state + &quot;&#x27; on component &#x27;&quot; + component.id() + &quot;&#x27;&quot;,
                                             &quot;error&quot;: e
                                         });
@@ -619,7 +624,7 @@
                                 component = null,
                                 actionFromMemory = null;
                         
-                            behaviors = $db.MonocoBehavior.find({
+                            behaviors = $db.SyrupBehavior.find({
                                 &quot;_id&quot;: behaviorId
                             });
                         
@@ -758,12 +763,12 @@
                         
                             if (params.error) {
                                 if (params.message) {
-                                    throw new MonocoError(&quot;monoco has been stopped because &quot; + params.message);
+                                    throw new SyrupError(&quot;syrup has been stopped because &quot; + params.message);
                                 } else {
-                                    throw new MonocoError(&quot;monoco has been stopped because of an unknown error&quot;);
+                                    throw new SyrupError(&quot;syrup has been stopped because of an unknown error&quot;);
                                 }
                             } else {
-                                console.warn(&#x27;monoco: monoco has been stopped&#x27;);
+                                console.warn(&#x27;syrup: syrup has been stopped&#x27;);
                             }
                         }
                         
@@ -782,26 +787,26 @@
                         
                         
                         /**
-                         * This module manages the workflow of monoco. It behaves like a workflow engine. &lt;br&gt;
+                         * This module manages the workflow of syrup. It behaves like a workflow engine. &lt;br&gt;
                          * It checks if the change of status of a component is valid to be executed. By valid, it means that:&lt;br&gt;
                          * - the state is valid for the component, &lt;br&gt;
                          * - the input (i.e. parameters) of all actions for the state are compliants with the model and &lt;br&gt;
                          * - the output of all actions are compliants with the model. &lt;br&gt;
                          * 
-                         * If an error occurs, the workflow will call the error state of the component and monoco. &lt;br&gt;
+                         * If an error occurs, the workflow will call the error state of the component and syrup. &lt;br&gt;
                          * If the error can break the consistency of the current system, the worklow will stop.
                          * 
-                         * @module monoco
-                         * @submodule monoco-workflow
-                         * @requires monoco-metamodel
-                         * @requires monoco-component
-                         * @requires monoco-behavior
-                         * @requires monoco-channel
-                         * @requires monoco-state
-                         * @requires monoco-helper
-                         * @requires monoco-log
-                         * @requires monoco-db
-                         * @class monoco-workflow 
+                         * @module syrup
+                         * @submodule syrup-workflow
+                         * @requires syrup-metamodel
+                         * @requires syrup-component
+                         * @requires syrup-behavior
+                         * @requires syrup-channel
+                         * @requires syrup-state
+                         * @requires syrup-helper
+                         * @requires syrup-log
+                         * @requires syrup-db
+                         * @class syrup-workflow 
                          * @static
                          */
                         

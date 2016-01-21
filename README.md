@@ -1,72 +1,69 @@
-# monoco
+# SyrupJS
 
-[![npm version](https://badge.fury.io/js/monoco.svg)](http://badge.fury.io/js/monoco)
-[![Build Status](https://travis-ci.org/monocojs/monoco.svg?branch=master)](https://travis-ci.org/monocojs/monoco)
-[![Coverage Status](https://img.shields.io/coveralls/monocojs/monoco.svg)](https://coveralls.io/r/monocojs/monoco)
-[![devDependency Status](https://david-dm.org/monocojs/monoco/dev-status.svg)](https://david-dm.org/monocojs/monoco#info=devDependencies)
+[![npm version](https://badge.fury.io/js/system-runtime.svg)](http://badge.fury.io/js/system-runtime)
+[![Build Status](https://travis-ci.org/system-designer/system-runtime.svg?branch=master)](https://travis-ci.org/system-designer/system-runtime)
+[![Coverage Status](https://img.shields.io/coveralls/system-designer/system-runtime.svg)](https://coveralls.io/r/system-designer/system-runtime)
+[![devDependency Status](https://david-dm.org/system-designer/system-runtime/dev-status.svg)](https://david-dm.org/system-designer/system-runtime#info=devDependencies)
 
-#### What is monoco ?
+#### What is SyrupJS ?
 
-It is a **5-in-1 JavaScript library**:
-
-* it is **a metamodel** that helps you to design components,
-* it is **a component factory** that creates components based on your design,
-* it is **a worflow engine** that checks at runtime if the signatures of invoked methods are compliant with your model,
-* it is an **ODM (Object Document Mapper)** to manage your components as NoSQL documents and
-* it is **a micro NoSQL Database** that stores your components and can export/import them into another monoco NoSQL Database.
-
-Finally monoco helps you to design, create and compose components.
+It is the System Runtime Platform for application created by System Designer.
 
 ## Installation
 
 #### Node.js
 
 ```sh
-$ npm install monoco --save
+$ npm install system-runtime --save
 ```
 
-Then require monoco:
+Then require SyrupJS:
 ```js
-var monoco = require('monoco');
+var syrup = require('system-runtime');
 ```
 
 #### Bower
 
 ```sh
-$ bower install monoco --save
+$ bower install system-runtime --save
 ```
 
 Add a `<script>` tag to your HTML page:
 ```html
-<script src="/bower_components/monoco/build/monoco.min.js"></script>
+<script src="/bower_components/system-runtime/build/system-runtime.min.js"></script>
 ```
 
-Then you can use monoco on your script:
+Then you can use syrup on your script:
 ```js
-// example: get monoco version
-monoco.version();
+// example: get SyrupJS version
+syrup.version();
 ```
 
 ## Documentation
 
-* [Quick Start](https://monoco.readme.io/docs/quick-start)
-* [Guide](https://monoco.readme.io/docs/installation)
-* [Examples](https://monoco.readme.io/docs/a-basic-hello-world)
-* [Build monoco](https://monoco.readme.io/docs/extend-monoco)
+* [Web site](https://systemdesigner.readme.io) [ work in progress ]
+
 
 ## Licence
 
-Copyright (C) 2015 - Erwan Carriou
- 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+The MIT License (MIT)
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
- 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/. 
+Copyright (c) 2016 Erwan Carriou
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 

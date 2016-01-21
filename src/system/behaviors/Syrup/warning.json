@@ -1,0 +1,6 @@
+{
+	"component": "Syrup",
+	"state": "warning",
+	"action": "function warning(message) {\n    console.warn('syrup: ' + message);\n}",
+	"core": true
+}

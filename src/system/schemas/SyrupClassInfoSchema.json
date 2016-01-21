@@ -1,0 +1,16 @@
+{
+    "_id": "SyrupClassInfoSchema",
+    "_name": "SyrupClassInfoSchema",
+    "_inherit": ["SyrupComponentSchema"],
+    "_core": true,
+    "model": "property",
+    "metamodel": "property",
+    "method": "method",
+    "methods": "method",
+    "property": "method",
+    "properties": "method",
+    "collections": "method",
+    "collection": "method",
+    "event": "method",
+    "events": "method"
+}

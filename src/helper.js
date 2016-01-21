@@ -1,33 +1,38 @@
-/* 
- * monoco
- * A Model and a NoSQL Database for Components
- * http://monoco.io/
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
  * @ecarriou
- *
- * Copyright (C) 2015 - Erwan Carriou
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
  */
 
 /**
  * This module contains all the functions used by all the modules.
  * 
- * @module monoco
- * @submodule monoco-helper
- * @requires monoco-db
- * @requires monoco-component
- * @class monoco-helper
+ * @module syrup
+ * @submodule syrup-helper
+ * @requires syrup-db
+ * @requires syrup-component
+ * @class syrup-helper
  * @static
  */
 
@@ -41,21 +46,21 @@ var $component = require('./component.js');
 /* Private property */
 
 
-var monocoRef = null;
+var syrupRef = null;
 
 
 /* Public method */
 
 
 /*
- * Check if a monoco instance exists.
- * @method isMonoco
- * @return {Boolean} true if a monoco instance exist
+ * Check if a syrup instance exists.
+ * @method isSyrup
+ * @return {Boolean} true if a syrup instance exist
  */
-function isMonoco() {
+function isSyrup() {
     var result = false;
 
-    if ($db.Monoco && $db.Monoco.find().length) {
+    if ($db.Syrup && $db.Syrup.find().length) {
         result = true;
     }
 
@@ -64,30 +69,30 @@ function isMonoco() {
 
 
 /*
- * Get the monoco instance.
- * @method getMonoco
- * @return {Monoco} monoco instance
+ * Get the syrup instance.
+ * @method getSyrup
+ * @return {Syrup} syrup instance
  */
-function getMonoco() {
-    var monocoId = '';
+function getSyrup() {
+    var syrupId = '';
 
-    if (!monocoRef) {
-        if (isMonoco()) {
-            monocoId = $db.Monoco.find()[0]._id;
-            monocoRef = $component.get(monocoId);
+    if (!syrupRef) {
+        if (isSyrup()) {
+            syrupId = $db.Syrup.find()[0]._id;
+            syrupRef = $component.get(syrupId);
         } else {
-            monocoRef = {
+            syrupRef = {
                 error: function error(err, data) {
-                    console.error('monoco: ' + err, data);
+                    console.error('syrup: ' + err, data);
                 },
                 warning: function warning(message) {
-                    console.warn('monoco: ' + message);
+                    console.warn('syrup: ' + message);
                 }
             };
         }
     }
 
-    return monocoRef;
+    return syrupRef;
 }
 
 
@@ -104,35 +109,56 @@ function generateId() {
 }
 
 
+/*
+ * Add Polyfill
+ * @method polyfill
+ */
+function polyfill() {
+
+    // fixing constructor.name property in IE
+    // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer
+    if (Function.prototype.name === undefined && Object.defineProperty !== undefined) {
+        Object.defineProperty(Function.prototype, 'name', {
+            get: function () {
+                var funcNameRegex = /function\s([^(]{1,})\(/;
+                var results = (funcNameRegex).exec((this).toString());
+                return (results && results.length > 1) ? results[1].trim() : "";
+            },
+            set: function (value) { }
+        });
+    }
+}
+
+
 /* exports */
 
 
 /**
  * This module contains all the functions used by all the modules.
  * 
- * @module monoco
- * @submodule monoco-helper
- * @requires monoco-db
- * @requires monoco-component
- * @class monoco-helper
+ * @module syrup
+ * @submodule syrup-helper
+ * @requires syrup-db
+ * @requires syrup-component
+ * @class syrup-helper
  * @static
  */
 
 
 /**
- * Get monoco instance.
- * @method getMonoco
- * @return {Monoco} monoco instance
+ * Get syrup instance.
+ * @method getSyrup
+ * @return {Syrup} syrup instance
  */
-exports.getMonoco = getMonoco;
+exports.getSyrup = getSyrup;
 
 
 /**
- * Check if a monoco instance exists.
- * @method isMonoco
- * @return {Boolean} true if a monoco instance exist
+ * Check if a syrup instance exists.
+ * @method isSyrup
+ * @return {Boolean} true if a syrup instance exist
  */
-exports.isMonoco = isMonoco;
+exports.isSyrup = isSyrup;
 
 
 /**
@@ -141,3 +167,10 @@ exports.isMonoco = isMonoco;
  * @return {String} a uuid
  */
 exports.generateId = generateId;
+
+
+/**
+ * Add Polyfill
+ * @method polyfill
+ */
+exports.polyfill = polyfill;

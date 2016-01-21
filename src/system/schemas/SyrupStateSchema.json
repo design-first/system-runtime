@@ -1,0 +1,7 @@
+{
+    "_id": "SyrupStateSchema",
+    "_name": "SyrupStateSchema",
+    "_core": true,
+    "name": "property",
+    "parameters": "property"
+}

@@ -1,6 +1,6 @@
 {
     "globals": {
-        "monoco": true
+        "syrup": true
     },
     "node" : true,
     "supernew": true

@@ -1,38 +1,43 @@
-/* 
- * monoco
- * A Model and a NoSQL Database for Components
- * http://monoco.io/
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
  * @ecarriou
- *
- * Copyright (C) 2015 - Erwan Carriou
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
  */
 
 /**
  * This module manages the components. 
- * It is the factory of all the components that are created by monoco.
+ * It is the factory of all the components that are created by syrup.
  * 
- * @module monoco
- * @submodule monoco-component
- * @requires monoco-workflow
- * @requires monoco-db
- * @requires monoco-metamodel
- * @requires monoco-behavior
- * @requires monoco-helper
- * @requires monoco-log
- * @class monoco-component
+ * @module syrup
+ * @submodule syrup-component
+ * @requires syrup-workflow
+ * @requires syrup-db
+ * @requires syrup-metamodel
+ * @requires syrup-behavior
+ * @requires syrup-helper
+ * @requires syrup-log
+ * @class syrup-component
  * @static 
  */
 
@@ -63,14 +68,14 @@ var PROPERTY_TYPE = 'property',
 
 /*
  * Sub class to override push and pop method of Array Class.
- * @class MonocoArray
+ * @class SyrupArray
  * @param {Object} conf
  * {String} classId name of the class
  * {String} type type of the array
  * {Array} arr array
  * @private
  */
-function MonocoArray(conf) {
+function SyrupArray(conf) {
     var arr = [],
         arrDb = [],
         type = '',
@@ -91,7 +96,7 @@ function MonocoArray(conf) {
     // init
     arrDb.forEach(function (val) {
         if (type.indexOf('@') !== -1) {
-            arr.push($helper.getMonoco().require(val));
+            arr.push($helper.getSyrup().require(val));
         } else {
             arr.push(val);
         }
@@ -99,7 +104,7 @@ function MonocoArray(conf) {
 
     /* Override push method.
      * @push
-     * @param {MonocoComponent|Object} value
+     * @param {SyrupComponent|Object} value
      */
     arr.push = function push(val) {
         var isClass = false;
@@ -141,7 +146,7 @@ function MonocoArray(conf) {
 
     /* Override pop method.
      * @pop
-     * @return {MonocoComponent|Object} value
+     * @return {SyrupComponent|Object} value
      */
     arr.pop = function pop() {
         var result,
@@ -176,7 +181,7 @@ function MonocoArray(conf) {
 }
 
 /* jshint -W058 */
-MonocoArray.prototype = new Array;
+SyrupArray.prototype = new Array;
 /* jshint +W058 */
 
 
@@ -347,8 +352,8 @@ function createClass(classId) {
         // create link to db
         $db.store[classId][config._id] = config;
 
-        if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
-            $helper.getMonoco().require('db').insert(classId, config);
+        if ($helper.isSyrup() && $helper.getSyrup().require('db')) {
+            $helper.getSyrup().require('db').insert(classId, config);
         }
 
         Object.freeze(this);
@@ -409,14 +414,14 @@ function addProperties(model, Class, classId) {
             body = function body(position, value) {
                 var search = [],
                     component = null,
-                    monocoArr = null,
+                    syrupArr = null,
                     val = null,
                     realVal = null;
 
                 if (typeof value === 'undefined') {
                     if (typeof position === 'undefined') {
 
-                        monocoArr = new MonocoArray({
+                        syrupArr = new SyrupArray({
                             "id": this.id(),
                             "propertyName": propertyName,
                             "readOnly": propertyReadOnly,
@@ -425,12 +430,12 @@ function addProperties(model, Class, classId) {
                             "arr": $db.store[classId][this.id()][propertyName]
                         });
 
-                        return monocoArr;
+                        return syrupArr;
                     } else {
                         val = $db.store[classId][this.id()][propertyName][position];
                         if (val) {
                             if (propertyType[0].indexOf('@') !== -1) {
-                                realVal = $helper.getMonoco().require(val);
+                                realVal = $helper.getSyrup().require(val);
                             } else {
                                 realVal = val;
                             }
@@ -459,8 +464,8 @@ function addProperties(model, Class, classId) {
                                 component = search[0];
                                 component[propertyName][position] = realVal;
 
-                                if ($helper.isMonoco()) {
-                                    $helper.getMonoco().require('db').update(classId, this.id(), propertyName, realVal);
+                                if ($helper.isSyrup()) {
+                                    $helper.getSyrup().require('db').update(classId, this.id(), propertyName, realVal);
                                 }
 
                                 $workflow.state({
@@ -514,12 +519,12 @@ function addProperties(model, Class, classId) {
                                     component[propertyName] = value;
                                 }
 
-                                if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
-                                    $helper.getMonoco().require('db').update(classId, this.id(), propertyName, value);
+                                if ($helper.isSyrup() && $helper.getSyrup().require('db')) {
+                                    $helper.getSyrup().require('db').update(classId, this.id(), propertyName, value);
                                 }
                                 
-                                // case of MonocoBehavior
-                                if (classId === 'MonocoBehavior') {
+                                // case of SyrupBehavior
+                                if (classId === 'SyrupBehavior') {
                                     $behavior.removeFromMemory(this.id());
                                 }
 
@@ -604,8 +609,8 @@ function addEvents(model, Class, classId) {
                     length = -1,
                     message = {};
 
-                if (classId === 'MonocoChannel') {
-                    systems = $db.MonocoSystem.find({
+                if (classId === 'SyrupChannel') {
+                    systems = $db.SyrupSystem.find({
                         'master': true
                     });
                     if (systems.length) {
@@ -619,7 +624,7 @@ function addEvents(model, Class, classId) {
                         message.data = data;
                         message.event = methodName;
                         
-                        $db.MonocoMessage.insert(message);
+                        $db.SyrupMessage.insert(message);
 
                         $workflow.state({
                             "component": this.id(),
@@ -674,7 +679,7 @@ function addOn(Class, classId) {
                     !$metamodel.isEvent(state, classId) &&
                     !$metamodel.isProperty(state, classId) &&
                     !$metamodel.isCollection(state, classId) &&
-                    $db.MonocoBehavior.find({
+                    $db.SyrupBehavior.find({
                         "component": this.id(),
                         "state": state
                     }).length >= 1) {
@@ -726,7 +731,7 @@ function addOnClass(Class, classId) {
                     !$metamodel.isEvent(state, classId) &&
                     !$metamodel.isProperty(state, classId) &&
                     !$metamodel.isCollection(state, classId) &&
-                    $db.MonocoBehavior.find({
+                    $db.SyrupBehavior.find({
                         "component": this.id(),
                         "state": state
                     }).length >= 1) {
@@ -861,8 +866,8 @@ function factory(config) {
     addEvents(config.model, Class, classId);
 
     // add default properties/methods only if the component
-    // inherit from MonocoComponent
-    if ($metamodel.inheritFrom(classId, 'MonocoComponent')) {
+    // inherit from SyrupComponent
+    if ($metamodel.inheritFrom(classId, 'SyrupComponent')) {
         addOn(Class, classId);
         addOnClass(Class, classId);
         addOffClass(Class, classId);
@@ -918,7 +923,7 @@ function destroy(id) {
             "_id": id
         });
         // case of Behavior
-        if (classId === 'MonocoBehavior') {
+        if (classId === 'SyrupBehavior') {
             $behavior.removeFromMemory(id);
         }
     }
@@ -940,17 +945,17 @@ function clear() {
 
 /**
  * This module manages the components. 
- * It is the factory of all the components that are created by monoco.
+ * It is the factory of all the components that are created by syrup.
  * 
- * @module monoco
- * @submodule monoco-component
- * @requires monoco-workflow
- * @requires monoco-db
- * @requires monoco-metamodel
- * @requires monoco-behavior
- * @requires monoco-helper
- * @requires monoco-log
- * @class monoco-component
+ * @module syrup
+ * @submodule syrup-component
+ * @requires syrup-workflow
+ * @requires syrup-db
+ * @requires syrup-metamodel
+ * @requires syrup-behavior
+ * @requires syrup-helper
+ * @requires syrup-log
+ * @class syrup-component
  * @static 
  */
 

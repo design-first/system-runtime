@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/db.js - monoco</title>
+    <title>src/db.js - system-runtime</title>
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -15,18 +15,18 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-            monoco
+            system-runtime
         </h1>
 	<div class="nav">
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.8.3</b>
+                    API Docs for Version: <b>0.9.1</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/syrup", "classes/syrup-behavior", "classes/syrup-component", "classes/syrup-db", "classes/syrup-helper", "classes/syrup-log", "classes/syrup-metamodel", "classes/syrup-state", "classes/syrup-system", "classes/syrup-workflow", "classes/SyrupDatabaseCollection", "classes/SyrupError", "modules/syrup", "modules/syrup-behavior", "modules/syrup-component", "modules/syrup-db", "modules/syrup-helper", "modules/syrup-log", "modules/syrup-metamodel", "modules/syrup-state", "modules/syrup-system", "modules/syrup-workflow"]'>
         </form>
     </div>
 </div>
@@ -37,18 +37,18 @@
 	        <div id="sidebar">
 	        <div id="classes">
 	            <ul id="api-classes" class="nav nav-list">
-	                    <li><a href="../classes/monoco.html">monoco</a></li>
-	                    <li><a href="../classes/monoco-behavior.html">monoco-behavior</a></li>
-	                    <li><a href="../classes/monoco-component.html">monoco-component</a></li>
-	                    <li><a href="../classes/monoco-db.html">monoco-db</a></li>
-	                    <li><a href="../classes/monoco-helper.html">monoco-helper</a></li>
-	                    <li><a href="../classes/monoco-log.html">monoco-log</a></li>
-	                    <li><a href="../classes/monoco-metamodel.html">monoco-metamodel</a></li>
-	                    <li><a href="../classes/monoco-state.html">monoco-state</a></li>
-	                    <li><a href="../classes/monoco-system.html">monoco-system</a></li>
-	                    <li><a href="../classes/monoco-workflow.html">monoco-workflow</a></li>
-	                    <li><a href="../classes/MonocoDatabaseCollection.html">MonocoDatabaseCollection</a></li>
-	                    <li><a href="../classes/MonocoError.html">MonocoError</a></li>
+	                    <li><a href="../classes/syrup.html">syrup</a></li>
+	                    <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
+	                    <li><a href="../classes/syrup-component.html">syrup-component</a></li>
+	                    <li><a href="../classes/syrup-db.html">syrup-db</a></li>
+	                    <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
+	                    <li><a href="../classes/syrup-log.html">syrup-log</a></li>
+	                    <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
+	                    <li><a href="../classes/syrup-state.html">syrup-state</a></li>
+	                    <li><a href="../classes/syrup-system.html">syrup-system</a></li>
+	                    <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
+	                    <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
+	                    <li><a href="../classes/SyrupError.html">SyrupError</a></li>
 	            </ul>
 	        </div>
 	        </div>
@@ -87,45 +87,50 @@
                         
                         <div class="file">
                             <pre class="prettyprint linenums">
-                        /* 
-                         * monoco
-                         * A Model and a NoSQL Database for Components
-                         * http://monoco.io/
+                        /*
+                         * SyrupJS
+                         * The System Runtime Platform
+                         * http://syrupjs.systemdesigner.io
                          * @ecarriou
-                         *
-                         * Copyright (C) 2015 - Erwan Carriou
-                         *
-                         * This program is free software: you can redistribute it and/or modify
-                         * it under the terms of the GNU General Public License as published by
-                         * the Free Software Foundation, either version 3 of the License, or
-                         * (at your option) any later version.
-                         *
-                         * This program is distributed in the hope that it will be useful,
-                         * but WITHOUT ANY WARRANTY; without even the implied warranty of
-                         * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                         * GNU General Public License for more details.
-                         *
-                         * You should have received a copy of the GNU General Public License
-                         * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+                         *  
+                         * Copyright (c) 2016 Erwan Carriou
+                         * 
+                         * Permission is hereby granted, free of charge, to any person obtaining a copy
+                         * of this software and associated documentation files (the &quot;Software&quot;), to deal
+                         * in the Software without restriction, including without limitation the rights
+                         * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                         * copies of the Software, and to permit persons to whom the Software is
+                         * furnished to do so, subject to the following conditions:
+                         * 
+                         * The above copyright notice and this permission notice shall be included in all
+                         * copies or substantial portions of the Software.
+                         * 
+                         * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                         * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                         * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                         * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                         * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                         * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                         * SOFTWARE. 
                          */
                         
                         /**
-                         * This module manages monoco database. &lt;br&gt;
-                         * monoco database is a micro NoSQL Database that contains: &lt;br&gt;
+                         * This module manages syrup database. &lt;br&gt;
+                         * syrup database is a micro NoSQL Database that contains: &lt;br&gt;
                          * - collections to store documents (schemas, types, components, ...) and &lt;br&gt;
                          * - APIs to import or export documents. &lt;br&gt;
                          * 
-                         * monoco Database is closely linked to monoco metamodel and monoco components because: &lt;br&gt;
-                         * - all operations done by monoco database must be compliant with the model before being finished, &lt;br&gt;
+                         * syrup Database is closely linked to syrup metamodel and syrup components because: &lt;br&gt;
+                         * - all operations done by syrup database must be compliant with the model before being finished, &lt;br&gt;
                          * - insert operation automatically creates a component and &lt;br&gt;
                          * - remove operation automatically destroy a component.
                          *  
-                         * @module monoco
-                         * @submodule monoco-db
-                         * @requires monoco-component
-                         * @requires monoco-helper
-                         * @requires monoco-log
-                         * @class monoco-db
+                         * @module syrup
+                         * @submodule syrup-db
+                         * @requires syrup-component
+                         * @requires syrup-helper
+                         * @requires syrup-log
+                         * @class syrup-db
                          * @static
                          */
                         
@@ -146,24 +151,24 @@
                         var store = {},
                             collections = [],
                             internalDB = [
-                                &#x27;Monoco&#x27;,
-                                &#x27;MonocoSchema&#x27;,
-                                &#x27;MonocoExtendedSchema&#x27;,
-                                &#x27;MonocoBehavior&#x27;,
-                                &#x27;MonocoState&#x27;,
-                                &#x27;MonocoType&#x27;,
-                                &#x27;MonocoMetamodel&#x27;,
-                                &#x27;MonocoDatabase&#x27;,
-                                &#x27;MonocoSystem&#x27;,
-                                &#x27;MonocoClassInfo&#x27;,
-                                &#x27;MonocoMessage&#x27;,
-                                &#x27;MonocoChannel&#x27;
+                                &#x27;Syrup&#x27;,
+                                &#x27;SyrupSchema&#x27;,
+                                &#x27;SyrupExtendedSchema&#x27;,
+                                &#x27;SyrupBehavior&#x27;,
+                                &#x27;SyrupState&#x27;,
+                                &#x27;SyrupType&#x27;,
+                                &#x27;SyrupMetamodel&#x27;,
+                                &#x27;SyrupDatabase&#x27;,
+                                &#x27;SyrupSystem&#x27;,
+                                &#x27;SyrupClassInfo&#x27;,
+                                &#x27;SyrupMessage&#x27;,
+                                &#x27;SyrupChannel&#x27;
                             ],
                             coreDb = [
-                                &#x27;MonocoSchema&#x27;,
-                                &#x27;MonocoExtendedSchema&#x27;,
-                                &#x27;MonocoState&#x27;,
-                                &#x27;MonocoType&#x27;
+                                &#x27;SyrupSchema&#x27;,
+                                &#x27;SyrupExtendedSchema&#x27;,
+                                &#x27;SyrupState&#x27;,
+                                &#x27;SyrupType&#x27;
                             ];
                         
                         
@@ -196,9 +201,9 @@
                         
                             // schemas
                             dbDump.schemas = {};
-                            if (exports.MonocoSchema.count()) {
-                                for (schemaId in store.MonocoSchema) {
-                                    schema = JSON.parse(JSON.stringify(store.MonocoSchema[schemaId]));
+                            if (exports.SyrupSchema.count()) {
+                                for (schemaId in store.SyrupSchema) {
+                                    schema = JSON.parse(JSON.stringify(store.SyrupSchema[schemaId]));
                                     if (!schema._core) {
                                         dbDump.schemas[schemaId] = schema;
                                     }
@@ -207,9 +212,9 @@
                         
                             // types
                             dbDump.types = {};
-                            if (exports.MonocoType.count()) {
-                                for (typeId in store.MonocoType) {
-                                    type = JSON.parse(JSON.stringify(store.MonocoType[typeId]));
+                            if (exports.SyrupType.count()) {
+                                for (typeId in store.SyrupType) {
+                                    type = JSON.parse(JSON.stringify(store.SyrupType[typeId]));
                                     delete type._id;
                                     if (!type.core) {
                                         dbDump.types[type.name] = type;
@@ -219,8 +224,8 @@
                         
                             // behaviors
                             dbDump.behaviors = {};
-                            for (behaviorId in store.MonocoBehavior) {
-                                behavior = JSON.parse(JSON.stringify(store.MonocoBehavior[behaviorId]));
+                            for (behaviorId in store.SyrupBehavior) {
+                                behavior = JSON.parse(JSON.stringify(store.SyrupBehavior[behaviorId]));
                                 delete behavior.classInfo;
                                 
                                 if (!behavior.core) {
@@ -271,15 +276,15 @@
                         
                         
                         /** 
-                         * A collection of documents managed by monoco. &lt;br&gt;
-                         * Internal collections manage core objects of monoco (schema, type, ...). &lt;br&gt;
+                         * A collection of documents managed by syrup. &lt;br&gt;
+                         * Internal collections manage core objects of syrup (schema, type, ...). &lt;br&gt;
                          * Public collections manage components of the same class. &lt;br&gt;
                          * 
-                         * @class MonocoDatabaseCollection
+                         * @class SyrupDatabaseCollection
                          * @constructor
                          * @param {String} name name of the new collection
                          */
-                        var MonocoDatabaseCollection = function (name) {
+                        var SyrupDatabaseCollection = function (name) {
                             if ($metamodel.get(name) || internalDB.indexOf(name) !== -1) {
                                 store[name] = {};
                                 this.name = name;
@@ -303,7 +308,7 @@
                          * $db.Person.find({&quot;name&quot;: &quot;laure&quot;, &quot;age&quot; : 24}); &lt;br&gt;
                          * $db.Person.find([{&quot;name&quot;: &quot;rene&quot;}, {&quot;name&quot;: &quot;robert&quot;}]);
                          */
-                        MonocoDatabaseCollection.prototype.find = function (query) {
+                        SyrupDatabaseCollection.prototype.find = function (query) {
                             var result = [],
                                 id = &#x27;&#x27;,
                                 object = {};
@@ -341,7 +346,7 @@
                         
                         /**
                          * Insert an new document into the collection. &lt;br&gt;
-                         * Before inserting the document, monoco checks that the document is compliant
+                         * Before inserting the document, syrup checks that the document is compliant
                          * with its class definition. &lt;br&gt; 
                          * Then, after inserting it, we create the component.
                          * @method insert
@@ -355,7 +360,7 @@
                          *      &quot;age&quot;: 43 &lt;br&gt;
                          * }); &lt;br&gt;
                          */
-                        MonocoDatabaseCollection.prototype.insert = function (document) {
+                        SyrupDatabaseCollection.prototype.insert = function (document) {
                             var doc = [],
                                 Component = null,
                                 result = [];
@@ -373,9 +378,9 @@
                                     systems = [];
                         
                                 switch (true) {
-                                    case this.name === &#x27;MonocoSchema&#x27;:
-                                    case this.name === &#x27;MonocoType&#x27;:
-                                    case this.name === &#x27;MonocoExtendedSchema&#x27;:
+                                    case this.name === &#x27;SyrupSchema&#x27;:
+                                    case this.name === &#x27;SyrupType&#x27;:
+                                    case this.name === &#x27;SyrupExtendedSchema&#x27;:
                                     case $metamodel.isValidObject(obj, $metamodel.get(this.name)):
                         
                                         if (typeof obj._id === &#x27;undefined&#x27;) {
@@ -389,20 +394,20 @@
                                             component = new Component(obj);
                                             result.push(component.id());
                                         } else {
-                                            if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
-                                                $helper.getMonoco().require(&#x27;db&#x27;).insert(this.name, obj);
+                                            if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
+                                                $helper.getSyrup().require(&#x27;db&#x27;).insert(this.name, obj);
                                             }
                                         }
                         
-                                        if (this.name === &#x27;MonocoMessage&#x27;) {
-                                            if ($helper.isMonoco()) {
-                                                systems = exports.MonocoSystem.find({
+                                        if (this.name === &#x27;SyrupMessage&#x27;) {
+                                            if ($helper.isSyrup()) {
+                                                systems = exports.SyrupSystem.find({
                                                     &#x27;master&#x27;: true
                                                 });
                                                 if (!systems.length || (systems.length &amp;&amp; systems[0]._id !== obj.from)) {
-                                                    channels = exports.MonocoChannel.find({});
+                                                    channels = exports.SyrupChannel.find({});
                                                     if (channels.length &gt; 0) {
-                                                        channel = $helper.getMonoco().require(channels[0]._id);
+                                                        channel = $helper.getSyrup().require(channels[0]._id);
                                                         $workflow.state({
                                                             &quot;component&quot;: channels[0]._id,
                                                             &quot;state&quot;: obj.event,
@@ -438,7 +443,7 @@
                          * $db.Cars.update([{&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;code&quot;: &quot;AZD-65&quot;}], {&quot;price&quot;: &quot;10000$&quot;}); &lt;br&gt;
                          * $db.Cars.update({&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;price&quot;: &quot;10000$&quot;}, {&quot;upsert&quot;: true}); &lt;br&gt;
                          */
-                        MonocoDatabaseCollection.prototype.update = function (query, update, options) {
+                        SyrupDatabaseCollection.prototype.update = function (query, update, options) {
                             var docs = this.find(query),
                                 updated = 0,
                                 i = 0,
@@ -485,8 +490,8 @@
                                                 if ($metamodel.isValidType(update[attributeName], type)) {
                                                     docs[i][attributeName] = update[attributeName];
                                                     updated = updated + 1;
-                                                    if ($helper.isMonoco()) {
-                                                        $helper.getMonoco().require(&#x27;db&#x27;).update(this.name, docs[i]._id, attributeName, update[attributeName]);
+                                                    if ($helper.isSyrup()) {
+                                                        $helper.getSyrup().require(&#x27;db&#x27;).update(this.name, docs[i]._id, attributeName, update[attributeName]);
                                                     }
                                                 } else {
                                                     $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName]);
@@ -514,7 +519,7 @@
                          * $db.Cars.remove({&quot;code&quot;: &quot;AZD-71&quot;}); &lt;br&gt;
                          * $db.Cars.remove([{&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;code&quot;: &quot;AZD-65&quot;}]); &lt;br&gt;
                          */
-                        MonocoDatabaseCollection.prototype.remove = function (query) {
+                        SyrupDatabaseCollection.prototype.remove = function (query) {
                             var result = [],
                                 id = &#x27;&#x27;,
                                 component = null,
@@ -535,8 +540,8 @@
                                                 if (component) {
                                                     component.destroy();
                                                 }
-                                                if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
-                                                    $helper.getMonoco().require(&#x27;db&#x27;).remove(this.name, id);
+                                                if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
+                                                    $helper.getSyrup().require(&#x27;db&#x27;).remove(this.name, id);
                                                 }
                                                 result.push(id);
                                             }
@@ -552,8 +557,8 @@
                                             if (component) {
                                                 component.destroy();
                                             }
-                                            if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
-                                                $helper.getMonoco().require(&#x27;db&#x27;).remove(this.name, id);
+                                            if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
+                                                $helper.getSyrup().require(&#x27;db&#x27;).remove(this.name, id);
                                             }
                                             result.push(id);
                                         }
@@ -569,8 +574,8 @@
                                             component.destroy();
                                         }
                                     }
-                                    if ($helper.isMonoco() &amp;&amp; $helper.getMonoco().require(&#x27;db&#x27;)) {
-                                        $helper.getMonoco().require(&#x27;db&#x27;).remove(this.name, id);
+                                    if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
+                                        $helper.getSyrup().require(&#x27;db&#x27;).remove(this.name, id);
                                     }
                                     result.push(id);
                                 }
@@ -585,7 +590,7 @@
                          * @method count
                          * @return {Number} number of documents in the collection
                          */
-                        MonocoDatabaseCollection.prototype.count = function () {
+                        SyrupDatabaseCollection.prototype.count = function () {
                             var result = 0,
                                 objectId = &#x27;&#x27;;
                             for (objectId in store[this.name]) {
@@ -599,20 +604,20 @@
                         
                         
                         /*
-                         * Create a new {{#crossLink &quot;MonocoDatabaseCollection&quot;}}{{/crossLink}}.
+                         * Create a new {{#crossLink &quot;SyrupDatabaseCollection&quot;}}{{/crossLink}}.
                          * @method collection
                          * @param {String} name of the collection
                          */
                         function collection(name) {
-                            exports[name] = new MonocoDatabaseCollection(name);
+                            exports[name] = new SyrupDatabaseCollection(name);
                         }
                         
                         
                         /*
-                         * Import/Export a monoco system into/from the database
+                         * Import/Export a syrup system into/from the database
                          * @method system
-                         * @param {JSON} importedSystem a monoco system to import
-                         * @return {String} the id of the imported monoco system or the if of the current monoco system
+                         * @param {JSON} importedSystem a syrup system to import
+                         * @return {String} the id of the imported syrup system or the if of the current syrup system
                          */
                         function system(importedSystem) {
                             var result = &#x27;&#x27;,
@@ -643,7 +648,7 @@
                         
                                 //add behaviors
                                 for (behaviorId in importedSystem.behaviors) {
-                                    exports.MonocoBehavior.insert(importedSystem.behaviors[behaviorId]);
+                                    exports.SyrupBehavior.insert(importedSystem.behaviors[behaviorId]);
                                 }
                         
                                 // add components
@@ -654,7 +659,7 @@
                                 }
                         
                                 // reset info if already a master system
-                                systems = exports.MonocoSystem.find({
+                                systems = exports.SyrupSystem.find({
                                     &#x27;master&#x27;: true
                                 });
                                 if (systems.length) {
@@ -666,7 +671,7 @@
                                 }
                         
                                 // insert the system in DB
-                                exports.MonocoSystem.insert(importedSystem);
+                                exports.SyrupSystem.insert(importedSystem);
                         
                                 result = importedSystem._id;
                         
@@ -674,7 +679,7 @@
                                 exportedSystem = dump();
                         
                                 // get id of the master system
-                                systems = exports.MonocoSystem.find({
+                                systems = exports.SyrupSystem.find({
                                     &#x27;master&#x27;: true
                                 });
                         
@@ -703,10 +708,10 @@
                         
                         
                         /*
-                         * Export a monoco sub-system.
+                         * Export a syrup sub-system.
                          * @method subsystem
                          * @param {JSON} params parameters
-                         * @return {String} a stringified monoco sub-system
+                         * @return {String} a stringified syrup sub-system
                          * 
                          * @example
                          * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;}}); // filter export on schemas &lt;br&gt;
@@ -728,7 +733,7 @@
                                 className = &#x27;&#x27;;
                             
                             // default values
-                            result = exports.MonocoSystem.find({
+                            result = exports.SyrupSystem.find({
                                 &#x27;master&#x27;: true
                             });
                             if (result.length) {
@@ -744,7 +749,7 @@
                             // schemas
                             system.schemas = {};
                             if (params.schemas) {
-                                result = exports.MonocoSchema.find(params.schema);
+                                result = exports.SyrupSchema.find(params.schema);
                         
                                 length = result.length;
                                 for (i = 0; i &lt; length; i++) {
@@ -758,7 +763,7 @@
                             // types
                             system.types = {};
                             if (params.types) {
-                                result = exports.MonocoType.find(params.types);
+                                result = exports.SyrupType.find(params.types);
                         
                                 length = result.length;
                                 for (i = 0; i &lt; length; i++) {
@@ -772,7 +777,7 @@
                             // behaviors
                             system.behaviors = {};
                             if (params.behaviors) {
-                                behavior = exports.MonocoBehavior.find(params.behaviors);
+                                behavior = exports.SyrupBehavior.find(params.behaviors);
                         
                                 length = result.length;
                                 for (i = 0; i &lt; length; i++) {
@@ -834,10 +839,10 @@
                          * @method init
                          */
                         function init() {
-                            var monocoSystemId = &#x27;&#x27;,
-                                monocoSystem = null;
+                            var syrupSystemId = &#x27;&#x27;,
+                                syrupSystem = null;
                         
-                            monocoSystem = exports.MonocoSystem.find({
+                            syrupSystem = exports.SyrupSystem.find({
                                 &#x27;_id&#x27;: &#x27;e89c617b6b15d24&#x27;
                             })[0];
                         
@@ -851,9 +856,9 @@
                             // init metamodel
                             $metamodel.init();
                             
-                            // reimport monoco core system
-                            monocoSystemId = exports.system(monocoSystem);
-                            $component.get(monocoSystemId).main();
+                            // reimport syrup core system
+                            syrupSystemId = exports.system(syrupSystem);
+                            $component.get(syrupSystemId).main();
                         }
                         
                         
@@ -861,28 +866,28 @@
                         
                         
                         /**
-                         * This module manages monoco database. &lt;br&gt;
-                         * monoco database is a micro NoSQL Database that contains: &lt;br&gt;
+                         * This module manages syrup database. &lt;br&gt;
+                         * syrup database is a micro NoSQL Database that contains: &lt;br&gt;
                          * - collections to store documents (schemas, types, components, ...) and &lt;br&gt;
                          * - APIs to import or export documents. &lt;br&gt;
                          * 
-                         * monoco database is closely linked to monoco metamodel because: &lt;br&gt;
-                         * - all operations done by monoco database must be compliant with the model before being finished, &lt;br&gt;
+                         * syrup database is closely linked to syrup metamodel because: &lt;br&gt;
+                         * - all operations done by syrup database must be compliant with the model before being finished, &lt;br&gt;
                          * - insert operation automatically creates a component and &lt;br&gt;
                          * - remove operation automatically destroy a component.
                          *   
-                         * @module monoco
-                         * @submodule monoco-db
-                         * @requires monoco-component
-                         * @requires monoco-helper
-                         * @requires monoco-log
-                         * @class monoco-db
+                         * @module syrup
+                         * @submodule syrup-db
+                         * @requires syrup-component
+                         * @requires syrup-helper
+                         * @requires syrup-log
+                         * @class syrup-db
                          * @static
                          */
                         
                         
                         /**
-                         * Create a new {{#crossLink &quot;MonocoDatabaseCollection&quot;}}{{/crossLink}}.
+                         * Create a new {{#crossLink &quot;SyrupDatabaseCollection&quot;}}{{/crossLink}}.
                          * @method collection
                          * @param {String} name of the collection
                          */
@@ -890,26 +895,26 @@
                         
                         
                         /**
-                         * monoco database store that lists all the collections.
+                         * syrup database store that lists all the collections.
                          * @property {JSON} store
                          */
                         exports.store = store;
                         
                         
                         /**
-                         * Import/Export a monoco system into/from the database.
+                         * Import/Export a syrup system into/from the database.
                          * @method system
-                         * @param {JSON} importedSystem a monoco system to import
-                         * @return {String} the id of the imported monoco system or the current monoco system  
+                         * @param {JSON} importedSystem a syrup system to import
+                         * @return {String} the id of the imported syrup system or the current syrup system  
                          */
                         exports.system = system;
                         
                         
                         /**
-                         * Export a monoco sub-system.
+                         * Export a syrup sub-system.
                          * @method subsystem
                          * @param {JSON} params parameters
-                         * @return {String} a stringified monoco sub-system
+                         * @return {String} a stringified syrup sub-system
                          * 
                          * @example
                          * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;}}); // filter export on schemas &lt;br&gt;

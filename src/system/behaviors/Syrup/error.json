@@ -1,0 +1,6 @@
+{
+	"component": "Syrup",
+	"state": "error",
+	"action": "function error(data) {\n    console.error('syrup: ' + data.message, data.error);\n}",
+	"core": true
+}

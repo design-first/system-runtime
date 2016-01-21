@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/metamodel.js - monoco</title>
+    <title>src/metamodel.js - system-runtime</title>
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -15,18 +15,18 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-            monoco
+            system-runtime
         </h1>
 	<div class="nav">
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.8.3</b>
+                    API Docs for Version: <b>0.9.1</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/monoco", "classes/monoco-behavior", "classes/monoco-component", "classes/monoco-db", "classes/monoco-helper", "classes/monoco-log", "classes/monoco-metamodel", "classes/monoco-state", "classes/monoco-system", "classes/monoco-workflow", "classes/MonocoDatabaseCollection", "classes/MonocoError", "modules/monoco", "modules/monoco-behavior", "modules/monoco-component", "modules/monoco-db", "modules/monoco-helper", "modules/monoco-log", "modules/monoco-metamodel", "modules/monoco-state", "modules/monoco-system", "modules/monoco-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/syrup", "classes/syrup-behavior", "classes/syrup-component", "classes/syrup-db", "classes/syrup-helper", "classes/syrup-log", "classes/syrup-metamodel", "classes/syrup-state", "classes/syrup-system", "classes/syrup-workflow", "classes/SyrupDatabaseCollection", "classes/SyrupError", "modules/syrup", "modules/syrup-behavior", "modules/syrup-component", "modules/syrup-db", "modules/syrup-helper", "modules/syrup-log", "modules/syrup-metamodel", "modules/syrup-state", "modules/syrup-system", "modules/syrup-workflow"]'>
         </form>
     </div>
 </div>
@@ -37,18 +37,18 @@
 	        <div id="sidebar">
 	        <div id="classes">
 	            <ul id="api-classes" class="nav nav-list">
-	                    <li><a href="../classes/monoco.html">monoco</a></li>
-	                    <li><a href="../classes/monoco-behavior.html">monoco-behavior</a></li>
-	                    <li><a href="../classes/monoco-component.html">monoco-component</a></li>
-	                    <li><a href="../classes/monoco-db.html">monoco-db</a></li>
-	                    <li><a href="../classes/monoco-helper.html">monoco-helper</a></li>
-	                    <li><a href="../classes/monoco-log.html">monoco-log</a></li>
-	                    <li><a href="../classes/monoco-metamodel.html">monoco-metamodel</a></li>
-	                    <li><a href="../classes/monoco-state.html">monoco-state</a></li>
-	                    <li><a href="../classes/monoco-system.html">monoco-system</a></li>
-	                    <li><a href="../classes/monoco-workflow.html">monoco-workflow</a></li>
-	                    <li><a href="../classes/MonocoDatabaseCollection.html">MonocoDatabaseCollection</a></li>
-	                    <li><a href="../classes/MonocoError.html">MonocoError</a></li>
+	                    <li><a href="../classes/syrup.html">syrup</a></li>
+	                    <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
+	                    <li><a href="../classes/syrup-component.html">syrup-component</a></li>
+	                    <li><a href="../classes/syrup-db.html">syrup-db</a></li>
+	                    <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
+	                    <li><a href="../classes/syrup-log.html">syrup-log</a></li>
+	                    <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
+	                    <li><a href="../classes/syrup-state.html">syrup-state</a></li>
+	                    <li><a href="../classes/syrup-system.html">syrup-system</a></li>
+	                    <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
+	                    <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
+	                    <li><a href="../classes/SyrupError.html">SyrupError</a></li>
 	            </ul>
 	        </div>
 	        </div>
@@ -87,38 +87,44 @@
                         
                         <div class="file">
                             <pre class="prettyprint linenums">
-                        /* 
-                         * monoco
-                         * A Model and a NoSQL Database for Components
+                        /*
+                         * SyrupJS
+                         * The System Runtime Platform
+                         * http://syrupjs.systemdesigner.io
                          * @ecarriou
-                         *
-                         * Copyright (C) 2015 - Erwan Carriou
-                         *
-                         * This program is free software: you can redistribute it and/or modify
-                         * it under the terms of the GNU General Public License as published by
-                         * the Free Software Foundation, either version 3 of the License, or
-                         * (at your option) any later version.
-                         *
-                         * This program is distributed in the hope that it will be useful,
-                         * but WITHOUT ANY WARRANTY; without even the implied warranty of
-                         * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                         * GNU General Public License for more details.
-                         *
-                         * You should have received a copy of the GNU General Public License
-                         * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+                         *  
+                         * Copyright (c) 2016 Erwan Carriou
+                         * 
+                         * Permission is hereby granted, free of charge, to any person obtaining a copy
+                         * of this software and associated documentation files (the &quot;Software&quot;), to deal
+                         * in the Software without restriction, including without limitation the rights
+                         * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                         * copies of the Software, and to permit persons to whom the Software is
+                         * furnished to do so, subject to the following conditions:
+                         * 
+                         * The above copyright notice and this permission notice shall be included in all
+                         * copies or substantial portions of the Software.
+                         * 
+                         * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                         * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                         * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                         * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                         * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                         * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                         * SOFTWARE. 
                          */
                         
                         /**
-                         * This module manages monoco metamodel. &lt;br&gt;
-                         * monoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.
+                         * This module manages syrup metamodel. &lt;br&gt;
+                         * syrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.
                          * 
-                         * @module monoco
-                         * @submodule monoco-metamodel
-                         * @requires monoco-db
-                         * @requires monoco-log
-                         * @requires monoco-component
-                         * @requires monoco-workflow
-                         * @class monoco-metamodel
+                         * @module syrup
+                         * @submodule syrup-metamodel
+                         * @requires syrup-db
+                         * @requires syrup-log
+                         * @requires syrup-component
+                         * @requires syrup-workflow
+                         * @class syrup-metamodel
                          * @static
                          */
                         
@@ -416,19 +422,19 @@
                          * @private
                          */
                         function initDbStructure() {
-                            $db.collection(&#x27;MonocoSchema&#x27;);
-                            $db.collection(&#x27;MonocoExtendedSchema&#x27;);
-                            $db.collection(&#x27;MonocoClassInfo&#x27;);
-                            $db.collection(&#x27;MonocoBehavior&#x27;);
-                            $db.collection(&#x27;MonocoState&#x27;);
-                            $db.collection(&#x27;MonocoType&#x27;);
-                            $db.collection(&#x27;MonocoMessage&#x27;);
-                            $db.collection(&#x27;MonocoChannel&#x27;);
+                            $db.collection(&#x27;SyrupSchema&#x27;);
+                            $db.collection(&#x27;SyrupExtendedSchema&#x27;);
+                            $db.collection(&#x27;SyrupClassInfo&#x27;);
+                            $db.collection(&#x27;SyrupBehavior&#x27;);
+                            $db.collection(&#x27;SyrupState&#x27;);
+                            $db.collection(&#x27;SyrupType&#x27;);
+                            $db.collection(&#x27;SyrupMessage&#x27;);
+                            $db.collection(&#x27;SyrupChannel&#x27;);
                         }
                         
                         
                         /*
-                         * Create the Database structure (i.e. MonocoDatabaseCollection).
+                         * Create the Database structure (i.e. SyrupDatabaseCollection).
                          * @method createDbStructure
                          * @private
                          */
@@ -439,7 +445,7 @@
                         
                             for (modelName in store.catalog) {
                                 modelDef = store.catalog[modelName];
-                                $db.MonocoSchema.insert(modelDef);
+                                $db.SyrupSchema.insert(modelDef);
                                 if (typeof modelDef[SCHEMA] !== &#x27;undefined&#x27; &amp;&amp;
                                     typeof $db[modelDef[ID]] === &#x27;undefined&#x27; &amp;&amp;
                                     modelDef[CLASS] !== false) {
@@ -449,13 +455,13 @@
                         
                             for (modelName in store.model) {
                                 modelDef = store.model[modelName];
-                                $db.MonocoExtendedSchema.insert(modelDef);
+                                $db.SyrupExtendedSchema.insert(modelDef);
                             }
                         
                             for (typeName in store.type) {
                                 modelDef = store.type[typeName];
                                 modelDef._id = modelDef.name;
-                                $db.MonocoType.insert(modelDef);
+                                $db.SyrupType.insert(modelDef);
                             }
                         }
                         
@@ -499,13 +505,13 @@
                                     modelDef[CLASS] !== false
                                     ) {
                                     if (!$component.get(id)) {
-                                        $db.MonocoClassInfo.insert({
+                                        $db.SyrupClassInfo.insert({
                                             &quot;_id&quot;: id,
                                             &quot;metamodel&quot;: store.model[modelDef[SCHEMA]],
                                             &quot;model&quot;: modelDef
                                         });
                                     } else {
-                                        $db.MonocoClassInfo.update({
+                                        $db.SyrupClassInfo.update({
                                             &quot;_id&quot;: id
                                         }, {
                                                 &quot;_id&quot;: id,
@@ -1479,16 +1485,16 @@
                         
                         
                         /**
-                         * This module manages monoco metamodel. &lt;br&gt;
-                         * monoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.
+                         * This module manages syrup metamodel. &lt;br&gt;
+                         * syrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.
                          * 
-                         * @module monoco
-                         * @submodule monoco-metamodel
-                         * @requires monoco-db
-                         * @requires monoco-log
-                         * @requires monoco-component
-                         * @requires monoco-workflow
-                         * @class monoco-metamodel
+                         * @module syrup
+                         * @submodule syrup-metamodel
+                         * @requires syrup-db
+                         * @requires syrup-log
+                         * @requires syrup-component
+                         * @requires syrup-workflow
+                         * @class syrup-metamodel
                          * @static
                          */
                         

@@ -1,42 +1,47 @@
-/* 
- * monoco
- * A Model and a NoSQL Database for Components
- * http://monoco.io/
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
  * @ecarriou
- *
- * Copyright (C) 2015 - Erwan Carriou
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
  */
 
 /**
- * This module manages monoco database. <br>
- * monoco database is a micro NoSQL Database that contains: <br>
+ * This module manages syrup database. <br>
+ * syrup database is a micro NoSQL Database that contains: <br>
  * - collections to store documents (schemas, types, components, ...) and <br>
  * - APIs to import or export documents. <br>
  * 
- * monoco Database is closely linked to monoco metamodel and monoco components because: <br>
- * - all operations done by monoco database must be compliant with the model before being finished, <br>
+ * syrup Database is closely linked to syrup metamodel and syrup components because: <br>
+ * - all operations done by syrup database must be compliant with the model before being finished, <br>
  * - insert operation automatically creates a component and <br>
  * - remove operation automatically destroy a component.
  *  
- * @module monoco
- * @submodule monoco-db
- * @requires monoco-component
- * @requires monoco-helper
- * @requires monoco-log
- * @class monoco-db
+ * @module syrup
+ * @submodule syrup-db
+ * @requires syrup-component
+ * @requires syrup-helper
+ * @requires syrup-log
+ * @class syrup-db
  * @static
  */
 
@@ -57,24 +62,24 @@ var $workflow = require('./workflow.js');
 var store = {},
     collections = [],
     internalDB = [
-        'Monoco',
-        'MonocoSchema',
-        'MonocoExtendedSchema',
-        'MonocoBehavior',
-        'MonocoState',
-        'MonocoType',
-        'MonocoMetamodel',
-        'MonocoDatabase',
-        'MonocoSystem',
-        'MonocoClassInfo',
-        'MonocoMessage',
-        'MonocoChannel'
+        'Syrup',
+        'SyrupSchema',
+        'SyrupExtendedSchema',
+        'SyrupBehavior',
+        'SyrupState',
+        'SyrupType',
+        'SyrupMetamodel',
+        'SyrupDatabase',
+        'SyrupSystem',
+        'SyrupClassInfo',
+        'SyrupMessage',
+        'SyrupChannel'
     ],
     coreDb = [
-        'MonocoSchema',
-        'MonocoExtendedSchema',
-        'MonocoState',
-        'MonocoType'
+        'SyrupSchema',
+        'SyrupExtendedSchema',
+        'SyrupState',
+        'SyrupType'
     ];
 
 
@@ -107,9 +112,9 @@ function dump() {
 
     // schemas
     dbDump.schemas = {};
-    if (exports.MonocoSchema.count()) {
-        for (schemaId in store.MonocoSchema) {
-            schema = JSON.parse(JSON.stringify(store.MonocoSchema[schemaId]));
+    if (exports.SyrupSchema.count()) {
+        for (schemaId in store.SyrupSchema) {
+            schema = JSON.parse(JSON.stringify(store.SyrupSchema[schemaId]));
             if (!schema._core) {
                 dbDump.schemas[schemaId] = schema;
             }
@@ -118,9 +123,9 @@ function dump() {
 
     // types
     dbDump.types = {};
-    if (exports.MonocoType.count()) {
-        for (typeId in store.MonocoType) {
-            type = JSON.parse(JSON.stringify(store.MonocoType[typeId]));
+    if (exports.SyrupType.count()) {
+        for (typeId in store.SyrupType) {
+            type = JSON.parse(JSON.stringify(store.SyrupType[typeId]));
             delete type._id;
             if (!type.core) {
                 dbDump.types[type.name] = type;
@@ -130,8 +135,8 @@ function dump() {
 
     // behaviors
     dbDump.behaviors = {};
-    for (behaviorId in store.MonocoBehavior) {
-        behavior = JSON.parse(JSON.stringify(store.MonocoBehavior[behaviorId]));
+    for (behaviorId in store.SyrupBehavior) {
+        behavior = JSON.parse(JSON.stringify(store.SyrupBehavior[behaviorId]));
         delete behavior.classInfo;
         
         if (!behavior.core) {
@@ -182,15 +187,15 @@ function contains(source, target) {
 
 
 /** 
- * A collection of documents managed by monoco. <br>
- * Internal collections manage core objects of monoco (schema, type, ...). <br>
+ * A collection of documents managed by syrup. <br>
+ * Internal collections manage core objects of syrup (schema, type, ...). <br>
  * Public collections manage components of the same class. <br>
  * 
- * @class MonocoDatabaseCollection
+ * @class SyrupDatabaseCollection
  * @constructor
  * @param {String} name name of the new collection
  */
-var MonocoDatabaseCollection = function (name) {
+var SyrupDatabaseCollection = function (name) {
     if ($metamodel.get(name) || internalDB.indexOf(name) !== -1) {
         store[name] = {};
         this.name = name;
@@ -214,7 +219,7 @@ var MonocoDatabaseCollection = function (name) {
  * $db.Person.find({"name": "laure", "age" : 24}); <br>
  * $db.Person.find([{"name": "rene"}, {"name": "robert"}]);
  */
-MonocoDatabaseCollection.prototype.find = function (query) {
+SyrupDatabaseCollection.prototype.find = function (query) {
     var result = [],
         id = '',
         object = {};
@@ -252,7 +257,7 @@ MonocoDatabaseCollection.prototype.find = function (query) {
 
 /**
  * Insert an new document into the collection. <br>
- * Before inserting the document, monoco checks that the document is compliant
+ * Before inserting the document, syrup checks that the document is compliant
  * with its class definition. <br> 
  * Then, after inserting it, we create the component.
  * @method insert
@@ -266,7 +271,7 @@ MonocoDatabaseCollection.prototype.find = function (query) {
  *      "age": 43 <br>
  * }); <br>
  */
-MonocoDatabaseCollection.prototype.insert = function (document) {
+SyrupDatabaseCollection.prototype.insert = function (document) {
     var doc = [],
         Component = null,
         result = [];
@@ -284,9 +289,9 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
             systems = [];
 
         switch (true) {
-            case this.name === 'MonocoSchema':
-            case this.name === 'MonocoType':
-            case this.name === 'MonocoExtendedSchema':
+            case this.name === 'SyrupSchema':
+            case this.name === 'SyrupType':
+            case this.name === 'SyrupExtendedSchema':
             case $metamodel.isValidObject(obj, $metamodel.get(this.name)):
 
                 if (typeof obj._id === 'undefined') {
@@ -300,20 +305,20 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
                     component = new Component(obj);
                     result.push(component.id());
                 } else {
-                    if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
-                        $helper.getMonoco().require('db').insert(this.name, obj);
+                    if ($helper.isSyrup() && $helper.getSyrup().require('db')) {
+                        $helper.getSyrup().require('db').insert(this.name, obj);
                     }
                 }
 
-                if (this.name === 'MonocoMessage') {
-                    if ($helper.isMonoco()) {
-                        systems = exports.MonocoSystem.find({
+                if (this.name === 'SyrupMessage') {
+                    if ($helper.isSyrup()) {
+                        systems = exports.SyrupSystem.find({
                             'master': true
                         });
                         if (!systems.length || (systems.length && systems[0]._id !== obj.from)) {
-                            channels = exports.MonocoChannel.find({});
+                            channels = exports.SyrupChannel.find({});
                             if (channels.length > 0) {
-                                channel = $helper.getMonoco().require(channels[0]._id);
+                                channel = $helper.getSyrup().require(channels[0]._id);
                                 $workflow.state({
                                     "component": channels[0]._id,
                                     "state": obj.event,
@@ -349,7 +354,7 @@ MonocoDatabaseCollection.prototype.insert = function (document) {
  * $db.Cars.update([{"code": "AZD-71"}, {"code": "AZD-65"}], {"price": "10000$"}); <br>
  * $db.Cars.update({"code": "AZD-71"}, {"price": "10000$"}, {"upsert": true}); <br>
  */
-MonocoDatabaseCollection.prototype.update = function (query, update, options) {
+SyrupDatabaseCollection.prototype.update = function (query, update, options) {
     var docs = this.find(query),
         updated = 0,
         i = 0,
@@ -396,8 +401,8 @@ MonocoDatabaseCollection.prototype.update = function (query, update, options) {
                         if ($metamodel.isValidType(update[attributeName], type)) {
                             docs[i][attributeName] = update[attributeName];
                             updated = updated + 1;
-                            if ($helper.isMonoco()) {
-                                $helper.getMonoco().require('db').update(this.name, docs[i]._id, attributeName, update[attributeName]);
+                            if ($helper.isSyrup()) {
+                                $helper.getSyrup().require('db').update(this.name, docs[i]._id, attributeName, update[attributeName]);
                             }
                         } else {
                             $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName]);
@@ -425,7 +430,7 @@ MonocoDatabaseCollection.prototype.update = function (query, update, options) {
  * $db.Cars.remove({"code": "AZD-71"}); <br>
  * $db.Cars.remove([{"code": "AZD-71"}, {"code": "AZD-65"}]); <br>
  */
-MonocoDatabaseCollection.prototype.remove = function (query) {
+SyrupDatabaseCollection.prototype.remove = function (query) {
     var result = [],
         id = '',
         component = null,
@@ -446,8 +451,8 @@ MonocoDatabaseCollection.prototype.remove = function (query) {
                         if (component) {
                             component.destroy();
                         }
-                        if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
-                            $helper.getMonoco().require('db').remove(this.name, id);
+                        if ($helper.isSyrup() && $helper.getSyrup().require('db')) {
+                            $helper.getSyrup().require('db').remove(this.name, id);
                         }
                         result.push(id);
                     }
@@ -463,8 +468,8 @@ MonocoDatabaseCollection.prototype.remove = function (query) {
                     if (component) {
                         component.destroy();
                     }
-                    if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
-                        $helper.getMonoco().require('db').remove(this.name, id);
+                    if ($helper.isSyrup() && $helper.getSyrup().require('db')) {
+                        $helper.getSyrup().require('db').remove(this.name, id);
                     }
                     result.push(id);
                 }
@@ -480,8 +485,8 @@ MonocoDatabaseCollection.prototype.remove = function (query) {
                     component.destroy();
                 }
             }
-            if ($helper.isMonoco() && $helper.getMonoco().require('db')) {
-                $helper.getMonoco().require('db').remove(this.name, id);
+            if ($helper.isSyrup() && $helper.getSyrup().require('db')) {
+                $helper.getSyrup().require('db').remove(this.name, id);
             }
             result.push(id);
         }
@@ -496,7 +501,7 @@ MonocoDatabaseCollection.prototype.remove = function (query) {
  * @method count
  * @return {Number} number of documents in the collection
  */
-MonocoDatabaseCollection.prototype.count = function () {
+SyrupDatabaseCollection.prototype.count = function () {
     var result = 0,
         objectId = '';
     for (objectId in store[this.name]) {
@@ -510,20 +515,20 @@ MonocoDatabaseCollection.prototype.count = function () {
 
 
 /*
- * Create a new {{#crossLink "MonocoDatabaseCollection"}}{{/crossLink}}.
+ * Create a new {{#crossLink "SyrupDatabaseCollection"}}{{/crossLink}}.
  * @method collection
  * @param {String} name of the collection
  */
 function collection(name) {
-    exports[name] = new MonocoDatabaseCollection(name);
+    exports[name] = new SyrupDatabaseCollection(name);
 }
 
 
 /*
- * Import/Export a monoco system into/from the database
+ * Import/Export a syrup system into/from the database
  * @method system
- * @param {JSON} importedSystem a monoco system to import
- * @return {String} the id of the imported monoco system or the if of the current monoco system
+ * @param {JSON} importedSystem a syrup system to import
+ * @return {String} the id of the imported syrup system or the if of the current syrup system
  */
 function system(importedSystem) {
     var result = '',
@@ -554,7 +559,7 @@ function system(importedSystem) {
 
         //add behaviors
         for (behaviorId in importedSystem.behaviors) {
-            exports.MonocoBehavior.insert(importedSystem.behaviors[behaviorId]);
+            exports.SyrupBehavior.insert(importedSystem.behaviors[behaviorId]);
         }
 
         // add components
@@ -565,7 +570,7 @@ function system(importedSystem) {
         }
 
         // reset info if already a master system
-        systems = exports.MonocoSystem.find({
+        systems = exports.SyrupSystem.find({
             'master': true
         });
         if (systems.length) {
@@ -577,7 +582,7 @@ function system(importedSystem) {
         }
 
         // insert the system in DB
-        exports.MonocoSystem.insert(importedSystem);
+        exports.SyrupSystem.insert(importedSystem);
 
         result = importedSystem._id;
 
@@ -585,7 +590,7 @@ function system(importedSystem) {
         exportedSystem = dump();
 
         // get id of the master system
-        systems = exports.MonocoSystem.find({
+        systems = exports.SyrupSystem.find({
             'master': true
         });
 
@@ -614,10 +619,10 @@ function system(importedSystem) {
 
 
 /*
- * Export a monoco sub-system.
+ * Export a syrup sub-system.
  * @method subsystem
  * @param {JSON} params parameters
- * @return {String} a stringified monoco sub-system
+ * @return {String} a stringified syrup sub-system
  * 
  * @example
  * $db.subsystem({"schemas":{"name":"Person"}}); // filter export on schemas <br>
@@ -639,7 +644,7 @@ function subsystem(params) {
         className = '';
     
     // default values
-    result = exports.MonocoSystem.find({
+    result = exports.SyrupSystem.find({
         'master': true
     });
     if (result.length) {
@@ -655,7 +660,7 @@ function subsystem(params) {
     // schemas
     system.schemas = {};
     if (params.schemas) {
-        result = exports.MonocoSchema.find(params.schema);
+        result = exports.SyrupSchema.find(params.schema);
 
         length = result.length;
         for (i = 0; i < length; i++) {
@@ -669,7 +674,7 @@ function subsystem(params) {
     // types
     system.types = {};
     if (params.types) {
-        result = exports.MonocoType.find(params.types);
+        result = exports.SyrupType.find(params.types);
 
         length = result.length;
         for (i = 0; i < length; i++) {
@@ -683,7 +688,7 @@ function subsystem(params) {
     // behaviors
     system.behaviors = {};
     if (params.behaviors) {
-        behavior = exports.MonocoBehavior.find(params.behaviors);
+        behavior = exports.SyrupBehavior.find(params.behaviors);
 
         length = result.length;
         for (i = 0; i < length; i++) {
@@ -745,10 +750,10 @@ function clear() {
  * @method init
  */
 function init() {
-    var monocoSystemId = '',
-        monocoSystem = null;
+    var syrupSystemId = '',
+        syrupSystem = null;
 
-    monocoSystem = exports.MonocoSystem.find({
+    syrupSystem = exports.SyrupSystem.find({
         '_id': 'e89c617b6b15d24'
     })[0];
 
@@ -762,9 +767,9 @@ function init() {
     // init metamodel
     $metamodel.init();
     
-    // reimport monoco core system
-    monocoSystemId = exports.system(monocoSystem);
-    $component.get(monocoSystemId).main();
+    // reimport syrup core system
+    syrupSystemId = exports.system(syrupSystem);
+    $component.get(syrupSystemId).main();
 }
 
 
@@ -772,28 +777,28 @@ function init() {
 
 
 /**
- * This module manages monoco database. <br>
- * monoco database is a micro NoSQL Database that contains: <br>
+ * This module manages syrup database. <br>
+ * syrup database is a micro NoSQL Database that contains: <br>
  * - collections to store documents (schemas, types, components, ...) and <br>
  * - APIs to import or export documents. <br>
  * 
- * monoco database is closely linked to monoco metamodel because: <br>
- * - all operations done by monoco database must be compliant with the model before being finished, <br>
+ * syrup database is closely linked to syrup metamodel because: <br>
+ * - all operations done by syrup database must be compliant with the model before being finished, <br>
  * - insert operation automatically creates a component and <br>
  * - remove operation automatically destroy a component.
  *   
- * @module monoco
- * @submodule monoco-db
- * @requires monoco-component
- * @requires monoco-helper
- * @requires monoco-log
- * @class monoco-db
+ * @module syrup
+ * @submodule syrup-db
+ * @requires syrup-component
+ * @requires syrup-helper
+ * @requires syrup-log
+ * @class syrup-db
  * @static
  */
 
 
 /**
- * Create a new {{#crossLink "MonocoDatabaseCollection"}}{{/crossLink}}.
+ * Create a new {{#crossLink "SyrupDatabaseCollection"}}{{/crossLink}}.
  * @method collection
  * @param {String} name of the collection
  */
@@ -801,26 +806,26 @@ exports.collection = collection;
 
 
 /**
- * monoco database store that lists all the collections.
+ * syrup database store that lists all the collections.
  * @property {JSON} store
  */
 exports.store = store;
 
 
 /**
- * Import/Export a monoco system into/from the database.
+ * Import/Export a syrup system into/from the database.
  * @method system
- * @param {JSON} importedSystem a monoco system to import
- * @return {String} the id of the imported monoco system or the current monoco system  
+ * @param {JSON} importedSystem a syrup system to import
+ * @return {String} the id of the imported syrup system or the current syrup system  
  */
 exports.system = system;
 
 
 /**
- * Export a monoco sub-system.
+ * Export a syrup sub-system.
  * @method subsystem
  * @param {JSON} params parameters
- * @return {String} a stringified monoco sub-system
+ * @return {String} a stringified syrup sub-system
  * 
  * @example
  * $db.subsystem({"schemas":{"name":"Person"}}); // filter export on schemas <br>

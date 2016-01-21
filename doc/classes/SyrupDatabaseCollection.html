@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SyrupDatabaseCollection - system-runtime</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/lucid.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+            system-runtime
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.9.1</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/syrup", "classes/syrup-behavior", "classes/syrup-component", "classes/syrup-db", "classes/syrup-helper", "classes/syrup-log", "classes/syrup-metamodel", "classes/syrup-state", "classes/syrup-system", "classes/syrup-workflow", "classes/SyrupDatabaseCollection", "classes/SyrupError", "modules/syrup", "modules/syrup-behavior", "modules/syrup-component", "modules/syrup-db", "modules/syrup-helper", "modules/syrup-log", "modules/syrup-metamodel", "modules/syrup-state", "modules/syrup-system", "modules/syrup-workflow"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+	        <div id="sidebar">
+	        <div id="classes">
+	            <ul id="api-classes" class="nav nav-list">
+	                    <li><a href="../classes/syrup.html">syrup</a></li>
+	                    <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
+	                    <li><a href="../classes/syrup-component.html">syrup-component</a></li>
+	                    <li><a href="../classes/syrup-db.html">syrup-db</a></li>
+	                    <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
+	                    <li><a href="../classes/syrup-log.html">syrup-log</a></li>
+	                    <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
+	                    <li><a href="../classes/syrup-state.html">syrup-state</a></li>
+	                    <li><a href="../classes/syrup-system.html">syrup-system</a></li>
+	                    <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
+	                    <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
+	                    <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+	            </ul>
+	        </div>
+	        </div>
+	    </div>
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+                    Show:
+                    <label for="api-show-inherited" class="checkbox">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected" class="checkbox">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private" class="checkbox">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated" class="checkbox">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </form>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+                            <h1>SyrupDatabaseCollection</h1>
+                        </div>
+                        
+                        
+                        
+                        	<div class="well well-small">
+                                    Module: <a href="../modules/syrup-db.html">syrup-db</a><br>
+                                    Parent Module: <a href="../modules/syrup.html">syrup</a>
+                            </div>
+                        
+                        
+                        
+                        <div class="yuidoc-class-description">
+                        <p>A collection of documents managed by syrup. <br>
+                        Internal collections manage core objects of syrup (schema, type, ...). <br>
+                        Public collections manage components of the same class. <br></p>
+                        
+                        </div>
+                        
+                        <!-- table of contents -->
+                        
+                        <div id="class-toc" class="page-section">
+                        	<h2>Table of Contents</h2>
+                            <ul>
+                        		<li>
+                        			<strong>Methods</strong>
+                        			<ul>
+                        				<li><a href="#method-count"><span class="im">count</span>()</a></li>
+                        				<li><a href="#method-find"><span class="im">find</span>(<span class="ia">query</span>)</a></li>
+                        				<li><a href="#method-insert"><span class="im">insert</span>(<span class="ia">document</span>)</a></li>
+                        				<li><a href="#method-remove"><span class="im">remove</span>(<span class="ia">query</span>)</a></li>
+                        				<li><a href="#method-update"><span class="im">update</span>(<span class="ia">query</span><span class="ia">update</span><span class="ia">options</span>)</a></li>
+                        			</ul>
+                        		</li>
+                        
+                        
+                        
+                        	</ul>
+                        </div>
+                        
+                        <!-- details -->
+                        
+                            <div class="constructor yuidoc-class-constructor page-section">
+                                <h2>Constructor</h2>
+                                <div class="item-list">
+                                <div id="method-SyrupDatabaseCollection" class="method item">
+                                	<div class="method-signature">
+                                	<span class="name"><code>SyrupDatabaseCollection</code></span>
+                                
+                                		<div class="args">
+                                			<span class="paren">(</span><ul class="args-list inline commas">
+                                				<li class="arg">
+                                						<code>name</code>
+                                				</li>
+                                			</ul><span class="paren">)</span>
+                                		</div>
+                                	</div>
+                                
+                                
+                                
+                                
+                                
+                                
+                                	<div class="meta">
+                                				<p>
+                                				Defined in
+                                		<a href="../files/src_db.js.html#l189"><code>src&#x2F;db.js:189</code></a>
+                                		</p>
+                                
+                                
+                                
+                                	</div>
+                                
+                                
+                                		<div class="params">
+                                			<h4>Parameters:</h4>
+                                
+                                			<ul class="params-list">
+                                				<li class="param">
+                                						<code class="param-name">name</code>
+                                						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+                                
+                                					<div class="param-description"><p>name of the new collection</p>
+                                </div>
+                                
+                                				</li>
+                                			</ul>
+                                		</div>
+                                
+                                
+                                </div>
+                                </div>
+                            </div>
+                        
+                            <div id="methods" class="page-section">
+                                <h2 class="off-left">Methods</h2>
+                                <div class="item-list">
+                                    <div id="method-count" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>count</code></span>
+                                    
+                                    		<span class="paren">()</span>
+                                    		<span class="returns-inline">
+                                    			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                    		</span>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_db.js.html#l499"><code>src&#x2F;db.js:499</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Count the number of documents in the collection.</p>
+                                    </div>
+                                    
+                                    
+                                    		<div class="returns">
+                                    			<h4>Returns:</h4>
+                                    
+                                    			<div class="returns-description">
+                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                                    					<p>number of documents in the collection</p>
+                                    
+                                    			</div>
+                                    		</div>
+                                    
+                                    </div>
+                                    <div id="method-find" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>find</code></span>
+                                    
+                                    		<div class="args">
+                                    			<span class="paren">(</span><ul class="args-list inline commas">
+                                    				<li class="arg">
+                                    						<code>query</code>
+                                    				</li>
+                                    			</ul><span class="paren">)</span>
+                                    		</div>
+                                    		<span class="returns-inline">
+                                    			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                    		</span>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_db.js.html#l211"><code>src&#x2F;db.js:211</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Find a document into the collection.</p>
+                                    </div>
+                                    
+                                    		<div class="params">
+                                    			<h4>Parameters:</h4>
+                                    
+                                    			<ul class="params-list">
+                                    				<li class="param">
+                                    						<code class="param-name">query</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a>  |  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                    
+                                    
+                                    
+                                    				</li>
+                                    			</ul>
+                                    		</div>
+                                    
+                                    		<div class="returns">
+                                    			<h4>Returns:</h4>
+                                    
+                                    			<div class="returns-description">
+                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
+                                    					<p>Array of documents that map the query</p>
+                                    
+                                    			</div>
+                                    		</div>
+                                    
+                                    		<div class="example">
+                                    			<h4>Example:</h4>
+                                    
+                                    			<div class="example-content">
+                                    				<p>$db.Person.find({"name": "laure"}); <br>
+                                    $db.Person.find({"name": "laure", "age" : 24}); <br>
+                                    $db.Person.find([{"name": "rene"}, {"name": "robert"}]);</p>
+                                    
+                                    			</div>
+                                    		</div>
+                                    </div>
+                                    <div id="method-insert" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>insert</code></span>
+                                    
+                                    		<div class="args">
+                                    			<span class="paren">(</span><ul class="args-list inline commas">
+                                    				<li class="arg">
+                                    						<code>document</code>
+                                    				</li>
+                                    			</ul><span class="paren">)</span>
+                                    		</div>
+                                    		<span class="returns-inline">
+                                    			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                    		</span>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_db.js.html#l258"><code>src&#x2F;db.js:258</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Insert an new document into the collection. <br>
+                                    Before inserting the document, syrup checks that the document is compliant
+                                    with its class definition. <br>
+                                    Then, after inserting it, we create the component.</p>
+                                    </div>
+                                    
+                                    		<div class="params">
+                                    			<h4>Parameters:</h4>
+                                    
+                                    			<ul class="params-list">
+                                    				<li class="param">
+                                    						<code class="param-name">document</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a>  |  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>a new object to add</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    			</ul>
+                                    		</div>
+                                    
+                                    		<div class="returns">
+                                    			<h4>Returns:</h4>
+                                    
+                                    			<div class="returns-description">
+                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
+                                    					<p>array of id created</p>
+                                    
+                                    			</div>
+                                    		</div>
+                                    
+                                    		<div class="example">
+                                    			<h4>Example:</h4>
+                                    
+                                    			<div class="example-content">
+                                    				<p>$db.Person.insert({<br>
+                                    "name": "bob", <br>
+                                    "firstName": "Saint-Clar", <br>
+                                    "age": 43 <br>
+                                    }); <br></p>
+                                    
+                                    			</div>
+                                    		</div>
+                                    </div>
+                                    <div id="method-remove" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>remove</code></span>
+                                    
+                                    		<div class="args">
+                                    			<span class="paren">(</span><ul class="args-list inline commas">
+                                    				<li class="arg">
+                                    						<code>query</code>
+                                    				</li>
+                                    			</ul><span class="paren">)</span>
+                                    		</div>
+                                    		<span class="returns-inline">
+                                    			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                    		</span>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_db.js.html#l422"><code>src&#x2F;db.js:422</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Remove a document from the colllection. <br>
+                                    When a document is removed, the component is destroyed.</p>
+                                    </div>
+                                    
+                                    		<div class="params">
+                                    			<h4>Parameters:</h4>
+                                    
+                                    			<ul class="params-list">
+                                    				<li class="param">
+                                    						<code class="param-name">query</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a>  |  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>query to find the documents to remove</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    			</ul>
+                                    		</div>
+                                    
+                                    		<div class="returns">
+                                    			<h4>Returns:</h4>
+                                    
+                                    			<div class="returns-description">
+                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
+                                    					<p>list of documents id removed</p>
+                                    
+                                    			</div>
+                                    		</div>
+                                    
+                                    		<div class="example">
+                                    			<h4>Example:</h4>
+                                    
+                                    			<div class="example-content">
+                                    				<p>$db.Cars.remove({"code": "AZD-71"}); <br>
+                                    $db.Cars.remove([{"code": "AZD-71"}, {"code": "AZD-65"}]); <br></p>
+                                    
+                                    			</div>
+                                    		</div>
+                                    </div>
+                                    <div id="method-update" class="method item">
+                                    	<div class="method-signature">
+                                    	<span class="name"><code>update</code></span>
+                                    
+                                    		<div class="args">
+                                    			<span class="paren">(</span><ul class="args-list inline commas">
+                                    				<li class="arg">
+                                    						<code>query</code>
+                                    				</li>
+                                    				<li class="arg">
+                                    						<code>update</code>
+                                    				</li>
+                                    				<li class="arg">
+                                    						<code>options</code>
+                                    				</li>
+                                    			</ul><span class="paren">)</span>
+                                    		</div>
+                                    		<span class="returns-inline">
+                                    			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                    		</span>
+                                    	</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    	<div class="meta">
+                                    				<p>
+                                    				Defined in
+                                    		<a href="../files/src_db.js.html#l343"><code>src&#x2F;db.js:343</code></a>
+                                    		</p>
+                                    
+                                    
+                                    
+                                    	</div>
+                                    
+                                    	<div class="description"><p>Update documents into a collection.</p>
+                                    </div>
+                                    
+                                    		<div class="params">
+                                    			<h4>Parameters:</h4>
+                                    
+                                    			<ul class="params-list">
+                                    				<li class="param">
+                                    						<code class="param-name">query</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a>  |  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>query to find the documents to update</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    				<li class="param">
+                                    						<code class="param-name">update</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>update to make</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    				<li class="param">
+                                    						<code class="param-name">options</code>
+                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                    
+                                    
+                                    					<div class="param-description"><p>{Boolean} upsert true if we create a document when no document is found by the query</p>
+                                    </div>
+                                    
+                                    				</li>
+                                    			</ul>
+                                    		</div>
+                                    
+                                    		<div class="returns">
+                                    			<h4>Returns:</h4>
+                                    
+                                    			<div class="returns-description">
+                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                                    					<p>Number of documents updated</p>
+                                    
+                                    			</div>
+                                    		</div>
+                                    
+                                    		<div class="example">
+                                    			<h4>Example:</h4>
+                                    
+                                    			<div class="example-content">
+                                    				<p>$db.Cars.update({"code": "AZD-71"}, {"price": "10000$"}); <br>
+                                    $db.Cars.update([{"code": "AZD-71"}, {"code": "AZD-65"}], {"price": "10000$"}); <br>
+                                    $db.Cars.update({"code": "AZD-71"}, {"price": "10000$"}, {"upsert": true}); <br></p>
+                                    
+                                    			</div>
+                                    		</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -1,18 +1,18 @@
 {
     "project": {
-        "name": "monoco",
-        "description": "A Model and a NoSQL Database for Components",
-        "version": "0.8.3",
-        "url": "http://monoco.io"
+        "name": "system-runtime",
+        "description": "SyrupJS, the System Runtime Platform",
+        "version": "0.9.1",
+        "url": "http://syrupjs.systemdesigner.io"
     },
     "files": {
         "src/behavior.js": {
             "name": "src/behavior.js",
             "modules": {
-                "monoco-behavior": 1
+                "syrup-behavior": 1
             },
             "classes": {
-                "monoco-behavior": 1
+                "syrup-behavior": 1
             },
             "fors": {},
             "namespaces": {}
@@ -20,10 +20,10 @@
         "src/component.js": {
             "name": "src/component.js",
             "modules": {
-                "monoco-component": 1
+                "syrup-component": 1
             },
             "classes": {
-                "monoco-component": 1
+                "syrup-component": 1
             },
             "fors": {},
             "namespaces": {}
@@ -31,11 +31,11 @@
         "src/db.js": {
             "name": "src/db.js",
             "modules": {
-                "monoco-db": 1
+                "syrup-db": 1
             },
             "classes": {
-                "monoco-db": 1,
-                "MonocoDatabaseCollection": 1
+                "syrup-db": 1,
+                "SyrupDatabaseCollection": 1
             },
             "fors": {},
             "namespaces": {}
@@ -43,10 +43,10 @@
         "src/helper.js": {
             "name": "src/helper.js",
             "modules": {
-                "monoco-helper": 1
+                "syrup-helper": 1
             },
             "classes": {
-                "monoco-helper": 1
+                "syrup-helper": 1
             },
             "fors": {},
             "namespaces": {}
@@ -54,10 +54,10 @@
         "src/log.js": {
             "name": "src/log.js",
             "modules": {
-                "monoco-log": 1
+                "syrup-log": 1
             },
             "classes": {
-                "monoco-log": 1
+                "syrup-log": 1
             },
             "fors": {},
             "namespaces": {}
@@ -65,21 +65,10 @@
         "src/metamodel.js": {
             "name": "src/metamodel.js",
             "modules": {
-                "monoco-metamodel": 1
+                "syrup-metamodel": 1
             },
             "classes": {
-                "monoco-metamodel": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "src/monoco.js": {
-            "name": "src/monoco.js",
-            "modules": {
-                "monoco": 1
-            },
-            "classes": {
-                "monoco": 1
+                "syrup-metamodel": 1
             },
             "fors": {},
             "namespaces": {}
@@ -87,10 +76,21 @@
         "src/state.js": {
             "name": "src/state.js",
             "modules": {
-                "monoco-state": 1
+                "syrup-state": 1
             },
             "classes": {
-                "monoco-state": 1
+                "syrup-state": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/syrup.js": {
+            "name": "src/syrup.js",
+            "modules": {
+                "syrup": 1
+            },
+            "classes": {
+                "syrup": 1
             },
             "fors": {},
             "namespaces": {}
@@ -98,11 +98,11 @@
         "src/workflow.js": {
             "name": "src/workflow.js",
             "modules": {
-                "monoco-workflow": 1
+                "syrup-workflow": 1
             },
             "classes": {
-                "monoco-workflow": 1,
-                "MonocoError": 1
+                "syrup-workflow": 1,
+                "SyrupError": 1
             },
             "fors": {},
             "namespaces": {}
@@ -110,326 +110,337 @@
         "build/system/system.js": {
             "name": "build/system/system.js",
             "modules": {
-                "monoco-system": 1
+                "syrup-system": 1
             },
             "classes": {
-                "monoco-system": 1
+                "syrup-system": 1
             },
             "fors": {},
             "namespaces": {}
         }
     },
     "modules": {
-        "monoco": {
-            "name": "monoco",
+        "syrup": {
+            "name": "syrup",
             "submodules": {
-                "monoco-behavior": 1,
-                "monoco-component": 1,
-                "monoco-db": 1,
-                "monoco-helper": 1,
-                "monoco-log": 1,
-                "monoco-metamodel": 1,
-                "monoco-state": 1,
-                "monoco-workflow": 1,
-                "monoco-system": 1
+                "syrup-behavior": 1,
+                "syrup-component": 1,
+                "syrup-db": 1,
+                "syrup-helper": 1,
+                "syrup-log": 1,
+                "syrup-metamodel": 1,
+                "syrup-state": 1,
+                "syrup-workflow": 1,
+                "syrup-system": 1
             },
+            "elements": {},
             "classes": {
-                "monoco-behavior": 1,
-                "monoco-component": 1,
-                "monoco-db": 1,
-                "MonocoDatabaseCollection": 1,
-                "monoco-helper": 1,
-                "monoco-log": 1,
-                "monoco-metamodel": 1,
-                "monoco": 1,
-                "monoco-state": 1,
-                "monoco-workflow": 1,
-                "MonocoError": 1,
-                "monoco-system": 1
+                "syrup-behavior": 1,
+                "syrup-component": 1,
+                "syrup-db": 1,
+                "SyrupDatabaseCollection": 1,
+                "syrup-helper": 1,
+                "syrup-log": 1,
+                "syrup-metamodel": 1,
+                "syrup-state": 1,
+                "syrup": 1,
+                "syrup-workflow": 1,
+                "SyrupError": 1,
+                "syrup-system": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "main",
             "file": "build/system/system.js",
-            "line": 959,
-            "description": "This module is the main module of monoco. <br>\nIt inits monoco metamodel and loads monoco core system.",
+            "line": 964,
+            "description": "This module is the main module of syrup. <br>\nIt inits syrup metamodel and loads syrup core system.",
             "requires": [
-                "monoco-component",
-                "monoco-metamodel",
-                "monoco-system"
+                "syrup-component",
+                "syrup-metamodel",
+                "syrup-system",
+                "syrup-helper"
             ],
             "itemtype": "main",
             "static": 1
         },
-        "monoco-behavior": {
-            "name": "monoco-behavior",
+        "syrup-behavior": {
+            "name": "syrup-behavior",
             "submodules": {},
+            "elements": {},
             "classes": {
-                "monoco-behavior": 1
+                "syrup-behavior": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "monoco",
+            "module": "syrup",
             "namespace": "",
             "file": "src/behavior.js",
-            "line": 264,
+            "line": 269,
             "description": "This module manages the behaviors of all components. \nA behavior is a mecanism that allow users to add actions that will be executed \nwhen a specific state of a component will change.",
             "requires": [
-                "monoco-db",
-                "monoco-helper",
-                "monoco-channel"
+                "syrup-db",
+                "syrup-helper",
+                "syrup-channel"
             ],
             "static": 1
         },
-        "monoco-component": {
-            "name": "monoco-component",
+        "syrup-component": {
+            "name": "syrup-component",
             "submodules": {},
+            "elements": {},
             "classes": {
-                "monoco-component": 1
+                "syrup-component": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "monoco",
+            "module": "syrup",
             "namespace": "",
             "file": "src/component.js",
-            "line": 941,
-            "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
+            "line": 946,
+            "description": "This module manages the components. \nIt is the factory of all the components that are created by syrup.",
             "requires": [
-                "monoco-workflow",
-                "monoco-db",
-                "monoco-metamodel",
-                "monoco-behavior",
-                "monoco-helper",
-                "monoco-log"
+                "syrup-workflow",
+                "syrup-db",
+                "syrup-metamodel",
+                "syrup-behavior",
+                "syrup-helper",
+                "syrup-log"
             ],
             "static": 1
         },
-        "monoco-db": {
-            "name": "monoco-db",
+        "syrup-db": {
+            "name": "syrup-db",
             "submodules": {},
+            "elements": {},
             "classes": {
-                "monoco-db": 1,
-                "MonocoDatabaseCollection": 1
+                "syrup-db": 1,
+                "SyrupDatabaseCollection": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "monoco",
+            "module": "syrup",
             "namespace": "",
             "file": "src/db.js",
-            "line": 184,
-            "description": "This module manages monoco database. <br>\nmonoco database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nmonoco Database is closely linked to monoco metamodel and monoco components because: <br>\n- all operations done by monoco database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
+            "line": 189,
+            "description": "This module manages syrup database. <br>\nsyrup database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nsyrup Database is closely linked to syrup metamodel and syrup components because: <br>\n- all operations done by syrup database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
-                "monoco-component",
-                "monoco-helper",
-                "monoco-log"
+                "syrup-component",
+                "syrup-helper",
+                "syrup-log"
             ],
             "static": 1
         },
-        "monoco-helper": {
-            "name": "monoco-helper",
+        "syrup-helper": {
+            "name": "syrup-helper",
             "submodules": {},
+            "elements": {},
             "classes": {
-                "monoco-helper": 1
+                "syrup-helper": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "monoco",
+            "module": "syrup",
             "namespace": "",
             "file": "src/helper.js",
-            "line": 110,
+            "line": 136,
             "description": "This module contains all the functions used by all the modules.",
             "requires": [
-                "monoco-db",
-                "monoco-component"
+                "syrup-db",
+                "syrup-component"
             ],
             "static": 1
         },
-        "monoco-log": {
-            "name": "monoco-log",
+        "syrup-log": {
+            "name": "syrup-log",
             "submodules": {},
+            "elements": {},
             "classes": {
-                "monoco-log": 1
+                "syrup-log": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "monoco",
+            "module": "syrup",
             "namespace": "",
             "file": "src/log.js",
-            "line": 446,
+            "line": 451,
             "description": "This module contains all the functions that write a log.",
             "requires": [
-                "monoco-helper"
+                "syrup-helper"
             ],
             "static": 1
         },
-        "monoco-metamodel": {
-            "name": "monoco-metamodel",
+        "syrup-metamodel": {
+            "name": "syrup-metamodel",
             "submodules": {},
+            "elements": {},
             "classes": {
-                "monoco-metamodel": 1
+                "syrup-metamodel": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "monoco",
+            "module": "syrup",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1392,
-            "description": "This module manages monoco metamodel. <br>\nmonoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.",
+            "line": 1398,
+            "description": "This module manages syrup metamodel. <br>\nsyrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.",
             "requires": [
-                "monoco-db",
-                "monoco-log",
-                "monoco-component",
-                "monoco-workflow"
+                "syrup-db",
+                "syrup-log",
+                "syrup-component",
+                "syrup-workflow"
             ],
             "static": 1
         },
-        "monoco-state": {
-            "name": "monoco-state",
+        "syrup-state": {
+            "name": "syrup-state",
             "submodules": {},
+            "elements": {},
             "classes": {
-                "monoco-state": 1
+                "syrup-state": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "monoco",
+            "module": "syrup",
             "namespace": "",
             "file": "src/state.js",
-            "line": 94,
+            "line": 99,
             "description": "This module manages the states of all thecomponents.",
             "requires": [
-                "monoco-db"
+                "syrup-db"
             ],
             "static": 1
         },
-        "monoco-workflow": {
-            "name": "monoco-workflow",
+        "syrup-workflow": {
+            "name": "syrup-workflow",
             "submodules": {},
+            "elements": {},
             "classes": {
-                "monoco-workflow": 1,
-                "MonocoError": 1
+                "syrup-workflow": 1,
+                "SyrupError": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "monoco",
+            "module": "syrup",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 61,
-            "description": "This module manages the workflow of monoco. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and monoco. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
+            "line": 66,
+            "description": "This module manages the workflow of syrup. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and syrup. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
-                "monoco-metamodel",
-                "monoco-component",
-                "monoco-behavior",
-                "monoco-channel",
-                "monoco-state",
-                "monoco-helper",
-                "monoco-log",
-                "monoco-db"
+                "syrup-metamodel",
+                "syrup-component",
+                "syrup-behavior",
+                "syrup-channel",
+                "syrup-state",
+                "syrup-helper",
+                "syrup-log",
+                "syrup-db"
             ],
             "static": 1
         },
-        "monoco-system": {
-            "name": "monoco-system",
+        "syrup-system": {
+            "name": "syrup-system",
             "submodules": {},
+            "elements": {},
             "classes": {
-                "monoco-system": 1
+                "syrup-system": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "monoco",
+            "module": "syrup",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 959,
-            "description": "This module contains monoco core system.",
+            "line": 964,
+            "description": "This module contains syrup core system.",
             "static": 1
         }
     },
     "classes": {
-        "monoco-behavior": {
-            "name": "monoco-behavior",
-            "shortname": "monoco-behavior",
+        "syrup-behavior": {
+            "name": "syrup-behavior",
+            "shortname": "syrup-behavior",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "monoco",
-            "submodule": "monoco-behavior",
+            "module": "syrup",
+            "submodule": "syrup-behavior",
             "namespace": "",
             "file": "src/behavior.js",
-            "line": 264,
+            "line": 269,
             "description": "This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed \nwhen a specific state of a component will change.",
             "requires": [
-                "monoco-db",
-                "monoco-helper",
-                "monoco-channel"
+                "syrup-db",
+                "syrup-helper",
+                "syrup-channel"
             ]
         },
-        "monoco-component": {
-            "name": "monoco-component",
-            "shortname": "monoco-component",
+        "syrup-component": {
+            "name": "syrup-component",
+            "shortname": "syrup-component",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "monoco",
-            "submodule": "monoco-component",
+            "module": "syrup",
+            "submodule": "syrup-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 941,
-            "description": "This module manages the components. \nIt is the factory of all the components that are created by monoco.",
+            "line": 946,
+            "description": "This module manages the components. \nIt is the factory of all the components that are created by syrup.",
             "requires": [
-                "monoco-workflow",
-                "monoco-db",
-                "monoco-metamodel",
-                "monoco-behavior",
-                "monoco-helper",
-                "monoco-log"
+                "syrup-workflow",
+                "syrup-db",
+                "syrup-metamodel",
+                "syrup-behavior",
+                "syrup-helper",
+                "syrup-log"
             ]
         },
-        "monoco-db": {
-            "name": "monoco-db",
-            "shortname": "monoco-db",
+        "syrup-db": {
+            "name": "syrup-db",
+            "shortname": "syrup-db",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "monoco",
-            "submodule": "monoco-db",
+            "module": "syrup",
+            "submodule": "syrup-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 774,
-            "description": "This module manages monoco database. <br>\nmonoco database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nmonoco database is closely linked to monoco metamodel because: <br>\n- all operations done by monoco database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
+            "line": 779,
+            "description": "This module manages syrup database. <br>\nsyrup database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nsyrup database is closely linked to syrup metamodel because: <br>\n- all operations done by syrup database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
-                "monoco-component",
-                "monoco-helper",
-                "monoco-log"
+                "syrup-component",
+                "syrup-helper",
+                "syrup-log"
             ]
         },
-        "MonocoDatabaseCollection": {
-            "name": "MonocoDatabaseCollection",
-            "shortname": "MonocoDatabaseCollection",
+        "SyrupDatabaseCollection": {
+            "name": "SyrupDatabaseCollection",
+            "shortname": "SyrupDatabaseCollection",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "monoco",
-            "submodule": "monoco-db",
+            "module": "syrup",
+            "submodule": "syrup-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 184,
-            "description": "A collection of documents managed by monoco. <br>\nInternal collections manage core objects of monoco (schema, type, ...). <br>\nPublic collections manage components of the same class. <br>",
+            "line": 189,
+            "description": "A collection of documents managed by syrup. <br>\nInternal collections manage core objects of syrup (schema, type, ...). <br>\nPublic collections manage components of the same class. <br>",
             "is_constructor": 1,
             "params": [
                 {
@@ -439,144 +450,144 @@
                 }
             ]
         },
-        "monoco-helper": {
-            "name": "monoco-helper",
-            "shortname": "monoco-helper",
+        "syrup-helper": {
+            "name": "syrup-helper",
+            "shortname": "syrup-helper",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "monoco",
-            "submodule": "monoco-helper",
+            "module": "syrup",
+            "submodule": "syrup-helper",
             "namespace": "",
             "file": "src/helper.js",
-            "line": 110,
+            "line": 136,
             "description": "This module contains all the functions used by all the modules.",
             "requires": [
-                "monoco-db",
-                "monoco-component"
+                "syrup-db",
+                "syrup-component"
             ]
         },
-        "monoco-log": {
-            "name": "monoco-log",
-            "shortname": "monoco-log",
+        "syrup-log": {
+            "name": "syrup-log",
+            "shortname": "syrup-log",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "monoco",
-            "submodule": "monoco-log",
+            "module": "syrup",
+            "submodule": "syrup-log",
             "namespace": "",
             "file": "src/log.js",
-            "line": 446,
+            "line": 451,
             "description": "This module contains all the functions that write a log.",
             "requires": [
-                "monoco-helper"
+                "syrup-helper"
             ]
         },
-        "monoco-metamodel": {
-            "name": "monoco-metamodel",
-            "shortname": "monoco-metamodel",
+        "syrup-metamodel": {
+            "name": "syrup-metamodel",
+            "shortname": "syrup-metamodel",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "monoco",
-            "submodule": "monoco-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1392,
-            "description": "This module manages monoco metamodel. <br>\nmonoco metamodel loads schemas and types, analyzes them and creates the component classes and related MonocoDatabaseCollections.",
+            "line": 1398,
+            "description": "This module manages syrup metamodel. <br>\nsyrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.",
             "requires": [
-                "monoco-db",
-                "monoco-log",
-                "monoco-component",
-                "monoco-workflow"
+                "syrup-db",
+                "syrup-log",
+                "syrup-component",
+                "syrup-workflow"
             ]
         },
-        "monoco": {
-            "name": "monoco",
-            "shortname": "monoco",
+        "syrup-state": {
+            "name": "syrup-state",
+            "shortname": "syrup-state",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "monoco",
+            "module": "syrup",
+            "submodule": "syrup-state",
             "namespace": "",
-            "file": "src/monoco.js",
-            "line": 67,
-            "description": "This module is the main module of monoco. <br>\nIt inits monoco metamodel and loads monoco core system.",
+            "file": "src/state.js",
+            "line": 99,
+            "description": "This module manages the states of all the components.",
             "requires": [
-                "monoco-component",
-                "monoco-metamodel",
-                "monoco-system"
+                "syrup-db"
+            ]
+        },
+        "syrup": {
+            "name": "syrup",
+            "shortname": "syrup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "syrup",
+            "namespace": "",
+            "file": "src/syrup.js",
+            "line": 77,
+            "description": "This module is the main module of syrup. <br>\nIt inits syrup metamodel and loads syrup core system.",
+            "requires": [
+                "syrup-component",
+                "syrup-metamodel",
+                "syrup-system"
             ],
-            "mainName": "monoco",
+            "mainName": "syrup",
             "tag": "main",
             "itemtype": "main",
             "_main": true
         },
-        "monoco-state": {
-            "name": "monoco-state",
-            "shortname": "monoco-state",
+        "syrup-workflow": {
+            "name": "syrup-workflow",
+            "shortname": "syrup-workflow",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "monoco",
-            "submodule": "monoco-state",
-            "namespace": "",
-            "file": "src/state.js",
-            "line": 94,
-            "description": "This module manages the states of all the components.",
-            "requires": [
-                "monoco-db"
-            ]
-        },
-        "monoco-workflow": {
-            "name": "monoco-workflow",
-            "shortname": "monoco-workflow",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "monoco",
-            "submodule": "monoco-workflow",
+            "module": "syrup",
+            "submodule": "syrup-workflow",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 695,
-            "description": "This module manages the workflow of monoco. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and monoco. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
+            "line": 700,
+            "description": "This module manages the workflow of syrup. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and syrup. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
-                "monoco-metamodel",
-                "monoco-component",
-                "monoco-behavior",
-                "monoco-channel",
-                "monoco-state",
-                "monoco-helper",
-                "monoco-log",
-                "monoco-db"
+                "syrup-metamodel",
+                "syrup-component",
+                "syrup-behavior",
+                "syrup-channel",
+                "syrup-state",
+                "syrup-helper",
+                "syrup-log",
+                "syrup-db"
             ]
         },
-        "MonocoError": {
-            "name": "MonocoError",
-            "shortname": "MonocoError",
+        "SyrupError": {
+            "name": "SyrupError",
+            "shortname": "SyrupError",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "monoco",
-            "submodule": "monoco-workflow",
+            "module": "syrup",
+            "submodule": "syrup-workflow",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 61,
-            "description": "The MonocoError class.",
+            "line": 66,
+            "description": "The SyrupError class.",
             "is_constructor": 1,
             "params": [
                 {
@@ -586,27 +597,28 @@
                 }
             ]
         },
-        "monoco-system": {
-            "name": "monoco-system",
-            "shortname": "monoco-system",
+        "syrup-system": {
+            "name": "syrup-system",
+            "shortname": "syrup-system",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "monoco",
-            "submodule": "monoco-system",
+            "module": "syrup",
+            "submodule": "syrup-system",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 959,
-            "description": "This module contains monoco core system."
+            "line": 964,
+            "description": "This module contains syrup core system."
         }
     },
+    "elements": {},
     "classitems": [
         {
             "file": "src/behavior.js",
-            "line": 278,
-            "description": "Add a behavior that will be stored in monoco database.",
+            "line": 283,
+            "description": "Add a behavior that will be stored in syrup database.",
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -627,7 +639,7 @@
                 },
                 {
                     "name": "useCoreAPI",
-                    "description": "if true, monoco core modules will be injected as parameters of the action (default false)",
+                    "description": "if true, syrup core modules will be injected as parameters of the action (default false)",
                     "type": "Boolean"
                 },
                 {
@@ -637,16 +649,16 @@
                 }
             ],
             "return": {
-                "description": "id of the behavior created in monoco database",
+                "description": "id of the behavior created in syrup database",
                 "type": "String"
             },
-            "class": "monoco-behavior",
-            "module": "monoco",
-            "submodule": "monoco-behavior"
+            "class": "syrup-behavior",
+            "module": "syrup",
+            "submodule": "syrup-behavior"
         },
         {
             "file": "src/behavior.js",
-            "line": 291,
+            "line": 296,
             "description": "Get a behavior by its id.",
             "itemtype": "method",
             "name": "get",
@@ -661,13 +673,13 @@
                 "description": "the behavior",
                 "type": "Behavior"
             },
-            "class": "monoco-behavior",
-            "module": "monoco",
-            "submodule": "monoco-behavior"
+            "class": "syrup-behavior",
+            "module": "syrup",
+            "submodule": "syrup-behavior"
         },
         {
             "file": "src/behavior.js",
-            "line": 300,
+            "line": 305,
             "description": "Remove a behavior with its id or remove all the behaviors for a specific state\nof the component.",
             "itemtype": "method",
             "name": "remove",
@@ -678,13 +690,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "monoco-behavior",
-            "module": "monoco",
-            "submodule": "monoco-behavior"
+            "class": "syrup-behavior",
+            "module": "syrup",
+            "submodule": "syrup-behavior"
         },
         {
             "file": "src/behavior.js",
-            "line": 312,
+            "line": 317,
             "description": "Get all the actions of a behavior for a component.",
             "itemtype": "method",
             "name": "getActions",
@@ -704,23 +716,23 @@
                 "description": "all the actions that have to be executed for a specific component and state",
                 "type": "Array"
             },
-            "class": "monoco-behavior",
-            "module": "monoco",
-            "submodule": "monoco-behavior"
+            "class": "syrup-behavior",
+            "module": "syrup",
+            "submodule": "syrup-behavior"
         },
         {
             "file": "src/behavior.js",
-            "line": 322,
+            "line": 327,
             "description": "Remove all the behaviors stored in memory.",
             "itemtype": "method",
             "name": "clear",
-            "class": "monoco-behavior",
-            "module": "monoco",
-            "submodule": "monoco-behavior"
+            "class": "syrup-behavior",
+            "module": "syrup",
+            "submodule": "syrup-behavior"
         },
         {
             "file": "src/behavior.js",
-            "line": 329,
+            "line": 334,
             "description": "Remove a behavior with its id from the memory.",
             "itemtype": "method",
             "name": "removeFromMemory",
@@ -731,13 +743,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-behavior",
-            "module": "monoco",
-            "submodule": "monoco-behavior"
+            "class": "syrup-behavior",
+            "module": "syrup",
+            "submodule": "syrup-behavior"
         },
         {
             "file": "src/component.js",
-            "line": 958,
+            "line": 963,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -752,13 +764,13 @@
                 "description": "component",
                 "type": "Component"
             },
-            "class": "monoco-component",
-            "module": "monoco",
-            "submodule": "monoco-component"
+            "class": "syrup-component",
+            "module": "syrup",
+            "submodule": "syrup-component"
         },
         {
             "file": "src/component.js",
-            "line": 968,
+            "line": 973,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -773,23 +785,23 @@
                 "description": "component",
                 "type": "Component"
             },
-            "class": "monoco-component",
-            "module": "monoco",
-            "submodule": "monoco-component"
+            "class": "syrup-component",
+            "module": "syrup",
+            "submodule": "syrup-component"
         },
         {
             "file": "src/component.js",
-            "line": 977,
+            "line": 982,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
-            "class": "monoco-component",
-            "module": "monoco",
-            "submodule": "monoco-component"
+            "class": "syrup-component",
+            "module": "syrup",
+            "submodule": "syrup-component"
         },
         {
             "file": "src/component.js",
-            "line": 984,
+            "line": 989,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -804,13 +816,13 @@
                 "description": "if the component has been destroyed",
                 "type": "Boolean"
             },
-            "class": "monoco-component",
-            "module": "monoco",
-            "submodule": "monoco-component"
+            "class": "syrup-component",
+            "module": "syrup",
+            "submodule": "syrup-component"
         },
         {
             "file": "src/db.js",
-            "line": 206,
+            "line": 211,
             "description": "Find a document into the collection.",
             "itemtype": "method",
             "name": "find",
@@ -828,14 +840,14 @@
             "example": [
                 " \n$db.Person.find({\"name\": \"laure\"}); <br>\n$db.Person.find({\"name\": \"laure\", \"age\" : 24}); <br>\n$db.Person.find([{\"name\": \"rene\"}, {\"name\": \"robert\"}]);"
             ],
-            "class": "MonocoDatabaseCollection",
-            "module": "monoco",
-            "submodule": "monoco-db"
+            "class": "SyrupDatabaseCollection",
+            "module": "syrup",
+            "submodule": "syrup-db"
         },
         {
             "file": "src/db.js",
-            "line": 253,
-            "description": "Insert an new document into the collection. <br>\nBefore inserting the document, monoco checks that the document is compliant\nwith its class definition. <br> \nThen, after inserting it, we create the component.",
+            "line": 258,
+            "description": "Insert an new document into the collection. <br>\nBefore inserting the document, syrup checks that the document is compliant\nwith its class definition. <br> \nThen, after inserting it, we create the component.",
             "itemtype": "method",
             "name": "insert",
             "params": [
@@ -852,13 +864,13 @@
             "example": [
                 " \n$db.Person.insert({<br>\n     \"name\": \"bob\", <br>\n     \"firstName\": \"Saint-Clar\", <br>\n     \"age\": 43 <br>\n}); <br>"
             ],
-            "class": "MonocoDatabaseCollection",
-            "module": "monoco",
-            "submodule": "monoco-db"
+            "class": "SyrupDatabaseCollection",
+            "module": "syrup",
+            "submodule": "syrup-db"
         },
         {
             "file": "src/db.js",
-            "line": 338,
+            "line": 343,
             "description": "Update documents into a collection.",
             "itemtype": "method",
             "name": "update",
@@ -886,13 +898,13 @@
             "example": [
                 " \n$db.Cars.update({\"code\": \"AZD-71\"}, {\"price\": \"10000$\"}); <br>\n$db.Cars.update([{\"code\": \"AZD-71\"}, {\"code\": \"AZD-65\"}], {\"price\": \"10000$\"}); <br>\n$db.Cars.update({\"code\": \"AZD-71\"}, {\"price\": \"10000$\"}, {\"upsert\": true}); <br>"
             ],
-            "class": "MonocoDatabaseCollection",
-            "module": "monoco",
-            "submodule": "monoco-db"
+            "class": "SyrupDatabaseCollection",
+            "module": "syrup",
+            "submodule": "syrup-db"
         },
         {
             "file": "src/db.js",
-            "line": 417,
+            "line": 422,
             "description": "Remove a document from the colllection. <br>\nWhen a document is removed, the component is destroyed.",
             "itemtype": "method",
             "name": "remove",
@@ -910,13 +922,13 @@
             "example": [
                 " \n$db.Cars.remove({\"code\": \"AZD-71\"}); <br>\n$db.Cars.remove([{\"code\": \"AZD-71\"}, {\"code\": \"AZD-65\"}]); <br>"
             ],
-            "class": "MonocoDatabaseCollection",
-            "module": "monoco",
-            "submodule": "monoco-db"
+            "class": "SyrupDatabaseCollection",
+            "module": "syrup",
+            "submodule": "syrup-db"
         },
         {
             "file": "src/db.js",
-            "line": 494,
+            "line": 499,
             "description": "Count the number of documents in the collection.",
             "itemtype": "method",
             "name": "count",
@@ -924,14 +936,14 @@
                 "description": "number of documents in the collection",
                 "type": "Number"
             },
-            "class": "MonocoDatabaseCollection",
-            "module": "monoco",
-            "submodule": "monoco-db"
+            "class": "SyrupDatabaseCollection",
+            "module": "syrup",
+            "submodule": "syrup-db"
         },
         {
             "file": "src/db.js",
-            "line": 795,
-            "description": "Create a new {{#crossLink \"MonocoDatabaseCollection\"}}{{/crossLink}}.",
+            "line": 800,
+            "description": "Create a new {{#crossLink \"SyrupDatabaseCollection\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "collection",
             "params": [
@@ -941,46 +953,46 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-db",
-            "module": "monoco",
-            "submodule": "monoco-db"
+            "class": "syrup-db",
+            "module": "syrup",
+            "submodule": "syrup-db"
         },
         {
             "file": "src/db.js",
-            "line": 803,
-            "description": "monoco database store that lists all the collections.",
+            "line": 808,
+            "description": "syrup database store that lists all the collections.",
             "itemtype": "property",
             "name": "store",
             "type": "JSON",
-            "class": "monoco-db",
-            "module": "monoco",
-            "submodule": "monoco-db"
+            "class": "syrup-db",
+            "module": "syrup",
+            "submodule": "syrup-db"
         },
         {
             "file": "src/db.js",
-            "line": 810,
-            "description": "Import/Export a monoco system into/from the database.",
+            "line": 815,
+            "description": "Import/Export a syrup system into/from the database.",
             "itemtype": "method",
             "name": "system",
             "params": [
                 {
                     "name": "importedSystem",
-                    "description": "a monoco system to import",
+                    "description": "a syrup system to import",
                     "type": "JSON"
                 }
             ],
             "return": {
-                "description": "the id of the imported monoco system or the current monoco system",
+                "description": "the id of the imported syrup system or the current syrup system",
                 "type": "String"
             },
-            "class": "monoco-db",
-            "module": "monoco",
-            "submodule": "monoco-db"
+            "class": "syrup-db",
+            "module": "syrup",
+            "submodule": "syrup-db"
         },
         {
             "file": "src/db.js",
-            "line": 819,
-            "description": "Export a monoco sub-system.",
+            "line": 824,
+            "description": "Export a syrup sub-system.",
             "itemtype": "method",
             "name": "subsystem",
             "params": [
@@ -991,67 +1003,67 @@
                 }
             ],
             "return": {
-                "description": "a stringified monoco sub-system",
+                "description": "a stringified syrup sub-system",
                 "type": "String"
             },
             "example": [
                 "\n$db.subsystem({\"schemas\":{\"name\":\"Person\"}}); // filter export on schemas <br>\n$db.subsystem({\"types\":{\"name\":\"address\"}}); // filter export on types <br>\n$db.subsystem({\"behaviors\":{\"component\":\"laure\"}}); // filter export on behaviors <br>\n$db.subsystem({\"components\":{\"Person\": {\"country\": \"France\"}}}); // filter export on components <br>\n$db.subsystem({\"schemas\":{\"name\":\"Person\"},\"components\":{\"Person\": {\"country\": \"France\"}}}); // combine filters"
             ],
-            "class": "monoco-db",
-            "module": "monoco",
-            "submodule": "monoco-db"
+            "class": "syrup-db",
+            "module": "syrup",
+            "submodule": "syrup-db"
         },
         {
             "file": "src/db.js",
-            "line": 835,
+            "line": 840,
             "description": "Clear the database.",
             "itemtype": "method",
             "name": "clear",
-            "class": "monoco-db",
-            "module": "monoco",
-            "submodule": "monoco-db"
+            "class": "syrup-db",
+            "module": "syrup",
+            "submodule": "syrup-db"
         },
         {
             "file": "src/db.js",
-            "line": 842,
+            "line": 847,
             "description": "Init the database.",
             "itemtype": "method",
             "name": "init",
-            "class": "monoco-db",
-            "module": "monoco",
-            "submodule": "monoco-db"
+            "class": "syrup-db",
+            "module": "syrup",
+            "submodule": "syrup-db"
         },
         {
             "file": "src/helper.js",
-            "line": 122,
-            "description": "Get monoco instance.",
+            "line": 148,
+            "description": "Get syrup instance.",
             "itemtype": "method",
-            "name": "getMonoco",
+            "name": "getSyrup",
             "return": {
-                "description": "monoco instance",
-                "type": "Monoco"
+                "description": "syrup instance",
+                "type": "Syrup"
             },
-            "class": "monoco-helper",
-            "module": "monoco",
-            "submodule": "monoco-helper"
+            "class": "syrup-helper",
+            "module": "syrup",
+            "submodule": "syrup-helper"
         },
         {
             "file": "src/helper.js",
-            "line": 130,
-            "description": "Check if a monoco instance exists.",
+            "line": 156,
+            "description": "Check if a syrup instance exists.",
             "itemtype": "method",
-            "name": "isMonoco",
+            "name": "isSyrup",
             "return": {
-                "description": "true if a monoco instance exist",
+                "description": "true if a syrup instance exist",
                 "type": "Boolean"
             },
-            "class": "monoco-helper",
-            "module": "monoco",
-            "submodule": "monoco-helper"
+            "class": "syrup-helper",
+            "module": "syrup",
+            "submodule": "syrup-helper"
         },
         {
             "file": "src/helper.js",
-            "line": 138,
+            "line": 164,
             "description": "Generate a uuid.",
             "itemtype": "method",
             "name": "generateId",
@@ -1059,13 +1071,23 @@
                 "description": "a uuid",
                 "type": "String"
             },
-            "class": "monoco-helper",
-            "module": "monoco",
-            "submodule": "monoco-helper"
+            "class": "syrup-helper",
+            "module": "syrup",
+            "submodule": "syrup-helper"
+        },
+        {
+            "file": "src/helper.js",
+            "line": 172,
+            "description": "Add Polyfill",
+            "itemtype": "method",
+            "name": "polyfill",
+            "class": "syrup-helper",
+            "module": "syrup",
+            "submodule": "syrup-helper"
         },
         {
             "file": "src/log.js",
-            "line": 385,
+            "line": 390,
             "description": "A message send by the channel is invalid",
             "itemtype": "method",
             "name": "invalidChannelEvent",
@@ -1086,13 +1108,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 457,
+            "line": 462,
             "description": "A property of a schema is unknown.",
             "itemtype": "method",
             "name": "unknownProperty",
@@ -1108,13 +1130,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 466,
+            "line": 471,
             "description": "Invalid type for a property.",
             "itemtype": "method",
             "name": "invalidPropertyType",
@@ -1135,13 +1157,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 476,
+            "line": 481,
             "description": "Invalid value for a type enum.",
             "itemtype": "method",
             "name": "invalidEnumValue",
@@ -1157,13 +1179,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 485,
+            "line": 490,
             "description": "Invalid class name for a component.",
             "itemtype": "method",
             "name": "invalidClassName",
@@ -1184,13 +1206,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 495,
+            "line": 500,
             "description": "Missing a property.",
             "itemtype": "method",
             "name": "missingProperty",
@@ -1201,13 +1223,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 503,
+            "line": 508,
             "description": "A class definition is missing.",
             "itemtype": "method",
             "name": "missingImplementation",
@@ -1223,13 +1245,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 512,
+            "line": 517,
             "description": "Invalid type for a property of a class definition.",
             "itemtype": "method",
             "name": "invalidTypeImp",
@@ -1245,13 +1267,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 521,
+            "line": 526,
             "description": "Missing a property for a class definition.",
             "itemtype": "method",
             "name": "missingPropertyImp",
@@ -1267,13 +1289,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 530,
+            "line": 535,
             "description": "Unkown property for a class definition.",
             "itemtype": "method",
             "name": "unknownPropertyImp",
@@ -1289,13 +1311,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 539,
+            "line": 544,
             "description": "Invalid type definition.",
             "itemtype": "method",
             "name": "invalidTypeDefinition",
@@ -1306,13 +1328,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 547,
+            "line": 552,
             "description": "Invalid property type.",
             "itemtype": "method",
             "name": "invalidPropertyName",
@@ -1338,13 +1360,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 558,
+            "line": 563,
             "description": "Trying to set a read-only property.",
             "itemtype": "method",
             "name": "readOnlyProperty",
@@ -1360,14 +1382,14 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 567,
-            "description": "Invalid document on a monoco database insert operation.",
+            "line": 572,
+            "description": "Invalid document on a syrup database insert operation.",
             "itemtype": "method",
             "name": "invalidDocumentOnDbInsert",
             "params": [
@@ -1382,14 +1404,14 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 576,
-            "description": "Invalid property on a monoco database update operation.",
+            "line": 581,
+            "description": "Invalid property on a syrup database update operation.",
             "itemtype": "method",
             "name": "invalidPropertyTypeOnDbUpdate",
             "params": [
@@ -1419,13 +1441,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 588,
+            "line": 593,
             "description": "Call an unknown method of a class.",
             "itemtype": "method",
             "name": "unknownMethod",
@@ -1441,14 +1463,14 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 597,
-            "description": "Try to create an invalid MonocoDatabaseCollection.",
+            "line": 602,
+            "description": "Try to create an invalid SyrupDatabaseCollection.",
             "itemtype": "method",
             "name": "invalidCollectionName",
             "params": [
@@ -1458,13 +1480,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 605,
+            "line": 610,
             "description": "Invalid result type of a method.",
             "itemtype": "method",
             "name": "invalidResultType",
@@ -1480,13 +1502,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 614,
+            "line": 619,
             "description": "Unknown class.",
             "itemtype": "method",
             "name": "unknownComponent",
@@ -1502,23 +1524,23 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 623,
-            "description": "The monoco workflow has been restarted.",
+            "line": 628,
+            "description": "The syrup workflow has been restarted.",
             "itemtype": "method",
             "name": "workflowRestarted",
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 630,
+            "line": 635,
             "description": "Invalid parameter number for a method.",
             "itemtype": "method",
             "name": "invalidParamNumber",
@@ -1534,13 +1556,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 639,
+            "line": 644,
             "description": "Invalid type parameters for a method.",
             "itemtype": "method",
             "name": "invalidParamType",
@@ -1561,13 +1583,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 650,
+            "line": 655,
             "description": "Add a more than one behavior to a state.",
             "itemtype": "method",
             "name": "behaviorNotUnique",
@@ -1583,13 +1605,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 659,
+            "line": 664,
             "description": "Can not add a behavior with an invalid state.",
             "itemtype": "method",
             "name": "invalidStateOn",
@@ -1605,13 +1627,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 668,
+            "line": 673,
             "description": "The call to a remove state of the behavior module is invalid.",
             "itemtype": "method",
             "name": "invalidStateOff",
@@ -1627,23 +1649,23 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 677,
+            "line": 682,
             "description": "The master system is not found.",
             "itemtype": "method",
             "name": "masterSystemNotFound",
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 684,
+            "line": 689,
             "description": "Invalid type.",
             "itemtype": "method",
             "name": "invalidType",
@@ -1659,13 +1681,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 693,
+            "line": 698,
             "description": "Unknown type.",
             "itemtype": "method",
             "name": "unknownType",
@@ -1676,13 +1698,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 701,
+            "line": 706,
             "description": "A component has not been alreay created.",
             "itemtype": "method",
             "name": "canNotYetValidate",
@@ -1698,13 +1720,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 710,
+            "line": 715,
             "description": "A message send by the channel is invalid",
             "itemtype": "method",
             "name": "invalidChannelEvent",
@@ -1725,13 +1747,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 720,
+            "line": 725,
             "description": "invalid parameter number for an action add with on method.",
             "itemtype": "method",
             "name": "invalidParamNumberMethodOn",
@@ -1747,13 +1769,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 729,
+            "line": 734,
             "description": "Create a component with an id that is already used.",
             "itemtype": "method",
             "name": "idAlreadyUsed",
@@ -1764,13 +1786,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 737,
+            "line": 742,
             "description": "Change the id of a component.",
             "itemtype": "method",
             "name": "updateUuid",
@@ -1791,14 +1813,14 @@
                     "type": "Boolean"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 747,
-            "description": "Unkonw property on a monoco database update operation.",
+            "line": 752,
+            "description": "Unkonw property on a syrup database update operation.",
             "itemtype": "method",
             "name": "unknownPropertyOnDbUpdate",
             "params": [
@@ -1813,13 +1835,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/log.js",
-            "line": 756,
+            "line": 761,
             "description": "Try to change the state of a component that has been destroyed",
             "itemtype": "method",
             "name": "invalideUseOfComponent",
@@ -1830,33 +1852,33 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-log",
-            "module": "monoco",
-            "submodule": "monoco-log"
+            "class": "syrup-log",
+            "module": "syrup",
+            "submodule": "syrup-log"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1407,
+            "line": 1413,
             "description": "Init the metamodel.",
             "itemtype": "method",
             "name": "init",
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1414,
+            "line": 1420,
             "description": "Remove the data of the metamodel from the memory.",
             "itemtype": "method",
             "name": "clear",
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1421,
+            "line": 1427,
             "description": "Add a new schema.",
             "itemtype": "method",
             "name": "schema",
@@ -1867,13 +1889,13 @@
                     "type": "JSON"
                 }
             ],
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1429,
+            "line": 1435,
             "description": "Add a new type.",
             "itemtype": "method",
             "name": "type",
@@ -1884,23 +1906,23 @@
                     "type": "JSON"
                 }
             ],
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1437,
+            "line": 1443,
             "description": "Create the metamodel.",
             "itemtype": "method",
             "name": "create",
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1444,
+            "line": 1450,
             "description": "Get a schema.",
             "itemtype": "method",
             "name": "get",
@@ -1915,13 +1937,13 @@
                 "description": "the schema",
                 "type": "Object"
             },
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1453,
+            "line": 1459,
             "description": "Get the definition of the metamodel.",
             "itemtype": "method",
             "name": "getMetaDef",
@@ -1929,13 +1951,13 @@
                 "description": "the metadefinition of the metamodel",
                 "type": "Object"
             },
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1461,
+            "line": 1467,
             "description": "Get parents of a shema if any.",
             "itemtype": "method",
             "name": "getParents",
@@ -1950,13 +1972,13 @@
                 "description": "id id of the parents",
                 "type": "Array"
             },
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1470,
+            "line": 1476,
             "description": "Check if a class inherits from another one",
             "itemtype": "method",
             "name": "inheritFrom",
@@ -1976,13 +1998,13 @@
                 "description": "true if the component inherit from the specific class name",
                 "type": "Boolean"
             },
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1480,
+            "line": 1486,
             "description": "Check if the object is compliant with the schema.\nUse it to test if the constructor of an object is compliant\nwith the definition of the class.",
             "itemtype": "method",
             "name": "isValidObject",
@@ -2012,13 +2034,13 @@
                 "description": "true is the object is compliant with the schema",
                 "type": "Boolean"
             },
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1494,
+            "line": 1500,
             "description": "Prepare the object in order to be compliant with the schema.",
             "itemtype": "method",
             "name": "prepareObject",
@@ -2034,13 +2056,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1503,
+            "line": 1509,
             "description": "Check if a value is compliant with a type.",
             "itemtype": "method",
             "name": "isValidType",
@@ -2060,13 +2082,13 @@
                 "description": "true if the object is compliant with the type",
                 "type": "Boolean"
             },
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1513,
+            "line": 1519,
             "description": "Check if a value is compliant with a type enum.",
             "itemtype": "method",
             "name": "isValidEnum",
@@ -2086,13 +2108,13 @@
                 "description": "true if the object is compliant with the enum",
                 "type": "Boolean"
             },
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1523,
+            "line": 1529,
             "description": "Check if the name is a correct state for the component.",
             "itemtype": "method",
             "name": "isValidState",
@@ -2112,13 +2134,13 @@
                 "description": "true if the name is a correct state for the component",
                 "type": "Boolean"
             },
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1533,
+            "line": 1539,
             "description": "Check if an attribute of the schema is an event.",
             "itemtype": "method",
             "name": "isEvent",
@@ -2138,13 +2160,13 @@
                 "description": "true if the attribute is an event",
                 "type": "Boolean"
             },
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1543,
+            "line": 1549,
             "description": "Check if an attribute of the schema is a property.",
             "itemtype": "method",
             "name": "isProperty",
@@ -2164,13 +2186,13 @@
                 "description": "true if the attribute is a property",
                 "type": "Boolean"
             },
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1553,
+            "line": 1559,
             "description": "Check if an attribute of the schema is a collection.",
             "itemtype": "method",
             "name": "isCollection",
@@ -2190,13 +2212,13 @@
                 "description": "true if the attribute is a collection",
                 "type": "Boolean"
             },
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1563,
+            "line": 1569,
             "description": "Check if an attribute of the schema is a method.",
             "itemtype": "method",
             "name": "isMethod",
@@ -2216,23 +2238,13 @@
                 "description": "true if the attribute is a method",
                 "type": "Boolean"
             },
-            "class": "monoco-metamodel",
-            "module": "monoco",
-            "submodule": "monoco-metamodel"
-        },
-        {
-            "file": "src/monoco.js",
-            "line": 81,
-            "description": "monoco instance.",
-            "itemtype": "property",
-            "name": "monoco",
-            "type": "Monoco",
-            "class": "monoco",
-            "module": "monoco"
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
         },
         {
             "file": "src/state.js",
-            "line": 105,
+            "line": 110,
             "description": "Set the state of a component.",
             "itemtype": "method",
             "name": "set",
@@ -2248,13 +2260,13 @@
                     "type": "String"
                 }
             ],
-            "class": "monoco-state",
-            "module": "monoco",
-            "submodule": "monoco-state"
+            "class": "syrup-state",
+            "module": "syrup",
+            "submodule": "syrup-state"
         },
         {
             "file": "src/state.js",
-            "line": 114,
+            "line": 119,
             "description": "Get the state of a component.",
             "itemtype": "method",
             "name": "get",
@@ -2269,23 +2281,33 @@
                 "description": "the state of the component.",
                 "type": "String"
             },
-            "class": "monoco-state",
-            "module": "monoco",
-            "submodule": "monoco-state"
+            "class": "syrup-state",
+            "module": "syrup",
+            "submodule": "syrup-state"
         },
         {
             "file": "src/state.js",
-            "line": 123,
+            "line": 128,
             "description": "Remove all the states of the components from the memory.",
             "itemtype": "method",
             "name": "clear",
-            "class": "monoco-state",
-            "module": "monoco",
-            "submodule": "monoco-state"
+            "class": "syrup-state",
+            "module": "syrup",
+            "submodule": "syrup-state"
+        },
+        {
+            "file": "src/syrup.js",
+            "line": 91,
+            "description": "syrup instance.",
+            "itemtype": "property",
+            "name": "syrup",
+            "type": "Syrup",
+            "class": "syrup",
+            "module": "syrup"
         },
         {
             "file": "src/workflow.js",
-            "line": 720,
+            "line": 725,
             "description": "Change the state of a component.\n\nWorklow:<br>\n<br>\n0. Check if the component has not been destroyed <br>\n1. Check if the state is a method or an event <br>\n2. Search if there is a behavior with an action for the new state <br>\n3. If so, get the action(s) <br>\n4. Check if the conditons on input are compliant with the metamodel <br>\n5. Call the action(s) <br>\n6. If not an of event, check if the conditons on input are compliant with the metamodel <br>\n7. If all is ok, the state of the component is updated <br>\n8. Return the result <br>",
             "itemtype": "method",
             "name": "state",
@@ -2296,13 +2318,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "monoco-workflow",
-            "module": "monoco",
-            "submodule": "monoco-workflow"
+            "class": "syrup-workflow",
+            "module": "syrup",
+            "submodule": "syrup-workflow"
         },
         {
             "file": "src/workflow.js",
-            "line": 744,
+            "line": 749,
             "description": "Stop the workflow engine.",
             "itemtype": "method",
             "name": "stop",
@@ -2313,23 +2335,23 @@
                     "type": "Object"
                 }
             ],
-            "class": "monoco-workflow",
-            "module": "monoco",
-            "submodule": "monoco-workflow"
+            "class": "syrup-workflow",
+            "module": "syrup",
+            "submodule": "syrup-workflow"
         },
         {
             "file": "src/workflow.js",
-            "line": 754,
+            "line": 759,
             "description": "Restart the workflow engine from the last state.",
             "itemtype": "method",
             "name": "restart",
-            "class": "monoco-workflow",
-            "module": "monoco",
-            "submodule": "monoco-workflow"
+            "class": "syrup-workflow",
+            "module": "syrup",
+            "submodule": "syrup-workflow"
         },
         {
             "file": "src/workflow.js",
-            "line": 761,
+            "line": 766,
             "description": "Check if conditions on input are compliant with the model before calling the action.",
             "itemtype": "method",
             "name": "checkParams",
@@ -2344,13 +2366,13 @@
                 "description": "true if condition on input are compliant with the model",
                 "type": "Boolean"
             },
-            "class": "monoco-workflow",
-            "module": "monoco",
-            "submodule": "monoco-workflow"
+            "class": "syrup-workflow",
+            "module": "syrup",
+            "submodule": "syrup-workflow"
         },
         {
             "file": "src/workflow.js",
-            "line": 770,
+            "line": 775,
             "description": "Check if an action has the valid number of parameter.",
             "itemtype": "method",
             "name": "validParamNumbers",
@@ -2375,13 +2397,13 @@
                 "description": "true if the action is the valid number of parameters",
                 "type": "Boolean"
             },
-            "class": "monoco-workflow",
-            "module": "monoco",
-            "submodule": "monoco-workflow"
+            "class": "syrup-workflow",
+            "module": "syrup",
+            "submodule": "syrup-workflow"
         },
         {
             "file": "src/workflow.js",
-            "line": 781,
+            "line": 786,
             "description": "Call an action that comes from an event.",
             "itemtype": "method",
             "name": "action",
@@ -2397,20 +2419,20 @@
                     "type": "Array"
                 }
             ],
-            "class": "monoco-workflow",
-            "module": "monoco",
-            "submodule": "monoco-workflow"
+            "class": "syrup-workflow",
+            "module": "syrup",
+            "submodule": "syrup-workflow"
         },
         {
             "file": "build/system/system.js",
-            "line": 969,
-            "description": "monoco core system",
+            "line": 974,
+            "description": "syrup core system",
             "itemtype": "property",
             "name": "system",
-            "type": "MonocoSystem",
-            "class": "monoco-system",
-            "module": "monoco",
-            "submodule": "monoco-system"
+            "type": "SyrupSystem",
+            "class": "syrup-system",
+            "module": "syrup",
+            "submodule": "syrup-system"
         }
     ],
     "warnings": []

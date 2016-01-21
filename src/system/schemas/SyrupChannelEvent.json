@@ -1,0 +1,5 @@
+{
+	"_id": "SyrupChannelEvent",
+	"_name": "SyrupChannelEvent",
+	"_schema": "SyrupChannelEventSchema"
+}

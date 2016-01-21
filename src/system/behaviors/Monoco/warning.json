@@ -1,6 +1,0 @@
-{
-	"component": "Monoco",
-	"state": "warning",
-	"action": "function warning(message) {\n    console.warn('monoco: ' + message);\n}",
-	"core": true
-}

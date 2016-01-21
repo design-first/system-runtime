@@ -1,7 +1,0 @@
-{
-	"component": "MonocoSystem",
-	"state": "sync",
-	"action": "function sync() {\n    var system = JSON.parse($db.system());\n    \n    this.schemas(system.schemas);\n    this.types(system.types);\n    this.behaviors(system.behaviors);\n    this.components(system.components);\n}",
-	"core": true,
-	"useCoreAPI": true
-}

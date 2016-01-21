@@ -1,0 +1,12 @@
+{
+    "_id": "SyrupComponentSchema",
+    "_name": "SyrupComponentSchema",
+    "_core": true,
+    "classInfo": "property",
+    "on": "method",
+    "off": "method",
+    "require": "method",
+    "destroy": "method",
+    "init": "method",
+    "error": "event"
+}

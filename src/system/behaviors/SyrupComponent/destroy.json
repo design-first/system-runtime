@@ -1,0 +1,7 @@
+{
+	"component": "SyrupComponent",
+	"state": "destroy",
+	"action": "function destroy() {\n    $component.destroy(this.id());\n}",
+	"core": true,
+	"useCoreAPI": true
+}

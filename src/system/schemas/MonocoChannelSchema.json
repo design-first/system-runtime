@@ -1,7 +1,0 @@
-{
-    "_id": "MonocoChannelSchema",
-    "_name": "MonocoChannelSchema",
-    "_inherit": ["MonocoComponentSchema", "MonocoChannelEventSchema"],
-    "_core": true,
-    "send": "event"
-}

@@ -1,8 +1,0 @@
-{
-    "_id": "MonocoMessageSchema",
-    "_name": "MonocoMessageSchema",
-    "_core": true,
-    "event": "property",
-    "from": "property",
-    "data": "property"
-}

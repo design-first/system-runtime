@@ -1,0 +1,7 @@
+{
+	"component": "SyrupDatabase",
+	"state": "subsystem",
+	"action": "function subsystem(params) {\n    return $db.subsystem(params);\n}",
+	"core": true,
+	"useCoreAPI": true
+}
