@@ -17,7 +17,8 @@ SyrupJS is a JavaScript library that manages JavaScript Application Systems.
 $ npm install system-runtime --save
 ```
 
-Then require SyrupJS:
+Then:
+
 ```js
 var syrup = require('system-runtime');
 ```
