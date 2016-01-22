@@ -7,7 +7,7 @@
 
 #### What is SyrupJS ?
 
-It is the System Runtime Platform for application created by System Designer.
+It is the System Runtime Platform for JavaScript Application Systems.
 
 ## Installation
 
