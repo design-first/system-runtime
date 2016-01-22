@@ -1,7 +1,7 @@
 # SyrupJS
 
 [![npm version](https://badge.fury.io/js/system-runtime.svg)](http://badge.fury.io/js/system-runtime)
-[![Build Status](https://travis-ci.org/system-sdk/system-sdk.svg?branch=master)](https://travis-ci.org/system-sdk/system-runtime)
+[![Build Status](https://travis-ci.org/system-sdk/system-runtime.svg?branch=master)](https://travis-ci.org/system-sdk/system-runtime)
 [![Coverage Status](https://img.shields.io/coveralls/system-sdk/system-runtime.svg)](https://coveralls.io/r/system-sdk/system-runtime)
 [![devDependency Status](https://david-dm.org/system-sdk/system-runtime/dev-status.svg)](https://david-dm.org/system-sdk/system-runtime#info=devDependencies)
 
