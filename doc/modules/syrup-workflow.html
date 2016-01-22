@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.1</b>
+                    API Docs for Version: <b>0.9.2</b>
                 </p>
             </li>
         </div>
@@ -33,116 +33,116 @@
 <div class="container">
     <div class="row">
         <div class="span3">
-	    <div>
-	        <div id="sidebar">
-	        <div id="classes">
-	            <ul id="api-classes" class="nav nav-list">
-	                    <li><a href="../classes/syrup.html">syrup</a></li>
-	                    <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
-	                    <li><a href="../classes/syrup-component.html">syrup-component</a></li>
-	                    <li><a href="../classes/syrup-db.html">syrup-db</a></li>
-	                    <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
-	                    <li><a href="../classes/syrup-log.html">syrup-log</a></li>
-	                    <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
-	                    <li><a href="../classes/syrup-state.html">syrup-state</a></li>
-	                    <li><a href="../classes/syrup-system.html">syrup-system</a></li>
-	                    <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
-	                    <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
-	                    <li><a href="../classes/SyrupError.html">SyrupError</a></li>
-	            </ul>
-	        </div>
-	        </div>
-	    </div>
+<div>
+    <div id="sidebar">
+    <div id="classes">
+        <ul id="api-classes" class="nav nav-list">
+                <li><a href="../classes/syrup.html">syrup</a></li>
+                <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
+                <li><a href="../classes/syrup-component.html">syrup-component</a></li>
+                <li><a href="../classes/syrup-db.html">syrup-db</a></li>
+                <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
+                <li><a href="../classes/syrup-log.html">syrup-log</a></li>
+                <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
+                <li><a href="../classes/syrup-state.html">syrup-state</a></li>
+                <li><a href="../classes/syrup-system.html">syrup-system</a></li>
+                <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
+                <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
+                <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+        </ul>
+    </div>
+    </div>
+</div>
         </div>
         <div class="span9">
-                <form id="options-form" class="form-inline pull-right">
-                    Show:
-                    <label for="api-show-inherited" class="checkbox">
-                        <input type="checkbox" id="api-show-inherited" checked>
-                        Inherited
-                    </label>
-            
-                    <label for="api-show-protected" class="checkbox">
-                        <input type="checkbox" id="api-show-protected">
-                        Protected
-                    </label>
-            
-                    <label for="api-show-private" class="checkbox">
-                        <input type="checkbox" id="api-show-private">
-                        Private
-                    </label>
-                    <label for="api-show-deprecated" class="checkbox">
-                        <input type="checkbox" id="api-show-deprecated">
-                        Deprecated
-                    </label>
-            
-                </form>
-            
+    <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <div class="page-header">
-                            <h1>syrup-workflow <small>Module</small></h1>
-                        </div>
-                        
-                        <div class="clearfix well well-small">
-                        
-                                <div class="uses">
-                                    Requires
-                                    <ul class="inline commas">
-                                            <li><a href="../modules/syrup-metamodel.html">syrup-metamodel</a></li>
-                                            <li><a href="../modules/syrup-component.html">syrup-component</a></li>
-                                            <li><a href="../modules/syrup-behavior.html">syrup-behavior</a></li>
-                                            <li>syrup-channel</li>
-                                            <li><a href="../modules/syrup-state.html">syrup-state</a></li>
-                                            <li><a href="../modules/syrup-helper.html">syrup-helper</a></li>
-                                            <li><a href="../modules/syrup-log.html">syrup-log</a></li>
-                                            <li><a href="../modules/syrup-db.html">syrup-db</a></li>
-                                    </ul>
-                                </div>
-                        
-                                <div class="foundat">
-                                    Defined in: <a href="../files/src_workflow.js.html#l66"><code>src&#x2F;workflow.js:66</code></a>
-                                </div>
-                        
-                        </div>
-                        
-                        
-                        <div class="moduledesc well well-small">
-                            <p>This module manages the workflow of syrup. It behaves like a workflow engine. <br>
-                        It checks if the change of status of a component is valid to be executed. By valid, it means that:<br></p>
-                        <ul>
-                        <li>the state is valid for the component, <br></li>
-                        <li>the input (i.e. parameters) of all actions for the state are compliants with the model and <br></li>
-                        <li>the output of all actions are compliants with the model. <br></li>
-                        </ul>
-                        <p>If an error occurs, the workflow will call the error state of the component and syrup. <br>
-                        If the error can break the consistency of the current system, the worklow will stop.</p>
-                        
-                        </div>
-                        
-                        
-                        <div class="yui3-g">
-                            <div class="yui3-u-1-2">
-                                    <p>This module provides the following classes:</p>
-                        
-                                    <ul class="module-classes">
-                                        <li class="module-class">
-                                            <a href="../classes/syrup-workflow.html">
-                                                syrup-workflow
-                                            </a>
-                                        </li>
-                                        <li class="module-class">
-                                            <a href="../classes/SyrupError.html">
-                                                SyrupError
-                                            </a>
-                                        </li>
-                                    </ul>
-                            </div>
-                        
-                            <div class="yui3-u-1-2">
-                            </div>
-                        </div>
+<div class="page-header">
+    <h1>syrup-workflow <small>Module</small></h1>
+</div>
+
+<div class="clearfix well well-small">
+
+        <div class="uses">
+            Requires
+            <ul class="inline commas">
+                    <li><a href="../modules/syrup-metamodel.html">syrup-metamodel</a></li>
+                    <li><a href="../modules/syrup-component.html">syrup-component</a></li>
+                    <li><a href="../modules/syrup-behavior.html">syrup-behavior</a></li>
+                    <li>syrup-channel</li>
+                    <li><a href="../modules/syrup-state.html">syrup-state</a></li>
+                    <li><a href="../modules/syrup-helper.html">syrup-helper</a></li>
+                    <li><a href="../modules/syrup-log.html">syrup-log</a></li>
+                    <li><a href="../modules/syrup-db.html">syrup-db</a></li>
+            </ul>
+        </div>
+
+        <div class="foundat">
+            Defined in: <a href="../files/src_workflow.js.html#l66"><code>src&#x2F;workflow.js:66</code></a>
+        </div>
+
+</div>
+
+
+<div class="moduledesc well well-small">
+    <p>This module manages the workflow of syrup. It behaves like a workflow engine. <br>
+It checks if the change of status of a component is valid to be executed. By valid, it means that:<br></p>
+<ul>
+<li>the state is valid for the component, <br></li>
+<li>the input (i.e. parameters) of all actions for the state are compliants with the model and <br></li>
+<li>the output of all actions are compliants with the model. <br></li>
+</ul>
+<p>If an error occurs, the workflow will call the error state of the component and syrup. <br>
+If the error can break the consistency of the current system, the worklow will stop.</p>
+
+</div>
+
+
+<div class="yui3-g">
+    <div class="yui3-u-1-2">
+            <p>This module provides the following classes:</p>
+
+            <ul class="module-classes">
+                <li class="module-class">
+                    <a href="../classes/syrup-workflow.html">
+                        syrup-workflow
+                    </a>
+                </li>
+                <li class="module-class">
+                    <a href="../classes/SyrupError.html">
+                        SyrupError
+                    </a>
+                </li>
+            </ul>
+    </div>
+
+    <div class="yui3-u-1-2">
+    </div>
+</div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "0.9.1",
+    "version": "0.9.2",
     "description": "SyrupJS, the System Runtime Platform",
     "homepage": "http://syrupjs.systemdesigner.io",
     "keywords": [
@@ -25,10 +25,10 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/system-designer/system-runtime.git"
+        "url": "https://github.com/system-sdk/system-runtime.git"
     },
     "bugs": {
-        "url": "https://github.com/system-designer/system-runtime/issues"
+        "url": "https://github.com/system-sdk/system-runtime/issues"
     },
     "scripts": {
         "watch": "grunt watch",

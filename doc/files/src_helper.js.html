@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.1</b>
+                    API Docs for Version: <b>0.9.2</b>
                 </p>
             </li>
         </div>
@@ -33,238 +33,238 @@
 <div class="container">
     <div class="row">
         <div class="span3">
-	    <div>
-	        <div id="sidebar">
-	        <div id="classes">
-	            <ul id="api-classes" class="nav nav-list">
-	                    <li><a href="../classes/syrup.html">syrup</a></li>
-	                    <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
-	                    <li><a href="../classes/syrup-component.html">syrup-component</a></li>
-	                    <li><a href="../classes/syrup-db.html">syrup-db</a></li>
-	                    <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
-	                    <li><a href="../classes/syrup-log.html">syrup-log</a></li>
-	                    <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
-	                    <li><a href="../classes/syrup-state.html">syrup-state</a></li>
-	                    <li><a href="../classes/syrup-system.html">syrup-system</a></li>
-	                    <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
-	                    <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
-	                    <li><a href="../classes/SyrupError.html">SyrupError</a></li>
-	            </ul>
-	        </div>
-	        </div>
-	    </div>
+<div>
+    <div id="sidebar">
+    <div id="classes">
+        <ul id="api-classes" class="nav nav-list">
+                <li><a href="../classes/syrup.html">syrup</a></li>
+                <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
+                <li><a href="../classes/syrup-component.html">syrup-component</a></li>
+                <li><a href="../classes/syrup-db.html">syrup-db</a></li>
+                <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
+                <li><a href="../classes/syrup-log.html">syrup-log</a></li>
+                <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
+                <li><a href="../classes/syrup-state.html">syrup-state</a></li>
+                <li><a href="../classes/syrup-system.html">syrup-system</a></li>
+                <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
+                <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
+                <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+        </ul>
+    </div>
+    </div>
+</div>
         </div>
         <div class="span9">
-                <form id="options-form" class="form-inline pull-right">
-                    Show:
-                    <label for="api-show-inherited" class="checkbox">
-                        <input type="checkbox" id="api-show-inherited" checked>
-                        Inherited
-                    </label>
-            
-                    <label for="api-show-protected" class="checkbox">
-                        <input type="checkbox" id="api-show-protected">
-                        Protected
-                    </label>
-            
-                    <label for="api-show-private" class="checkbox">
-                        <input type="checkbox" id="api-show-private">
-                        Private
-                    </label>
-                    <label for="api-show-deprecated" class="checkbox">
-                        <input type="checkbox" id="api-show-deprecated">
-                        Deprecated
-                    </label>
-            
-                </form>
-            
+    <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <div class="page-header">
-                            <h1>src/helper.js <small>File</small></h1>
-                        </div>
-                        
-                        <div class="file">
-                            <pre class="prettyprint linenums">
-                        /*
-                         * SyrupJS
-                         * The System Runtime Platform
-                         * http://syrupjs.systemdesigner.io
-                         * @ecarriou
-                         *  
-                         * Copyright (c) 2016 Erwan Carriou
-                         * 
-                         * Permission is hereby granted, free of charge, to any person obtaining a copy
-                         * of this software and associated documentation files (the &quot;Software&quot;), to deal
-                         * in the Software without restriction, including without limitation the rights
-                         * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-                         * copies of the Software, and to permit persons to whom the Software is
-                         * furnished to do so, subject to the following conditions:
-                         * 
-                         * The above copyright notice and this permission notice shall be included in all
-                         * copies or substantial portions of the Software.
-                         * 
-                         * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-                         * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-                         * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-                         * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-                         * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-                         * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-                         * SOFTWARE. 
-                         */
-                        
-                        /**
-                         * This module contains all the functions used by all the modules.
-                         * 
-                         * @module syrup
-                         * @submodule syrup-helper
-                         * @requires syrup-db
-                         * @requires syrup-component
-                         * @class syrup-helper
-                         * @static
-                         */
-                        
-                        
-                        &#x27;use strict&#x27;;
-                        
-                        var $db = require(&#x27;./db.js&#x27;);
-                        var $component = require(&#x27;./component.js&#x27;);
-                        
-                        
-                        /* Private property */
-                        
-                        
-                        var syrupRef = null;
-                        
-                        
-                        /* Public method */
-                        
-                        
-                        /*
-                         * Check if a syrup instance exists.
-                         * @method isSyrup
-                         * @return {Boolean} true if a syrup instance exist
-                         */
-                        function isSyrup() {
-                            var result = false;
-                        
-                            if ($db.Syrup &amp;&amp; $db.Syrup.find().length) {
-                                result = true;
-                            }
-                        
-                            return result;
-                        }
-                        
-                        
-                        /*
-                         * Get the syrup instance.
-                         * @method getSyrup
-                         * @return {Syrup} syrup instance
-                         */
-                        function getSyrup() {
-                            var syrupId = &#x27;&#x27;;
-                        
-                            if (!syrupRef) {
-                                if (isSyrup()) {
-                                    syrupId = $db.Syrup.find()[0]._id;
-                                    syrupRef = $component.get(syrupId);
-                                } else {
-                                    syrupRef = {
-                                        error: function error(err, data) {
-                                            console.error(&#x27;syrup: &#x27; + err, data);
-                                        },
-                                        warning: function warning(message) {
-                                            console.warn(&#x27;syrup: &#x27; + message);
-                                        }
-                                    };
-                                }
-                            }
-                        
-                            return syrupRef;
-                        }
-                        
-                        
-                        /*
-                         * Generate a uuid.
-                         * @method generateId
-                         * @return {String} a uuid
-                         */
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            return gen() + gen() + gen();
-                        }
-                        
-                        
-                        /*
-                         * Add Polyfill
-                         * @method polyfill
-                         */
-                        function polyfill() {
-                        
-                            // fixing constructor.name property in IE
-                            // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer
-                            if (Function.prototype.name === undefined &amp;&amp; Object.defineProperty !== undefined) {
-                                Object.defineProperty(Function.prototype, &#x27;name&#x27;, {
-                                    get: function () {
-                                        var funcNameRegex = /function\s([^(]{1,})\(/;
-                                        var results = (funcNameRegex).exec((this).toString());
-                                        return (results &amp;&amp; results.length &gt; 1) ? results[1].trim() : &quot;&quot;;
-                                    },
-                                    set: function (value) { }
-                                });
-                            }
-                        }
-                        
-                        
-                        /* exports */
-                        
-                        
-                        /**
-                         * This module contains all the functions used by all the modules.
-                         * 
-                         * @module syrup
-                         * @submodule syrup-helper
-                         * @requires syrup-db
-                         * @requires syrup-component
-                         * @class syrup-helper
-                         * @static
-                         */
-                        
-                        
-                        /**
-                         * Get syrup instance.
-                         * @method getSyrup
-                         * @return {Syrup} syrup instance
-                         */
-                        exports.getSyrup = getSyrup;
-                        
-                        
-                        /**
-                         * Check if a syrup instance exists.
-                         * @method isSyrup
-                         * @return {Boolean} true if a syrup instance exist
-                         */
-                        exports.isSyrup = isSyrup;
-                        
-                        
-                        /**
-                         * Generate a uuid.
-                         * @method generateId
-                         * @return {String} a uuid
-                         */
-                        exports.generateId = generateId;
-                        
-                        
-                        /**
-                         * Add Polyfill
-                         * @method polyfill
-                         */
-                        exports.polyfill = polyfill;
-                            </pre>
-                        </div>
+<div class="page-header">
+    <h1>src/helper.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
+ * @ecarriou
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
+ */
+
+/**
+ * This module contains all the functions used by all the modules.
+ * 
+ * @module syrup
+ * @submodule syrup-helper
+ * @requires syrup-db
+ * @requires syrup-component
+ * @class syrup-helper
+ * @static
+ */
+
+
+&#x27;use strict&#x27;;
+
+var $db = require(&#x27;./db.js&#x27;);
+var $component = require(&#x27;./component.js&#x27;);
+
+
+/* Private property */
+
+
+var syrupRef = null;
+
+
+/* Public method */
+
+
+/*
+ * Check if a syrup instance exists.
+ * @method isSyrup
+ * @return {Boolean} true if a syrup instance exist
+ */
+function isSyrup() {
+    var result = false;
+
+    if ($db.Syrup &amp;&amp; $db.Syrup.find().length) {
+        result = true;
+    }
+
+    return result;
+}
+
+
+/*
+ * Get the syrup instance.
+ * @method getSyrup
+ * @return {Syrup} syrup instance
+ */
+function getSyrup() {
+    var syrupId = &#x27;&#x27;;
+
+    if (!syrupRef) {
+        if (isSyrup()) {
+            syrupId = $db.Syrup.find()[0]._id;
+            syrupRef = $component.get(syrupId);
+        } else {
+            syrupRef = {
+                error: function error(err, data) {
+                    console.error(&#x27;syrup: &#x27; + err, data);
+                },
+                warning: function warning(message) {
+                    console.warn(&#x27;syrup: &#x27; + message);
+                }
+            };
+        }
+    }
+
+    return syrupRef;
+}
+
+
+/*
+ * Generate a uuid.
+ * @method generateId
+ * @return {String} a uuid
+ */
+function generateId() {
+    function gen() {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+    }
+    return gen() + gen() + gen();
+}
+
+
+/*
+ * Add Polyfill
+ * @method polyfill
+ */
+function polyfill() {
+
+    // fixing constructor.name property in IE
+    // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer
+    if (Function.prototype.name === undefined &amp;&amp; Object.defineProperty !== undefined) {
+        Object.defineProperty(Function.prototype, &#x27;name&#x27;, {
+            get: function () {
+                var funcNameRegex = /function\s([^(]{1,})\(/;
+                var results = (funcNameRegex).exec((this).toString());
+                return (results &amp;&amp; results.length &gt; 1) ? results[1].trim() : &quot;&quot;;
+            },
+            set: function (value) { }
+        });
+    }
+}
+
+
+/* exports */
+
+
+/**
+ * This module contains all the functions used by all the modules.
+ * 
+ * @module syrup
+ * @submodule syrup-helper
+ * @requires syrup-db
+ * @requires syrup-component
+ * @class syrup-helper
+ * @static
+ */
+
+
+/**
+ * Get syrup instance.
+ * @method getSyrup
+ * @return {Syrup} syrup instance
+ */
+exports.getSyrup = getSyrup;
+
+
+/**
+ * Check if a syrup instance exists.
+ * @method isSyrup
+ * @return {Boolean} true if a syrup instance exist
+ */
+exports.isSyrup = isSyrup;
+
+
+/**
+ * Generate a uuid.
+ * @method generateId
+ * @return {String} a uuid
+ */
+exports.generateId = generateId;
+
+
+/**
+ * Add Polyfill
+ * @method polyfill
+ */
+exports.polyfill = polyfill;
+    </pre>
+</div>
                     </div>
                 </div>
             </div>

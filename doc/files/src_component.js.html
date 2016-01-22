@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.1</b>
+                    API Docs for Version: <b>0.9.2</b>
                 </p>
             </li>
         </div>
@@ -33,1057 +33,1057 @@
 <div class="container">
     <div class="row">
         <div class="span3">
-	    <div>
-	        <div id="sidebar">
-	        <div id="classes">
-	            <ul id="api-classes" class="nav nav-list">
-	                    <li><a href="../classes/syrup.html">syrup</a></li>
-	                    <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
-	                    <li><a href="../classes/syrup-component.html">syrup-component</a></li>
-	                    <li><a href="../classes/syrup-db.html">syrup-db</a></li>
-	                    <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
-	                    <li><a href="../classes/syrup-log.html">syrup-log</a></li>
-	                    <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
-	                    <li><a href="../classes/syrup-state.html">syrup-state</a></li>
-	                    <li><a href="../classes/syrup-system.html">syrup-system</a></li>
-	                    <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
-	                    <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
-	                    <li><a href="../classes/SyrupError.html">SyrupError</a></li>
-	            </ul>
-	        </div>
-	        </div>
-	    </div>
+<div>
+    <div id="sidebar">
+    <div id="classes">
+        <ul id="api-classes" class="nav nav-list">
+                <li><a href="../classes/syrup.html">syrup</a></li>
+                <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
+                <li><a href="../classes/syrup-component.html">syrup-component</a></li>
+                <li><a href="../classes/syrup-db.html">syrup-db</a></li>
+                <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
+                <li><a href="../classes/syrup-log.html">syrup-log</a></li>
+                <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
+                <li><a href="../classes/syrup-state.html">syrup-state</a></li>
+                <li><a href="../classes/syrup-system.html">syrup-system</a></li>
+                <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
+                <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
+                <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+        </ul>
+    </div>
+    </div>
+</div>
         </div>
         <div class="span9">
-                <form id="options-form" class="form-inline pull-right">
-                    Show:
-                    <label for="api-show-inherited" class="checkbox">
-                        <input type="checkbox" id="api-show-inherited" checked>
-                        Inherited
-                    </label>
-            
-                    <label for="api-show-protected" class="checkbox">
-                        <input type="checkbox" id="api-show-protected">
-                        Protected
-                    </label>
-            
-                    <label for="api-show-private" class="checkbox">
-                        <input type="checkbox" id="api-show-private">
-                        Private
-                    </label>
-                    <label for="api-show-deprecated" class="checkbox">
-                        <input type="checkbox" id="api-show-deprecated">
-                        Deprecated
-                    </label>
-            
-                </form>
-            
+    <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <div class="page-header">
-                            <h1>src/component.js <small>File</small></h1>
-                        </div>
-                        
-                        <div class="file">
-                            <pre class="prettyprint linenums">
-                        /*
-                         * SyrupJS
-                         * The System Runtime Platform
-                         * http://syrupjs.systemdesigner.io
-                         * @ecarriou
-                         *  
-                         * Copyright (c) 2016 Erwan Carriou
-                         * 
-                         * Permission is hereby granted, free of charge, to any person obtaining a copy
-                         * of this software and associated documentation files (the &quot;Software&quot;), to deal
-                         * in the Software without restriction, including without limitation the rights
-                         * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-                         * copies of the Software, and to permit persons to whom the Software is
-                         * furnished to do so, subject to the following conditions:
-                         * 
-                         * The above copyright notice and this permission notice shall be included in all
-                         * copies or substantial portions of the Software.
-                         * 
-                         * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-                         * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-                         * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-                         * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-                         * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-                         * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-                         * SOFTWARE. 
-                         */
-                        
-                        /**
-                         * This module manages the components. 
-                         * It is the factory of all the components that are created by syrup.
-                         * 
-                         * @module syrup
-                         * @submodule syrup-component
-                         * @requires syrup-workflow
-                         * @requires syrup-db
-                         * @requires syrup-metamodel
-                         * @requires syrup-behavior
-                         * @requires syrup-helper
-                         * @requires syrup-log
-                         * @class syrup-component
-                         * @static 
-                         */
-                        
-                        &#x27;use strict&#x27;;
-                        
-                        var $workflow = require(&#x27;./workflow.js&#x27;);
-                        var $db = require(&#x27;./db.js&#x27;);
-                        var $metamodel = require(&#x27;./metamodel.js&#x27;);
-                        var $behavior = require(&#x27;./behavior.js&#x27;);
-                        var $helper = require(&#x27;./helper.js&#x27;);
-                        var $log = require(&#x27;./log.js&#x27;);
-                        var $worklow = require(&#x27;./workflow.js&#x27;);
-                        var $state = require(&#x27;./state.js&#x27;);
-                        
-                        
-                        /* Private properties */
-                        
-                        
-                        var PROPERTY_TYPE = &#x27;property&#x27;,
-                            COLLECTION_TYPE = &#x27;collection&#x27;,
-                            METHOD_TYPE = &#x27;method&#x27;,
-                            EVENT_TYPE = &#x27;event&#x27;,
-                            store = {};
-                            
-                        
-                        /* Private methods */
-                        
-                        
-                        /*
-                         * Sub class to override push and pop method of Array Class.
-                         * @class SyrupArray
-                         * @param {Object} conf
-                         * {String} classId name of the class
-                         * {String} type type of the array
-                         * {Array} arr array
-                         * @private
-                         */
-                        function SyrupArray(conf) {
-                            var arr = [],
-                                arrDb = [],
-                                type = &#x27;&#x27;,
-                                id = &#x27;&#x27;,
-                                propertyName = &#x27;&#x27;,
-                                isReadOnly = false;
-                        
-                            conf = conf || {};
-                            type = conf.type || &#x27;&#x27;;
-                            id = conf.id || &#x27;&#x27;;
-                            propertyName = conf.propertyName || &#x27;&#x27;;
-                            arrDb = conf.arr || [];
-                        
-                            if (typeof conf.readOnly !== &#x27;undefined&#x27;) {
-                                isReadOnly = conf.readOnly;
-                            }
-                        
-                            // init
-                            arrDb.forEach(function (val) {
-                                if (type.indexOf(&#x27;@&#x27;) !== -1) {
-                                    arr.push($helper.getSyrup().require(val));
-                                } else {
-                                    arr.push(val);
-                                }
-                            });
-                        
-                            /* Override push method.
-                             * @push
-                             * @param {SyrupComponent|Object} value
-                             */
-                            arr.push = function push(val) {
-                                var isClass = false;
-                        
-                                if (!isReadOnly) {
-                        
-                                    isClass = type.indexOf(&#x27;@&#x27;) !== -1;
-                        
-                                    if (isClass) {
-                                        if (val &amp;&amp; $metamodel.inheritFrom(val.constructor.name, type.replace(&#x27;@&#x27;, &#x27;&#x27;))) {
-                                            arrDb.push(val.id());
-                        
-                                            $workflow.state({
-                                                &quot;component&quot;: id,
-                                                &quot;state&quot;: propertyName,
-                                                &quot;data&quot;: [arrDb.length, val.id(), &#x27;add&#x27;]
-                                            });
-                                        } else {
-                                            $log.invalidPropertyName(id, propertyName, val.id(), type);
-                                        }
-                                    } else {
-                                        if (val &amp;&amp; $metamodel.isValidType(val, type)) {
-                                            arrDb.push(val);
-                        
-                                            $workflow.state({
-                                                &quot;component&quot;: id,
-                                                &quot;state&quot;: propertyName,
-                                                &quot;data&quot;: [arrDb.length, val, &#x27;add&#x27;]
-                                            });
-                                        } else {
-                                            $log.invalidPropertyName(id, propertyName, val, type);
-                                        }
-                                    }
-                                } else {
-                                    $log.readOnlyProperty(id, propertyName);
-                                }
-                                return arrDb.length;
-                            };
-                        
-                            /* Override pop method.
-                             * @pop
-                             * @return {SyrupComponent|Object} value
-                             */
-                            arr.pop = function pop() {
-                                var result,
-                                    val = null,
-                                    isClass = false;
-                        
-                                if (!isReadOnly) {
-                                    if (arrDb.length !== 0) {
-                                        val = arrDb.pop();
-                        
-                                        $workflow.state({
-                                            &quot;component&quot;: val,
-                                            &quot;state&quot;: propertyName,
-                                            &quot;data&quot;: [arrDb.length - 1, val, &#x27;remove&#x27;]
-                                        });
-                        
-                                        isClass = type.indexOf(&#x27;@&#x27;) !== -1;
-                        
-                                        if (isClass) {
-                                            result = store[val];
-                                        } else {
-                                            result = val;
-                                        }
-                                    }
-                                } else {
-                                    $log.readOnlyProperty(id, propertyName);
-                                }
-                                return result;
-                            };
-                        
-                            return arr;
-                        }
-                        
-                        /* jshint -W058 */
-                        SyrupArray.prototype = new Array;
-                        /* jshint +W058 */
-                        
-                        
-                        /*
-                         * Get all the names of method parameters.
-                         * @method getParamNames
-                         * @param {String} id id of the class
-                         * @param {String} methodName name of the method
-                         * @return {Array} all the names of method parameters of the class
-                         * @private
-                         */
-                        function getParamNames(id, methodName) {
-                            var params = [],
-                                result = [],
-                                length = 0,
-                                i = 0;
-                        
-                            params = $metamodel.get(id)[methodName].params;
-                            if (params) {
-                                length = params.length;
-                                for (i = 0; i &lt; length; i++) {
-                                    result.push(params[i].name);
-                                }
-                            }
-                            return result;
-                        }
-                        
-                        
-                        /*
-                         * Get all the property of a class.
-                         * @method getProperties
-                         * @param {String} id id of the class
-                         * @return {Array} all the properties of the class
-                         * @private
-                         */
-                        function getProperties(id) {
-                            var model = null,
-                                schema = null,
-                                propNames = [],
-                                length = 0,
-                                i = 0,
-                                result = [];
-                        
-                            model = $metamodel.get(id);
-                            schema = $metamodel.get(model._schema);
-                        
-                            propNames = Object.keys(schema);
-                        
-                            length = propNames.length;
-                            for (i = 0; i &lt; length; i++) {
-                                if (schema[propNames[i]] === PROPERTY_TYPE || schema[propNames[i]] === COLLECTION_TYPE) {
-                                    result.push({
-                                        &quot;name&quot;: propNames[i],
-                                        &quot;type&quot;: model[propNames[i]].type,
-                                        &quot;readOnly&quot;: model[propNames[i]].readOnly
-                                    });
-                                }
-                            }
-                        
-                            return result;
-                        }
-                        
-                        
-                        /*
-                         * Get all the method of a class.
-                         * @method getMethods
-                         * @param {String} id id of the class
-                         * @return {Array} all the methods of the class
-                         * @private
-                         */
-                        function getMethods(id) {
-                            var model = null,
-                                schema = null,
-                                propNames = [],
-                                length = 0,
-                                i = 0,
-                                result = [];
-                        
-                            model = $metamodel.get(id);
-                            schema = $metamodel.get(model._schema);
-                        
-                            propNames = Object.keys(schema);
-                        
-                            length = propNames.length;
-                            for (i = 0; i &lt; length; i++) {
-                                if (schema[propNames[i]] === METHOD_TYPE) {
-                                    result.push(propNames[i]);
-                                }
-                            }
-                        
-                            return result;
-                        }
-                        
-                        
-                        /*
-                         * Get all the event of a class.
-                         * @method getEvents
-                         * @param {String} id id of the class
-                         * @return {Array} all the events of the class
-                         * @private
-                         */
-                        function getEvents(id) {
-                            var model = null,
-                                schema = null,
-                                propNames = [],
-                                length = 0,
-                                i = 0,
-                                result = [];
-                        
-                            model = $metamodel.get(id);
-                            schema = $metamodel.get(model._schema);
-                        
-                            propNames = Object.keys(schema);
-                        
-                            length = propNames.length;
-                            for (i = 0; i &lt; length; i++) {
-                                if (schema[propNames[i]] === EVENT_TYPE) {
-                                    result.push(propNames[i]);
-                                }
-                            }
-                        
-                            return result;
-                        }
-                        
-                        
-                        /*
-                         * Create a new class from a class definition.
-                         * @method createClasss
-                         * @param {String} classId name of the class
-                         * @return {Function} the class
-                         * @private
-                         */
-                        function createClass(classId) {
-                            var body = function (config) {
-                                config = config || {};
-                                var body = {};
-                        
-                                if ($metamodel.isValidObject(config, $metamodel.get(classId), true, true)) {
-                                    $metamodel.prepareObject(config, $metamodel.get(classId));
-                                } else {
-                                    $workflow.stop({
-                                        &quot;error&quot;: true,
-                                        &quot;message&quot;: &quot;the parameters for creating a component of class &#x27;&quot; + classId + &quot;&#x27; are not compliant with the model&quot;
-                                    });
-                                }
-                        
-                                if (typeof config._id === &#x27;undefined&#x27;) {
-                                    config._id = $helper.generateId();
-                                }
-                        
-                                if (typeof store[config._id] !== &#x27;undefined&#x27;) {
-                                    $log.idAlreadyUsed(config._id);
-                                }
-                        
-                                store[config._id] = this;
-                        
-                                // id
-                                body = function () {
-                                    return config._id;
-                                };
-                                /* jshint -W054 */
-                                this.id = new Function(&quot;body&quot;, &quot;return function id () { return body.call(this) };&quot;)(body);
-                                /* jshint +W054 */
-                        
-                                // classInfo
-                                config.classInfo = classId + &#x27;Info&#x27;;
-                        
-                                // create link to db
-                                $db.store[classId][config._id] = config;
-                        
-                                if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
-                                    $helper.getSyrup().require(&#x27;db&#x27;).insert(classId, config);
-                                }
-                        
-                                Object.freeze(this);
-                        
-                                if (this.init) {
-                                    this.init(config);
-                                }
-                            };
-                            /* jshint -W054 */
-                            return new Function(&quot;body&quot;, &quot;return function &quot; + classId + &quot; (config) { body.call(this,config) };&quot;)(body);
-                            /* jshint +W054 */
-                        }
-                        
-                        
-                        /*
-                         * Add an id method to a class that will return its id.
-                         * @method addId
-                         * @param {Function} Class a class
-                         * @param {String} classId name of the class
-                         * @private
-                         */
-                        function addId(Class, classId) {
-                            var body = function () {
-                                return classId;
-                            };
-                            /* jshint -W054 */
-                            Class.id = new Function(&quot;body&quot;, &quot;return function id (prop, val) { return body.call(this, prop, val) };&quot;)(body);
-                            /* jshint +W054 */
-                        }
-                        
-                        
-                        /*
-                         * Add properties to a component. All these properties will be accessed by a method with the same name.
-                         * Some checks can be done in order to see if the set of properties is compliant with the model.
-                         * @example
-                         * laure.age(); // get the age of a person
-                         * laure.age(22); // set the age of a person
-                         * @method addProperties
-                         * @param {String} model model name
-                         * @param {Function} Class Class
-                         * @param {String} classId name of the class
-                         * @private
-                         */
-                        function addProperties(model, Class, classId) {
-                            var properties = getProperties(model);
-                        
-                            properties.forEach(function property(prop) {
-                                var body = {},
-                                    propertyName = &#x27;&#x27;,
-                                    propertyType = &#x27;&#x27;,
-                                    propertyReadOnly = &#x27;&#x27;;
-                        
-                                propertyName = prop.name;
-                                propertyType = prop.type;
-                                propertyReadOnly = prop.readOnly;
-                        
-                                if (Array.isArray(propertyType)) { // in case of array, return a sub array
-                                    body = function body(position, value) {
-                                        var search = [],
-                                            component = null,
-                                            syrupArr = null,
-                                            val = null,
-                                            realVal = null;
-                        
-                                        if (typeof value === &#x27;undefined&#x27;) {
-                                            if (typeof position === &#x27;undefined&#x27;) {
-                        
-                                                syrupArr = new SyrupArray({
-                                                    &quot;id&quot;: this.id(),
-                                                    &quot;propertyName&quot;: propertyName,
-                                                    &quot;readOnly&quot;: propertyReadOnly,
-                                                    &quot;classId&quot;: classId,
-                                                    &quot;type&quot;: propertyType[0],
-                                                    &quot;arr&quot;: $db.store[classId][this.id()][propertyName]
-                                                });
-                        
-                                                return syrupArr;
-                                            } else {
-                                                val = $db.store[classId][this.id()][propertyName][position];
-                                                if (val) {
-                                                    if (propertyType[0].indexOf(&#x27;@&#x27;) !== -1) {
-                                                        realVal = $helper.getSyrup().require(val);
-                                                    } else {
-                                                        realVal = val;
-                                                    }
-                                                    return realVal;
-                                                }
-                                            }
-                                        } else {
-                                            if (propertyReadOnly) {
-                                                $log.readOnlyProperty(this.id(), propertyName);
-                                            } else {
-                                                if (
-                                                    $metamodel.isValidType(value, propertyType[0]) ||
-                                                    ($metamodel.inheritFrom(value.constructor.name, propertyType[0].replace(&#x27;@&#x27;, &#x27;&#x27;)) &amp;&amp; (propertyType[0].indexOf(&#x27;@&#x27;) !== -1))
-                                                    ) {
-                                                    search = $db[classId].find({
-                                                        &quot;_id&quot;: this.id()
-                                                    });
-                                                    if (search.length) {
-                        
-                                                        if (propertyType[0].indexOf(&#x27;@&#x27;) !== -1) {
-                                                            realVal = value.id();
-                                                        } else {
-                                                            realVal = value;
-                                                        }
-                        
-                                                        component = search[0];
-                                                        component[propertyName][position] = realVal;
-                        
-                                                        if ($helper.isSyrup()) {
-                                                            $helper.getSyrup().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, realVal);
-                                                        }
-                        
-                                                        $workflow.state({
-                                                            &quot;component&quot;: this.id(),
-                                                            &quot;state&quot;: propertyName,
-                                                            &quot;data&quot;: [position, realVal, &#x27;add&#x27;]
-                                                        });
-                                                    } else {
-                                                        $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    };
-                                    /* jshint -W054 */
-                                    Class.prototype[propertyName] = new Function(&quot;body&quot;, &quot;return function &quot; + propertyName + &quot; (position,value) { return body.call(this, position, value) };&quot;)(body);
-                                    /* jshint +W054 */
-                                } else {
-                                    body = function body(value) {
-                                        var search = [],
-                                            component = null,
-                                            propertyValue = null;
-                        
-                                        if (typeof value === &#x27;undefined&#x27;) {
-                                            component = $db.store[classId][this.id()];
-                                            if (component) {
-                                                propertyValue = component[propertyName];
-                        
-                                                if (propertyType.indexOf(&#x27;@&#x27;) !== -1) {
-                                                    propertyValue = get(propertyValue);
-                                                }
-                                                return propertyValue;
-                                            } else {
-                                                $workflow.stop({
-                                                    &quot;error&quot;: true,
-                                                    &quot;message&quot;: &quot;trying to get the property &#x27;&quot; + propertyName + &quot;&#x27; on the destroyed component &#x27;&quot; + this.id() + &quot;&#x27;&quot;
-                                                });
-                                            }
-                                        } else {
-                                            if (propertyReadOnly) {
-                                                $log.readOnlyProperty(this.id(), propertyName);
-                                            } else {
-                                                if ($metamodel.isValidType(value, propertyType)) {
-                                                    search = $db[classId].find({ &quot;_id&quot;: this.id() });
-                                                    if (search.length) {
-                                                        component = search[0];
-                        
-                                                        if (propertyType.indexOf(&#x27;@&#x27;) !== -1) {
-                                                            component[propertyName] = value.id();
-                                                        } else {
-                                                            component[propertyName] = value;
-                                                        }
-                        
-                                                        if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
-                                                            $helper.getSyrup().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, value);
-                                                        }
-                                                        
-                                                        // case of SyrupBehavior
-                                                        if (classId === &#x27;SyrupBehavior&#x27;) {
-                                                            $behavior.removeFromMemory(this.id());
-                                                        }
-                        
-                                                        $workflow.state({
-                                                            &quot;component&quot;: this.id(),
-                                                            &quot;state&quot;: propertyName,
-                                                            &quot;data&quot;: [value]
-                                                        });
-                                                    }
-                                                } else {
-                                                    $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
-                                                }
-                                            }
-                                        }
-                                    };
-                                    /* jshint -W054 */
-                                    Class.prototype[propertyName] = new Function(&quot;body&quot;, &quot;return function &quot; + propertyName + &quot; (value) { return body.call(this,value) };&quot;)(body);
-                                    /* jshint +W054 */
-                                }
-                            });
-                        }
-                        
-                        
-                        /*
-                         * Add methods to a component.
-                         * The call to these methods will invoke the workflow in order to check that inpouts / outputs are compliant with the model.
-                         * @method addMethods
-                         * @param {String} model model name
-                         * @param {Function} Class Class
-                         * @param {String} classId name of the class
-                         * @private
-                         */
-                        function addMethods(model, Class, classId) {
-                            var methods = getMethods(model);
-                        
-                            methods.forEach(function method(methodName) {
-                                var paramsName = getParamNames(classId, methodName),
-                                    params = paramsName.join(&#x27;,&#x27;),
-                                    body = function () {
-                                        var result = null;
-                        
-                                        result = $workflow.state({
-                                            &quot;component&quot;: this.id(),
-                                            &quot;state&quot;: methodName,
-                                            &quot;data&quot;: arguments
-                                        });
-                        
-                                        return result;
-                                    };
-                                if (params) {
-                                    /* jshint -W054 */
-                                    Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; (&quot; + params + &quot;) { return body.call(this,&quot; + params + &quot;) };&quot;)(body);
-                                    /* jshint +W054 */
-                                } else {
-                                    /* jshint -W054 */
-                                    Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; () { return body.call(this) };&quot;)(body);
-                                    /* jshint +W054 */
-                                }
-                            });
-                        }
-                        
-                        
-                        /*
-                         * Add events to a component.
-                         * The call to these methods will invoke the workflow in order to check that inpouts are compliant with the model.
-                         * @method addEvents
-                         * @param {String} model model name
-                         * @param {Function} Class Class
-                         * @param {String} classId name of the class
-                         * @private
-                         */
-                        function addEvents(model, Class, classId) {
-                            var events = getEvents(model);
-                            events.forEach(function event(methodName) {
-                                var paramsName = getParamNames(classId, methodName),
-                                    params = paramsName.join(&#x27;,&#x27;),
-                                    body = function () {
-                                        var systems = [],
-                                            systemId = -1,
-                                            data = [],
-                                            i = 0,
-                                            length = -1,
-                                            message = {};
-                        
-                                        if (classId === &#x27;SyrupChannel&#x27;) {
-                                            systems = $db.SyrupSystem.find({
-                                                &#x27;master&#x27;: true
-                                            });
-                                            if (systems.length) {
-                                                systemId = systems[0]._id;
-                        
-                                                message.from = systemId;
-                                                length = arguments.length;
-                                                for (i = 0; i &lt; length; i++) {
-                                                    data.push(arguments[i]);
-                                                }
-                                                message.data = data;
-                                                message.event = methodName;
-                                                
-                                                $db.SyrupMessage.insert(message);
-                        
-                                                $workflow.state({
-                                                    &quot;component&quot;: this.id(),
-                                                    &quot;state&quot;: &quot;send&quot;,
-                                                    &quot;data&quot;: [{
-                                                        &quot;event&quot;: message.event,
-                                                        &quot;from&quot;: message.from,
-                                                        &quot;data&quot;: message.data
-                                                    }]
-                                                });
-                                            }
-                                        }
-                        
-                                        $workflow.state({
-                                            &quot;component&quot;: this.id(),
-                                            &quot;state&quot;: methodName,
-                                            &quot;data&quot;: arguments
-                                        });
-                                    };
-                                if (params) {
-                                    /* jshint -W054 */
-                                    Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; (&quot; + params + &quot;) { return body.call(this,&quot; + params + &quot;) };&quot;)(body);
-                                    /* jshint +W054 */
-                                } else {
-                                    /* jshint -W054 */
-                                    Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; () { return body.call(this) };&quot;)(body);
-                                    /* jshint +W054 */
-                                }
-                            });
-                        }
-                        
-                        
-                        /*
-                         * Add a on method to a component to add behaviors to the component.
-                         * @method addOn
-                         * @param {Function} Class Class
-                         * @param {String} classId name of the class
-                         * @private
-                         */
-                        function addOn(Class, classId) {
-                            var body = function (state, handler, useCoreAPI) {
-                                var behaviorId = &#x27;&#x27;,
-                                    currentState = &#x27;&#x27;;
-                        
-                                if ($workflow.checkParams({
-                                    &quot;component&quot;: this,
-                                    &quot;methodName&quot;: &quot;on&quot;,
-                                    &quot;args&quot;: arguments
-                                })) {
-                                    if ($metamodel.isValidState(state, classId)) {
-                                        if (
-                                            !$metamodel.isEvent(state, classId) &amp;&amp;
-                                            !$metamodel.isProperty(state, classId) &amp;&amp;
-                                            !$metamodel.isCollection(state, classId) &amp;&amp;
-                                            $db.SyrupBehavior.find({
-                                                &quot;component&quot;: this.id(),
-                                                &quot;state&quot;: state
-                                            }).length &gt;= 1) {
-                                            $log.behaviorNotUnique(classId, state);
-                                        } else {
-                                            if ($worklow.validParamNumbers(classId, state, handler)) {
-                                                behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI);
-                        
-                                                currentState = $state.get(this.id());
-                                                if (currentState &amp;&amp; state === currentState.name) {
-                                                    $workflow.action(behaviorId, currentState.parameters.data);
-                                                }
-                        
-                                            } else {
-                                                $log.invalidParamNumberMethodOn(this.id(), state);
-                                            }
-                                        }
-                                    } else {
-                                        $log.invalidStateOn(classId, state);
-                                    }
-                                }
-                                return behaviorId;
-                            };
-                            /* jshint -W054 */
-                            Class.prototype.on = new Function(&quot;body&quot;, &quot;return function on (state,handler,useCoreAPI) { return body.call(this,state,handler,useCoreAPI) };&quot;)(body);
-                            /* jshint +W054 */
-                        }
-                        
-                        
-                        /*
-                         * Add a on method to a class component to add behaviors to the class.
-                         * @method addOnClass
-                         * @param {Function} Class Class
-                         * @param {String} classId name of the class
-                         * @private
-                         */
-                        function addOnClass(Class, classId) {
-                            var body = function (state, handler, useCoreAPI) {
-                                var behaviorId = &#x27;&#x27;,
-                                    currentState = &#x27;&#x27;;
-                        
-                                if ($workflow.checkParams({
-                                    &quot;component&quot;: this,
-                                    &quot;methodName&quot;: &quot;on&quot;,
-                                    &quot;args&quot;: arguments
-                                })) {
-                                    if ($metamodel.isValidState(state, classId)) {
-                                        if (
-                                            !$metamodel.isEvent(state, classId) &amp;&amp;
-                                            !$metamodel.isProperty(state, classId) &amp;&amp;
-                                            !$metamodel.isCollection(state, classId) &amp;&amp;
-                                            $db.SyrupBehavior.find({
-                                                &quot;component&quot;: this.id(),
-                                                &quot;state&quot;: state
-                                            }).length &gt;= 1) {
-                                            $log.behaviorNotUnique(classId, state);
-                                        } else {
-                                            if ($worklow.validParamNumbers(classId, state, handler)) {
-                                                behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI);
-                        
-                                                currentState = $state.get(this.id());
-                                                if (currentState &amp;&amp; state === currentState.name) {
-                                                    $workflow.action(behaviorId, currentState.parameters.data);
-                                                }
-                        
-                                            } else {
-                                                $log.invalidParamNumberMethodOn(this.id(), state);
-                                            }
-                                        }
-                                    } else {
-                                        $log.invalidStateOn(classId, state);
-                                    }
-                                }
-                                return behaviorId;
-                            };
-                            /* jshint -W054 */
-                            Class.on = new Function(&quot;body&quot;, &quot;return function on (state,handler,useCoreAPI) { return body.call(this, state, handler, useCoreAPI) };&quot;)(body);
-                            /* jshint -W054 */
-                        }
-                        
-                        
-                        /*
-                         * Add a off method to a class component to remove behaviors from the class.
-                         * @method addOffClass
-                         * @param {Object} Class Class
-                         * @param {String} classId name of the class
-                         * @private
-                         */
-                        function addOffClass(Class, classId) {
-                            var body = function (state, behaviorId) {
-                                if ($workflow.checkParams({
-                                    &quot;component&quot;: this,
-                                    &quot;methodName&quot;: &quot;off&quot;,
-                                    &quot;args&quot;: arguments
-                                })) {
-                                    if ($metamodel.isValidState(state, classId)) {
-                                        $behavior.remove({
-                                            &quot;behaviorId&quot;: behaviorId,
-                                            &quot;componentId&quot;: classId,
-                                            &quot;state&quot;: state
-                                        });
-                                    } else {
-                                        $log.InvalidStateOff(classId, state);
-                                    }
-                                }
-                            };
-                            /* jshint -W054 */
-                            Class.off = new Function(&quot;body&quot;, &quot;return function off (state, behaviorId) { return body.call(this, state, behaviorId) };&quot;)(body);
-                            /* jshint +W054 */
-                        }
-                        
-                        
-                        /*
-                         * Add a destroy method to a class component to detroy the class and all the components of the same class.
-                         * @method addDestroyClass
-                         * @param {Object} Class Class
-                         * @private
-                         */
-                        function addDestroyClass(Class) {
-                            var body = function () {
-                                var id = this.id();
-                                
-                                // if not virtual component
-                                if ($db[id]) {
-                                    $db[id].remove();
-                                }
-                        
-                                delete store[id];
-                        
-                                $workflow.state({
-                                    &quot;component&quot;: id,
-                                    &quot;state&quot;: &quot;destroy&quot;
-                                });
-                            };
-                            /* jshint -W054 */
-                            Class.destroy = new Function(&quot;body&quot;, &quot;return function destroy () { return body.call(this) };&quot;)(body);
-                            /* jshint +W054 */
-                        }
-                        
-                        
-                        /*
-                         * Add the addClassInfo method on a class.
-                         * @method addClassInfoClass
-                         * @param {Object} Class Class
-                         * @private
-                         */
-                        function addClassInfoClass(Class) {
-                            var body = function () {
-                                return get(this.id() + &#x27;Info&#x27;);
-                            };
-                            /* jshint -W054 */
-                            Class.classInfo = new Function(&quot;body&quot;, &quot;return function classInfo () { return body.call(this) };&quot;)(body);
-                            /* jshint +W054 */
-                        }
-                        
-                        
-                        /*
-                         * Create a component from its configuration.
-                         * @method factory
-                         * @param {JSON} config configuration of the component
-                         * @return {Component} the created component
-                         * @private
-                         */
-                        function factory(config) {
-                            config = config || {};
-                        
-                            var Class = {},
-                                classId = &#x27;&#x27;;
-                        
-                            if (typeof config.model === &#x27;undefined&#x27;) {
-                                classId = $helper.generateId();
+<div class="page-header">
+    <h1>src/component.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
+ * @ecarriou
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
+ */
+
+/**
+ * This module manages the components. 
+ * It is the factory of all the components that are created by syrup.
+ * 
+ * @module syrup
+ * @submodule syrup-component
+ * @requires syrup-workflow
+ * @requires syrup-db
+ * @requires syrup-metamodel
+ * @requires syrup-behavior
+ * @requires syrup-helper
+ * @requires syrup-log
+ * @class syrup-component
+ * @static 
+ */
+
+&#x27;use strict&#x27;;
+
+var $workflow = require(&#x27;./workflow.js&#x27;);
+var $db = require(&#x27;./db.js&#x27;);
+var $metamodel = require(&#x27;./metamodel.js&#x27;);
+var $behavior = require(&#x27;./behavior.js&#x27;);
+var $helper = require(&#x27;./helper.js&#x27;);
+var $log = require(&#x27;./log.js&#x27;);
+var $worklow = require(&#x27;./workflow.js&#x27;);
+var $state = require(&#x27;./state.js&#x27;);
+
+
+/* Private properties */
+
+
+var PROPERTY_TYPE = &#x27;property&#x27;,
+    COLLECTION_TYPE = &#x27;collection&#x27;,
+    METHOD_TYPE = &#x27;method&#x27;,
+    EVENT_TYPE = &#x27;event&#x27;,
+    store = {};
+    
+
+/* Private methods */
+
+
+/*
+ * Sub class to override push and pop method of Array Class.
+ * @class SyrupArray
+ * @param {Object} conf
+ * {String} classId name of the class
+ * {String} type type of the array
+ * {Array} arr array
+ * @private
+ */
+function SyrupArray(conf) {
+    var arr = [],
+        arrDb = [],
+        type = &#x27;&#x27;,
+        id = &#x27;&#x27;,
+        propertyName = &#x27;&#x27;,
+        isReadOnly = false;
+
+    conf = conf || {};
+    type = conf.type || &#x27;&#x27;;
+    id = conf.id || &#x27;&#x27;;
+    propertyName = conf.propertyName || &#x27;&#x27;;
+    arrDb = conf.arr || [];
+
+    if (typeof conf.readOnly !== &#x27;undefined&#x27;) {
+        isReadOnly = conf.readOnly;
+    }
+
+    // init
+    arrDb.forEach(function (val) {
+        if (type.indexOf(&#x27;@&#x27;) !== -1) {
+            arr.push($helper.getSyrup().require(val));
+        } else {
+            arr.push(val);
+        }
+    });
+
+    /* Override push method.
+     * @push
+     * @param {SyrupComponent|Object} value
+     */
+    arr.push = function push(val) {
+        var isClass = false;
+
+        if (!isReadOnly) {
+
+            isClass = type.indexOf(&#x27;@&#x27;) !== -1;
+
+            if (isClass) {
+                if (val &amp;&amp; $metamodel.inheritFrom(val.constructor.name, type.replace(&#x27;@&#x27;, &#x27;&#x27;))) {
+                    arrDb.push(val.id());
+
+                    $workflow.state({
+                        &quot;component&quot;: id,
+                        &quot;state&quot;: propertyName,
+                        &quot;data&quot;: [arrDb.length, val.id(), &#x27;add&#x27;]
+                    });
+                } else {
+                    $log.invalidPropertyName(id, propertyName, val.id(), type);
+                }
+            } else {
+                if (val &amp;&amp; $metamodel.isValidType(val, type)) {
+                    arrDb.push(val);
+
+                    $workflow.state({
+                        &quot;component&quot;: id,
+                        &quot;state&quot;: propertyName,
+                        &quot;data&quot;: [arrDb.length, val, &#x27;add&#x27;]
+                    });
+                } else {
+                    $log.invalidPropertyName(id, propertyName, val, type);
+                }
+            }
+        } else {
+            $log.readOnlyProperty(id, propertyName);
+        }
+        return arrDb.length;
+    };
+
+    /* Override pop method.
+     * @pop
+     * @return {SyrupComponent|Object} value
+     */
+    arr.pop = function pop() {
+        var result,
+            val = null,
+            isClass = false;
+
+        if (!isReadOnly) {
+            if (arrDb.length !== 0) {
+                val = arrDb.pop();
+
+                $workflow.state({
+                    &quot;component&quot;: val,
+                    &quot;state&quot;: propertyName,
+                    &quot;data&quot;: [arrDb.length - 1, val, &#x27;remove&#x27;]
+                });
+
+                isClass = type.indexOf(&#x27;@&#x27;) !== -1;
+
+                if (isClass) {
+                    result = store[val];
+                } else {
+                    result = val;
+                }
+            }
+        } else {
+            $log.readOnlyProperty(id, propertyName);
+        }
+        return result;
+    };
+
+    return arr;
+}
+
+/* jshint -W058 */
+SyrupArray.prototype = new Array;
+/* jshint +W058 */
+
+
+/*
+ * Get all the names of method parameters.
+ * @method getParamNames
+ * @param {String} id id of the class
+ * @param {String} methodName name of the method
+ * @return {Array} all the names of method parameters of the class
+ * @private
+ */
+function getParamNames(id, methodName) {
+    var params = [],
+        result = [],
+        length = 0,
+        i = 0;
+
+    params = $metamodel.get(id)[methodName].params;
+    if (params) {
+        length = params.length;
+        for (i = 0; i &lt; length; i++) {
+            result.push(params[i].name);
+        }
+    }
+    return result;
+}
+
+
+/*
+ * Get all the property of a class.
+ * @method getProperties
+ * @param {String} id id of the class
+ * @return {Array} all the properties of the class
+ * @private
+ */
+function getProperties(id) {
+    var model = null,
+        schema = null,
+        propNames = [],
+        length = 0,
+        i = 0,
+        result = [];
+
+    model = $metamodel.get(id);
+    schema = $metamodel.get(model._schema);
+
+    propNames = Object.keys(schema);
+
+    length = propNames.length;
+    for (i = 0; i &lt; length; i++) {
+        if (schema[propNames[i]] === PROPERTY_TYPE || schema[propNames[i]] === COLLECTION_TYPE) {
+            result.push({
+                &quot;name&quot;: propNames[i],
+                &quot;type&quot;: model[propNames[i]].type,
+                &quot;readOnly&quot;: model[propNames[i]].readOnly
+            });
+        }
+    }
+
+    return result;
+}
+
+
+/*
+ * Get all the method of a class.
+ * @method getMethods
+ * @param {String} id id of the class
+ * @return {Array} all the methods of the class
+ * @private
+ */
+function getMethods(id) {
+    var model = null,
+        schema = null,
+        propNames = [],
+        length = 0,
+        i = 0,
+        result = [];
+
+    model = $metamodel.get(id);
+    schema = $metamodel.get(model._schema);
+
+    propNames = Object.keys(schema);
+
+    length = propNames.length;
+    for (i = 0; i &lt; length; i++) {
+        if (schema[propNames[i]] === METHOD_TYPE) {
+            result.push(propNames[i]);
+        }
+    }
+
+    return result;
+}
+
+
+/*
+ * Get all the event of a class.
+ * @method getEvents
+ * @param {String} id id of the class
+ * @return {Array} all the events of the class
+ * @private
+ */
+function getEvents(id) {
+    var model = null,
+        schema = null,
+        propNames = [],
+        length = 0,
+        i = 0,
+        result = [];
+
+    model = $metamodel.get(id);
+    schema = $metamodel.get(model._schema);
+
+    propNames = Object.keys(schema);
+
+    length = propNames.length;
+    for (i = 0; i &lt; length; i++) {
+        if (schema[propNames[i]] === EVENT_TYPE) {
+            result.push(propNames[i]);
+        }
+    }
+
+    return result;
+}
+
+
+/*
+ * Create a new class from a class definition.
+ * @method createClasss
+ * @param {String} classId name of the class
+ * @return {Function} the class
+ * @private
+ */
+function createClass(classId) {
+    var body = function (config) {
+        config = config || {};
+        var body = {};
+
+        if ($metamodel.isValidObject(config, $metamodel.get(classId), true, true)) {
+            $metamodel.prepareObject(config, $metamodel.get(classId));
+        } else {
+            $workflow.stop({
+                &quot;error&quot;: true,
+                &quot;message&quot;: &quot;the parameters for creating a component of class &#x27;&quot; + classId + &quot;&#x27; are not compliant with the model&quot;
+            });
+        }
+
+        if (typeof config._id === &#x27;undefined&#x27;) {
+            config._id = $helper.generateId();
+        }
+
+        if (typeof store[config._id] !== &#x27;undefined&#x27;) {
+            $log.idAlreadyUsed(config._id);
+        }
+
+        store[config._id] = this;
+
+        // id
+        body = function () {
+            return config._id;
+        };
+        /* jshint -W054 */
+        this.id = new Function(&quot;body&quot;, &quot;return function id () { return body.call(this) };&quot;)(body);
+        /* jshint +W054 */
+
+        // classInfo
+        config.classInfo = classId + &#x27;Info&#x27;;
+
+        // create link to db
+        $db.store[classId][config._id] = config;
+
+        if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
+            $helper.getSyrup().require(&#x27;db&#x27;).insert(classId, config);
+        }
+
+        Object.freeze(this);
+
+        if (this.init) {
+            this.init(config);
+        }
+    };
+    /* jshint -W054 */
+    return new Function(&quot;body&quot;, &quot;return function &quot; + classId + &quot; (config) { body.call(this,config) };&quot;)(body);
+    /* jshint +W054 */
+}
+
+
+/*
+ * Add an id method to a class that will return its id.
+ * @method addId
+ * @param {Function} Class a class
+ * @param {String} classId name of the class
+ * @private
+ */
+function addId(Class, classId) {
+    var body = function () {
+        return classId;
+    };
+    /* jshint -W054 */
+    Class.id = new Function(&quot;body&quot;, &quot;return function id (prop, val) { return body.call(this, prop, val) };&quot;)(body);
+    /* jshint +W054 */
+}
+
+
+/*
+ * Add properties to a component. All these properties will be accessed by a method with the same name.
+ * Some checks can be done in order to see if the set of properties is compliant with the model.
+ * @example
+ * laure.age(); // get the age of a person
+ * laure.age(22); // set the age of a person
+ * @method addProperties
+ * @param {String} model model name
+ * @param {Function} Class Class
+ * @param {String} classId name of the class
+ * @private
+ */
+function addProperties(model, Class, classId) {
+    var properties = getProperties(model);
+
+    properties.forEach(function property(prop) {
+        var body = {},
+            propertyName = &#x27;&#x27;,
+            propertyType = &#x27;&#x27;,
+            propertyReadOnly = &#x27;&#x27;;
+
+        propertyName = prop.name;
+        propertyType = prop.type;
+        propertyReadOnly = prop.readOnly;
+
+        if (Array.isArray(propertyType)) { // in case of array, return a sub array
+            body = function body(position, value) {
+                var search = [],
+                    component = null,
+                    syrupArr = null,
+                    val = null,
+                    realVal = null;
+
+                if (typeof value === &#x27;undefined&#x27;) {
+                    if (typeof position === &#x27;undefined&#x27;) {
+
+                        syrupArr = new SyrupArray({
+                            &quot;id&quot;: this.id(),
+                            &quot;propertyName&quot;: propertyName,
+                            &quot;readOnly&quot;: propertyReadOnly,
+                            &quot;classId&quot;: classId,
+                            &quot;type&quot;: propertyType[0],
+                            &quot;arr&quot;: $db.store[classId][this.id()][propertyName]
+                        });
+
+                        return syrupArr;
+                    } else {
+                        val = $db.store[classId][this.id()][propertyName][position];
+                        if (val) {
+                            if (propertyType[0].indexOf(&#x27;@&#x27;) !== -1) {
+                                realVal = $helper.getSyrup().require(val);
                             } else {
-                                classId = config.model;
+                                realVal = val;
                             }
-                        
-                            Class = createClass(classId);
-                        
-                            store[classId] = Class;
-                        
-                            addId(Class, classId);
-                        
-                            addProperties(config.model, Class, classId);
-                            addMethods(config.model, Class, classId);
-                            addEvents(config.model, Class, classId);
-                        
-                            // add default properties/methods only if the component
-                            // inherit from SyrupComponent
-                            if ($metamodel.inheritFrom(classId, &#x27;SyrupComponent&#x27;)) {
-                                addOn(Class, classId);
-                                addOnClass(Class, classId);
-                                addOffClass(Class, classId);
-                                addDestroyClass(Class);
-                                addClassInfoClass(Class);
-                            }
-                        
-                            Object.freeze(Class);
-                        
-                            return Class;
+                            return realVal;
                         }
-                        
-                        
-                        /* Public methods */
-                        
-                        
-                        /*
-                         * Get a component by its id.
-                         * @method get
-                         * @param {String} id of the component
-                         * @return {Component} component
-                         */
-                        function get(id) {
-                            return store[id];
-                        }
-                        
-                        
-                        /*
-                         * Create a component from its configuration.
-                         * @method create
-                         * @param {Object} config &lt;br&gt;
-                         * {String} model model name &lt;br&gt;
-                         * @return {Component}
-                         */
-                        function create(config) {
-                            return factory(config);
-                        }
-                        
-                        
-                        /*
-                         * Destroy a component from its id.
-                         * @method destroy
-                         * @param {String} id id of the component to destroy
-                         */
-                        function destroy(id) {
-                            var component = store[id],
-                                classId = &#x27;&#x27;;
-                        
-                            if (component) {
-                                delete store[id];
-                                classId = component.constructor.name;
-                                $db[classId].remove({
-                                    &quot;_id&quot;: id
-                                });
-                                // case of Behavior
-                                if (classId === &#x27;SyrupBehavior&#x27;) {
-                                    $behavior.removeFromMemory(id);
+                    }
+                } else {
+                    if (propertyReadOnly) {
+                        $log.readOnlyProperty(this.id(), propertyName);
+                    } else {
+                        if (
+                            $metamodel.isValidType(value, propertyType[0]) ||
+                            ($metamodel.inheritFrom(value.constructor.name, propertyType[0].replace(&#x27;@&#x27;, &#x27;&#x27;)) &amp;&amp; (propertyType[0].indexOf(&#x27;@&#x27;) !== -1))
+                            ) {
+                            search = $db[classId].find({
+                                &quot;_id&quot;: this.id()
+                            });
+                            if (search.length) {
+
+                                if (propertyType[0].indexOf(&#x27;@&#x27;) !== -1) {
+                                    realVal = value.id();
+                                } else {
+                                    realVal = value;
                                 }
+
+                                component = search[0];
+                                component[propertyName][position] = realVal;
+
+                                if ($helper.isSyrup()) {
+                                    $helper.getSyrup().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, realVal);
+                                }
+
+                                $workflow.state({
+                                    &quot;component&quot;: this.id(),
+                                    &quot;state&quot;: propertyName,
+                                    &quot;data&quot;: [position, realVal, &#x27;add&#x27;]
+                                });
+                            } else {
+                                $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
                             }
                         }
-                        
-                        
-                        
-                        /*
-                         * Remove all the components store in the memory.
-                         * @method clear
-                         */
-                        function clear() {
-                            store = {};
+                    }
+                }
+            };
+            /* jshint -W054 */
+            Class.prototype[propertyName] = new Function(&quot;body&quot;, &quot;return function &quot; + propertyName + &quot; (position,value) { return body.call(this, position, value) };&quot;)(body);
+            /* jshint +W054 */
+        } else {
+            body = function body(value) {
+                var search = [],
+                    component = null,
+                    propertyValue = null;
+
+                if (typeof value === &#x27;undefined&#x27;) {
+                    component = $db.store[classId][this.id()];
+                    if (component) {
+                        propertyValue = component[propertyName];
+
+                        if (propertyType.indexOf(&#x27;@&#x27;) !== -1) {
+                            propertyValue = get(propertyValue);
                         }
+                        return propertyValue;
+                    } else {
+                        $workflow.stop({
+                            &quot;error&quot;: true,
+                            &quot;message&quot;: &quot;trying to get the property &#x27;&quot; + propertyName + &quot;&#x27; on the destroyed component &#x27;&quot; + this.id() + &quot;&#x27;&quot;
+                        });
+                    }
+                } else {
+                    if (propertyReadOnly) {
+                        $log.readOnlyProperty(this.id(), propertyName);
+                    } else {
+                        if ($metamodel.isValidType(value, propertyType)) {
+                            search = $db[classId].find({ &quot;_id&quot;: this.id() });
+                            if (search.length) {
+                                component = search[0];
+
+                                if (propertyType.indexOf(&#x27;@&#x27;) !== -1) {
+                                    component[propertyName] = value.id();
+                                } else {
+                                    component[propertyName] = value;
+                                }
+
+                                if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
+                                    $helper.getSyrup().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, value);
+                                }
+                                
+                                // case of SyrupBehavior
+                                if (classId === &#x27;SyrupBehavior&#x27;) {
+                                    $behavior.removeFromMemory(this.id());
+                                }
+
+                                $workflow.state({
+                                    &quot;component&quot;: this.id(),
+                                    &quot;state&quot;: propertyName,
+                                    &quot;data&quot;: [value]
+                                });
+                            }
+                        } else {
+                            $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
+                        }
+                    }
+                }
+            };
+            /* jshint -W054 */
+            Class.prototype[propertyName] = new Function(&quot;body&quot;, &quot;return function &quot; + propertyName + &quot; (value) { return body.call(this,value) };&quot;)(body);
+            /* jshint +W054 */
+        }
+    });
+}
+
+
+/*
+ * Add methods to a component.
+ * The call to these methods will invoke the workflow in order to check that inpouts / outputs are compliant with the model.
+ * @method addMethods
+ * @param {String} model model name
+ * @param {Function} Class Class
+ * @param {String} classId name of the class
+ * @private
+ */
+function addMethods(model, Class, classId) {
+    var methods = getMethods(model);
+
+    methods.forEach(function method(methodName) {
+        var paramsName = getParamNames(classId, methodName),
+            params = paramsName.join(&#x27;,&#x27;),
+            body = function () {
+                var result = null;
+
+                result = $workflow.state({
+                    &quot;component&quot;: this.id(),
+                    &quot;state&quot;: methodName,
+                    &quot;data&quot;: arguments
+                });
+
+                return result;
+            };
+        if (params) {
+            /* jshint -W054 */
+            Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; (&quot; + params + &quot;) { return body.call(this,&quot; + params + &quot;) };&quot;)(body);
+            /* jshint +W054 */
+        } else {
+            /* jshint -W054 */
+            Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; () { return body.call(this) };&quot;)(body);
+            /* jshint +W054 */
+        }
+    });
+}
+
+
+/*
+ * Add events to a component.
+ * The call to these methods will invoke the workflow in order to check that inpouts are compliant with the model.
+ * @method addEvents
+ * @param {String} model model name
+ * @param {Function} Class Class
+ * @param {String} classId name of the class
+ * @private
+ */
+function addEvents(model, Class, classId) {
+    var events = getEvents(model);
+    events.forEach(function event(methodName) {
+        var paramsName = getParamNames(classId, methodName),
+            params = paramsName.join(&#x27;,&#x27;),
+            body = function () {
+                var systems = [],
+                    systemId = -1,
+                    data = [],
+                    i = 0,
+                    length = -1,
+                    message = {};
+
+                if (classId === &#x27;SyrupChannel&#x27;) {
+                    systems = $db.SyrupSystem.find({
+                        &#x27;master&#x27;: true
+                    });
+                    if (systems.length) {
+                        systemId = systems[0]._id;
+
+                        message.from = systemId;
+                        length = arguments.length;
+                        for (i = 0; i &lt; length; i++) {
+                            data.push(arguments[i]);
+                        }
+                        message.data = data;
+                        message.event = methodName;
                         
-                        
-                        /* exports */
-                        
-                        
-                        /**
-                         * This module manages the components. 
-                         * It is the factory of all the components that are created by syrup.
-                         * 
-                         * @module syrup
-                         * @submodule syrup-component
-                         * @requires syrup-workflow
-                         * @requires syrup-db
-                         * @requires syrup-metamodel
-                         * @requires syrup-behavior
-                         * @requires syrup-helper
-                         * @requires syrup-log
-                         * @class syrup-component
-                         * @static 
-                         */
-                        
-                        
-                        /**
-                         * Create a component from its configuration.
-                         * @method create
-                         * @param {Object} config &lt;br&gt;
-                         * {String} model model name &lt;br&gt;
-                         * @return {Component} component
-                         */
-                        exports.create = create;
-                        
-                        
-                        /**
-                         * Get a component by its id.
-                         * @method get
-                         * @param {String} id id of the component
-                         * @return {Component} component
-                         */
-                        exports.get = get;
-                        
-                        
-                        /**
-                         * Remove all the components store in memory.
-                         * @method clear
-                         */
-                        exports.clear = clear;
-                        
-                        
-                        /**
-                         * Destroy a component from its id.
-                         * @method destroy
-                         * @param {String} id id of the component to destroy
-                         * @return {Boolean} if the component has been destroyed
-                         */
-                        exports.destroy = destroy;
-                            </pre>
-                        </div>
+                        $db.SyrupMessage.insert(message);
+
+                        $workflow.state({
+                            &quot;component&quot;: this.id(),
+                            &quot;state&quot;: &quot;send&quot;,
+                            &quot;data&quot;: [{
+                                &quot;event&quot;: message.event,
+                                &quot;from&quot;: message.from,
+                                &quot;data&quot;: message.data
+                            }]
+                        });
+                    }
+                }
+
+                $workflow.state({
+                    &quot;component&quot;: this.id(),
+                    &quot;state&quot;: methodName,
+                    &quot;data&quot;: arguments
+                });
+            };
+        if (params) {
+            /* jshint -W054 */
+            Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; (&quot; + params + &quot;) { return body.call(this,&quot; + params + &quot;) };&quot;)(body);
+            /* jshint +W054 */
+        } else {
+            /* jshint -W054 */
+            Class.prototype[methodName] = new Function(&quot;body&quot;, &quot;return function &quot; + methodName + &quot; () { return body.call(this) };&quot;)(body);
+            /* jshint +W054 */
+        }
+    });
+}
+
+
+/*
+ * Add a on method to a component to add behaviors to the component.
+ * @method addOn
+ * @param {Function} Class Class
+ * @param {String} classId name of the class
+ * @private
+ */
+function addOn(Class, classId) {
+    var body = function (state, handler, useCoreAPI) {
+        var behaviorId = &#x27;&#x27;,
+            currentState = &#x27;&#x27;;
+
+        if ($workflow.checkParams({
+            &quot;component&quot;: this,
+            &quot;methodName&quot;: &quot;on&quot;,
+            &quot;args&quot;: arguments
+        })) {
+            if ($metamodel.isValidState(state, classId)) {
+                if (
+                    !$metamodel.isEvent(state, classId) &amp;&amp;
+                    !$metamodel.isProperty(state, classId) &amp;&amp;
+                    !$metamodel.isCollection(state, classId) &amp;&amp;
+                    $db.SyrupBehavior.find({
+                        &quot;component&quot;: this.id(),
+                        &quot;state&quot;: state
+                    }).length &gt;= 1) {
+                    $log.behaviorNotUnique(classId, state);
+                } else {
+                    if ($worklow.validParamNumbers(classId, state, handler)) {
+                        behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI);
+
+                        currentState = $state.get(this.id());
+                        if (currentState &amp;&amp; state === currentState.name) {
+                            $workflow.action(behaviorId, currentState.parameters.data);
+                        }
+
+                    } else {
+                        $log.invalidParamNumberMethodOn(this.id(), state);
+                    }
+                }
+            } else {
+                $log.invalidStateOn(classId, state);
+            }
+        }
+        return behaviorId;
+    };
+    /* jshint -W054 */
+    Class.prototype.on = new Function(&quot;body&quot;, &quot;return function on (state,handler,useCoreAPI) { return body.call(this,state,handler,useCoreAPI) };&quot;)(body);
+    /* jshint +W054 */
+}
+
+
+/*
+ * Add a on method to a class component to add behaviors to the class.
+ * @method addOnClass
+ * @param {Function} Class Class
+ * @param {String} classId name of the class
+ * @private
+ */
+function addOnClass(Class, classId) {
+    var body = function (state, handler, useCoreAPI) {
+        var behaviorId = &#x27;&#x27;,
+            currentState = &#x27;&#x27;;
+
+        if ($workflow.checkParams({
+            &quot;component&quot;: this,
+            &quot;methodName&quot;: &quot;on&quot;,
+            &quot;args&quot;: arguments
+        })) {
+            if ($metamodel.isValidState(state, classId)) {
+                if (
+                    !$metamodel.isEvent(state, classId) &amp;&amp;
+                    !$metamodel.isProperty(state, classId) &amp;&amp;
+                    !$metamodel.isCollection(state, classId) &amp;&amp;
+                    $db.SyrupBehavior.find({
+                        &quot;component&quot;: this.id(),
+                        &quot;state&quot;: state
+                    }).length &gt;= 1) {
+                    $log.behaviorNotUnique(classId, state);
+                } else {
+                    if ($worklow.validParamNumbers(classId, state, handler)) {
+                        behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI);
+
+                        currentState = $state.get(this.id());
+                        if (currentState &amp;&amp; state === currentState.name) {
+                            $workflow.action(behaviorId, currentState.parameters.data);
+                        }
+
+                    } else {
+                        $log.invalidParamNumberMethodOn(this.id(), state);
+                    }
+                }
+            } else {
+                $log.invalidStateOn(classId, state);
+            }
+        }
+        return behaviorId;
+    };
+    /* jshint -W054 */
+    Class.on = new Function(&quot;body&quot;, &quot;return function on (state,handler,useCoreAPI) { return body.call(this, state, handler, useCoreAPI) };&quot;)(body);
+    /* jshint -W054 */
+}
+
+
+/*
+ * Add a off method to a class component to remove behaviors from the class.
+ * @method addOffClass
+ * @param {Object} Class Class
+ * @param {String} classId name of the class
+ * @private
+ */
+function addOffClass(Class, classId) {
+    var body = function (state, behaviorId) {
+        if ($workflow.checkParams({
+            &quot;component&quot;: this,
+            &quot;methodName&quot;: &quot;off&quot;,
+            &quot;args&quot;: arguments
+        })) {
+            if ($metamodel.isValidState(state, classId)) {
+                $behavior.remove({
+                    &quot;behaviorId&quot;: behaviorId,
+                    &quot;componentId&quot;: classId,
+                    &quot;state&quot;: state
+                });
+            } else {
+                $log.InvalidStateOff(classId, state);
+            }
+        }
+    };
+    /* jshint -W054 */
+    Class.off = new Function(&quot;body&quot;, &quot;return function off (state, behaviorId) { return body.call(this, state, behaviorId) };&quot;)(body);
+    /* jshint +W054 */
+}
+
+
+/*
+ * Add a destroy method to a class component to detroy the class and all the components of the same class.
+ * @method addDestroyClass
+ * @param {Object} Class Class
+ * @private
+ */
+function addDestroyClass(Class) {
+    var body = function () {
+        var id = this.id();
+        
+        // if not virtual component
+        if ($db[id]) {
+            $db[id].remove();
+        }
+
+        delete store[id];
+
+        $workflow.state({
+            &quot;component&quot;: id,
+            &quot;state&quot;: &quot;destroy&quot;
+        });
+    };
+    /* jshint -W054 */
+    Class.destroy = new Function(&quot;body&quot;, &quot;return function destroy () { return body.call(this) };&quot;)(body);
+    /* jshint +W054 */
+}
+
+
+/*
+ * Add the addClassInfo method on a class.
+ * @method addClassInfoClass
+ * @param {Object} Class Class
+ * @private
+ */
+function addClassInfoClass(Class) {
+    var body = function () {
+        return get(this.id() + &#x27;Info&#x27;);
+    };
+    /* jshint -W054 */
+    Class.classInfo = new Function(&quot;body&quot;, &quot;return function classInfo () { return body.call(this) };&quot;)(body);
+    /* jshint +W054 */
+}
+
+
+/*
+ * Create a component from its configuration.
+ * @method factory
+ * @param {JSON} config configuration of the component
+ * @return {Component} the created component
+ * @private
+ */
+function factory(config) {
+    config = config || {};
+
+    var Class = {},
+        classId = &#x27;&#x27;;
+
+    if (typeof config.model === &#x27;undefined&#x27;) {
+        classId = $helper.generateId();
+    } else {
+        classId = config.model;
+    }
+
+    Class = createClass(classId);
+
+    store[classId] = Class;
+
+    addId(Class, classId);
+
+    addProperties(config.model, Class, classId);
+    addMethods(config.model, Class, classId);
+    addEvents(config.model, Class, classId);
+
+    // add default properties/methods only if the component
+    // inherit from SyrupComponent
+    if ($metamodel.inheritFrom(classId, &#x27;SyrupComponent&#x27;)) {
+        addOn(Class, classId);
+        addOnClass(Class, classId);
+        addOffClass(Class, classId);
+        addDestroyClass(Class);
+        addClassInfoClass(Class);
+    }
+
+    Object.freeze(Class);
+
+    return Class;
+}
+
+
+/* Public methods */
+
+
+/*
+ * Get a component by its id.
+ * @method get
+ * @param {String} id of the component
+ * @return {Component} component
+ */
+function get(id) {
+    return store[id];
+}
+
+
+/*
+ * Create a component from its configuration.
+ * @method create
+ * @param {Object} config &lt;br&gt;
+ * {String} model model name &lt;br&gt;
+ * @return {Component}
+ */
+function create(config) {
+    return factory(config);
+}
+
+
+/*
+ * Destroy a component from its id.
+ * @method destroy
+ * @param {String} id id of the component to destroy
+ */
+function destroy(id) {
+    var component = store[id],
+        classId = &#x27;&#x27;;
+
+    if (component) {
+        delete store[id];
+        classId = component.constructor.name;
+        $db[classId].remove({
+            &quot;_id&quot;: id
+        });
+        // case of Behavior
+        if (classId === &#x27;SyrupBehavior&#x27;) {
+            $behavior.removeFromMemory(id);
+        }
+    }
+}
+
+
+
+/*
+ * Remove all the components store in the memory.
+ * @method clear
+ */
+function clear() {
+    store = {};
+}
+
+
+/* exports */
+
+
+/**
+ * This module manages the components. 
+ * It is the factory of all the components that are created by syrup.
+ * 
+ * @module syrup
+ * @submodule syrup-component
+ * @requires syrup-workflow
+ * @requires syrup-db
+ * @requires syrup-metamodel
+ * @requires syrup-behavior
+ * @requires syrup-helper
+ * @requires syrup-log
+ * @class syrup-component
+ * @static 
+ */
+
+
+/**
+ * Create a component from its configuration.
+ * @method create
+ * @param {Object} config &lt;br&gt;
+ * {String} model model name &lt;br&gt;
+ * @return {Component} component
+ */
+exports.create = create;
+
+
+/**
+ * Get a component by its id.
+ * @method get
+ * @param {String} id id of the component
+ * @return {Component} component
+ */
+exports.get = get;
+
+
+/**
+ * Remove all the components store in memory.
+ * @method clear
+ */
+exports.clear = clear;
+
+
+/**
+ * Destroy a component from its id.
+ * @method destroy
+ * @param {String} id id of the component to destroy
+ * @return {Boolean} if the component has been destroyed
+ */
+exports.destroy = destroy;
+    </pre>
+</div>
                     </div>
                 </div>
             </div>

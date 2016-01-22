@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.1</b>
+                    API Docs for Version: <b>0.9.2</b>
                 </p>
             </li>
         </div>
@@ -33,854 +33,854 @@
 <div class="container">
     <div class="row">
         <div class="span3">
-	    <div>
-	        <div id="sidebar">
-	        <div id="classes">
-	            <ul id="api-classes" class="nav nav-list">
-	                    <li><a href="../classes/syrup.html">syrup</a></li>
-	                    <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
-	                    <li><a href="../classes/syrup-component.html">syrup-component</a></li>
-	                    <li><a href="../classes/syrup-db.html">syrup-db</a></li>
-	                    <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
-	                    <li><a href="../classes/syrup-log.html">syrup-log</a></li>
-	                    <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
-	                    <li><a href="../classes/syrup-state.html">syrup-state</a></li>
-	                    <li><a href="../classes/syrup-system.html">syrup-system</a></li>
-	                    <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
-	                    <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
-	                    <li><a href="../classes/SyrupError.html">SyrupError</a></li>
-	            </ul>
-	        </div>
-	        </div>
-	    </div>
+<div>
+    <div id="sidebar">
+    <div id="classes">
+        <ul id="api-classes" class="nav nav-list">
+                <li><a href="../classes/syrup.html">syrup</a></li>
+                <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
+                <li><a href="../classes/syrup-component.html">syrup-component</a></li>
+                <li><a href="../classes/syrup-db.html">syrup-db</a></li>
+                <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
+                <li><a href="../classes/syrup-log.html">syrup-log</a></li>
+                <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
+                <li><a href="../classes/syrup-state.html">syrup-state</a></li>
+                <li><a href="../classes/syrup-system.html">syrup-system</a></li>
+                <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
+                <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
+                <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+        </ul>
+    </div>
+    </div>
+</div>
         </div>
         <div class="span9">
-                <form id="options-form" class="form-inline pull-right">
-                    Show:
-                    <label for="api-show-inherited" class="checkbox">
-                        <input type="checkbox" id="api-show-inherited" checked>
-                        Inherited
-                    </label>
-            
-                    <label for="api-show-protected" class="checkbox">
-                        <input type="checkbox" id="api-show-protected">
-                        Protected
-                    </label>
-            
-                    <label for="api-show-private" class="checkbox">
-                        <input type="checkbox" id="api-show-private">
-                        Private
-                    </label>
-                    <label for="api-show-deprecated" class="checkbox">
-                        <input type="checkbox" id="api-show-deprecated">
-                        Deprecated
-                    </label>
-            
-                </form>
-            
+    <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <div class="page-header">
-                            <h1>src/workflow.js <small>File</small></h1>
-                        </div>
-                        
-                        <div class="file">
-                            <pre class="prettyprint linenums">
-                        /*
-                         * SyrupJS
-                         * The System Runtime Platform
-                         * http://syrupjs.systemdesigner.io
-                         * @ecarriou
-                         *  
-                         * Copyright (c) 2016 Erwan Carriou
-                         * 
-                         * Permission is hereby granted, free of charge, to any person obtaining a copy
-                         * of this software and associated documentation files (the &quot;Software&quot;), to deal
-                         * in the Software without restriction, including without limitation the rights
-                         * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-                         * copies of the Software, and to permit persons to whom the Software is
-                         * furnished to do so, subject to the following conditions:
-                         * 
-                         * The above copyright notice and this permission notice shall be included in all
-                         * copies or substantial portions of the Software.
-                         * 
-                         * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-                         * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-                         * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-                         * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-                         * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-                         * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-                         * SOFTWARE. 
-                         */
-                        
-                        /**
-                         * This module manages the workflow of syrup. It behaves like a workflow engine. &lt;br&gt;
-                         * It checks if the change of status of a component is valid to be executed. By valid, it means that:&lt;br&gt;
-                         * - the state is valid for the component, &lt;br&gt;
-                         * - the input (i.e. parameters) of all actions for the state are compliants with the model and &lt;br&gt;
-                         * - the output of all actions are compliants with the model. &lt;br&gt;
-                         * 
-                         * If an error occurs, the workflow will call the error state of the component and syrup. &lt;br&gt;
-                         * If the error can break the consistency of the current system, the worklow will stop.
-                         * 
-                         * @module syrup
-                         * @submodule syrup-workflow
-                         * @requires syrup-metamodel
-                         * @requires syrup-component
-                         * @requires syrup-behavior
-                         * @requires syrup-channel
-                         * @requires syrup-state
-                         * @requires syrup-helper
-                         * @requires syrup-log
-                         * @requires syrup-db
-                         * @class syrup-workflow 
-                         * @static
-                         */
-                        
-                        &#x27;use strict&#x27;;
-                        
-                        var $metamodel = require(&#x27;./metamodel.js&#x27;);
-                        var $component = require(&#x27;./component.js&#x27;);
-                        var $behavior = require(&#x27;./behavior.js&#x27;);
-                        var $state = require(&#x27;./state.js&#x27;);
-                        var $helper = require(&#x27;./helper.js&#x27;);
-                        var $log = require(&#x27;./log.js&#x27;);
-                        var $db = require(&#x27;./db.js&#x27;);
-                        
-                        
-                        /* Private methods */
-                        
-                        
-                        /**
-                         * The SyrupError class.
-                         * @class SyrupError
-                         * @constructor
-                         * @param {String} message message of the error
-                         */
-                        function SyrupError(message) {
-                            this.message = message;
-                            this.name = &quot;SyrupError&quot;;
-                        }
-                        SyrupError.prototype = new Error();
-                        SyrupError.prototype.constructor = SyrupError;
-                        
-                        
-                        /*
-                         * Get all the names of the parameter of a method.
-                         * @method getParamNames
-                         * @param {String} id id of the class
-                         * @param {String} methodName name of the method
-                         * @return {Array} the names of all parameters of the method for the class
-                         * @private
-                         */
-                        function getParamNames(id, methodName) {
-                            var method = null,
-                                params = [],
-                                result = [],
-                                length = 0,
-                                i = 0;
-                        
-                            method = $metamodel.get(id)[methodName];
-                            if (method) {
-                                params = method.params;
-                                if (params) {
-                                    length = params.length;
-                                    for (i = 0; i &lt; length; i++) {
-                                        result.push(params[i].name);
-                                    }
-                                }
-                            } else {
-                                $log.unknownMethod(id, methodName);
-                            }
-                            return result;
-                        }
-                        
-                        
-                        /* 
-                         * Get the number of parameters of a method.
-                         * @method getParamNumber
-                         * @param {String} id id of the class
-                         * @param {String} methodName name of the method
-                         * @return {Array} number of parameters min and max for the method
-                         * @private
-                         */
-                        function getParamNumber(id, methodName) {
-                            var method = null,
-                                params = [],
-                                result = [],
-                                length = 0,
-                                i = 0,
-                                min = 0,
-                                max = 0;
-                        
-                            method = $metamodel.get(id)[methodName];
-                            if (method) {
-                                params = method.params;
-                                if (params) {
-                                    length = params.length;
-                                    for (i = 0; i &lt; length; i++) {
-                                        if (typeof params[i].mandatory === &#x27;undefined&#x27; || params[i].mandatory === true) {
-                                            min = min + 1;
-                                        }
-                                        max = max + 1;
-                                    }
-                                }
-                                result.push(min);
-                                result.push(max);
-                            } else {
-                                $log.unknownMethod(id, methodName);
-                            }
-                            return result;
-                        }
-                        
-                        
-                        /* 
-                         * Set the default value of the non mandatory parameters of a method.
-                         * @method setDefaultValue
-                         * @param {String} id id of the class
-                         * @param {String} methodName name of the method
-                         * @param {Array} args arguments
-                         * @return {Array} arguments with default values
-                         * @private
-                         */
-                        function setDefaultValue(id, methodName, args) {
-                            var method = null,
-                                params = [],
-                                result = [],
-                                length = 0,
-                                i = 0;
-                        
-                            method = $metamodel.get(id)[methodName];
-                            if (method) {
-                                params = method.params;
-                                if (params) {
-                                    length = params.length;
-                                    for (i = 0; i &lt; length; i++) {
-                                        if (params[i].mandatory === false &amp;&amp; typeof args[i] === &#x27;undefined&#x27;) {
-                                            result.push(params[i].default);
-                                        } else {
-                                            result.push(args[i]);
-                                        }
-                                    }
-                                }
-                            } else {
-                                $log.unknownMethod(id, methodName);
-                            }
-                            return result;
-                        }
-                        
-                        
-                        /*
-                         * Get the type returned by a method.
-                         * @method getReturnType
-                         * @param {String} id id of the class
-                         * @param {String} methodName name of the method
-                         * @return {String} the type returned by the method
-                         * @private
-                         */
-                        function getReturnType(id, methodName) {
-                            var resultType = null,
-                                result = null;
-                        
-                            resultType = $metamodel.get(id)[methodName].result;
-                            if (resultType) {
-                                result = resultType;
-                            }
-                            return result;
-                        }
-                        
-                        
-                        /*
-                         * Get all the type of the parameters of a method
-                         * @method getParamTypes
-                         * @param {String} id id of the class
-                         * @param {String} methodName name of the method
-                         * @return {Array} the types of the parameters of a method
-                         * @private
-                         */
-                        function getParamTypes(id, methodName) {
-                            var method = null,
-                                params = [],
-                                result = [],
-                                length = 0,
-                                i = 0;
-                        
-                            method = $metamodel.get(id)[methodName];
-                            if (method) {
-                                params = method.params;
-                                if (params) {
-                                    length = params.length;
-                                    for (i = 0; i &lt; length; i++) {
-                                        result.push(params[i].type);
-                                    }
-                                }
-                            } else {
-                                $log.unknownMethod(id, methodName);
-                            }
-                            return result;
-                        }
-                        
-                        
-                        /*
-                         * Check if conditions on output are compliant with the metamodel
-                         * @method checkResult
-                         * @param {Object} params
-                         * @return {Boolean} true if conditions on ouput are compliant with the metamodel
-                         * @private
-                         */
-                        function checkResult(params) {
-                            params = params || {};
-                        
-                            var component = params.component || null,
-                                methodName = params.methodName || &#x27;&#x27;,
-                                methodResult = params.methodResult || undefined,
-                                componentClassName = &#x27;&#x27;,
-                                returnType = null,
-                                result = true;
-                        
-                            if (component.constructor.name === &#x27;Function&#x27;) {
-                                componentClassName = component.name;
-                            } else {
-                                componentClassName = component.constructor.name;
-                            }
-                        
-                            returnType = getReturnType(componentClassName, methodName);
-                        
-                            if (returnType !== null) {
-                                if (returnType === &#x27;array&#x27;) {
-                                    if (!Array.isArray(methodResult)) {
-                                        result = false;
-                                        $log.invalidResultType(component.id(), methodName);
-                                    }
-                                } else {
-                                    if (typeof methodResult !== returnType) {
-                                        result = false;
-                                        $log.invalidResultType(component.id(), methodName);
-                                    }
-                                }
-                            }
-                        
-                            return result;
-                        }
-                        
-                        
-                        /*
-                         * Get the actions of the specified state
-                         * @method getActions
-                         * @param {Object} component a syrup component
-                         * @param {String} name name of the state
-                         * @param {Boolean} isEvent true if the state is an event
-                         * @return {Array} list of the actions
-                         * @private
-                         */
-                        function getActions(component, name, isEvent) {
-                            var action = $behavior.getActions(component.id(), name),
-                                parents = [],
-                                length = 0,
-                                i = 0,
-                                parent = null;
-                        
-                            if (!action.length || isEvent) {
-                                if (component.constructor.name !== &#x27;Function&#x27;) {
-                                    action = action.concat(getActions($component.get(component.constructor.name), name, isEvent));
-                                } else {
-                                    parents = $metamodel.getParents(component.name);
-                                    length = parents.length;
-                                    for (i = 0; i &lt; length; i++) {
-                                        parent = $component.get(parents[i]);
-                                        if (parent) {
-                                            action = action.concat(getActions(parent, name, isEvent));
-                                        } else {
-                                            $log.unknownComponent(parents[i], component.name);
-                                        }
-                                        if (action.length) {
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        
-                            if (action.length) {
-                                action.reverse();
-                            }
-                        
-                            return action;
-                        }
-                        
-                        
-                        /*
-                         * Call an action and make some Dependency Injection if it is a core action
-                         * @method callAction
-                         * @param {Component} component
-                         * @param {String} state name of the state
-                         * @param {Object} action action
-                         * @param {Array} params parameters of the action
-                         * @param {Boolean} isEvent is the action a callback of an event
-                         * @return {Boolean} result of the action
-                         */
-                        function callAction(component, state, action, params, isEvent) {
-                            var result = null,
-                                injectedParams = [],
-                                i = 0,
-                                length = 0;
-                        
-                            if (!$metamodel.isProperty(state, component.constructor.name) &amp;&amp; !$metamodel.isCollection(state, component.constructor.name)) {
-                                params = setDefaultValue(component.constructor.name, state, params);
-                            }
-                        
-                            try {
-                                length = params.length;
-                                for (i = 0; i &lt; length; i++) {
-                                    injectedParams.push(params[i]);
-                                }
-                                if (action.useCoreAPI) {
-                                    injectedParams.push($component);
-                                    injectedParams.push($db);
-                                    injectedParams.push($metamodel);
-                                    injectedParams.push(exports);
-                                    injectedParams.push($behavior);
-                                    injectedParams.push($state);
-                                }
-                        
-                                if (isEvent) {
-                                    setTimeout(action.action.bind.apply(action.action, [component].concat(injectedParams)), 0);
-                                } else {
-                                    result = action.action.apply(component, injectedParams);
-                                }
-                            } catch (e) {
-                                if (e instanceof SyrupError) {
-                                    throw e;
-                                } else {
-                                    if (component &amp;&amp; component.error) {
-                                        component.error({
-                                            &quot;message&quot;: &quot;error when trying to call the method &#x27;&quot; + state + &quot;&#x27; on component &#x27;&quot; + component.id() + &quot;&#x27;&quot;,
-                                            &quot;error&quot;: e
-                                        });
-                                    }
-                                    if ($helper.getSyrup()) {
-                                        $helper.getSyrup().error({
-                                            &quot;message&quot;: &quot;error when trying to call the method &#x27;&quot; + state + &quot;&#x27; on component &#x27;&quot; + component.id() + &quot;&#x27;&quot;,
-                                            &quot;error&quot;: e
-                                        });
-                                    }
-                                }
-                            }
-                        
-                            return result;
-                        }
-                        
-                        
-                        /* Public methods */
-                        
-                        
-                        /*
-                         * Check if an action has the valid number of parameter.
-                         * @method validParamNumbers
-                         * @param {String} className name the class
-                         * @param {String} state state on which the action applied
-                         * @param {Function} action action
-                         * @return {Boolean} true if the action is the valid number of parameters
-                         */
-                        function validParamNumbers(className, state, action) {
-                            var func = &#x27;&#x27;,
-                                beginBody = -1,
-                                header = &#x27;&#x27;,
-                                funcParams = &#x27;&#x27;,
-                                params = [],
-                                paramNumber = 0,
-                                modelNumberParam = [],
-                                isProperty = false,
-                                isCollection = false,
-                                result = false;
-                        
-                            // check number of parameters of the action
-                            func = action.toString();
-                            beginBody = func.indexOf(&#x27;{&#x27;);
-                            header = func.substring(0, beginBody);
-                            funcParams = header.split(&#x27;(&#x27;)[1].replace(&#x27;)&#x27;, &#x27;&#x27;).trim();
-                            params = funcParams.split(&#x27;,&#x27;);
-                            if (params[0] === &#x27;&#x27;) {
-                                params = [];
-                            }
-                            paramNumber = params.length;
-                        
-                            // get the number min and max of valid parameters
-                            isProperty = $metamodel.isProperty(state, className);
-                            isCollection = $metamodel.isCollection(state, className);
-                        
-                            switch (true) {
-                                case isCollection:
-                                    modelNumberParam = [3, 3];
-                                    break;
-                                case isProperty:
-                                    modelNumberParam = [1, 1];
-                                    break;
-                                default:
-                                    modelNumberParam = getParamNumber(className, state);
-                                    break;
-                            }
-                        
-                            // compare
-                            if (modelNumberParam[0] &lt;= paramNumber &amp;&amp; paramNumber &lt;= modelNumberParam[1]) {
-                                result = true;
-                            }
-                        
-                            return result;
-                        }
-                        
-                        
-                        /*
-                         * Check if conditions on input are compliant with the model before calling the action.
-                         * @method checkParams
-                         * @param {Object} params
-                         * @return {Boolean} true if condition on input are compliant with the model
-                         */
-                        function checkParams(params) {
-                            params = params || {};
-                        
-                            var component = params.component || null,
-                                methodName = params.methodName || &#x27;&#x27;,
-                                args = params.args || &#x27;&#x27;,
-                                paramsName = [],
-                                paramsType = [],
-                                paramsNumber = [],
-                                componentClassName = &#x27;&#x27;,
-                                length = args.length,
-                                i = 0,
-                                param = null,
-                                result = true,
-                                isProperty = false,
-                                isCollection = false;
-                        
-                            if (component.constructor.name === &#x27;Function&#x27;) {
-                                componentClassName = component.name;
-                            } else {
-                                componentClassName = component.constructor.name;
-                            }
-                        
-                            isProperty = $metamodel.isProperty(methodName, componentClassName);
-                            isCollection = $metamodel.isCollection(methodName, componentClassName);
-                            paramsName = getParamNames(componentClassName, methodName);
-                        
-                            switch (true) {
-                                case isCollection:
-                                    paramsType = [&#x27;number&#x27;, $metamodel.get(componentClassName)[methodName].type[0], &#x27;string&#x27;];
-                                    paramsNumber = [3, 3];
-                                    break;
-                                case isProperty:
-                                    paramsType = [$metamodel.get(componentClassName)[methodName].type];
-                                    paramsNumber = [1, 1];
-                                    break;
-                                default:
-                                    paramsType = getParamTypes(componentClassName, methodName);
-                                    paramsNumber = getParamNumber(componentClassName, methodName);
-                                    break;
-                            }
-                        
-                            // case of object
-                            if (typeof length === &#x27;undefined&#x27;) {
-                                length = 1;
-                            }
-                        
-                            if (paramsNumber.indexOf(length) === -1) {
-                                result = false;
-                                $log.invalidParamNumber(component.id(), methodName);
-                            }
-                        
-                            for (i = 0; i &lt; length; i++) {
-                                param = args[i];
-                                if (typeof param === &#x27;undefined&#x27;) {
-                                    if (i &lt; paramsNumber[0]) {
-                                        result = false;
-                                        $log.invalidParamNumber(component.id(), methodName);
-                                    } else {
-                                        continue;
-                                    }
-                                } else {
-                                    if (!$metamodel.isValidType(param, paramsType[i])) {
-                                        result = false;
-                                        $log.invalidParamType(component.id(), methodName, paramsName[i]);
-                                    }
-                                }
-                            }
-                        
-                            return result;
-                        }
-                        
-                        
-                        /*
-                         * Call an action that comes from an event.
-                         * @method action
-                         * @param {String} behaviorId id of the behavior
-                         * @param {Array} params parameters
-                         */
-                        function action(behaviorId, params) {
-                            var isEvent = false,
-                                isProperty = false,
-                                isCollection = false,
-                                behaviors = [],
-                                behavior = null,
-                                component = null,
-                                actionFromMemory = null;
-                        
-                            behaviors = $db.SyrupBehavior.find({
-                                &quot;_id&quot;: behaviorId
-                            });
-                        
-                            actionFromMemory = $behavior.get(behaviorId);
-                        
-                            if (behaviors.length === 1) {
-                                behavior = behaviors[0];
-                        
-                                component = $component.get(behavior.component);
-                                if (component) {
-                                    isEvent = $metamodel.isEvent(behavior.state, component.constructor.name);
-                                    isProperty = $metamodel.isProperty(behavior.state, component.constructor.name);
-                                    isCollection = $metamodel.isCollection(behavior.state, component.constructor.name);
-                        
-                                    if (isEvent || isProperty || isCollection) {
-                                        callAction(component, behavior.state, {
-                                            &quot;useCoreAPI&quot;: behavior.useCoreAPI,
-                                            &quot;action&quot;: actionFromMemory
-                                        }, params, true);
-                                    }
-                                }
-                            }
-                        }
-                        
-                        
-                        /*
-                         * Change the state of a component.
-                         * 
-                         * Worklow:&lt;br&gt;
-                         * &lt;br&gt;
-                         * 0. Check if the component has not been destroyed &lt;br&gt;
-                         * 1. Check if the state is a method, a property or an event &lt;br&gt;
-                         * 2. Search if there is a behavior with actions for the new state &lt;br&gt;
-                         * 3. If so, get the action(s) &lt;br&gt;
-                         * 4. Check if the inputs are compliants with the metamodel &lt;br&gt;
-                         * 5. Call the action(s) &lt;br&gt;
-                         * 6. If a method, check if the output are compliants with the metamodel &lt;br&gt;
-                         * 7. If all is ok, the state of the component is updated &lt;br&gt;
-                         * 8. Return the result &lt;br&gt;
-                         * 
-                         * @method state
-                         * @param {Object} params params to change the state &lt;br&gt;
-                         * {String} component id of the component &lt;br&gt;
-                         * {String} state state of the component &lt;br&gt;
-                         * {Array} data parameters to send to the action
-                         */
-                        function state(params) {
-                        
-                            params = params || {};
-                            params.component = params.component || &#x27;&#x27;;
-                            params.state = params.state || &#x27;&#x27;;
-                            params.data = params.data || [];
-                        
-                            var component = null,
-                                currentState = &#x27;&#x27;,
-                                actions = [],
-                                action = null,
-                                result = null,
-                                i = 0,
-                                length = 0,
-                                isProperty = false,
-                                isCollection = false,
-                                isEvent = false;
-                        
-                            currentState = $state.get(params.component);
-                        
-                            if (currentState === &#x27;destroy&#x27;) {
-                                $log.invalidUseOfComponent(params.component);
-                            }
-                        
-                            component = $component.get(params.component);
-                            if (component) {
-                                isEvent = $metamodel.isEvent(params.state, component.constructor.name);
-                                isProperty = $metamodel.isProperty(params.state, component.constructor.name);
-                                isCollection = $metamodel.isCollection(params.state, component.constructor.name);
-                                actions = getActions(component, params.state, isEvent);
-                            }
-                        
-                            if (actions.length) {
-                        
-                                if (checkParams({
-                                    &quot;component&quot;: component,
-                                    &quot;methodName&quot;: params.state,
-                                    &quot;args&quot;: params.data
-                                })) {
-                        
-                                    if (!isEvent &amp;&amp;
-                                        !isProperty &amp;&amp;
-                                        !isCollection) {
-                                        action = actions[0];
-                                        result = callAction(component, params.state, action, params.data, false);
-                        
-                                        checkResult({
-                                            &quot;component&quot;: component,
-                                            &quot;methodName&quot;: params.state,
-                                            &quot;methodResult&quot;: result
-                                        });
-                        
-                                    } else {
-                        
-                                        length = actions.length;
-                                        for (i = 0; i &lt; length; i++) {
-                                            action = actions[i];
-                                            callAction(component, params.state, action, params.data, true);
-                                        }
-                        
-                                        $state.set(component.id(), params.state, params.data);
-                                    }
-                                }
-                                return result;
-                            } else {
-                                if (component &amp;&amp; (isEvent || isProperty || isCollection)) {
-                                    $state.set(component.id(), params.state, params.data);
-                                }
-                            }
-                        }
-                        
-                        
-                        /*
-                         * Stop the workflow engine.
-                         * @method stop
-                         * @param {Object} params parameters &lt;br&gt;
-                         * {Boolean} error true if the stop of the workflow is due to an error (default false) &lt;br&gt;
-                         * {String} message error message to log (default &#x27;&#x27;)
-                         */
-                        function stop(params) {
-                            params = params || {};
-                        
-                            if (typeof params.error === &#x27;undefined&#x27;) {
-                                params.error = false;
-                            }
-                            params.message = params.message || &#x27;&#x27;;
-                        
-                            exports.state = function () {
-                            };
-                        
-                            if (params.error) {
-                                if (params.message) {
-                                    throw new SyrupError(&quot;syrup has been stopped because &quot; + params.message);
-                                } else {
-                                    throw new SyrupError(&quot;syrup has been stopped because of an unknown error&quot;);
-                                }
-                            } else {
-                                console.warn(&#x27;syrup: syrup has been stopped&#x27;);
-                            }
-                        }
-                        
-                        
-                        /*
-                         * Restart the workflow engine from the last state.
-                         * @method restart
-                         */
-                        function restart() {
-                            exports.state = state;
-                            $log.workflowRestarted();
-                        }
-                        
-                        
-                        /* exports */
-                        
-                        
-                        /**
-                         * This module manages the workflow of syrup. It behaves like a workflow engine. &lt;br&gt;
-                         * It checks if the change of status of a component is valid to be executed. By valid, it means that:&lt;br&gt;
-                         * - the state is valid for the component, &lt;br&gt;
-                         * - the input (i.e. parameters) of all actions for the state are compliants with the model and &lt;br&gt;
-                         * - the output of all actions are compliants with the model. &lt;br&gt;
-                         * 
-                         * If an error occurs, the workflow will call the error state of the component and syrup. &lt;br&gt;
-                         * If the error can break the consistency of the current system, the worklow will stop.
-                         * 
-                         * @module syrup
-                         * @submodule syrup-workflow
-                         * @requires syrup-metamodel
-                         * @requires syrup-component
-                         * @requires syrup-behavior
-                         * @requires syrup-channel
-                         * @requires syrup-state
-                         * @requires syrup-helper
-                         * @requires syrup-log
-                         * @requires syrup-db
-                         * @class syrup-workflow 
-                         * @static
-                         */
-                        
-                        
-                        /**
-                         * Change the state of a component.
-                         * 
-                         * Worklow:&lt;br&gt;
-                         * &lt;br&gt;
-                         * 0. Check if the component has not been destroyed &lt;br&gt;
-                         * 1. Check if the state is a method or an event &lt;br&gt;
-                         * 2. Search if there is a behavior with an action for the new state &lt;br&gt;
-                         * 3. If so, get the action(s) &lt;br&gt;
-                         * 4. Check if the conditons on input are compliant with the metamodel &lt;br&gt;
-                         * 5. Call the action(s) &lt;br&gt;
-                         * 6. If not an of event, check if the conditons on input are compliant with the metamodel &lt;br&gt;
-                         * 7. If all is ok, the state of the component is updated &lt;br&gt;
-                         * 8. Return the result &lt;br&gt;
-                         * 
-                         * @method state
-                         * @param {Object} params params to change the state &lt;br&gt;
-                         * {String} component id of the component &lt;br&gt;
-                         * {String} state state of the component &lt;br&gt;
-                         * {Array} data parameters to send to the action
-                         */
-                        exports.state = state;
-                        
-                        
-                        /**
-                         * Stop the workflow engine.
-                         * @method stop
-                         * @param {Object} params parameters &lt;br&gt;
-                         * {Boolean} error true if the stop of the workflow is due to an error (default false) &lt;br&gt;
-                         * {String} message error message to log (default &#x27;&#x27;)
-                         */
-                        exports.stop = stop;
-                        
-                        
-                        /**
-                         * Restart the workflow engine from the last state.
-                         * @method restart
-                         */
-                        exports.restart = restart;
-                        
-                        
-                        /**
-                         * Check if conditions on input are compliant with the model before calling the action.
-                         * @method checkParams
-                         * @param {Object} params
-                         * @return {Boolean} true if condition on input are compliant with the model
-                         */
-                        exports.checkParams = checkParams;
-                        
-                        
-                        /**
-                         * Check if an action has the valid number of parameter.
-                         * @method validParamNumbers
-                         * @param {String} className name the class
-                         * @param {String} state state on which the action applied
-                         * @param {Function} action action
-                         * @return {Boolean} true if the action is the valid number of parameters
-                         */
-                        exports.validParamNumbers = validParamNumbers;
-                        
-                        
-                        /**
-                         * Call an action that comes from an event.
-                         * @method action
-                         * @param {String} behaviorId id of the behavior
-                         * @param {Array} params parameters
-                         */
-                        exports.action = action;
-                            </pre>
-                        </div>
+<div class="page-header">
+    <h1>src/workflow.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
+ * @ecarriou
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
+ */
+
+/**
+ * This module manages the workflow of syrup. It behaves like a workflow engine. &lt;br&gt;
+ * It checks if the change of status of a component is valid to be executed. By valid, it means that:&lt;br&gt;
+ * - the state is valid for the component, &lt;br&gt;
+ * - the input (i.e. parameters) of all actions for the state are compliants with the model and &lt;br&gt;
+ * - the output of all actions are compliants with the model. &lt;br&gt;
+ * 
+ * If an error occurs, the workflow will call the error state of the component and syrup. &lt;br&gt;
+ * If the error can break the consistency of the current system, the worklow will stop.
+ * 
+ * @module syrup
+ * @submodule syrup-workflow
+ * @requires syrup-metamodel
+ * @requires syrup-component
+ * @requires syrup-behavior
+ * @requires syrup-channel
+ * @requires syrup-state
+ * @requires syrup-helper
+ * @requires syrup-log
+ * @requires syrup-db
+ * @class syrup-workflow 
+ * @static
+ */
+
+&#x27;use strict&#x27;;
+
+var $metamodel = require(&#x27;./metamodel.js&#x27;);
+var $component = require(&#x27;./component.js&#x27;);
+var $behavior = require(&#x27;./behavior.js&#x27;);
+var $state = require(&#x27;./state.js&#x27;);
+var $helper = require(&#x27;./helper.js&#x27;);
+var $log = require(&#x27;./log.js&#x27;);
+var $db = require(&#x27;./db.js&#x27;);
+
+
+/* Private methods */
+
+
+/**
+ * The SyrupError class.
+ * @class SyrupError
+ * @constructor
+ * @param {String} message message of the error
+ */
+function SyrupError(message) {
+    this.message = message;
+    this.name = &quot;SyrupError&quot;;
+}
+SyrupError.prototype = new Error();
+SyrupError.prototype.constructor = SyrupError;
+
+
+/*
+ * Get all the names of the parameter of a method.
+ * @method getParamNames
+ * @param {String} id id of the class
+ * @param {String} methodName name of the method
+ * @return {Array} the names of all parameters of the method for the class
+ * @private
+ */
+function getParamNames(id, methodName) {
+    var method = null,
+        params = [],
+        result = [],
+        length = 0,
+        i = 0;
+
+    method = $metamodel.get(id)[methodName];
+    if (method) {
+        params = method.params;
+        if (params) {
+            length = params.length;
+            for (i = 0; i &lt; length; i++) {
+                result.push(params[i].name);
+            }
+        }
+    } else {
+        $log.unknownMethod(id, methodName);
+    }
+    return result;
+}
+
+
+/* 
+ * Get the number of parameters of a method.
+ * @method getParamNumber
+ * @param {String} id id of the class
+ * @param {String} methodName name of the method
+ * @return {Array} number of parameters min and max for the method
+ * @private
+ */
+function getParamNumber(id, methodName) {
+    var method = null,
+        params = [],
+        result = [],
+        length = 0,
+        i = 0,
+        min = 0,
+        max = 0;
+
+    method = $metamodel.get(id)[methodName];
+    if (method) {
+        params = method.params;
+        if (params) {
+            length = params.length;
+            for (i = 0; i &lt; length; i++) {
+                if (typeof params[i].mandatory === &#x27;undefined&#x27; || params[i].mandatory === true) {
+                    min = min + 1;
+                }
+                max = max + 1;
+            }
+        }
+        result.push(min);
+        result.push(max);
+    } else {
+        $log.unknownMethod(id, methodName);
+    }
+    return result;
+}
+
+
+/* 
+ * Set the default value of the non mandatory parameters of a method.
+ * @method setDefaultValue
+ * @param {String} id id of the class
+ * @param {String} methodName name of the method
+ * @param {Array} args arguments
+ * @return {Array} arguments with default values
+ * @private
+ */
+function setDefaultValue(id, methodName, args) {
+    var method = null,
+        params = [],
+        result = [],
+        length = 0,
+        i = 0;
+
+    method = $metamodel.get(id)[methodName];
+    if (method) {
+        params = method.params;
+        if (params) {
+            length = params.length;
+            for (i = 0; i &lt; length; i++) {
+                if (params[i].mandatory === false &amp;&amp; typeof args[i] === &#x27;undefined&#x27;) {
+                    result.push(params[i].default);
+                } else {
+                    result.push(args[i]);
+                }
+            }
+        }
+    } else {
+        $log.unknownMethod(id, methodName);
+    }
+    return result;
+}
+
+
+/*
+ * Get the type returned by a method.
+ * @method getReturnType
+ * @param {String} id id of the class
+ * @param {String} methodName name of the method
+ * @return {String} the type returned by the method
+ * @private
+ */
+function getReturnType(id, methodName) {
+    var resultType = null,
+        result = null;
+
+    resultType = $metamodel.get(id)[methodName].result;
+    if (resultType) {
+        result = resultType;
+    }
+    return result;
+}
+
+
+/*
+ * Get all the type of the parameters of a method
+ * @method getParamTypes
+ * @param {String} id id of the class
+ * @param {String} methodName name of the method
+ * @return {Array} the types of the parameters of a method
+ * @private
+ */
+function getParamTypes(id, methodName) {
+    var method = null,
+        params = [],
+        result = [],
+        length = 0,
+        i = 0;
+
+    method = $metamodel.get(id)[methodName];
+    if (method) {
+        params = method.params;
+        if (params) {
+            length = params.length;
+            for (i = 0; i &lt; length; i++) {
+                result.push(params[i].type);
+            }
+        }
+    } else {
+        $log.unknownMethod(id, methodName);
+    }
+    return result;
+}
+
+
+/*
+ * Check if conditions on output are compliant with the metamodel
+ * @method checkResult
+ * @param {Object} params
+ * @return {Boolean} true if conditions on ouput are compliant with the metamodel
+ * @private
+ */
+function checkResult(params) {
+    params = params || {};
+
+    var component = params.component || null,
+        methodName = params.methodName || &#x27;&#x27;,
+        methodResult = params.methodResult || undefined,
+        componentClassName = &#x27;&#x27;,
+        returnType = null,
+        result = true;
+
+    if (component.constructor.name === &#x27;Function&#x27;) {
+        componentClassName = component.name;
+    } else {
+        componentClassName = component.constructor.name;
+    }
+
+    returnType = getReturnType(componentClassName, methodName);
+
+    if (returnType !== null) {
+        if (returnType === &#x27;array&#x27;) {
+            if (!Array.isArray(methodResult)) {
+                result = false;
+                $log.invalidResultType(component.id(), methodName);
+            }
+        } else {
+            if (typeof methodResult !== returnType) {
+                result = false;
+                $log.invalidResultType(component.id(), methodName);
+            }
+        }
+    }
+
+    return result;
+}
+
+
+/*
+ * Get the actions of the specified state
+ * @method getActions
+ * @param {Object} component a syrup component
+ * @param {String} name name of the state
+ * @param {Boolean} isEvent true if the state is an event
+ * @return {Array} list of the actions
+ * @private
+ */
+function getActions(component, name, isEvent) {
+    var action = $behavior.getActions(component.id(), name),
+        parents = [],
+        length = 0,
+        i = 0,
+        parent = null;
+
+    if (!action.length || isEvent) {
+        if (component.constructor.name !== &#x27;Function&#x27;) {
+            action = action.concat(getActions($component.get(component.constructor.name), name, isEvent));
+        } else {
+            parents = $metamodel.getParents(component.name);
+            length = parents.length;
+            for (i = 0; i &lt; length; i++) {
+                parent = $component.get(parents[i]);
+                if (parent) {
+                    action = action.concat(getActions(parent, name, isEvent));
+                } else {
+                    $log.unknownComponent(parents[i], component.name);
+                }
+                if (action.length) {
+                    break;
+                }
+            }
+        }
+    }
+
+    if (action.length) {
+        action.reverse();
+    }
+
+    return action;
+}
+
+
+/*
+ * Call an action and make some Dependency Injection if it is a core action
+ * @method callAction
+ * @param {Component} component
+ * @param {String} state name of the state
+ * @param {Object} action action
+ * @param {Array} params parameters of the action
+ * @param {Boolean} isEvent is the action a callback of an event
+ * @return {Boolean} result of the action
+ */
+function callAction(component, state, action, params, isEvent) {
+    var result = null,
+        injectedParams = [],
+        i = 0,
+        length = 0;
+
+    if (!$metamodel.isProperty(state, component.constructor.name) &amp;&amp; !$metamodel.isCollection(state, component.constructor.name)) {
+        params = setDefaultValue(component.constructor.name, state, params);
+    }
+
+    try {
+        length = params.length;
+        for (i = 0; i &lt; length; i++) {
+            injectedParams.push(params[i]);
+        }
+        if (action.useCoreAPI) {
+            injectedParams.push($component);
+            injectedParams.push($db);
+            injectedParams.push($metamodel);
+            injectedParams.push(exports);
+            injectedParams.push($behavior);
+            injectedParams.push($state);
+        }
+
+        if (isEvent) {
+            setTimeout(action.action.bind.apply(action.action, [component].concat(injectedParams)), 0);
+        } else {
+            result = action.action.apply(component, injectedParams);
+        }
+    } catch (e) {
+        if (e instanceof SyrupError) {
+            throw e;
+        } else {
+            if (component &amp;&amp; component.error) {
+                component.error({
+                    &quot;message&quot;: &quot;error when trying to call the method &#x27;&quot; + state + &quot;&#x27; on component &#x27;&quot; + component.id() + &quot;&#x27;&quot;,
+                    &quot;error&quot;: e
+                });
+            }
+            if ($helper.getSyrup()) {
+                $helper.getSyrup().error({
+                    &quot;message&quot;: &quot;error when trying to call the method &#x27;&quot; + state + &quot;&#x27; on component &#x27;&quot; + component.id() + &quot;&#x27;&quot;,
+                    &quot;error&quot;: e
+                });
+            }
+        }
+    }
+
+    return result;
+}
+
+
+/* Public methods */
+
+
+/*
+ * Check if an action has the valid number of parameter.
+ * @method validParamNumbers
+ * @param {String} className name the class
+ * @param {String} state state on which the action applied
+ * @param {Function} action action
+ * @return {Boolean} true if the action is the valid number of parameters
+ */
+function validParamNumbers(className, state, action) {
+    var func = &#x27;&#x27;,
+        beginBody = -1,
+        header = &#x27;&#x27;,
+        funcParams = &#x27;&#x27;,
+        params = [],
+        paramNumber = 0,
+        modelNumberParam = [],
+        isProperty = false,
+        isCollection = false,
+        result = false;
+
+    // check number of parameters of the action
+    func = action.toString();
+    beginBody = func.indexOf(&#x27;{&#x27;);
+    header = func.substring(0, beginBody);
+    funcParams = header.split(&#x27;(&#x27;)[1].replace(&#x27;)&#x27;, &#x27;&#x27;).trim();
+    params = funcParams.split(&#x27;,&#x27;);
+    if (params[0] === &#x27;&#x27;) {
+        params = [];
+    }
+    paramNumber = params.length;
+
+    // get the number min and max of valid parameters
+    isProperty = $metamodel.isProperty(state, className);
+    isCollection = $metamodel.isCollection(state, className);
+
+    switch (true) {
+        case isCollection:
+            modelNumberParam = [3, 3];
+            break;
+        case isProperty:
+            modelNumberParam = [1, 1];
+            break;
+        default:
+            modelNumberParam = getParamNumber(className, state);
+            break;
+    }
+
+    // compare
+    if (modelNumberParam[0] &lt;= paramNumber &amp;&amp; paramNumber &lt;= modelNumberParam[1]) {
+        result = true;
+    }
+
+    return result;
+}
+
+
+/*
+ * Check if conditions on input are compliant with the model before calling the action.
+ * @method checkParams
+ * @param {Object} params
+ * @return {Boolean} true if condition on input are compliant with the model
+ */
+function checkParams(params) {
+    params = params || {};
+
+    var component = params.component || null,
+        methodName = params.methodName || &#x27;&#x27;,
+        args = params.args || &#x27;&#x27;,
+        paramsName = [],
+        paramsType = [],
+        paramsNumber = [],
+        componentClassName = &#x27;&#x27;,
+        length = args.length,
+        i = 0,
+        param = null,
+        result = true,
+        isProperty = false,
+        isCollection = false;
+
+    if (component.constructor.name === &#x27;Function&#x27;) {
+        componentClassName = component.name;
+    } else {
+        componentClassName = component.constructor.name;
+    }
+
+    isProperty = $metamodel.isProperty(methodName, componentClassName);
+    isCollection = $metamodel.isCollection(methodName, componentClassName);
+    paramsName = getParamNames(componentClassName, methodName);
+
+    switch (true) {
+        case isCollection:
+            paramsType = [&#x27;number&#x27;, $metamodel.get(componentClassName)[methodName].type[0], &#x27;string&#x27;];
+            paramsNumber = [3, 3];
+            break;
+        case isProperty:
+            paramsType = [$metamodel.get(componentClassName)[methodName].type];
+            paramsNumber = [1, 1];
+            break;
+        default:
+            paramsType = getParamTypes(componentClassName, methodName);
+            paramsNumber = getParamNumber(componentClassName, methodName);
+            break;
+    }
+
+    // case of object
+    if (typeof length === &#x27;undefined&#x27;) {
+        length = 1;
+    }
+
+    if (paramsNumber.indexOf(length) === -1) {
+        result = false;
+        $log.invalidParamNumber(component.id(), methodName);
+    }
+
+    for (i = 0; i &lt; length; i++) {
+        param = args[i];
+        if (typeof param === &#x27;undefined&#x27;) {
+            if (i &lt; paramsNumber[0]) {
+                result = false;
+                $log.invalidParamNumber(component.id(), methodName);
+            } else {
+                continue;
+            }
+        } else {
+            if (!$metamodel.isValidType(param, paramsType[i])) {
+                result = false;
+                $log.invalidParamType(component.id(), methodName, paramsName[i]);
+            }
+        }
+    }
+
+    return result;
+}
+
+
+/*
+ * Call an action that comes from an event.
+ * @method action
+ * @param {String} behaviorId id of the behavior
+ * @param {Array} params parameters
+ */
+function action(behaviorId, params) {
+    var isEvent = false,
+        isProperty = false,
+        isCollection = false,
+        behaviors = [],
+        behavior = null,
+        component = null,
+        actionFromMemory = null;
+
+    behaviors = $db.SyrupBehavior.find({
+        &quot;_id&quot;: behaviorId
+    });
+
+    actionFromMemory = $behavior.get(behaviorId);
+
+    if (behaviors.length === 1) {
+        behavior = behaviors[0];
+
+        component = $component.get(behavior.component);
+        if (component) {
+            isEvent = $metamodel.isEvent(behavior.state, component.constructor.name);
+            isProperty = $metamodel.isProperty(behavior.state, component.constructor.name);
+            isCollection = $metamodel.isCollection(behavior.state, component.constructor.name);
+
+            if (isEvent || isProperty || isCollection) {
+                callAction(component, behavior.state, {
+                    &quot;useCoreAPI&quot;: behavior.useCoreAPI,
+                    &quot;action&quot;: actionFromMemory
+                }, params, true);
+            }
+        }
+    }
+}
+
+
+/*
+ * Change the state of a component.
+ * 
+ * Worklow:&lt;br&gt;
+ * &lt;br&gt;
+ * 0. Check if the component has not been destroyed &lt;br&gt;
+ * 1. Check if the state is a method, a property or an event &lt;br&gt;
+ * 2. Search if there is a behavior with actions for the new state &lt;br&gt;
+ * 3. If so, get the action(s) &lt;br&gt;
+ * 4. Check if the inputs are compliants with the metamodel &lt;br&gt;
+ * 5. Call the action(s) &lt;br&gt;
+ * 6. If a method, check if the output are compliants with the metamodel &lt;br&gt;
+ * 7. If all is ok, the state of the component is updated &lt;br&gt;
+ * 8. Return the result &lt;br&gt;
+ * 
+ * @method state
+ * @param {Object} params params to change the state &lt;br&gt;
+ * {String} component id of the component &lt;br&gt;
+ * {String} state state of the component &lt;br&gt;
+ * {Array} data parameters to send to the action
+ */
+function state(params) {
+
+    params = params || {};
+    params.component = params.component || &#x27;&#x27;;
+    params.state = params.state || &#x27;&#x27;;
+    params.data = params.data || [];
+
+    var component = null,
+        currentState = &#x27;&#x27;,
+        actions = [],
+        action = null,
+        result = null,
+        i = 0,
+        length = 0,
+        isProperty = false,
+        isCollection = false,
+        isEvent = false;
+
+    currentState = $state.get(params.component);
+
+    if (currentState === &#x27;destroy&#x27;) {
+        $log.invalidUseOfComponent(params.component);
+    }
+
+    component = $component.get(params.component);
+    if (component) {
+        isEvent = $metamodel.isEvent(params.state, component.constructor.name);
+        isProperty = $metamodel.isProperty(params.state, component.constructor.name);
+        isCollection = $metamodel.isCollection(params.state, component.constructor.name);
+        actions = getActions(component, params.state, isEvent);
+    }
+
+    if (actions.length) {
+
+        if (checkParams({
+            &quot;component&quot;: component,
+            &quot;methodName&quot;: params.state,
+            &quot;args&quot;: params.data
+        })) {
+
+            if (!isEvent &amp;&amp;
+                !isProperty &amp;&amp;
+                !isCollection) {
+                action = actions[0];
+                result = callAction(component, params.state, action, params.data, false);
+
+                checkResult({
+                    &quot;component&quot;: component,
+                    &quot;methodName&quot;: params.state,
+                    &quot;methodResult&quot;: result
+                });
+
+            } else {
+
+                length = actions.length;
+                for (i = 0; i &lt; length; i++) {
+                    action = actions[i];
+                    callAction(component, params.state, action, params.data, true);
+                }
+
+                $state.set(component.id(), params.state, params.data);
+            }
+        }
+        return result;
+    } else {
+        if (component &amp;&amp; (isEvent || isProperty || isCollection)) {
+            $state.set(component.id(), params.state, params.data);
+        }
+    }
+}
+
+
+/*
+ * Stop the workflow engine.
+ * @method stop
+ * @param {Object} params parameters &lt;br&gt;
+ * {Boolean} error true if the stop of the workflow is due to an error (default false) &lt;br&gt;
+ * {String} message error message to log (default &#x27;&#x27;)
+ */
+function stop(params) {
+    params = params || {};
+
+    if (typeof params.error === &#x27;undefined&#x27;) {
+        params.error = false;
+    }
+    params.message = params.message || &#x27;&#x27;;
+
+    exports.state = function () {
+    };
+
+    if (params.error) {
+        if (params.message) {
+            throw new SyrupError(&quot;syrup has been stopped because &quot; + params.message);
+        } else {
+            throw new SyrupError(&quot;syrup has been stopped because of an unknown error&quot;);
+        }
+    } else {
+        console.warn(&#x27;syrup: syrup has been stopped&#x27;);
+    }
+}
+
+
+/*
+ * Restart the workflow engine from the last state.
+ * @method restart
+ */
+function restart() {
+    exports.state = state;
+    $log.workflowRestarted();
+}
+
+
+/* exports */
+
+
+/**
+ * This module manages the workflow of syrup. It behaves like a workflow engine. &lt;br&gt;
+ * It checks if the change of status of a component is valid to be executed. By valid, it means that:&lt;br&gt;
+ * - the state is valid for the component, &lt;br&gt;
+ * - the input (i.e. parameters) of all actions for the state are compliants with the model and &lt;br&gt;
+ * - the output of all actions are compliants with the model. &lt;br&gt;
+ * 
+ * If an error occurs, the workflow will call the error state of the component and syrup. &lt;br&gt;
+ * If the error can break the consistency of the current system, the worklow will stop.
+ * 
+ * @module syrup
+ * @submodule syrup-workflow
+ * @requires syrup-metamodel
+ * @requires syrup-component
+ * @requires syrup-behavior
+ * @requires syrup-channel
+ * @requires syrup-state
+ * @requires syrup-helper
+ * @requires syrup-log
+ * @requires syrup-db
+ * @class syrup-workflow 
+ * @static
+ */
+
+
+/**
+ * Change the state of a component.
+ * 
+ * Worklow:&lt;br&gt;
+ * &lt;br&gt;
+ * 0. Check if the component has not been destroyed &lt;br&gt;
+ * 1. Check if the state is a method or an event &lt;br&gt;
+ * 2. Search if there is a behavior with an action for the new state &lt;br&gt;
+ * 3. If so, get the action(s) &lt;br&gt;
+ * 4. Check if the conditons on input are compliant with the metamodel &lt;br&gt;
+ * 5. Call the action(s) &lt;br&gt;
+ * 6. If not an of event, check if the conditons on input are compliant with the metamodel &lt;br&gt;
+ * 7. If all is ok, the state of the component is updated &lt;br&gt;
+ * 8. Return the result &lt;br&gt;
+ * 
+ * @method state
+ * @param {Object} params params to change the state &lt;br&gt;
+ * {String} component id of the component &lt;br&gt;
+ * {String} state state of the component &lt;br&gt;
+ * {Array} data parameters to send to the action
+ */
+exports.state = state;
+
+
+/**
+ * Stop the workflow engine.
+ * @method stop
+ * @param {Object} params parameters &lt;br&gt;
+ * {Boolean} error true if the stop of the workflow is due to an error (default false) &lt;br&gt;
+ * {String} message error message to log (default &#x27;&#x27;)
+ */
+exports.stop = stop;
+
+
+/**
+ * Restart the workflow engine from the last state.
+ * @method restart
+ */
+exports.restart = restart;
+
+
+/**
+ * Check if conditions on input are compliant with the model before calling the action.
+ * @method checkParams
+ * @param {Object} params
+ * @return {Boolean} true if condition on input are compliant with the model
+ */
+exports.checkParams = checkParams;
+
+
+/**
+ * Check if an action has the valid number of parameter.
+ * @method validParamNumbers
+ * @param {String} className name the class
+ * @param {String} state state on which the action applied
+ * @param {Function} action action
+ * @return {Boolean} true if the action is the valid number of parameters
+ */
+exports.validParamNumbers = validParamNumbers;
+
+
+/**
+ * Call an action that comes from an event.
+ * @method action
+ * @param {String} behaviorId id of the behavior
+ * @param {Array} params parameters
+ */
+exports.action = action;
+    </pre>
+</div>
                     </div>
                 </div>
             </div>

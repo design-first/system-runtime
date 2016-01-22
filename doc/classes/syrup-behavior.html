@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.1</b>
+                    API Docs for Version: <b>0.9.2</b>
                 </p>
             </li>
         </div>
@@ -33,479 +33,479 @@
 <div class="container">
     <div class="row">
         <div class="span3">
-	    <div>
-	        <div id="sidebar">
-	        <div id="classes">
-	            <ul id="api-classes" class="nav nav-list">
-	                    <li><a href="../classes/syrup.html">syrup</a></li>
-	                    <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
-	                    <li><a href="../classes/syrup-component.html">syrup-component</a></li>
-	                    <li><a href="../classes/syrup-db.html">syrup-db</a></li>
-	                    <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
-	                    <li><a href="../classes/syrup-log.html">syrup-log</a></li>
-	                    <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
-	                    <li><a href="../classes/syrup-state.html">syrup-state</a></li>
-	                    <li><a href="../classes/syrup-system.html">syrup-system</a></li>
-	                    <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
-	                    <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
-	                    <li><a href="../classes/SyrupError.html">SyrupError</a></li>
-	            </ul>
-	        </div>
-	        </div>
-	    </div>
+<div>
+    <div id="sidebar">
+    <div id="classes">
+        <ul id="api-classes" class="nav nav-list">
+                <li><a href="../classes/syrup.html">syrup</a></li>
+                <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
+                <li><a href="../classes/syrup-component.html">syrup-component</a></li>
+                <li><a href="../classes/syrup-db.html">syrup-db</a></li>
+                <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
+                <li><a href="../classes/syrup-log.html">syrup-log</a></li>
+                <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
+                <li><a href="../classes/syrup-state.html">syrup-state</a></li>
+                <li><a href="../classes/syrup-system.html">syrup-system</a></li>
+                <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
+                <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
+                <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+        </ul>
+    </div>
+    </div>
+</div>
         </div>
         <div class="span9">
-                <form id="options-form" class="form-inline pull-right">
-                    Show:
-                    <label for="api-show-inherited" class="checkbox">
-                        <input type="checkbox" id="api-show-inherited" checked>
-                        Inherited
-                    </label>
-            
-                    <label for="api-show-protected" class="checkbox">
-                        <input type="checkbox" id="api-show-protected">
-                        Protected
-                    </label>
-            
-                    <label for="api-show-private" class="checkbox">
-                        <input type="checkbox" id="api-show-private">
-                        Private
-                    </label>
-                    <label for="api-show-deprecated" class="checkbox">
-                        <input type="checkbox" id="api-show-deprecated">
-                        Deprecated
-                    </label>
-            
-                </form>
-            
+    <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <div class="page-header">
-                            <h1>syrup-behavior</h1>
-                        </div>
-                        
-                        
-                        
-                        	<div class="well well-small">
-                                    Module: <a href="../modules/syrup-behavior.html">syrup-behavior</a><br>
-                                    Parent Module: <a href="../modules/syrup.html">syrup</a>
-                            </div>
-                        
-                        
-                        
-                        <div class="yuidoc-class-description">
-                        <p>This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed
-                        when a specific state of a component will change.</p>
-                        
-                        </div>
-                        
-                        <!-- table of contents -->
-                        
-                        <div id="class-toc" class="page-section">
-                        	<h2>Table of Contents</h2>
-                            <ul>
-                        		<li>
-                        			<strong>Methods</strong>
-                        			<ul>
-                        				<li><a href="#method-add"><span class="im">add</span>(<span class="ia">id</span><span class="ia">state</span><span class="ia">action</span><span class="ia">useCoreAPI</span><span class="ia">core</span>)</a></li>
-                        				<li><a href="#method-clear"><span class="im">clear</span>()</a></li>
-                        				<li><a href="#method-get"><span class="im">get</span>(<span class="ia">id</span>)</a></li>
-                        				<li><a href="#method-getActions"><span class="im">getActions</span>(<span class="ia">id</span><span class="ia">state</span>)</a></li>
-                        				<li><a href="#method-remove"><span class="im">remove</span>(<span class="ia">params</span>)</a></li>
-                        				<li><a href="#method-removeFromMemory"><span class="im">removeFromMemory</span>(<span class="ia">id</span>)</a></li>
-                        			</ul>
-                        		</li>
-                        
-                        
-                        
-                        	</ul>
-                        </div>
-                        
-                        <!-- details -->
-                        
-                        
-                            <div id="methods" class="page-section">
-                                <h2 class="off-left">Methods</h2>
-                                <div class="item-list">
-                                    <div id="method-add" class="method item">
-                                    	<div class="method-signature">
-                                    	<span class="name"><code>add</code></span>
-                                    
-                                    		<div class="args">
-                                    			<span class="paren">(</span><ul class="args-list inline commas">
-                                    				<li class="arg">
-                                    						<code>id</code>
-                                    				</li>
-                                    				<li class="arg">
-                                    						<code>state</code>
-                                    				</li>
-                                    				<li class="arg">
-                                    						<code>action</code>
-                                    				</li>
-                                    				<li class="arg">
-                                    						<code>useCoreAPI</code>
-                                    				</li>
-                                    				<li class="arg">
-                                    						<code>core</code>
-                                    				</li>
-                                    			</ul><span class="paren">)</span>
-                                    		</div>
-                                    		<span class="returns-inline">
-                                    			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                    		</span>
-                                    	</div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    	<div class="meta">
-                                    				<p>
-                                    				Defined in
-                                    		<a href="../files/src_behavior.js.html#l283"><code>src&#x2F;behavior.js:283</code></a>
-                                    		</p>
-                                    
-                                    
-                                    
-                                    	</div>
-                                    
-                                    	<div class="description"><p>Add a behavior that will be stored in syrup database.</p>
-                                    </div>
-                                    
-                                    		<div class="params">
-                                    			<h4>Parameters:</h4>
-                                    
-                                    			<ul class="params-list">
-                                    				<li class="param">
-                                    						<code class="param-name">id</code>
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                    
-                                    
-                                    					<div class="param-description"><p>id of the component</p>
-                                    </div>
-                                    
-                                    				</li>
-                                    				<li class="param">
-                                    						<code class="param-name">state</code>
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                                    
-                                    
-                                    					<div class="param-description"><p>the state on which the action will be executed</p>
-                                    </div>
-                                    
-                                    				</li>
-                                    				<li class="param">
-                                    						<code class="param-name">action</code>
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                                    
-                                    
-                                    					<div class="param-description"><p>the action to execute when the component will have a specific state</p>
-                                    </div>
-                                    
-                                    				</li>
-                                    				<li class="param">
-                                    						<code class="param-name">useCoreAPI</code>
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-                                    
-                                    
-                                    					<div class="param-description"><p>if true, syrup core modules will be injected as parameters of the action (default false)</p>
-                                    </div>
-                                    
-                                    				</li>
-                                    				<li class="param">
-                                    						<code class="param-name">core</code>
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-                                    
-                                    
-                                    					<div class="param-description"><p>if true, behavior can not be exported</p>
-                                    </div>
-                                    
-                                    				</li>
-                                    			</ul>
-                                    		</div>
-                                    
-                                    		<div class="returns">
-                                    			<h4>Returns:</h4>
-                                    
-                                    			<div class="returns-description">
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
-                                    					<p>id of the behavior created in syrup database</p>
-                                    
-                                    			</div>
-                                    		</div>
-                                    
-                                    </div>
-                                    <div id="method-clear" class="method item">
-                                    	<div class="method-signature">
-                                    	<span class="name"><code>clear</code></span>
-                                    
-                                    		<span class="paren">()</span>
-                                    	</div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    	<div class="meta">
-                                    				<p>
-                                    				Defined in
-                                    		<a href="../files/src_behavior.js.html#l327"><code>src&#x2F;behavior.js:327</code></a>
-                                    		</p>
-                                    
-                                    
-                                    
-                                    	</div>
-                                    
-                                    	<div class="description"><p>Remove all the behaviors stored in memory.</p>
-                                    </div>
-                                    
-                                    
-                                    
-                                    </div>
-                                    <div id="method-get" class="method item">
-                                    	<div class="method-signature">
-                                    	<span class="name"><code>get</code></span>
-                                    
-                                    		<div class="args">
-                                    			<span class="paren">(</span><ul class="args-list inline commas">
-                                    				<li class="arg">
-                                    						<code>id</code>
-                                    				</li>
-                                    			</ul><span class="paren">)</span>
-                                    		</div>
-                                    		<span class="returns-inline">
-                                    			<span class="type">Behavior</span>
-                                    		</span>
-                                    	</div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    	<div class="meta">
-                                    				<p>
-                                    				Defined in
-                                    		<a href="../files/src_behavior.js.html#l296"><code>src&#x2F;behavior.js:296</code></a>
-                                    		</p>
-                                    
-                                    
-                                    
-                                    	</div>
-                                    
-                                    	<div class="description"><p>Get a behavior by its id.</p>
-                                    </div>
-                                    
-                                    		<div class="params">
-                                    			<h4>Parameters:</h4>
-                                    
-                                    			<ul class="params-list">
-                                    				<li class="param">
-                                    						<code class="param-name">id</code>
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                    
-                                    
-                                    					<div class="param-description"><p>id of the behavior</p>
-                                    </div>
-                                    
-                                    				</li>
-                                    			</ul>
-                                    		</div>
-                                    
-                                    		<div class="returns">
-                                    			<h4>Returns:</h4>
-                                    
-                                    			<div class="returns-description">
-                                    						<span class="type">Behavior</span>:
-                                    					<p>the behavior</p>
-                                    
-                                    			</div>
-                                    		</div>
-                                    
-                                    </div>
-                                    <div id="method-getActions" class="method item">
-                                    	<div class="method-signature">
-                                    	<span class="name"><code>getActions</code></span>
-                                    
-                                    		<div class="args">
-                                    			<span class="paren">(</span><ul class="args-list inline commas">
-                                    				<li class="arg">
-                                    						<code>id</code>
-                                    				</li>
-                                    				<li class="arg">
-                                    						<code>state</code>
-                                    				</li>
-                                    			</ul><span class="paren">)</span>
-                                    		</div>
-                                    		<span class="returns-inline">
-                                    			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
-                                    		</span>
-                                    	</div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    	<div class="meta">
-                                    				<p>
-                                    				Defined in
-                                    		<a href="../files/src_behavior.js.html#l317"><code>src&#x2F;behavior.js:317</code></a>
-                                    		</p>
-                                    
-                                    
-                                    
-                                    	</div>
-                                    
-                                    	<div class="description"><p>Get all the actions of a behavior for a component.</p>
-                                    </div>
-                                    
-                                    		<div class="params">
-                                    			<h4>Parameters:</h4>
-                                    
-                                    			<ul class="params-list">
-                                    				<li class="param">
-                                    						<code class="param-name">id</code>
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                    
-                                    
-                                    					<div class="param-description"><p>id of the component</p>
-                                    </div>
-                                    
-                                    				</li>
-                                    				<li class="param">
-                                    						<code class="param-name">state</code>
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                    
-                                    
-                                    					<div class="param-description"><p>name of the state</p>
-                                    </div>
-                                    
-                                    				</li>
-                                    			</ul>
-                                    		</div>
-                                    
-                                    		<div class="returns">
-                                    			<h4>Returns:</h4>
-                                    
-                                    			<div class="returns-description">
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
-                                    					<p>all the actions that have to be executed for a specific component and state</p>
-                                    
-                                    			</div>
-                                    		</div>
-                                    
-                                    </div>
-                                    <div id="method-remove" class="method item">
-                                    	<div class="method-signature">
-                                    	<span class="name"><code>remove</code></span>
-                                    
-                                    		<div class="args">
-                                    			<span class="paren">(</span><ul class="args-list inline commas">
-                                    				<li class="arg">
-                                    						<code>params</code>
-                                    				</li>
-                                    			</ul><span class="paren">)</span>
-                                    		</div>
-                                    	</div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    	<div class="meta">
-                                    				<p>
-                                    				Defined in
-                                    		<a href="../files/src_behavior.js.html#l305"><code>src&#x2F;behavior.js:305</code></a>
-                                    		</p>
-                                    
-                                    
-                                    
-                                    	</div>
-                                    
-                                    	<div class="description"><p>Remove a behavior with its id or remove all the behaviors for a specific state
-                                    of the component.</p>
-                                    </div>
-                                    
-                                    		<div class="params">
-                                    			<h4>Parameters:</h4>
-                                    
-                                    			<ul class="params-list">
-                                    				<li class="param">
-                                    						<code class="param-name">params</code>
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                                    
-                                    
-                                    					<div class="param-description"><br>
-                                    {String} componentId id of the component <br>
-                                    {String} state state of the component <br>
-                                    {String} behaviorId id of the behavior (optional)) <br></div>
-                                    
-                                    				</li>
-                                    			</ul>
-                                    		</div>
-                                    
-                                    
-                                    </div>
-                                    <div id="method-removeFromMemory" class="method item">
-                                    	<div class="method-signature">
-                                    	<span class="name"><code>removeFromMemory</code></span>
-                                    
-                                    		<div class="args">
-                                    			<span class="paren">(</span><ul class="args-list inline commas">
-                                    				<li class="arg">
-                                    						<code>id</code>
-                                    				</li>
-                                    			</ul><span class="paren">)</span>
-                                    		</div>
-                                    	</div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    	<div class="meta">
-                                    				<p>
-                                    				Defined in
-                                    		<a href="../files/src_behavior.js.html#l334"><code>src&#x2F;behavior.js:334</code></a>
-                                    		</p>
-                                    
-                                    
-                                    
-                                    	</div>
-                                    
-                                    	<div class="description"><p>Remove a behavior with its id from the memory.</p>
-                                    </div>
-                                    
-                                    		<div class="params">
-                                    			<h4>Parameters:</h4>
-                                    
-                                    			<ul class="params-list">
-                                    				<li class="param">
-                                    						<code class="param-name">id</code>
-                                    						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                    
-                                    
-                                    					<div class="param-description"><p>id of the component</p>
-                                    </div>
-                                    
-                                    				</li>
-                                    			</ul>
-                                    		</div>
-                                    
-                                    
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        
-                        
+<div class="page-header">
+    <h1>syrup-behavior</h1>
+</div>
+
+
+
+	<div class="well well-small">
+            Module: <a href="../modules/syrup-behavior.html">syrup-behavior</a><br>
+            Parent Module: <a href="../modules/syrup.html">syrup</a>
+    </div>
+
+
+
+<div class="yuidoc-class-description">
+<p>This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed
+when a specific state of a component will change.</p>
+
+</div>
+
+<!-- table of contents -->
+
+<div id="class-toc" class="page-section">
+	<h2>Table of Contents</h2>
+    <ul>
+		<li>
+			<strong>Methods</strong>
+			<ul>
+				<li><a href="#method-add"><span class="im">add</span>(<span class="ia">id</span><span class="ia">state</span><span class="ia">action</span><span class="ia">useCoreAPI</span><span class="ia">core</span>)</a></li>
+				<li><a href="#method-clear"><span class="im">clear</span>()</a></li>
+				<li><a href="#method-get"><span class="im">get</span>(<span class="ia">id</span>)</a></li>
+				<li><a href="#method-getActions"><span class="im">getActions</span>(<span class="ia">id</span><span class="ia">state</span>)</a></li>
+				<li><a href="#method-remove"><span class="im">remove</span>(<span class="ia">params</span>)</a></li>
+				<li><a href="#method-removeFromMemory"><span class="im">removeFromMemory</span>(<span class="ia">id</span>)</a></li>
+			</ul>
+		</li>
+
+
+
+	</ul>
+</div>
+
+<!-- details -->
+
+
+    <div id="methods" class="page-section">
+        <h2 class="off-left">Methods</h2>
+        <div class="item-list">
+<div id="method-add" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>add</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>id</code>
+				</li>
+				<li class="arg">
+						<code>state</code>
+				</li>
+				<li class="arg">
+						<code>action</code>
+				</li>
+				<li class="arg">
+						<code>useCoreAPI</code>
+				</li>
+				<li class="arg">
+						<code>core</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+		<span class="returns-inline">
+			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+		</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+				<p>
+				Defined in
+		<a href="../files/src_behavior.js.html#l283"><code>src&#x2F;behavior.js:283</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Add a behavior that will be stored in syrup database.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">id</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>id of the component</p>
+</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">state</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+					<div class="param-description"><p>the state on which the action will be executed</p>
+</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">action</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+					<div class="param-description"><p>the action to execute when the component will have a specific state</p>
+</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">useCoreAPI</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+					<div class="param-description"><p>if true, syrup core modules will be injected as parameters of the action (default false)</p>
+</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">core</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+					<div class="param-description"><p>if true, behavior can not be exported</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+		<div class="returns">
+			<h4>Returns:</h4>
+
+			<div class="returns-description">
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+					<p>id of the behavior created in syrup database</p>
+
+			</div>
+		</div>
+
+</div>
+<div id="method-clear" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>clear</code></span>
+
+		<span class="paren">()</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+				<p>
+				Defined in
+		<a href="../files/src_behavior.js.html#l327"><code>src&#x2F;behavior.js:327</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Remove all the behaviors stored in memory.</p>
+</div>
+
+
+
+</div>
+<div id="method-get" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>get</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>id</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+		<span class="returns-inline">
+			<span class="type">Behavior</span>
+		</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+				<p>
+				Defined in
+		<a href="../files/src_behavior.js.html#l296"><code>src&#x2F;behavior.js:296</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Get a behavior by its id.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">id</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>id of the behavior</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+		<div class="returns">
+			<h4>Returns:</h4>
+
+			<div class="returns-description">
+						<span class="type">Behavior</span>:
+					<p>the behavior</p>
+
+			</div>
+		</div>
+
+</div>
+<div id="method-getActions" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>getActions</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>id</code>
+				</li>
+				<li class="arg">
+						<code>state</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+		<span class="returns-inline">
+			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+		</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+				<p>
+				Defined in
+		<a href="../files/src_behavior.js.html#l317"><code>src&#x2F;behavior.js:317</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Get all the actions of a behavior for a component.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">id</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>id of the component</p>
+</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">state</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>name of the state</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+		<div class="returns">
+			<h4>Returns:</h4>
+
+			<div class="returns-description">
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
+					<p>all the actions that have to be executed for a specific component and state</p>
+
+			</div>
+		</div>
+
+</div>
+<div id="method-remove" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>remove</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>params</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+				<p>
+				Defined in
+		<a href="../files/src_behavior.js.html#l305"><code>src&#x2F;behavior.js:305</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Remove a behavior with its id or remove all the behaviors for a specific state
+of the component.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">params</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+					<div class="param-description"><br>
+{String} componentId id of the component <br>
+{String} state state of the component <br>
+{String} behaviorId id of the behavior (optional)) <br></div>
+
+				</li>
+			</ul>
+		</div>
+
+
+</div>
+<div id="method-removeFromMemory" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>removeFromMemory</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>id</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+				<p>
+				Defined in
+		<a href="../files/src_behavior.js.html#l334"><code>src&#x2F;behavior.js:334</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Remove a behavior with its id from the memory.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">id</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>id of the component</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+
+</div>
+        </div>
+    </div>
+
+
+
+
                     </div>
                 </div>
             </div>

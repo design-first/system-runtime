@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.1</b>
+                    API Docs for Version: <b>0.9.2</b>
                 </p>
             </li>
         </div>
@@ -33,828 +33,828 @@
 <div class="container">
     <div class="row">
         <div class="span3">
-	    <div>
-	        <div id="sidebar">
-	        <div id="classes">
-	            <ul id="api-classes" class="nav nav-list">
-	                    <li><a href="../classes/syrup.html">syrup</a></li>
-	                    <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
-	                    <li><a href="../classes/syrup-component.html">syrup-component</a></li>
-	                    <li><a href="../classes/syrup-db.html">syrup-db</a></li>
-	                    <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
-	                    <li><a href="../classes/syrup-log.html">syrup-log</a></li>
-	                    <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
-	                    <li><a href="../classes/syrup-state.html">syrup-state</a></li>
-	                    <li><a href="../classes/syrup-system.html">syrup-system</a></li>
-	                    <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
-	                    <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
-	                    <li><a href="../classes/SyrupError.html">SyrupError</a></li>
-	            </ul>
-	        </div>
-	        </div>
-	    </div>
+<div>
+    <div id="sidebar">
+    <div id="classes">
+        <ul id="api-classes" class="nav nav-list">
+                <li><a href="../classes/syrup.html">syrup</a></li>
+                <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
+                <li><a href="../classes/syrup-component.html">syrup-component</a></li>
+                <li><a href="../classes/syrup-db.html">syrup-db</a></li>
+                <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
+                <li><a href="../classes/syrup-log.html">syrup-log</a></li>
+                <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
+                <li><a href="../classes/syrup-state.html">syrup-state</a></li>
+                <li><a href="../classes/syrup-system.html">syrup-system</a></li>
+                <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
+                <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
+                <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+        </ul>
+    </div>
+    </div>
+</div>
         </div>
         <div class="span9">
-                <form id="options-form" class="form-inline pull-right">
-                    Show:
-                    <label for="api-show-inherited" class="checkbox">
-                        <input type="checkbox" id="api-show-inherited" checked>
-                        Inherited
-                    </label>
-            
-                    <label for="api-show-protected" class="checkbox">
-                        <input type="checkbox" id="api-show-protected">
-                        Protected
-                    </label>
-            
-                    <label for="api-show-private" class="checkbox">
-                        <input type="checkbox" id="api-show-private">
-                        Private
-                    </label>
-                    <label for="api-show-deprecated" class="checkbox">
-                        <input type="checkbox" id="api-show-deprecated">
-                        Deprecated
-                    </label>
-            
-                </form>
-            
+    <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <div class="page-header">
-                            <h1>src/log.js <small>File</small></h1>
-                        </div>
-                        
-                        <div class="file">
-                            <pre class="prettyprint linenums">
-                        /*
-                         * SyrupJS
-                         * The System Runtime Platform
-                         * http://syrupjs.systemdesigner.io
-                         * @ecarriou
-                         *  
-                         * Copyright (c) 2016 Erwan Carriou
-                         * 
-                         * Permission is hereby granted, free of charge, to any person obtaining a copy
-                         * of this software and associated documentation files (the &quot;Software&quot;), to deal
-                         * in the Software without restriction, including without limitation the rights
-                         * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-                         * copies of the Software, and to permit persons to whom the Software is
-                         * furnished to do so, subject to the following conditions:
-                         * 
-                         * The above copyright notice and this permission notice shall be included in all
-                         * copies or substantial portions of the Software.
-                         * 
-                         * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-                         * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-                         * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-                         * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-                         * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-                         * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-                         * SOFTWARE. 
-                         */
-                        
-                        /**
-                         * This module contains all the functions that write a log.
-                         * 
-                         * @module syrup
-                         * @submodule syrup-log
-                         * @requires syrup-helper
-                         * @class syrup-log
-                         * @static
-                         */
-                        
-                        &#x27;use strict&#x27;;
-                        
-                        
-                        var $helper = require(&#x27;./helper.js&#x27;);
-                        
-                        
-                        /* Private properties */
-                        
-                        
-                        var ID = &#x27;_id&#x27;;
-                        
-                        
-                        /* Public methods */
-                        
-                        
-                        /*
-                         * A property of a schema is unknown.
-                         * @method unknownProperty
-                         * @param {String} propertyName the name of the property
-                         * @param {Object} schema the schema definition
-                         */
-                        function unknownProperty(propertyName, schema) {
-                            var message = &#x27;&#x27;;
-                        
-                            if (schema[ID]) {
-                                message = &quot;unknown property &#x27;&quot; + propertyName + &quot;&#x27; for the definition of &quot; + schema[ID];
-                            } else {
-                                message = &quot;unknown property &#x27;&quot; + propertyName + &quot;&#x27; for the meta attribute &quot; + JSON.stringify(schema);
-                            }
-                        
-                            $helper.getSyrup().warning(message);
-                        }
-                        
-                        
-                        /*
-                         * Invalid type for a property.
-                         * @method invalidPropertyType
-                         * @param {String} propertyName name of the peropety
-                         * @param {String} type the type defined by the schema
-                         * @param {String} property the property
-                         */
-                        function invalidPropertyType(propertyName, type, property) {
-                            $helper.getSyrup().warning(&quot;invalid type for property &#x27;&quot; + JSON.stringify(propertyName) + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof property + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Invalid value for type enum.
-                         * @method invalidEnumValue
-                         * @param {Object} value the value
-                         * @param {String} type the type defined by the schema
-                         */
-                        function invalidEnumValue(value, type) {
-                            $helper.getSyrup().warning(&quot;invalid value for the enum value &#x27;&quot; + value + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof value + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Invalid class name for a component.
-                         * @method invalidClassName
-                         * @param {String} componentId id of the component
-                         * @param {String} type the type defined by the schema
-                         * @param {String} constructorName name of the component class
-                         */
-                        function invalidClassName(componentId, type, constructorName) {
-                            $helper.getSyrup().warning(&quot;invalid class name for component &#x27;&quot; + componentId + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + constructorName + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Missing a property.
-                         * @method missingProperty
-                         * @param {String} propertyName name of the property
-                         */
-                        function missingProperty(propertyName) {
-                            $helper.getSyrup().warning(&quot;missing property &#x27;&quot; + propertyName + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * A class definition is missing.
-                         * @method missingImplementation
-                         * @param {String} classSource a class
-                         * @param {String} classToImp the class to implement
-                         */
-                        function missingImplementation(classSource, classToImp) {
-                            $helper.getSyrup().warning(&quot;class &#x27;&quot; + classSource + &quot;&#x27; is missing for the implementation of the class &#x27;&quot; + classToImp + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Invalid type for a property of a class definition.
-                         * @method invalidTypeImp
-                         * @param {String} property a property
-                         * @param {String} className a class name
-                         */
-                        function invalidTypeImp(property, className) {
-                            $helper.getSyrup().warning(&quot;invalid type for property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + className + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Missing a property for a class definition.
-                         * @method missingPropertyImp
-                         * @param {String} property a property
-                         * @param {String} className a class name
-                         */
-                        function missingPropertyImp(property, className) {
-                            $helper.getSyrup().warning(&quot;missing property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + className + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Unkown property for a class definition.
-                         * @method unknownPropertyImp
-                         * @param {String} property a property
-                         * @param {Object} schema a schema
-                         */
-                        function unknownPropertyImp(property, schema) {
-                            $helper.getSyrup().warning(&quot;unknown property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + schema + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Invalid type definition.
-                         * @method invalidTypeDefinition
-                         * @param {Object} def a type definition
-                         */
-                        function invalidTypeDefinition(def) {
-                            $helper.getSyrup().warning(&quot;can not load the definition of type &#x27;&quot; + def + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Invalid property name.
-                         * @method invalidPropertyName
-                         * @param {String} id id of the component
-                         * @param {String} propertyName name of the property
-                         * @param {String} propertyValue value of the property
-                         * @param {String} type type defined by the schema
-                         */
-                        function invalidPropertyName(id, propertyName, propertyValue, type) {
-                            if (type.indexOf(&quot;#&quot;) !== -1) {
-                                $helper.getSyrup().warning(&quot;invalid name for property &#x27;&quot; + propertyName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
-                            } else {
-                                $helper.getSyrup().warning(&quot;invalid name for property &#x27;&quot; + propertyName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
-                            }
-                        }
-                        
-                        
-                        /*
-                         * Trying to set a read-only property.
-                         * @method readOnlyProperty
-                         * @param {String} id id of the component
-                         * @param {String} propertyName name of the property
-                         */
-                        function readOnlyProperty(id, propertyName) {
-                            $helper.getSyrup().warning(&quot;can not set read-only property &#x27;&quot; + propertyName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Invalid document on a syrup database insert operation.
-                         * @method invalidDocumentOnDbInsert
-                         * @param {String} doc a document
-                         * @param {String} collectionName the name of the colllection
-                         */
-                        function invalidDocumentOnDbInsert(doc, collectionName) {
-                            $helper.getSyrup().warning(&quot;invalid document &#x27;&quot; + JSON.stringify(doc) + &quot;&#x27; on an insert operation on collection &#x27;&quot; + collectionName + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Invalid property on a syrup database update operation.
-                         * @method invalidPropertyTypeOnDbUpdate
-                         * @param {String} collectionName the name of the colllection
-                         * @param {String} id id of the component
-                         * @param {String} propertyName name of the property
-                         * @param {String} propertyValue value of the property
-                         * @param {String} type expected type defined by the schema
-                         */
-                        function invalidPropertyTypeOnDbUpdate(collectionName, id, propertyName, propertyValue, type) {
-                            if (type.indexOf(&quot;#&quot;) !== -1) {
-                                $helper.getSyrup().warning(&quot;invalid type for property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on collection &#x27;&quot; + collectionName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
-                            } else {
-                                $helper.getSyrup().warning(&quot;invalid type for property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on collection &#x27;&quot; + collectionName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
-                            }
-                        }
-                        
-                        
-                        
-                        /*
-                         * Unkonw property on a syrup database update operation.
-                         * @method unknownPropertyOnDbUpdate
-                         * @param {String} propertyName name of the property
-                         * @param {String} id id of the component
-                         */
-                        function unknownPropertyOnDbUpdate(propertyName, id) {
-                            $helper.getSyrup().warning(&quot;unknown property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on component &#x27;&quot; + id + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Call an unknown method of a class.
-                         * @method unknownMethod
-                         * @param {String} classId id of the class
-                         * @param {String} methodName name of the method
-                         */
-                        function unknownMethod(classId, methodName) {
-                            $helper.getSyrup().warning(&quot;try to call an unknown method &#x27;&quot; + methodName + &quot;&#x27; for the class &#x27;&quot; + classId + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Try to create an invalid SyrupDatabaseCollection.
-                         * @method invalidCollectionName
-                         * @param {String} name name of the collection
-                         */
-                        function invalidCollectionName(name) {
-                            $helper.getSyrup().warning(&quot;invalid name for creating the collection &#x27;&quot; + name + &quot;&#x27;: there is no schema &#x27;&quot; + name + &quot;&#x27; in the metamodel&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Invalid type result of a method.
-                         * @method invalidResultType
-                         * @param {String} id id of the component
-                         * @param {String} methodName name ot the method
-                         */
-                        function invalidResultType(id, methodName) {
-                            $helper.getSyrup().warning(&quot;invalid type on the result of method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Unknown class.
-                         * @method unknownComponent
-                         * @param {String} id id of the class
-                         * @param {String} componentId if of the component
-                         */
-                        function unknownComponent(className, componentId) {
-                            $helper.getSyrup().warning(&quot;unkown class component &#x27;&quot; + className + &quot;&#x27; for component &#x27;&quot; + componentId + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * The syrup workflow has been restarted.
-                         * @method workflowRestarted
-                         */
-                        function workflowRestarted() {
-                            $helper.getSyrup().warning(&#x27;syrup has been restarted&#x27;);
-                        }
-                        
-                        
-                        /*
-                         * invalid parameter number for a method.
-                         * @method invalidParamNumber
-                         * @param {String} id id of the component
-                         * @param {String} methodName name of the component
-                         */
-                        function invalidParamNumber(id, methodName) {
-                            $helper.getSyrup().warning(&quot;invalid number of parameters when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Invalid type parameters for a method.
-                         * @method invalidParamType
-                         * @param {String} id id of the component
-                         * @param {String} methodName name of the component
-                         * @param {String} paramName name of the parameter
-                         * 
-                         */
-                        function invalidParamType(id, methodName, paramName) {
-                            $helper.getSyrup().warning(&quot;invalid type for the parameter &#x27;&quot; + paramName + &quot;&#x27; when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Add a more than one behavior to a state.
-                         * @method behaviorNotUnique
-                         * @param {String} id id of the class
-                         * @param {String} stateName name of the state
-                         */
-                        function behaviorNotUnique(id, stateName) {
-                            $helper.getSyrup().warning(&quot;try to add more than one behavior for the state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Can not add a behavior with an invalid state.
-                         * @method invalidStateOn
-                         * @param {String} id id of the class
-                         * @param {String} stateName name of the state
-                         */
-                        function invalidStateOn(id, stateName) {
-                            $helper.getSyrup().warning(&quot;try to add a behavior with an unkwown state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * The call to a remove state of the behavior module is invalid.
-                         * @method invalidStateOff
-                         * @param {String} id id of the class
-                         * @param {String} stateName name of the state
-                         */
-                        function invalidStateOff(id, stateName) {
-                            $helper.getSyrup().warning(&quot;try to remove a behavior from an unkwown state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * The master system is not found.
-                         * @method masterSystemNotFound
-                         */
-                        function masterSystemNotFound() {
-                            $helper.getSyrup().warning(&quot;the master system is not found&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Invalid type.
-                         * @method invalidType
-                         * @param {Object} value value of the type
-                         * @param {String} typeName expectec type defined by the schema
-                         */
-                        function invalidType(value, typeName) {
-                            $helper.getSyrup().warning(&quot;invalid type for value &#x27;&quot; + JSON.stringify(value) + &quot;&#x27;: expected &#x27;&quot; + typeName + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Unknown type.
-                         * @method unknownType
-                         * @param {String} value value
-                         */
-                        function unknownType(value) {
-                            $helper.getSyrup().warning(&quot;unknown type for value &#x27;&quot; + JSON.stringify(value) + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * A component has not been alreay created.
-                         * @method canNotYetValidate
-                         * @param {String} id id of the component
-                         * @param {String} className name of the class
-                         */
-                        function canNotYetValidate(id, className) {
-                            $helper.getSyrup().warning(&quot;can not yet validate if the component &#x27;&quot; + JSON.stringify(id) + &quot;&#x27; is an instance of &#x27;&quot; + className + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /**
-                         * A message send by the channel is invalid
-                         * @method invalidChannelEvent
-                         * @param {String} message message send
-                         * @param {String} eventName name of the event
-                         * @param {String} type expected type
-                         */
-                        function invalidChannelEvent(message, eventName, type) {
-                            $helper.getSyrup().warning(&quot;invalid type for the message &#x27;&quot; + JSON.stringify(message) + &quot;&#x27;: expected type &#x27;&quot; + type + &quot;&#x27; for event &#x27;&quot; + eventName + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * invalid parameter number for an action add with on method.
-                         * @method invalidParamNumberMethodOn
-                         * @param {String} id id of the component
-                         * @param {String} methodName name of the component
-                         */
-                        function invalidParamNumberMethodOn(id, methodName) {
-                            $helper.getSyrup().warning(&quot;invalid number of parameters when adding an action on method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Create a component with an id that is already used.
-                         * @method idAlreadyUsed
-                         * @param {String} id id of the component
-                         */
-                        function idAlreadyUsed(id) {
-                            $helper.getSyrup().warning(&quot;try to create a component with the id &#x27;&quot; + id + &quot;&#x27; that is already used by another component&quot;);
-                        }
-                        
-                        
-                        /*
-                         * Change the id of a component.
-                         * @method updateUuid
-                         * @param {String} currentId id of the component
-                         * @param {String} newId of the component
-                         * @param {Boolean} alreadyUsed newId already used
-                         */
-                        function updateUuid(currentId, newId, alreadyUsed) {
-                            if (alreadyUsed) {
-                                $helper.getSyrup().warning(&quot;try to update a component of id &#x27;&quot; + currentId + &quot;&#x27; with the new id &#x27;&quot; + newId + &quot;&#x27; that is already used&quot;);
-                            } else {
-                                $helper.getSyrup().warning(&quot;try to update a component of id &#x27;&quot; + currentId + &quot;&#x27; with the new id &#x27;&quot; + newId + &quot;&#x27;&quot;);
-                            }
-                        }
-                        
-                        /*
-                         * Try to change the state of a component that has been destroyed
-                         * @method invalidUseOfComponent
-                         * @param {String} id id of the component
-                         */
-                        function invalidUseOfComponent(id) {
-                            $helper.getSyrup().warning(&quot;try to change the state of the destroyed component &#x27;&quot; + id + &quot;&#x27;&quot;);
-                        }
-                        
-                        
-                        /* exports */
-                        
-                        
-                        /**
-                         * This module contains all the functions that write a log.
-                         * 
-                         * @module syrup
-                         * @submodule syrup-log
-                         * @requires syrup-helper
-                         * @class syrup-log
-                         * @static
-                         */
-                        
-                        
-                        /**
-                         * A property of a schema is unknown.
-                         * @method unknownProperty
-                         * @param {String} propertyName the name of the property
-                         * @param {Object} schema the schema definition
-                         */
-                        exports.unknownProperty = unknownProperty;
-                        
-                        
-                        /**
-                         * Invalid type for a property.
-                         * @method invalidPropertyType
-                         * @param {String} propertyName name of the peropety
-                         * @param {String} type the type defined by the schema
-                         * @param {String} property the property
-                         */
-                        exports.invalidPropertyType = invalidPropertyType;
-                        
-                        
-                        /**
-                         * Invalid value for a type enum.
-                         * @method invalidEnumValue
-                         * @param {Object} value the value
-                         * @param {String} type the type defined by the schema
-                         */
-                        exports.invalidEnumValue = invalidEnumValue;
-                        
-                        
-                        /**
-                         * Invalid class name for a component.
-                         * @method invalidClassName
-                         * @param {String} componentId id of the component
-                         * @param {String} type the type defined by the schema
-                         * @param {String} constructorName name of the component class
-                         */
-                        exports.invalidClassName = invalidClassName;
-                        
-                        
-                        /**
-                         * Missing a property.
-                         * @method missingProperty
-                         * @param {String} propertyName name of the property
-                         */
-                        exports.missingProperty = missingProperty;
-                        
-                        
-                        /**
-                         * A class definition is missing.
-                         * @method missingImplementation
-                         * @param {String} classSource a class
-                         * @param {String} classToImp the class to implement
-                         */
-                        exports.missingImplementation = missingImplementation;
-                        
-                        
-                        /**
-                         * Invalid type for a property of a class definition.
-                         * @method invalidTypeImp
-                         * @param {String} property a property
-                         * @param {String} className a class name
-                         */
-                        exports.invalidTypeImp = invalidTypeImp;
-                        
-                        
-                        /**
-                         * Missing a property for a class definition.
-                         * @method missingPropertyImp
-                         * @param {String} property a property
-                         * @param {String} className a class name
-                         */
-                        exports.missingPropertyImp = missingPropertyImp;
-                        
-                        
-                        /**
-                         * Unkown property for a class definition.
-                         * @method unknownPropertyImp
-                         * @param {String} property a property
-                         * @param {Object} schema a schema
-                         */
-                        exports.unknownPropertyImp = unknownPropertyImp;
-                        
-                        
-                        /**
-                         * Invalid type definition.
-                         * @method invalidTypeDefinition
-                         * @param {Object} def a type definition
-                         */
-                        exports.invalidTypeDefinition = invalidTypeDefinition;
-                        
-                        
-                        /**
-                         * Invalid property type.
-                         * @method invalidPropertyName
-                         * @param {String} id id of the component
-                         * @param {String} propertyName name of the property
-                         * @param {String} propertyValue value of the property
-                         * @param {String} type type defined by the schema
-                         */
-                        exports.invalidPropertyName = invalidPropertyName;
-                        
-                        
-                        /**
-                         * Trying to set a read-only property.
-                         * @method readOnlyProperty
-                         * @param {String} id id of the component
-                         * @param {String} propertyName name of the property
-                         */
-                        exports.readOnlyProperty = readOnlyProperty;
-                        
-                        
-                        /**
-                         * Invalid document on a syrup database insert operation.
-                         * @method invalidDocumentOnDbInsert
-                         * @param {String} doc a document
-                         * @param {String} collectionName the name of the colllection
-                         */
-                        exports.invalidDocumentOnDbInsert = invalidDocumentOnDbInsert;
-                        
-                        
-                        /**
-                         * Invalid property on a syrup database update operation.
-                         * @method invalidPropertyTypeOnDbUpdate
-                         * @param {String} collectionName the name of the colllection
-                         * @param {String} id id of the component
-                         * @param {String} propertyName name of the property
-                         * @param {String} propertyValue value of the property
-                         * @param {String} type expected type defined by the schema
-                         */
-                        exports.invalidPropertyTypeOnDbUpdate = invalidPropertyTypeOnDbUpdate;
-                        
-                        
-                        /**
-                         * Call an unknown method of a class.
-                         * @method unknownMethod
-                         * @param {String} classId id of the class
-                         * @param {String} methodName name of the method
-                         */
-                        exports.unknownMethod = unknownMethod;
-                        
-                        
-                        /**
-                         * Try to create an invalid SyrupDatabaseCollection.
-                         * @method invalidCollectionName
-                         * @param {String} name name of the collection
-                         */
-                        exports.invalidCollectionName = invalidCollectionName;
-                        
-                        
-                        /**
-                         * Invalid result type of a method.
-                         * @method invalidResultType
-                         * @param {String} id id of the component
-                         * @param {String} methodName name ot the method
-                         */
-                        exports.invalidResultType = invalidResultType;
-                        
-                        
-                        /**
-                         * Unknown class.
-                         * @method unknownComponent
-                         * @param {String} id id of the class
-                         * @param {String} componentId if of the component
-                         */
-                        exports.unknownComponent = unknownComponent;
-                        
-                        
-                        /**
-                         * The syrup workflow has been restarted.
-                         * @method workflowRestarted
-                         */
-                        exports.workflowRestarted = workflowRestarted;
-                        
-                        
-                        /**
-                         * Invalid parameter number for a method.
-                         * @method invalidParamNumber
-                         * @param {String} id id of the component
-                         * @param {String} methodName name of the component
-                         */
-                        exports.invalidParamNumber = invalidParamNumber;
-                        
-                        
-                        /**
-                         * Invalid type parameters for a method.
-                         * @method invalidParamType
-                         * @param {String} id id of the component
-                         * @param {String} methodName name of the component
-                         * @param {String} paramName name of the parameter
-                         * 
-                         */
-                        exports.invalidParamType = invalidParamType;
-                        
-                        
-                        /**
-                         * Add a more than one behavior to a state.
-                         * @method behaviorNotUnique
-                         * @param {String} id id of the class
-                         * @param {String} stateName name of the state
-                         */
-                        exports.behaviorNotUnique = behaviorNotUnique;
-                        
-                        
-                        /**
-                         * Can not add a behavior with an invalid state.
-                         * @method invalidStateOn
-                         * @param {String} id id of the class
-                         * @param {String} stateName name of the state
-                         */
-                        exports.invalidStateOn = invalidStateOn;
-                        
-                        
-                        /**
-                         * The call to a remove state of the behavior module is invalid.
-                         * @method invalidStateOff
-                         * @param {String} id id of the class
-                         * @param {String} stateName name of the state
-                         */
-                        exports.invalidStateOff = invalidStateOff;
-                        
-                        
-                        /**
-                         * The master system is not found.
-                         * @method masterSystemNotFound
-                         */
-                        exports.masterSystemNotFound = masterSystemNotFound;
-                        
-                        
-                        /**
-                         * Invalid type.
-                         * @method invalidType
-                         * @param {Object} value value of the type
-                         * @param {String} typeName expectec type defined by the schema
-                         */
-                        exports.invalidType = invalidType;
-                        
-                        
-                        /**
-                         * Unknown type.
-                         * @method unknownType
-                         * @param {String} value value
-                         */
-                        exports.unknownType = unknownType;
-                        
-                        
-                        /**
-                         * A component has not been alreay created.
-                         * @method canNotYetValidate
-                         * @param {String} id id of the component
-                         * @param {String} className name of the class
-                         */
-                        exports.canNotYetValidate = canNotYetValidate;
-                        
-                        
-                        /**
-                         * A message send by the channel is invalid
-                         * @method invalidChannelEvent
-                         * @param {String} message message send
-                         * @param {String} eventName name of the event
-                         * @param {String} type expected type
-                         */
-                        exports.invalidChannelEvent = invalidChannelEvent;
-                        
-                        
-                        /**
-                         * invalid parameter number for an action add with on method.
-                         * @method invalidParamNumberMethodOn
-                         * @param {String} id id of the component
-                         * @param {String} methodName name of the component
-                         */
-                        exports.invalidParamNumberMethodOn = invalidParamNumberMethodOn;
-                        
-                        
-                        /**
-                         * Create a component with an id that is already used.
-                         * @method idAlreadyUsed
-                         * @param {String} id id of the component
-                         */
-                        exports.idAlreadyUsed = idAlreadyUsed;
-                        
-                        
-                        /**
-                         * Change the id of a component.
-                         * @method updateUuid
-                         * @param {String} currentId id of the component
-                         * @param {String} newId of the component
-                         * @param {Boolean} alreadyUsed newId already used
-                         */
-                        exports.updateUuid = updateUuid;
-                        
-                        
-                        /**
-                         * Unkonw property on a syrup database update operation.
-                         * @method unknownPropertyOnDbUpdate
-                         * @param {String} propertyName name of the property
-                         * @param {String} id id of the component
-                         */
-                        exports.unknownPropertyOnDbUpdate = unknownPropertyOnDbUpdate;
-                        
-                        
-                        /**
-                         * Try to change the state of a component that has been destroyed
-                         * @method invalideUseOfComponent
-                         * @param {String} id id of the component
-                         */
-                        exports.invalidUseOfComponent = invalidUseOfComponent;
-                            </pre>
-                        </div>
+<div class="page-header">
+    <h1>src/log.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
+ * @ecarriou
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
+ */
+
+/**
+ * This module contains all the functions that write a log.
+ * 
+ * @module syrup
+ * @submodule syrup-log
+ * @requires syrup-helper
+ * @class syrup-log
+ * @static
+ */
+
+&#x27;use strict&#x27;;
+
+
+var $helper = require(&#x27;./helper.js&#x27;);
+
+
+/* Private properties */
+
+
+var ID = &#x27;_id&#x27;;
+
+
+/* Public methods */
+
+
+/*
+ * A property of a schema is unknown.
+ * @method unknownProperty
+ * @param {String} propertyName the name of the property
+ * @param {Object} schema the schema definition
+ */
+function unknownProperty(propertyName, schema) {
+    var message = &#x27;&#x27;;
+
+    if (schema[ID]) {
+        message = &quot;unknown property &#x27;&quot; + propertyName + &quot;&#x27; for the definition of &quot; + schema[ID];
+    } else {
+        message = &quot;unknown property &#x27;&quot; + propertyName + &quot;&#x27; for the meta attribute &quot; + JSON.stringify(schema);
+    }
+
+    $helper.getSyrup().warning(message);
+}
+
+
+/*
+ * Invalid type for a property.
+ * @method invalidPropertyType
+ * @param {String} propertyName name of the peropety
+ * @param {String} type the type defined by the schema
+ * @param {String} property the property
+ */
+function invalidPropertyType(propertyName, type, property) {
+    $helper.getSyrup().warning(&quot;invalid type for property &#x27;&quot; + JSON.stringify(propertyName) + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof property + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Invalid value for type enum.
+ * @method invalidEnumValue
+ * @param {Object} value the value
+ * @param {String} type the type defined by the schema
+ */
+function invalidEnumValue(value, type) {
+    $helper.getSyrup().warning(&quot;invalid value for the enum value &#x27;&quot; + value + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof value + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Invalid class name for a component.
+ * @method invalidClassName
+ * @param {String} componentId id of the component
+ * @param {String} type the type defined by the schema
+ * @param {String} constructorName name of the component class
+ */
+function invalidClassName(componentId, type, constructorName) {
+    $helper.getSyrup().warning(&quot;invalid class name for component &#x27;&quot; + componentId + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + constructorName + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Missing a property.
+ * @method missingProperty
+ * @param {String} propertyName name of the property
+ */
+function missingProperty(propertyName) {
+    $helper.getSyrup().warning(&quot;missing property &#x27;&quot; + propertyName + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * A class definition is missing.
+ * @method missingImplementation
+ * @param {String} classSource a class
+ * @param {String} classToImp the class to implement
+ */
+function missingImplementation(classSource, classToImp) {
+    $helper.getSyrup().warning(&quot;class &#x27;&quot; + classSource + &quot;&#x27; is missing for the implementation of the class &#x27;&quot; + classToImp + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Invalid type for a property of a class definition.
+ * @method invalidTypeImp
+ * @param {String} property a property
+ * @param {String} className a class name
+ */
+function invalidTypeImp(property, className) {
+    $helper.getSyrup().warning(&quot;invalid type for property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + className + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Missing a property for a class definition.
+ * @method missingPropertyImp
+ * @param {String} property a property
+ * @param {String} className a class name
+ */
+function missingPropertyImp(property, className) {
+    $helper.getSyrup().warning(&quot;missing property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + className + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Unkown property for a class definition.
+ * @method unknownPropertyImp
+ * @param {String} property a property
+ * @param {Object} schema a schema
+ */
+function unknownPropertyImp(property, schema) {
+    $helper.getSyrup().warning(&quot;unknown property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + schema + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Invalid type definition.
+ * @method invalidTypeDefinition
+ * @param {Object} def a type definition
+ */
+function invalidTypeDefinition(def) {
+    $helper.getSyrup().warning(&quot;can not load the definition of type &#x27;&quot; + def + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Invalid property name.
+ * @method invalidPropertyName
+ * @param {String} id id of the component
+ * @param {String} propertyName name of the property
+ * @param {String} propertyValue value of the property
+ * @param {String} type type defined by the schema
+ */
+function invalidPropertyName(id, propertyName, propertyValue, type) {
+    if (type.indexOf(&quot;#&quot;) !== -1) {
+        $helper.getSyrup().warning(&quot;invalid name for property &#x27;&quot; + propertyName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+    } else {
+        $helper.getSyrup().warning(&quot;invalid name for property &#x27;&quot; + propertyName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+    }
+}
+
+
+/*
+ * Trying to set a read-only property.
+ * @method readOnlyProperty
+ * @param {String} id id of the component
+ * @param {String} propertyName name of the property
+ */
+function readOnlyProperty(id, propertyName) {
+    $helper.getSyrup().warning(&quot;can not set read-only property &#x27;&quot; + propertyName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Invalid document on a syrup database insert operation.
+ * @method invalidDocumentOnDbInsert
+ * @param {String} doc a document
+ * @param {String} collectionName the name of the colllection
+ */
+function invalidDocumentOnDbInsert(doc, collectionName) {
+    $helper.getSyrup().warning(&quot;invalid document &#x27;&quot; + JSON.stringify(doc) + &quot;&#x27; on an insert operation on collection &#x27;&quot; + collectionName + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Invalid property on a syrup database update operation.
+ * @method invalidPropertyTypeOnDbUpdate
+ * @param {String} collectionName the name of the colllection
+ * @param {String} id id of the component
+ * @param {String} propertyName name of the property
+ * @param {String} propertyValue value of the property
+ * @param {String} type expected type defined by the schema
+ */
+function invalidPropertyTypeOnDbUpdate(collectionName, id, propertyName, propertyValue, type) {
+    if (type.indexOf(&quot;#&quot;) !== -1) {
+        $helper.getSyrup().warning(&quot;invalid type for property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on collection &#x27;&quot; + collectionName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+    } else {
+        $helper.getSyrup().warning(&quot;invalid type for property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on collection &#x27;&quot; + collectionName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+    }
+}
+
+
+
+/*
+ * Unkonw property on a syrup database update operation.
+ * @method unknownPropertyOnDbUpdate
+ * @param {String} propertyName name of the property
+ * @param {String} id id of the component
+ */
+function unknownPropertyOnDbUpdate(propertyName, id) {
+    $helper.getSyrup().warning(&quot;unknown property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Call an unknown method of a class.
+ * @method unknownMethod
+ * @param {String} classId id of the class
+ * @param {String} methodName name of the method
+ */
+function unknownMethod(classId, methodName) {
+    $helper.getSyrup().warning(&quot;try to call an unknown method &#x27;&quot; + methodName + &quot;&#x27; for the class &#x27;&quot; + classId + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Try to create an invalid SyrupDatabaseCollection.
+ * @method invalidCollectionName
+ * @param {String} name name of the collection
+ */
+function invalidCollectionName(name) {
+    $helper.getSyrup().warning(&quot;invalid name for creating the collection &#x27;&quot; + name + &quot;&#x27;: there is no schema &#x27;&quot; + name + &quot;&#x27; in the metamodel&quot;);
+}
+
+
+/*
+ * Invalid type result of a method.
+ * @method invalidResultType
+ * @param {String} id id of the component
+ * @param {String} methodName name ot the method
+ */
+function invalidResultType(id, methodName) {
+    $helper.getSyrup().warning(&quot;invalid type on the result of method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Unknown class.
+ * @method unknownComponent
+ * @param {String} id id of the class
+ * @param {String} componentId if of the component
+ */
+function unknownComponent(className, componentId) {
+    $helper.getSyrup().warning(&quot;unkown class component &#x27;&quot; + className + &quot;&#x27; for component &#x27;&quot; + componentId + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * The syrup workflow has been restarted.
+ * @method workflowRestarted
+ */
+function workflowRestarted() {
+    $helper.getSyrup().warning(&#x27;syrup has been restarted&#x27;);
+}
+
+
+/*
+ * invalid parameter number for a method.
+ * @method invalidParamNumber
+ * @param {String} id id of the component
+ * @param {String} methodName name of the component
+ */
+function invalidParamNumber(id, methodName) {
+    $helper.getSyrup().warning(&quot;invalid number of parameters when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Invalid type parameters for a method.
+ * @method invalidParamType
+ * @param {String} id id of the component
+ * @param {String} methodName name of the component
+ * @param {String} paramName name of the parameter
+ * 
+ */
+function invalidParamType(id, methodName, paramName) {
+    $helper.getSyrup().warning(&quot;invalid type for the parameter &#x27;&quot; + paramName + &quot;&#x27; when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Add a more than one behavior to a state.
+ * @method behaviorNotUnique
+ * @param {String} id id of the class
+ * @param {String} stateName name of the state
+ */
+function behaviorNotUnique(id, stateName) {
+    $helper.getSyrup().warning(&quot;try to add more than one behavior for the state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Can not add a behavior with an invalid state.
+ * @method invalidStateOn
+ * @param {String} id id of the class
+ * @param {String} stateName name of the state
+ */
+function invalidStateOn(id, stateName) {
+    $helper.getSyrup().warning(&quot;try to add a behavior with an unkwown state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * The call to a remove state of the behavior module is invalid.
+ * @method invalidStateOff
+ * @param {String} id id of the class
+ * @param {String} stateName name of the state
+ */
+function invalidStateOff(id, stateName) {
+    $helper.getSyrup().warning(&quot;try to remove a behavior from an unkwown state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * The master system is not found.
+ * @method masterSystemNotFound
+ */
+function masterSystemNotFound() {
+    $helper.getSyrup().warning(&quot;the master system is not found&quot;);
+}
+
+
+/*
+ * Invalid type.
+ * @method invalidType
+ * @param {Object} value value of the type
+ * @param {String} typeName expectec type defined by the schema
+ */
+function invalidType(value, typeName) {
+    $helper.getSyrup().warning(&quot;invalid type for value &#x27;&quot; + JSON.stringify(value) + &quot;&#x27;: expected &#x27;&quot; + typeName + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Unknown type.
+ * @method unknownType
+ * @param {String} value value
+ */
+function unknownType(value) {
+    $helper.getSyrup().warning(&quot;unknown type for value &#x27;&quot; + JSON.stringify(value) + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * A component has not been alreay created.
+ * @method canNotYetValidate
+ * @param {String} id id of the component
+ * @param {String} className name of the class
+ */
+function canNotYetValidate(id, className) {
+    $helper.getSyrup().warning(&quot;can not yet validate if the component &#x27;&quot; + JSON.stringify(id) + &quot;&#x27; is an instance of &#x27;&quot; + className + &quot;&#x27;&quot;);
+}
+
+
+/**
+ * A message send by the channel is invalid
+ * @method invalidChannelEvent
+ * @param {String} message message send
+ * @param {String} eventName name of the event
+ * @param {String} type expected type
+ */
+function invalidChannelEvent(message, eventName, type) {
+    $helper.getSyrup().warning(&quot;invalid type for the message &#x27;&quot; + JSON.stringify(message) + &quot;&#x27;: expected type &#x27;&quot; + type + &quot;&#x27; for event &#x27;&quot; + eventName + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * invalid parameter number for an action add with on method.
+ * @method invalidParamNumberMethodOn
+ * @param {String} id id of the component
+ * @param {String} methodName name of the component
+ */
+function invalidParamNumberMethodOn(id, methodName) {
+    $helper.getSyrup().warning(&quot;invalid number of parameters when adding an action on method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Create a component with an id that is already used.
+ * @method idAlreadyUsed
+ * @param {String} id id of the component
+ */
+function idAlreadyUsed(id) {
+    $helper.getSyrup().warning(&quot;try to create a component with the id &#x27;&quot; + id + &quot;&#x27; that is already used by another component&quot;);
+}
+
+
+/*
+ * Change the id of a component.
+ * @method updateUuid
+ * @param {String} currentId id of the component
+ * @param {String} newId of the component
+ * @param {Boolean} alreadyUsed newId already used
+ */
+function updateUuid(currentId, newId, alreadyUsed) {
+    if (alreadyUsed) {
+        $helper.getSyrup().warning(&quot;try to update a component of id &#x27;&quot; + currentId + &quot;&#x27; with the new id &#x27;&quot; + newId + &quot;&#x27; that is already used&quot;);
+    } else {
+        $helper.getSyrup().warning(&quot;try to update a component of id &#x27;&quot; + currentId + &quot;&#x27; with the new id &#x27;&quot; + newId + &quot;&#x27;&quot;);
+    }
+}
+
+/*
+ * Try to change the state of a component that has been destroyed
+ * @method invalidUseOfComponent
+ * @param {String} id id of the component
+ */
+function invalidUseOfComponent(id) {
+    $helper.getSyrup().warning(&quot;try to change the state of the destroyed component &#x27;&quot; + id + &quot;&#x27;&quot;);
+}
+
+
+/* exports */
+
+
+/**
+ * This module contains all the functions that write a log.
+ * 
+ * @module syrup
+ * @submodule syrup-log
+ * @requires syrup-helper
+ * @class syrup-log
+ * @static
+ */
+
+
+/**
+ * A property of a schema is unknown.
+ * @method unknownProperty
+ * @param {String} propertyName the name of the property
+ * @param {Object} schema the schema definition
+ */
+exports.unknownProperty = unknownProperty;
+
+
+/**
+ * Invalid type for a property.
+ * @method invalidPropertyType
+ * @param {String} propertyName name of the peropety
+ * @param {String} type the type defined by the schema
+ * @param {String} property the property
+ */
+exports.invalidPropertyType = invalidPropertyType;
+
+
+/**
+ * Invalid value for a type enum.
+ * @method invalidEnumValue
+ * @param {Object} value the value
+ * @param {String} type the type defined by the schema
+ */
+exports.invalidEnumValue = invalidEnumValue;
+
+
+/**
+ * Invalid class name for a component.
+ * @method invalidClassName
+ * @param {String} componentId id of the component
+ * @param {String} type the type defined by the schema
+ * @param {String} constructorName name of the component class
+ */
+exports.invalidClassName = invalidClassName;
+
+
+/**
+ * Missing a property.
+ * @method missingProperty
+ * @param {String} propertyName name of the property
+ */
+exports.missingProperty = missingProperty;
+
+
+/**
+ * A class definition is missing.
+ * @method missingImplementation
+ * @param {String} classSource a class
+ * @param {String} classToImp the class to implement
+ */
+exports.missingImplementation = missingImplementation;
+
+
+/**
+ * Invalid type for a property of a class definition.
+ * @method invalidTypeImp
+ * @param {String} property a property
+ * @param {String} className a class name
+ */
+exports.invalidTypeImp = invalidTypeImp;
+
+
+/**
+ * Missing a property for a class definition.
+ * @method missingPropertyImp
+ * @param {String} property a property
+ * @param {String} className a class name
+ */
+exports.missingPropertyImp = missingPropertyImp;
+
+
+/**
+ * Unkown property for a class definition.
+ * @method unknownPropertyImp
+ * @param {String} property a property
+ * @param {Object} schema a schema
+ */
+exports.unknownPropertyImp = unknownPropertyImp;
+
+
+/**
+ * Invalid type definition.
+ * @method invalidTypeDefinition
+ * @param {Object} def a type definition
+ */
+exports.invalidTypeDefinition = invalidTypeDefinition;
+
+
+/**
+ * Invalid property type.
+ * @method invalidPropertyName
+ * @param {String} id id of the component
+ * @param {String} propertyName name of the property
+ * @param {String} propertyValue value of the property
+ * @param {String} type type defined by the schema
+ */
+exports.invalidPropertyName = invalidPropertyName;
+
+
+/**
+ * Trying to set a read-only property.
+ * @method readOnlyProperty
+ * @param {String} id id of the component
+ * @param {String} propertyName name of the property
+ */
+exports.readOnlyProperty = readOnlyProperty;
+
+
+/**
+ * Invalid document on a syrup database insert operation.
+ * @method invalidDocumentOnDbInsert
+ * @param {String} doc a document
+ * @param {String} collectionName the name of the colllection
+ */
+exports.invalidDocumentOnDbInsert = invalidDocumentOnDbInsert;
+
+
+/**
+ * Invalid property on a syrup database update operation.
+ * @method invalidPropertyTypeOnDbUpdate
+ * @param {String} collectionName the name of the colllection
+ * @param {String} id id of the component
+ * @param {String} propertyName name of the property
+ * @param {String} propertyValue value of the property
+ * @param {String} type expected type defined by the schema
+ */
+exports.invalidPropertyTypeOnDbUpdate = invalidPropertyTypeOnDbUpdate;
+
+
+/**
+ * Call an unknown method of a class.
+ * @method unknownMethod
+ * @param {String} classId id of the class
+ * @param {String} methodName name of the method
+ */
+exports.unknownMethod = unknownMethod;
+
+
+/**
+ * Try to create an invalid SyrupDatabaseCollection.
+ * @method invalidCollectionName
+ * @param {String} name name of the collection
+ */
+exports.invalidCollectionName = invalidCollectionName;
+
+
+/**
+ * Invalid result type of a method.
+ * @method invalidResultType
+ * @param {String} id id of the component
+ * @param {String} methodName name ot the method
+ */
+exports.invalidResultType = invalidResultType;
+
+
+/**
+ * Unknown class.
+ * @method unknownComponent
+ * @param {String} id id of the class
+ * @param {String} componentId if of the component
+ */
+exports.unknownComponent = unknownComponent;
+
+
+/**
+ * The syrup workflow has been restarted.
+ * @method workflowRestarted
+ */
+exports.workflowRestarted = workflowRestarted;
+
+
+/**
+ * Invalid parameter number for a method.
+ * @method invalidParamNumber
+ * @param {String} id id of the component
+ * @param {String} methodName name of the component
+ */
+exports.invalidParamNumber = invalidParamNumber;
+
+
+/**
+ * Invalid type parameters for a method.
+ * @method invalidParamType
+ * @param {String} id id of the component
+ * @param {String} methodName name of the component
+ * @param {String} paramName name of the parameter
+ * 
+ */
+exports.invalidParamType = invalidParamType;
+
+
+/**
+ * Add a more than one behavior to a state.
+ * @method behaviorNotUnique
+ * @param {String} id id of the class
+ * @param {String} stateName name of the state
+ */
+exports.behaviorNotUnique = behaviorNotUnique;
+
+
+/**
+ * Can not add a behavior with an invalid state.
+ * @method invalidStateOn
+ * @param {String} id id of the class
+ * @param {String} stateName name of the state
+ */
+exports.invalidStateOn = invalidStateOn;
+
+
+/**
+ * The call to a remove state of the behavior module is invalid.
+ * @method invalidStateOff
+ * @param {String} id id of the class
+ * @param {String} stateName name of the state
+ */
+exports.invalidStateOff = invalidStateOff;
+
+
+/**
+ * The master system is not found.
+ * @method masterSystemNotFound
+ */
+exports.masterSystemNotFound = masterSystemNotFound;
+
+
+/**
+ * Invalid type.
+ * @method invalidType
+ * @param {Object} value value of the type
+ * @param {String} typeName expectec type defined by the schema
+ */
+exports.invalidType = invalidType;
+
+
+/**
+ * Unknown type.
+ * @method unknownType
+ * @param {String} value value
+ */
+exports.unknownType = unknownType;
+
+
+/**
+ * A component has not been alreay created.
+ * @method canNotYetValidate
+ * @param {String} id id of the component
+ * @param {String} className name of the class
+ */
+exports.canNotYetValidate = canNotYetValidate;
+
+
+/**
+ * A message send by the channel is invalid
+ * @method invalidChannelEvent
+ * @param {String} message message send
+ * @param {String} eventName name of the event
+ * @param {String} type expected type
+ */
+exports.invalidChannelEvent = invalidChannelEvent;
+
+
+/**
+ * invalid parameter number for an action add with on method.
+ * @method invalidParamNumberMethodOn
+ * @param {String} id id of the component
+ * @param {String} methodName name of the component
+ */
+exports.invalidParamNumberMethodOn = invalidParamNumberMethodOn;
+
+
+/**
+ * Create a component with an id that is already used.
+ * @method idAlreadyUsed
+ * @param {String} id id of the component
+ */
+exports.idAlreadyUsed = idAlreadyUsed;
+
+
+/**
+ * Change the id of a component.
+ * @method updateUuid
+ * @param {String} currentId id of the component
+ * @param {String} newId of the component
+ * @param {Boolean} alreadyUsed newId already used
+ */
+exports.updateUuid = updateUuid;
+
+
+/**
+ * Unkonw property on a syrup database update operation.
+ * @method unknownPropertyOnDbUpdate
+ * @param {String} propertyName name of the property
+ * @param {String} id id of the component
+ */
+exports.unknownPropertyOnDbUpdate = unknownPropertyOnDbUpdate;
+
+
+/**
+ * Try to change the state of a component that has been destroyed
+ * @method invalideUseOfComponent
+ * @param {String} id id of the component
+ */
+exports.invalidUseOfComponent = invalidUseOfComponent;
+    </pre>
+</div>
                     </div>
                 </div>
             </div>

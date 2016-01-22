@@ -1,9 +1,9 @@
 # SyrupJS
 
 [![npm version](https://badge.fury.io/js/system-runtime.svg)](http://badge.fury.io/js/system-runtime)
-[![Build Status](https://travis-ci.org/system-designer/system-runtime.svg?branch=master)](https://travis-ci.org/system-designer/system-runtime)
-[![Coverage Status](https://img.shields.io/coveralls/system-designer/system-runtime.svg)](https://coveralls.io/r/system-designer/system-runtime)
-[![devDependency Status](https://david-dm.org/system-designer/system-runtime/dev-status.svg)](https://david-dm.org/system-designer/system-runtime#info=devDependencies)
+[![Build Status](https://travis-ci.org/system-sdk/system-sdk.svg?branch=master)](https://travis-ci.org/system-sdk/system-runtime)
+[![Coverage Status](https://img.shields.io/coveralls/system-sdk/system-runtime.svg)](https://coveralls.io/r/system-sdk/system-runtime)
+[![devDependency Status](https://david-dm.org/system-sdk/system-runtime/dev-status.svg)](https://david-dm.org/system-sdk/system-runtime#info=devDependencies)
 
 #### What is SyrupJS ?
 
@@ -41,7 +41,7 @@ syrup.version();
 
 ## Documentation
 
-* [Web site](https://systemdesigner.readme.io) [ work in progress ]
+* [Web site](http://doc.systemdesigner.io) [ work in progress ]
 
 
 ## Licence

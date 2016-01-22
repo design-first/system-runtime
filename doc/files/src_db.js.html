@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.1</b>
+                    API Docs for Version: <b>0.9.2</b>
                 </p>
             </li>
         </div>
@@ -33,913 +33,913 @@
 <div class="container">
     <div class="row">
         <div class="span3">
-	    <div>
-	        <div id="sidebar">
-	        <div id="classes">
-	            <ul id="api-classes" class="nav nav-list">
-	                    <li><a href="../classes/syrup.html">syrup</a></li>
-	                    <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
-	                    <li><a href="../classes/syrup-component.html">syrup-component</a></li>
-	                    <li><a href="../classes/syrup-db.html">syrup-db</a></li>
-	                    <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
-	                    <li><a href="../classes/syrup-log.html">syrup-log</a></li>
-	                    <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
-	                    <li><a href="../classes/syrup-state.html">syrup-state</a></li>
-	                    <li><a href="../classes/syrup-system.html">syrup-system</a></li>
-	                    <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
-	                    <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
-	                    <li><a href="../classes/SyrupError.html">SyrupError</a></li>
-	            </ul>
-	        </div>
-	        </div>
-	    </div>
+<div>
+    <div id="sidebar">
+    <div id="classes">
+        <ul id="api-classes" class="nav nav-list">
+                <li><a href="../classes/syrup.html">syrup</a></li>
+                <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
+                <li><a href="../classes/syrup-component.html">syrup-component</a></li>
+                <li><a href="../classes/syrup-db.html">syrup-db</a></li>
+                <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
+                <li><a href="../classes/syrup-log.html">syrup-log</a></li>
+                <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
+                <li><a href="../classes/syrup-state.html">syrup-state</a></li>
+                <li><a href="../classes/syrup-system.html">syrup-system</a></li>
+                <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
+                <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
+                <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+        </ul>
+    </div>
+    </div>
+</div>
         </div>
         <div class="span9">
-                <form id="options-form" class="form-inline pull-right">
-                    Show:
-                    <label for="api-show-inherited" class="checkbox">
-                        <input type="checkbox" id="api-show-inherited" checked>
-                        Inherited
-                    </label>
-            
-                    <label for="api-show-protected" class="checkbox">
-                        <input type="checkbox" id="api-show-protected">
-                        Protected
-                    </label>
-            
-                    <label for="api-show-private" class="checkbox">
-                        <input type="checkbox" id="api-show-private">
-                        Private
-                    </label>
-                    <label for="api-show-deprecated" class="checkbox">
-                        <input type="checkbox" id="api-show-deprecated">
-                        Deprecated
-                    </label>
-            
-                </form>
-            
+    <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <div class="page-header">
-                            <h1>src/db.js <small>File</small></h1>
-                        </div>
-                        
-                        <div class="file">
-                            <pre class="prettyprint linenums">
-                        /*
-                         * SyrupJS
-                         * The System Runtime Platform
-                         * http://syrupjs.systemdesigner.io
-                         * @ecarriou
-                         *  
-                         * Copyright (c) 2016 Erwan Carriou
-                         * 
-                         * Permission is hereby granted, free of charge, to any person obtaining a copy
-                         * of this software and associated documentation files (the &quot;Software&quot;), to deal
-                         * in the Software without restriction, including without limitation the rights
-                         * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-                         * copies of the Software, and to permit persons to whom the Software is
-                         * furnished to do so, subject to the following conditions:
-                         * 
-                         * The above copyright notice and this permission notice shall be included in all
-                         * copies or substantial portions of the Software.
-                         * 
-                         * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-                         * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-                         * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-                         * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-                         * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-                         * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-                         * SOFTWARE. 
-                         */
-                        
-                        /**
-                         * This module manages syrup database. &lt;br&gt;
-                         * syrup database is a micro NoSQL Database that contains: &lt;br&gt;
-                         * - collections to store documents (schemas, types, components, ...) and &lt;br&gt;
-                         * - APIs to import or export documents. &lt;br&gt;
-                         * 
-                         * syrup Database is closely linked to syrup metamodel and syrup components because: &lt;br&gt;
-                         * - all operations done by syrup database must be compliant with the model before being finished, &lt;br&gt;
-                         * - insert operation automatically creates a component and &lt;br&gt;
-                         * - remove operation automatically destroy a component.
-                         *  
-                         * @module syrup
-                         * @submodule syrup-db
-                         * @requires syrup-component
-                         * @requires syrup-helper
-                         * @requires syrup-log
-                         * @class syrup-db
-                         * @static
-                         */
-                        
-                        &#x27;use strict&#x27;;
-                        
-                        var $component = require(&#x27;./component.js&#x27;);
-                        var $metamodel = require(&#x27;./metamodel.js&#x27;);
-                        var $helper = require(&#x27;./helper.js&#x27;);
-                        var $log = require(&#x27;./log.js&#x27;);
-                        var $behavior = require(&#x27;./behavior.js&#x27;);
-                        var $state = require(&#x27;./state.js&#x27;);
-                        var $workflow = require(&#x27;./workflow.js&#x27;);
-                        
-                        
-                        /* Private properties */
-                        
-                        
-                        var store = {},
-                            collections = [],
-                            internalDB = [
-                                &#x27;Syrup&#x27;,
-                                &#x27;SyrupSchema&#x27;,
-                                &#x27;SyrupExtendedSchema&#x27;,
-                                &#x27;SyrupBehavior&#x27;,
-                                &#x27;SyrupState&#x27;,
-                                &#x27;SyrupType&#x27;,
-                                &#x27;SyrupMetamodel&#x27;,
-                                &#x27;SyrupDatabase&#x27;,
-                                &#x27;SyrupSystem&#x27;,
-                                &#x27;SyrupClassInfo&#x27;,
-                                &#x27;SyrupMessage&#x27;,
-                                &#x27;SyrupChannel&#x27;
-                            ],
-                            coreDb = [
-                                &#x27;SyrupSchema&#x27;,
-                                &#x27;SyrupExtendedSchema&#x27;,
-                                &#x27;SyrupState&#x27;,
-                                &#x27;SyrupType&#x27;
-                            ];
-                        
-                        
-                        /* Private methods */
-                        
-                        
-                        /*
-                         * Dump the database.
-                         * @method dump
-                         * @return {Object} the dump of the database. The dump is an object that contains: &lt;br&gt;
-                         * {Object} schemas the schemas store in the database &lt;br&gt;
-                         * {Object} types the types store in the database &lt;br&gt;
-                         * {Object} behaviors the behaviors store in the database &lt;br&gt;
-                         * {Object} components the components store in the database
-                         * @private
-                         */
-                        function dump() {
-                            var dbDump = {},
-                                collectionName = &#x27;&#x27;,
-                                behaviorId = &#x27;&#x27;,
-                                typeId = &#x27;&#x27;,
-                                type = null,
-                                behavior = null,
-                                schema = null,
-                                collection = null,
-                                schemaId = &#x27;&#x27;,
-                                length = 0,
-                                i = 0,
-                                id = &#x27;&#x27;;
-                        
-                            // schemas
-                            dbDump.schemas = {};
-                            if (exports.SyrupSchema.count()) {
-                                for (schemaId in store.SyrupSchema) {
-                                    schema = JSON.parse(JSON.stringify(store.SyrupSchema[schemaId]));
-                                    if (!schema._core) {
-                                        dbDump.schemas[schemaId] = schema;
-                                    }
-                                }
-                            }
-                        
-                            // types
-                            dbDump.types = {};
-                            if (exports.SyrupType.count()) {
-                                for (typeId in store.SyrupType) {
-                                    type = JSON.parse(JSON.stringify(store.SyrupType[typeId]));
-                                    delete type._id;
-                                    if (!type.core) {
-                                        dbDump.types[type.name] = type;
-                                    }
-                                }
-                            }
-                        
-                            // behaviors
-                            dbDump.behaviors = {};
-                            for (behaviorId in store.SyrupBehavior) {
-                                behavior = JSON.parse(JSON.stringify(store.SyrupBehavior[behaviorId]));
-                                delete behavior.classInfo;
-                                
-                                if (!behavior.core) {
-                                    dbDump.behaviors[behaviorId] = behavior;
-                                }
-                            }
-                        
-                            // components
-                            dbDump.components = {};
-                            length = collections.length;
-                            for (i = 0; i &lt; length; i++) {
-                                collectionName = collections[i];
-                                if (exports[collectionName].count()) {
-                                    collection = JSON.parse(JSON.stringify(store[collectionName]));
-                        
-                                    for (id in collection) {
-                                        delete collection[id].classInfo;
-                                    }
-                        
-                                    dbDump.components[collectionName] = collection;
-                                }
-                            }
-                        
-                            return dbDump;
-                        }
-                        
-                        
-                        /*
-                         * Test if an object contains another one.
-                         * @method contains
-                         * @param {Object} source source object 
-                         * @param {Object} target target object 
-                         * @return {Boolean} true if the source object contains the target object
-                         * @private
-                         */
-                        function contains(source, target) {
-                            var result = true,
-                                property = &#x27;&#x27;;
-                        
-                            for (property in source) {
-                                if (typeof target[property] === &#x27;undefined&#x27; || target[property] !== source[property]) {
-                                    result = false;
-                                    break;
-                                }
-                            }
-                            return result;
-                        }
-                        
-                        
-                        /** 
-                         * A collection of documents managed by syrup. &lt;br&gt;
-                         * Internal collections manage core objects of syrup (schema, type, ...). &lt;br&gt;
-                         * Public collections manage components of the same class. &lt;br&gt;
-                         * 
-                         * @class SyrupDatabaseCollection
-                         * @constructor
-                         * @param {String} name name of the new collection
-                         */
-                        var SyrupDatabaseCollection = function (name) {
-                            if ($metamodel.get(name) || internalDB.indexOf(name) !== -1) {
-                                store[name] = {};
-                                this.name = name;
-                                if (internalDB.indexOf(name) === -1) {
-                                    collections.push(name);
-                                }
-                            } else {
-                                $log.invalidCollectionName(name);
-                            }
-                        };
-                        
-                        
-                        /**
-                         * Find a document into the collection.
-                         * @method find
-                         * @param {Object|Array} query
-                         * @return {Array} Array of documents that map the query
-                         * 
-                         * @example 
-                         * $db.Person.find({&quot;name&quot;: &quot;laure&quot;}); &lt;br&gt;
-                         * $db.Person.find({&quot;name&quot;: &quot;laure&quot;, &quot;age&quot; : 24}); &lt;br&gt;
-                         * $db.Person.find([{&quot;name&quot;: &quot;rene&quot;}, {&quot;name&quot;: &quot;robert&quot;}]);
-                         */
-                        SyrupDatabaseCollection.prototype.find = function (query) {
-                            var result = [],
-                                id = &#x27;&#x27;,
-                                object = {};
-                        
-                            query = query || null;
-                        
-                            if (query &amp;&amp; Object.keys(query).length) {
-                                if (Array.isArray(query)) {
-                                    query.forEach(function multi_search(criteria) {
-                                        for (id in store[this.name]) {
-                                            object = store[this.name][id];
-                                            if (contains(criteria, object)) {
-                                                result.push(object);
-                                            }
-                                        }
-                                    }.bind(this));
-                                } else {
-                                    for (id in store[this.name]) {
-                                        object = store[this.name][id];
-                                        if (contains(query, object)) {
-                                            result.push(object);
-                                        }
-                                    }
-                                }
-                            } else {
-                                for (id in store[this.name]) {
-                                    object = store[this.name][id];
-                                    result.push(object);
-                                }
-                            }
-                        
-                            return result;
-                        };
-                        
-                        
-                        /**
-                         * Insert an new document into the collection. &lt;br&gt;
-                         * Before inserting the document, syrup checks that the document is compliant
-                         * with its class definition. &lt;br&gt; 
-                         * Then, after inserting it, we create the component.
-                         * @method insert
-                         * @param {Object|Array} document a new object to add
-                         * @return {Array} array of id created
-                         * 
-                         * @example 
-                         * $db.Person.insert({&lt;br&gt;
-                         *      &quot;name&quot;: &quot;bob&quot;, &lt;br&gt;
-                         *      &quot;firstName&quot;: &quot;Saint-Clar&quot;, &lt;br&gt;
-                         *      &quot;age&quot;: 43 &lt;br&gt;
-                         * }); &lt;br&gt;
-                         */
-                        SyrupDatabaseCollection.prototype.insert = function (document) {
-                            var doc = [],
-                                Component = null,
-                                result = [];
-                        
-                            if (Array.isArray(document)) {
-                                doc = document;
-                            } else {
-                                doc.push(document);
-                            }
-                        
-                            doc.forEach(function multi_insert(obj) {
-                                var component = null,
-                                    channels = [],
-                                    channel = null,
-                                    systems = [];
-                        
-                                switch (true) {
-                                    case this.name === &#x27;SyrupSchema&#x27;:
-                                    case this.name === &#x27;SyrupType&#x27;:
-                                    case this.name === &#x27;SyrupExtendedSchema&#x27;:
-                                    case $metamodel.isValidObject(obj, $metamodel.get(this.name)):
-                        
-                                        if (typeof obj._id === &#x27;undefined&#x27;) {
-                                            obj._id = $helper.generateId();
-                                        }
-                        
-                                        store[this.name][obj._id] = obj;
-                        
-                                        Component = $component.get(this.name);
-                                        if (Component) {
-                                            component = new Component(obj);
-                                            result.push(component.id());
-                                        } else {
-                                            if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
-                                                $helper.getSyrup().require(&#x27;db&#x27;).insert(this.name, obj);
-                                            }
-                                        }
-                        
-                                        if (this.name === &#x27;SyrupMessage&#x27;) {
-                                            if ($helper.isSyrup()) {
-                                                systems = exports.SyrupSystem.find({
-                                                    &#x27;master&#x27;: true
-                                                });
-                                                if (!systems.length || (systems.length &amp;&amp; systems[0]._id !== obj.from)) {
-                                                    channels = exports.SyrupChannel.find({});
-                                                    if (channels.length &gt; 0) {
-                                                        channel = $helper.getSyrup().require(channels[0]._id);
-                                                        $workflow.state({
-                                                            &quot;component&quot;: channels[0]._id,
-                                                            &quot;state&quot;: obj.event,
-                                                            &quot;data&quot;: obj.data
-                                                        });
-                                                    }
-                                                }
-                                            }
-                                        }
-                        
-                                        break;
-                                    default:
-                                        $log.invalidDocumentOnDbInsert(obj, this.name);
-                                        break;
-                                }
-                            }.bind(this));
-                        
-                            return result;
-                        };
-                        
-                        
-                        /**
-                         * Update documents into a collection.
-                         * @method update
-                         * @param {Object|Array} query query to find the documents to update
-                         * @param {Object} update update to make
-                         * @param {Object} options 
-                         * {Boolean} upsert true if we create a document when no document is found by the query
-                         * @return {Number} Number of documents updated
-                         * 
-                         * @example 
-                         * $db.Cars.update({&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;price&quot;: &quot;10000$&quot;}); &lt;br&gt;
-                         * $db.Cars.update([{&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;code&quot;: &quot;AZD-65&quot;}], {&quot;price&quot;: &quot;10000$&quot;}); &lt;br&gt;
-                         * $db.Cars.update({&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;price&quot;: &quot;10000$&quot;}, {&quot;upsert&quot;: true}); &lt;br&gt;
-                         */
-                        SyrupDatabaseCollection.prototype.update = function (query, update, options) {
-                            var docs = this.find(query),
-                                updated = 0,
-                                i = 0,
-                                length = docs.length,
-                                attributeName = &#x27;&#x27;,
-                                schema = $metamodel.get(this.name),
-                                type = &#x27;&#x27;;
-                        
-                            options = options || {};
-                            if (typeof options.upsert === &#x27;undefined&#x27;) {
-                                options.upsert = options.upsert || false;
-                            }
-                        
-                            if (update) {
-                        
-                                // upsert case
-                                if (length === 0 &amp;&amp; options.upsert) {
-                                    if (query._id) {
-                                        update._id = query._id;
-                                    }
-                                    this.insert(update);
-                                    updated = updated + 1;
-                                }
-                        
-                                for (i = 0; i &lt; length; i++) {
-                                    // case of update of _id
-                                    if (typeof update._id !== &#x27;undefined&#x27; &amp;&amp; update._id !== docs[i]._id) {
-                                        $log.updateUuid(docs[i]._id, update._id, typeof $component.get(update._id) !== &#x27;undefined&#x27;);
-                                    }
-                        
-                                    for (attributeName in update) {
-                                        if (typeof docs[i][attributeName] !== &#x27;undefined&#x27;) {
-                        
-                                            // check type
-                                            type = &#x27;&#x27;;
-                                            if (attributeName.indexOf(&#x27;_&#x27;) !== 0) {
-                                                type = schema[attributeName].type;
-                                            } else {
-                                                if ($metamodel.getMetaDef()[attributeName]) {
-                                                    type = $metamodel.getMetaDef()[attributeName].type;
-                                                }
-                                            }
-                                            if (type) {
-                                                if ($metamodel.isValidType(update[attributeName], type)) {
-                                                    docs[i][attributeName] = update[attributeName];
-                                                    updated = updated + 1;
-                                                    if ($helper.isSyrup()) {
-                                                        $helper.getSyrup().require(&#x27;db&#x27;).update(this.name, docs[i]._id, attributeName, update[attributeName]);
-                                                    }
-                                                } else {
-                                                    $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName]);
-                                                }
-                                            } else {
-                                                $log.unknownPropertyOnDbUpdate(attributeName, docs[i]._id);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        
-                            return updated;
-                        };
-                        
-                        
-                        /**
-                         * Remove a document from the colllection. &lt;br&gt;
-                         * When a document is removed, the component is destroyed.
-                         * @method remove
-                         * @param {Object|Array} query query to find the documents to remove
-                         * @return {Array} list of documents id removed
-                         * 
-                         * @example 
-                         * $db.Cars.remove({&quot;code&quot;: &quot;AZD-71&quot;}); &lt;br&gt;
-                         * $db.Cars.remove([{&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;code&quot;: &quot;AZD-65&quot;}]); &lt;br&gt;
-                         */
-                        SyrupDatabaseCollection.prototype.remove = function (query) {
-                            var result = [],
-                                id = &#x27;&#x27;,
-                                component = null,
-                                object = {};
-                        
-                            query = query || null;
-                        
-                            if (query &amp;&amp; Object.keys(query).length) {
-                        
-                                if (Array.isArray(query)) {
-                                    query.forEach(function multi_remove(criteria) {
-                                        for (id in store[this.name]) {
-                                            object = store[this.name][id];
-                        
-                                            if (contains(criteria, object)) {
-                                                delete store[this.name][id];
-                                                component = $component.get(id);
-                                                if (component) {
-                                                    component.destroy();
-                                                }
-                                                if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
-                                                    $helper.getSyrup().require(&#x27;db&#x27;).remove(this.name, id);
-                                                }
-                                                result.push(id);
-                                            }
-                                        }
-                                    }.bind(this));
-                                } else {
-                                    for (id in store[this.name]) {
-                                        object = store[this.name][id];
-                        
-                                        if (contains(query, object)) {
-                                            delete store[this.name][id];
-                                            component = $component.get(id);
-                                            if (component) {
-                                                component.destroy();
-                                            }
-                                            if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
-                                                $helper.getSyrup().require(&#x27;db&#x27;).remove(this.name, id);
-                                            }
-                                            result.push(id);
-                                        }
-                                    }
-                                }
-                            } else {
-                                for (id in store[this.name]) {
-                                    delete store[this.name][id];
-                        
-                                    if (coreDb.indexOf(this.name) == -1) {
-                                        component = $component.get(id);
-                                        if (component) {
-                                            component.destroy();
-                                        }
-                                    }
-                                    if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
-                                        $helper.getSyrup().require(&#x27;db&#x27;).remove(this.name, id);
-                                    }
-                                    result.push(id);
-                                }
-                            }
-                        
-                            return result;
-                        };
-                        
-                        
-                        /**
-                         * Count the number of documents in the collection.
-                         * @method count
-                         * @return {Number} number of documents in the collection
-                         */
-                        SyrupDatabaseCollection.prototype.count = function () {
-                            var result = 0,
-                                objectId = &#x27;&#x27;;
-                            for (objectId in store[this.name]) {
-                                result++;
-                            }
-                            return result;
-                        };
-                        
-                        
-                        /* Public methods */
-                        
-                        
-                        /*
-                         * Create a new {{#crossLink &quot;SyrupDatabaseCollection&quot;}}{{/crossLink}}.
-                         * @method collection
-                         * @param {String} name of the collection
-                         */
-                        function collection(name) {
-                            exports[name] = new SyrupDatabaseCollection(name);
-                        }
-                        
-                        
-                        /*
-                         * Import/Export a syrup system into/from the database
-                         * @method system
-                         * @param {JSON} importedSystem a syrup system to import
-                         * @return {String} the id of the imported syrup system or the if of the current syrup system
-                         */
-                        function system(importedSystem) {
-                            var result = &#x27;&#x27;,
-                                collectionName = &#x27;&#x27;,
-                                componentId = &#x27;&#x27;,
-                                typeName = &#x27;&#x27;,
-                                schemaName = &#x27;&#x27;,
-                                behaviorId = &#x27;&#x27;,
-                                systems = [],
-                                id = null,
-                                mastersystem = null,
-                                behavior = null,
-                                exportedSystem = {};
-                        
-                            if (importedSystem) { // import
-                        
-                                // add types
-                                for (typeName in importedSystem.types) {
-                                    $metamodel.type(importedSystem.types[typeName]);
-                                }
-                        
-                                // add schemas
-                                for (schemaName in importedSystem.schemas) {
-                                    $metamodel.schema(importedSystem.schemas[schemaName]);
-                                }
-                        
-                                $metamodel.create();
-                        
-                                //add behaviors
-                                for (behaviorId in importedSystem.behaviors) {
-                                    exports.SyrupBehavior.insert(importedSystem.behaviors[behaviorId]);
-                                }
-                        
-                                // add components
-                                for (collectionName in importedSystem.components) {
-                                    for (componentId in importedSystem.components[collectionName]) {
-                                        exports[collectionName].insert(importedSystem.components[collectionName][componentId]);
-                                    }
-                                }
-                        
-                                // reset info if already a master system
-                                systems = exports.SyrupSystem.find({
-                                    &#x27;master&#x27;: true
+<div class="page-header">
+    <h1>src/db.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+/*
+ * SyrupJS
+ * The System Runtime Platform
+ * http://syrupjs.systemdesigner.io
+ * @ecarriou
+ *  
+ * Copyright (c) 2016 Erwan Carriou
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
+ */
+
+/**
+ * This module manages syrup database. &lt;br&gt;
+ * syrup database is a micro NoSQL Database that contains: &lt;br&gt;
+ * - collections to store documents (schemas, types, components, ...) and &lt;br&gt;
+ * - APIs to import or export documents. &lt;br&gt;
+ * 
+ * syrup Database is closely linked to syrup metamodel and syrup components because: &lt;br&gt;
+ * - all operations done by syrup database must be compliant with the model before being finished, &lt;br&gt;
+ * - insert operation automatically creates a component and &lt;br&gt;
+ * - remove operation automatically destroy a component.
+ *  
+ * @module syrup
+ * @submodule syrup-db
+ * @requires syrup-component
+ * @requires syrup-helper
+ * @requires syrup-log
+ * @class syrup-db
+ * @static
+ */
+
+&#x27;use strict&#x27;;
+
+var $component = require(&#x27;./component.js&#x27;);
+var $metamodel = require(&#x27;./metamodel.js&#x27;);
+var $helper = require(&#x27;./helper.js&#x27;);
+var $log = require(&#x27;./log.js&#x27;);
+var $behavior = require(&#x27;./behavior.js&#x27;);
+var $state = require(&#x27;./state.js&#x27;);
+var $workflow = require(&#x27;./workflow.js&#x27;);
+
+
+/* Private properties */
+
+
+var store = {},
+    collections = [],
+    internalDB = [
+        &#x27;Syrup&#x27;,
+        &#x27;SyrupSchema&#x27;,
+        &#x27;SyrupExtendedSchema&#x27;,
+        &#x27;SyrupBehavior&#x27;,
+        &#x27;SyrupState&#x27;,
+        &#x27;SyrupType&#x27;,
+        &#x27;SyrupMetamodel&#x27;,
+        &#x27;SyrupDatabase&#x27;,
+        &#x27;SyrupSystem&#x27;,
+        &#x27;SyrupClassInfo&#x27;,
+        &#x27;SyrupMessage&#x27;,
+        &#x27;SyrupChannel&#x27;
+    ],
+    coreDb = [
+        &#x27;SyrupSchema&#x27;,
+        &#x27;SyrupExtendedSchema&#x27;,
+        &#x27;SyrupState&#x27;,
+        &#x27;SyrupType&#x27;
+    ];
+
+
+/* Private methods */
+
+
+/*
+ * Dump the database.
+ * @method dump
+ * @return {Object} the dump of the database. The dump is an object that contains: &lt;br&gt;
+ * {Object} schemas the schemas store in the database &lt;br&gt;
+ * {Object} types the types store in the database &lt;br&gt;
+ * {Object} behaviors the behaviors store in the database &lt;br&gt;
+ * {Object} components the components store in the database
+ * @private
+ */
+function dump() {
+    var dbDump = {},
+        collectionName = &#x27;&#x27;,
+        behaviorId = &#x27;&#x27;,
+        typeId = &#x27;&#x27;,
+        type = null,
+        behavior = null,
+        schema = null,
+        collection = null,
+        schemaId = &#x27;&#x27;,
+        length = 0,
+        i = 0,
+        id = &#x27;&#x27;;
+
+    // schemas
+    dbDump.schemas = {};
+    if (exports.SyrupSchema.count()) {
+        for (schemaId in store.SyrupSchema) {
+            schema = JSON.parse(JSON.stringify(store.SyrupSchema[schemaId]));
+            if (!schema._core) {
+                dbDump.schemas[schemaId] = schema;
+            }
+        }
+    }
+
+    // types
+    dbDump.types = {};
+    if (exports.SyrupType.count()) {
+        for (typeId in store.SyrupType) {
+            type = JSON.parse(JSON.stringify(store.SyrupType[typeId]));
+            delete type._id;
+            if (!type.core) {
+                dbDump.types[type.name] = type;
+            }
+        }
+    }
+
+    // behaviors
+    dbDump.behaviors = {};
+    for (behaviorId in store.SyrupBehavior) {
+        behavior = JSON.parse(JSON.stringify(store.SyrupBehavior[behaviorId]));
+        delete behavior.classInfo;
+        
+        if (!behavior.core) {
+            dbDump.behaviors[behaviorId] = behavior;
+        }
+    }
+
+    // components
+    dbDump.components = {};
+    length = collections.length;
+    for (i = 0; i &lt; length; i++) {
+        collectionName = collections[i];
+        if (exports[collectionName].count()) {
+            collection = JSON.parse(JSON.stringify(store[collectionName]));
+
+            for (id in collection) {
+                delete collection[id].classInfo;
+            }
+
+            dbDump.components[collectionName] = collection;
+        }
+    }
+
+    return dbDump;
+}
+
+
+/*
+ * Test if an object contains another one.
+ * @method contains
+ * @param {Object} source source object 
+ * @param {Object} target target object 
+ * @return {Boolean} true if the source object contains the target object
+ * @private
+ */
+function contains(source, target) {
+    var result = true,
+        property = &#x27;&#x27;;
+
+    for (property in source) {
+        if (typeof target[property] === &#x27;undefined&#x27; || target[property] !== source[property]) {
+            result = false;
+            break;
+        }
+    }
+    return result;
+}
+
+
+/** 
+ * A collection of documents managed by syrup. &lt;br&gt;
+ * Internal collections manage core objects of syrup (schema, type, ...). &lt;br&gt;
+ * Public collections manage components of the same class. &lt;br&gt;
+ * 
+ * @class SyrupDatabaseCollection
+ * @constructor
+ * @param {String} name name of the new collection
+ */
+var SyrupDatabaseCollection = function (name) {
+    if ($metamodel.get(name) || internalDB.indexOf(name) !== -1) {
+        store[name] = {};
+        this.name = name;
+        if (internalDB.indexOf(name) === -1) {
+            collections.push(name);
+        }
+    } else {
+        $log.invalidCollectionName(name);
+    }
+};
+
+
+/**
+ * Find a document into the collection.
+ * @method find
+ * @param {Object|Array} query
+ * @return {Array} Array of documents that map the query
+ * 
+ * @example 
+ * $db.Person.find({&quot;name&quot;: &quot;laure&quot;}); &lt;br&gt;
+ * $db.Person.find({&quot;name&quot;: &quot;laure&quot;, &quot;age&quot; : 24}); &lt;br&gt;
+ * $db.Person.find([{&quot;name&quot;: &quot;rene&quot;}, {&quot;name&quot;: &quot;robert&quot;}]);
+ */
+SyrupDatabaseCollection.prototype.find = function (query) {
+    var result = [],
+        id = &#x27;&#x27;,
+        object = {};
+
+    query = query || null;
+
+    if (query &amp;&amp; Object.keys(query).length) {
+        if (Array.isArray(query)) {
+            query.forEach(function multi_search(criteria) {
+                for (id in store[this.name]) {
+                    object = store[this.name][id];
+                    if (contains(criteria, object)) {
+                        result.push(object);
+                    }
+                }
+            }.bind(this));
+        } else {
+            for (id in store[this.name]) {
+                object = store[this.name][id];
+                if (contains(query, object)) {
+                    result.push(object);
+                }
+            }
+        }
+    } else {
+        for (id in store[this.name]) {
+            object = store[this.name][id];
+            result.push(object);
+        }
+    }
+
+    return result;
+};
+
+
+/**
+ * Insert an new document into the collection. &lt;br&gt;
+ * Before inserting the document, syrup checks that the document is compliant
+ * with its class definition. &lt;br&gt; 
+ * Then, after inserting it, we create the component.
+ * @method insert
+ * @param {Object|Array} document a new object to add
+ * @return {Array} array of id created
+ * 
+ * @example 
+ * $db.Person.insert({&lt;br&gt;
+ *      &quot;name&quot;: &quot;bob&quot;, &lt;br&gt;
+ *      &quot;firstName&quot;: &quot;Saint-Clar&quot;, &lt;br&gt;
+ *      &quot;age&quot;: 43 &lt;br&gt;
+ * }); &lt;br&gt;
+ */
+SyrupDatabaseCollection.prototype.insert = function (document) {
+    var doc = [],
+        Component = null,
+        result = [];
+
+    if (Array.isArray(document)) {
+        doc = document;
+    } else {
+        doc.push(document);
+    }
+
+    doc.forEach(function multi_insert(obj) {
+        var component = null,
+            channels = [],
+            channel = null,
+            systems = [];
+
+        switch (true) {
+            case this.name === &#x27;SyrupSchema&#x27;:
+            case this.name === &#x27;SyrupType&#x27;:
+            case this.name === &#x27;SyrupExtendedSchema&#x27;:
+            case $metamodel.isValidObject(obj, $metamodel.get(this.name)):
+
+                if (typeof obj._id === &#x27;undefined&#x27;) {
+                    obj._id = $helper.generateId();
+                }
+
+                store[this.name][obj._id] = obj;
+
+                Component = $component.get(this.name);
+                if (Component) {
+                    component = new Component(obj);
+                    result.push(component.id());
+                } else {
+                    if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
+                        $helper.getSyrup().require(&#x27;db&#x27;).insert(this.name, obj);
+                    }
+                }
+
+                if (this.name === &#x27;SyrupMessage&#x27;) {
+                    if ($helper.isSyrup()) {
+                        systems = exports.SyrupSystem.find({
+                            &#x27;master&#x27;: true
+                        });
+                        if (!systems.length || (systems.length &amp;&amp; systems[0]._id !== obj.from)) {
+                            channels = exports.SyrupChannel.find({});
+                            if (channels.length &gt; 0) {
+                                channel = $helper.getSyrup().require(channels[0]._id);
+                                $workflow.state({
+                                    &quot;component&quot;: channels[0]._id,
+                                    &quot;state&quot;: obj.event,
+                                    &quot;data&quot;: obj.data
                                 });
-                                if (systems.length) {
-                                    if (systems[0]._id === importedSystem._id) {
-                                        importedSystem.master = true;
-                                    } else {
-                                        importedSystem.master = false;
-                                    }
-                                }
-                        
-                                // insert the system in DB
-                                exports.SyrupSystem.insert(importedSystem);
-                        
-                                result = importedSystem._id;
-                        
-                            } else { // export
-                                exportedSystem = dump();
-                        
-                                // get id of the master system
-                                systems = exports.SyrupSystem.find({
-                                    &#x27;master&#x27;: true
-                                });
-                        
-                                if (systems.length) {
-                                    mastersystem = systems[0];
-                                    id = mastersystem._id;
-                                    for (behaviorId in exportedSystem.behaviors) {
-                                        behavior = exportedSystem.behaviors[behaviorId];
-                                        if (behavior.state === &#x27;main&#x27;) {
-                                            behavior.component = id;
-                                        }
-                                    }
-                        
-                                    exportedSystem.name = mastersystem.name;
-                                    exportedSystem.version = mastersystem.version;
-                                    exportedSystem.description = mastersystem.description;
-                                    exportedSystem._id = id;
-                        
-                                    result = JSON.stringify(exportedSystem);
-                                } else {
-                                    $log.masterSystemNotFound();
-                                }
-                            }
-                            return result;
-                        }
-                        
-                        
-                        /*
-                         * Export a syrup sub-system.
-                         * @method subsystem
-                         * @param {JSON} params parameters
-                         * @return {String} a stringified syrup sub-system
-                         * 
-                         * @example
-                         * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;}}); // filter export on schemas &lt;br&gt;
-                         * $db.subsystem({&quot;types&quot;:{&quot;name&quot;:&quot;address&quot;}}); // filter export on types &lt;br&gt;
-                         * $db.subsystem({&quot;behaviors&quot;:{&quot;component&quot;:&quot;laure&quot;}}); // filter export on behaviors &lt;br&gt;
-                         * $db.subsystem({&quot;components&quot;:{&quot;Person&quot;: {&quot;country&quot;: &quot;France&quot;}}}); // filter export on components &lt;br&gt;
-                         * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;},&quot;components&quot;:{&quot;Person&quot;: {&quot;country&quot;: &quot;France&quot;}}}); // combine filters
-                         */
-                        function subsystem(params) {
-                            var system = {},
-                                result = [],
-                                defaultName = &#x27;&#x27;,
-                                i = 0,
-                                length = 0,
-                                schema = null,
-                                type = null,
-                                behavior = null,
-                                component = null,
-                                className = &#x27;&#x27;;
-                            
-                            // default values
-                            result = exports.SyrupSystem.find({
-                                &#x27;master&#x27;: true
-                            });
-                            if (result.length) {
-                                defaultName = result[0].name;
-                            }
-                        
-                            system.name = params.name || &#x27;sub_&#x27; + defaultName;
-                            system.version = params.version || &#x27;0.0.1&#x27;;
-                            system.description = params.description || &#x27;&#x27;;
-                        
-                            system.subsystem = true;
-                        
-                            // schemas
-                            system.schemas = {};
-                            if (params.schemas) {
-                                result = exports.SyrupSchema.find(params.schema);
-                        
-                                length = result.length;
-                                for (i = 0; i &lt; length; i++) {
-                                    schema = result[i];
-                                    if (!schema._core) {
-                                        system.schemas[schema._id] = schema;
-                                    }
-                                }
-                            }
-                        
-                            // types
-                            system.types = {};
-                            if (params.types) {
-                                result = exports.SyrupType.find(params.types);
-                        
-                                length = result.length;
-                                for (i = 0; i &lt; length; i++) {
-                                    type = result[i];
-                                    if (!type._core) {
-                                        system.types[type._id] = type;
-                                    }
-                                }
-                            }
-                        
-                            // behaviors
-                            system.behaviors = {};
-                            if (params.behaviors) {
-                                behavior = exports.SyrupBehavior.find(params.behaviors);
-                        
-                                length = result.length;
-                                for (i = 0; i &lt; length; i++) {
-                                    behavior = result[i];
-                                    if (!behavior.core) {
-                                        system.behaviors[behavior._id] = behavior;
-                                    }
-                                }
-                            }
-                        
-                            // components
-                            system.components = {};
-                            if (params.components) {
-                                for (className in params.components) {
-                                    if (exports[className]) {
-                                        system.components[className] = {};
-                        
-                                        result = exports[className].find(params.components[className]);
-                                        length = result.length;
-                                        for (i = 0; i &lt; length; i++) {
-                                            component = result[i];
-                                            system.components[className][component._id] = component;
-                                        }
-                                    }
-                                }
-                            }
-                        
-                            return JSON.stringify(system);
-                        }
-                        
-                        
-                        /*
-                         * Clear the database.
-                         * @method clear
-                         */
-                        function clear() {
-                            var length = 0,
-                                i = 0,
-                                collectionName = &#x27;&#x27;;
-                            
-                            // remove collections
-                            length = collections.length;
-                            for (i = 0; i &lt; length; i++) {
-                                collectionName = collections[i];
-                                exports[collectionName].remove();
-                            }
-                        
-                            // remove internal collections
-                            length = internalDB.length;
-                            for (i = 0; i &lt; length; i++) {
-                                collectionName = internalDB[i];
-                                exports[collectionName].remove();
                             }
                         }
-                        
-                        
-                        /*
-                         * Init the database.
-                         * @method init
-                         */
-                        function init() {
-                            var syrupSystemId = &#x27;&#x27;,
-                                syrupSystem = null;
-                        
-                            syrupSystem = exports.SyrupSystem.find({
-                                &#x27;_id&#x27;: &#x27;e89c617b6b15d24&#x27;
-                            })[0];
-                        
-                            // clear all the data in memory
-                            exports.clear();
-                            $component.clear();
-                            $metamodel.clear();
-                            $state.clear();
-                            $behavior.clear();
-                        
-                            // init metamodel
-                            $metamodel.init();
-                            
-                            // reimport syrup core system
-                            syrupSystemId = exports.system(syrupSystem);
-                            $component.get(syrupSystemId).main();
+                    }
+                }
+
+                break;
+            default:
+                $log.invalidDocumentOnDbInsert(obj, this.name);
+                break;
+        }
+    }.bind(this));
+
+    return result;
+};
+
+
+/**
+ * Update documents into a collection.
+ * @method update
+ * @param {Object|Array} query query to find the documents to update
+ * @param {Object} update update to make
+ * @param {Object} options 
+ * {Boolean} upsert true if we create a document when no document is found by the query
+ * @return {Number} Number of documents updated
+ * 
+ * @example 
+ * $db.Cars.update({&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;price&quot;: &quot;10000$&quot;}); &lt;br&gt;
+ * $db.Cars.update([{&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;code&quot;: &quot;AZD-65&quot;}], {&quot;price&quot;: &quot;10000$&quot;}); &lt;br&gt;
+ * $db.Cars.update({&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;price&quot;: &quot;10000$&quot;}, {&quot;upsert&quot;: true}); &lt;br&gt;
+ */
+SyrupDatabaseCollection.prototype.update = function (query, update, options) {
+    var docs = this.find(query),
+        updated = 0,
+        i = 0,
+        length = docs.length,
+        attributeName = &#x27;&#x27;,
+        schema = $metamodel.get(this.name),
+        type = &#x27;&#x27;;
+
+    options = options || {};
+    if (typeof options.upsert === &#x27;undefined&#x27;) {
+        options.upsert = options.upsert || false;
+    }
+
+    if (update) {
+
+        // upsert case
+        if (length === 0 &amp;&amp; options.upsert) {
+            if (query._id) {
+                update._id = query._id;
+            }
+            this.insert(update);
+            updated = updated + 1;
+        }
+
+        for (i = 0; i &lt; length; i++) {
+            // case of update of _id
+            if (typeof update._id !== &#x27;undefined&#x27; &amp;&amp; update._id !== docs[i]._id) {
+                $log.updateUuid(docs[i]._id, update._id, typeof $component.get(update._id) !== &#x27;undefined&#x27;);
+            }
+
+            for (attributeName in update) {
+                if (typeof docs[i][attributeName] !== &#x27;undefined&#x27;) {
+
+                    // check type
+                    type = &#x27;&#x27;;
+                    if (attributeName.indexOf(&#x27;_&#x27;) !== 0) {
+                        type = schema[attributeName].type;
+                    } else {
+                        if ($metamodel.getMetaDef()[attributeName]) {
+                            type = $metamodel.getMetaDef()[attributeName].type;
                         }
-                        
-                        
-                        /* exports */
-                        
-                        
-                        /**
-                         * This module manages syrup database. &lt;br&gt;
-                         * syrup database is a micro NoSQL Database that contains: &lt;br&gt;
-                         * - collections to store documents (schemas, types, components, ...) and &lt;br&gt;
-                         * - APIs to import or export documents. &lt;br&gt;
-                         * 
-                         * syrup database is closely linked to syrup metamodel because: &lt;br&gt;
-                         * - all operations done by syrup database must be compliant with the model before being finished, &lt;br&gt;
-                         * - insert operation automatically creates a component and &lt;br&gt;
-                         * - remove operation automatically destroy a component.
-                         *   
-                         * @module syrup
-                         * @submodule syrup-db
-                         * @requires syrup-component
-                         * @requires syrup-helper
-                         * @requires syrup-log
-                         * @class syrup-db
-                         * @static
-                         */
-                        
-                        
-                        /**
-                         * Create a new {{#crossLink &quot;SyrupDatabaseCollection&quot;}}{{/crossLink}}.
-                         * @method collection
-                         * @param {String} name of the collection
-                         */
-                        exports.collection = collection;
-                        
-                        
-                        /**
-                         * syrup database store that lists all the collections.
-                         * @property {JSON} store
-                         */
-                        exports.store = store;
-                        
-                        
-                        /**
-                         * Import/Export a syrup system into/from the database.
-                         * @method system
-                         * @param {JSON} importedSystem a syrup system to import
-                         * @return {String} the id of the imported syrup system or the current syrup system  
-                         */
-                        exports.system = system;
-                        
-                        
-                        /**
-                         * Export a syrup sub-system.
-                         * @method subsystem
-                         * @param {JSON} params parameters
-                         * @return {String} a stringified syrup sub-system
-                         * 
-                         * @example
-                         * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;}}); // filter export on schemas &lt;br&gt;
-                         * $db.subsystem({&quot;types&quot;:{&quot;name&quot;:&quot;address&quot;}}); // filter export on types &lt;br&gt;
-                         * $db.subsystem({&quot;behaviors&quot;:{&quot;component&quot;:&quot;laure&quot;}}); // filter export on behaviors &lt;br&gt;
-                         * $db.subsystem({&quot;components&quot;:{&quot;Person&quot;: {&quot;country&quot;: &quot;France&quot;}}}); // filter export on components &lt;br&gt;
-                         * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;},&quot;components&quot;:{&quot;Person&quot;: {&quot;country&quot;: &quot;France&quot;}}}); // combine filters
-                         */
-                        exports.subsystem = subsystem;
-                        
-                        
-                        /**
-                         * Clear the database.
-                         * @method clear
-                         */
-                        exports.clear = clear;
-                         
-                         
-                        /**
-                         * Init the database.
-                         * @method init
-                         */
-                        exports.init = init;
-                            </pre>
-                        </div>
+                    }
+                    if (type) {
+                        if ($metamodel.isValidType(update[attributeName], type)) {
+                            docs[i][attributeName] = update[attributeName];
+                            updated = updated + 1;
+                            if ($helper.isSyrup()) {
+                                $helper.getSyrup().require(&#x27;db&#x27;).update(this.name, docs[i]._id, attributeName, update[attributeName]);
+                            }
+                        } else {
+                            $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName]);
+                        }
+                    } else {
+                        $log.unknownPropertyOnDbUpdate(attributeName, docs[i]._id);
+                    }
+                }
+            }
+        }
+    }
+
+    return updated;
+};
+
+
+/**
+ * Remove a document from the colllection. &lt;br&gt;
+ * When a document is removed, the component is destroyed.
+ * @method remove
+ * @param {Object|Array} query query to find the documents to remove
+ * @return {Array} list of documents id removed
+ * 
+ * @example 
+ * $db.Cars.remove({&quot;code&quot;: &quot;AZD-71&quot;}); &lt;br&gt;
+ * $db.Cars.remove([{&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;code&quot;: &quot;AZD-65&quot;}]); &lt;br&gt;
+ */
+SyrupDatabaseCollection.prototype.remove = function (query) {
+    var result = [],
+        id = &#x27;&#x27;,
+        component = null,
+        object = {};
+
+    query = query || null;
+
+    if (query &amp;&amp; Object.keys(query).length) {
+
+        if (Array.isArray(query)) {
+            query.forEach(function multi_remove(criteria) {
+                for (id in store[this.name]) {
+                    object = store[this.name][id];
+
+                    if (contains(criteria, object)) {
+                        delete store[this.name][id];
+                        component = $component.get(id);
+                        if (component) {
+                            component.destroy();
+                        }
+                        if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
+                            $helper.getSyrup().require(&#x27;db&#x27;).remove(this.name, id);
+                        }
+                        result.push(id);
+                    }
+                }
+            }.bind(this));
+        } else {
+            for (id in store[this.name]) {
+                object = store[this.name][id];
+
+                if (contains(query, object)) {
+                    delete store[this.name][id];
+                    component = $component.get(id);
+                    if (component) {
+                        component.destroy();
+                    }
+                    if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
+                        $helper.getSyrup().require(&#x27;db&#x27;).remove(this.name, id);
+                    }
+                    result.push(id);
+                }
+            }
+        }
+    } else {
+        for (id in store[this.name]) {
+            delete store[this.name][id];
+
+            if (coreDb.indexOf(this.name) == -1) {
+                component = $component.get(id);
+                if (component) {
+                    component.destroy();
+                }
+            }
+            if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
+                $helper.getSyrup().require(&#x27;db&#x27;).remove(this.name, id);
+            }
+            result.push(id);
+        }
+    }
+
+    return result;
+};
+
+
+/**
+ * Count the number of documents in the collection.
+ * @method count
+ * @return {Number} number of documents in the collection
+ */
+SyrupDatabaseCollection.prototype.count = function () {
+    var result = 0,
+        objectId = &#x27;&#x27;;
+    for (objectId in store[this.name]) {
+        result++;
+    }
+    return result;
+};
+
+
+/* Public methods */
+
+
+/*
+ * Create a new {{#crossLink &quot;SyrupDatabaseCollection&quot;}}{{/crossLink}}.
+ * @method collection
+ * @param {String} name of the collection
+ */
+function collection(name) {
+    exports[name] = new SyrupDatabaseCollection(name);
+}
+
+
+/*
+ * Import/Export a syrup system into/from the database
+ * @method system
+ * @param {JSON} importedSystem a syrup system to import
+ * @return {String} the id of the imported syrup system or the if of the current syrup system
+ */
+function system(importedSystem) {
+    var result = &#x27;&#x27;,
+        collectionName = &#x27;&#x27;,
+        componentId = &#x27;&#x27;,
+        typeName = &#x27;&#x27;,
+        schemaName = &#x27;&#x27;,
+        behaviorId = &#x27;&#x27;,
+        systems = [],
+        id = null,
+        mastersystem = null,
+        behavior = null,
+        exportedSystem = {};
+
+    if (importedSystem) { // import
+
+        // add types
+        for (typeName in importedSystem.types) {
+            $metamodel.type(importedSystem.types[typeName]);
+        }
+
+        // add schemas
+        for (schemaName in importedSystem.schemas) {
+            $metamodel.schema(importedSystem.schemas[schemaName]);
+        }
+
+        $metamodel.create();
+
+        //add behaviors
+        for (behaviorId in importedSystem.behaviors) {
+            exports.SyrupBehavior.insert(importedSystem.behaviors[behaviorId]);
+        }
+
+        // add components
+        for (collectionName in importedSystem.components) {
+            for (componentId in importedSystem.components[collectionName]) {
+                exports[collectionName].insert(importedSystem.components[collectionName][componentId]);
+            }
+        }
+
+        // reset info if already a master system
+        systems = exports.SyrupSystem.find({
+            &#x27;master&#x27;: true
+        });
+        if (systems.length) {
+            if (systems[0]._id === importedSystem._id) {
+                importedSystem.master = true;
+            } else {
+                importedSystem.master = false;
+            }
+        }
+
+        // insert the system in DB
+        exports.SyrupSystem.insert(importedSystem);
+
+        result = importedSystem._id;
+
+    } else { // export
+        exportedSystem = dump();
+
+        // get id of the master system
+        systems = exports.SyrupSystem.find({
+            &#x27;master&#x27;: true
+        });
+
+        if (systems.length) {
+            mastersystem = systems[0];
+            id = mastersystem._id;
+            for (behaviorId in exportedSystem.behaviors) {
+                behavior = exportedSystem.behaviors[behaviorId];
+                if (behavior.state === &#x27;main&#x27;) {
+                    behavior.component = id;
+                }
+            }
+
+            exportedSystem.name = mastersystem.name;
+            exportedSystem.version = mastersystem.version;
+            exportedSystem.description = mastersystem.description;
+            exportedSystem._id = id;
+
+            result = JSON.stringify(exportedSystem);
+        } else {
+            $log.masterSystemNotFound();
+        }
+    }
+    return result;
+}
+
+
+/*
+ * Export a syrup sub-system.
+ * @method subsystem
+ * @param {JSON} params parameters
+ * @return {String} a stringified syrup sub-system
+ * 
+ * @example
+ * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;}}); // filter export on schemas &lt;br&gt;
+ * $db.subsystem({&quot;types&quot;:{&quot;name&quot;:&quot;address&quot;}}); // filter export on types &lt;br&gt;
+ * $db.subsystem({&quot;behaviors&quot;:{&quot;component&quot;:&quot;laure&quot;}}); // filter export on behaviors &lt;br&gt;
+ * $db.subsystem({&quot;components&quot;:{&quot;Person&quot;: {&quot;country&quot;: &quot;France&quot;}}}); // filter export on components &lt;br&gt;
+ * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;},&quot;components&quot;:{&quot;Person&quot;: {&quot;country&quot;: &quot;France&quot;}}}); // combine filters
+ */
+function subsystem(params) {
+    var system = {},
+        result = [],
+        defaultName = &#x27;&#x27;,
+        i = 0,
+        length = 0,
+        schema = null,
+        type = null,
+        behavior = null,
+        component = null,
+        className = &#x27;&#x27;;
+    
+    // default values
+    result = exports.SyrupSystem.find({
+        &#x27;master&#x27;: true
+    });
+    if (result.length) {
+        defaultName = result[0].name;
+    }
+
+    system.name = params.name || &#x27;sub_&#x27; + defaultName;
+    system.version = params.version || &#x27;0.0.1&#x27;;
+    system.description = params.description || &#x27;&#x27;;
+
+    system.subsystem = true;
+
+    // schemas
+    system.schemas = {};
+    if (params.schemas) {
+        result = exports.SyrupSchema.find(params.schema);
+
+        length = result.length;
+        for (i = 0; i &lt; length; i++) {
+            schema = result[i];
+            if (!schema._core) {
+                system.schemas[schema._id] = schema;
+            }
+        }
+    }
+
+    // types
+    system.types = {};
+    if (params.types) {
+        result = exports.SyrupType.find(params.types);
+
+        length = result.length;
+        for (i = 0; i &lt; length; i++) {
+            type = result[i];
+            if (!type._core) {
+                system.types[type._id] = type;
+            }
+        }
+    }
+
+    // behaviors
+    system.behaviors = {};
+    if (params.behaviors) {
+        behavior = exports.SyrupBehavior.find(params.behaviors);
+
+        length = result.length;
+        for (i = 0; i &lt; length; i++) {
+            behavior = result[i];
+            if (!behavior.core) {
+                system.behaviors[behavior._id] = behavior;
+            }
+        }
+    }
+
+    // components
+    system.components = {};
+    if (params.components) {
+        for (className in params.components) {
+            if (exports[className]) {
+                system.components[className] = {};
+
+                result = exports[className].find(params.components[className]);
+                length = result.length;
+                for (i = 0; i &lt; length; i++) {
+                    component = result[i];
+                    system.components[className][component._id] = component;
+                }
+            }
+        }
+    }
+
+    return JSON.stringify(system);
+}
+
+
+/*
+ * Clear the database.
+ * @method clear
+ */
+function clear() {
+    var length = 0,
+        i = 0,
+        collectionName = &#x27;&#x27;;
+    
+    // remove collections
+    length = collections.length;
+    for (i = 0; i &lt; length; i++) {
+        collectionName = collections[i];
+        exports[collectionName].remove();
+    }
+
+    // remove internal collections
+    length = internalDB.length;
+    for (i = 0; i &lt; length; i++) {
+        collectionName = internalDB[i];
+        exports[collectionName].remove();
+    }
+}
+
+
+/*
+ * Init the database.
+ * @method init
+ */
+function init() {
+    var syrupSystemId = &#x27;&#x27;,
+        syrupSystem = null;
+
+    syrupSystem = exports.SyrupSystem.find({
+        &#x27;_id&#x27;: &#x27;e89c617b6b15d24&#x27;
+    })[0];
+
+    // clear all the data in memory
+    exports.clear();
+    $component.clear();
+    $metamodel.clear();
+    $state.clear();
+    $behavior.clear();
+
+    // init metamodel
+    $metamodel.init();
+    
+    // reimport syrup core system
+    syrupSystemId = exports.system(syrupSystem);
+    $component.get(syrupSystemId).main();
+}
+
+
+/* exports */
+
+
+/**
+ * This module manages syrup database. &lt;br&gt;
+ * syrup database is a micro NoSQL Database that contains: &lt;br&gt;
+ * - collections to store documents (schemas, types, components, ...) and &lt;br&gt;
+ * - APIs to import or export documents. &lt;br&gt;
+ * 
+ * syrup database is closely linked to syrup metamodel because: &lt;br&gt;
+ * - all operations done by syrup database must be compliant with the model before being finished, &lt;br&gt;
+ * - insert operation automatically creates a component and &lt;br&gt;
+ * - remove operation automatically destroy a component.
+ *   
+ * @module syrup
+ * @submodule syrup-db
+ * @requires syrup-component
+ * @requires syrup-helper
+ * @requires syrup-log
+ * @class syrup-db
+ * @static
+ */
+
+
+/**
+ * Create a new {{#crossLink &quot;SyrupDatabaseCollection&quot;}}{{/crossLink}}.
+ * @method collection
+ * @param {String} name of the collection
+ */
+exports.collection = collection;
+
+
+/**
+ * syrup database store that lists all the collections.
+ * @property {JSON} store
+ */
+exports.store = store;
+
+
+/**
+ * Import/Export a syrup system into/from the database.
+ * @method system
+ * @param {JSON} importedSystem a syrup system to import
+ * @return {String} the id of the imported syrup system or the current syrup system  
+ */
+exports.system = system;
+
+
+/**
+ * Export a syrup sub-system.
+ * @method subsystem
+ * @param {JSON} params parameters
+ * @return {String} a stringified syrup sub-system
+ * 
+ * @example
+ * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;}}); // filter export on schemas &lt;br&gt;
+ * $db.subsystem({&quot;types&quot;:{&quot;name&quot;:&quot;address&quot;}}); // filter export on types &lt;br&gt;
+ * $db.subsystem({&quot;behaviors&quot;:{&quot;component&quot;:&quot;laure&quot;}}); // filter export on behaviors &lt;br&gt;
+ * $db.subsystem({&quot;components&quot;:{&quot;Person&quot;: {&quot;country&quot;: &quot;France&quot;}}}); // filter export on components &lt;br&gt;
+ * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;},&quot;components&quot;:{&quot;Person&quot;: {&quot;country&quot;: &quot;France&quot;}}}); // combine filters
+ */
+exports.subsystem = subsystem;
+
+
+/**
+ * Clear the database.
+ * @method clear
+ */
+exports.clear = clear;
+ 
+ 
+/**
+ * Init the database.
+ * @method init
+ */
+exports.init = init;
+    </pre>
+</div>
                     </div>
                 </div>
             </div>
