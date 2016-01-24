@@ -42,8 +42,10 @@ syrup.version();
 
 ## Documentation
 
-* [Web site](http://doc.systemdesigner.io) [ work in progress ]
-
+* [Quick Start](https://syrupjs.readme.io/docs/quick-start)
+* [Guide](https://syrupjs.readme.io/docs/installation)
+* [Examples](https://syrupjs.readme.io/docs/a-basic-hello-world)
+* [Build monoco](https://syrupjs.readme.io/docs/extend-syrupjs)
 
 ## Licence
 
