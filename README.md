@@ -45,7 +45,7 @@ syrup.version();
 * [Quick Start](https://syrupjs.readme.io/docs/quick-start)
 * [Guide](https://syrupjs.readme.io/docs/installation)
 * [Examples](https://syrupjs.readme.io/docs/a-basic-hello-world)
-* [Build monoco](https://syrupjs.readme.io/docs/extend-syrupjs)
+* [Build SyrupJS](https://syrupjs.readme.io/docs/extend-syrupjs)
 
 ## Licence
 
