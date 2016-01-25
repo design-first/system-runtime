@@ -1294,8 +1294,14 @@ function isValidObject(object, schema, strict, cleanRef) {
     for (fieldName in object) {
         field = object[fieldName];
 
-        if (!hasType(schema[fieldName], &#x27;undefined&#x27;)) {
-            typeSchema = schema[fieldName].type;
+        if (!hasType(schema[fieldName], &#x27;undefined&#x27;) || fieldName === &#x27;_core&#x27;) {
+            
+            // case of _core
+            if (fieldName !== &#x27;_core&#x27;) {
+                typeSchema = schema[fieldName].type;
+            } else {
+                 typeSchema = &#x27;boolean&#x27;;
+            }
 
             // cas of _id
             if (fieldName === &#x27;_id&#x27;) {

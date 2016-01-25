@@ -6,6 +6,7 @@ describe('a syrup component', function () {
     }
 
     beforeEach(function () {
+        syrup.system('component-spec');
         var metamodel = syrup.require('metamodel');
 
         metamodel.schema({
@@ -290,6 +291,18 @@ describe('a syrup component', function () {
 
         var result = syrup.require('Person');
         expect(result).toBe(undefined);
+    });
+
+
+    it('can create a core object', function () {
+        var Person = syrup.require('Person');
+        var shadow = new Person({
+            'firstName': 'Shadow',
+            'lastName': 'Object',
+            '_core': true
+        });
+
+        expect(syrup.require('db').system().indexOf('Shadow')).toBe(-1);
     });
 
 });

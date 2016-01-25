@@ -243,6 +243,10 @@ function dump() {
 
             for (id in collection) {
                 delete collection[id].classInfo;
+                
+                if (collection[id]._core) {
+                    delete collection[id];
+                }
             }
 
             dbDump.components[collectionName] = collection;
