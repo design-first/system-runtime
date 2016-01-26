@@ -7,7 +7,10 @@
 
 #### What is SyrupJS ?
 
-[SyrupJS](https://syrupjs.github.io) is a JavaScript library that manages JavaScript Application Systems.
+[SyrupJS](https://syrupjs.github.io) (System Runtime Platform) is a JavaScript library to run and manage JavaScript Application Systems.
+
+SyrupJS is part of the [System SDK project](https://github.com/system-sdk).
+System SDK is a SDK for building JavaScript Application Systems.
 
 ## Installation
 
