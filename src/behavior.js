@@ -1,7 +1,7 @@
 /*
  * SyrupJS
  * The System Runtime Platform
- * http://syrupjs.systemdesigner.io
+ * https://syrupjs.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou

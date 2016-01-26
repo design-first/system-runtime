@@ -2,7 +2,7 @@
     "name": "system-runtime",
     "version": "0.9.2",
     "description": "SyrupJS, the System Runtime Platform",
-    "homepage": "http://syrupjs.systemdesigner.io",
+    "homepage": "https://syrupjs.github.io",
     "keywords": [
         "mda",
         "metamodel",

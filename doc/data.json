@@ -3,7 +3,7 @@
         "name": "system-runtime",
         "description": "SyrupJS, the System Runtime Platform",
         "version": "0.9.2",
-        "url": "http://syrupjs.systemdesigner.io"
+        "url": "https://syrupjs.github.io"
     },
     "files": {
         "src/behavior.js": {
