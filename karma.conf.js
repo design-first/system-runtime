@@ -71,7 +71,9 @@ module.exports = function (config) {
         ],
         singleRun: true,
         sauceLabs: {
-            testName: 'SyrupJS Unit Tests'
+            testName: 'SyrupJS Unit Tests',
+            tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
+            startConnect: false
         },
         customLaunchers: customLaunchers,
         browsers: Object.keys(customLaunchers)
