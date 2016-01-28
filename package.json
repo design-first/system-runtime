@@ -1,65 +1,65 @@
 {
-  "name": "system-runtime",
-  "version": "0.9.3",
-  "description": "SyrupJS, the System Runtime Platform",
-  "homepage": "https://syrupjs.github.io",
-  "keywords": [
-    "mda",
-    "metamodel",
-    "model",
-    "schema",
-    "odm",
-    "design",
-    "nosql",
-    "component",
-    "system",
-    "isomorphic",
-    "runtime"
-  ],
-  "main": "./src/syrup.js",
-  "author": {
-    "name": "erwan carriou",
-    "email": "erwan.carriou@mac.com",
-    "twitter": "@ecarriou"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/system-sdk/system-runtime.git"
-  },
-  "bugs": {
-    "url": "https://github.com/system-sdk/system-runtime/issues"
-  },
-  "scripts": {
-    "watch": "grunt watch",
-    "doc": "grunt doc",
-    "test": "grunt test",
-    "clean": "grunt clean",
-    "debug": "grunt debug",
-    "build": "grunt build"
-  },
-  "devDependencies": {
-    "coveralls": "^2.11.3",
-    "grunt": "^0.4.5",
-    "grunt-browserify": "^4.0.0",
-    "grunt-cli": "^0.1.13",
-    "grunt-contrib-clean": "^0.7.0",
-    "grunt-contrib-concat": "^0.5.1",
-    "grunt-contrib-jshint": "^0.12.0",
-    "grunt-contrib-uglify": "^0.11.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-contrib-yuidoc": "^0.10.0",
-    "grunt-jasmine-nodejs": "^1.4.2",
-    "grunt-jsbeautifier": "^0.2.10",
-    "grunt-karma": "^0.12.0",
-    "grunt-merge-json": "^0.9.5",
-    "istanbul": "^0.4.0",
-    "karma": "^0.13.3",
-    "karma-coverage": "^0.5.0",
-    "karma-firefox-launcher": "^0.1.6",
-    "karma-jasmine": "^0.3.6",
-    "karma-sauce-launcher": "^0.3.0",
-    "karma-script-launcher": "^0.1.0",
-    "yuidoc-lucid-theme": "^0.1.1"
-  }
+    "name": "system-runtime",
+    "version": "0.9.3",
+    "description": "SyrupJS, the System Runtime Platform",
+    "homepage": "https://syrupjs.github.io",
+    "keywords": [
+        "mda",
+        "metamodel",
+        "model",
+        "schema",
+        "odm",
+        "design",
+        "nosql",
+        "component",
+        "system",
+        "isomorphic",
+        "runtime"
+    ],
+    "main": "./src/syrup.js",
+    "author": {
+        "name": "erwan carriou",
+        "email": "erwan.carriou@mac.com",
+        "twitter": "@ecarriou"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/system-sdk/system-runtime.git"
+    },
+    "bugs": {
+        "url": "https://github.com/system-sdk/system-runtime/issues"
+    },
+    "scripts": {
+        "watch": "grunt watch",
+        "doc": "grunt doc",
+        "test": "grunt build",
+        "clean": "grunt clean",
+        "debug": "grunt debug",
+        "build": "grunt build"
+    },
+    "devDependencies": {
+        "coveralls": "^2.11.3",
+        "grunt": "^0.4.5",
+        "grunt-browserify": "^4.0.0",
+        "grunt-cli": "^0.1.13",
+        "grunt-contrib-clean": "^0.7.0",
+        "grunt-contrib-concat": "^0.5.1",
+        "grunt-contrib-jshint": "^0.12.0",
+        "grunt-contrib-uglify": "^0.11.0",
+        "grunt-contrib-watch": "^0.6.1",
+        "grunt-contrib-yuidoc": "^0.10.0",
+        "grunt-jasmine-nodejs": "^1.4.2",
+        "grunt-jsbeautifier": "^0.2.10",
+        "grunt-karma": "^0.12.0",
+        "grunt-merge-json": "^0.9.5",
+        "istanbul": "^0.4.0",
+        "karma": "^0.13.3",
+        "karma-coverage": "^0.5.0",
+        "karma-firefox-launcher": "^0.1.6",
+        "karma-jasmine": "^0.3.6",
+        "karma-sauce-launcher": "^0.3.0",
+        "karma-script-launcher": "^0.1.0",
+        "yuidoc-lucid-theme": "^0.1.1"
+    }
 }
