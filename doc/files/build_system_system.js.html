@@ -850,158 +850,158 @@ var system = {
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;19997182e719383&quot;: {
-            &quot;_id&quot;: &quot;19997182e719383&quot;,
+        &quot;136d81bf7d184cc&quot;: {
+            &quot;_id&quot;: &quot;136d81bf7d184cc&quot;,
             &quot;component&quot;: &quot;Syrup&quot;,
             &quot;state&quot;: &quot;error&quot;,
             &quot;action&quot;: &quot;function error(data) {\n    console.error(&#x27;syrup: &#x27; + data.message, data.error);\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1584d127ab1e5c5&quot;: {
-            &quot;_id&quot;: &quot;1584d127ab1e5c5&quot;,
+        &quot;10c561f57d1ad1a&quot;: {
+            &quot;_id&quot;: &quot;10c561f57d1ad1a&quot;,
             &quot;component&quot;: &quot;Syrup&quot;,
             &quot;state&quot;: &quot;system&quot;,
             &quot;action&quot;: &quot;function system(name) {\n    var System = null,\n    system = {},\n    systemId = &#x27;&#x27;,\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        System = this.require(&#x27;SyrupSystem&#x27;);\n        system = new System(conf);\n    } else {\n        result = $db.SyrupSystem.find({\n            &#x27;master&#x27;: true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1a38f1a0a81252f&quot;: {
-            &quot;_id&quot;: &quot;1a38f1a0a81252f&quot;,
+        &quot;1c0b517b651d86a&quot;: {
+            &quot;_id&quot;: &quot;1c0b517b651d86a&quot;,
             &quot;component&quot;: &quot;Syrup&quot;,
             &quot;state&quot;: &quot;warning&quot;,
             &quot;action&quot;: &quot;function warning(message) {\n    console.warn(&#x27;syrup: &#x27; + message);\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;100651d3a11f549&quot;: {
-            &quot;_id&quot;: &quot;100651d3a11f549&quot;,
+        &quot;11b7e17fae17854&quot;: {
+            &quot;_id&quot;: &quot;11b7e17fae17854&quot;,
             &quot;component&quot;: &quot;SyrupClassInfo&quot;,
             &quot;state&quot;: &quot;collection&quot;,
             &quot;action&quot;: &quot;function collection(name) {\n    var result = {};\n    if (this.metamodel()[name] === &#x27;collection&#x27;) {\n        result = this.model()[name];\n    } \n    \n    return result; \n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1959618def17fd9&quot;: {
-            &quot;_id&quot;: &quot;1959618def17fd9&quot;,
+        &quot;1cf3817b2a1a10e&quot;: {
+            &quot;_id&quot;: &quot;1cf3817b2a1a10e&quot;,
             &quot;component&quot;: &quot;SyrupClassInfo&quot;,
             &quot;state&quot;: &quot;collections&quot;,
             &quot;action&quot;: &quot;function collections() {\n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length; \n    \n    for (i = 0; i &lt; length; i++) { \n        item = keys[i]; \n        if (this.metamodel()[item] === &#x27;collection&#x27;) {\n            result.push(item);\n        }\n    }\n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;16c4a1e6f812c5a&quot;: {
-            &quot;_id&quot;: &quot;16c4a1e6f812c5a&quot;,
+        &quot;129e6111231fa91&quot;: {
+            &quot;_id&quot;: &quot;129e6111231fa91&quot;,
             &quot;component&quot;: &quot;SyrupClassInfo&quot;,
             &quot;state&quot;: &quot;event&quot;,
             &quot;action&quot;: &quot;function event(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === &#x27;event&#x27;) {\n        result = this.model()[name];\n    } \n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1ea371b9d5157f5&quot;: {
-            &quot;_id&quot;: &quot;1ea371b9d5157f5&quot;,
+        &quot;155041e4a710125&quot;: {
+            &quot;_id&quot;: &quot;155041e4a710125&quot;,
             &quot;component&quot;: &quot;SyrupClassInfo&quot;,
             &quot;state&quot;: &quot;events&quot;,
             &quot;action&quot;: &quot;function events() {\n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length;\n    \n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;event&#x27;) {\n            result.push(item);\n        }\n    } \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1fc661700610c04&quot;: {
-            &quot;_id&quot;: &quot;1fc661700610c04&quot;,
+        &quot;1dace158d415f4a&quot;: {
+            &quot;_id&quot;: &quot;1dace158d415f4a&quot;,
             &quot;component&quot;: &quot;SyrupClassInfo&quot;,
             &quot;state&quot;: &quot;method&quot;,
             &quot;action&quot;: &quot;function method(name) {\n    var result = {};\n    if (this.metamodel()[name] === &#x27;method&#x27;) {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1608a13a9a164bb&quot;: {
-            &quot;_id&quot;: &quot;1608a13a9a164bb&quot;,
+        &quot;1463c1afff16ce4&quot;: {
+            &quot;_id&quot;: &quot;1463c1afff16ce4&quot;,
             &quot;component&quot;: &quot;SyrupClassInfo&quot;,
             &quot;state&quot;: &quot;methods&quot;,
             &quot;action&quot;: &quot;function methods() {\n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;method&#x27;) {\n            result.push(item);\n        }\n    } \n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;17a791d1b417509&quot;: {
-            &quot;_id&quot;: &quot;17a791d1b417509&quot;,
+        &quot;152631967f17b3c&quot;: {
+            &quot;_id&quot;: &quot;152631967f17b3c&quot;,
             &quot;component&quot;: &quot;SyrupClassInfo&quot;,
             &quot;state&quot;: &quot;properties&quot;,
             &quot;action&quot;: &quot;function properties() { \n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;property&#x27;) {\n            result.push(item);\n        }\n    } return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1f98f175a41a920&quot;: {
-            &quot;_id&quot;: &quot;1f98f175a41a920&quot;,
+        &quot;1852f1361913962&quot;: {
+            &quot;_id&quot;: &quot;1852f1361913962&quot;,
             &quot;component&quot;: &quot;SyrupClassInfo&quot;,
             &quot;state&quot;: &quot;property&quot;,
             &quot;action&quot;: &quot;function property(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === &#x27;property&#x27;) {\n        result = this.model()[name];\n    }\n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;18c1d150fd12142&quot;: {
-            &quot;_id&quot;: &quot;18c1d150fd12142&quot;,
+        &quot;182fe1cced1ffdf&quot;: {
+            &quot;_id&quot;: &quot;182fe1cced1ffdf&quot;,
             &quot;component&quot;: &quot;SyrupComponent&quot;,
             &quot;state&quot;: &quot;destroy&quot;,
             &quot;action&quot;: &quot;function destroy() {\n    $component.destroy(this.id());\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;16ca418f9e107c7&quot;: {
-            &quot;_id&quot;: &quot;16ca418f9e107c7&quot;,
+        &quot;1243217fe1182a3&quot;: {
+            &quot;_id&quot;: &quot;1243217fe1182a3&quot;,
             &quot;component&quot;: &quot;SyrupComponent&quot;,
             &quot;state&quot;: &quot;off&quot;,
             &quot;action&quot;: &quot;function off(state, behaviorId) {\n    var args = [],\n    i = 0,\n    length = 0;\n    length = arguments.length;\n    \n    for (i = 0; i &lt; length - 6; i++) {\n        args.push(arguments[i]);\n    }\n    \n    if ($workflow.checkParams({\&quot;component\&quot;: this, \&quot;methodName\&quot;: \&quot;off\&quot;, \&quot;args\&quot;: args})) {\n        if ($metamodel.isValidState(state, this.constructor.name)) {\n            $behavior.remove({\&quot;behaviorId\&quot;: behaviorId, \&quot;componentId\&quot;: this.id(), \&quot;state\&quot;: state});\n        } else { $helper.getSyrup().warning({ \&quot;message\&quot;:\&quot;invoke &#x27;off&#x27; method of component &#x27;\&quot; + this.id() + \&quot;&#x27; with an invalid state &#x27;\&quot; + state + \&quot;&#x27;\&quot;}); \n        }\n    }\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1e9051804915579&quot;: {
-            &quot;_id&quot;: &quot;1e9051804915579&quot;,
+        &quot;1d7381ee0017f35&quot;: {
+            &quot;_id&quot;: &quot;1d7381ee0017f35&quot;,
             &quot;component&quot;: &quot;SyrupComponent&quot;,
             &quot;state&quot;: &quot;require&quot;,
             &quot;action&quot;: &quot;function require(id) {\n    return $component.get(id);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1f349196e119d9c&quot;: {
-            &quot;_id&quot;: &quot;1f349196e119d9c&quot;,
+        &quot;1684016e7f15140&quot;: {
+            &quot;_id&quot;: &quot;1684016e7f15140&quot;,
             &quot;component&quot;: &quot;SyrupDatabase&quot;,
             &quot;state&quot;: &quot;collections&quot;,
             &quot;action&quot;: &quot;function collections() {\n    var result = {},\n    collectionName = &#x27;&#x27;;\n    \n    for (collectionName in $db.store) {\n        if ($db.store.hasOwnProperty(collectionName) &amp;&amp; collectionName.indexOf(&#x27;Syrup&#x27;) !== 0) {\n            result[collectionName] = $db[collectionName];\n            \n        }\n    }\n    return result;\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;18a8a16ea81a24d&quot;: {
-            &quot;_id&quot;: &quot;18a8a16ea81a24d&quot;,
+        &quot;187e615f2e19f27&quot;: {
+            &quot;_id&quot;: &quot;187e615f2e19f27&quot;,
             &quot;component&quot;: &quot;SyrupDatabase&quot;,
             &quot;state&quot;: &quot;subsystem&quot;,
             &quot;action&quot;: &quot;function subsystem(params) {\n    return $db.subsystem(params);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1e98716ea81bc6f&quot;: {
-            &quot;_id&quot;: &quot;1e98716ea81bc6f&quot;,
+        &quot;126f11cd5711018&quot;: {
+            &quot;_id&quot;: &quot;126f11cd5711018&quot;,
             &quot;component&quot;: &quot;SyrupDatabase&quot;,
             &quot;state&quot;: &quot;system&quot;,
             &quot;action&quot;: &quot;function system(system) {\n    return $db.system(system);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;170231f4e11dd87&quot;: {
-            &quot;_id&quot;: &quot;170231f4e11dd87&quot;,
+        &quot;1b2ce12cf1166bf&quot;: {
+            &quot;_id&quot;: &quot;1b2ce12cf1166bf&quot;,
             &quot;component&quot;: &quot;SyrupMetamodel&quot;,
             &quot;state&quot;: &quot;create&quot;,
             &quot;action&quot;: &quot;function create() {\n    $metamodel.create();\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;15d6019c321e32c&quot;: {
-            &quot;_id&quot;: &quot;15d6019c321e32c&quot;,
+        &quot;16c6f10df616189&quot;: {
+            &quot;_id&quot;: &quot;16c6f10df616189&quot;,
             &quot;component&quot;: &quot;SyrupMetamodel&quot;,
             &quot;state&quot;: &quot;schema&quot;,
             &quot;action&quot;: &quot;function schema(schema) {\n    $metamodel.schema(schema);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1cfe01d0bf12542&quot;: {
-            &quot;_id&quot;: &quot;1cfe01d0bf12542&quot;,
+        &quot;162b51029b19bc2&quot;: {
+            &quot;_id&quot;: &quot;162b51029b19bc2&quot;,
             &quot;component&quot;: &quot;SyrupMetamodel&quot;,
             &quot;state&quot;: &quot;type&quot;,
             &quot;action&quot;: &quot;function type(type) {\n    $metamodel.type(type);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;147ca11f0c1b2e8&quot;: {
-            &quot;_id&quot;: &quot;147ca11f0c1b2e8&quot;,
+        &quot;1fa131d1031e616&quot;: {
+            &quot;_id&quot;: &quot;1fa131d1031e616&quot;,
             &quot;component&quot;: &quot;SyrupSystem&quot;,
             &quot;state&quot;: &quot;sync&quot;,
             &quot;action&quot;: &quot;function sync() {\n    var system = JSON.parse($db.system());\n    \n    this.schemas(system.schemas);\n    this.types(system.types);\n    this.behaviors(system.behaviors);\n    this.components(system.components);\n}&quot;,

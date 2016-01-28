@@ -26,6 +26,24 @@
  */
 
 module.exports = function (config) {
+    var customLaunchers = {
+        sl_chrome: {
+            base: 'SauceLabs',
+            browserName: 'chrome',
+            version: '47'
+        },
+        sl_firefox: {
+            base: 'SauceLabs',
+            browserName: 'firefox',
+            version: '43'
+        },
+        sl_ie_11: {
+            base: 'SauceLabs',
+            browserName: 'internet explorer',
+            version: '11'
+        }
+    };
+
     config.set({
         basePath: './',
         frameworks: ['jasmine'],
@@ -39,19 +57,23 @@ module.exports = function (config) {
             "test/syrup/system-spec.js",
             "test/syrup/mson-spec.js"
         ],
-        reporters: ['progress', 'coverage'],
+        reporters: ['progress', 'coverage', 'dots', 'saucelabs'],
         preprocessors: {
             'build/system-runtime.min.js': ['coverage']
         },
         colors: true,
         autoWatch: true,
-        browsers: ['Firefox'],
         plugins: [
             'karma-coverage',
             'karma-script-launcher',
-            'karma-firefox-launcher',
+            'karma-sauce-launcher',
             'karma-jasmine'
         ],
-        singleRun: true
+        singleRun: true,
+        sauceLabs: {
+            testName: 'SyrupJS Unit Tests'
+        },
+        customLaunchers: customLaunchers,
+        browsers: Object.keys(customLaunchers)
     });
 };
