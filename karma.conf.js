@@ -26,6 +26,7 @@
  */
 
 module.exports = function (config) {
+    // customLaunchers
     var customLaunchers = {
         sl_chrome: {
             base: 'SauceLabs',
@@ -43,6 +44,18 @@ module.exports = function (config) {
             version: '11'
         }
     };
+    
+    // sauceLabConfig
+    var sauceLabConfig = {
+        testName: 'SyrupJS Unit Tests',
+    }
+    if (process.env.TRAVIS) {
+        sauceLabConfig = {
+            testName: 'SyrupJS Unit Tests',
+            tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
+            startConnect: false
+        }
+    }
 
     config.set({
         basePath: './',
@@ -70,11 +83,7 @@ module.exports = function (config) {
             'karma-jasmine'
         ],
         singleRun: true,
-        sauceLabs: {
-            testName: 'SyrupJS Unit Tests',
-            tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
-            startConnect: false
-        },
+        sauceLabs: sauceLabConfig,
         customLaunchers: customLaunchers,
         browsers: Object.keys(customLaunchers)
     });
