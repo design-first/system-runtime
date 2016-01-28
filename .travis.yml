@@ -8,5 +8,6 @@ addons:
         secure: "efGUd954jUnJDz3Bj8afSAbBsZRH3zoPWsdEElcwOpzczoH0qBGD1nzWot1gEJhHoO6Z38lFvh+6t1UQi/t9kKp4UdXWSUpyarUM1X+6PL6I6BjVwkyk7R4msiciNk4m2vV/af4LzpdTU9rDDvRiPqD8k/HucTExmE/wtzoh0Y0="
 before_script:
   - npm install jasmine-node -g
+  - npm install karma-cli -g
 script: 
   - istanbul cover jasmine-node --captureExceptions test/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
