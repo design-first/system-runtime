@@ -9,6 +9,6 @@ addons:
 before_script:
   - npm install jasmine-node -g
 script:
+    - npm build
     - npm test
     - istanbul cover jasmine-node --captureExceptions test/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
-    - npm build
