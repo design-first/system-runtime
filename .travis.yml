@@ -3,9 +3,9 @@ node_js:
     -  "4.1"
 addons:
   sauce_connect:
-    username: "ecarriou"
+    username: "system-runtime"
     access_key:
-        secure: "efGUd954jUnJDz3Bj8afSAbBsZRH3zoPWsdEElcwOpzczoH0qBGD1nzWot1gEJhHoO6Z38lFvh+6t1UQi/t9kKp4UdXWSUpyarUM1X+6PL6I6BjVwkyk7R4msiciNk4m2vV/af4LzpdTU9rDDvRiPqD8k/HucTExmE/wtzoh0Y0="
+        secure: "WRT+mKn8QC5gC5ZO8Q68HN0GH3n0iTaAxN8RaB8UM/tLwRAO+pdz/VUucELHyVZur1x6XflMS7g2/Dyn2CpC30CzMqUJx883Ehbm8d1IPcrufP9DdTI75WLKfWb+HIw2PjnSWhkNBTLS0NxvcBu60b59dJ/gyuj4c2+Uh75b0lw="
 before_script:
   - npm install jasmine-node -g
 script:
