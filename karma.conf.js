@@ -45,6 +45,12 @@ module.exports = function (config) {
         }
     };
     
+    // browers
+    var browsers = ['Firefox'];
+    if (process.env.TRAVIS) {
+        browsers = Object.keys(customLaunchers);
+    }
+    
     // sauceLabConfig
     var sauceLabConfig = {
         testName: 'SyrupJS Unit Tests',
@@ -55,6 +61,12 @@ module.exports = function (config) {
             tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
             startConnect: false
         }
+    }
+    
+    // reporters
+    var reporters = ['progress', 'coverage'];
+    if (process.env.TRAVIS) {
+       reporters = ['progress', 'coverage', 'dots', 'saucelabs']
     }
 
     config.set({
@@ -70,7 +82,7 @@ module.exports = function (config) {
             "test/syrup/system-spec.js",
             "test/syrup/mson-spec.js"
         ],
-        reporters: ['progress', 'coverage', 'dots', 'saucelabs'],
+        reporters: reporters,
         preprocessors: {
             'build/system-runtime.min.js': ['coverage']
         },
@@ -79,12 +91,13 @@ module.exports = function (config) {
         plugins: [
             'karma-coverage',
             'karma-script-launcher',
+            'karma-firefox-launcher',
             'karma-sauce-launcher',
             'karma-jasmine'
         ],
         singleRun: true,
         sauceLabs: sauceLabConfig,
         customLaunchers: customLaunchers,
-        browsers: Object.keys(customLaunchers)
+        browsers: browsers
     });
 };
