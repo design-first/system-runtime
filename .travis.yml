@@ -5,7 +5,7 @@ addons:
   sauce_connect:
     username: "system-runtime"
     access_key:
-        secure: "WRT+mKn8QC5gC5ZO8Q68HN0GH3n0iTaAxN8RaB8UM/tLwRAO+pdz/VUucELHyVZur1x6XflMS7g2/Dyn2CpC30CzMqUJx883Ehbm8d1IPcrufP9DdTI75WLKfWb+HIw2PjnSWhkNBTLS0NxvcBu60b59dJ/gyuj4c2+Uh75b0lw="
+        secure: "TIOf9WlmwKnrXRoz6EmwL8Hpr/fwfDSTw99IsI4Eu4mVMnL+o+HeAPH1M/BqT0WPvCN3QH+orbgM9NoNP6qN/yFtMSJ3bSME9VE0QSRTXiAiuf+JTfN0a8MTbM6pa2NYak7kpxIhl8/30jEot4w39Mc004DlSNAWTXlf0wTkx8E="
 before_script:
   - npm install jasmine-node -g
 script:
