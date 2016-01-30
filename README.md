@@ -35,7 +35,7 @@ Thanks to SyrupJS NoSQL Database, you can compose your model with an another one
 
 SyrupJS uses the [Model-Driven Architecture](http://www.omg.org/mda/) approach to create classes based on your design. Use them to instantiate your components. 
 
-#### A Workflow engine
+#### A workflow engine
 
 SyrupJS checks at runtime if the signatures of invoked methods are compliant with your model. 
 
