@@ -8,10 +8,18 @@
 
 ## What is SyrupJS ?
 
-[SyrupJS](https://syrupjs.github.io) (System Runtime Platform) is a JavaScript library to run and manage **JavaScript Application Systems**, applications driven by the design.
+[SyrupJS](https://syrupjs.github.io) (System Runtime Platform) is a JavaScript library to run and manage **JavaScript Application Systems** created with [System Designer](http://designfirst.io).
 
 SyrupJS is part of the [System SDK project](https://github.com/system-sdk).
 System SDK is a SDK for building JavaScript Application Systems.
+
+## What does SyrupJS do ?
+
+#### JSON Virtual Machine (JVM)
+
+[JSON](http://json.org) is traditionnaly used to represent data. We use this format to store your model, components and the behaviors of your app.
+
+SyrupJS will load your JSON and run your app as a JVM (JSON Virtual Machine).
 
 ## What contains SyrupJS ?
 
