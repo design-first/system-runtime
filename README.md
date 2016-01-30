@@ -6,12 +6,35 @@
 [![Coverage Status](https://img.shields.io/coveralls/system-sdk/system-runtime.svg)](https://coveralls.io/r/system-sdk/system-runtime)
 [![devDependency Status](https://david-dm.org/system-sdk/system-runtime/dev-status.svg)](https://david-dm.org/system-sdk/system-runtime#info=devDependencies)
 
-#### What is SyrupJS ?
+## What is SyrupJS ?
 
 [SyrupJS](https://syrupjs.github.io) (System Runtime Platform) is a JavaScript library to run and manage JavaScript Application Systems.
 
 SyrupJS is part of the [System SDK project](https://github.com/system-sdk).
 System SDK is a SDK for building JavaScript Application Systems.
+
+## What contains SyrupJS ?
+
+#### A metamodel
+
+SyrupJS contains a metamodel to help you to design your model. The definition of the model is made on a JSON format called [MSON](https://syrupjs.readme.io/docs/design-your-model#section-mson), no code is needed. 
+With [MSON](https://syrupjs.readme.io/docs/design-your-model#section-mson) you can define types, classes, one to one / one to many relationships and multi inheritance between classes. 
+[MSON](https://syrupjs.readme.io/docs/design-your-model#section-mson) is based on [UML](http://uml.org), so learning it is very easy.
+
+#### A NoSQL DataBase
+
+SyrupJS acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents. 
+SyrupJS has a micro NoSQL Database that stores your components and you can export/import them into another SyrupJS NoSQL Database. 
+Thanks to SyrupJS NoSQL Database, you can compose your model with an another one.
+
+#### A Component factory
+
+SyrupJS uses the [Model-Driven Architecture](http://www.omg.org/mda/) approach to create classes based on your design. Use them to instantiate your components. 
+
+#### A Workflow engine
+
+SyrupJS checks at runtime if the signatures of invoked methods are compliant with your model. 
+With SyrupJS your components really behave the way you designed them. 
 
 ## Installation
 

@@ -25,7 +25,8 @@
         "component",
         "system",
         "isomorphic",
-        "runtime"
+        "runtime",
+        "json"
     ],
     "ignore": [
         "addons",

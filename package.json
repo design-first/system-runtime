@@ -14,7 +14,8 @@
         "component",
         "system",
         "isomorphic",
-        "runtime"
+        "runtime",
+        "json"
     ],
     "main": "./src/syrup.js",
     "author": {
