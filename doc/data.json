@@ -2,7 +2,7 @@
     "project": {
         "name": "system-runtime",
         "description": "SyrupJS, the System Runtime Platform",
-        "version": "0.9.4",
+        "version": "0.9.5",
         "url": "https://syrupjs.github.io"
     },
     "files": {
@@ -152,7 +152,7 @@
             "namespaces": {},
             "tag": "main",
             "file": "build/system/system.js",
-            "line": 964,
+            "line": 966,
             "description": "This module is the main module of syrup. <br>\nIt inits syrup metamodel and loads syrup core system.",
             "requires": [
                 "syrup-component",
@@ -358,7 +358,7 @@
             "module": "syrup",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 964,
+            "line": 966,
             "description": "This module contains syrup core system.",
             "static": 1
         }
@@ -609,7 +609,7 @@
             "submodule": "syrup-system",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 964,
+            "line": 966,
             "description": "This module contains syrup core system."
         }
     },
@@ -2425,7 +2425,7 @@
         },
         {
             "file": "build/system/system.js",
-            "line": 974,
+            "line": 976,
             "description": "syrup core system",
             "itemtype": "property",
             "name": "system",
