@@ -411,16 +411,6 @@ function invalidParamNumberMethodOn(id, methodName) {
 
 
 /*
- * Create a component with an id that is already used.
- * @method idAlreadyUsed
- * @param {String} id id of the component
- */
-function idAlreadyUsed(id) {
-    $helper.getSyrup().warning("try to create a component with the id '" + id + "' that is already used by another component");
-}
-
-
-/*
  * Change the id of a component.
  * @method updateUuid
  * @param {String} currentId id of the component
@@ -729,14 +719,6 @@ exports.invalidChannelEvent = invalidChannelEvent;
  * @param {String} methodName name of the component
  */
 exports.invalidParamNumberMethodOn = invalidParamNumberMethodOn;
-
-
-/**
- * Create a component with an id that is already used.
- * @method idAlreadyUsed
- * @param {String} id id of the component
- */
-exports.idAlreadyUsed = idAlreadyUsed;
 
 
 /**

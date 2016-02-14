@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "0.9.5",
+    "version": "0.9.6",
     "description": "SyrupJS, the System Runtime Platform",
     "license": "MIT",
     "homepage": "https://syrupjs.github.io",
@@ -15,6 +15,7 @@
     },
     "main": "build/system-runtime.min.js",
     "keywords": [
+        "uml",
         "mda",
         "metamodel",
         "schema",

@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.5</b>
+                    API Docs for Version: <b>0.9.6</b>
                 </p>
             </li>
         </div>
@@ -500,16 +500,6 @@ function invalidParamNumberMethodOn(id, methodName) {
 
 
 /*
- * Create a component with an id that is already used.
- * @method idAlreadyUsed
- * @param {String} id id of the component
- */
-function idAlreadyUsed(id) {
-    $helper.getSyrup().warning(&quot;try to create a component with the id &#x27;&quot; + id + &quot;&#x27; that is already used by another component&quot;);
-}
-
-
-/*
  * Change the id of a component.
  * @method updateUuid
  * @param {String} currentId id of the component
@@ -818,14 +808,6 @@ exports.invalidChannelEvent = invalidChannelEvent;
  * @param {String} methodName name of the component
  */
 exports.invalidParamNumberMethodOn = invalidParamNumberMethodOn;
-
-
-/**
- * Create a component with an id that is already used.
- * @method idAlreadyUsed
- * @param {String} id id of the component
- */
-exports.idAlreadyUsed = idAlreadyUsed;
 
 
 /**

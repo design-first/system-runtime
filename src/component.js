@@ -332,10 +332,6 @@ function createClass(classId) {
             config._id = $helper.generateId();
         }
 
-        if (typeof store[config._id] !== 'undefined') {
-            $log.idAlreadyUsed(config._id);
-        }
-
         store[config._id] = this;
 
         // id

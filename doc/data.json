@@ -2,7 +2,7 @@
     "project": {
         "name": "system-runtime",
         "description": "SyrupJS, the System Runtime Platform",
-        "version": "0.9.5",
+        "version": "0.9.6",
         "url": "https://syrupjs.github.io"
     },
     "files": {
@@ -198,7 +198,7 @@
             "module": "syrup",
             "namespace": "",
             "file": "src/component.js",
-            "line": 946,
+            "line": 942,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by syrup.",
             "requires": [
                 "syrup-workflow",
@@ -267,7 +267,7 @@
             "module": "syrup",
             "namespace": "",
             "file": "src/log.js",
-            "line": 451,
+            "line": 441,
             "description": "This module contains all the functions that write a log.",
             "requires": [
                 "syrup-helper"
@@ -396,7 +396,7 @@
             "submodule": "syrup-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 946,
+            "line": 942,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by syrup.",
             "requires": [
                 "syrup-workflow",
@@ -481,7 +481,7 @@
             "submodule": "syrup-log",
             "namespace": "",
             "file": "src/log.js",
-            "line": 451,
+            "line": 441,
             "description": "This module contains all the functions that write a log.",
             "requires": [
                 "syrup-helper"
@@ -749,7 +749,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 963,
+            "line": 959,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -770,7 +770,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 973,
+            "line": 969,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -791,7 +791,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 982,
+            "line": 978,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -801,7 +801,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 989,
+            "line": 985,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -1114,7 +1114,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 462,
+            "line": 452,
             "description": "A property of a schema is unknown.",
             "itemtype": "method",
             "name": "unknownProperty",
@@ -1136,7 +1136,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 471,
+            "line": 461,
             "description": "Invalid type for a property.",
             "itemtype": "method",
             "name": "invalidPropertyType",
@@ -1163,7 +1163,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 481,
+            "line": 471,
             "description": "Invalid value for a type enum.",
             "itemtype": "method",
             "name": "invalidEnumValue",
@@ -1185,7 +1185,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 490,
+            "line": 480,
             "description": "Invalid class name for a component.",
             "itemtype": "method",
             "name": "invalidClassName",
@@ -1212,7 +1212,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 500,
+            "line": 490,
             "description": "Missing a property.",
             "itemtype": "method",
             "name": "missingProperty",
@@ -1229,7 +1229,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 508,
+            "line": 498,
             "description": "A class definition is missing.",
             "itemtype": "method",
             "name": "missingImplementation",
@@ -1251,7 +1251,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 517,
+            "line": 507,
             "description": "Invalid type for a property of a class definition.",
             "itemtype": "method",
             "name": "invalidTypeImp",
@@ -1273,7 +1273,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 526,
+            "line": 516,
             "description": "Missing a property for a class definition.",
             "itemtype": "method",
             "name": "missingPropertyImp",
@@ -1295,7 +1295,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 535,
+            "line": 525,
             "description": "Unkown property for a class definition.",
             "itemtype": "method",
             "name": "unknownPropertyImp",
@@ -1317,7 +1317,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 544,
+            "line": 534,
             "description": "Invalid type definition.",
             "itemtype": "method",
             "name": "invalidTypeDefinition",
@@ -1334,7 +1334,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 552,
+            "line": 542,
             "description": "Invalid property type.",
             "itemtype": "method",
             "name": "invalidPropertyName",
@@ -1366,7 +1366,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 563,
+            "line": 553,
             "description": "Trying to set a read-only property.",
             "itemtype": "method",
             "name": "readOnlyProperty",
@@ -1388,7 +1388,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 572,
+            "line": 562,
             "description": "Invalid document on a syrup database insert operation.",
             "itemtype": "method",
             "name": "invalidDocumentOnDbInsert",
@@ -1410,7 +1410,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 581,
+            "line": 571,
             "description": "Invalid property on a syrup database update operation.",
             "itemtype": "method",
             "name": "invalidPropertyTypeOnDbUpdate",
@@ -1447,7 +1447,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 593,
+            "line": 583,
             "description": "Call an unknown method of a class.",
             "itemtype": "method",
             "name": "unknownMethod",
@@ -1469,7 +1469,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 602,
+            "line": 592,
             "description": "Try to create an invalid SyrupDatabaseCollection.",
             "itemtype": "method",
             "name": "invalidCollectionName",
@@ -1486,7 +1486,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 610,
+            "line": 600,
             "description": "Invalid result type of a method.",
             "itemtype": "method",
             "name": "invalidResultType",
@@ -1508,7 +1508,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 619,
+            "line": 609,
             "description": "Unknown class.",
             "itemtype": "method",
             "name": "unknownComponent",
@@ -1530,7 +1530,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 628,
+            "line": 618,
             "description": "The syrup workflow has been restarted.",
             "itemtype": "method",
             "name": "workflowRestarted",
@@ -1540,7 +1540,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 635,
+            "line": 625,
             "description": "Invalid parameter number for a method.",
             "itemtype": "method",
             "name": "invalidParamNumber",
@@ -1562,7 +1562,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 644,
+            "line": 634,
             "description": "Invalid type parameters for a method.",
             "itemtype": "method",
             "name": "invalidParamType",
@@ -1589,7 +1589,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 655,
+            "line": 645,
             "description": "Add a more than one behavior to a state.",
             "itemtype": "method",
             "name": "behaviorNotUnique",
@@ -1611,7 +1611,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 664,
+            "line": 654,
             "description": "Can not add a behavior with an invalid state.",
             "itemtype": "method",
             "name": "invalidStateOn",
@@ -1633,7 +1633,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 673,
+            "line": 663,
             "description": "The call to a remove state of the behavior module is invalid.",
             "itemtype": "method",
             "name": "invalidStateOff",
@@ -1655,7 +1655,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 682,
+            "line": 672,
             "description": "The master system is not found.",
             "itemtype": "method",
             "name": "masterSystemNotFound",
@@ -1665,7 +1665,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 689,
+            "line": 679,
             "description": "Invalid type.",
             "itemtype": "method",
             "name": "invalidType",
@@ -1687,7 +1687,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 698,
+            "line": 688,
             "description": "Unknown type.",
             "itemtype": "method",
             "name": "unknownType",
@@ -1704,7 +1704,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 706,
+            "line": 696,
             "description": "A component has not been alreay created.",
             "itemtype": "method",
             "name": "canNotYetValidate",
@@ -1726,7 +1726,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 715,
+            "line": 705,
             "description": "A message send by the channel is invalid",
             "itemtype": "method",
             "name": "invalidChannelEvent",
@@ -1753,7 +1753,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 725,
+            "line": 715,
             "description": "invalid parameter number for an action add with on method.",
             "itemtype": "method",
             "name": "invalidParamNumberMethodOn",
@@ -1775,24 +1775,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 734,
-            "description": "Create a component with an id that is already used.",
-            "itemtype": "method",
-            "name": "idAlreadyUsed",
-            "params": [
-                {
-                    "name": "id",
-                    "description": "id of the component",
-                    "type": "String"
-                }
-            ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
-        },
-        {
-            "file": "src/log.js",
-            "line": 742,
+            "line": 724,
             "description": "Change the id of a component.",
             "itemtype": "method",
             "name": "updateUuid",
@@ -1819,7 +1802,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 752,
+            "line": 734,
             "description": "Unkonw property on a syrup database update operation.",
             "itemtype": "method",
             "name": "unknownPropertyOnDbUpdate",
@@ -1841,7 +1824,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 761,
+            "line": 743,
             "description": "Try to change the state of a component that has been destroyed",
             "itemtype": "method",
             "name": "invalideUseOfComponent",

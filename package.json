@@ -1,9 +1,10 @@
 {
     "name": "system-runtime",
-    "version": "0.9.5",
+    "version": "0.9.6",
     "description": "SyrupJS, the System Runtime Platform",
     "homepage": "https://syrupjs.github.io",
     "keywords": [
+        "uml",
         "mda",
         "metamodel",
         "model",
