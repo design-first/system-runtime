@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "0.9.6",
+    "version": "0.9.7",
     "description": "SyrupJS, the System Runtime Platform",
     "license": "MIT",
     "homepage": "https://syrupjs.github.io",

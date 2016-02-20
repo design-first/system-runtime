@@ -1,6 +1,6 @@
 {
 	"name": "syrup",
-	"version": "0.9.6",
+	"version": "0.9.7",
 	"description": "The System Runtime Platform",
 	"_id": "e89c617b6b15d24",
 	"schemas": {
@@ -666,6 +666,11 @@
 			"type": "string",
 			"core": true
 		},
+		"json": {
+			"name": "json",
+			"type": "string",
+			"core": true
+		},
 		"message": {
 			"name": "message",
 			"type": "object",
@@ -766,158 +771,158 @@
 			"core": true,
 			"useCoreAPI": true
 		},
-		"18475129a319a7b": {
-			"_id": "18475129a319a7b",
+		"1a440158941b4c8": {
+			"_id": "1a440158941b4c8",
 			"component": "Syrup",
 			"state": "error",
 			"action": "function error(data) {\n    console.error('syrup: ' + data.message, data.error);\n}",
 			"core": true
 		},
-		"10e4e1a404195a7": {
-			"_id": "10e4e1a404195a7",
+		"1764e15b401d60c": {
+			"_id": "1764e15b401d60c",
 			"component": "Syrup",
 			"state": "system",
 			"action": "function system(name) {\n    var System = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        System = this.require('SyrupSystem');\n        system = new System(conf);\n    } else {\n        result = $db.SyrupSystem.find({\n            'master': true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}",
 			"core": true,
 			"useCoreAPI": true
 		},
-		"124e1187da105d1": {
-			"_id": "124e1187da105d1",
+		"15a4210f3f1dfe7": {
+			"_id": "15a4210f3f1dfe7",
 			"component": "Syrup",
 			"state": "warning",
 			"action": "function warning(message) {\n    console.warn('syrup: ' + message);\n}",
 			"core": true
 		},
-		"1cb2e1e35d157db": {
-			"_id": "1cb2e1e35d157db",
+		"1637316b031e8a6": {
+			"_id": "1637316b031e8a6",
 			"component": "SyrupClassInfo",
 			"state": "collection",
 			"action": "function collection(name) {\n    var result = {};\n    if (this.metamodel()[name] === 'collection') {\n        result = this.model()[name];\n    } \n    \n    return result; \n}",
 			"core": true
 		},
-		"1e0a7149ed1cfa4": {
-			"_id": "1e0a7149ed1cfa4",
+		"178c41bc39197b7": {
+			"_id": "178c41bc39197b7",
 			"component": "SyrupClassInfo",
 			"state": "collections",
 			"action": "function collections() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length; \n    \n    for (i = 0; i < length; i++) { \n        item = keys[i]; \n        if (this.metamodel()[item] === 'collection') {\n            result.push(item);\n        }\n    }\n    \n    return result;\n}",
 			"core": true
 		},
-		"124ce15da411e98": {
-			"_id": "124ce15da411e98",
+		"16e6a19749115be": {
+			"_id": "16e6a19749115be",
 			"component": "SyrupClassInfo",
 			"state": "event",
 			"action": "function event(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'event') {\n        result = this.model()[name];\n    } \n    \n    return result;\n}",
 			"core": true
 		},
-		"1cf131349414890": {
-			"_id": "1cf131349414890",
+		"175431bac513ee8": {
+			"_id": "175431bac513ee8",
 			"component": "SyrupClassInfo",
 			"state": "events",
 			"action": "function events() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'event') {\n            result.push(item);\n        }\n    } \n    return result;\n}",
 			"core": true
 		},
-		"19c5710b5811ad3": {
-			"_id": "19c5710b5811ad3",
+		"1ab1217f0a1815c": {
+			"_id": "1ab1217f0a1815c",
 			"component": "SyrupClassInfo",
 			"state": "method",
 			"action": "function method(name) {\n    var result = {};\n    if (this.metamodel()[name] === 'method') {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}",
 			"core": true
 		},
-		"13bc91adbf1f284": {
-			"_id": "13bc91adbf1f284",
+		"1e07b13a701f9e2": {
+			"_id": "1e07b13a701f9e2",
 			"component": "SyrupClassInfo",
 			"state": "methods",
 			"action": "function methods() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'method') {\n            result.push(item);\n        }\n    } \n    \n    return result;\n}",
 			"core": true
 		},
-		"17c841db7010c61": {
-			"_id": "17c841db7010c61",
+		"13b2f18cf1185d6": {
+			"_id": "13b2f18cf1185d6",
 			"component": "SyrupClassInfo",
 			"state": "properties",
 			"action": "function properties() { \n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'property') {\n            result.push(item);\n        }\n    } return result;\n}",
 			"core": true
 		},
-		"1140d12efe1aaa8": {
-			"_id": "1140d12efe1aaa8",
+		"12cba138be161f2": {
+			"_id": "12cba138be161f2",
 			"component": "SyrupClassInfo",
 			"state": "property",
 			"action": "function property(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'property') {\n        result = this.model()[name];\n    }\n    return result;\n}",
 			"core": true
 		},
-		"1511d1f76911b6e": {
-			"_id": "1511d1f76911b6e",
+		"151981ba4212ace": {
+			"_id": "151981ba4212ace",
 			"component": "SyrupComponent",
 			"state": "destroy",
 			"action": "function destroy() {\n    $component.destroy(this.id());\n}",
 			"core": true,
 			"useCoreAPI": true
 		},
-		"121551981214ce7": {
-			"_id": "121551981214ce7",
+		"1ebc21652210178": {
+			"_id": "1ebc21652210178",
 			"component": "SyrupComponent",
 			"state": "off",
 			"action": "function off(state, behaviorId) {\n    var args = [],\n    i = 0,\n    length = 0;\n    length = arguments.length;\n    \n    for (i = 0; i < length - 6; i++) {\n        args.push(arguments[i]);\n    }\n    \n    if ($workflow.checkParams({\"component\": this, \"methodName\": \"off\", \"args\": args})) {\n        if ($metamodel.isValidState(state, this.constructor.name)) {\n            $behavior.remove({\"behaviorId\": behaviorId, \"componentId\": this.id(), \"state\": state});\n        } else { $helper.getSyrup().warning({ \"message\":\"invoke 'off' method of component '\" + this.id() + \"' with an invalid state '\" + state + \"'\"}); \n        }\n    }\n}",
 			"core": true,
 			"useCoreAPI": true
 		},
-		"15f181817818bb9": {
-			"_id": "15f181817818bb9",
+		"18d631d2f11b073": {
+			"_id": "18d631d2f11b073",
 			"component": "SyrupComponent",
 			"state": "require",
 			"action": "function require(id) {\n    return $component.get(id);\n}",
 			"core": true,
 			"useCoreAPI": true
 		},
-		"1c31c1a4781b13d": {
-			"_id": "1c31c1a4781b13d",
+		"17d721438711085": {
+			"_id": "17d721438711085",
 			"component": "SyrupDatabase",
 			"state": "collections",
 			"action": "function collections() {\n    var result = {},\n    collectionName = '';\n    \n    for (collectionName in $db.store) {\n        if ($db.store.hasOwnProperty(collectionName) && collectionName.indexOf('Syrup') !== 0) {\n            result[collectionName] = $db[collectionName];\n            \n        }\n    }\n    return result;\n}",
 			"core": true,
 			"useCoreAPI": true
 		},
-		"103751ab091f4d1": {
-			"_id": "103751ab091f4d1",
+		"189ba10e771e706": {
+			"_id": "189ba10e771e706",
 			"component": "SyrupDatabase",
 			"state": "subsystem",
 			"action": "function subsystem(params) {\n    return $db.subsystem(params);\n}",
 			"core": true,
 			"useCoreAPI": true
 		},
-		"186db117741f0f2": {
-			"_id": "186db117741f0f2",
+		"1ec8e1b89217bd0": {
+			"_id": "1ec8e1b89217bd0",
 			"component": "SyrupDatabase",
 			"state": "system",
 			"action": "function system(system) {\n    return $db.system(system);\n}",
 			"core": true,
 			"useCoreAPI": true
 		},
-		"1ba6f1b7fb1e324": {
-			"_id": "1ba6f1b7fb1e324",
+		"146271f0d21f988": {
+			"_id": "146271f0d21f988",
 			"component": "SyrupMetamodel",
 			"state": "create",
 			"action": "function create() {\n    $metamodel.create();\n}",
 			"core": true,
 			"useCoreAPI": true
 		},
-		"1a41517d831ed6e": {
-			"_id": "1a41517d831ed6e",
+		"1aab01bc4613909": {
+			"_id": "1aab01bc4613909",
 			"component": "SyrupMetamodel",
 			"state": "schema",
 			"action": "function schema(schema) {\n    $metamodel.schema(schema);\n}",
 			"core": true,
 			"useCoreAPI": true
 		},
-		"13bcb1748c16c9b": {
-			"_id": "13bcb1748c16c9b",
+		"12baa14ebd18f39": {
+			"_id": "12baa14ebd18f39",
 			"component": "SyrupMetamodel",
 			"state": "type",
 			"action": "function type(type) {\n    $metamodel.type(type);\n}",
 			"core": true,
 			"useCoreAPI": true
 		},
-		"12caa1caed10c1f": {
-			"_id": "12caa1caed10c1f",
+		"13627116291ca84": {
+			"_id": "13627116291ca84",
 			"component": "SyrupSystem",
 			"state": "sync",
 			"action": "function sync() {\n    var system = JSON.parse($db.system());\n    \n    this.schemas(system.schemas);\n    this.types(system.types);\n    this.behaviors(system.behaviors);\n    this.components(system.components);\n}",
@@ -929,7 +934,7 @@
 		"Syrup": {
 			"syrup": {
 				"_id": "syrup",
-				"version": "0.9.6"
+				"version": "0.9.7"
 			}
 		},
 		"SyrupDatabase": {
