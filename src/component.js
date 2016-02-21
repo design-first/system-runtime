@@ -619,7 +619,7 @@ function addEvents(model, Class, classId) {
                         }
                         message.data = data;
                         message.event = methodName;
-                        
+
                         $db.SyrupMessage.insert(message);
 
                         $workflow.state({
@@ -796,14 +796,30 @@ function addOffClass(Class, classId) {
  */
 function addDestroyClass(Class) {
     var body = function () {
-        var id = this.id();
+        var id = this.id(),
+            result = [],
+            i = 0,
+            length = 0;
         
         // if not virtual component
         if ($db[id]) {
-            $db[id].remove();
+            result = $db[id].remove();
         }
 
         delete store[id];
+        
+        // remove behaviors
+        $behavior.remove({
+            'componentId': id
+        });
+
+        length = result.length;
+        for (i = 0; i < length; i++) {
+            // remove behaviors
+            $behavior.remove({
+                'componentId': result[i]
+            });
+        }
 
         $workflow.state({
             "component": id,
@@ -918,6 +934,12 @@ function destroy(id) {
         $db[classId].remove({
             "_id": id
         });
+        
+        // remove behaviors
+        $behavior.remove({
+            'componentId': id
+        });
+        
         // case of Behavior
         if (classId === 'SyrupBehavior') {
             $behavior.removeFromMemory(id);

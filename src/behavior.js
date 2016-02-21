@@ -188,10 +188,16 @@ function remove(params) {
             });
             delete store[params.behaviorId];
         } else {
-            result = $db.SyrupBehavior.remove({
-                "component": params.componentId,
-                "state": params.state
-            });
+            if (params.state) {
+                result = $db.SyrupBehavior.remove({
+                    "component": params.componentId,
+                    "state": params.state
+                });
+            } else {
+                result = $db.SyrupBehavior.remove({
+                    "component": params.componentId
+                });
+            }
             result.forEach(function (id) {
                 delete store[id];
             });

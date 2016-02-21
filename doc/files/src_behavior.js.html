@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.7</b>
+                    API Docs for Version: <b>0.9.8</b>
                 </p>
             </li>
         </div>
@@ -277,10 +277,16 @@ function remove(params) {
             });
             delete store[params.behaviorId];
         } else {
-            result = $db.SyrupBehavior.remove({
-                &quot;component&quot;: params.componentId,
-                &quot;state&quot;: params.state
-            });
+            if (params.state) {
+                result = $db.SyrupBehavior.remove({
+                    &quot;component&quot;: params.componentId,
+                    &quot;state&quot;: params.state
+                });
+            } else {
+                result = $db.SyrupBehavior.remove({
+                    &quot;component&quot;: params.componentId
+                });
+            }
             result.forEach(function (id) {
                 delete store[id];
             });

@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.7</b>
+                    API Docs for Version: <b>0.9.8</b>
                 </p>
             </li>
         </div>
@@ -227,7 +227,7 @@ function dump() {
     for (behaviorId in store.SyrupBehavior) {
         behavior = JSON.parse(JSON.stringify(store.SyrupBehavior[behaviorId]));
         delete behavior.classInfo;
-        
+
         if (!behavior.core) {
             dbDump.behaviors[behaviorId] = behavior;
         }
@@ -243,7 +243,7 @@ function dump() {
 
             for (id in collection) {
                 delete collection[id].classInfo;
-                
+
                 if (collection[id]._core) {
                     delete collection[id];
                 }
@@ -410,10 +410,11 @@ SyrupDatabaseCollection.prototype.insert = function (document) {
                         });
                         if (!systems.length || (systems.length &amp;&amp; systems[0]._id !== obj.from)) {
                             channels = exports.SyrupChannel.find({});
-                            if (channels.length &gt; 0) {
-                                channel = $helper.getSyrup().require(channels[0]._id);
+                            var length = channels.length;
+                            for (var i = 0; i &lt; length; i++) {
+                                channel = $helper.getSyrup().require(channels[i]._id);
                                 $workflow.state({
-                                    &quot;component&quot;: channels[0]._id,
+                                    &quot;component&quot;: channels[i]._id,
                                     &quot;state&quot;: obj.event,
                                     &quot;data&quot;: obj.data
                                 });

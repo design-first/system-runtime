@@ -118,6 +118,47 @@ describe('a syrup component', function () {
         }, 1);
     });
 
+    it('can remove all event', function (done) {
+        var Person = syrup.require('Person');
+        var yoda2 = new Person({
+            'firstName': 'Yoda',
+            'lastName': 'Master'
+        });
+
+        yoda2.on('moving', function () {
+            this.adress('Dagobah');
+        });
+        yoda2.off();
+
+        yoda2.moving();
+
+        setTimeout(function () {
+            expect(yoda2.adress()).toBe('');
+            done();
+        }, 1);
+    });
+
+    it('can remove an event with its id', function (done) {
+        var Person = syrup.require('Person');
+        var yoda3 = new Person({
+            'firstName': 'Yoda',
+            'lastName': 'Master'
+        });
+
+        var behaviorId = yoda3.on('moving', function () {
+            this.adress('Dagobah');
+        });
+        
+        yoda3.require(behaviorId).destroy();
+
+        yoda3.moving();
+
+        setTimeout(function () {
+            expect(yoda3.adress()).toBe('');
+            done();
+        }, 1);
+    });
+
     it('can add an event on a property change', function (done) {
         var Person = syrup.require('Person');
         var yoda = new Person({

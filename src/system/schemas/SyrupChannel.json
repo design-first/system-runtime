@@ -3,8 +3,7 @@
     "_name": "SyrupChannel",
     "_schema": "SyrupChannelSchema",
     "_inherit": [
-        "SyrupComponent",
-        "SyrupChannelEvent"
+        "SyrupComponent"
     ],
     "_core": true,
     "send": {

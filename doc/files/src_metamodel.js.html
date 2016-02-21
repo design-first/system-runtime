@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.7</b>
+                    API Docs for Version: <b>0.9.8</b>
                 </p>
             </li>
         </div>
@@ -658,6 +658,24 @@ function checkType(name, id, type) {
     return result;
 }
 
+/*
+ * Merge two schemas.
+ * @method merge
+ * @param {Object} source source schema
+ * @param {Object} target target schema
+ * @return {Object} merged schema
+ */
+function merge(source, target) {
+    var propName = &#x27;&#x27;,
+        result = target;
+
+    for (propName in source) {
+        if (source.hasOwnProperty(propName) &amp;&amp; propName.indexOf(&#x27;_&#x27;) !== 0) {
+            result[propName] = source[propName];
+        }
+    }
+    return result;
+}
 
 /* Public methods */
 
@@ -681,7 +699,11 @@ function schema(importedSchema) {
     // check if schema is compliant with the meta meta model
     if (isValidObject(importedSchema, store.metadef.schema, false)) {
 
-        store.catalog[id] = importedSchema;
+        if (typeof store.catalog[id] === &#x27;undefined&#x27;) {
+            store.catalog[id] = importedSchema;
+        } else {
+            store.catalog[id] = merge(importedSchema, store.catalog[id]);
+        }
         if (inherit) {
             store.inheritance[id] = inherit;
         }
@@ -1300,7 +1322,7 @@ function isValidObject(object, schema, strict, cleanRef) {
             if (fieldName !== &#x27;_core&#x27;) {
                 typeSchema = schema[fieldName].type;
             } else {
-                 typeSchema = &#x27;boolean&#x27;;
+                typeSchema = &#x27;boolean&#x27;;
             }
 
             // cas of _id

@@ -138,7 +138,7 @@ function dump() {
     for (behaviorId in store.SyrupBehavior) {
         behavior = JSON.parse(JSON.stringify(store.SyrupBehavior[behaviorId]));
         delete behavior.classInfo;
-        
+
         if (!behavior.core) {
             dbDump.behaviors[behaviorId] = behavior;
         }
@@ -154,7 +154,7 @@ function dump() {
 
             for (id in collection) {
                 delete collection[id].classInfo;
-                
+
                 if (collection[id]._core) {
                     delete collection[id];
                 }
@@ -321,10 +321,11 @@ SyrupDatabaseCollection.prototype.insert = function (document) {
                         });
                         if (!systems.length || (systems.length && systems[0]._id !== obj.from)) {
                             channels = exports.SyrupChannel.find({});
-                            if (channels.length > 0) {
-                                channel = $helper.getSyrup().require(channels[0]._id);
+                            var length = channels.length;
+                            for (var i = 0; i < length; i++) {
+                                channel = $helper.getSyrup().require(channels[i]._id);
                                 $workflow.state({
-                                    "component": channels[0]._id,
+                                    "component": channels[i]._id,
                                     "state": obj.event,
                                     "data": obj.data
                                 });

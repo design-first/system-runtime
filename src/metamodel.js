@@ -569,6 +569,24 @@ function checkType(name, id, type) {
     return result;
 }
 
+/*
+ * Merge two schemas.
+ * @method merge
+ * @param {Object} source source schema
+ * @param {Object} target target schema
+ * @return {Object} merged schema
+ */
+function merge(source, target) {
+    var propName = '',
+        result = target;
+
+    for (propName in source) {
+        if (source.hasOwnProperty(propName) && propName.indexOf('_') !== 0) {
+            result[propName] = source[propName];
+        }
+    }
+    return result;
+}
 
 /* Public methods */
 
@@ -592,7 +610,11 @@ function schema(importedSchema) {
     // check if schema is compliant with the meta meta model
     if (isValidObject(importedSchema, store.metadef.schema, false)) {
 
-        store.catalog[id] = importedSchema;
+        if (typeof store.catalog[id] === 'undefined') {
+            store.catalog[id] = importedSchema;
+        } else {
+            store.catalog[id] = merge(importedSchema, store.catalog[id]);
+        }
         if (inherit) {
             store.inheritance[id] = inherit;
         }
@@ -1211,7 +1233,7 @@ function isValidObject(object, schema, strict, cleanRef) {
             if (fieldName !== '_core') {
                 typeSchema = schema[fieldName].type;
             } else {
-                 typeSchema = 'boolean';
+                typeSchema = 'boolean';
             }
 
             // cas of _id

@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.7</b>
+                    API Docs for Version: <b>0.9.8</b>
                 </p>
             </li>
         </div>
@@ -708,7 +708,7 @@ function addEvents(model, Class, classId) {
                         }
                         message.data = data;
                         message.event = methodName;
-                        
+
                         $db.SyrupMessage.insert(message);
 
                         $workflow.state({
@@ -885,14 +885,30 @@ function addOffClass(Class, classId) {
  */
 function addDestroyClass(Class) {
     var body = function () {
-        var id = this.id();
+        var id = this.id(),
+            result = [],
+            i = 0,
+            length = 0;
         
         // if not virtual component
         if ($db[id]) {
-            $db[id].remove();
+            result = $db[id].remove();
         }
 
         delete store[id];
+        
+        // remove behaviors
+        $behavior.remove({
+            &#x27;componentId&#x27;: id
+        });
+
+        length = result.length;
+        for (i = 0; i &lt; length; i++) {
+            // remove behaviors
+            $behavior.remove({
+                &#x27;componentId&#x27;: result[i]
+            });
+        }
 
         $workflow.state({
             &quot;component&quot;: id,
@@ -1007,6 +1023,12 @@ function destroy(id) {
         $db[classId].remove({
             &quot;_id&quot;: id
         });
+        
+        // remove behaviors
+        $behavior.remove({
+            &#x27;componentId&#x27;: id
+        });
+        
         // case of Behavior
         if (classId === &#x27;SyrupBehavior&#x27;) {
             $behavior.removeFromMemory(id);

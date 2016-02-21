@@ -22,7 +22,8 @@
     "off": {
         "params": [{
                 "name": "state",
-                "type": "string"
+                "type": "string",
+                "mandatory": false
             },
             {
                 "name": "behaviorId",

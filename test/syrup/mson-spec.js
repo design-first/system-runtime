@@ -9,8 +9,8 @@ describe('a MSON schema', function () {
         var metamodel = syrup.require('metamodel');
 
         metamodel.schema({
-            '_id': 'PersonSchema',
-            '_name': 'PersonSchema',
+            '_id': 'PersonSchema_test',
+            '_name': 'PersonSchema_test',
             '_inherit': ['SyrupComponentSchema'],
             'description': 'string',
             'firstName': 'property',
@@ -19,9 +19,9 @@ describe('a MSON schema', function () {
         });
 
         metamodel.schema({
-            '_id': 'Person',
-            '_name': 'Person',
-            '_schema': 'PersonSchema',
+            '_id': 'Person_test',
+            '_name': 'Person_test',
+            '_schema': 'PersonSchema_test',
             '_inherit': ['SyrupComponent'],
             'description': 'a person',
             'firstName': {
@@ -42,9 +42,9 @@ describe('a MSON schema', function () {
         });
 
         metamodel.schema({
-            '_id': 'TeacherSchema',
-            '_name': 'TeacherSchema',
-            '_inherit': ['SyrupComponentSchema', 'PersonSchema'],
+            '_id': 'TeacherSchema_test',
+            '_name': 'TeacherSchema_test',
+            '_inherit': ['SyrupComponentSchema', 'PersonSchema_test'],
             'description': 'string',
             'firstName': 'property',
             'lastName': 'property',
@@ -52,10 +52,10 @@ describe('a MSON schema', function () {
         });
 
         metamodel.schema({
-            '_id': 'Teacher',
-            '_name': 'Teacher',
-            '_schema': 'PersonSchema',
-            '_inherit': ['SyrupComponent', 'Person'],
+            '_id': 'Teacher_test',
+            '_name': 'Teacher_test',
+            '_schema': 'PersonSchema_test',
+            '_inherit': ['SyrupComponent', 'Person_test'],
             'description': 'a person',
             'firstName': {
                 'type': 'string',
@@ -76,15 +76,15 @@ describe('a MSON schema', function () {
 
         metamodel.create();
 
-        var Person = syrup.require('Person');
+        var Person = syrup.require('Person_test');
 
         Person.off('getFullName');
-        
+
         Person.on('getFullName', function () {
             return this.firstName() + ' ' + this.lastName();
         });
 
-        var Teacher = syrup.require('Teacher');
+        var Teacher = syrup.require('Teacher_test');
 
         var eikichi = new Teacher({
             'firstName': 'Eikichi',
@@ -93,5 +93,5 @@ describe('a MSON schema', function () {
 
         expect(eikichi.getFullName()).toBe('Eikichi Onizuka');
     });
-    
+
 });
