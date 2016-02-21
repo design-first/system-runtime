@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "0.9.8",
+    "version": "0.9.9",
     "description": "SyrupJS, the System Runtime Platform",
     "homepage": "https://syrupjs.github.io",
     "keywords": [
@@ -38,7 +38,8 @@
         "test": "grunt test",
         "clean": "grunt clean",
         "debug": "grunt debug",
-        "build": "grunt build"
+        "build": "grunt build",
+        "build-json": "grunt build-json"
     },
     "devDependencies": {
         "coveralls": "^2.11.3",

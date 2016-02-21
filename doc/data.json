@@ -2,7 +2,7 @@
     "project": {
         "name": "system-runtime",
         "description": "SyrupJS, the System Runtime Platform",
-        "version": "0.9.8",
+        "version": "0.9.9",
         "url": "https://syrupjs.github.io"
     },
     "files": {

@@ -382,4 +382,14 @@ module.exports = function (grunt) {
         'karma:syrup',
         'yuidoc'
     ]);
+    
+    // build task
+    grunt.registerTask('build-json', [
+        'browserify:syrupDebug',
+        'browserify:syrup',
+        'uglify',
+        'concat:licence',
+        'karma:syrup',
+        'yuidoc'
+    ]);
 };
