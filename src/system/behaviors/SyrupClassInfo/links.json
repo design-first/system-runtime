@@ -1,0 +1,6 @@
+{
+	"component": "SyrupClassInfo",
+	"state": "links",
+	"action": "function links() { \n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'links') {\n            result.push(item);\n        }\n    } return result;\n}",
+	"core": true
+}

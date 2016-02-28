@@ -1,0 +1,23 @@
+{
+    "name": "link",
+    "type": "object",
+    "schema": {
+        "type": {
+            "type": "string",
+            "mandatory": true
+        },
+        "readOnly": {
+            "type": "boolean",
+            "mandatory": true
+        },
+        "mandatory": {
+            "type": "boolean",
+            "mandatory": true
+        },
+        "default": {
+            "type": "@type",
+            "mandatory": true
+        }
+    },
+    "core": true
+}

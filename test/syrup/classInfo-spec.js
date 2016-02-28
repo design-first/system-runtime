@@ -25,6 +25,16 @@ describe('a syrup ClassInfo instance', function () {
         expect(Array.isArray(properties)).toBe(true);
     });
 
+    it('can show a definition of a link', function () {
+        var link = syrup.classInfo().property('version');
+        expect(link.type).toBe('string');
+    });
+
+    it('can show its links', function () {
+        var links = syrup.classInfo().links();
+        expect(Array.isArray(links)).toBe(true);
+    });
+
     it('can show a definition of a method', function () {
         var method = syrup.classInfo().method('system');
         expect(method.result).toBe('object');
@@ -34,7 +44,7 @@ describe('a syrup ClassInfo instance', function () {
         var methods = syrup.classInfo().methods();
         expect(Array.isArray(methods)).toBe(true);
     });
-    
+
     it('can show a definition of a collection', function () {
         var collection = syrup.classInfo().collection('system');
         expect(collection.result).toBe(undefined);

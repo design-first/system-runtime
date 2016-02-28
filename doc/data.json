@@ -152,7 +152,7 @@
             "namespaces": {},
             "tag": "main",
             "file": "build/system/system.js",
-            "line": 1076,
+            "line": 1253,
             "description": "This module is the main module of syrup. <br>\nIt inits syrup metamodel and loads syrup core system.",
             "requires": [
                 "syrup-component",
@@ -198,7 +198,7 @@
             "module": "syrup",
             "namespace": "",
             "file": "src/component.js",
-            "line": 964,
+            "line": 976,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by syrup.",
             "requires": [
                 "syrup-workflow",
@@ -224,7 +224,7 @@
             "module": "syrup",
             "namespace": "",
             "file": "src/db.js",
-            "line": 193,
+            "line": 205,
             "description": "This module manages syrup database. <br>\nsyrup database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nsyrup Database is closely linked to syrup metamodel and syrup components because: <br>\n- all operations done by syrup database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "syrup-component",
@@ -287,7 +287,7 @@
             "module": "syrup",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1426,
+            "line": 1530,
             "description": "This module manages syrup metamodel. <br>\nsyrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.",
             "requires": [
                 "syrup-db",
@@ -358,7 +358,7 @@
             "module": "syrup",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 1076,
+            "line": 1253,
             "description": "This module contains syrup core system.",
             "static": 1
         }
@@ -396,7 +396,7 @@
             "submodule": "syrup-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 964,
+            "line": 976,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by syrup.",
             "requires": [
                 "syrup-workflow",
@@ -419,7 +419,7 @@
             "submodule": "syrup-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 784,
+            "line": 804,
             "description": "This module manages syrup database. <br>\nsyrup database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nsyrup database is closely linked to syrup metamodel because: <br>\n- all operations done by syrup database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "syrup-component",
@@ -439,7 +439,7 @@
             "submodule": "syrup-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 193,
+            "line": 205,
             "description": "A collection of documents managed by syrup. <br>\nInternal collections manage core objects of syrup (schema, type, ...). <br>\nPublic collections manage components of the same class. <br>",
             "is_constructor": 1,
             "params": [
@@ -499,7 +499,7 @@
             "submodule": "syrup-metamodel",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1426,
+            "line": 1530,
             "description": "This module manages syrup metamodel. <br>\nsyrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.",
             "requires": [
                 "syrup-db",
@@ -561,7 +561,7 @@
             "submodule": "syrup-workflow",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 700,
+            "line": 716,
             "description": "This module manages the workflow of syrup. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and syrup. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
                 "syrup-metamodel",
@@ -609,7 +609,7 @@
             "submodule": "syrup-system",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 1076,
+            "line": 1253,
             "description": "This module contains syrup core system."
         }
     },
@@ -749,7 +749,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 981,
+            "line": 993,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -770,7 +770,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 991,
+            "line": 1003,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -791,7 +791,24 @@
         },
         {
             "file": "src/component.js",
-            "line": 1000,
+            "line": 1012,
+            "description": "Remove a component with its id from the memory.",
+            "itemtype": "method",
+            "name": "removeFromMemory",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                }
+            ],
+            "class": "syrup-component",
+            "module": "syrup",
+            "submodule": "syrup-component"
+        },
+        {
+            "file": "src/component.js",
+            "line": 1020,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -801,7 +818,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 1007,
+            "line": 1027,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -822,7 +839,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 215,
+            "line": 227,
             "description": "Find a document into the collection.",
             "itemtype": "method",
             "name": "find",
@@ -846,7 +863,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 262,
+            "line": 274,
             "description": "Insert an new document into the collection. <br>\nBefore inserting the document, syrup checks that the document is compliant\nwith its class definition. <br> \nThen, after inserting it, we create the component.",
             "itemtype": "method",
             "name": "insert",
@@ -870,7 +887,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 348,
+            "line": 360,
             "description": "Update documents into a collection.",
             "itemtype": "method",
             "name": "update",
@@ -904,7 +921,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 427,
+            "line": 447,
             "description": "Remove a document from the colllection. <br>\nWhen a document is removed, the component is destroyed.",
             "itemtype": "method",
             "name": "remove",
@@ -928,7 +945,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 504,
+            "line": 524,
             "description": "Count the number of documents in the collection.",
             "itemtype": "method",
             "name": "count",
@@ -942,7 +959,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 805,
+            "line": 825,
             "description": "Create a new {{#crossLink \"SyrupDatabaseCollection\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "collection",
@@ -959,7 +976,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 813,
+            "line": 833,
             "description": "syrup database store that lists all the collections.",
             "itemtype": "property",
             "name": "store",
@@ -970,7 +987,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 820,
+            "line": 840,
             "description": "Import/Export a syrup system into/from the database.",
             "itemtype": "method",
             "name": "system",
@@ -991,7 +1008,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 829,
+            "line": 849,
             "description": "Export a syrup sub-system.",
             "itemtype": "method",
             "name": "subsystem",
@@ -1015,7 +1032,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 845,
+            "line": 865,
             "description": "Clear the database.",
             "itemtype": "method",
             "name": "clear",
@@ -1025,7 +1042,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 852,
+            "line": 872,
             "description": "Init the database.",
             "itemtype": "method",
             "name": "init",
@@ -1841,7 +1858,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1441,
+            "line": 1545,
             "description": "Init the metamodel.",
             "itemtype": "method",
             "name": "init",
@@ -1851,7 +1868,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1448,
+            "line": 1552,
             "description": "Remove the data of the metamodel from the memory.",
             "itemtype": "method",
             "name": "clear",
@@ -1861,7 +1878,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1455,
+            "line": 1559,
             "description": "Add a new schema.",
             "itemtype": "method",
             "name": "schema",
@@ -1878,7 +1895,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1463,
+            "line": 1567,
             "description": "Add a new type.",
             "itemtype": "method",
             "name": "type",
@@ -1895,7 +1912,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1471,
+            "line": 1575,
             "description": "Create the metamodel.",
             "itemtype": "method",
             "name": "create",
@@ -1905,7 +1922,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1478,
+            "line": 1582,
             "description": "Get a schema.",
             "itemtype": "method",
             "name": "get",
@@ -1926,7 +1943,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1487,
+            "line": 1591,
             "description": "Get the definition of the metamodel.",
             "itemtype": "method",
             "name": "getMetaDef",
@@ -1940,7 +1957,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1495,
+            "line": 1599,
             "description": "Get parents of a shema if any.",
             "itemtype": "method",
             "name": "getParents",
@@ -1961,7 +1978,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1504,
+            "line": 1608,
             "description": "Check if a class inherits from another one",
             "itemtype": "method",
             "name": "inheritFrom",
@@ -1987,7 +2004,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1514,
+            "line": 1618,
             "description": "Check if the object is compliant with the schema.\nUse it to test if the constructor of an object is compliant\nwith the definition of the class.",
             "itemtype": "method",
             "name": "isValidObject",
@@ -2023,7 +2040,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1528,
+            "line": 1632,
             "description": "Prepare the object in order to be compliant with the schema.",
             "itemtype": "method",
             "name": "prepareObject",
@@ -2045,7 +2062,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1537,
+            "line": 1641,
             "description": "Check if a value is compliant with a type.",
             "itemtype": "method",
             "name": "isValidType",
@@ -2071,7 +2088,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1547,
+            "line": 1651,
             "description": "Check if a value is compliant with a type enum.",
             "itemtype": "method",
             "name": "isValidEnum",
@@ -2097,7 +2114,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1557,
+            "line": 1661,
             "description": "Check if the name is a correct state for the component.",
             "itemtype": "method",
             "name": "isValidState",
@@ -2123,7 +2140,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1567,
+            "line": 1671,
             "description": "Check if an attribute of the schema is an event.",
             "itemtype": "method",
             "name": "isEvent",
@@ -2149,7 +2166,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1577,
+            "line": 1681,
             "description": "Check if an attribute of the schema is a property.",
             "itemtype": "method",
             "name": "isProperty",
@@ -2175,7 +2192,33 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1587,
+            "line": 1691,
+            "description": "Check if an attribute of the schema is a link.",
+            "itemtype": "method",
+            "name": "isLink",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the property",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "component id",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the attribute is a link",
+                "type": "Boolean"
+            },
+            "class": "syrup-metamodel",
+            "module": "syrup",
+            "submodule": "syrup-metamodel"
+        },
+        {
+            "file": "src/metamodel.js",
+            "line": 1701,
             "description": "Check if an attribute of the schema is a collection.",
             "itemtype": "method",
             "name": "isCollection",
@@ -2201,7 +2244,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1597,
+            "line": 1711,
             "description": "Check if an attribute of the schema is a method.",
             "itemtype": "method",
             "name": "isMethod",
@@ -2290,7 +2333,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 725,
+            "line": 741,
             "description": "Change the state of a component.\n\nWorklow:<br>\n<br>\n0. Check if the component has not been destroyed <br>\n1. Check if the state is a method or an event <br>\n2. Search if there is a behavior with an action for the new state <br>\n3. If so, get the action(s) <br>\n4. Check if the conditons on input are compliant with the metamodel <br>\n5. Call the action(s) <br>\n6. If not an of event, check if the conditons on input are compliant with the metamodel <br>\n7. If all is ok, the state of the component is updated <br>\n8. Return the result <br>",
             "itemtype": "method",
             "name": "state",
@@ -2307,7 +2350,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 749,
+            "line": 765,
             "description": "Stop the workflow engine.",
             "itemtype": "method",
             "name": "stop",
@@ -2324,7 +2367,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 759,
+            "line": 775,
             "description": "Restart the workflow engine from the last state.",
             "itemtype": "method",
             "name": "restart",
@@ -2334,7 +2377,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 766,
+            "line": 782,
             "description": "Check if conditions on input are compliant with the model before calling the action.",
             "itemtype": "method",
             "name": "checkParams",
@@ -2355,7 +2398,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 775,
+            "line": 791,
             "description": "Check if an action has the valid number of parameter.",
             "itemtype": "method",
             "name": "validParamNumbers",
@@ -2386,7 +2429,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 786,
+            "line": 802,
             "description": "Call an action that comes from an event.",
             "itemtype": "method",
             "name": "action",
@@ -2408,7 +2451,7 @@
         },
         {
             "file": "build/system/system.js",
-            "line": 1086,
+            "line": 1263,
             "description": "syrup core system",
             "itemtype": "property",
             "name": "system",

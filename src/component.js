@@ -57,6 +57,7 @@ var $state = require('./state.js');
 
 
 var PROPERTY_TYPE = 'property',
+    LINK_TYPE = 'link',
     COLLECTION_TYPE = 'collection',
     METHOD_TYPE = 'method',
     EVENT_TYPE = 'event',
@@ -232,7 +233,7 @@ function getProperties(id) {
 
     length = propNames.length;
     for (i = 0; i < length; i++) {
-        if (schema[propNames[i]] === PROPERTY_TYPE || schema[propNames[i]] === COLLECTION_TYPE) {
+        if (schema[propNames[i]] === LINK_TYPE || schema[propNames[i]] === PROPERTY_TYPE || schema[propNames[i]] === COLLECTION_TYPE) {
             result.push({
                 "name": propNames[i],
                 "type": model[propNames[i]].type,
@@ -674,6 +675,7 @@ function addOn(Class, classId) {
                 if (
                     !$metamodel.isEvent(state, classId) &&
                     !$metamodel.isProperty(state, classId) &&
+                    !$metamodel.isLink(state, classId) &&
                     !$metamodel.isCollection(state, classId) &&
                     $db.SyrupBehavior.find({
                         "component": this.id(),
@@ -726,6 +728,7 @@ function addOnClass(Class, classId) {
                 if (
                     !$metamodel.isEvent(state, classId) &&
                     !$metamodel.isProperty(state, classId) &&
+                    !$metamodel.isLink(state, classId) &&
                     !$metamodel.isCollection(state, classId) &&
                     $db.SyrupBehavior.find({
                         "component": this.id(),
@@ -948,6 +951,15 @@ function destroy(id) {
 }
 
 
+/*
+ * Remove a component with its id from the memory.
+ * @method removeFromMemory
+ * @param {String} id id of the component
+ */
+function removeFromMemory(id) {
+    delete store[id];
+}
+
 
 /*
  * Remove all the components store in the memory.
@@ -995,6 +1007,14 @@ exports.create = create;
  * @return {Component} component
  */
 exports.get = get;
+
+
+/**
+ * Remove a component with its id from the memory.
+ * @method removeFromMemory
+ * @param {String} id id of the component
+ */
+exports.removeFromMemory = removeFromMemory;
 
 
 /**

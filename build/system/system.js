@@ -110,7 +110,21 @@ var system = {
             "_name": "SyrupChannelSchema",
             "sync": "event",
             "loadSystem": "event",
+            "createSchema": "event",
+            "updateSchema": "event",
+            "deleteSchema": "event",
+            "createModel": "event",
+            "updateModel": "event",
+            "deleteModel": "event",
+            "createType": "event",
+            "updateType": "event",
+            "deleteType": "event",
+            "createComponent": "event",
+            "updateComponent": "event",
+            "deleteComponent": "event",
+            "createBehavior": "event",
             "updateBehavior": "event",
+            "deleteBehavior": "event",
             "_inherit": [
                 "SyrupComponentSchema"
             ],
@@ -132,6 +146,114 @@ var system = {
                     "type": "object"
                 }]
             },
+            "createSchema": {
+                "params": [{
+                    "name": "id",
+                    "type": "string"
+                }, {
+                    "name": "schema",
+                    "type": "object"
+                }]
+            },
+            "updateSchema": {
+                "params": [{
+                    "name": "id",
+                    "type": "string"
+                }, {
+                    "name": "schema",
+                    "type": "object"
+                }]
+            },
+            "deleteSchema": {
+                "params": [{
+                    "name": "id",
+                    "type": "string"
+                }]
+            },
+            "createModel": {
+                "params": [{
+                    "name": "id",
+                    "type": "string"
+                }, {
+                    "name": "model",
+                    "type": "object"
+                }]
+            },
+            "updateModel": {
+                "params": [{
+                    "name": "id",
+                    "type": "string"
+                }, {
+                    "name": "model",
+                    "type": "object"
+                }]
+            },
+            "deleteModel": {
+                "params": [{
+                    "name": "id",
+                    "type": "string"
+                }]
+            },
+            "createType": {
+                "params": [{
+                    "name": "id",
+                    "type": "string"
+                }, {
+                    "name": "type",
+                    "type": "object"
+                }]
+            },
+            "updateType": {
+                "params": [{
+                    "name": "id",
+                    "type": "string"
+                }, {
+                    "name": "type",
+                    "type": "object"
+                }]
+            },
+            "deleteType": {
+                "params": [{
+                    "name": "id",
+                    "type": "string"
+                }]
+            },
+            "createComponent": {
+                "params": [{
+                    "name": "collection",
+                    "type": "string"
+                }, {
+                    "name": "component",
+                    "type": "object"
+                }]
+            },
+            "updateComponent": {
+                "params": [{
+                    "name": "id",
+                    "type": "string"
+                }, {
+                    "name": "collection",
+                    "type": "string"
+                }, {
+                    "name": "component",
+                    "type": "object"
+                }]
+            },
+            "deleteComponent": {
+                "params": [{
+                    "name": "id",
+                    "type": "string"
+                }, {
+                    "name": "collection",
+                    "type": "string"
+                }]
+            },
+            "createBehavior": {
+                "params": [{
+                    "name": "behavior",
+                    "type": "object"
+                }]
+            },
             "updateBehavior": {
                 "params": [{
                     "name": "id",
@@ -139,6 +261,12 @@ var system = {
                 }, {
                     "name": "behavior",
                     "type": "object"
+                }]
+            },
+            "deleteBehavior": {
+                "params": [{
+                    "name": "id",
+                    "type": "string"
                 }]
             },
             "_core": true,
@@ -285,6 +413,16 @@ var system = {
             "properties": {
                 "result": "array"
             },
+            "link": {
+                "params": [{
+                    "name": "name",
+                    "type": "string"
+                }],
+                "result": "object"
+            },
+            "links": {
+                "result": "array"
+            },
             "method": {
                 "params": [{
                     "name": "name",
@@ -329,6 +467,8 @@ var system = {
             "methods": "method",
             "property": "method",
             "properties": "method",
+            "link": "method",
+            "links": "method",
             "collections": "method",
             "collection": "method",
             "event": "method",
@@ -731,6 +871,29 @@ var system = {
             "type": "string",
             "core": true
         },
+        "link": {
+            "name": "link",
+            "type": "object",
+            "schema": {
+                "type": {
+                    "type": "string",
+                    "mandatory": true
+                },
+                "readOnly": {
+                    "type": "boolean",
+                    "mandatory": true
+                },
+                "mandatory": {
+                    "type": "boolean",
+                    "mandatory": true
+                },
+                "default": {
+                    "type": "@type",
+                    "mandatory": true
+                }
+            },
+            "core": true
+        },
         "message": {
             "name": "message",
             "type": "object",
@@ -819,7 +982,7 @@ var system = {
             "_id": "1c00c107e01c9b3",
             "component": "SyrupAdmin",
             "state": "start",
-            "action": "function start(path) {\n    var Worker = null,\n    worker = null,\n    workerPath = '',\n    SyrupChannel = null,\n    syrupChannel = null;\n    \n    if (path) {\n        workerPath = path + '/scripts/worker.js';\n        workerPath = workerPath.replace(/\\/\\//g,'/');\n    } else {\n        workerPath = '/designer/scripts/worker.js';\n    }\n    \n    if (typeof SharedWorker !== 'undefined' && !this.require('channel-admin')) {\n        \n        SyrupChannel = this.require('SyrupChannel');\n        syrupChannel = new SyrupChannel({\n            '_id': 'channel-admin',\n            '_core': true\n        });\n        \n        syrupChannel.on('updateBehavior', function updateBehavior(id, behavior) {\n            this.require(id).action(behavior.action);\n        });\n        syrupChannel.on('sync', function sync() {\n            this.loadSystem(JSON.parse(this.require('db').system()));\n        });\n        syrupChannel.on('send', function send(message) {\n            this.require('worker-admin').worker().port.postMessage(message);\n        });\n\n        Worker = this.require('Worker');\n        worker = new Worker({\n            '_id': 'worker-admin',\n            '_core': true,\n            'worker': new SharedWorker(workerPath),\n        });\n        \n        worker.worker().port.onmessage = function (e) {\n          $db.SyrupMessage.insert(e.data);\n        };\n        \n        // notify System Designer\n        syrupChannel.sync();\n        \n        console.info('syrup: admin is started');\n    }\n}",
+            "action": "function start(path) {\n    var Worker = null,\n    worker = null,\n    workerPath = '',\n    SyrupChannel = null,\n    syrupChannel = null;\n    \n    if (path) {\n        workerPath = path + '/scripts/worker.js';\n        workerPath = workerPath.replace(/\\/\\//g,'/');\n    } else {\n        workerPath = '/designer/scripts/worker.js';\n    }\n    \n    if (typeof SharedWorker !== 'undefined') {\n        \n        if (!this.require('channel-admin')) {\n            SyrupChannel = this.require('SyrupChannel');\n            syrupChannel = new SyrupChannel({\n                '_id': 'channel-admin',\n                '_core': true\n            });\n            \n            syrupChannel.on('send', function send(message) {\n                this.require('worker-admin').worker().port.postMessage(message);\n            });\n            \n            // schema change events\n            syrupChannel.on('createSchema', function createSchema(id, schema) {\n                this.require('metamodel').schema(schema);\n                this.require('metamodel').create();\n            }, true);\n            \n            syrupChannel.on('updateSchema', function updateSchema(id, schema) {\n                 this.require('metamodel').type(schema);\n                 this.require('metamodel').create();\n            }, true);\n            \n            syrupChannel.on('deleteSchema', function deleteSchema(id) {\n                $db['SyrupSchema'].remove({'_id': id});\n                this.require('metamodel').create();\n            }, true);\n            \n            // model change events\n            syrupChannel.on('createModel', function createModel(id, model) {\n                this.require('metamodel').schema(model);\n                this.require('metamodel').create();\n            }, true);\n            \n            syrupChannel.on('updateModel', function updateModel(id, model) {\n                 this.require('metamodel').type(model);\n                 this.require('metamodel').create();\n            }, true);\n            \n            syrupChannel.on('deleteModel', function deleteModel(id) {\n                $db['SyrupSchema'].remove({'_id': id});\n                this.require('metamodel').create();\n                $component.removeFromMemory(id);\n            }, true);\n            \n            // type change events\n            syrupChannel.on('createType', function createType(id, type) {\n                this.require('metamodel').type(type);\n                this.require('metamodel').create();\n            }, true);\n            \n            syrupChannel.on('updateType', function updateType(id, type) {\n                 this.require('metamodel').type(type);\n                 this.require('metamodel').create();\n            }, true);\n            \n            syrupChannel.on('deleteType', function deleteType(id) {\n                $db['SyrupType'].remove({'_id': id});\n                this.require('metamodel').create();\n            }, true);\n            \n            // component change events\n            syrupChannel.on('createComponent', function createComponent(model, component) {\n                $db[model].insert(component);\n            }, true);\n            \n            syrupChannel.on('updateComponent', function updateComponent(id, collection, component) {\n                $db[collection].update({'_id': id}, component);\n            }, true);\n            \n            syrupChannel.on('deleteComponent', function deleteComponent(id, collection) {\n                $db[collection].remove({'_id': id});\n            }, true);\n            \n            // behavior change events\n            syrupChannel.on('createBehavior', function createBehavior(component) {\n                $db['SyrupBehavior'].insert(component);\n            }, true);\n            syrupChannel.on('updateBehavior', function updateBehavior(id, behavior) {\n                this.require(id).action(behavior.action);\n            });\n            syrupChannel.on('deleteBehavior', function deleteBehavior(id) {\n                $db['SyrupBehavior'].remove({'_id': id});                  \n            }, true);\n         \n            // System Designer event\n            syrupChannel.on('sync', function sync() {\n                this.loadSystem(JSON.parse(this.require('db').system()));\n            });\n    \n            Worker = this.require('Worker');\n            worker = new Worker({\n                '_id': 'worker-admin',\n                '_core': true,\n                'worker': new SharedWorker(workerPath),\n            });\n            \n            worker.worker().port.onmessage = function (e) {\n              $db.SyrupMessage.insert(e.data);\n            };\n            \n            console.info('syrup: admin is started');\n        } else {\n            console.info('syrup: admin is already started');\n        }\n    } else {\n        console.info('syrup: the browser can not run admin features');\n    }\n}",
             "useCoreAPI": true,
             "core": true
         },
@@ -854,158 +1017,172 @@ var system = {
             "core": true,
             "useCoreAPI": true
         },
-        "16b3e1379b1641b": {
-            "_id": "16b3e1379b1641b",
+        "1663c164fe1f544": {
+            "_id": "1663c164fe1f544",
             "component": "Syrup",
             "state": "error",
             "action": "function error(data) {\n    console.error('syrup: ' + data.message, data.error);\n}",
             "core": true
         },
-        "174e613a5e1e88d": {
-            "_id": "174e613a5e1e88d",
+        "117001257a17cc0": {
+            "_id": "117001257a17cc0",
             "component": "Syrup",
             "state": "system",
             "action": "function system(name) {\n    var System = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        System = this.require('SyrupSystem');\n        system = new System(conf);\n    } else {\n        result = $db.SyrupSystem.find({\n            'master': true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "18aa41aa7218f20": {
-            "_id": "18aa41aa7218f20",
+        "124cf18d4415558": {
+            "_id": "124cf18d4415558",
             "component": "Syrup",
             "state": "warning",
             "action": "function warning(message) {\n    console.warn('syrup: ' + message);\n}",
             "core": true
         },
-        "16ea4189d816940": {
-            "_id": "16ea4189d816940",
+        "1e2ad1cbd01b1bc": {
+            "_id": "1e2ad1cbd01b1bc",
             "component": "SyrupClassInfo",
             "state": "collection",
             "action": "function collection(name) {\n    var result = {};\n    if (this.metamodel()[name] === 'collection') {\n        result = this.model()[name];\n    } \n    \n    return result; \n}",
             "core": true
         },
-        "1df6c1a55c172ff": {
-            "_id": "1df6c1a55c172ff",
+        "1feda14e911ae6b": {
+            "_id": "1feda14e911ae6b",
             "component": "SyrupClassInfo",
             "state": "collections",
             "action": "function collections() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length; \n    \n    for (i = 0; i < length; i++) { \n        item = keys[i]; \n        if (this.metamodel()[item] === 'collection') {\n            result.push(item);\n        }\n    }\n    \n    return result;\n}",
             "core": true
         },
-        "151101548313897": {
-            "_id": "151101548313897",
+        "14997118de177a3": {
+            "_id": "14997118de177a3",
             "component": "SyrupClassInfo",
             "state": "event",
             "action": "function event(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'event') {\n        result = this.model()[name];\n    } \n    \n    return result;\n}",
             "core": true
         },
-        "1b2221e62d16657": {
-            "_id": "1b2221e62d16657",
+        "100e1107981d38e": {
+            "_id": "100e1107981d38e",
             "component": "SyrupClassInfo",
             "state": "events",
             "action": "function events() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'event') {\n            result.push(item);\n        }\n    } \n    return result;\n}",
             "core": true
         },
-        "102b51c3ee14502": {
-            "_id": "102b51c3ee14502",
+        "1bd1a1975f138d8": {
+            "_id": "1bd1a1975f138d8",
+            "component": "SyrupClassInfo",
+            "state": "link",
+            "action": "function link(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'link') {\n        result = this.model()[name];\n    }\n    return result;\n}",
+            "core": true
+        },
+        "1a675193e9171e9": {
+            "_id": "1a675193e9171e9",
+            "component": "SyrupClassInfo",
+            "state": "links",
+            "action": "function links() { \n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'links') {\n            result.push(item);\n        }\n    } return result;\n}",
+            "core": true
+        },
+        "1d0cf1724810462": {
+            "_id": "1d0cf1724810462",
             "component": "SyrupClassInfo",
             "state": "method",
             "action": "function method(name) {\n    var result = {};\n    if (this.metamodel()[name] === 'method') {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}",
             "core": true
         },
-        "168c3168c6145e6": {
-            "_id": "168c3168c6145e6",
+        "1cd8d1e1ca17958": {
+            "_id": "1cd8d1e1ca17958",
             "component": "SyrupClassInfo",
             "state": "methods",
             "action": "function methods() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'method') {\n            result.push(item);\n        }\n    } \n    \n    return result;\n}",
             "core": true
         },
-        "109a71e2fd1b95d": {
-            "_id": "109a71e2fd1b95d",
+        "171ee129a6168ac": {
+            "_id": "171ee129a6168ac",
             "component": "SyrupClassInfo",
             "state": "properties",
             "action": "function properties() { \n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'property') {\n            result.push(item);\n        }\n    } return result;\n}",
             "core": true
         },
-        "1526810baf1f5de": {
-            "_id": "1526810baf1f5de",
+        "10d5d148c215309": {
+            "_id": "10d5d148c215309",
             "component": "SyrupClassInfo",
             "state": "property",
             "action": "function property(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'property') {\n        result = this.model()[name];\n    }\n    return result;\n}",
             "core": true
         },
-        "15c9a129d01f0da": {
-            "_id": "15c9a129d01f0da",
+        "137e21e5f419637": {
+            "_id": "137e21e5f419637",
             "component": "SyrupComponent",
             "state": "destroy",
             "action": "function destroy() {\n    $component.destroy(this.id());\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1252c1432b1a8b4": {
-            "_id": "1252c1432b1a8b4",
+        "1d4e5141b910e10": {
+            "_id": "1d4e5141b910e10",
             "component": "SyrupComponent",
             "state": "off",
             "action": "function off(state, behaviorId) {\n    var args = [],\n    i = 0,\n    length = 0;\n    length = arguments.length;\n    \n    for (i = 0; i < length - 6; i++) {\n        args.push(arguments[i]);\n    }\n    \n    if ($workflow.checkParams({\n        \"component\": this, \n        \"methodName\": \"off\", \n        \"args\": args\n        })) {\n        \n        if (state || behaviorId) {\n            if ($metamodel.isValidState(state, this.constructor.name)) {\n                $behavior.remove({\n                    \"behaviorId\": behaviorId, \n                    \"componentId\": this.id(), \n                    \"state\": state\n                });\n            } else { \n                console.warn(\"syrup: invoke \\'off\\' method of component '\" + this.id() + \"' with an invalid state '\" + state + \"'\"); \n            }\n        } else {\n            $behavior.remove({\n                \"componentId\": this.id()\n            });\n        }\n    }\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1c7d2176a514fdf": {
-            "_id": "1c7d2176a514fdf",
+        "17cf51b3241f3d8": {
+            "_id": "17cf51b3241f3d8",
             "component": "SyrupComponent",
             "state": "require",
             "action": "function require(id) {\n    return $component.get(id);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "16c761f4ad18e2c": {
-            "_id": "16c761f4ad18e2c",
+        "1081814d661280e": {
+            "_id": "1081814d661280e",
             "component": "SyrupDatabase",
             "state": "collections",
             "action": "function collections() {\n    var result = {},\n    collectionName = '';\n    \n    for (collectionName in $db.store) {\n        if ($db.store.hasOwnProperty(collectionName) && collectionName.indexOf('Syrup') !== 0) {\n            result[collectionName] = $db[collectionName];\n            \n        }\n    }\n    return result;\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "162381ab2d1f65b": {
-            "_id": "162381ab2d1f65b",
+        "11f4f118f714cbf": {
+            "_id": "11f4f118f714cbf",
             "component": "SyrupDatabase",
             "state": "subsystem",
             "action": "function subsystem(params) {\n    return $db.subsystem(params);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1ec31126d41e813": {
-            "_id": "1ec31126d41e813",
+        "13af01083d1486d": {
+            "_id": "13af01083d1486d",
             "component": "SyrupDatabase",
             "state": "system",
             "action": "function system(system) {\n    return $db.system(system);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1f4d8184a81338c": {
-            "_id": "1f4d8184a81338c",
+        "1ef1a1ed181b217": {
+            "_id": "1ef1a1ed181b217",
             "component": "SyrupMetamodel",
             "state": "create",
             "action": "function create() {\n    $metamodel.create();\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "192a71bbf018978": {
-            "_id": "192a71bbf018978",
+        "1111c133071dbb7": {
+            "_id": "1111c133071dbb7",
             "component": "SyrupMetamodel",
             "state": "schema",
             "action": "function schema(schema) {\n    $metamodel.schema(schema);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "115441e10a17425": {
-            "_id": "115441e10a17425",
+        "180ab147ec192ce": {
+            "_id": "180ab147ec192ce",
             "component": "SyrupMetamodel",
             "state": "type",
             "action": "function type(type) {\n    $metamodel.type(type);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "143cf1dce61e17b": {
-            "_id": "143cf1dce61e17b",
+        "17c4d19f791be30": {
+            "_id": "17c4d19f791be30",
             "component": "SyrupSystem",
             "state": "sync",
             "action": "function sync() {\n    var system = JSON.parse($db.system());\n    \n    this.schemas(system.schemas);\n    this.types(system.types);\n    this.behaviors(system.behaviors);\n    this.components(system.components);\n}",
@@ -1039,7 +1216,7 @@ var system = {
             "18ed81de331252c": {
                 "_id": "18ed81de331252c",
                 "name": "system-admin",
-                "version": "0.0.1",
+                "version": "0.1.0",
                 "description": "SyrupJS administration component",
                 "subsystem": true,
                 "master": false

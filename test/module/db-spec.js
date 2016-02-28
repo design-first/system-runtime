@@ -20,6 +20,12 @@ describe('a db module', function () {
         expect(result.length).toBe(1);
     });
 
+    it('can find a document with regex criteria', function () {
+        var result = db.Syrup.find({ '_id': /syrup/ });
+
+        expect(result.length).toBe(1);
+    });
+
     it('can add a document', function () {
         db.Syrup.insert({ '_id': 'syrup1', 'version': '0.0.0' });
         var result = db.Syrup.find({ '_id': 'syrup1' });

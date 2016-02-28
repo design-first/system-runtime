@@ -26,6 +26,16 @@
     "properties": {
         "result": "array"
     },
+    "link": {
+        "params": [{
+                "name": "name",
+                "type": "string"
+            }],
+        "result": "object"
+    },
+    "links": {
+        "result": "array"
+    },
     "method": {
         "params": [{
                 "name": "name",

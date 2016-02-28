@@ -9,6 +9,8 @@
     "methods": "method",
     "property": "method",
     "properties": "method",
+    "link": "method",
+    "links": "method",
     "collections": "method",
     "collection": "method",
     "event": "method",

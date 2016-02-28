@@ -1,0 +1,6 @@
+{
+	"component": "SyrupClassInfo",
+	"state": "link",
+	"action": "function link(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'link') {\n        result = this.model()[name];\n    }\n    return result;\n}",
+	"core": true
+}

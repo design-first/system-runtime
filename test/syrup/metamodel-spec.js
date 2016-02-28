@@ -128,7 +128,7 @@ describe('a syrup metamodel instance', function () {
             'firstName': 'property',
             'lastName': 'property',
             'address': 'property',
-            'father': 'property'
+            'father': 'link'
         });
 
         metamodel.schema({
@@ -205,7 +205,7 @@ describe('a syrup metamodel instance', function () {
             'firstName': 'property',
             'lastName': 'property',
             'address': 'property',
-            'father': 'property'
+            'father': 'link'
         });
 
         metamodel.schema({
@@ -294,7 +294,7 @@ describe('a syrup metamodel instance', function () {
             'firstName': 'property',
             'lastName': 'property',
             'address': 'property',
-            'father': 'property',
+            'father': 'link',
             'son': 'property'
         });
 

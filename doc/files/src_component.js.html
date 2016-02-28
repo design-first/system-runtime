@@ -146,6 +146,7 @@ var $state = require(&#x27;./state.js&#x27;);
 
 
 var PROPERTY_TYPE = &#x27;property&#x27;,
+    LINK_TYPE = &#x27;link&#x27;,
     COLLECTION_TYPE = &#x27;collection&#x27;,
     METHOD_TYPE = &#x27;method&#x27;,
     EVENT_TYPE = &#x27;event&#x27;,
@@ -321,7 +322,7 @@ function getProperties(id) {
 
     length = propNames.length;
     for (i = 0; i &lt; length; i++) {
-        if (schema[propNames[i]] === PROPERTY_TYPE || schema[propNames[i]] === COLLECTION_TYPE) {
+        if (schema[propNames[i]] === LINK_TYPE || schema[propNames[i]] === PROPERTY_TYPE || schema[propNames[i]] === COLLECTION_TYPE) {
             result.push({
                 &quot;name&quot;: propNames[i],
                 &quot;type&quot;: model[propNames[i]].type,
@@ -763,6 +764,7 @@ function addOn(Class, classId) {
                 if (
                     !$metamodel.isEvent(state, classId) &amp;&amp;
                     !$metamodel.isProperty(state, classId) &amp;&amp;
+                    !$metamodel.isLink(state, classId) &amp;&amp;
                     !$metamodel.isCollection(state, classId) &amp;&amp;
                     $db.SyrupBehavior.find({
                         &quot;component&quot;: this.id(),
@@ -815,6 +817,7 @@ function addOnClass(Class, classId) {
                 if (
                     !$metamodel.isEvent(state, classId) &amp;&amp;
                     !$metamodel.isProperty(state, classId) &amp;&amp;
+                    !$metamodel.isLink(state, classId) &amp;&amp;
                     !$metamodel.isCollection(state, classId) &amp;&amp;
                     $db.SyrupBehavior.find({
                         &quot;component&quot;: this.id(),
@@ -1037,6 +1040,15 @@ function destroy(id) {
 }
 
 
+/*
+ * Remove a component with its id from the memory.
+ * @method removeFromMemory
+ * @param {String} id id of the component
+ */
+function removeFromMemory(id) {
+    delete store[id];
+}
+
 
 /*
  * Remove all the components store in the memory.
@@ -1084,6 +1096,14 @@ exports.create = create;
  * @return {Component} component
  */
 exports.get = get;
+
+
+/**
+ * Remove a component with its id from the memory.
+ * @method removeFromMemory
+ * @param {String} id id of the component
+ */
+exports.removeFromMemory = removeFromMemory;
 
 
 /**

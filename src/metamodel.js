@@ -59,8 +59,9 @@ var ID = '_id',
     METHOD_TYPE = 'method',
     EVENT_TYPE = 'event',
     PROPERTY_TYPE = 'property',
+    LINK_TYPE = 'link',
     COLLECTION_TYPE = 'collection',
-    internalTypes = ['property', 'collection', 'method', 'event'],
+    internalTypes = ['property', 'collection', 'link', 'method', 'event'],
     defaultTypes = ['boolean', 'string', 'number', 'object', 'function', 'array'],
     store = {
         metadef: {},
@@ -75,6 +76,56 @@ var ID = '_id',
 
 
 /* Private methods */
+
+/*
+ * Load schemas and types in memory.
+ * @method loadInMemory
+ * @private
+ */
+function loadInMemory() {
+    var schemas = [],
+        types = [],
+        schema = null,
+        type = null,
+        id = '',
+        inherit = '',
+        i = 0,
+        length = 0;
+        
+    // init store
+    store.catalog = {};
+    store.inheritance = {};
+    store.inheritanceTree = {};
+    store.model = {};
+    store.states = {};
+    store.type = {};
+    store.implementation = {};
+
+    // load schemas
+    schemas = $db.SyrupSchema.find({});
+
+    length = schemas.length;
+    for (i = 0; i < length; i++) {
+        schema = schemas[i];
+
+        id = schema[ID];
+        inherit = schema[INHERITS];
+
+        store.catalog[id] = schema;
+        if (inherit) {
+            store.inheritance[id] = inherit;
+        }
+    }
+    
+    // load types
+    types = $db.SyrupType.find({});
+
+    length = types.length;
+    for (i = 0; i < length; i++) {
+        type = types[i];
+        store.type[type.name] = type;
+    }
+}
 
 
 /*
@@ -351,12 +402,10 @@ function initDbStructure() {
  */
 function createDbStructure() {
     var modelName = '',
-        modelDef = {},
-        typeName = '';
+        modelDef = {};
 
     for (modelName in store.catalog) {
         modelDef = store.catalog[modelName];
-        $db.SyrupSchema.insert(modelDef);
         if (typeof modelDef[SCHEMA] !== 'undefined' &&
             typeof $db[modelDef[ID]] === 'undefined' &&
             modelDef[CLASS] !== false) {
@@ -367,12 +416,6 @@ function createDbStructure() {
     for (modelName in store.model) {
         modelDef = store.model[modelName];
         $db.SyrupExtendedSchema.insert(modelDef);
-    }
-
-    for (typeName in store.type) {
-        modelDef = store.type[typeName];
-        modelDef._id = modelDef.name;
-        $db.SyrupType.insert(modelDef);
     }
 }
 
@@ -597,26 +640,32 @@ function merge(source, target) {
  * @param {JSON} importedSchema schema to add
  */
 function schema(importedSchema) {
-    var id = importedSchema[ID],
-        inherit = importedSchema[INHERITS],
-        name = importedSchema[NAME];
+    var schema = null,
+        id = '',
+        inherit = '',
+        name = '',
+        schemas = [];
+
+    schema = JSON.parse(JSON.stringify(importedSchema));
+
+    id = schema[ID];
+    name = schema[NAME];
+    inherit = schema[INHERITS];
 
     // if no id, it will be the name by default
     if (hasType(id, 'undefined')) {
         id = name;
-        importedSchema[ID] = name;
+        schema[ID] = name;
     }
 
     // check if schema is compliant with the meta meta model
-    if (isValidObject(importedSchema, store.metadef.schema, false)) {
+    if (isValidObject(schema, store.metadef.schema, false)) {
 
-        if (typeof store.catalog[id] === 'undefined') {
-            store.catalog[id] = importedSchema;
+        schemas = $db.SyrupSchema.find({ '_id': id });
+        if (schemas.length) {
+            $db.SyrupSchema.update({ '_id': id }, merge(schema, schemas[0]));
         } else {
-            store.catalog[id] = merge(importedSchema, store.catalog[id]);
-        }
-        if (inherit) {
-            store.inheritance[id] = inherit;
+            $db.SyrupSchema.insert(schema);
         }
     } else {
         $workflow.stop({
@@ -638,7 +687,7 @@ function type(importedType) {
     // check if type is compliant with the meta meta model
     if (isValidObject(importedType, store.metadef.type)) {
         if (name) {
-            store.type[name] = importedType;
+            $db.SyrupType.insert(importedType);
         } else {
             $log.invalidTypeDefinition(importedType);
         }
@@ -735,6 +784,7 @@ function clear() {
  * @method create
  */
 function create() {
+    loadInMemory();
     createInheritanceTree();
     createModel();
     checkImplementation();
@@ -766,6 +816,18 @@ function isEvent(name, id) {
  */
 function isProperty(name, id) {
     return checkType(name, id, PROPERTY_TYPE);
+}
+
+
+/*
+ * Check if an attribute of the schema is a link.
+ * @method isLink
+ * @param {String} name name of the property
+ * @param {String} id component id
+ * @return {Boolean} true if the attribute is a link
+ */
+function isLink(name, id) {
+    return checkType(name, id, LINK_TYPE);
 }
 
 
@@ -831,14 +893,54 @@ function isValidType(value, typeName) {
     function _checkReference(value, typeName) {
         var isValid = true;
         var typeRef = getReference(typeName);
+        var component = value;
+
         if (hasType(value, 'string')) {
-            value = $component.get(value);
+            component = $component.get(value);
         }
-        if (getClassName(value) !== typeRef) {
+        if (getClassName(component) !== typeRef && JSON.stringify(component) !== '{}') {
             isValid = false;
             $log.invalidType(value, typeName.replace('@', ''));
         }
         return isValid;
+    }
+    
+    /*
+    * Check if an object is compliant with a type.
+    * @return {Boolean} the object is compliant with the type
+    * @private
+    */
+    function _isValidType(value, typeName) {
+        var isValid = true,
+            realType = '',
+            i = 0,
+            length = 0;
+
+        realType = getType(typeName);
+        switch (realType) {
+            case 'string':
+                isValid = hasType(value, typeName);
+                break;
+            case 'array':
+                length = value.length;
+                for (i = 0; i < length; i++) {
+                    switch (true) {
+                        case isCustomType(typeName[0]):
+                            isValid = checkCustomSchema(value[i], typeName[0]);
+                            break;
+                        case isReference(typeName[0]):
+                            isValid = _checkReference(value[i], typeName[0]);
+                            break;
+                        default:
+                            isValid = hasType(value[i], typeName[0]);
+                            break;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     if (!hasType(typeName, 'undefined')) {
@@ -850,7 +952,7 @@ function isValidType(value, typeName) {
                 result = _checkReference(value, typeName);
                 break;
             default:
-                result = hasType(value, typeName);
+                result = _isValidType(value, typeName);
                 break;
         }
     } else {
@@ -955,7 +1057,8 @@ function isValidSchema(object, schema) {
                 isValid = Array.isArray(field);
             } else {
                 if (isReference(typeRef)) {
-                    isValid = hasType(field, 'object');
+                    isValid = hasType(field, 'object') || hasType(field, 'string');
+                    // TODO maybe have a more stict validation that just a type checking
                 } else {
                     isValid = hasType(field, typeRef);
                 }
@@ -1121,7 +1224,8 @@ function isValidObject(object, schema, strict, cleanRef) {
         }
 
         if (!hasType(comp, 'undefined')) {
-            if (getClassName(comp) !== typeRef) {
+            if (!inheritFrom(comp.constructor.name, typeRef)) {
+                //if (getClassName(comp) !== typeRef) { uncomment this case if we want a strict mode
                 isValid = false;
                 $log.invalidType(field, typeRef);
             } else {
@@ -1582,6 +1686,16 @@ exports.isEvent = isEvent;
  * @return {Boolean} true if the attribute is a property
  */
 exports.isProperty = isProperty;
+
+
+/**
+ * Check if an attribute of the schema is a link.
+ * @method isLink
+ * @param {String} name name of the property
+ * @param {String} id component id
+ * @return {Boolean} true if the attribute is a link
+ */
+exports.isLink = isLink;
 
 
 /**

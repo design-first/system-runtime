@@ -336,7 +336,7 @@ function callAction(component, state, action, params, isEvent) {
         i = 0,
         length = 0;
 
-    if (!$metamodel.isProperty(state, component.constructor.name) && !$metamodel.isCollection(state, component.constructor.name)) {
+    if (!$metamodel.isProperty(state, component.constructor.name) && !$metamodel.isLink(state, component.constructor.name) && !$metamodel.isCollection(state, component.constructor.name)) {
         params = setDefaultValue(component.constructor.name, state, params);
     }
 
@@ -402,6 +402,7 @@ function validParamNumbers(className, state, action) {
         paramNumber = 0,
         modelNumberParam = [],
         isProperty = false,
+        isLink = false,
         isCollection = false,
         result = false;
 
@@ -418,6 +419,7 @@ function validParamNumbers(className, state, action) {
 
     // get the number min and max of valid parameters
     isProperty = $metamodel.isProperty(state, className);
+    isLink = $metamodel.isLink(state, className);
     isCollection = $metamodel.isCollection(state, className);
 
     switch (true) {
@@ -425,6 +427,9 @@ function validParamNumbers(className, state, action) {
             modelNumberParam = [3, 3];
             break;
         case isProperty:
+            modelNumberParam = [1, 1];
+            break;
+        case isLink:
             modelNumberParam = [1, 1];
             break;
         default:
@@ -462,6 +467,7 @@ function checkParams(params) {
         param = null,
         result = true,
         isProperty = false,
+        isLink = false,
         isCollection = false;
 
     if (component.constructor.name === 'Function') {
@@ -471,6 +477,7 @@ function checkParams(params) {
     }
 
     isProperty = $metamodel.isProperty(methodName, componentClassName);
+    isLink = $metamodel.isLink(methodName, componentClassName);
     isCollection = $metamodel.isCollection(methodName, componentClassName);
     paramsName = getParamNames(componentClassName, methodName);
 
@@ -480,6 +487,10 @@ function checkParams(params) {
             paramsNumber = [3, 3];
             break;
         case isProperty:
+            paramsType = [$metamodel.get(componentClassName)[methodName].type];
+            paramsNumber = [1, 1];
+            break;
+        case isLink:
             paramsType = [$metamodel.get(componentClassName)[methodName].type];
             paramsNumber = [1, 1];
             break;
@@ -529,6 +540,7 @@ function checkParams(params) {
 function action(behaviorId, params) {
     var isEvent = false,
         isProperty = false,
+        isLink = false,
         isCollection = false,
         behaviors = [],
         behavior = null,
@@ -548,9 +560,10 @@ function action(behaviorId, params) {
         if (component) {
             isEvent = $metamodel.isEvent(behavior.state, component.constructor.name);
             isProperty = $metamodel.isProperty(behavior.state, component.constructor.name);
+            isLink = $metamodel.isLink(behavior.state, component.constructor.name);
             isCollection = $metamodel.isCollection(behavior.state, component.constructor.name);
 
-            if (isEvent || isProperty || isCollection) {
+            if (isEvent || isProperty || isCollection || isLink) {
                 callAction(component, behavior.state, {
                     "useCoreAPI": behavior.useCoreAPI,
                     "action": actionFromMemory
@@ -597,6 +610,7 @@ function state(params) {
         i = 0,
         length = 0,
         isProperty = false,
+        isLink = false,
         isCollection = false,
         isEvent = false;
 
@@ -610,6 +624,7 @@ function state(params) {
     if (component) {
         isEvent = $metamodel.isEvent(params.state, component.constructor.name);
         isProperty = $metamodel.isProperty(params.state, component.constructor.name);
+        isLink = $metamodel.isLink(params.state, component.constructor.name);
         isCollection = $metamodel.isCollection(params.state, component.constructor.name);
         actions = getActions(component, params.state, isEvent);
     }
@@ -624,6 +639,7 @@ function state(params) {
 
             if (!isEvent &&
                 !isProperty &&
+                !isLink &&
                 !isCollection) {
                 action = actions[0];
                 result = callAction(component, params.state, action, params.data, false);
@@ -647,7 +663,7 @@ function state(params) {
         }
         return result;
     } else {
-        if (component && (isEvent || isProperty || isCollection)) {
+        if (component && (isEvent || isProperty || isLink || isCollection)) {
             $state.set(component.id(), params.state, params.data);
         }
     }

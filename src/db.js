@@ -181,7 +181,19 @@ function contains(source, target) {
         property = '';
 
     for (property in source) {
-        if (typeof target[property] === 'undefined' || target[property] !== source[property]) {
+        if (typeof target[property] !== 'undefined') {
+            if (source[property] instanceof RegExp) {
+                if (target[property].match(source[property]) === null) {
+                    result = false;
+                    break;
+                }
+            } else {
+                if (target[property] !== source[property]) {
+                    result = false;
+                    break;
+                }
+            }
+        } else {
             result = false;
             break;
         }
@@ -392,28 +404,36 @@ SyrupDatabaseCollection.prototype.update = function (query, update, options) {
 
             for (attributeName in update) {
                 if (typeof docs[i][attributeName] !== 'undefined') {
-
-                    // check type
-                    type = '';
-                    if (attributeName.indexOf('_') !== 0) {
-                        type = schema[attributeName].type;
-                    } else {
-                        if ($metamodel.getMetaDef()[attributeName]) {
-                            type = $metamodel.getMetaDef()[attributeName].type;
+                    if (this.name !== 'SyrupSchema') {
+                        // check type
+                        type = '';
+                        if (attributeName.indexOf('_') !== 0) {
+                            type = schema[attributeName].type;
+                        } else {
+                            if ($metamodel.getMetaDef()[attributeName]) {
+                                type = $metamodel.getMetaDef()[attributeName].type;
+                            }
                         }
-                    }
-                    if (type) {
-                        if ($metamodel.isValidType(update[attributeName], type)) {
-                            docs[i][attributeName] = update[attributeName];
-                            updated = updated + 1;
-                            if ($helper.isSyrup()) {
-                                $helper.getSyrup().require('db').update(this.name, docs[i]._id, attributeName, update[attributeName]);
+                        if (type) {
+                            if ($metamodel.isValidType(update[attributeName], type)) {
+                                docs[i][attributeName] = update[attributeName];
+                                updated = updated + 1;
+                                if ($helper.isSyrup()) {
+                                    $helper.getSyrup().require('db').update(this.name, docs[i]._id, attributeName, update[attributeName]);
+                                }
+                            } else {
+                                $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName]);
                             }
                         } else {
-                            $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName]);
+                            $log.unknownPropertyOnDbUpdate(attributeName, docs[i]._id);
                         }
                     } else {
-                        $log.unknownPropertyOnDbUpdate(attributeName, docs[i]._id);
+                        // TODO more check in case of schema update
+                        docs[i][attributeName] = update[attributeName];
+                        updated = updated + 1;
+                        if ($helper.isSyrup()) {
+                            $helper.getSyrup().require('db').update(this.name, docs[i]._id, attributeName, update[attributeName]);
+                        }
                     }
                 }
             }

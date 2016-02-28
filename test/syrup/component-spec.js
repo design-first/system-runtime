@@ -17,7 +17,7 @@ describe('a syrup component', function () {
             'children': 'collection',
             'firstName': 'property',
             'lastName': 'property',
-            'father': 'property',
+            'father': 'link',
             'adress': 'property',
             'moving': 'event'
         });
