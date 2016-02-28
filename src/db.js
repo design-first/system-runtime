@@ -421,6 +421,16 @@ SyrupDatabaseCollection.prototype.update = function (query, update, options) {
                                 if ($helper.isSyrup()) {
                                     $helper.getSyrup().require('db').update(this.name, docs[i]._id, attributeName, update[attributeName]);
                                 }
+                                $workflow.state({
+                                    "component": docs[i]._id,
+                                    "state": attributeName,
+                                    "data": [update[attributeName]]
+                                });
+                                $workflow.state({
+                                    "component": this.name,
+                                    "state": attributeName,
+                                    "data": [update[attributeName]]
+                                });
                             } else {
                                 $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName]);
                             }

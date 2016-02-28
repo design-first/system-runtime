@@ -419,7 +419,7 @@
             "submodule": "syrup-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 804,
+            "line": 814,
             "description": "This module manages syrup database. <br>\nsyrup database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nsyrup database is closely linked to syrup metamodel because: <br>\n- all operations done by syrup database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "syrup-component",
@@ -921,7 +921,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 447,
+            "line": 457,
             "description": "Remove a document from the colllection. <br>\nWhen a document is removed, the component is destroyed.",
             "itemtype": "method",
             "name": "remove",
@@ -945,7 +945,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 524,
+            "line": 534,
             "description": "Count the number of documents in the collection.",
             "itemtype": "method",
             "name": "count",
@@ -959,7 +959,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 825,
+            "line": 835,
             "description": "Create a new {{#crossLink \"SyrupDatabaseCollection\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "collection",
@@ -976,7 +976,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 833,
+            "line": 843,
             "description": "syrup database store that lists all the collections.",
             "itemtype": "property",
             "name": "store",
@@ -987,7 +987,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 840,
+            "line": 850,
             "description": "Import/Export a syrup system into/from the database.",
             "itemtype": "method",
             "name": "system",
@@ -1008,7 +1008,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 849,
+            "line": 859,
             "description": "Export a syrup sub-system.",
             "itemtype": "method",
             "name": "subsystem",
@@ -1032,7 +1032,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 865,
+            "line": 875,
             "description": "Clear the database.",
             "itemtype": "method",
             "name": "clear",
@@ -1042,7 +1042,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 872,
+            "line": 882,
             "description": "Init the database.",
             "itemtype": "method",
             "name": "init",
