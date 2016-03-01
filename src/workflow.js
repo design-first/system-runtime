@@ -333,11 +333,18 @@ function getActions(component, name, isEvent) {
 function callAction(component, state, action, params, isEvent) {
     var result = null,
         injectedParams = [],
+        componentClassName = '',
         i = 0,
         length = 0;
 
-    if (!$metamodel.isProperty(state, component.constructor.name) && !$metamodel.isLink(state, component.constructor.name) && !$metamodel.isCollection(state, component.constructor.name)) {
-        params = setDefaultValue(component.constructor.name, state, params);
+    if (component.constructor.name === 'Function') {
+        componentClassName = component.name;
+    } else {
+        componentClassName = component.constructor.name;
+    }
+
+    if (!$metamodel.isProperty(state, componentClassName) && !$metamodel.isLink(state, componentClassName) && !$metamodel.isCollection(state, componentClassName)) {
+        params = setDefaultValue(componentClassName, state, params);
     }
 
     try {
@@ -545,6 +552,7 @@ function action(behaviorId, params) {
         behaviors = [],
         behavior = null,
         component = null,
+        componentClassName = '',
         actionFromMemory = null;
 
     behaviors = $db.SyrupBehavior.find({
@@ -558,10 +566,17 @@ function action(behaviorId, params) {
 
         component = $component.get(behavior.component);
         if (component) {
-            isEvent = $metamodel.isEvent(behavior.state, component.constructor.name);
-            isProperty = $metamodel.isProperty(behavior.state, component.constructor.name);
-            isLink = $metamodel.isLink(behavior.state, component.constructor.name);
-            isCollection = $metamodel.isCollection(behavior.state, component.constructor.name);
+
+            if (component.constructor.name === 'Function') {
+                componentClassName = component.name;
+            } else {
+                componentClassName = component.constructor.name;
+            }
+
+            isEvent = $metamodel.isEvent(behavior.state, componentClassName);
+            isProperty = $metamodel.isProperty(behavior.state, componentClassName);
+            isLink = $metamodel.isLink(behavior.state, componentClassName);
+            isCollection = $metamodel.isCollection(behavior.state, componentClassName);
 
             if (isEvent || isProperty || isCollection || isLink) {
                 callAction(component, behavior.state, {
@@ -609,6 +624,7 @@ function state(params) {
         result = null,
         i = 0,
         length = 0,
+        componentClassName = false,
         isProperty = false,
         isLink = false,
         isCollection = false,
@@ -622,10 +638,16 @@ function state(params) {
 
     component = $component.get(params.component);
     if (component) {
-        isEvent = $metamodel.isEvent(params.state, component.constructor.name);
-        isProperty = $metamodel.isProperty(params.state, component.constructor.name);
-        isLink = $metamodel.isLink(params.state, component.constructor.name);
-        isCollection = $metamodel.isCollection(params.state, component.constructor.name);
+
+        if (component.constructor.name === 'Function') {
+            componentClassName = component.name;
+        } else {
+            componentClassName = component.constructor.name;
+        }
+        isEvent = $metamodel.isEvent(params.state, componentClassName);
+        isProperty = $metamodel.isProperty(params.state, componentClassName);
+        isLink = $metamodel.isLink(params.state, componentClassName);
+        isCollection = $metamodel.isCollection(params.state, componentClassName);
         actions = getActions(component, params.state, isEvent);
     }
 
