@@ -241,16 +241,17 @@ function SyrupArray(conf) {
     arr.pop = function pop() {
         var result,
             val = null,
-            isClass = false;
+            isClass = false,
+            length = 0;
 
         if (!isReadOnly) {
             if (arrDb.length !== 0) {
                 val = arrDb.pop();
 
                 $workflow.state({
-                    &quot;component&quot;: val,
+                    &quot;component&quot;: id,
                     &quot;state&quot;: propertyName,
-                    &quot;data&quot;: [arrDb.length - 1, val, &#x27;remove&#x27;]
+                    &quot;data&quot;: [arrDb.length, val, &#x27;remove&#x27;]
                 });
 
                 isClass = type.indexOf(&#x27;@&#x27;) !== -1;

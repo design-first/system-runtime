@@ -198,7 +198,7 @@
             "module": "syrup",
             "namespace": "",
             "file": "src/component.js",
-            "line": 976,
+            "line": 977,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by syrup.",
             "requires": [
                 "syrup-workflow",
@@ -396,7 +396,7 @@
             "submodule": "syrup-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 976,
+            "line": 977,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by syrup.",
             "requires": [
                 "syrup-workflow",
@@ -749,7 +749,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 993,
+            "line": 994,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -770,7 +770,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 1003,
+            "line": 1004,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -791,7 +791,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 1012,
+            "line": 1013,
             "description": "Remove a component with its id from the memory.",
             "itemtype": "method",
             "name": "removeFromMemory",
@@ -808,7 +808,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 1020,
+            "line": 1021,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -818,7 +818,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 1027,
+            "line": 1028,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",

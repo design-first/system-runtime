@@ -159,9 +159,9 @@ function SyrupArray(conf) {
                 val = arrDb.pop();
 
                 $workflow.state({
-                    "component": val,
+                    "component": id,
                     "state": propertyName,
-                    "data": [arrDb.length - 1, val, 'remove']
+                    "data": [arrDb.length, val, 'remove']
                 });
 
                 isClass = type.indexOf('@') !== -1;
