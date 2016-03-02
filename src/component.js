@@ -633,13 +633,13 @@ function addEvents(model, Class, classId) {
                             }]
                         });
                     }
+                } else {
+                    $workflow.state({
+                        "component": this.id(),
+                        "state": methodName,
+                        "data": arguments
+                    });
                 }
-
-                $workflow.state({
-                    "component": this.id(),
-                    "state": methodName,
-                    "data": arguments
-                });
             };
         if (params) {
             /* jshint -W054 */

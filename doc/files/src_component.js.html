@@ -241,8 +241,7 @@ function SyrupArray(conf) {
     arr.pop = function pop() {
         var result,
             val = null,
-            isClass = false,
-            length = 0;
+            isClass = false;
 
         if (!isReadOnly) {
             if (arrDb.length !== 0) {
@@ -723,13 +722,13 @@ function addEvents(model, Class, classId) {
                             }]
                         });
                     }
+                } else {
+                    $workflow.state({
+                        &quot;component&quot;: this.id(),
+                        &quot;state&quot;: methodName,
+                        &quot;data&quot;: arguments
+                    });
                 }
-
-                $workflow.state({
-                    &quot;component&quot;: this.id(),
-                    &quot;state&quot;: methodName,
-                    &quot;data&quot;: arguments
-                });
             };
         if (params) {
             /* jshint -W054 */
