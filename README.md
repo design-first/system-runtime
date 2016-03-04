@@ -78,7 +78,7 @@ runtime.version();
 * [Quick Start](https://system-runtime.readme.io/docs/quick-start)
 * [Guide](https://system-runtime.readme.io/docs/installation)
 * [Examples](https://system-runtime.readme.io/docs/a-basic-hello-world)
-* [Build Runtime](https://system-runtime.readme.io/docs/extend-runtimejs)
+* [Build Runtime](https://system-runtime.readme.io/docs/extend-runtime)
 
 ## Licence
 
