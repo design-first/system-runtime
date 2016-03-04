@@ -1,4 +1,4 @@
-describe('a Runtime system', function () {
+describe('a system', function () {
 
     var system = null;
     

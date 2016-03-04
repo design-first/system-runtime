@@ -1,4 +1,4 @@
-describe('a Runtime database instance', function () {
+describe('a database instance', function () {
 
     // init
     if (typeof window === 'undefined') {

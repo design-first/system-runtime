@@ -1,4 +1,4 @@
-describe('a Runtime component', function () {
+describe('a component', function () {
 
     // init
     if (typeof window === 'undefined') {

@@ -1,4 +1,4 @@
-describe('a Runtime ClassInfo instance', function () {
+describe('a ClassInfo instance', function () {
 
     // init
     if (typeof window === 'undefined') {

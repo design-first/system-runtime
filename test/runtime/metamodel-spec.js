@@ -1,4 +1,4 @@
-describe('a Runtime metamodel instance', function () {
+describe('a metamodel instance', function () {
 
     // init
     if (typeof window === 'undefined') {
