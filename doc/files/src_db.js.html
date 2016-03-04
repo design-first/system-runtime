@@ -21,12 +21,12 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.9</b>
+                    API Docs for Version: <b>1.0.0</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/syrup", "classes/syrup-behavior", "classes/syrup-component", "classes/syrup-db", "classes/syrup-helper", "classes/syrup-log", "classes/syrup-metamodel", "classes/syrup-state", "classes/syrup-system", "classes/syrup-workflow", "classes/SyrupDatabaseCollection", "classes/SyrupError", "modules/syrup", "modules/syrup-behavior", "modules/syrup-component", "modules/syrup-db", "modules/syrup-helper", "modules/syrup-log", "modules/syrup-metamodel", "modules/syrup-state", "modules/syrup-system", "modules/syrup-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/runtime", "classes/runtime-behavior", "classes/runtime-component", "classes/runtime-db", "classes/runtime-helper", "classes/runtime-log", "classes/runtime-metamodel", "classes/runtime-state", "classes/runtime-system", "classes/runtime-workflow", "classes/RuntimeDatabaseCollection", "classes/RuntimeError", "modules/runtime", "modules/runtime-behavior", "modules/runtime-component", "modules/runtime-db", "modules/runtime-helper", "modules/runtime-log", "modules/runtime-metamodel", "modules/runtime-state", "modules/runtime-system", "modules/runtime-workflow"]'>
         </form>
     </div>
 </div>
@@ -37,18 +37,18 @@
     <div id="sidebar">
     <div id="classes">
         <ul id="api-classes" class="nav nav-list">
-                <li><a href="../classes/syrup.html">syrup</a></li>
-                <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
-                <li><a href="../classes/syrup-component.html">syrup-component</a></li>
-                <li><a href="../classes/syrup-db.html">syrup-db</a></li>
-                <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
-                <li><a href="../classes/syrup-log.html">syrup-log</a></li>
-                <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
-                <li><a href="../classes/syrup-state.html">syrup-state</a></li>
-                <li><a href="../classes/syrup-system.html">syrup-system</a></li>
-                <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
-                <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
-                <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+                <li><a href="../classes/runtime.html">runtime</a></li>
+                <li><a href="../classes/runtime-behavior.html">runtime-behavior</a></li>
+                <li><a href="../classes/runtime-component.html">runtime-component</a></li>
+                <li><a href="../classes/runtime-db.html">runtime-db</a></li>
+                <li><a href="../classes/runtime-helper.html">runtime-helper</a></li>
+                <li><a href="../classes/runtime-log.html">runtime-log</a></li>
+                <li><a href="../classes/runtime-metamodel.html">runtime-metamodel</a></li>
+                <li><a href="../classes/runtime-state.html">runtime-state</a></li>
+                <li><a href="../classes/runtime-system.html">runtime-system</a></li>
+                <li><a href="../classes/runtime-workflow.html">runtime-workflow</a></li>
+                <li><a href="../classes/RuntimeDatabaseCollection.html">RuntimeDatabaseCollection</a></li>
+                <li><a href="../classes/RuntimeError.html">RuntimeError</a></li>
         </ul>
     </div>
     </div>
@@ -88,9 +88,8 @@
 <div class="file">
     <pre class="prettyprint linenums">
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -115,22 +114,22 @@
  */
 
 /**
- * This module manages syrup database. &lt;br&gt;
- * syrup database is a micro NoSQL Database that contains: &lt;br&gt;
+ * This module manages Runtime database. &lt;br&gt;
+ * Runtime database is a micro NoSQL Database that contains: &lt;br&gt;
  * - collections to store documents (schemas, types, components, ...) and &lt;br&gt;
  * - APIs to import or export documents. &lt;br&gt;
  * 
- * syrup Database is closely linked to syrup metamodel and syrup components because: &lt;br&gt;
- * - all operations done by syrup database must be compliant with the model before being finished, &lt;br&gt;
+ * Runtime Database is closely linked to Runtime metamodel and Runtime components because: &lt;br&gt;
+ * - all operations done by Runtime database must be compliant with the model before being finished, &lt;br&gt;
  * - insert operation automatically creates a component and &lt;br&gt;
  * - remove operation automatically destroy a component.
  *  
- * @module syrup
- * @submodule syrup-db
- * @requires syrup-component
- * @requires syrup-helper
- * @requires syrup-log
- * @class syrup-db
+ * @module runtime
+ * @submodule runtime-db
+ * @requires runtime-component
+ * @requires runtime-helper
+ * @requires runtime-log
+ * @class runtime-db
  * @static
  */
 
@@ -151,24 +150,24 @@ var $workflow = require(&#x27;./workflow.js&#x27;);
 var store = {},
     collections = [],
     internalDB = [
-        &#x27;Syrup&#x27;,
-        &#x27;SyrupSchema&#x27;,
-        &#x27;SyrupExtendedSchema&#x27;,
-        &#x27;SyrupBehavior&#x27;,
-        &#x27;SyrupState&#x27;,
-        &#x27;SyrupType&#x27;,
-        &#x27;SyrupMetamodel&#x27;,
-        &#x27;SyrupDatabase&#x27;,
-        &#x27;SyrupSystem&#x27;,
-        &#x27;SyrupClassInfo&#x27;,
-        &#x27;SyrupMessage&#x27;,
-        &#x27;SyrupChannel&#x27;
+        &#x27;Runtime&#x27;,
+        &#x27;RuntimeSchema&#x27;,
+        &#x27;RuntimeExtendedSchema&#x27;,
+        &#x27;RuntimeBehavior&#x27;,
+        &#x27;RuntimeState&#x27;,
+        &#x27;RuntimeType&#x27;,
+        &#x27;RuntimeMetamodel&#x27;,
+        &#x27;RuntimeDatabase&#x27;,
+        &#x27;RuntimeSystem&#x27;,
+        &#x27;RuntimeClassInfo&#x27;,
+        &#x27;RuntimeMessage&#x27;,
+        &#x27;RuntimeChannel&#x27;
     ],
     coreDb = [
-        &#x27;SyrupSchema&#x27;,
-        &#x27;SyrupExtendedSchema&#x27;,
-        &#x27;SyrupState&#x27;,
-        &#x27;SyrupType&#x27;
+        &#x27;RuntimeSchema&#x27;,
+        &#x27;RuntimeExtendedSchema&#x27;,
+        &#x27;RuntimeState&#x27;,
+        &#x27;RuntimeType&#x27;
     ];
 
 
@@ -201,9 +200,9 @@ function dump() {
 
     // schemas
     dbDump.schemas = {};
-    if (exports.SyrupSchema.count()) {
-        for (schemaId in store.SyrupSchema) {
-            schema = JSON.parse(JSON.stringify(store.SyrupSchema[schemaId]));
+    if (exports.RuntimeSchema.count()) {
+        for (schemaId in store.RuntimeSchema) {
+            schema = JSON.parse(JSON.stringify(store.RuntimeSchema[schemaId]));
             if (!schema._core) {
                 dbDump.schemas[schemaId] = schema;
             }
@@ -212,9 +211,9 @@ function dump() {
 
     // types
     dbDump.types = {};
-    if (exports.SyrupType.count()) {
-        for (typeId in store.SyrupType) {
-            type = JSON.parse(JSON.stringify(store.SyrupType[typeId]));
+    if (exports.RuntimeType.count()) {
+        for (typeId in store.RuntimeType) {
+            type = JSON.parse(JSON.stringify(store.RuntimeType[typeId]));
             delete type._id;
             if (!type.core) {
                 dbDump.types[type.name] = type;
@@ -224,8 +223,8 @@ function dump() {
 
     // behaviors
     dbDump.behaviors = {};
-    for (behaviorId in store.SyrupBehavior) {
-        behavior = JSON.parse(JSON.stringify(store.SyrupBehavior[behaviorId]));
+    for (behaviorId in store.RuntimeBehavior) {
+        behavior = JSON.parse(JSON.stringify(store.RuntimeBehavior[behaviorId]));
         delete behavior.classInfo;
 
         if (!behavior.core) {
@@ -292,15 +291,15 @@ function contains(source, target) {
 
 
 /** 
- * A collection of documents managed by syrup. &lt;br&gt;
- * Internal collections manage core objects of syrup (schema, type, ...). &lt;br&gt;
+ * A collection of documents managed by Runtime. &lt;br&gt;
+ * Internal collections manage core objects of Runtime (schema, type, ...). &lt;br&gt;
  * Public collections manage components of the same class. &lt;br&gt;
  * 
- * @class SyrupDatabaseCollection
+ * @class RuntimeDatabaseCollection
  * @constructor
  * @param {String} name name of the new collection
  */
-var SyrupDatabaseCollection = function (name) {
+var RuntimeDatabaseCollection = function (name) {
     if ($metamodel.get(name) || internalDB.indexOf(name) !== -1) {
         store[name] = {};
         this.name = name;
@@ -324,7 +323,7 @@ var SyrupDatabaseCollection = function (name) {
  * $db.Person.find({&quot;name&quot;: &quot;laure&quot;, &quot;age&quot; : 24}); &lt;br&gt;
  * $db.Person.find([{&quot;name&quot;: &quot;rene&quot;}, {&quot;name&quot;: &quot;robert&quot;}]);
  */
-SyrupDatabaseCollection.prototype.find = function (query) {
+RuntimeDatabaseCollection.prototype.find = function (query) {
     var result = [],
         id = &#x27;&#x27;,
         object = {};
@@ -362,7 +361,7 @@ SyrupDatabaseCollection.prototype.find = function (query) {
 
 /**
  * Insert an new document into the collection. &lt;br&gt;
- * Before inserting the document, syrup checks that the document is compliant
+ * Before inserting the document, Runtime checks that the document is compliant
  * with its class definition. &lt;br&gt; 
  * Then, after inserting it, we create the component.
  * @method insert
@@ -376,7 +375,7 @@ SyrupDatabaseCollection.prototype.find = function (query) {
  *      &quot;age&quot;: 43 &lt;br&gt;
  * }); &lt;br&gt;
  */
-SyrupDatabaseCollection.prototype.insert = function (document) {
+RuntimeDatabaseCollection.prototype.insert = function (document) {
     var doc = [],
         Component = null,
         result = [];
@@ -394,9 +393,9 @@ SyrupDatabaseCollection.prototype.insert = function (document) {
             systems = [];
 
         switch (true) {
-            case this.name === &#x27;SyrupSchema&#x27;:
-            case this.name === &#x27;SyrupType&#x27;:
-            case this.name === &#x27;SyrupExtendedSchema&#x27;:
+            case this.name === &#x27;RuntimeSchema&#x27;:
+            case this.name === &#x27;RuntimeType&#x27;:
+            case this.name === &#x27;RuntimeExtendedSchema&#x27;:
             case $metamodel.isValidObject(obj, $metamodel.get(this.name)):
 
                 if (typeof obj._id === &#x27;undefined&#x27;) {
@@ -410,21 +409,21 @@ SyrupDatabaseCollection.prototype.insert = function (document) {
                     component = new Component(obj);
                     result.push(component.id());
                 } else {
-                    if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
-                        $helper.getSyrup().require(&#x27;db&#x27;).insert(this.name, obj);
+                    if ($helper.isRuntime() &amp;&amp; $helper.getRuntime().require(&#x27;db&#x27;)) {
+                        $helper.getRuntime().require(&#x27;db&#x27;).insert(this.name, obj);
                     }
                 }
 
-                if (this.name === &#x27;SyrupMessage&#x27;) {
-                    if ($helper.isSyrup()) {
-                        systems = exports.SyrupSystem.find({
+                if (this.name === &#x27;RuntimeMessage&#x27;) {
+                    if ($helper.isRuntime()) {
+                        systems = exports.RuntimeSystem.find({
                             &#x27;master&#x27;: true
                         });
                         if (!systems.length || (systems.length &amp;&amp; systems[0]._id !== obj.from)) {
-                            channels = exports.SyrupChannel.find({});
+                            channels = exports.RuntimeChannel.find({});
                             var length = channels.length;
                             for (var i = 0; i &lt; length; i++) {
-                                channel = $helper.getSyrup().require(channels[i]._id);
+                                channel = $helper.getRuntime().require(channels[i]._id);
                                 $workflow.state({
                                     &quot;component&quot;: channels[i]._id,
                                     &quot;state&quot;: obj.event,
@@ -460,7 +459,7 @@ SyrupDatabaseCollection.prototype.insert = function (document) {
  * $db.Cars.update([{&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;code&quot;: &quot;AZD-65&quot;}], {&quot;price&quot;: &quot;10000$&quot;}); &lt;br&gt;
  * $db.Cars.update({&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;price&quot;: &quot;10000$&quot;}, {&quot;upsert&quot;: true}); &lt;br&gt;
  */
-SyrupDatabaseCollection.prototype.update = function (query, update, options) {
+RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
     var docs = this.find(query),
         updated = 0,
         i = 0,
@@ -493,7 +492,7 @@ SyrupDatabaseCollection.prototype.update = function (query, update, options) {
 
             for (attributeName in update) {
                 if (typeof docs[i][attributeName] !== &#x27;undefined&#x27;) {
-                    if (this.name !== &#x27;SyrupSchema&#x27;) {
+                    if (this.name !== &#x27;RuntimeSchema&#x27;) {
                         // check type
                         type = &#x27;&#x27;;
                         if (attributeName.indexOf(&#x27;_&#x27;) !== 0) {
@@ -507,8 +506,8 @@ SyrupDatabaseCollection.prototype.update = function (query, update, options) {
                             if ($metamodel.isValidType(update[attributeName], type)) {
                                 docs[i][attributeName] = update[attributeName];
                                 updated = updated + 1;
-                                if ($helper.isSyrup()) {
-                                    $helper.getSyrup().require(&#x27;db&#x27;).update(this.name, docs[i]._id, attributeName, update[attributeName]);
+                                if ($helper.isRuntime()) {
+                                    $helper.getRuntime().require(&#x27;db&#x27;).update(this.name, docs[i]._id, attributeName, update[attributeName]);
                                 }
                                 $workflow.state({
                                     &quot;component&quot;: docs[i]._id,
@@ -530,8 +529,8 @@ SyrupDatabaseCollection.prototype.update = function (query, update, options) {
                         // TODO more check in case of schema update
                         docs[i][attributeName] = update[attributeName];
                         updated = updated + 1;
-                        if ($helper.isSyrup()) {
-                            $helper.getSyrup().require(&#x27;db&#x27;).update(this.name, docs[i]._id, attributeName, update[attributeName]);
+                        if ($helper.isRuntime()) {
+                            $helper.getRuntime().require(&#x27;db&#x27;).update(this.name, docs[i]._id, attributeName, update[attributeName]);
                         }
                     }
                 }
@@ -554,7 +553,7 @@ SyrupDatabaseCollection.prototype.update = function (query, update, options) {
  * $db.Cars.remove({&quot;code&quot;: &quot;AZD-71&quot;}); &lt;br&gt;
  * $db.Cars.remove([{&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;code&quot;: &quot;AZD-65&quot;}]); &lt;br&gt;
  */
-SyrupDatabaseCollection.prototype.remove = function (query) {
+RuntimeDatabaseCollection.prototype.remove = function (query) {
     var result = [],
         id = &#x27;&#x27;,
         component = null,
@@ -575,8 +574,8 @@ SyrupDatabaseCollection.prototype.remove = function (query) {
                         if (component) {
                             component.destroy();
                         }
-                        if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
-                            $helper.getSyrup().require(&#x27;db&#x27;).remove(this.name, id);
+                        if ($helper.isRuntime() &amp;&amp; $helper.getRuntime().require(&#x27;db&#x27;)) {
+                            $helper.getRuntime().require(&#x27;db&#x27;).remove(this.name, id);
                         }
                         result.push(id);
                     }
@@ -592,8 +591,8 @@ SyrupDatabaseCollection.prototype.remove = function (query) {
                     if (component) {
                         component.destroy();
                     }
-                    if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
-                        $helper.getSyrup().require(&#x27;db&#x27;).remove(this.name, id);
+                    if ($helper.isRuntime() &amp;&amp; $helper.getRuntime().require(&#x27;db&#x27;)) {
+                        $helper.getRuntime().require(&#x27;db&#x27;).remove(this.name, id);
                     }
                     result.push(id);
                 }
@@ -609,8 +608,8 @@ SyrupDatabaseCollection.prototype.remove = function (query) {
                     component.destroy();
                 }
             }
-            if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
-                $helper.getSyrup().require(&#x27;db&#x27;).remove(this.name, id);
+            if ($helper.isRuntime() &amp;&amp; $helper.getRuntime().require(&#x27;db&#x27;)) {
+                $helper.getRuntime().require(&#x27;db&#x27;).remove(this.name, id);
             }
             result.push(id);
         }
@@ -625,7 +624,7 @@ SyrupDatabaseCollection.prototype.remove = function (query) {
  * @method count
  * @return {Number} number of documents in the collection
  */
-SyrupDatabaseCollection.prototype.count = function () {
+RuntimeDatabaseCollection.prototype.count = function () {
     var result = 0,
         objectId = &#x27;&#x27;;
     for (objectId in store[this.name]) {
@@ -639,20 +638,20 @@ SyrupDatabaseCollection.prototype.count = function () {
 
 
 /*
- * Create a new {{#crossLink &quot;SyrupDatabaseCollection&quot;}}{{/crossLink}}.
+ * Create a new {{#crossLink &quot;RuntimeDatabaseCollection&quot;}}{{/crossLink}}.
  * @method collection
  * @param {String} name of the collection
  */
 function collection(name) {
-    exports[name] = new SyrupDatabaseCollection(name);
+    exports[name] = new RuntimeDatabaseCollection(name);
 }
 
 
 /*
- * Import/Export a syrup system into/from the database
+ * Import/Export a Runtime system into/from the database
  * @method system
- * @param {JSON} importedSystem a syrup system to import
- * @return {String} the id of the imported syrup system or the if of the current syrup system
+ * @param {JSON} importedSystem a Runtime system to import
+ * @return {String} the id of the imported Runtime system or the if of the current Runtime system
  */
 function system(importedSystem) {
     var result = &#x27;&#x27;,
@@ -683,7 +682,7 @@ function system(importedSystem) {
 
         //add behaviors
         for (behaviorId in importedSystem.behaviors) {
-            exports.SyrupBehavior.insert(importedSystem.behaviors[behaviorId]);
+            exports.RuntimeBehavior.insert(importedSystem.behaviors[behaviorId]);
         }
 
         // add components
@@ -694,7 +693,7 @@ function system(importedSystem) {
         }
 
         // reset info if already a master system
-        systems = exports.SyrupSystem.find({
+        systems = exports.RuntimeSystem.find({
             &#x27;master&#x27;: true
         });
         if (systems.length) {
@@ -706,7 +705,7 @@ function system(importedSystem) {
         }
 
         // insert the system in DB
-        exports.SyrupSystem.insert(importedSystem);
+        exports.RuntimeSystem.insert(importedSystem);
 
         result = importedSystem._id;
 
@@ -714,7 +713,7 @@ function system(importedSystem) {
         exportedSystem = dump();
 
         // get id of the master system
-        systems = exports.SyrupSystem.find({
+        systems = exports.RuntimeSystem.find({
             &#x27;master&#x27;: true
         });
 
@@ -743,10 +742,10 @@ function system(importedSystem) {
 
 
 /*
- * Export a syrup sub-system.
+ * Export a Runtime sub-system.
  * @method subsystem
  * @param {JSON} params parameters
- * @return {String} a stringified syrup sub-system
+ * @return {String} a stringified Runtime sub-system
  * 
  * @example
  * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;}}); // filter export on schemas &lt;br&gt;
@@ -768,7 +767,7 @@ function subsystem(params) {
         className = &#x27;&#x27;;
     
     // default values
-    result = exports.SyrupSystem.find({
+    result = exports.RuntimeSystem.find({
         &#x27;master&#x27;: true
     });
     if (result.length) {
@@ -784,7 +783,7 @@ function subsystem(params) {
     // schemas
     system.schemas = {};
     if (params.schemas) {
-        result = exports.SyrupSchema.find(params.schema);
+        result = exports.RuntimeSchema.find(params.schema);
 
         length = result.length;
         for (i = 0; i &lt; length; i++) {
@@ -798,7 +797,7 @@ function subsystem(params) {
     // types
     system.types = {};
     if (params.types) {
-        result = exports.SyrupType.find(params.types);
+        result = exports.RuntimeType.find(params.types);
 
         length = result.length;
         for (i = 0; i &lt; length; i++) {
@@ -812,7 +811,7 @@ function subsystem(params) {
     // behaviors
     system.behaviors = {};
     if (params.behaviors) {
-        behavior = exports.SyrupBehavior.find(params.behaviors);
+        behavior = exports.RuntimeBehavior.find(params.behaviors);
 
         length = result.length;
         for (i = 0; i &lt; length; i++) {
@@ -874,10 +873,10 @@ function clear() {
  * @method init
  */
 function init() {
-    var syrupSystemId = &#x27;&#x27;,
-        syrupSystem = null;
+    var runtimeSystemId = &#x27;&#x27;,
+        runtimeSystem = null;
 
-    syrupSystem = exports.SyrupSystem.find({
+    runtimeSystem = exports.RuntimeSystem.find({
         &#x27;_id&#x27;: &#x27;e89c617b6b15d24&#x27;
     })[0];
 
@@ -891,9 +890,9 @@ function init() {
     // init metamodel
     $metamodel.init();
     
-    // reimport syrup core system
-    syrupSystemId = exports.system(syrupSystem);
-    $component.get(syrupSystemId).main();
+    // reimport Runtime core system
+    runtimeSystemId = exports.system(runtimeSystem);
+    $component.get(runtimeSystemId).main();
 }
 
 
@@ -901,28 +900,28 @@ function init() {
 
 
 /**
- * This module manages syrup database. &lt;br&gt;
- * syrup database is a micro NoSQL Database that contains: &lt;br&gt;
+ * This module manages Runtime database. &lt;br&gt;
+ * Runtime database is a micro NoSQL Database that contains: &lt;br&gt;
  * - collections to store documents (schemas, types, components, ...) and &lt;br&gt;
  * - APIs to import or export documents. &lt;br&gt;
  * 
- * syrup database is closely linked to syrup metamodel because: &lt;br&gt;
- * - all operations done by syrup database must be compliant with the model before being finished, &lt;br&gt;
+ * Runtime database is closely linked to Runtime metamodel because: &lt;br&gt;
+ * - all operations done by Runtime database must be compliant with the model before being finished, &lt;br&gt;
  * - insert operation automatically creates a component and &lt;br&gt;
  * - remove operation automatically destroy a component.
  *   
- * @module syrup
- * @submodule syrup-db
- * @requires syrup-component
- * @requires syrup-helper
- * @requires syrup-log
- * @class syrup-db
+ * @module runtime
+ * @submodule runtime-db
+ * @requires runtime-component
+ * @requires runtime-helper
+ * @requires runtime-log
+ * @class runtime-db
  * @static
  */
 
 
 /**
- * Create a new {{#crossLink &quot;SyrupDatabaseCollection&quot;}}{{/crossLink}}.
+ * Create a new {{#crossLink &quot;RuntimeDatabaseCollection&quot;}}{{/crossLink}}.
  * @method collection
  * @param {String} name of the collection
  */
@@ -930,26 +929,26 @@ exports.collection = collection;
 
 
 /**
- * syrup database store that lists all the collections.
+ * Runtime database store that lists all the collections.
  * @property {JSON} store
  */
 exports.store = store;
 
 
 /**
- * Import/Export a syrup system into/from the database.
+ * Import/Export a Runtime system into/from the database.
  * @method system
- * @param {JSON} importedSystem a syrup system to import
- * @return {String} the id of the imported syrup system or the current syrup system  
+ * @param {JSON} importedSystem a Runtime system to import
+ * @return {String} the id of the imported Runtime system or the current Runtime system  
  */
 exports.system = system;
 
 
 /**
- * Export a syrup sub-system.
+ * Export a Runtime sub-system.
  * @method subsystem
  * @param {JSON} params parameters
- * @return {String} a stringified syrup sub-system
+ * @return {String} a stringified Runtime sub-system
  * 
  * @example
  * $db.subsystem({&quot;schemas&quot;:{&quot;name&quot;:&quot;Person&quot;}}); // filter export on schemas &lt;br&gt;

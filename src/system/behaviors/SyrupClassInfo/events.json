@@ -1,5 +1,5 @@
 {
-	"component": "SyrupClassInfo",
+	"component": "RuntimeClassInfo",
 	"state": "events",
 	"action": "function events() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'event') {\n            result.push(item);\n        }\n    } \n    return result;\n}",
 	"core": true

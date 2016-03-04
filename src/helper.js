@@ -1,7 +1,6 @@
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -28,11 +27,11 @@
 /**
  * This module contains all the functions used by all the modules.
  * 
- * @module syrup
- * @submodule syrup-helper
- * @requires syrup-db
- * @requires syrup-component
- * @class syrup-helper
+ * @module runtime
+ * @submodule runtime-helper
+ * @requires runtime-db
+ * @requires runtime-component
+ * @class runtime-helper
  * @static
  */
 
@@ -46,21 +45,21 @@ var $component = require('./component.js');
 /* Private property */
 
 
-var syrupRef = null;
+var runtimeRef = null;
 
 
 /* Public method */
 
 
 /*
- * Check if a syrup instance exists.
- * @method isSyrup
- * @return {Boolean} true if a syrup instance exist
+ * Check if a Runtime instance exists.
+ * @method isRuntime
+ * @return {Boolean} true if a Runtime instance exist
  */
-function isSyrup() {
+function isRuntime() {
     var result = false;
 
-    if ($db.Syrup && $db.Syrup.find().length) {
+    if ($db.Runtime && $db.Runtime.find().length) {
         result = true;
     }
 
@@ -69,30 +68,30 @@ function isSyrup() {
 
 
 /*
- * Get the syrup instance.
- * @method getSyrup
- * @return {Syrup} syrup instance
+ * Get the Runtime instance.
+ * @method getRuntime
+ * @return {Runtime} Runtime instance
  */
-function getSyrup() {
-    var syrupId = '';
+function getRuntime() {
+    var runtimeId = '';
 
-    if (!syrupRef) {
-        if (isSyrup()) {
-            syrupId = $db.Syrup.find()[0]._id;
-            syrupRef = $component.get(syrupId);
+    if (!runtimeRef) {
+        if (isRuntime()) {
+            runtimeId = $db.Runtime.find()[0]._id;
+            runtimeRef = $component.get(runtimeId);
         } else {
-            syrupRef = {
+            runtimeRef = {
                 error: function error(err, data) {
-                    console.error('syrup: ' + err, data);
+                    console.error('runtime: ' + err, data);
                 },
                 warning: function warning(message) {
-                    console.warn('syrup: ' + message);
+                    console.warn('runtime: ' + message);
                 }
             };
         }
     }
 
-    return syrupRef;
+    return runtimeRef;
 }
 
 
@@ -136,29 +135,29 @@ function polyfill() {
 /**
  * This module contains all the functions used by all the modules.
  * 
- * @module syrup
- * @submodule syrup-helper
- * @requires syrup-db
- * @requires syrup-component
- * @class syrup-helper
+ * @module runtime
+ * @submodule runtime-helper
+ * @requires runtime-db
+ * @requires runtime-component
+ * @class runtime-helper
  * @static
  */
 
 
 /**
- * Get syrup instance.
- * @method getSyrup
- * @return {Syrup} syrup instance
+ * Get Runtime instance.
+ * @method getRuntime
+ * @return {Runtime} Runtime instance
  */
-exports.getSyrup = getSyrup;
+exports.getRuntime = getRuntime;
 
 
 /**
- * Check if a syrup instance exists.
- * @method isSyrup
- * @return {Boolean} true if a syrup instance exist
+ * Check if a Runtime instance exists.
+ * @method isRuntime
+ * @return {Boolean} true if a Runtime instance exist
  */
-exports.isSyrup = isSyrup;
+exports.isRuntime = isRuntime;
 
 
 /**

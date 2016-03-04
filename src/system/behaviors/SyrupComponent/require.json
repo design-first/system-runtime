@@ -1,5 +1,5 @@
 {
-	"component": "SyrupComponent",
+	"component": "RuntimeComponent",
 	"state": "require",
 	"action": "function require(id) {\n    return $component.get(id);\n}",
 	"core": true,

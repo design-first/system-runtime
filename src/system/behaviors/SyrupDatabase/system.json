@@ -1,5 +1,5 @@
 {
-	"component": "SyrupDatabase",
+	"component": "RuntimeDatabase",
 	"state": "system",
 	"action": "function system(system) {\n    return $db.system(system);\n}",
 	"core": true,

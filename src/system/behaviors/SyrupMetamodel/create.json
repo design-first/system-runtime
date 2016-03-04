@@ -1,5 +1,5 @@
 {
-	"component": "SyrupMetamodel",
+	"component": "RuntimeMetamodel",
 	"state": "create",
 	"action": "function create() {\n    $metamodel.create();\n}",
 	"core": true,

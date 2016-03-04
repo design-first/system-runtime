@@ -1,7 +1,6 @@
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -26,11 +25,11 @@
  */
 
 /**
- * This module contains syrup core system.
+ * This module contains Runtime core system.
  *
- * @module syrup
- * @submodule syrup-system
- * @class syrup-system
+ * @module runtime
+ * @submodule runtime-system
+ * @class runtime-system
  * @static 
  */
 
@@ -41,7 +40,7 @@
 
 
 /*
- * syrup core system
- * @property {SyrupSystem} system
+ * Runtime core system
+ * @property {RuntimeSystem} system
  */
 var system = 

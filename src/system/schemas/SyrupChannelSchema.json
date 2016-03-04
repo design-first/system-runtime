@@ -1,7 +1,0 @@
-{
-    "_id": "SyrupChannelSchema",
-    "_name": "SyrupChannelSchema",
-    "_inherit": ["SyrupComponentSchema"],
-    "_core": true,
-    "send": "event"
-}

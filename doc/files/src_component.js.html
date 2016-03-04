@@ -21,12 +21,12 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.9</b>
+                    API Docs for Version: <b>1.0.0</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/syrup", "classes/syrup-behavior", "classes/syrup-component", "classes/syrup-db", "classes/syrup-helper", "classes/syrup-log", "classes/syrup-metamodel", "classes/syrup-state", "classes/syrup-system", "classes/syrup-workflow", "classes/SyrupDatabaseCollection", "classes/SyrupError", "modules/syrup", "modules/syrup-behavior", "modules/syrup-component", "modules/syrup-db", "modules/syrup-helper", "modules/syrup-log", "modules/syrup-metamodel", "modules/syrup-state", "modules/syrup-system", "modules/syrup-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/runtime", "classes/runtime-behavior", "classes/runtime-component", "classes/runtime-db", "classes/runtime-helper", "classes/runtime-log", "classes/runtime-metamodel", "classes/runtime-state", "classes/runtime-system", "classes/runtime-workflow", "classes/RuntimeDatabaseCollection", "classes/RuntimeError", "modules/runtime", "modules/runtime-behavior", "modules/runtime-component", "modules/runtime-db", "modules/runtime-helper", "modules/runtime-log", "modules/runtime-metamodel", "modules/runtime-state", "modules/runtime-system", "modules/runtime-workflow"]'>
         </form>
     </div>
 </div>
@@ -37,18 +37,18 @@
     <div id="sidebar">
     <div id="classes">
         <ul id="api-classes" class="nav nav-list">
-                <li><a href="../classes/syrup.html">syrup</a></li>
-                <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
-                <li><a href="../classes/syrup-component.html">syrup-component</a></li>
-                <li><a href="../classes/syrup-db.html">syrup-db</a></li>
-                <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
-                <li><a href="../classes/syrup-log.html">syrup-log</a></li>
-                <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
-                <li><a href="../classes/syrup-state.html">syrup-state</a></li>
-                <li><a href="../classes/syrup-system.html">syrup-system</a></li>
-                <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
-                <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
-                <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+                <li><a href="../classes/runtime.html">runtime</a></li>
+                <li><a href="../classes/runtime-behavior.html">runtime-behavior</a></li>
+                <li><a href="../classes/runtime-component.html">runtime-component</a></li>
+                <li><a href="../classes/runtime-db.html">runtime-db</a></li>
+                <li><a href="../classes/runtime-helper.html">runtime-helper</a></li>
+                <li><a href="../classes/runtime-log.html">runtime-log</a></li>
+                <li><a href="../classes/runtime-metamodel.html">runtime-metamodel</a></li>
+                <li><a href="../classes/runtime-state.html">runtime-state</a></li>
+                <li><a href="../classes/runtime-system.html">runtime-system</a></li>
+                <li><a href="../classes/runtime-workflow.html">runtime-workflow</a></li>
+                <li><a href="../classes/RuntimeDatabaseCollection.html">RuntimeDatabaseCollection</a></li>
+                <li><a href="../classes/RuntimeError.html">RuntimeError</a></li>
         </ul>
     </div>
     </div>
@@ -88,9 +88,8 @@
 <div class="file">
     <pre class="prettyprint linenums">
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -116,17 +115,17 @@
 
 /**
  * This module manages the components. 
- * It is the factory of all the components that are created by syrup.
+ * It is the factory of all the components that are created by Runtime.
  * 
- * @module syrup
- * @submodule syrup-component
- * @requires syrup-workflow
- * @requires syrup-db
- * @requires syrup-metamodel
- * @requires syrup-behavior
- * @requires syrup-helper
- * @requires syrup-log
- * @class syrup-component
+ * @module runtime
+ * @submodule runtime-component
+ * @requires runtime-workflow
+ * @requires runtime-db
+ * @requires runtime-metamodel
+ * @requires runtime-behavior
+ * @requires runtime-helper
+ * @requires runtime-log
+ * @class runtime-component
  * @static 
  */
 
@@ -158,14 +157,14 @@ var PROPERTY_TYPE = &#x27;property&#x27;,
 
 /*
  * Sub class to override push and pop method of Array Class.
- * @class SyrupArray
+ * @class RuntimeArray
  * @param {Object} conf
  * {String} classId name of the class
  * {String} type type of the array
  * {Array} arr array
  * @private
  */
-function SyrupArray(conf) {
+function RuntimeArray(conf) {
     var arr = [],
         arrDb = [],
         type = &#x27;&#x27;,
@@ -186,7 +185,7 @@ function SyrupArray(conf) {
     // init
     arrDb.forEach(function (val) {
         if (type.indexOf(&#x27;@&#x27;) !== -1) {
-            arr.push($helper.getSyrup().require(val));
+            arr.push($helper.getRuntime().require(val));
         } else {
             arr.push(val);
         }
@@ -194,7 +193,7 @@ function SyrupArray(conf) {
 
     /* Override push method.
      * @push
-     * @param {SyrupComponent|Object} value
+     * @param {RuntimeComponent|Object} value
      */
     arr.push = function push(val) {
         var isClass = false;
@@ -236,7 +235,7 @@ function SyrupArray(conf) {
 
     /* Override pop method.
      * @pop
-     * @return {SyrupComponent|Object} value
+     * @return {RuntimeComponent|Object} value
      */
     arr.pop = function pop() {
         var result,
@@ -271,7 +270,7 @@ function SyrupArray(conf) {
 }
 
 /* jshint -W058 */
-SyrupArray.prototype = new Array;
+RuntimeArray.prototype = new Array;
 /* jshint +W058 */
 
 
@@ -438,8 +437,8 @@ function createClass(classId) {
         // create link to db
         $db.store[classId][config._id] = config;
 
-        if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
-            $helper.getSyrup().require(&#x27;db&#x27;).insert(classId, config);
+        if ($helper.isRuntime() &amp;&amp; $helper.getRuntime().require(&#x27;db&#x27;)) {
+            $helper.getRuntime().require(&#x27;db&#x27;).insert(classId, config);
         }
 
         Object.freeze(this);
@@ -500,14 +499,14 @@ function addProperties(model, Class, classId) {
             body = function body(position, value) {
                 var search = [],
                     component = null,
-                    syrupArr = null,
+                    runtimeArr = null,
                     val = null,
                     realVal = null;
 
                 if (typeof value === &#x27;undefined&#x27;) {
                     if (typeof position === &#x27;undefined&#x27;) {
 
-                        syrupArr = new SyrupArray({
+                        runtimeArr = new RuntimeArray({
                             &quot;id&quot;: this.id(),
                             &quot;propertyName&quot;: propertyName,
                             &quot;readOnly&quot;: propertyReadOnly,
@@ -516,12 +515,12 @@ function addProperties(model, Class, classId) {
                             &quot;arr&quot;: $db.store[classId][this.id()][propertyName]
                         });
 
-                        return syrupArr;
+                        return runtimeArr;
                     } else {
                         val = $db.store[classId][this.id()][propertyName][position];
                         if (val) {
                             if (propertyType[0].indexOf(&#x27;@&#x27;) !== -1) {
-                                realVal = $helper.getSyrup().require(val);
+                                realVal = $helper.getRuntime().require(val);
                             } else {
                                 realVal = val;
                             }
@@ -550,8 +549,8 @@ function addProperties(model, Class, classId) {
                                 component = search[0];
                                 component[propertyName][position] = realVal;
 
-                                if ($helper.isSyrup()) {
-                                    $helper.getSyrup().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, realVal);
+                                if ($helper.isRuntime()) {
+                                    $helper.getRuntime().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, realVal);
                                 }
 
                                 $workflow.state({
@@ -605,12 +604,12 @@ function addProperties(model, Class, classId) {
                                     component[propertyName] = value;
                                 }
 
-                                if ($helper.isSyrup() &amp;&amp; $helper.getSyrup().require(&#x27;db&#x27;)) {
-                                    $helper.getSyrup().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, value);
+                                if ($helper.isRuntime() &amp;&amp; $helper.getRuntime().require(&#x27;db&#x27;)) {
+                                    $helper.getRuntime().require(&#x27;db&#x27;).update(classId, this.id(), propertyName, value);
                                 }
                                 
-                                // case of SyrupBehavior
-                                if (classId === &#x27;SyrupBehavior&#x27;) {
+                                // case of RuntimeBehavior
+                                if (classId === &#x27;RuntimeBehavior&#x27;) {
                                     $behavior.removeFromMemory(this.id());
                                 }
 
@@ -695,8 +694,8 @@ function addEvents(model, Class, classId) {
                     length = -1,
                     message = {};
 
-                if (classId === &#x27;SyrupChannel&#x27;) {
-                    systems = $db.SyrupSystem.find({
+                if (classId === &#x27;RuntimeChannel&#x27;) {
+                    systems = $db.RuntimeSystem.find({
                         &#x27;master&#x27;: true
                     });
                     if (systems.length) {
@@ -710,7 +709,7 @@ function addEvents(model, Class, classId) {
                         message.data = data;
                         message.event = methodName;
 
-                        $db.SyrupMessage.insert(message);
+                        $db.RuntimeMessage.insert(message);
 
                         $workflow.state({
                             &quot;component&quot;: this.id(),
@@ -766,7 +765,7 @@ function addOn(Class, classId) {
                     !$metamodel.isProperty(state, classId) &amp;&amp;
                     !$metamodel.isLink(state, classId) &amp;&amp;
                     !$metamodel.isCollection(state, classId) &amp;&amp;
-                    $db.SyrupBehavior.find({
+                    $db.RuntimeBehavior.find({
                         &quot;component&quot;: this.id(),
                         &quot;state&quot;: state
                     }).length &gt;= 1) {
@@ -819,7 +818,7 @@ function addOnClass(Class, classId) {
                     !$metamodel.isProperty(state, classId) &amp;&amp;
                     !$metamodel.isLink(state, classId) &amp;&amp;
                     !$metamodel.isCollection(state, classId) &amp;&amp;
-                    $db.SyrupBehavior.find({
+                    $db.RuntimeBehavior.find({
                         &quot;component&quot;: this.id(),
                         &quot;state&quot;: state
                     }).length &gt;= 1) {
@@ -970,8 +969,8 @@ function factory(config) {
     addEvents(config.model, Class, classId);
 
     // add default properties/methods only if the component
-    // inherit from SyrupComponent
-    if ($metamodel.inheritFrom(classId, &#x27;SyrupComponent&#x27;)) {
+    // inherit from RuntimeComponent
+    if ($metamodel.inheritFrom(classId, &#x27;RuntimeComponent&#x27;)) {
         addOn(Class, classId);
         addOnClass(Class, classId);
         addOffClass(Class, classId);
@@ -1033,7 +1032,7 @@ function destroy(id) {
         });
         
         // case of Behavior
-        if (classId === &#x27;SyrupBehavior&#x27;) {
+        if (classId === &#x27;RuntimeBehavior&#x27;) {
             $behavior.removeFromMemory(id);
         }
     }
@@ -1064,17 +1063,17 @@ function clear() {
 
 /**
  * This module manages the components. 
- * It is the factory of all the components that are created by syrup.
+ * It is the factory of all the components that are created by Runtime.
  * 
- * @module syrup
- * @submodule syrup-component
- * @requires syrup-workflow
- * @requires syrup-db
- * @requires syrup-metamodel
- * @requires syrup-behavior
- * @requires syrup-helper
- * @requires syrup-log
- * @class syrup-component
+ * @module runtime
+ * @submodule runtime-component
+ * @requires runtime-workflow
+ * @requires runtime-db
+ * @requires runtime-metamodel
+ * @requires runtime-behavior
+ * @requires runtime-helper
+ * @requires runtime-log
+ * @class runtime-component
  * @static 
  */
 

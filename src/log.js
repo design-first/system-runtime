@@ -1,7 +1,6 @@
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -28,10 +27,10 @@
 /**
  * This module contains all the functions that write a log.
  * 
- * @module syrup
- * @submodule syrup-log
- * @requires syrup-helper
- * @class syrup-log
+ * @module runtime
+ * @submodule runtime-log
+ * @requires runtime-helper
+ * @class runtime-log
  * @static
  */
 
@@ -65,7 +64,7 @@ function unknownProperty(propertyName, schema) {
         message = "unknown property '" + propertyName + "' for the meta attribute " + JSON.stringify(schema);
     }
 
-    $helper.getSyrup().warning(message);
+    $helper.getRuntime().warning(message);
 }
 
 
@@ -77,7 +76,7 @@ function unknownProperty(propertyName, schema) {
  * @param {String} property the property
  */
 function invalidPropertyType(propertyName, type, property) {
-    $helper.getSyrup().warning("invalid type for property '" + JSON.stringify(propertyName) + "': expected '" + type + "' instead of '" + typeof property + "'");
+    $helper.getRuntime().warning("invalid type for property '" + JSON.stringify(propertyName) + "': expected '" + type + "' instead of '" + typeof property + "'");
 }
 
 
@@ -88,7 +87,7 @@ function invalidPropertyType(propertyName, type, property) {
  * @param {String} type the type defined by the schema
  */
 function invalidEnumValue(value, type) {
-    $helper.getSyrup().warning("invalid value for the enum value '" + value + "': expected '" + type + "' instead of '" + typeof value + "'");
+    $helper.getRuntime().warning("invalid value for the enum value '" + value + "': expected '" + type + "' instead of '" + typeof value + "'");
 }
 
 
@@ -100,7 +99,7 @@ function invalidEnumValue(value, type) {
  * @param {String} constructorName name of the component class
  */
 function invalidClassName(componentId, type, constructorName) {
-    $helper.getSyrup().warning("invalid class name for component '" + componentId + "': expected '" + type + "' instead of '" + constructorName + "'");
+    $helper.getRuntime().warning("invalid class name for component '" + componentId + "': expected '" + type + "' instead of '" + constructorName + "'");
 }
 
 
@@ -110,7 +109,7 @@ function invalidClassName(componentId, type, constructorName) {
  * @param {String} propertyName name of the property
  */
 function missingProperty(propertyName) {
-    $helper.getSyrup().warning("missing property '" + propertyName + "'");
+    $helper.getRuntime().warning("missing property '" + propertyName + "'");
 }
 
 
@@ -121,7 +120,7 @@ function missingProperty(propertyName) {
  * @param {String} classToImp the class to implement
  */
 function missingImplementation(classSource, classToImp) {
-    $helper.getSyrup().warning("class '" + classSource + "' is missing for the implementation of the class '" + classToImp + "'");
+    $helper.getRuntime().warning("class '" + classSource + "' is missing for the implementation of the class '" + classToImp + "'");
 }
 
 
@@ -132,7 +131,7 @@ function missingImplementation(classSource, classToImp) {
  * @param {String} className a class name
  */
 function invalidTypeImp(property, className) {
-    $helper.getSyrup().warning("invalid type for property '" + property + "' for the definition of '" + className + "'");
+    $helper.getRuntime().warning("invalid type for property '" + property + "' for the definition of '" + className + "'");
 }
 
 
@@ -143,7 +142,7 @@ function invalidTypeImp(property, className) {
  * @param {String} className a class name
  */
 function missingPropertyImp(property, className) {
-    $helper.getSyrup().warning("missing property '" + property + "' for the definition of '" + className + "'");
+    $helper.getRuntime().warning("missing property '" + property + "' for the definition of '" + className + "'");
 }
 
 
@@ -154,7 +153,7 @@ function missingPropertyImp(property, className) {
  * @param {Object} schema a schema
  */
 function unknownPropertyImp(property, schema) {
-    $helper.getSyrup().warning("unknown property '" + property + "' for the definition of '" + schema + "'");
+    $helper.getRuntime().warning("unknown property '" + property + "' for the definition of '" + schema + "'");
 }
 
 
@@ -164,7 +163,7 @@ function unknownPropertyImp(property, schema) {
  * @param {Object} def a type definition
  */
 function invalidTypeDefinition(def) {
-    $helper.getSyrup().warning("can not load the definition of type '" + def + "'");
+    $helper.getRuntime().warning("can not load the definition of type '" + def + "'");
 }
 
 
@@ -178,9 +177,9 @@ function invalidTypeDefinition(def) {
  */
 function invalidPropertyName(id, propertyName, propertyValue, type) {
     if (type.indexOf("#") !== -1) {
-        $helper.getSyrup().warning("invalid name for property '" + propertyName + "': expected '" + type + "' instead of '" + propertyValue + "' on component '" + id + "'");
+        $helper.getRuntime().warning("invalid name for property '" + propertyName + "': expected '" + type + "' instead of '" + propertyValue + "' on component '" + id + "'");
     } else {
-        $helper.getSyrup().warning("invalid name for property '" + propertyName + "': expected '" + type + "' instead of '" + typeof propertyValue + "' on component '" + id + "'");
+        $helper.getRuntime().warning("invalid name for property '" + propertyName + "': expected '" + type + "' instead of '" + typeof propertyValue + "' on component '" + id + "'");
     }
 }
 
@@ -192,23 +191,23 @@ function invalidPropertyName(id, propertyName, propertyValue, type) {
  * @param {String} propertyName name of the property
  */
 function readOnlyProperty(id, propertyName) {
-    $helper.getSyrup().warning("can not set read-only property '" + propertyName + "' on component '" + id + "'");
+    $helper.getRuntime().warning("can not set read-only property '" + propertyName + "' on component '" + id + "'");
 }
 
 
 /*
- * Invalid document on a syrup database insert operation.
+ * Invalid document on a Runtime database insert operation.
  * @method invalidDocumentOnDbInsert
  * @param {String} doc a document
  * @param {String} collectionName the name of the colllection
  */
 function invalidDocumentOnDbInsert(doc, collectionName) {
-    $helper.getSyrup().warning("invalid document '" + JSON.stringify(doc) + "' on an insert operation on collection '" + collectionName + "'");
+    $helper.getRuntime().warning("invalid document '" + JSON.stringify(doc) + "' on an insert operation on collection '" + collectionName + "'");
 }
 
 
 /*
- * Invalid property on a syrup database update operation.
+ * Invalid property on a Runtime database update operation.
  * @method invalidPropertyTypeOnDbUpdate
  * @param {String} collectionName the name of the colllection
  * @param {String} id id of the component
@@ -218,22 +217,22 @@ function invalidDocumentOnDbInsert(doc, collectionName) {
  */
 function invalidPropertyTypeOnDbUpdate(collectionName, id, propertyName, propertyValue, type) {
     if (type.indexOf("#") !== -1) {
-        $helper.getSyrup().warning("invalid type for property '" + propertyName + "' on an update operation on collection '" + collectionName + "': expected '" + type + "' instead of '" + propertyValue + "' on component '" + id + "'");
+        $helper.getRuntime().warning("invalid type for property '" + propertyName + "' on an update operation on collection '" + collectionName + "': expected '" + type + "' instead of '" + propertyValue + "' on component '" + id + "'");
     } else {
-        $helper.getSyrup().warning("invalid type for property '" + propertyName + "' on an update operation on collection '" + collectionName + "': expected '" + type + "' instead of '" + typeof propertyValue + "' on component '" + id + "'");
+        $helper.getRuntime().warning("invalid type for property '" + propertyName + "' on an update operation on collection '" + collectionName + "': expected '" + type + "' instead of '" + typeof propertyValue + "' on component '" + id + "'");
     }
 }
 
 
 
 /*
- * Unkonw property on a syrup database update operation.
+ * Unkonw property on a Runtime database update operation.
  * @method unknownPropertyOnDbUpdate
  * @param {String} propertyName name of the property
  * @param {String} id id of the component
  */
 function unknownPropertyOnDbUpdate(propertyName, id) {
-    $helper.getSyrup().warning("unknown property '" + propertyName + "' on an update operation on component '" + id + "'");
+    $helper.getRuntime().warning("unknown property '" + propertyName + "' on an update operation on component '" + id + "'");
 }
 
 
@@ -244,17 +243,17 @@ function unknownPropertyOnDbUpdate(propertyName, id) {
  * @param {String} methodName name of the method
  */
 function unknownMethod(classId, methodName) {
-    $helper.getSyrup().warning("try to call an unknown method '" + methodName + "' for the class '" + classId + "'");
+    $helper.getRuntime().warning("try to call an unknown method '" + methodName + "' for the class '" + classId + "'");
 }
 
 
 /*
- * Try to create an invalid SyrupDatabaseCollection.
+ * Try to create an invalid RuntimeDatabaseCollection.
  * @method invalidCollectionName
  * @param {String} name name of the collection
  */
 function invalidCollectionName(name) {
-    $helper.getSyrup().warning("invalid name for creating the collection '" + name + "': there is no schema '" + name + "' in the metamodel");
+    $helper.getRuntime().warning("invalid name for creating the collection '" + name + "': there is no schema '" + name + "' in the metamodel");
 }
 
 
@@ -265,7 +264,7 @@ function invalidCollectionName(name) {
  * @param {String} methodName name ot the method
  */
 function invalidResultType(id, methodName) {
-    $helper.getSyrup().warning("invalid type on the result of method '" + methodName + "' on component '" + id + "'");
+    $helper.getRuntime().warning("invalid type on the result of method '" + methodName + "' on component '" + id + "'");
 }
 
 
@@ -276,16 +275,16 @@ function invalidResultType(id, methodName) {
  * @param {String} componentId if of the component
  */
 function unknownComponent(className, componentId) {
-    $helper.getSyrup().warning("unkown class component '" + className + "' for component '" + componentId + "'");
+    $helper.getRuntime().warning("unkown class component '" + className + "' for component '" + componentId + "'");
 }
 
 
 /*
- * The syrup workflow has been restarted.
+ * The Runtime workflow has been restarted.
  * @method workflowRestarted
  */
 function workflowRestarted() {
-    $helper.getSyrup().warning('syrup has been restarted');
+    $helper.getRuntime().warning('runtime has been restarted');
 }
 
 
@@ -296,7 +295,7 @@ function workflowRestarted() {
  * @param {String} methodName name of the component
  */
 function invalidParamNumber(id, methodName) {
-    $helper.getSyrup().warning("invalid number of parameters when calling the method '" + methodName + "' on component '" + id + "'");
+    $helper.getRuntime().warning("invalid number of parameters when calling the method '" + methodName + "' on component '" + id + "'");
 }
 
 
@@ -309,7 +308,7 @@ function invalidParamNumber(id, methodName) {
  * 
  */
 function invalidParamType(id, methodName, paramName) {
-    $helper.getSyrup().warning("invalid type for the parameter '" + paramName + "' when calling the method '" + methodName + "' on component '" + id + "'");
+    $helper.getRuntime().warning("invalid type for the parameter '" + paramName + "' when calling the method '" + methodName + "' on component '" + id + "'");
 }
 
 
@@ -320,7 +319,7 @@ function invalidParamType(id, methodName, paramName) {
  * @param {String} stateName name of the state
  */
 function behaviorNotUnique(id, stateName) {
-    $helper.getSyrup().warning("try to add more than one behavior for the state '" + stateName + "' on component class '" + id + "'");
+    $helper.getRuntime().warning("try to add more than one behavior for the state '" + stateName + "' on component class '" + id + "'");
 }
 
 
@@ -331,7 +330,7 @@ function behaviorNotUnique(id, stateName) {
  * @param {String} stateName name of the state
  */
 function invalidStateOn(id, stateName) {
-    $helper.getSyrup().warning("try to add a behavior with an unkwown state '" + stateName + "' on component class '" + id + "'");
+    $helper.getRuntime().warning("try to add a behavior with an unkwown state '" + stateName + "' on component class '" + id + "'");
 }
 
 
@@ -342,7 +341,7 @@ function invalidStateOn(id, stateName) {
  * @param {String} stateName name of the state
  */
 function invalidStateOff(id, stateName) {
-    $helper.getSyrup().warning("try to remove a behavior from an unkwown state '" + stateName + "' on component class '" + id + "'");
+    $helper.getRuntime().warning("try to remove a behavior from an unkwown state '" + stateName + "' on component class '" + id + "'");
 }
 
 
@@ -351,7 +350,7 @@ function invalidStateOff(id, stateName) {
  * @method masterSystemNotFound
  */
 function masterSystemNotFound() {
-    $helper.getSyrup().warning("the master system is not found");
+    $helper.getRuntime().warning("the master system is not found");
 }
 
 
@@ -362,7 +361,7 @@ function masterSystemNotFound() {
  * @param {String} typeName expectec type defined by the schema
  */
 function invalidType(value, typeName) {
-    $helper.getSyrup().warning("invalid type for value '" + JSON.stringify(value) + "': expected '" + typeName + "'");
+    $helper.getRuntime().warning("invalid type for value '" + JSON.stringify(value) + "': expected '" + typeName + "'");
 }
 
 
@@ -372,7 +371,7 @@ function invalidType(value, typeName) {
  * @param {String} value value
  */
 function unknownType(value) {
-    $helper.getSyrup().warning("unknown type for value '" + JSON.stringify(value) + "'");
+    $helper.getRuntime().warning("unknown type for value '" + JSON.stringify(value) + "'");
 }
 
 
@@ -383,7 +382,7 @@ function unknownType(value) {
  * @param {String} className name of the class
  */
 function canNotYetValidate(id, className) {
-    $helper.getSyrup().warning("can not yet validate if the component '" + JSON.stringify(id) + "' is an instance of '" + className + "'");
+    $helper.getRuntime().warning("can not yet validate if the component '" + JSON.stringify(id) + "' is an instance of '" + className + "'");
 }
 
 
@@ -395,7 +394,7 @@ function canNotYetValidate(id, className) {
  * @param {String} type expected type
  */
 function invalidChannelEvent(message, eventName, type) {
-    $helper.getSyrup().warning("invalid type for the message '" + JSON.stringify(message) + "': expected type '" + type + "' for event '" + eventName + "'");
+    $helper.getRuntime().warning("invalid type for the message '" + JSON.stringify(message) + "': expected type '" + type + "' for event '" + eventName + "'");
 }
 
 
@@ -406,7 +405,7 @@ function invalidChannelEvent(message, eventName, type) {
  * @param {String} methodName name of the component
  */
 function invalidParamNumberMethodOn(id, methodName) {
-    $helper.getSyrup().warning("invalid number of parameters when adding an action on method '" + methodName + "' on component '" + id + "'");
+    $helper.getRuntime().warning("invalid number of parameters when adding an action on method '" + methodName + "' on component '" + id + "'");
 }
 
 
@@ -419,9 +418,9 @@ function invalidParamNumberMethodOn(id, methodName) {
  */
 function updateUuid(currentId, newId, alreadyUsed) {
     if (alreadyUsed) {
-        $helper.getSyrup().warning("try to update a component of id '" + currentId + "' with the new id '" + newId + "' that is already used");
+        $helper.getRuntime().warning("try to update a component of id '" + currentId + "' with the new id '" + newId + "' that is already used");
     } else {
-        $helper.getSyrup().warning("try to update a component of id '" + currentId + "' with the new id '" + newId + "'");
+        $helper.getRuntime().warning("try to update a component of id '" + currentId + "' with the new id '" + newId + "'");
     }
 }
 
@@ -431,7 +430,7 @@ function updateUuid(currentId, newId, alreadyUsed) {
  * @param {String} id id of the component
  */
 function invalidUseOfComponent(id) {
-    $helper.getSyrup().warning("try to change the state of the destroyed component '" + id + "'");
+    $helper.getRuntime().warning("try to change the state of the destroyed component '" + id + "'");
 }
 
 
@@ -441,10 +440,10 @@ function invalidUseOfComponent(id) {
 /**
  * This module contains all the functions that write a log.
  * 
- * @module syrup
- * @submodule syrup-log
- * @requires syrup-helper
- * @class syrup-log
+ * @module runtime
+ * @submodule runtime-log
+ * @requires runtime-helper
+ * @class runtime-log
  * @static
  */
 
@@ -560,7 +559,7 @@ exports.readOnlyProperty = readOnlyProperty;
 
 
 /**
- * Invalid document on a syrup database insert operation.
+ * Invalid document on a Runtime database insert operation.
  * @method invalidDocumentOnDbInsert
  * @param {String} doc a document
  * @param {String} collectionName the name of the colllection
@@ -569,7 +568,7 @@ exports.invalidDocumentOnDbInsert = invalidDocumentOnDbInsert;
 
 
 /**
- * Invalid property on a syrup database update operation.
+ * Invalid property on a Runtime database update operation.
  * @method invalidPropertyTypeOnDbUpdate
  * @param {String} collectionName the name of the colllection
  * @param {String} id id of the component
@@ -590,7 +589,7 @@ exports.unknownMethod = unknownMethod;
 
 
 /**
- * Try to create an invalid SyrupDatabaseCollection.
+ * Try to create an invalid RuntimeDatabaseCollection.
  * @method invalidCollectionName
  * @param {String} name name of the collection
  */
@@ -616,7 +615,7 @@ exports.unknownComponent = unknownComponent;
 
 
 /**
- * The syrup workflow has been restarted.
+ * The Runtime workflow has been restarted.
  * @method workflowRestarted
  */
 exports.workflowRestarted = workflowRestarted;
@@ -732,7 +731,7 @@ exports.updateUuid = updateUuid;
 
 
 /**
- * Unkonw property on a syrup database update operation.
+ * Unkonw property on a Runtime database update operation.
  * @method unknownPropertyOnDbUpdate
  * @param {String} propertyName name of the property
  * @param {String} id id of the component

@@ -1,0 +1,75 @@
+{
+    "_id": "RuntimeDatabase",
+    "_name": "RuntimeDatabase",
+    "_schema": "RuntimeDatabaseSchema",
+    "_inherit": [
+        "RuntimeComponent"
+    ],
+    "_core": true,
+    "system": {
+        "params": [
+            {
+                "name": "system",
+                "type": "object",
+                "mandatory": false
+            }
+        ],
+        "result": "string"
+    },
+    "subsystem": {
+        "params": [
+            {
+                "name": "params",
+                "type": "object"
+            }
+        ],
+        "result": "string"
+    },
+    "collections": {
+        "result": "object"
+    },
+    "insert": {
+        "params": [
+            {
+                "name": "classId",
+                "type": "string"
+            },
+            {
+                "name": "object",
+                "type": "object"
+            }
+        ]
+    },
+    "update": {
+        "params": [
+            {
+                "name": "schema",
+                "type": "string"
+            },
+            {
+                "name": "componentId",
+                "type": "string"
+            },
+            {
+                "name": "attributeName",
+                "type": "string"
+            },
+            {
+                "name": "attributeValue",
+                "type": "object"
+            }
+        ]
+    },
+    "remove": {
+        "params": [
+            {
+                "name": "classId",
+                "type": "string"
+            },
+            {
+                "name": "object",
+                "type": "string"
+            }
+        ]
+    }
+}

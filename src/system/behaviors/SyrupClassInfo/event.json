@@ -1,5 +1,5 @@
 {
-	"component": "SyrupClassInfo",
+	"component": "RuntimeClassInfo",
 	"state": "event",
 	"action": "function event(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'event') {\n        result = this.model()[name];\n    } \n    \n    return result;\n}",
 	"core": true

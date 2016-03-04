@@ -1,5 +1,5 @@
 {
-	"component": "SyrupClassInfo",
+	"component": "RuntimeClassInfo",
 	"state": "method",
 	"action": "function method(name) {\n    var result = {};\n    if (this.metamodel()[name] === 'method') {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}",
 	"core": true

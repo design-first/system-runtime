@@ -1,9 +1,0 @@
-{
-    "_id": "SyrupSchema",
-    "_name": "SyrupSchema",
-    "_inherit": ["SyrupComponentSchema"],
-    "_core": true,
-    "version": "property",
-    "system": "method",
-    "warning": "event"
-}

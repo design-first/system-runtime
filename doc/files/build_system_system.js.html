@@ -21,12 +21,12 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.9</b>
+                    API Docs for Version: <b>1.0.0</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/syrup", "classes/syrup-behavior", "classes/syrup-component", "classes/syrup-db", "classes/syrup-helper", "classes/syrup-log", "classes/syrup-metamodel", "classes/syrup-state", "classes/syrup-system", "classes/syrup-workflow", "classes/SyrupDatabaseCollection", "classes/SyrupError", "modules/syrup", "modules/syrup-behavior", "modules/syrup-component", "modules/syrup-db", "modules/syrup-helper", "modules/syrup-log", "modules/syrup-metamodel", "modules/syrup-state", "modules/syrup-system", "modules/syrup-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/runtime", "classes/runtime-behavior", "classes/runtime-component", "classes/runtime-db", "classes/runtime-helper", "classes/runtime-log", "classes/runtime-metamodel", "classes/runtime-state", "classes/runtime-system", "classes/runtime-workflow", "classes/RuntimeDatabaseCollection", "classes/RuntimeError", "modules/runtime", "modules/runtime-behavior", "modules/runtime-component", "modules/runtime-db", "modules/runtime-helper", "modules/runtime-log", "modules/runtime-metamodel", "modules/runtime-state", "modules/runtime-system", "modules/runtime-workflow"]'>
         </form>
     </div>
 </div>
@@ -37,18 +37,18 @@
     <div id="sidebar">
     <div id="classes">
         <ul id="api-classes" class="nav nav-list">
-                <li><a href="../classes/syrup.html">syrup</a></li>
-                <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
-                <li><a href="../classes/syrup-component.html">syrup-component</a></li>
-                <li><a href="../classes/syrup-db.html">syrup-db</a></li>
-                <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
-                <li><a href="../classes/syrup-log.html">syrup-log</a></li>
-                <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
-                <li><a href="../classes/syrup-state.html">syrup-state</a></li>
-                <li><a href="../classes/syrup-system.html">syrup-system</a></li>
-                <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
-                <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
-                <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+                <li><a href="../classes/runtime.html">runtime</a></li>
+                <li><a href="../classes/runtime-behavior.html">runtime-behavior</a></li>
+                <li><a href="../classes/runtime-component.html">runtime-component</a></li>
+                <li><a href="../classes/runtime-db.html">runtime-db</a></li>
+                <li><a href="../classes/runtime-helper.html">runtime-helper</a></li>
+                <li><a href="../classes/runtime-log.html">runtime-log</a></li>
+                <li><a href="../classes/runtime-metamodel.html">runtime-metamodel</a></li>
+                <li><a href="../classes/runtime-state.html">runtime-state</a></li>
+                <li><a href="../classes/runtime-system.html">runtime-system</a></li>
+                <li><a href="../classes/runtime-workflow.html">runtime-workflow</a></li>
+                <li><a href="../classes/RuntimeDatabaseCollection.html">RuntimeDatabaseCollection</a></li>
+                <li><a href="../classes/RuntimeError.html">RuntimeError</a></li>
         </ul>
     </div>
     </div>
@@ -88,9 +88,8 @@
 <div class="file">
     <pre class="prettyprint linenums">
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -115,11 +114,11 @@
  */
 
 /**
- * This module contains syrup core system.
+ * This module contains Runtime core system.
  *
- * @module syrup
- * @submodule syrup-system
- * @class syrup-system
+ * @module runtime
+ * @submodule runtime-system
+ * @class runtime-system
  * @static 
  */
 
@@ -130,8 +129,8 @@
 
 
 /*
- * syrup core system
- * @property {SyrupSystem} system
+ * Runtime core system
+ * @property {RuntimeSystem} system
  */
 var system = {
     &quot;schemas&quot;: {
@@ -140,7 +139,7 @@ var system = {
             &quot;_name&quot;: &quot;Worker&quot;,
             &quot;_schema&quot;: &quot;WorkerSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponent&quot;
+                &quot;RuntimeComponent&quot;
             ],
             &quot;_core&quot;: true,
             &quot;worker&quot;: {
@@ -160,28 +159,28 @@ var system = {
             &quot;_id&quot;: &quot;WorkerSchema&quot;,
             &quot;_name&quot;: &quot;WorkerSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponentSchema&quot;
+                &quot;RuntimeComponentSchema&quot;
             ],
             &quot;_core&quot;: true,
             &quot;worker&quot;: &quot;property&quot;,
             &quot;send&quot;: &quot;method&quot;
         },
-        &quot;SyrupAdminSchema&quot;: {
-            &quot;_id&quot;: &quot;SyrupAdminSchema&quot;,
-            &quot;_name&quot;: &quot;SyrupAdminSchema&quot;,
+        &quot;RuntimeAdminSchema&quot;: {
+            &quot;_id&quot;: &quot;RuntimeAdminSchema&quot;,
+            &quot;_name&quot;: &quot;RuntimeAdminSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponentSchema&quot;
+                &quot;RuntimeComponentSchema&quot;
             ],
             &quot;_core&quot;: true,
             &quot;start&quot;: &quot;method&quot;,
             &quot;stop&quot;: &quot;method&quot;
         },
-        &quot;SyrupAdmin&quot;: {
-            &quot;_id&quot;: &quot;SyrupAdmin&quot;,
-            &quot;_name&quot;: &quot;SyrupAdmin&quot;,
-            &quot;_schema&quot;: &quot;SyrupAdminSchema&quot;,
+        &quot;RuntimeAdmin&quot;: {
+            &quot;_id&quot;: &quot;RuntimeAdmin&quot;,
+            &quot;_name&quot;: &quot;RuntimeAdmin&quot;,
+            &quot;_schema&quot;: &quot;RuntimeAdminSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponent&quot;
+                &quot;RuntimeComponent&quot;
             ],
             &quot;_core&quot;: true,
             &quot;start&quot;: {
@@ -194,9 +193,9 @@ var system = {
             },
             &quot;stop&quot;: {}
         },
-        &quot;SyrupChannelSchema&quot;: {
-            &quot;_id&quot;: &quot;SyrupChannelSchema&quot;,
-            &quot;_name&quot;: &quot;SyrupChannelSchema&quot;,
+        &quot;RuntimeChannelSchema&quot;: {
+            &quot;_id&quot;: &quot;RuntimeChannelSchema&quot;,
+            &quot;_name&quot;: &quot;RuntimeChannelSchema&quot;,
             &quot;sync&quot;: &quot;event&quot;,
             &quot;loadSystem&quot;: &quot;event&quot;,
             &quot;createSchema&quot;: &quot;event&quot;,
@@ -215,18 +214,18 @@ var system = {
             &quot;updateBehavior&quot;: &quot;event&quot;,
             &quot;deleteBehavior&quot;: &quot;event&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponentSchema&quot;
+                &quot;RuntimeComponentSchema&quot;
             ],
             &quot;_core&quot;: true,
             &quot;send&quot;: &quot;event&quot;
         },
-        &quot;SyrupChannel&quot;: {
-            &quot;_id&quot;: &quot;SyrupChannel&quot;,
-            &quot;_name&quot;: &quot;SyrupChannel&quot;,
-            &quot;_schema&quot;: &quot;SyrupChannelSchema&quot;,
+        &quot;RuntimeChannel&quot;: {
+            &quot;_id&quot;: &quot;RuntimeChannel&quot;,
+            &quot;_name&quot;: &quot;RuntimeChannel&quot;,
+            &quot;_schema&quot;: &quot;RuntimeChannelSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponent&quot;,
-                &quot;SyrupComponent&quot;
+                &quot;RuntimeComponent&quot;,
+                &quot;RuntimeComponent&quot;
             ],
             &quot;sync&quot;: {},
             &quot;loadSystem&quot;: {
@@ -366,20 +365,20 @@ var system = {
                 }]
             }
         },
-        &quot;SyrupSchema&quot;: {
+        &quot;RuntimeSchema&quot;: {
             &quot;load&quot;: &quot;method&quot;,
             &quot;ready&quot;: &quot;event&quot;,
-            &quot;_id&quot;: &quot;SyrupSchema&quot;,
-            &quot;_name&quot;: &quot;SyrupSchema&quot;,
+            &quot;_id&quot;: &quot;RuntimeSchema&quot;,
+            &quot;_name&quot;: &quot;RuntimeSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponentSchema&quot;
+                &quot;RuntimeComponentSchema&quot;
             ],
             &quot;_core&quot;: true,
             &quot;version&quot;: &quot;property&quot;,
             &quot;system&quot;: &quot;method&quot;,
             &quot;warning&quot;: &quot;event&quot;
         },
-        &quot;Syrup&quot;: {
+        &quot;Runtime&quot;: {
             &quot;load&quot;: {
                 &quot;params&quot;: [{
                     &quot;name&quot;: &quot;url&quot;,
@@ -392,11 +391,11 @@ var system = {
                 }]
             },
             &quot;ready&quot;: {},
-            &quot;_id&quot;: &quot;Syrup&quot;,
-            &quot;_name&quot;: &quot;Syrup&quot;,
-            &quot;_schema&quot;: &quot;SyrupSchema&quot;,
+            &quot;_id&quot;: &quot;Runtime&quot;,
+            &quot;_name&quot;: &quot;Runtime&quot;,
+            &quot;_schema&quot;: &quot;RuntimeSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponent&quot;
+                &quot;RuntimeComponent&quot;
             ],
             &quot;_core&quot;: true,
             &quot;version&quot;: {
@@ -420,12 +419,12 @@ var system = {
                 &quot;result&quot;: &quot;object&quot;
             }
         },
-        &quot;SyrupBehavior&quot;: {
-            &quot;_id&quot;: &quot;SyrupBehavior&quot;,
-            &quot;_name&quot;: &quot;SyrupBehavior&quot;,
-            &quot;_schema&quot;: &quot;SyrupBehaviorSchema&quot;,
+        &quot;RuntimeBehavior&quot;: {
+            &quot;_id&quot;: &quot;RuntimeBehavior&quot;,
+            &quot;_name&quot;: &quot;RuntimeBehavior&quot;,
+            &quot;_schema&quot;: &quot;RuntimeBehaviorSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponent&quot;
+                &quot;RuntimeComponent&quot;
             ],
             &quot;_core&quot;: true,
             &quot;core&quot;: {
@@ -459,11 +458,11 @@ var system = {
                 &quot;default&quot;: &quot;&quot;
             }
         },
-        &quot;SyrupBehaviorSchema&quot;: {
-            &quot;_id&quot;: &quot;SyrupBehaviorSchema&quot;,
-            &quot;_name&quot;: &quot;SyrupBehaviorSchema&quot;,
+        &quot;RuntimeBehaviorSchema&quot;: {
+            &quot;_id&quot;: &quot;RuntimeBehaviorSchema&quot;,
+            &quot;_name&quot;: &quot;RuntimeBehaviorSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponentSchema&quot;
+                &quot;RuntimeComponentSchema&quot;
             ],
             &quot;_core&quot;: true,
             &quot;core&quot;: &quot;property&quot;,
@@ -472,12 +471,12 @@ var system = {
             &quot;state&quot;: &quot;property&quot;,
             &quot;useCoreAPI&quot;: &quot;property&quot;
         },
-        &quot;SyrupClassInfo&quot;: {
-            &quot;_id&quot;: &quot;SyrupClassInfo&quot;,
-            &quot;_name&quot;: &quot;SyrupClassInfo&quot;,
-            &quot;_schema&quot;: &quot;SyrupClassInfoSchema&quot;,
+        &quot;RuntimeClassInfo&quot;: {
+            &quot;_id&quot;: &quot;RuntimeClassInfo&quot;,
+            &quot;_name&quot;: &quot;RuntimeClassInfo&quot;,
+            &quot;_schema&quot;: &quot;RuntimeClassInfoSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponent&quot;
+                &quot;RuntimeComponent&quot;
             ],
             &quot;_core&quot;: true,
             &quot;metamodel&quot;: {
@@ -543,11 +542,11 @@ var system = {
                 &quot;result&quot;: &quot;array&quot;
             }
         },
-        &quot;SyrupClassInfoSchema&quot;: {
-            &quot;_id&quot;: &quot;SyrupClassInfoSchema&quot;,
-            &quot;_name&quot;: &quot;SyrupClassInfoSchema&quot;,
+        &quot;RuntimeClassInfoSchema&quot;: {
+            &quot;_id&quot;: &quot;RuntimeClassInfoSchema&quot;,
+            &quot;_name&quot;: &quot;RuntimeClassInfoSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponentSchema&quot;
+                &quot;RuntimeComponentSchema&quot;
             ],
             &quot;_core&quot;: true,
             &quot;model&quot;: &quot;property&quot;,
@@ -563,10 +562,10 @@ var system = {
             &quot;event&quot;: &quot;method&quot;,
             &quot;events&quot;: &quot;method&quot;
         },
-        &quot;SyrupComponent&quot;: {
-            &quot;_id&quot;: &quot;SyrupComponent&quot;,
-            &quot;_name&quot;: &quot;SyrupComponent&quot;,
-            &quot;_schema&quot;: &quot;SyrupComponentSchema&quot;,
+        &quot;RuntimeComponent&quot;: {
+            &quot;_id&quot;: &quot;RuntimeComponent&quot;,
+            &quot;_name&quot;: &quot;RuntimeComponent&quot;,
+            &quot;_schema&quot;: &quot;RuntimeComponentSchema&quot;,
             &quot;_core&quot;: true,
             &quot;on&quot;: {
                 &quot;params&quot;: [{
@@ -602,7 +601,7 @@ var system = {
                 &quot;params&quot;: []
             },
             &quot;classInfo&quot;: {
-                &quot;type&quot;: &quot;@SyrupClassInfo&quot;,
+                &quot;type&quot;: &quot;@RuntimeClassInfo&quot;,
                 &quot;readOnly&quot;: false,
                 &quot;mandatory&quot;: false,
                 &quot;default&quot;: {}
@@ -620,9 +619,9 @@ var system = {
                 }]
             }
         },
-        &quot;SyrupComponentSchema&quot;: {
-            &quot;_id&quot;: &quot;SyrupComponentSchema&quot;,
-            &quot;_name&quot;: &quot;SyrupComponentSchema&quot;,
+        &quot;RuntimeComponentSchema&quot;: {
+            &quot;_id&quot;: &quot;RuntimeComponentSchema&quot;,
+            &quot;_name&quot;: &quot;RuntimeComponentSchema&quot;,
             &quot;_core&quot;: true,
             &quot;classInfo&quot;: &quot;property&quot;,
             &quot;on&quot;: &quot;method&quot;,
@@ -632,12 +631,12 @@ var system = {
             &quot;init&quot;: &quot;method&quot;,
             &quot;error&quot;: &quot;event&quot;
         },
-        &quot;SyrupDatabase&quot;: {
-            &quot;_id&quot;: &quot;SyrupDatabase&quot;,
-            &quot;_name&quot;: &quot;SyrupDatabase&quot;,
-            &quot;_schema&quot;: &quot;SyrupDatabaseSchema&quot;,
+        &quot;RuntimeDatabase&quot;: {
+            &quot;_id&quot;: &quot;RuntimeDatabase&quot;,
+            &quot;_name&quot;: &quot;RuntimeDatabase&quot;,
+            &quot;_schema&quot;: &quot;RuntimeDatabaseSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponent&quot;
+                &quot;RuntimeComponent&quot;
             ],
             &quot;_core&quot;: true,
             &quot;system&quot;: {
@@ -692,11 +691,11 @@ var system = {
                 }]
             }
         },
-        &quot;SyrupDatabaseSchema&quot;: {
-            &quot;_id&quot;: &quot;SyrupDatabaseSchema&quot;,
-            &quot;_name&quot;: &quot;SyrupDatabaseSchema&quot;,
+        &quot;RuntimeDatabaseSchema&quot;: {
+            &quot;_id&quot;: &quot;RuntimeDatabaseSchema&quot;,
+            &quot;_name&quot;: &quot;RuntimeDatabaseSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponentSchema&quot;
+                &quot;RuntimeComponentSchema&quot;
             ],
             &quot;_core&quot;: true,
             &quot;system&quot;: &quot;method&quot;,
@@ -706,10 +705,10 @@ var system = {
             &quot;update&quot;: &quot;event&quot;,
             &quot;remove&quot;: &quot;event&quot;
         },
-        &quot;SyrupMessage&quot;: {
-            &quot;_id&quot;: &quot;SyrupMessage&quot;,
-            &quot;_name&quot;: &quot;SyrupMessage&quot;,
-            &quot;_schema&quot;: &quot;SyrupMessageSchema&quot;,
+        &quot;RuntimeMessage&quot;: {
+            &quot;_id&quot;: &quot;RuntimeMessage&quot;,
+            &quot;_name&quot;: &quot;RuntimeMessage&quot;,
+            &quot;_schema&quot;: &quot;RuntimeMessageSchema&quot;,
             &quot;_core&quot;: true,
             &quot;event&quot;: {
                 &quot;type&quot;: &quot;string&quot;,
@@ -730,20 +729,20 @@ var system = {
                 &quot;default&quot;: []
             }
         },
-        &quot;SyrupMessageSchema&quot;: {
-            &quot;_id&quot;: &quot;SyrupMessageSchema&quot;,
-            &quot;_name&quot;: &quot;SyrupMessageSchema&quot;,
+        &quot;RuntimeMessageSchema&quot;: {
+            &quot;_id&quot;: &quot;RuntimeMessageSchema&quot;,
+            &quot;_name&quot;: &quot;RuntimeMessageSchema&quot;,
             &quot;_core&quot;: true,
             &quot;event&quot;: &quot;property&quot;,
             &quot;from&quot;: &quot;property&quot;,
             &quot;data&quot;: &quot;property&quot;
         },
-        &quot;SyrupMetamodel&quot;: {
-            &quot;_id&quot;: &quot;SyrupMetamodel&quot;,
-            &quot;_name&quot;: &quot;SyrupMetamodel&quot;,
-            &quot;_schema&quot;: &quot;SyrupMetamodelSchema&quot;,
+        &quot;RuntimeMetamodel&quot;: {
+            &quot;_id&quot;: &quot;RuntimeMetamodel&quot;,
+            &quot;_name&quot;: &quot;RuntimeMetamodel&quot;,
+            &quot;_schema&quot;: &quot;RuntimeMetamodelSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponent&quot;
+                &quot;RuntimeComponent&quot;
             ],
             &quot;_core&quot;: true,
             &quot;schema&quot;: {
@@ -762,21 +761,21 @@ var system = {
                 &quot;params&quot;: []
             }
         },
-        &quot;SyrupMetamodelSchema&quot;: {
-            &quot;_id&quot;: &quot;SyrupMetamodelSchema&quot;,
-            &quot;_name&quot;: &quot;SyrupMetamodelSchema&quot;,
+        &quot;RuntimeMetamodelSchema&quot;: {
+            &quot;_id&quot;: &quot;RuntimeMetamodelSchema&quot;,
+            &quot;_name&quot;: &quot;RuntimeMetamodelSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponentSchema&quot;
+                &quot;RuntimeComponentSchema&quot;
             ],
             &quot;_core&quot;: true,
             &quot;schema&quot;: &quot;method&quot;,
             &quot;type&quot;: &quot;method&quot;,
             &quot;create&quot;: &quot;method&quot;
         },
-        &quot;SyrupState&quot;: {
-            &quot;_id&quot;: &quot;SyrupState&quot;,
-            &quot;_name&quot;: &quot;SyrupState&quot;,
-            &quot;_schema&quot;: &quot;SyrupStateSchema&quot;,
+        &quot;RuntimeState&quot;: {
+            &quot;_id&quot;: &quot;RuntimeState&quot;,
+            &quot;_name&quot;: &quot;RuntimeState&quot;,
+            &quot;_schema&quot;: &quot;RuntimeStateSchema&quot;,
             &quot;_class&quot;: false,
             &quot;_core&quot;: true,
             &quot;name&quot;: {
@@ -792,19 +791,19 @@ var system = {
                 &quot;default&quot;: {}
             }
         },
-        &quot;SyrupStateSchema&quot;: {
-            &quot;_id&quot;: &quot;SyrupStateSchema&quot;,
-            &quot;_name&quot;: &quot;SyrupStateSchema&quot;,
+        &quot;RuntimeStateSchema&quot;: {
+            &quot;_id&quot;: &quot;RuntimeStateSchema&quot;,
+            &quot;_name&quot;: &quot;RuntimeStateSchema&quot;,
             &quot;_core&quot;: true,
             &quot;name&quot;: &quot;property&quot;,
             &quot;parameters&quot;: &quot;property&quot;
         },
-        &quot;SyrupSystem&quot;: {
-            &quot;_id&quot;: &quot;SyrupSystem&quot;,
-            &quot;_name&quot;: &quot;SyrupSystem&quot;,
-            &quot;_schema&quot;: &quot;SyrupSystemSchema&quot;,
+        &quot;RuntimeSystem&quot;: {
+            &quot;_id&quot;: &quot;RuntimeSystem&quot;,
+            &quot;_name&quot;: &quot;RuntimeSystem&quot;,
+            &quot;_schema&quot;: &quot;RuntimeSystemSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponent&quot;
+                &quot;RuntimeComponent&quot;
             ],
             &quot;_core&quot;: true,
             &quot;name&quot;: {
@@ -865,11 +864,11 @@ var system = {
             &quot;sync&quot;: {},
             &quot;main&quot;: {}
         },
-        &quot;SyrupSystemSchema&quot;: {
-            &quot;_id&quot;: &quot;SyrupSystemSchema&quot;,
-            &quot;_name&quot;: &quot;SyrupSystemSchema&quot;,
+        &quot;RuntimeSystemSchema&quot;: {
+            &quot;_id&quot;: &quot;RuntimeSystemSchema&quot;,
+            &quot;_name&quot;: &quot;RuntimeSystemSchema&quot;,
             &quot;_inherit&quot;: [
-                &quot;SyrupComponentSchema&quot;
+                &quot;RuntimeComponentSchema&quot;
             ],
             &quot;_core&quot;: true,
             &quot;name&quot;: &quot;property&quot;,
@@ -1069,32 +1068,32 @@ var system = {
     &quot;behaviors&quot;: {
         &quot;1c00c107e01c9b3&quot;: {
             &quot;_id&quot;: &quot;1c00c107e01c9b3&quot;,
-            &quot;component&quot;: &quot;SyrupAdmin&quot;,
+            &quot;component&quot;: &quot;RuntimeAdmin&quot;,
             &quot;state&quot;: &quot;start&quot;,
-            &quot;action&quot;: &quot;function start(path) {\n    var Worker = null,\n    worker = null,\n    workerPath = &#x27;&#x27;,\n    SyrupChannel = null,\n    syrupChannel = null;\n    \n    if (path) {\n        workerPath = path + &#x27;/scripts/worker.js&#x27;;\n        workerPath = workerPath.replace(/\\/\\//g,&#x27;/&#x27;);\n    } else {\n        workerPath = &#x27;/designer/scripts/worker.js&#x27;;\n    }\n    \n    if (typeof SharedWorker !== &#x27;undefined&#x27;) {\n        \n        if (!this.require(&#x27;channel-admin&#x27;)) {\n            SyrupChannel = this.require(&#x27;SyrupChannel&#x27;);\n            syrupChannel = new SyrupChannel({\n                &#x27;_id&#x27;: &#x27;channel-admin&#x27;,\n                &#x27;_core&#x27;: true\n            });\n            \n            syrupChannel.on(&#x27;send&#x27;, function send(message) {\n                this.require(&#x27;worker-admin&#x27;).worker().port.postMessage(message);\n            });\n            \n            // schema change events\n            syrupChannel.on(&#x27;createSchema&#x27;, function createSchema(id, schema) {\n                this.require(&#x27;metamodel&#x27;).schema(schema);\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            syrupChannel.on(&#x27;updateSchema&#x27;, function updateSchema(id, schema) {\n                 this.require(&#x27;metamodel&#x27;).type(schema);\n                 this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            syrupChannel.on(&#x27;deleteSchema&#x27;, function deleteSchema(id) {\n                $db[&#x27;SyrupSchema&#x27;].remove({&#x27;_id&#x27;: id});\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            // model change events\n            syrupChannel.on(&#x27;createModel&#x27;, function createModel(id, model) {\n                this.require(&#x27;metamodel&#x27;).schema(model);\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            syrupChannel.on(&#x27;updateModel&#x27;, function updateModel(id, model) {\n                 this.require(&#x27;metamodel&#x27;).type(model);\n                 this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            syrupChannel.on(&#x27;deleteModel&#x27;, function deleteModel(id) {\n                $db[&#x27;SyrupSchema&#x27;].remove({&#x27;_id&#x27;: id});\n                this.require(&#x27;metamodel&#x27;).create();\n                $component.removeFromMemory(id);\n            }, true);\n            \n            // type change events\n            syrupChannel.on(&#x27;createType&#x27;, function createType(id, type) {\n                this.require(&#x27;metamodel&#x27;).type(type);\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            syrupChannel.on(&#x27;updateType&#x27;, function updateType(id, type) {\n                 this.require(&#x27;metamodel&#x27;).type(type);\n                 this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            syrupChannel.on(&#x27;deleteType&#x27;, function deleteType(id) {\n                $db[&#x27;SyrupType&#x27;].remove({&#x27;_id&#x27;: id});\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            // component change events\n            syrupChannel.on(&#x27;createComponent&#x27;, function createComponent(model, component) {\n                $db[model].insert(component);\n            }, true);\n            \n            syrupChannel.on(&#x27;updateComponent&#x27;, function updateComponent(id, collection, component) {\n                $db[collection].update({&#x27;_id&#x27;: id}, component);\n            }, true);\n            \n            syrupChannel.on(&#x27;deleteComponent&#x27;, function deleteComponent(id, collection) {\n                $db[collection].remove({&#x27;_id&#x27;: id});\n            }, true);\n            \n            // behavior change events\n            syrupChannel.on(&#x27;createBehavior&#x27;, function createBehavior(component) {\n                $db[&#x27;SyrupBehavior&#x27;].insert(component);\n            }, true);\n            syrupChannel.on(&#x27;updateBehavior&#x27;, function updateBehavior(id, behavior) {\n                this.require(id).action(behavior.action);\n            });\n            syrupChannel.on(&#x27;deleteBehavior&#x27;, function deleteBehavior(id) {\n                $db[&#x27;SyrupBehavior&#x27;].remove({&#x27;_id&#x27;: id});                  \n            }, true);\n         \n            // System Designer event\n            syrupChannel.on(&#x27;sync&#x27;, function sync() {\n                this.loadSystem(JSON.parse(this.require(&#x27;db&#x27;).system()));\n            });\n    \n            Worker = this.require(&#x27;Worker&#x27;);\n            worker = new Worker({\n                &#x27;_id&#x27;: &#x27;worker-admin&#x27;,\n                &#x27;_core&#x27;: true,\n                &#x27;worker&#x27;: new SharedWorker(workerPath),\n            });\n            \n            worker.worker().port.onmessage = function (e) {\n              $db.SyrupMessage.insert(e.data);\n            };\n            \n            console.info(&#x27;syrup: admin is started&#x27;);\n        } else {\n            console.info(&#x27;syrup: admin is already started&#x27;);\n        }\n    } else {\n        console.info(&#x27;syrup: the browser can not run admin features&#x27;);\n    }\n}&quot;,
+            &quot;action&quot;: &quot;function start(path) {\n    var Worker = null,\n    worker = null,\n    workerPath = &#x27;&#x27;,\n    RuntimeChannel = null,\n    runtimeChannel = null;\n    \n    if (path) {\n        workerPath = path + &#x27;/scripts/worker.js&#x27;;\n        workerPath = workerPath.replace(/\\/\\//g,&#x27;/&#x27;);\n    } else {\n        workerPath = &#x27;/designer/scripts/worker.js&#x27;;\n    }\n    \n    if (typeof SharedWorker !== &#x27;undefined&#x27;) {\n        \n        if (!this.require(&#x27;channel-admin&#x27;)) {\n            RuntimeChannel = this.require(&#x27;RuntimeChannel&#x27;);\n            runtimeChannel = new RuntimeChannel({\n                &#x27;_id&#x27;: &#x27;channel-admin&#x27;,\n                &#x27;_core&#x27;: true\n            });\n            \n            runtimeChannel.on(&#x27;send&#x27;, function send(message) {\n                this.require(&#x27;worker-admin&#x27;).worker().port.postMessage(message);\n            });\n            \n            // schema change events\n            runtimeChannel.on(&#x27;createSchema&#x27;, function createSchema(id, schema) {\n                this.require(&#x27;metamodel&#x27;).schema(schema);\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;updateSchema&#x27;, function updateSchema(id, schema) {\n                 this.require(&#x27;metamodel&#x27;).type(schema);\n                 this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;deleteSchema&#x27;, function deleteSchema(id) {\n                $db[&#x27;RuntimeSchema&#x27;].remove({&#x27;_id&#x27;: id});\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            // model change events\n            runtimeChannel.on(&#x27;createModel&#x27;, function createModel(id, model) {\n                this.require(&#x27;metamodel&#x27;).schema(model);\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;updateModel&#x27;, function updateModel(id, model) {\n                 this.require(&#x27;metamodel&#x27;).type(model);\n                 this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;deleteModel&#x27;, function deleteModel(id) {\n                $db[&#x27;RuntimeSchema&#x27;].remove({&#x27;_id&#x27;: id});\n                this.require(&#x27;metamodel&#x27;).create();\n                $component.removeFromMemory(id);\n            }, true);\n            \n            // type change events\n            runtimeChannel.on(&#x27;createType&#x27;, function createType(id, type) {\n                this.require(&#x27;metamodel&#x27;).type(type);\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;updateType&#x27;, function updateType(id, type) {\n                 this.require(&#x27;metamodel&#x27;).type(type);\n                 this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;deleteType&#x27;, function deleteType(id) {\n                $db[&#x27;RuntimeType&#x27;].remove({&#x27;_id&#x27;: id});\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            // component change events\n            runtimeChannel.on(&#x27;createComponent&#x27;, function createComponent(model, component) {\n                $db[model].insert(component);\n            }, true);\n            \n            runtimeChannel.on(&#x27;updateComponent&#x27;, function updateComponent(id, collection, component) {\n                $db[collection].update({&#x27;_id&#x27;: id}, component);\n            }, true);\n            \n            runtimeChannel.on(&#x27;deleteComponent&#x27;, function deleteComponent(id, collection) {\n                $db[collection].remove({&#x27;_id&#x27;: id});\n            }, true);\n            \n            // behavior change events\n            runtimeChannel.on(&#x27;createBehavior&#x27;, function createBehavior(component) {\n                $db[&#x27;RuntimeBehavior&#x27;].insert(component);\n            }, true);\n            runtimeChannel.on(&#x27;updateBehavior&#x27;, function updateBehavior(id, behavior) {\n                this.require(id).action(behavior.action);\n            });\n            runtimeChannel.on(&#x27;deleteBehavior&#x27;, function deleteBehavior(id) {\n                $db[&#x27;RuntimeBehavior&#x27;].remove({&#x27;_id&#x27;: id});                  \n            }, true);\n         \n            // System Designer event\n            runtimeChannel.on(&#x27;sync&#x27;, function sync() {\n                this.loadSystem(JSON.parse(this.require(&#x27;db&#x27;).system()));\n            });\n    \n            Worker = this.require(&#x27;Worker&#x27;);\n            worker = new Worker({\n                &#x27;_id&#x27;: &#x27;worker-admin&#x27;,\n                &#x27;_core&#x27;: true,\n                &#x27;worker&#x27;: new SharedWorker(workerPath),\n            });\n            \n            worker.worker().port.onmessage = function (e) {\n              $db.RuntimeMessage.insert(e.data);\n            };\n            \n            console.info(&#x27;runtime: admin is started&#x27;);\n        } else {\n            console.info(&#x27;runtime: admin is already started&#x27;);\n        }\n    } else {\n        console.info(&#x27;runtime: the browser can not run admin features&#x27;);\n    }\n}&quot;,
             &quot;useCoreAPI&quot;: true,
             &quot;core&quot;: true
         },
         &quot;1d7151dd2d1558f&quot;: {
             &quot;_id&quot;: &quot;1d7151dd2d1558f&quot;,
-            &quot;component&quot;: &quot;SyrupAdmin&quot;,
+            &quot;component&quot;: &quot;RuntimeAdmin&quot;,
             &quot;state&quot;: &quot;stop&quot;,
-            &quot;action&quot;: &quot;function stop() {\n    var worker = null,\n    channel = null;\n    \n    worker = this.require(&#x27;worker-admin&#x27;);\n    if (worker &amp;&amp; worker.worker()) {\n        worker.worker().port.onmessage = function () {};\n        worker.destroy();\n        \n        channel = this.require(&#x27;channel-admin&#x27;);\n        if (channel) {\n            channel.destroy();\n        }\n        \n        console.info(&#x27;syrup: admin is stopped&#x27;);\n    }\n}&quot;,
+            &quot;action&quot;: &quot;function stop() {\n    var worker = null,\n    channel = null;\n    \n    worker = this.require(&#x27;worker-admin&#x27;);\n    if (worker &amp;&amp; worker.worker()) {\n        worker.worker().port.onmessage = function () {};\n        worker.destroy();\n        \n        channel = this.require(&#x27;channel-admin&#x27;);\n        if (channel) {\n            channel.destroy();\n        }\n        \n        console.info(&#x27;runtime: admin is stopped&#x27;);\n    }\n}&quot;,
             &quot;useCoreAPI&quot;: false,
             &quot;core&quot;: false
         },
         &quot;1fc101c23918773&quot;: {
-            &quot;component&quot;: &quot;SyrupComponent&quot;,
+            &quot;component&quot;: &quot;RuntimeComponent&quot;,
             &quot;state&quot;: &quot;off&quot;,
-            &quot;action&quot;: &quot;function off(state, behaviorId) {\n    var args = [],\n    i = 0,\n    length = 0;\n    length = arguments.length;\n    \n    for (i = 0; i &lt; length - 6; i++) {\n        args.push(arguments[i]);\n    }\n    \n    if ($workflow.checkParams({\n        \&quot;component\&quot;: this, \n        \&quot;methodName\&quot;: \&quot;off\&quot;, \n        \&quot;args\&quot;: args\n        })) {\n        \n        if (state || behaviorId) {\n            if ($metamodel.isValidState(state, this.constructor.name)) {\n                $behavior.remove({\n                    \&quot;behaviorId\&quot;: behaviorId, \n                    \&quot;componentId\&quot;: this.id(), \n                    \&quot;state\&quot;: state\n                });\n            } else { \n                console.warn(\&quot;syrup: invoke \\&#x27;off\\&#x27; method of component &#x27;\&quot; + this.id() + \&quot;&#x27; with an invalid state &#x27;\&quot; + state + \&quot;&#x27;\&quot;); \n            }\n        } else {\n            $behavior.remove({\n                \&quot;componentId\&quot;: this.id()\n            });\n        }\n    }\n}&quot;,
+            &quot;action&quot;: &quot;function off(state, behaviorId) {\n    var args = [],\n    i = 0,\n    length = 0;\n    length = arguments.length;\n    \n    for (i = 0; i &lt; length - 6; i++) {\n        args.push(arguments[i]);\n    }\n    \n    if ($workflow.checkParams({\n        \&quot;component\&quot;: this, \n        \&quot;methodName\&quot;: \&quot;off\&quot;, \n        \&quot;args\&quot;: args\n        })) {\n        \n        if (state || behaviorId) {\n            if ($metamodel.isValidState(state, this.constructor.name)) {\n                $behavior.remove({\n                    \&quot;behaviorId\&quot;: behaviorId, \n                    \&quot;componentId\&quot;: this.id(), \n                    \&quot;state\&quot;: state\n                });\n            } else { \n                console.warn(\&quot;runtime: invoke \\&#x27;off\\&#x27; method of component &#x27;\&quot; + this.id() + \&quot;&#x27; with an invalid state &#x27;\&quot; + state + \&quot;&#x27;\&quot;); \n            }\n        } else {\n            $behavior.remove({\n                \&quot;componentId\&quot;: this.id()\n            });\n        }\n    }\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
         &quot;1aaee1e6311ff39&quot;: {
             &quot;_id&quot;: &quot;1aaee1e6311ff39&quot;,
-            &quot;component&quot;: &quot;syrup&quot;,
+            &quot;component&quot;: &quot;runtime&quot;,
             &quot;state&quot;: &quot;load&quot;,
-            &quot;action&quot;: &quot;function load(url, async) {\n    var xhr = null,\n    callbackLoad = null;\n    xhr = new XMLHttpRequest();\n    \n    callbackLoad = function callbackLoad(system) {\n        var sysId = $db.system(system),\n        sys = $component.get(sysId),\n        systems = document.querySelectorAll(&#x27;link[rel=system]&#x27;),\n        nbSubsystem = $db.SyrupSystem.find({\n            &#x27;subsystem&#x27;: true\n        }); \n        if (sys) {\n            sys.main();\n        } \n        if (systems.length + 1 + nbSubsystem.length === $db.SyrupSystem.count()) {\n            $component.get(&#x27;syrup&#x27;).ready();\n        }\n    };\n    \n    if (async) {\n        xhr.open(&#x27;GET&#x27;, url, true);\n        xhr.onreadystatechange = function () {\n            if (xhr.readyState === 4) {\n                if (xhr.status === 200) {\n                    callbackLoad(JSON.parse(xhr.response));\n                }\n            }\n        };\n        xhr.send(null);\n    } else {\n        xhr.open(&#x27;GET&#x27;, url, false);\n        xhr.send(null);\n        if (xhr.status === 200) {\n            callbackLoad(JSON.parse(xhr.response));\n        }\n    }\n}&quot;,
+            &quot;action&quot;: &quot;function load(url, async) {\n    var xhr = null,\n    callbackLoad = null;\n    xhr = new XMLHttpRequest();\n    \n    callbackLoad = function callbackLoad(system) {\n        var sysId = $db.system(system),\n        sys = $component.get(sysId),\n        systems = document.querySelectorAll(&#x27;link[rel=system]&#x27;),\n        nbSubsystem = $db.RuntimeSystem.find({\n            &#x27;subsystem&#x27;: true\n        }); \n        if (sys) {\n            sys.main();\n        } \n        if (systems.length + 1 + nbSubsystem.length === $db.RuntimeSystem.count()) {\n            $component.get(&#x27;runtime&#x27;).ready();\n        }\n    };\n    \n    if (async) {\n        xhr.open(&#x27;GET&#x27;, url, true);\n        xhr.onreadystatechange = function () {\n            if (xhr.readyState === 4) {\n                if (xhr.status === 200) {\n                    callbackLoad(JSON.parse(xhr.response));\n                }\n            }\n        };\n        xhr.send(null);\n    } else {\n        xhr.open(&#x27;GET&#x27;, url, false);\n        xhr.send(null);\n        if (xhr.status === 200) {\n            callbackLoad(JSON.parse(xhr.response));\n        }\n    }\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
@@ -1102,177 +1101,177 @@ var system = {
             &quot;_id&quot;: &quot;1f6001773a18791&quot;,
             &quot;component&quot;: &quot;e89c617b6b15d24&quot;,
             &quot;state&quot;: &quot;main&quot;,
-            &quot;action&quot;: &quot;function main() {\n    var subsystems = [],\n    systems = [],\n    system = null,\n    i = 0,\n    length = 0;\n    \n    subsystems = $db.SyrupSystem.find({\n        &#x27;subsystem&#x27;: true\n    });\n    subsystems.forEach(function (subsystem) {\n        var subsystemId = subsystem._id;\n        this.require(subsystemId).main();\n    }, this); \n    \n    if (typeof document !== &#x27;undefined&#x27;) {\n        systems = document.querySelectorAll(&#x27;link[rel=system]&#x27;);\n        length = systems.length;\n        \n        for (i = 0; i &lt; length; i++) {\n            system = systems[i];\n            \n            if (system.getAttribute(&#x27;async&#x27;) === &#x27;false&#x27;) {\n                this.require(&#x27;syrup&#x27;).load(system.href, false);\n            } else {\n                this.require(&#x27;syrup&#x27;).load(system.href, true);\n            }\n        }\n        if (length === 0) {\n            this.require(&#x27;syrup&#x27;).ready();\n        }\n    }\n}&quot;,
+            &quot;action&quot;: &quot;function main() {\n    var subsystems = [],\n    systems = [],\n    system = null,\n    i = 0,\n    length = 0;\n    \n    subsystems = $db.RuntimeSystem.find({\n        &#x27;subsystem&#x27;: true\n    });\n    subsystems.forEach(function (subsystem) {\n        var subsystemId = subsystem._id;\n        this.require(subsystemId).main();\n    }, this); \n    \n    if (typeof document !== &#x27;undefined&#x27;) {\n        systems = document.querySelectorAll(&#x27;link[rel=system]&#x27;);\n        length = systems.length;\n        \n        for (i = 0; i &lt; length; i++) {\n            system = systems[i];\n            \n            if (system.getAttribute(&#x27;async&#x27;) === &#x27;false&#x27;) {\n                this.require(&#x27;runtime&#x27;).load(system.href, false);\n            } else {\n                this.require(&#x27;runtime&#x27;).load(system.href, true);\n            }\n        }\n        if (length === 0) {\n            this.require(&#x27;runtime&#x27;).ready();\n        }\n    }\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1f62c1d8c71d33b&quot;: {
-            &quot;_id&quot;: &quot;1f62c1d8c71d33b&quot;,
-            &quot;component&quot;: &quot;Syrup&quot;,
+        &quot;1c04a108b31e3d1&quot;: {
+            &quot;_id&quot;: &quot;1c04a108b31e3d1&quot;,
+            &quot;component&quot;: &quot;Runtime&quot;,
             &quot;state&quot;: &quot;error&quot;,
-            &quot;action&quot;: &quot;function error(data) {\n    console.error(&#x27;syrup: &#x27; + data.message, data.error);\n}&quot;,
+            &quot;action&quot;: &quot;function error(data) {\n    console.error(&#x27;runtime: &#x27; + data.message, data.error);\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;120fd194d31adbd&quot;: {
-            &quot;_id&quot;: &quot;120fd194d31adbd&quot;,
-            &quot;component&quot;: &quot;Syrup&quot;,
+        &quot;10c321282917af9&quot;: {
+            &quot;_id&quot;: &quot;10c321282917af9&quot;,
+            &quot;component&quot;: &quot;Runtime&quot;,
             &quot;state&quot;: &quot;system&quot;,
-            &quot;action&quot;: &quot;function system(name) {\n    var System = null,\n    system = {},\n    systemId = &#x27;&#x27;,\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        System = this.require(&#x27;SyrupSystem&#x27;);\n        system = new System(conf);\n    } else {\n        result = $db.SyrupSystem.find({\n            &#x27;master&#x27;: true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}&quot;,
+            &quot;action&quot;: &quot;function system(name) {\n    var System = null,\n    system = {},\n    systemId = &#x27;&#x27;,\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        System = this.require(&#x27;RuntimeSystem&#x27;);\n        system = new System(conf);\n    } else {\n        result = $db.RuntimeSystem.find({\n            &#x27;master&#x27;: true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;17e2710e8e137b9&quot;: {
-            &quot;_id&quot;: &quot;17e2710e8e137b9&quot;,
-            &quot;component&quot;: &quot;Syrup&quot;,
+        &quot;1f80a1722010dfd&quot;: {
+            &quot;_id&quot;: &quot;1f80a1722010dfd&quot;,
+            &quot;component&quot;: &quot;Runtime&quot;,
             &quot;state&quot;: &quot;warning&quot;,
-            &quot;action&quot;: &quot;function warning(message) {\n    console.warn(&#x27;syrup: &#x27; + message);\n}&quot;,
+            &quot;action&quot;: &quot;function warning(message) {\n    console.warn(&#x27;runtime: &#x27; + message);\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;18b7f1b9e61eb34&quot;: {
-            &quot;_id&quot;: &quot;18b7f1b9e61eb34&quot;,
-            &quot;component&quot;: &quot;SyrupClassInfo&quot;,
+        &quot;1501c117e11deb8&quot;: {
+            &quot;_id&quot;: &quot;1501c117e11deb8&quot;,
+            &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;collection&quot;,
             &quot;action&quot;: &quot;function collection(name) {\n    var result = {};\n    if (this.metamodel()[name] === &#x27;collection&#x27;) {\n        result = this.model()[name];\n    } \n    \n    return result; \n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;17b7c137fd15eaf&quot;: {
-            &quot;_id&quot;: &quot;17b7c137fd15eaf&quot;,
-            &quot;component&quot;: &quot;SyrupClassInfo&quot;,
+        &quot;109a1166741c07e&quot;: {
+            &quot;_id&quot;: &quot;109a1166741c07e&quot;,
+            &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;collections&quot;,
             &quot;action&quot;: &quot;function collections() {\n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length; \n    \n    for (i = 0; i &lt; length; i++) { \n        item = keys[i]; \n        if (this.metamodel()[item] === &#x27;collection&#x27;) {\n            result.push(item);\n        }\n    }\n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;19899181ca12ac7&quot;: {
-            &quot;_id&quot;: &quot;19899181ca12ac7&quot;,
-            &quot;component&quot;: &quot;SyrupClassInfo&quot;,
+        &quot;1465311e9f1b5ab&quot;: {
+            &quot;_id&quot;: &quot;1465311e9f1b5ab&quot;,
+            &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;event&quot;,
             &quot;action&quot;: &quot;function event(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === &#x27;event&#x27;) {\n        result = this.model()[name];\n    } \n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1ef371df66123a3&quot;: {
-            &quot;_id&quot;: &quot;1ef371df66123a3&quot;,
-            &quot;component&quot;: &quot;SyrupClassInfo&quot;,
+        &quot;1d9e61b6ce11c76&quot;: {
+            &quot;_id&quot;: &quot;1d9e61b6ce11c76&quot;,
+            &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;events&quot;,
             &quot;action&quot;: &quot;function events() {\n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length;\n    \n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;event&#x27;) {\n            result.push(item);\n        }\n    } \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;11f80192ce1712e&quot;: {
-            &quot;_id&quot;: &quot;11f80192ce1712e&quot;,
-            &quot;component&quot;: &quot;SyrupClassInfo&quot;,
+        &quot;1b0ff1cf6613285&quot;: {
+            &quot;_id&quot;: &quot;1b0ff1cf6613285&quot;,
+            &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;link&quot;,
             &quot;action&quot;: &quot;function link(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === &#x27;link&#x27;) {\n        result = this.model()[name];\n    }\n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;15e2713de51504d&quot;: {
-            &quot;_id&quot;: &quot;15e2713de51504d&quot;,
-            &quot;component&quot;: &quot;SyrupClassInfo&quot;,
+        &quot;14c3514aac132df&quot;: {
+            &quot;_id&quot;: &quot;14c3514aac132df&quot;,
+            &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;links&quot;,
             &quot;action&quot;: &quot;function links() { \n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;link&#x27;) {\n            result.push(item);\n        }\n    } return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1a01d1d08d156a2&quot;: {
-            &quot;_id&quot;: &quot;1a01d1d08d156a2&quot;,
-            &quot;component&quot;: &quot;SyrupClassInfo&quot;,
+        &quot;1ea5d12ff419352&quot;: {
+            &quot;_id&quot;: &quot;1ea5d12ff419352&quot;,
+            &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;method&quot;,
             &quot;action&quot;: &quot;function method(name) {\n    var result = {};\n    if (this.metamodel()[name] === &#x27;method&#x27;) {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1befc1101d10f01&quot;: {
-            &quot;_id&quot;: &quot;1befc1101d10f01&quot;,
-            &quot;component&quot;: &quot;SyrupClassInfo&quot;,
+        &quot;1c66d1395d14a8d&quot;: {
+            &quot;_id&quot;: &quot;1c66d1395d14a8d&quot;,
+            &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;methods&quot;,
             &quot;action&quot;: &quot;function methods() {\n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;method&#x27;) {\n            result.push(item);\n        }\n    } \n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1bcdd199161ff69&quot;: {
-            &quot;_id&quot;: &quot;1bcdd199161ff69&quot;,
-            &quot;component&quot;: &quot;SyrupClassInfo&quot;,
+        &quot;1a65e144e61ac99&quot;: {
+            &quot;_id&quot;: &quot;1a65e144e61ac99&quot;,
+            &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;properties&quot;,
             &quot;action&quot;: &quot;function properties() { \n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;property&#x27;) {\n            result.push(item);\n        }\n    } return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;19f3b1d39e14db2&quot;: {
-            &quot;_id&quot;: &quot;19f3b1d39e14db2&quot;,
-            &quot;component&quot;: &quot;SyrupClassInfo&quot;,
+        &quot;112b21e3f81c9b4&quot;: {
+            &quot;_id&quot;: &quot;112b21e3f81c9b4&quot;,
+            &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;property&quot;,
             &quot;action&quot;: &quot;function property(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === &#x27;property&#x27;) {\n        result = this.model()[name];\n    }\n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;148b418ab81ff10&quot;: {
-            &quot;_id&quot;: &quot;148b418ab81ff10&quot;,
-            &quot;component&quot;: &quot;SyrupComponent&quot;,
+        &quot;1220f1f3f017a7e&quot;: {
+            &quot;_id&quot;: &quot;1220f1f3f017a7e&quot;,
+            &quot;component&quot;: &quot;RuntimeComponent&quot;,
             &quot;state&quot;: &quot;destroy&quot;,
             &quot;action&quot;: &quot;function destroy() {\n    $component.destroy(this.id());\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;11f091120a184d6&quot;: {
-            &quot;_id&quot;: &quot;11f091120a184d6&quot;,
-            &quot;component&quot;: &quot;SyrupComponent&quot;,
+        &quot;159401fb331fa77&quot;: {
+            &quot;_id&quot;: &quot;159401fb331fa77&quot;,
+            &quot;component&quot;: &quot;RuntimeComponent&quot;,
             &quot;state&quot;: &quot;off&quot;,
-            &quot;action&quot;: &quot;function off(state, behaviorId) {\n    var args = [],\n    i = 0,\n    length = 0;\n    length = arguments.length;\n    \n    for (i = 0; i &lt; length - 6; i++) {\n        args.push(arguments[i]);\n    }\n    \n    if ($workflow.checkParams({\n        \&quot;component\&quot;: this, \n        \&quot;methodName\&quot;: \&quot;off\&quot;, \n        \&quot;args\&quot;: args\n        })) {\n        \n        if (state || behaviorId) {\n            if ($metamodel.isValidState(state, this.constructor.name)) {\n                $behavior.remove({\n                    \&quot;behaviorId\&quot;: behaviorId, \n                    \&quot;componentId\&quot;: this.id(), \n                    \&quot;state\&quot;: state\n                });\n            } else { \n                console.warn(\&quot;syrup: invoke \\&#x27;off\\&#x27; method of component &#x27;\&quot; + this.id() + \&quot;&#x27; with an invalid state &#x27;\&quot; + state + \&quot;&#x27;\&quot;); \n            }\n        } else {\n            $behavior.remove({\n                \&quot;componentId\&quot;: this.id()\n            });\n        }\n    }\n}&quot;,
+            &quot;action&quot;: &quot;function off(state, behaviorId) {\n    var args = [],\n    i = 0,\n    length = 0;\n    length = arguments.length;\n    \n    for (i = 0; i &lt; length - 6; i++) {\n        args.push(arguments[i]);\n    }\n    \n    if ($workflow.checkParams({\n        \&quot;component\&quot;: this, \n        \&quot;methodName\&quot;: \&quot;off\&quot;, \n        \&quot;args\&quot;: args\n        })) {\n        \n        if (state || behaviorId) {\n            if ($metamodel.isValidState(state, this.constructor.name)) {\n                $behavior.remove({\n                    \&quot;behaviorId\&quot;: behaviorId, \n                    \&quot;componentId\&quot;: this.id(), \n                    \&quot;state\&quot;: state\n                });\n            } else { \n                console.warn(\&quot;runtime: invoke \\&#x27;off\\&#x27; method of component &#x27;\&quot; + this.id() + \&quot;&#x27; with an invalid state &#x27;\&quot; + state + \&quot;&#x27;\&quot;); \n            }\n        } else {\n            $behavior.remove({\n                \&quot;componentId\&quot;: this.id()\n            });\n        }\n    }\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;19cea18d171150d&quot;: {
-            &quot;_id&quot;: &quot;19cea18d171150d&quot;,
-            &quot;component&quot;: &quot;SyrupComponent&quot;,
+        &quot;16e3d1511e12d38&quot;: {
+            &quot;_id&quot;: &quot;16e3d1511e12d38&quot;,
+            &quot;component&quot;: &quot;RuntimeComponent&quot;,
             &quot;state&quot;: &quot;require&quot;,
             &quot;action&quot;: &quot;function require(id) {\n    return $component.get(id);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1c0671dc0c10a16&quot;: {
-            &quot;_id&quot;: &quot;1c0671dc0c10a16&quot;,
-            &quot;component&quot;: &quot;SyrupDatabase&quot;,
+        &quot;1d4611d41e19351&quot;: {
+            &quot;_id&quot;: &quot;1d4611d41e19351&quot;,
+            &quot;component&quot;: &quot;RuntimeDatabase&quot;,
             &quot;state&quot;: &quot;collections&quot;,
-            &quot;action&quot;: &quot;function collections() {\n    var result = {},\n    collectionName = &#x27;&#x27;;\n    \n    for (collectionName in $db.store) {\n        if ($db.store.hasOwnProperty(collectionName) &amp;&amp; collectionName.indexOf(&#x27;Syrup&#x27;) !== 0) {\n            result[collectionName] = $db[collectionName];\n            \n        }\n    }\n    return result;\n}&quot;,
+            &quot;action&quot;: &quot;function collections() {\n    var result = {},\n    collectionName = &#x27;&#x27;;\n    \n    for (collectionName in $db.store) {\n        if ($db.store.hasOwnProperty(collectionName) &amp;&amp; collectionName.indexOf(&#x27;Runtime&#x27;) !== 0) {\n            result[collectionName] = $db[collectionName];\n            \n        }\n    }\n    return result;\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;195fe1e9ea1a7cf&quot;: {
-            &quot;_id&quot;: &quot;195fe1e9ea1a7cf&quot;,
-            &quot;component&quot;: &quot;SyrupDatabase&quot;,
+        &quot;1ad291c62517189&quot;: {
+            &quot;_id&quot;: &quot;1ad291c62517189&quot;,
+            &quot;component&quot;: &quot;RuntimeDatabase&quot;,
             &quot;state&quot;: &quot;subsystem&quot;,
             &quot;action&quot;: &quot;function subsystem(params) {\n    return $db.subsystem(params);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1f54c15cd2191b8&quot;: {
-            &quot;_id&quot;: &quot;1f54c15cd2191b8&quot;,
-            &quot;component&quot;: &quot;SyrupDatabase&quot;,
+        &quot;17561114ea118d7&quot;: {
+            &quot;_id&quot;: &quot;17561114ea118d7&quot;,
+            &quot;component&quot;: &quot;RuntimeDatabase&quot;,
             &quot;state&quot;: &quot;system&quot;,
             &quot;action&quot;: &quot;function system(system) {\n    return $db.system(system);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;106991d3d514556&quot;: {
-            &quot;_id&quot;: &quot;106991d3d514556&quot;,
-            &quot;component&quot;: &quot;SyrupMetamodel&quot;,
+        &quot;17c231efdf12df8&quot;: {
+            &quot;_id&quot;: &quot;17c231efdf12df8&quot;,
+            &quot;component&quot;: &quot;RuntimeMetamodel&quot;,
             &quot;state&quot;: &quot;create&quot;,
             &quot;action&quot;: &quot;function create() {\n    $metamodel.create();\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1893b12c6d10a97&quot;: {
-            &quot;_id&quot;: &quot;1893b12c6d10a97&quot;,
-            &quot;component&quot;: &quot;SyrupMetamodel&quot;,
+        &quot;1d28e159a91f68b&quot;: {
+            &quot;_id&quot;: &quot;1d28e159a91f68b&quot;,
+            &quot;component&quot;: &quot;RuntimeMetamodel&quot;,
             &quot;state&quot;: &quot;schema&quot;,
             &quot;action&quot;: &quot;function schema(schema) {\n    $metamodel.schema(schema);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1e31b1fa831b4c4&quot;: {
-            &quot;_id&quot;: &quot;1e31b1fa831b4c4&quot;,
-            &quot;component&quot;: &quot;SyrupMetamodel&quot;,
+        &quot;10a64112cc1de84&quot;: {
+            &quot;_id&quot;: &quot;10a64112cc1de84&quot;,
+            &quot;component&quot;: &quot;RuntimeMetamodel&quot;,
             &quot;state&quot;: &quot;type&quot;,
             &quot;action&quot;: &quot;function type(type) {\n    $metamodel.type(type);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;189231b0c51f860&quot;: {
-            &quot;_id&quot;: &quot;189231b0c51f860&quot;,
-            &quot;component&quot;: &quot;SyrupSystem&quot;,
+        &quot;1b9e312ec111012&quot;: {
+            &quot;_id&quot;: &quot;1b9e312ec111012&quot;,
+            &quot;component&quot;: &quot;RuntimeSystem&quot;,
             &quot;state&quot;: &quot;sync&quot;,
             &quot;action&quot;: &quot;function sync() {\n    var system = JSON.parse($db.system());\n    \n    this.schemas(system.schemas);\n    this.types(system.types);\n    this.behaviors(system.behaviors);\n    this.components(system.components);\n}&quot;,
             &quot;core&quot;: true,
@@ -1280,33 +1279,33 @@ var system = {
         }
     },
     &quot;components&quot;: {
-        &quot;SyrupAdmin&quot;: {
+        &quot;RuntimeAdmin&quot;: {
             &quot;admin&quot;: {
                 &quot;_id&quot;: &quot;admin&quot;
             }
         },
-        &quot;Syrup&quot;: {
-            &quot;syrup&quot;: {
-                &quot;_id&quot;: &quot;syrup&quot;,
-                &quot;version&quot;: &quot;0.9.9&quot;
+        &quot;Runtime&quot;: {
+            &quot;runtime&quot;: {
+                &quot;_id&quot;: &quot;runtime&quot;,
+                &quot;version&quot;: &quot;1.0.0&quot;
             }
         },
-        &quot;SyrupDatabase&quot;: {
+        &quot;RuntimeDatabase&quot;: {
             &quot;db&quot;: {
                 &quot;_id&quot;: &quot;db&quot;
             }
         },
-        &quot;SyrupMetamodel&quot;: {
+        &quot;RuntimeMetamodel&quot;: {
             &quot;metamodel&quot;: {
                 &quot;_id&quot;: &quot;metamodel&quot;
             }
         },
-        &quot;SyrupSystem&quot;: {
+        &quot;RuntimeSystem&quot;: {
             &quot;18ed81de331252c&quot;: {
                 &quot;_id&quot;: &quot;18ed81de331252c&quot;,
                 &quot;name&quot;: &quot;system-admin&quot;,
                 &quot;version&quot;: &quot;0.1.0&quot;,
-                &quot;description&quot;: &quot;SyrupJS administration component&quot;,
+                &quot;description&quot;: &quot;Runtime Component administration&quot;,
                 &quot;subsystem&quot;: true,
                 &quot;master&quot;: false
             },
@@ -1328,9 +1327,9 @@ var system = {
             }
         }
     },
-    &quot;name&quot;: &quot;syrup&quot;,
-    &quot;version&quot;: &quot;0.9.9&quot;,
-    &quot;description&quot;: &quot;The System Runtime Platform&quot;,
+    &quot;name&quot;: &quot;runtime&quot;,
+    &quot;version&quot;: &quot;1.0.0&quot;,
+    &quot;description&quot;: &quot;Runtime&quot;,
     &quot;_id&quot;: &quot;e89c617b6b15d24&quot;,
     &quot;master&quot;: false,
     &quot;subsystem&quot;: false
@@ -1340,18 +1339,18 @@ var system = {
 
 
 /**
- * This module contains syrup core system.
+ * This module contains Runtime core system.
  *
- * @module syrup
- * @submodule syrup-system
- * @class syrup-system
+ * @module runtime
+ * @submodule runtime-system
+ * @class runtime-system
  * @static 
  */
 
 
 /**
- * syrup core system
- * @property {SyrupSystem} system
+ * Runtime core system
+ * @property {RuntimeSystem} system
  */
 exports.system = system;
 

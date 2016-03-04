@@ -1,7 +1,6 @@
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -26,16 +25,16 @@
  */
 
 /**
- * This module manages syrup metamodel. <br>
- * syrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.
+ * This module manages Runtime metamodel. <br>
+ * Runtime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.
  * 
- * @module syrup
- * @submodule syrup-metamodel
- * @requires syrup-db
- * @requires syrup-log
- * @requires syrup-component
- * @requires syrup-workflow
- * @class syrup-metamodel
+ * @module runtime
+ * @submodule runtime-metamodel
+ * @requires runtime-db
+ * @requires runtime-log
+ * @requires runtime-component
+ * @requires runtime-workflow
+ * @class runtime-metamodel
  * @static
  */
 
@@ -102,7 +101,7 @@ function loadInMemory() {
     store.implementation = {};
 
     // load schemas
-    schemas = $db.SyrupSchema.find({});
+    schemas = $db.RuntimeSchema.find({});
 
     length = schemas.length;
     for (i = 0; i < length; i++) {
@@ -118,7 +117,7 @@ function loadInMemory() {
     }
     
     // load types
-    types = $db.SyrupType.find({});
+    types = $db.RuntimeType.find({});
 
     length = types.length;
     for (i = 0; i < length; i++) {
@@ -384,19 +383,19 @@ function checkCustomSchema(value, typeName) {
  * @private
  */
 function initDbStructure() {
-    $db.collection('SyrupSchema');
-    $db.collection('SyrupExtendedSchema');
-    $db.collection('SyrupClassInfo');
-    $db.collection('SyrupBehavior');
-    $db.collection('SyrupState');
-    $db.collection('SyrupType');
-    $db.collection('SyrupMessage');
-    $db.collection('SyrupChannel');
+    $db.collection('RuntimeSchema');
+    $db.collection('RuntimeExtendedSchema');
+    $db.collection('RuntimeClassInfo');
+    $db.collection('RuntimeBehavior');
+    $db.collection('RuntimeState');
+    $db.collection('RuntimeType');
+    $db.collection('RuntimeMessage');
+    $db.collection('RuntimeChannel');
 }
 
 
 /*
- * Create the Database structure (i.e. SyrupDatabaseCollection).
+ * Create the Database structure (i.e. RuntimeDatabaseCollection).
  * @method createDbStructure
  * @private
  */
@@ -415,7 +414,7 @@ function createDbStructure() {
 
     for (modelName in store.model) {
         modelDef = store.model[modelName];
-        $db.SyrupExtendedSchema.insert(modelDef);
+        $db.RuntimeExtendedSchema.insert(modelDef);
     }
 }
 
@@ -459,13 +458,13 @@ function createClassInfo() {
             modelDef[CLASS] !== false
             ) {
             if (!$component.get(id)) {
-                $db.SyrupClassInfo.insert({
+                $db.RuntimeClassInfo.insert({
                     "_id": id,
                     "metamodel": store.model[modelDef[SCHEMA]],
                     "model": modelDef
                 });
             } else {
-                $db.SyrupClassInfo.update({
+                $db.RuntimeClassInfo.update({
                     "_id": id
                 }, {
                         "_id": id,
@@ -661,11 +660,11 @@ function schema(importedSchema) {
     // check if schema is compliant with the meta meta model
     if (isValidObject(schema, store.metadef.schema, false)) {
 
-        schemas = $db.SyrupSchema.find({ '_id': id });
+        schemas = $db.RuntimeSchema.find({ '_id': id });
         if (schemas.length) {
-            $db.SyrupSchema.update({ '_id': id }, merge(schema, schemas[0]));
+            $db.RuntimeSchema.update({ '_id': id }, merge(schema, schemas[0]));
         } else {
-            $db.SyrupSchema.insert(schema);
+            $db.RuntimeSchema.insert(schema);
         }
     } else {
         $workflow.stop({
@@ -687,7 +686,7 @@ function type(importedType) {
     // check if type is compliant with the meta meta model
     if (isValidObject(importedType, store.metadef.type)) {
         if (name) {
-            $db.SyrupType.insert(importedType);
+            $db.RuntimeType.insert(importedType);
         } else {
             $log.invalidTypeDefinition(importedType);
         }
@@ -1528,16 +1527,16 @@ function inheritFrom(name, parentName) {
 
 
 /**
- * This module manages syrup metamodel. <br>
- * syrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.
+ * This module manages Runtime metamodel. <br>
+ * Runtime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.
  * 
- * @module syrup
- * @submodule syrup-metamodel
- * @requires syrup-db
- * @requires syrup-log
- * @requires syrup-component
- * @requires syrup-workflow
- * @class syrup-metamodel
+ * @module runtime
+ * @submodule runtime-metamodel
+ * @requires runtime-db
+ * @requires runtime-log
+ * @requires runtime-component
+ * @requires runtime-workflow
+ * @class runtime-metamodel
  * @static
  */
 

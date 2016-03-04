@@ -1,7 +1,6 @@
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -26,26 +25,26 @@
  */
 
 /**
- * This module manages the workflow of syrup. It behaves like a workflow engine. <br>
+ * This module manages the workflow of Runtime. It behaves like a workflow engine. <br>
  * It checks if the change of status of a component is valid to be executed. By valid, it means that:<br>
  * - the state is valid for the component, <br>
  * - the input (i.e. parameters) of all actions for the state are compliants with the model and <br>
  * - the output of all actions are compliants with the model. <br>
  * 
- * If an error occurs, the workflow will call the error state of the component and syrup. <br>
+ * If an error occurs, the workflow will call the error state of the component and runtime. <br>
  * If the error can break the consistency of the current system, the worklow will stop.
  * 
- * @module syrup
- * @submodule syrup-workflow
- * @requires syrup-metamodel
- * @requires syrup-component
- * @requires syrup-behavior
- * @requires syrup-channel
- * @requires syrup-state
- * @requires syrup-helper
- * @requires syrup-log
- * @requires syrup-db
- * @class syrup-workflow 
+ * @module runtime
+ * @submodule runtime-workflow
+ * @requires runtime-metamodel
+ * @requires runtime-component
+ * @requires runtime-behavior
+ * @requires runtime-channel
+ * @requires runtime-state
+ * @requires runtime-helper
+ * @requires runtime-log
+ * @requires runtime-db
+ * @class runtime-workflow 
  * @static
  */
 
@@ -64,17 +63,17 @@ var $db = require('./db.js');
 
 
 /**
- * The SyrupError class.
- * @class SyrupError
+ * The RuntimeError class.
+ * @class RuntimeError
  * @constructor
  * @param {String} message message of the error
  */
-function SyrupError(message) {
+function RuntimeError(message) {
     this.message = message;
-    this.name = "SyrupError";
+    this.name = "RuntimeError";
 }
-SyrupError.prototype = new Error();
-SyrupError.prototype.constructor = SyrupError;
+RuntimeError.prototype = new Error();
+RuntimeError.prototype.constructor = RuntimeError;
 
 
 /*
@@ -279,7 +278,7 @@ function checkResult(params) {
 /*
  * Get the actions of the specified state
  * @method getActions
- * @param {Object} component a syrup component
+ * @param {Object} component a Runtime component
  * @param {String} name name of the state
  * @param {Boolean} isEvent true if the state is an event
  * @return {Array} list of the actions
@@ -367,7 +366,7 @@ function callAction(component, state, action, params, isEvent) {
             result = action.action.apply(component, injectedParams);
         }
     } catch (e) {
-        if (e instanceof SyrupError) {
+        if (e instanceof RuntimeError) {
             throw e;
         } else {
             if (component && component.error) {
@@ -376,8 +375,8 @@ function callAction(component, state, action, params, isEvent) {
                     "error": e
                 });
             }
-            if ($helper.getSyrup()) {
-                $helper.getSyrup().error({
+            if ($helper.getRuntime()) {
+                $helper.getRuntime().error({
                     "message": "error when trying to call the method '" + state + "' on component '" + component.id() + "'",
                     "error": e
                 });
@@ -555,7 +554,7 @@ function action(behaviorId, params) {
         componentClassName = '',
         actionFromMemory = null;
 
-    behaviors = $db.SyrupBehavior.find({
+    behaviors = $db.RuntimeBehavior.find({
         "_id": behaviorId
     });
 
@@ -712,12 +711,12 @@ function stop(params) {
 
     if (params.error) {
         if (params.message) {
-            throw new SyrupError("syrup has been stopped because " + params.message);
+            throw new RuntimeError("runtime has been stopped because " + params.message);
         } else {
-            throw new SyrupError("syrup has been stopped because of an unknown error");
+            throw new RuntimeError("runtime has been stopped because of an unknown error");
         }
     } else {
-        console.warn('syrup: syrup has been stopped');
+        console.warn('runtime: runtime has been stopped');
     }
 }
 
@@ -736,26 +735,26 @@ function restart() {
 
 
 /**
- * This module manages the workflow of syrup. It behaves like a workflow engine. <br>
+ * This module manages the workflow of Runtime. It behaves like a workflow engine. <br>
  * It checks if the change of status of a component is valid to be executed. By valid, it means that:<br>
  * - the state is valid for the component, <br>
  * - the input (i.e. parameters) of all actions for the state are compliants with the model and <br>
  * - the output of all actions are compliants with the model. <br>
  * 
- * If an error occurs, the workflow will call the error state of the component and syrup. <br>
+ * If an error occurs, the workflow will call the error state of the component and of Runtime instance. <br>
  * If the error can break the consistency of the current system, the worklow will stop.
  * 
- * @module syrup
- * @submodule syrup-workflow
- * @requires syrup-metamodel
- * @requires syrup-component
- * @requires syrup-behavior
- * @requires syrup-channel
- * @requires syrup-state
- * @requires syrup-helper
- * @requires syrup-log
- * @requires syrup-db
- * @class syrup-workflow 
+ * @module runtime
+ * @submodule runtime-workflow
+ * @requires runtime-metamodel
+ * @requires runtime-component
+ * @requires runtime-behavior
+ * @requires runtime-channel
+ * @requires runtime-state
+ * @requires runtime-helper
+ * @requires runtime-log
+ * @requires runtime-db
+ * @class runtime-workflow 
  * @static
  */
 

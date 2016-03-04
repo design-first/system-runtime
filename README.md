@@ -1,4 +1,4 @@
-# SyrupJS
+# Runtime
 
 [![npm version](https://badge.fury.io/js/system-runtime.svg)](http://badge.fury.io/js/system-runtime)
 [![Build Status](https://travis-ci.org/system-sdk/system-runtime.svg?branch=master)](https://travis-ci.org/system-sdk/system-runtime)
@@ -6,48 +6,41 @@
 [![Coverage Status](https://coveralls.io/repos/github/system-sdk/system-runtime/badge.svg?branch=master)](https://coveralls.io/github/system-sdk/system-runtime?branch=master)
 [![devDependency Status](https://david-dm.org/system-sdk/system-runtime/dev-status.svg)](https://david-dm.org/system-sdk/system-runtime#info=devDependencies)
 
-## What is SyrupJS ?
-
-#### the runtime of System Designer
-
-[SyrupJS](https://syrupjs.github.io) (System Runtime Platform) is a JavaScript library to run and manage **JavaScript Application Systems** created with [System Designer](http://designfirst.io).
-
-SyrupJS is part of the [System SDK project](https://github.com/system-sdk).
-System SDK is a SDK for building JavaScript Application Systems.
+## What is Runtime ?
 
 #### a JSON Virtual Machine (JVM)
 
 [JSON](http://json.org) is traditionnaly used to represent data. We use this format to store your model, components and the behaviors of your app.
 
-SyrupJS will load your JSON and run your app as a JVM (JSON Virtual Machine).
+Runtime will load your JSON and run your app as a JVM (JSON Virtual Machine).
 
-## What contains SyrupJS ?
+## What contains Runtime ?
 
 #### A metamodel
 
-SyrupJS contains a metamodel to help you to design your model. The definition of the model is made on a JSON format called [MSON](https://syrupjs.readme.io/docs/design-your-model#section-mson), no code is needed. 
+Runtime contains a metamodel to help you to design your model. The definition of the model is made on a JSON format called [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson), no code is needed. 
 
-With [MSON](https://syrupjs.readme.io/docs/design-your-model#section-mson) you can define types, classes, one to one / one to many relationships and multi inheritance between classes. 
+With [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson) you can define types, classes, one to one / one to many relationships and multi inheritance between classes. 
 
-[MSON](https://syrupjs.readme.io/docs/design-your-model#section-mson) is based on [UML](http://uml.org), so learning it is very easy.
+[MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson) is based on [UML](http://uml.org), so learning it is very easy.
 
 #### A NoSQL Database
 
-SyrupJS acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents. 
+Runtime acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents. 
 
-SyrupJS has a micro NoSQL Database that stores your components and you can export/import them into another SyrupJS NoSQL Database. 
+Runtime has a micro NoSQL Database that stores your components and you can export/import them into another Runtime NoSQL Database. 
 
-Thanks to SyrupJS NoSQL Database, you can compose your model with an another one.
+Thanks to Runtime NoSQL Database, you can compose your model with an another one.
 
 #### A component factory
 
-SyrupJS uses the [Model-Driven Architecture](http://www.omg.org/mda/) approach to create classes based on your design. Use them to instantiate your components. 
+Runtime uses the [Model-Driven Architecture](http://www.omg.org/mda/) approach to create classes based on your design. Use them to instantiate your components. 
 
 #### A workflow engine
 
-SyrupJS checks at runtime if the signatures of invoked methods are compliant with your model. 
+Runtime checks at runtime if the signatures of invoked methods are compliant with your model. 
 
-With SyrupJS your components really behave the way you designed them. 
+With Runtime your components really behave the way you designed them. 
 
 ## Installation
 
@@ -60,7 +53,7 @@ $ npm install system-runtime --save
 Then:
 
 ```js
-var syrup = require('system-runtime');
+var runtime = require('system-runtime');
 ```
 
 #### Bower
@@ -74,18 +67,18 @@ Add a `<script>` tag to your HTML page:
 <script src="/bower_components/system-runtime/build/system-runtime.min.js"></script>
 ```
 
-Then you can use syrup on your script:
+Then you can use runtime on your script:
 ```js
-// example: get SyrupJS version
-syrup.version();
+// example: get Runtime version
+runtime.version();
 ```
 
 ## Documentation
 
-* [Quick Start](https://syrupjs.readme.io/docs/quick-start)
-* [Guide](https://syrupjs.readme.io/docs/installation)
-* [Examples](https://syrupjs.readme.io/docs/a-basic-hello-world)
-* [Build SyrupJS](https://syrupjs.readme.io/docs/extend-syrupjs)
+* [Quick Start](https://system-runtime.readme.io/docs/quick-start)
+* [Guide](https://system-runtime.readme.io/docs/installation)
+* [Examples](https://system-runtime.readme.io/docs/a-basic-hello-world)
+* [Build Runtime](https://system-runtime.readme.io/docs/extend-runtimejs)
 
 ## Licence
 

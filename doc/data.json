@@ -1,18 +1,18 @@
 {
     "project": {
         "name": "system-runtime",
-        "description": "SyrupJS, the System Runtime Platform",
-        "version": "0.9.9",
-        "url": "https://syrupjs.github.io"
+        "description": "The System Runtime Platform",
+        "version": "1.0.0",
+        "url": "https://system-runtime.github.io"
     },
     "files": {
         "src/behavior.js": {
             "name": "src/behavior.js",
             "modules": {
-                "syrup-behavior": 1
+                "runtime-behavior": 1
             },
             "classes": {
-                "syrup-behavior": 1
+                "runtime-behavior": 1
             },
             "fors": {},
             "namespaces": {}
@@ -20,10 +20,10 @@
         "src/component.js": {
             "name": "src/component.js",
             "modules": {
-                "syrup-component": 1
+                "runtime-component": 1
             },
             "classes": {
-                "syrup-component": 1
+                "runtime-component": 1
             },
             "fors": {},
             "namespaces": {}
@@ -31,11 +31,11 @@
         "src/db.js": {
             "name": "src/db.js",
             "modules": {
-                "syrup-db": 1
+                "runtime-db": 1
             },
             "classes": {
-                "syrup-db": 1,
-                "SyrupDatabaseCollection": 1
+                "runtime-db": 1,
+                "RuntimeDatabaseCollection": 1
             },
             "fors": {},
             "namespaces": {}
@@ -43,10 +43,10 @@
         "src/helper.js": {
             "name": "src/helper.js",
             "modules": {
-                "syrup-helper": 1
+                "runtime-helper": 1
             },
             "classes": {
-                "syrup-helper": 1
+                "runtime-helper": 1
             },
             "fors": {},
             "namespaces": {}
@@ -54,10 +54,10 @@
         "src/log.js": {
             "name": "src/log.js",
             "modules": {
-                "syrup-log": 1
+                "runtime-log": 1
             },
             "classes": {
-                "syrup-log": 1
+                "runtime-log": 1
             },
             "fors": {},
             "namespaces": {}
@@ -65,10 +65,21 @@
         "src/metamodel.js": {
             "name": "src/metamodel.js",
             "modules": {
-                "syrup-metamodel": 1
+                "runtime-metamodel": 1
             },
             "classes": {
-                "syrup-metamodel": 1
+                "runtime-metamodel": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/runtime.js": {
+            "name": "src/runtime.js",
+            "modules": {
+                "runtime": 1
+            },
+            "classes": {
+                "runtime": 1
             },
             "fors": {},
             "namespaces": {}
@@ -76,21 +87,10 @@
         "src/state.js": {
             "name": "src/state.js",
             "modules": {
-                "syrup-state": 1
+                "runtime-state": 1
             },
             "classes": {
-                "syrup-state": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "src/syrup.js": {
-            "name": "src/syrup.js",
-            "modules": {
-                "syrup": 1
-            },
-            "classes": {
-                "syrup": 1
+                "runtime-state": 1
             },
             "fors": {},
             "namespaces": {}
@@ -98,11 +98,11 @@
         "src/workflow.js": {
             "name": "src/workflow.js",
             "modules": {
-                "syrup-workflow": 1
+                "runtime-workflow": 1
             },
             "classes": {
-                "syrup-workflow": 1,
-                "SyrupError": 1
+                "runtime-workflow": 1,
+                "RuntimeError": 1
             },
             "fors": {},
             "namespaces": {}
@@ -110,337 +110,337 @@
         "build/system/system.js": {
             "name": "build/system/system.js",
             "modules": {
-                "syrup-system": 1
+                "runtime-system": 1
             },
             "classes": {
-                "syrup-system": 1
+                "runtime-system": 1
             },
             "fors": {},
             "namespaces": {}
         }
     },
     "modules": {
-        "syrup": {
-            "name": "syrup",
+        "runtime": {
+            "name": "runtime",
             "submodules": {
-                "syrup-behavior": 1,
-                "syrup-component": 1,
-                "syrup-db": 1,
-                "syrup-helper": 1,
-                "syrup-log": 1,
-                "syrup-metamodel": 1,
-                "syrup-state": 1,
-                "syrup-workflow": 1,
-                "syrup-system": 1
+                "runtime-behavior": 1,
+                "runtime-component": 1,
+                "runtime-db": 1,
+                "runtime-helper": 1,
+                "runtime-log": 1,
+                "runtime-metamodel": 1,
+                "runtime-state": 1,
+                "runtime-workflow": 1,
+                "runtime-system": 1
             },
             "elements": {},
             "classes": {
-                "syrup-behavior": 1,
-                "syrup-component": 1,
-                "syrup-db": 1,
-                "SyrupDatabaseCollection": 1,
-                "syrup-helper": 1,
-                "syrup-log": 1,
-                "syrup-metamodel": 1,
-                "syrup-state": 1,
-                "syrup": 1,
-                "syrup-workflow": 1,
-                "SyrupError": 1,
-                "syrup-system": 1
+                "runtime-behavior": 1,
+                "runtime-component": 1,
+                "runtime-db": 1,
+                "RuntimeDatabaseCollection": 1,
+                "runtime-helper": 1,
+                "runtime-log": 1,
+                "runtime-metamodel": 1,
+                "runtime": 1,
+                "runtime-state": 1,
+                "runtime-workflow": 1,
+                "RuntimeError": 1,
+                "runtime-system": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "main",
             "file": "build/system/system.js",
-            "line": 1253,
-            "description": "This module is the main module of syrup. <br>\nIt inits syrup metamodel and loads syrup core system.",
+            "line": 1252,
+            "description": "This module is the main module of Runtime. <br>\nIt inits Runtime metamodel and loads Runtime core system.",
             "requires": [
-                "syrup-component",
-                "syrup-metamodel",
-                "syrup-system",
-                "syrup-helper"
+                "runtime-component",
+                "runtime-metamodel",
+                "runtime-system",
+                "runtime-helper"
             ],
             "itemtype": "main",
             "static": 1
         },
-        "syrup-behavior": {
-            "name": "syrup-behavior",
+        "runtime-behavior": {
+            "name": "runtime-behavior",
             "submodules": {},
             "elements": {},
             "classes": {
-                "syrup-behavior": 1
+                "runtime-behavior": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "syrup",
+            "module": "runtime",
             "namespace": "",
             "file": "src/behavior.js",
-            "line": 275,
+            "line": 274,
             "description": "This module manages the behaviors of all components. \nA behavior is a mecanism that allow users to add actions that will be executed \nwhen a specific state of a component will change.",
             "requires": [
-                "syrup-db",
-                "syrup-helper",
-                "syrup-channel"
+                "runtime-db",
+                "runtime-helper",
+                "runtime-channel"
             ],
             "static": 1
         },
-        "syrup-component": {
-            "name": "syrup-component",
+        "runtime-component": {
+            "name": "runtime-component",
             "submodules": {},
             "elements": {},
             "classes": {
-                "syrup-component": 1
+                "runtime-component": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "syrup",
+            "module": "runtime",
             "namespace": "",
             "file": "src/component.js",
-            "line": 976,
-            "description": "This module manages the components. \nIt is the factory of all the components that are created by syrup.",
+            "line": 975,
+            "description": "This module manages the components. \nIt is the factory of all the components that are created by Runtime.",
             "requires": [
-                "syrup-workflow",
-                "syrup-db",
-                "syrup-metamodel",
-                "syrup-behavior",
-                "syrup-helper",
-                "syrup-log"
+                "runtime-workflow",
+                "runtime-db",
+                "runtime-metamodel",
+                "runtime-behavior",
+                "runtime-helper",
+                "runtime-log"
             ],
             "static": 1
         },
-        "syrup-db": {
-            "name": "syrup-db",
+        "runtime-db": {
+            "name": "runtime-db",
             "submodules": {},
             "elements": {},
             "classes": {
-                "syrup-db": 1,
-                "SyrupDatabaseCollection": 1
+                "runtime-db": 1,
+                "RuntimeDatabaseCollection": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "syrup",
+            "module": "runtime",
             "namespace": "",
             "file": "src/db.js",
-            "line": 205,
-            "description": "This module manages syrup database. <br>\nsyrup database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nsyrup Database is closely linked to syrup metamodel and syrup components because: <br>\n- all operations done by syrup database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
+            "line": 204,
+            "description": "This module manages Runtime database. <br>\nRuntime database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nRuntime Database is closely linked to Runtime metamodel and Runtime components because: <br>\n- all operations done by Runtime database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
-                "syrup-component",
-                "syrup-helper",
-                "syrup-log"
+                "runtime-component",
+                "runtime-helper",
+                "runtime-log"
             ],
             "static": 1
         },
-        "syrup-helper": {
-            "name": "syrup-helper",
+        "runtime-helper": {
+            "name": "runtime-helper",
             "submodules": {},
             "elements": {},
             "classes": {
-                "syrup-helper": 1
+                "runtime-helper": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "syrup",
+            "module": "runtime",
             "namespace": "",
             "file": "src/helper.js",
-            "line": 136,
+            "line": 135,
             "description": "This module contains all the functions used by all the modules.",
             "requires": [
-                "syrup-db",
-                "syrup-component"
+                "runtime-db",
+                "runtime-component"
             ],
             "static": 1
         },
-        "syrup-log": {
-            "name": "syrup-log",
+        "runtime-log": {
+            "name": "runtime-log",
             "submodules": {},
             "elements": {},
             "classes": {
-                "syrup-log": 1
+                "runtime-log": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "syrup",
+            "module": "runtime",
             "namespace": "",
             "file": "src/log.js",
-            "line": 441,
+            "line": 440,
             "description": "This module contains all the functions that write a log.",
             "requires": [
-                "syrup-helper"
+                "runtime-helper"
             ],
             "static": 1
         },
-        "syrup-metamodel": {
-            "name": "syrup-metamodel",
+        "runtime-metamodel": {
+            "name": "runtime-metamodel",
             "submodules": {},
             "elements": {},
             "classes": {
-                "syrup-metamodel": 1
+                "runtime-metamodel": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "syrup",
+            "module": "runtime",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1530,
-            "description": "This module manages syrup metamodel. <br>\nsyrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.",
+            "line": 1529,
+            "description": "This module manages Runtime metamodel. <br>\nRuntime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.",
             "requires": [
-                "syrup-db",
-                "syrup-log",
-                "syrup-component",
-                "syrup-workflow"
+                "runtime-db",
+                "runtime-log",
+                "runtime-component",
+                "runtime-workflow"
             ],
             "static": 1
         },
-        "syrup-state": {
-            "name": "syrup-state",
+        "runtime-state": {
+            "name": "runtime-state",
             "submodules": {},
             "elements": {},
             "classes": {
-                "syrup-state": 1
+                "runtime-state": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "syrup",
+            "module": "runtime",
             "namespace": "",
             "file": "src/state.js",
-            "line": 99,
+            "line": 98,
             "description": "This module manages the states of all thecomponents.",
             "requires": [
-                "syrup-db"
+                "runtime-db"
             ],
             "static": 1
         },
-        "syrup-workflow": {
-            "name": "syrup-workflow",
+        "runtime-workflow": {
+            "name": "runtime-workflow",
             "submodules": {},
             "elements": {},
             "classes": {
-                "syrup-workflow": 1,
-                "SyrupError": 1
+                "runtime-workflow": 1,
+                "RuntimeError": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "syrup",
+            "module": "runtime",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 66,
-            "description": "This module manages the workflow of syrup. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and syrup. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
+            "line": 65,
+            "description": "This module manages the workflow of Runtime. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and runtime. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
-                "syrup-metamodel",
-                "syrup-component",
-                "syrup-behavior",
-                "syrup-channel",
-                "syrup-state",
-                "syrup-helper",
-                "syrup-log",
-                "syrup-db"
+                "runtime-metamodel",
+                "runtime-component",
+                "runtime-behavior",
+                "runtime-channel",
+                "runtime-state",
+                "runtime-helper",
+                "runtime-log",
+                "runtime-db"
             ],
             "static": 1
         },
-        "syrup-system": {
-            "name": "syrup-system",
+        "runtime-system": {
+            "name": "runtime-system",
             "submodules": {},
             "elements": {},
             "classes": {
-                "syrup-system": 1
+                "runtime-system": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
-            "module": "syrup",
+            "module": "runtime",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 1253,
-            "description": "This module contains syrup core system.",
+            "line": 1252,
+            "description": "This module contains Runtime core system.",
             "static": 1
         }
     },
     "classes": {
-        "syrup-behavior": {
-            "name": "syrup-behavior",
-            "shortname": "syrup-behavior",
+        "runtime-behavior": {
+            "name": "runtime-behavior",
+            "shortname": "runtime-behavior",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "syrup",
-            "submodule": "syrup-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior",
             "namespace": "",
             "file": "src/behavior.js",
-            "line": 275,
+            "line": 274,
             "description": "This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed \nwhen a specific state of a component will change.",
             "requires": [
-                "syrup-db",
-                "syrup-helper",
-                "syrup-channel"
+                "runtime-db",
+                "runtime-helper",
+                "runtime-channel"
             ]
         },
-        "syrup-component": {
-            "name": "syrup-component",
-            "shortname": "syrup-component",
+        "runtime-component": {
+            "name": "runtime-component",
+            "shortname": "runtime-component",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "syrup",
-            "submodule": "syrup-component",
+            "module": "runtime",
+            "submodule": "runtime-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 976,
-            "description": "This module manages the components. \nIt is the factory of all the components that are created by syrup.",
+            "line": 975,
+            "description": "This module manages the components. \nIt is the factory of all the components that are created by Runtime.",
             "requires": [
-                "syrup-workflow",
-                "syrup-db",
-                "syrup-metamodel",
-                "syrup-behavior",
-                "syrup-helper",
-                "syrup-log"
+                "runtime-workflow",
+                "runtime-db",
+                "runtime-metamodel",
+                "runtime-behavior",
+                "runtime-helper",
+                "runtime-log"
             ]
         },
-        "syrup-db": {
-            "name": "syrup-db",
-            "shortname": "syrup-db",
+        "runtime-db": {
+            "name": "runtime-db",
+            "shortname": "runtime-db",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "syrup",
-            "submodule": "syrup-db",
+            "module": "runtime",
+            "submodule": "runtime-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 814,
-            "description": "This module manages syrup database. <br>\nsyrup database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nsyrup database is closely linked to syrup metamodel because: <br>\n- all operations done by syrup database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
+            "line": 813,
+            "description": "This module manages Runtime database. <br>\nRuntime database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nRuntime database is closely linked to Runtime metamodel because: <br>\n- all operations done by Runtime database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
-                "syrup-component",
-                "syrup-helper",
-                "syrup-log"
+                "runtime-component",
+                "runtime-helper",
+                "runtime-log"
             ]
         },
-        "SyrupDatabaseCollection": {
-            "name": "SyrupDatabaseCollection",
-            "shortname": "SyrupDatabaseCollection",
+        "RuntimeDatabaseCollection": {
+            "name": "RuntimeDatabaseCollection",
+            "shortname": "RuntimeDatabaseCollection",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "syrup",
-            "submodule": "syrup-db",
+            "module": "runtime",
+            "submodule": "runtime-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 205,
-            "description": "A collection of documents managed by syrup. <br>\nInternal collections manage core objects of syrup (schema, type, ...). <br>\nPublic collections manage components of the same class. <br>",
+            "line": 204,
+            "description": "A collection of documents managed by Runtime. <br>\nInternal collections manage core objects of Runtime (schema, type, ...). <br>\nPublic collections manage components of the same class. <br>",
             "is_constructor": 1,
             "params": [
                 {
@@ -450,144 +450,144 @@
                 }
             ]
         },
-        "syrup-helper": {
-            "name": "syrup-helper",
-            "shortname": "syrup-helper",
+        "runtime-helper": {
+            "name": "runtime-helper",
+            "shortname": "runtime-helper",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "syrup",
-            "submodule": "syrup-helper",
+            "module": "runtime",
+            "submodule": "runtime-helper",
             "namespace": "",
             "file": "src/helper.js",
-            "line": 136,
+            "line": 135,
             "description": "This module contains all the functions used by all the modules.",
             "requires": [
-                "syrup-db",
-                "syrup-component"
+                "runtime-db",
+                "runtime-component"
             ]
         },
-        "syrup-log": {
-            "name": "syrup-log",
-            "shortname": "syrup-log",
+        "runtime-log": {
+            "name": "runtime-log",
+            "shortname": "runtime-log",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "syrup",
-            "submodule": "syrup-log",
+            "module": "runtime",
+            "submodule": "runtime-log",
             "namespace": "",
             "file": "src/log.js",
-            "line": 441,
+            "line": 440,
             "description": "This module contains all the functions that write a log.",
             "requires": [
-                "syrup-helper"
+                "runtime-helper"
             ]
         },
-        "syrup-metamodel": {
-            "name": "syrup-metamodel",
-            "shortname": "syrup-metamodel",
+        "runtime-metamodel": {
+            "name": "runtime-metamodel",
+            "shortname": "runtime-metamodel",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "syrup",
-            "submodule": "syrup-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1530,
-            "description": "This module manages syrup metamodel. <br>\nsyrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.",
+            "line": 1529,
+            "description": "This module manages Runtime metamodel. <br>\nRuntime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.",
             "requires": [
-                "syrup-db",
-                "syrup-log",
-                "syrup-component",
-                "syrup-workflow"
+                "runtime-db",
+                "runtime-log",
+                "runtime-component",
+                "runtime-workflow"
             ]
         },
-        "syrup-state": {
-            "name": "syrup-state",
-            "shortname": "syrup-state",
+        "runtime": {
+            "name": "runtime",
+            "shortname": "runtime",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "syrup",
-            "submodule": "syrup-state",
+            "module": "runtime",
             "namespace": "",
-            "file": "src/state.js",
-            "line": 99,
-            "description": "This module manages the states of all the components.",
+            "file": "src/runtime.js",
+            "line": 76,
+            "description": "This module is the main module of Runtime. <br>\nIt inits Runtime metamodel and loads Runtime core system.",
             "requires": [
-                "syrup-db"
-            ]
-        },
-        "syrup": {
-            "name": "syrup",
-            "shortname": "syrup",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "syrup",
-            "namespace": "",
-            "file": "src/syrup.js",
-            "line": 77,
-            "description": "This module is the main module of syrup. <br>\nIt inits syrup metamodel and loads syrup core system.",
-            "requires": [
-                "syrup-component",
-                "syrup-metamodel",
-                "syrup-system"
+                "runtime-component",
+                "runtime-metamodel",
+                "runtime-system"
             ],
-            "mainName": "syrup",
+            "mainName": "runtime",
             "tag": "main",
             "itemtype": "main",
             "_main": true
         },
-        "syrup-workflow": {
-            "name": "syrup-workflow",
-            "shortname": "syrup-workflow",
+        "runtime-state": {
+            "name": "runtime-state",
+            "shortname": "runtime-state",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "syrup",
-            "submodule": "syrup-workflow",
+            "module": "runtime",
+            "submodule": "runtime-state",
             "namespace": "",
-            "file": "src/workflow.js",
-            "line": 738,
-            "description": "This module manages the workflow of syrup. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and syrup. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
+            "file": "src/state.js",
+            "line": 98,
+            "description": "This module manages the states of all the components.",
             "requires": [
-                "syrup-metamodel",
-                "syrup-component",
-                "syrup-behavior",
-                "syrup-channel",
-                "syrup-state",
-                "syrup-helper",
-                "syrup-log",
-                "syrup-db"
+                "runtime-db"
             ]
         },
-        "SyrupError": {
-            "name": "SyrupError",
-            "shortname": "SyrupError",
+        "runtime-workflow": {
+            "name": "runtime-workflow",
+            "shortname": "runtime-workflow",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "syrup",
-            "submodule": "syrup-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 66,
-            "description": "The SyrupError class.",
+            "line": 737,
+            "description": "This module manages the workflow of Runtime. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and of Runtime instance. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
+            "requires": [
+                "runtime-metamodel",
+                "runtime-component",
+                "runtime-behavior",
+                "runtime-channel",
+                "runtime-state",
+                "runtime-helper",
+                "runtime-log",
+                "runtime-db"
+            ]
+        },
+        "RuntimeError": {
+            "name": "RuntimeError",
+            "shortname": "RuntimeError",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "runtime",
+            "submodule": "runtime-workflow",
+            "namespace": "",
+            "file": "src/workflow.js",
+            "line": 65,
+            "description": "The RuntimeError class.",
             "is_constructor": 1,
             "params": [
                 {
@@ -597,28 +597,28 @@
                 }
             ]
         },
-        "syrup-system": {
-            "name": "syrup-system",
-            "shortname": "syrup-system",
+        "runtime-system": {
+            "name": "runtime-system",
+            "shortname": "runtime-system",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "syrup",
-            "submodule": "syrup-system",
+            "module": "runtime",
+            "submodule": "runtime-system",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 1253,
-            "description": "This module contains syrup core system."
+            "line": 1252,
+            "description": "This module contains Runtime core system."
         }
     },
     "elements": {},
     "classitems": [
         {
             "file": "src/behavior.js",
-            "line": 289,
-            "description": "Add a behavior that will be stored in syrup database.",
+            "line": 288,
+            "description": "Add a behavior that will be stored in Runtime database.",
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -639,7 +639,7 @@
                 },
                 {
                     "name": "useCoreAPI",
-                    "description": "if true, syrup core modules will be injected as parameters of the action (default false)",
+                    "description": "if true, Runtime core modules will be injected as parameters of the action (default false)",
                     "type": "Boolean"
                 },
                 {
@@ -649,16 +649,16 @@
                 }
             ],
             "return": {
-                "description": "id of the behavior created in syrup database",
+                "description": "id of the behavior created in Runtime database",
                 "type": "String"
             },
-            "class": "syrup-behavior",
-            "module": "syrup",
-            "submodule": "syrup-behavior"
+            "class": "runtime-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior"
         },
         {
             "file": "src/behavior.js",
-            "line": 302,
+            "line": 301,
             "description": "Get a behavior by its id.",
             "itemtype": "method",
             "name": "get",
@@ -673,13 +673,13 @@
                 "description": "the behavior",
                 "type": "Behavior"
             },
-            "class": "syrup-behavior",
-            "module": "syrup",
-            "submodule": "syrup-behavior"
+            "class": "runtime-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior"
         },
         {
             "file": "src/behavior.js",
-            "line": 311,
+            "line": 310,
             "description": "Remove a behavior with its id or remove all the behaviors for a specific state\nof the component.",
             "itemtype": "method",
             "name": "remove",
@@ -690,13 +690,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "syrup-behavior",
-            "module": "syrup",
-            "submodule": "syrup-behavior"
+            "class": "runtime-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior"
         },
         {
             "file": "src/behavior.js",
-            "line": 323,
+            "line": 322,
             "description": "Get all the actions of a behavior for a component.",
             "itemtype": "method",
             "name": "getActions",
@@ -716,23 +716,23 @@
                 "description": "all the actions that have to be executed for a specific component and state",
                 "type": "Array"
             },
-            "class": "syrup-behavior",
-            "module": "syrup",
-            "submodule": "syrup-behavior"
+            "class": "runtime-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior"
         },
         {
             "file": "src/behavior.js",
-            "line": 333,
+            "line": 332,
             "description": "Remove all the behaviors stored in memory.",
             "itemtype": "method",
             "name": "clear",
-            "class": "syrup-behavior",
-            "module": "syrup",
-            "submodule": "syrup-behavior"
+            "class": "runtime-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior"
         },
         {
             "file": "src/behavior.js",
-            "line": 340,
+            "line": 339,
             "description": "Remove a behavior with its id from the memory.",
             "itemtype": "method",
             "name": "removeFromMemory",
@@ -743,13 +743,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-behavior",
-            "module": "syrup",
-            "submodule": "syrup-behavior"
+            "class": "runtime-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior"
         },
         {
             "file": "src/component.js",
-            "line": 993,
+            "line": 992,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -764,13 +764,13 @@
                 "description": "component",
                 "type": "Component"
             },
-            "class": "syrup-component",
-            "module": "syrup",
-            "submodule": "syrup-component"
+            "class": "runtime-component",
+            "module": "runtime",
+            "submodule": "runtime-component"
         },
         {
             "file": "src/component.js",
-            "line": 1003,
+            "line": 1002,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -785,13 +785,13 @@
                 "description": "component",
                 "type": "Component"
             },
-            "class": "syrup-component",
-            "module": "syrup",
-            "submodule": "syrup-component"
+            "class": "runtime-component",
+            "module": "runtime",
+            "submodule": "runtime-component"
         },
         {
             "file": "src/component.js",
-            "line": 1012,
+            "line": 1011,
             "description": "Remove a component with its id from the memory.",
             "itemtype": "method",
             "name": "removeFromMemory",
@@ -802,23 +802,23 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-component",
-            "module": "syrup",
-            "submodule": "syrup-component"
+            "class": "runtime-component",
+            "module": "runtime",
+            "submodule": "runtime-component"
         },
         {
             "file": "src/component.js",
-            "line": 1020,
+            "line": 1019,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
-            "class": "syrup-component",
-            "module": "syrup",
-            "submodule": "syrup-component"
+            "class": "runtime-component",
+            "module": "runtime",
+            "submodule": "runtime-component"
         },
         {
             "file": "src/component.js",
-            "line": 1027,
+            "line": 1026,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -833,13 +833,13 @@
                 "description": "if the component has been destroyed",
                 "type": "Boolean"
             },
-            "class": "syrup-component",
-            "module": "syrup",
-            "submodule": "syrup-component"
+            "class": "runtime-component",
+            "module": "runtime",
+            "submodule": "runtime-component"
         },
         {
             "file": "src/db.js",
-            "line": 227,
+            "line": 226,
             "description": "Find a document into the collection.",
             "itemtype": "method",
             "name": "find",
@@ -857,14 +857,14 @@
             "example": [
                 " \n$db.Person.find({\"name\": \"laure\"}); <br>\n$db.Person.find({\"name\": \"laure\", \"age\" : 24}); <br>\n$db.Person.find([{\"name\": \"rene\"}, {\"name\": \"robert\"}]);"
             ],
-            "class": "SyrupDatabaseCollection",
-            "module": "syrup",
-            "submodule": "syrup-db"
+            "class": "RuntimeDatabaseCollection",
+            "module": "runtime",
+            "submodule": "runtime-db"
         },
         {
             "file": "src/db.js",
-            "line": 274,
-            "description": "Insert an new document into the collection. <br>\nBefore inserting the document, syrup checks that the document is compliant\nwith its class definition. <br> \nThen, after inserting it, we create the component.",
+            "line": 273,
+            "description": "Insert an new document into the collection. <br>\nBefore inserting the document, Runtime checks that the document is compliant\nwith its class definition. <br> \nThen, after inserting it, we create the component.",
             "itemtype": "method",
             "name": "insert",
             "params": [
@@ -881,13 +881,13 @@
             "example": [
                 " \n$db.Person.insert({<br>\n     \"name\": \"bob\", <br>\n     \"firstName\": \"Saint-Clar\", <br>\n     \"age\": 43 <br>\n}); <br>"
             ],
-            "class": "SyrupDatabaseCollection",
-            "module": "syrup",
-            "submodule": "syrup-db"
+            "class": "RuntimeDatabaseCollection",
+            "module": "runtime",
+            "submodule": "runtime-db"
         },
         {
             "file": "src/db.js",
-            "line": 360,
+            "line": 359,
             "description": "Update documents into a collection.",
             "itemtype": "method",
             "name": "update",
@@ -915,13 +915,13 @@
             "example": [
                 " \n$db.Cars.update({\"code\": \"AZD-71\"}, {\"price\": \"10000$\"}); <br>\n$db.Cars.update([{\"code\": \"AZD-71\"}, {\"code\": \"AZD-65\"}], {\"price\": \"10000$\"}); <br>\n$db.Cars.update({\"code\": \"AZD-71\"}, {\"price\": \"10000$\"}, {\"upsert\": true}); <br>"
             ],
-            "class": "SyrupDatabaseCollection",
-            "module": "syrup",
-            "submodule": "syrup-db"
+            "class": "RuntimeDatabaseCollection",
+            "module": "runtime",
+            "submodule": "runtime-db"
         },
         {
             "file": "src/db.js",
-            "line": 457,
+            "line": 456,
             "description": "Remove a document from the colllection. <br>\nWhen a document is removed, the component is destroyed.",
             "itemtype": "method",
             "name": "remove",
@@ -939,13 +939,13 @@
             "example": [
                 " \n$db.Cars.remove({\"code\": \"AZD-71\"}); <br>\n$db.Cars.remove([{\"code\": \"AZD-71\"}, {\"code\": \"AZD-65\"}]); <br>"
             ],
-            "class": "SyrupDatabaseCollection",
-            "module": "syrup",
-            "submodule": "syrup-db"
+            "class": "RuntimeDatabaseCollection",
+            "module": "runtime",
+            "submodule": "runtime-db"
         },
         {
             "file": "src/db.js",
-            "line": 534,
+            "line": 533,
             "description": "Count the number of documents in the collection.",
             "itemtype": "method",
             "name": "count",
@@ -953,14 +953,14 @@
                 "description": "number of documents in the collection",
                 "type": "Number"
             },
-            "class": "SyrupDatabaseCollection",
-            "module": "syrup",
-            "submodule": "syrup-db"
+            "class": "RuntimeDatabaseCollection",
+            "module": "runtime",
+            "submodule": "runtime-db"
         },
         {
             "file": "src/db.js",
-            "line": 835,
-            "description": "Create a new {{#crossLink \"SyrupDatabaseCollection\"}}{{/crossLink}}.",
+            "line": 834,
+            "description": "Create a new {{#crossLink \"RuntimeDatabaseCollection\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "collection",
             "params": [
@@ -970,46 +970,46 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-db",
-            "module": "syrup",
-            "submodule": "syrup-db"
+            "class": "runtime-db",
+            "module": "runtime",
+            "submodule": "runtime-db"
         },
         {
             "file": "src/db.js",
-            "line": 843,
-            "description": "syrup database store that lists all the collections.",
+            "line": 842,
+            "description": "Runtime database store that lists all the collections.",
             "itemtype": "property",
             "name": "store",
             "type": "JSON",
-            "class": "syrup-db",
-            "module": "syrup",
-            "submodule": "syrup-db"
+            "class": "runtime-db",
+            "module": "runtime",
+            "submodule": "runtime-db"
         },
         {
             "file": "src/db.js",
-            "line": 850,
-            "description": "Import/Export a syrup system into/from the database.",
+            "line": 849,
+            "description": "Import/Export a Runtime system into/from the database.",
             "itemtype": "method",
             "name": "system",
             "params": [
                 {
                     "name": "importedSystem",
-                    "description": "a syrup system to import",
+                    "description": "a Runtime system to import",
                     "type": "JSON"
                 }
             ],
             "return": {
-                "description": "the id of the imported syrup system or the current syrup system",
+                "description": "the id of the imported Runtime system or the current Runtime system",
                 "type": "String"
             },
-            "class": "syrup-db",
-            "module": "syrup",
-            "submodule": "syrup-db"
+            "class": "runtime-db",
+            "module": "runtime",
+            "submodule": "runtime-db"
         },
         {
             "file": "src/db.js",
-            "line": 859,
-            "description": "Export a syrup sub-system.",
+            "line": 858,
+            "description": "Export a Runtime sub-system.",
             "itemtype": "method",
             "name": "subsystem",
             "params": [
@@ -1020,67 +1020,67 @@
                 }
             ],
             "return": {
-                "description": "a stringified syrup sub-system",
+                "description": "a stringified Runtime sub-system",
                 "type": "String"
             },
             "example": [
                 "\n$db.subsystem({\"schemas\":{\"name\":\"Person\"}}); // filter export on schemas <br>\n$db.subsystem({\"types\":{\"name\":\"address\"}}); // filter export on types <br>\n$db.subsystem({\"behaviors\":{\"component\":\"laure\"}}); // filter export on behaviors <br>\n$db.subsystem({\"components\":{\"Person\": {\"country\": \"France\"}}}); // filter export on components <br>\n$db.subsystem({\"schemas\":{\"name\":\"Person\"},\"components\":{\"Person\": {\"country\": \"France\"}}}); // combine filters"
             ],
-            "class": "syrup-db",
-            "module": "syrup",
-            "submodule": "syrup-db"
+            "class": "runtime-db",
+            "module": "runtime",
+            "submodule": "runtime-db"
         },
         {
             "file": "src/db.js",
-            "line": 875,
+            "line": 874,
             "description": "Clear the database.",
             "itemtype": "method",
             "name": "clear",
-            "class": "syrup-db",
-            "module": "syrup",
-            "submodule": "syrup-db"
+            "class": "runtime-db",
+            "module": "runtime",
+            "submodule": "runtime-db"
         },
         {
             "file": "src/db.js",
-            "line": 882,
+            "line": 881,
             "description": "Init the database.",
             "itemtype": "method",
             "name": "init",
-            "class": "syrup-db",
-            "module": "syrup",
-            "submodule": "syrup-db"
+            "class": "runtime-db",
+            "module": "runtime",
+            "submodule": "runtime-db"
         },
         {
             "file": "src/helper.js",
-            "line": 148,
-            "description": "Get syrup instance.",
+            "line": 147,
+            "description": "Get Runtime instance.",
             "itemtype": "method",
-            "name": "getSyrup",
+            "name": "getRuntime",
             "return": {
-                "description": "syrup instance",
-                "type": "Syrup"
+                "description": "Runtime instance",
+                "type": "Runtime"
             },
-            "class": "syrup-helper",
-            "module": "syrup",
-            "submodule": "syrup-helper"
+            "class": "runtime-helper",
+            "module": "runtime",
+            "submodule": "runtime-helper"
         },
         {
             "file": "src/helper.js",
-            "line": 156,
-            "description": "Check if a syrup instance exists.",
+            "line": 155,
+            "description": "Check if a Runtime instance exists.",
             "itemtype": "method",
-            "name": "isSyrup",
+            "name": "isRuntime",
             "return": {
-                "description": "true if a syrup instance exist",
+                "description": "true if a Runtime instance exist",
                 "type": "Boolean"
             },
-            "class": "syrup-helper",
-            "module": "syrup",
-            "submodule": "syrup-helper"
+            "class": "runtime-helper",
+            "module": "runtime",
+            "submodule": "runtime-helper"
         },
         {
             "file": "src/helper.js",
-            "line": 164,
+            "line": 163,
             "description": "Generate a uuid.",
             "itemtype": "method",
             "name": "generateId",
@@ -1088,23 +1088,23 @@
                 "description": "a uuid",
                 "type": "String"
             },
-            "class": "syrup-helper",
-            "module": "syrup",
-            "submodule": "syrup-helper"
+            "class": "runtime-helper",
+            "module": "runtime",
+            "submodule": "runtime-helper"
         },
         {
             "file": "src/helper.js",
-            "line": 172,
+            "line": 171,
             "description": "Add Polyfill",
             "itemtype": "method",
             "name": "polyfill",
-            "class": "syrup-helper",
-            "module": "syrup",
-            "submodule": "syrup-helper"
+            "class": "runtime-helper",
+            "module": "runtime",
+            "submodule": "runtime-helper"
         },
         {
             "file": "src/log.js",
-            "line": 390,
+            "line": 389,
             "description": "A message send by the channel is invalid",
             "itemtype": "method",
             "name": "invalidChannelEvent",
@@ -1125,13 +1125,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 452,
+            "line": 451,
             "description": "A property of a schema is unknown.",
             "itemtype": "method",
             "name": "unknownProperty",
@@ -1147,13 +1147,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 461,
+            "line": 460,
             "description": "Invalid type for a property.",
             "itemtype": "method",
             "name": "invalidPropertyType",
@@ -1174,13 +1174,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 471,
+            "line": 470,
             "description": "Invalid value for a type enum.",
             "itemtype": "method",
             "name": "invalidEnumValue",
@@ -1196,13 +1196,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 480,
+            "line": 479,
             "description": "Invalid class name for a component.",
             "itemtype": "method",
             "name": "invalidClassName",
@@ -1223,13 +1223,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 490,
+            "line": 489,
             "description": "Missing a property.",
             "itemtype": "method",
             "name": "missingProperty",
@@ -1240,13 +1240,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 498,
+            "line": 497,
             "description": "A class definition is missing.",
             "itemtype": "method",
             "name": "missingImplementation",
@@ -1262,13 +1262,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 507,
+            "line": 506,
             "description": "Invalid type for a property of a class definition.",
             "itemtype": "method",
             "name": "invalidTypeImp",
@@ -1284,13 +1284,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 516,
+            "line": 515,
             "description": "Missing a property for a class definition.",
             "itemtype": "method",
             "name": "missingPropertyImp",
@@ -1306,13 +1306,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 525,
+            "line": 524,
             "description": "Unkown property for a class definition.",
             "itemtype": "method",
             "name": "unknownPropertyImp",
@@ -1328,13 +1328,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 534,
+            "line": 533,
             "description": "Invalid type definition.",
             "itemtype": "method",
             "name": "invalidTypeDefinition",
@@ -1345,13 +1345,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 542,
+            "line": 541,
             "description": "Invalid property type.",
             "itemtype": "method",
             "name": "invalidPropertyName",
@@ -1377,13 +1377,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 553,
+            "line": 552,
             "description": "Trying to set a read-only property.",
             "itemtype": "method",
             "name": "readOnlyProperty",
@@ -1399,14 +1399,14 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 562,
-            "description": "Invalid document on a syrup database insert operation.",
+            "line": 561,
+            "description": "Invalid document on a Runtime database insert operation.",
             "itemtype": "method",
             "name": "invalidDocumentOnDbInsert",
             "params": [
@@ -1421,14 +1421,14 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 571,
-            "description": "Invalid property on a syrup database update operation.",
+            "line": 570,
+            "description": "Invalid property on a Runtime database update operation.",
             "itemtype": "method",
             "name": "invalidPropertyTypeOnDbUpdate",
             "params": [
@@ -1458,13 +1458,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 583,
+            "line": 582,
             "description": "Call an unknown method of a class.",
             "itemtype": "method",
             "name": "unknownMethod",
@@ -1480,14 +1480,14 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 592,
-            "description": "Try to create an invalid SyrupDatabaseCollection.",
+            "line": 591,
+            "description": "Try to create an invalid RuntimeDatabaseCollection.",
             "itemtype": "method",
             "name": "invalidCollectionName",
             "params": [
@@ -1497,13 +1497,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 600,
+            "line": 599,
             "description": "Invalid result type of a method.",
             "itemtype": "method",
             "name": "invalidResultType",
@@ -1519,13 +1519,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 609,
+            "line": 608,
             "description": "Unknown class.",
             "itemtype": "method",
             "name": "unknownComponent",
@@ -1541,23 +1541,23 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 618,
-            "description": "The syrup workflow has been restarted.",
+            "line": 617,
+            "description": "The Runtime workflow has been restarted.",
             "itemtype": "method",
             "name": "workflowRestarted",
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 625,
+            "line": 624,
             "description": "Invalid parameter number for a method.",
             "itemtype": "method",
             "name": "invalidParamNumber",
@@ -1573,13 +1573,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 634,
+            "line": 633,
             "description": "Invalid type parameters for a method.",
             "itemtype": "method",
             "name": "invalidParamType",
@@ -1600,13 +1600,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 645,
+            "line": 644,
             "description": "Add a more than one behavior to a state.",
             "itemtype": "method",
             "name": "behaviorNotUnique",
@@ -1622,13 +1622,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 654,
+            "line": 653,
             "description": "Can not add a behavior with an invalid state.",
             "itemtype": "method",
             "name": "invalidStateOn",
@@ -1644,13 +1644,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 663,
+            "line": 662,
             "description": "The call to a remove state of the behavior module is invalid.",
             "itemtype": "method",
             "name": "invalidStateOff",
@@ -1666,23 +1666,23 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 672,
+            "line": 671,
             "description": "The master system is not found.",
             "itemtype": "method",
             "name": "masterSystemNotFound",
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 679,
+            "line": 678,
             "description": "Invalid type.",
             "itemtype": "method",
             "name": "invalidType",
@@ -1698,13 +1698,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 688,
+            "line": 687,
             "description": "Unknown type.",
             "itemtype": "method",
             "name": "unknownType",
@@ -1715,13 +1715,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 696,
+            "line": 695,
             "description": "A component has not been alreay created.",
             "itemtype": "method",
             "name": "canNotYetValidate",
@@ -1737,13 +1737,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 705,
+            "line": 704,
             "description": "A message send by the channel is invalid",
             "itemtype": "method",
             "name": "invalidChannelEvent",
@@ -1764,13 +1764,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 715,
+            "line": 714,
             "description": "invalid parameter number for an action add with on method.",
             "itemtype": "method",
             "name": "invalidParamNumberMethodOn",
@@ -1786,13 +1786,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 724,
+            "line": 723,
             "description": "Change the id of a component.",
             "itemtype": "method",
             "name": "updateUuid",
@@ -1813,14 +1813,14 @@
                     "type": "Boolean"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 734,
-            "description": "Unkonw property on a syrup database update operation.",
+            "line": 733,
+            "description": "Unkonw property on a Runtime database update operation.",
             "itemtype": "method",
             "name": "unknownPropertyOnDbUpdate",
             "params": [
@@ -1835,13 +1835,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/log.js",
-            "line": 743,
+            "line": 742,
             "description": "Try to change the state of a component that has been destroyed",
             "itemtype": "method",
             "name": "invalideUseOfComponent",
@@ -1852,33 +1852,33 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-log",
-            "module": "syrup",
-            "submodule": "syrup-log"
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1545,
+            "line": 1544,
             "description": "Init the metamodel.",
             "itemtype": "method",
             "name": "init",
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1552,
+            "line": 1551,
             "description": "Remove the data of the metamodel from the memory.",
             "itemtype": "method",
             "name": "clear",
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1559,
+            "line": 1558,
             "description": "Add a new schema.",
             "itemtype": "method",
             "name": "schema",
@@ -1889,13 +1889,13 @@
                     "type": "JSON"
                 }
             ],
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1567,
+            "line": 1566,
             "description": "Add a new type.",
             "itemtype": "method",
             "name": "type",
@@ -1906,23 +1906,23 @@
                     "type": "JSON"
                 }
             ],
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1575,
+            "line": 1574,
             "description": "Create the metamodel.",
             "itemtype": "method",
             "name": "create",
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1582,
+            "line": 1581,
             "description": "Get a schema.",
             "itemtype": "method",
             "name": "get",
@@ -1937,13 +1937,13 @@
                 "description": "the schema",
                 "type": "Object"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1591,
+            "line": 1590,
             "description": "Get the definition of the metamodel.",
             "itemtype": "method",
             "name": "getMetaDef",
@@ -1951,13 +1951,13 @@
                 "description": "the metadefinition of the metamodel",
                 "type": "Object"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1599,
+            "line": 1598,
             "description": "Get parents of a shema if any.",
             "itemtype": "method",
             "name": "getParents",
@@ -1972,13 +1972,13 @@
                 "description": "id id of the parents",
                 "type": "Array"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1608,
+            "line": 1607,
             "description": "Check if a class inherits from another one",
             "itemtype": "method",
             "name": "inheritFrom",
@@ -1998,13 +1998,13 @@
                 "description": "true if the component inherit from the specific class name",
                 "type": "Boolean"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1618,
+            "line": 1617,
             "description": "Check if the object is compliant with the schema.\nUse it to test if the constructor of an object is compliant\nwith the definition of the class.",
             "itemtype": "method",
             "name": "isValidObject",
@@ -2034,13 +2034,13 @@
                 "description": "true is the object is compliant with the schema",
                 "type": "Boolean"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1632,
+            "line": 1631,
             "description": "Prepare the object in order to be compliant with the schema.",
             "itemtype": "method",
             "name": "prepareObject",
@@ -2056,13 +2056,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1641,
+            "line": 1640,
             "description": "Check if a value is compliant with a type.",
             "itemtype": "method",
             "name": "isValidType",
@@ -2082,13 +2082,13 @@
                 "description": "true if the object is compliant with the type",
                 "type": "Boolean"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1651,
+            "line": 1650,
             "description": "Check if a value is compliant with a type enum.",
             "itemtype": "method",
             "name": "isValidEnum",
@@ -2108,13 +2108,13 @@
                 "description": "true if the object is compliant with the enum",
                 "type": "Boolean"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1661,
+            "line": 1660,
             "description": "Check if the name is a correct state for the component.",
             "itemtype": "method",
             "name": "isValidState",
@@ -2134,13 +2134,13 @@
                 "description": "true if the name is a correct state for the component",
                 "type": "Boolean"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1671,
+            "line": 1670,
             "description": "Check if an attribute of the schema is an event.",
             "itemtype": "method",
             "name": "isEvent",
@@ -2160,13 +2160,13 @@
                 "description": "true if the attribute is an event",
                 "type": "Boolean"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1681,
+            "line": 1680,
             "description": "Check if an attribute of the schema is a property.",
             "itemtype": "method",
             "name": "isProperty",
@@ -2186,13 +2186,13 @@
                 "description": "true if the attribute is a property",
                 "type": "Boolean"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1691,
+            "line": 1690,
             "description": "Check if an attribute of the schema is a link.",
             "itemtype": "method",
             "name": "isLink",
@@ -2212,13 +2212,13 @@
                 "description": "true if the attribute is a link",
                 "type": "Boolean"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1701,
+            "line": 1700,
             "description": "Check if an attribute of the schema is a collection.",
             "itemtype": "method",
             "name": "isCollection",
@@ -2238,13 +2238,13 @@
                 "description": "true if the attribute is a collection",
                 "type": "Boolean"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
         },
         {
             "file": "src/metamodel.js",
-            "line": 1711,
+            "line": 1710,
             "description": "Check if an attribute of the schema is a method.",
             "itemtype": "method",
             "name": "isMethod",
@@ -2264,13 +2264,23 @@
                 "description": "true if the attribute is a method",
                 "type": "Boolean"
             },
-            "class": "syrup-metamodel",
-            "module": "syrup",
-            "submodule": "syrup-metamodel"
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "src/runtime.js",
+            "line": 90,
+            "description": "Runtime instance.",
+            "itemtype": "property",
+            "name": "runtime",
+            "type": "Runtime",
+            "class": "runtime",
+            "module": "runtime"
         },
         {
             "file": "src/state.js",
-            "line": 110,
+            "line": 109,
             "description": "Set the state of a component.",
             "itemtype": "method",
             "name": "set",
@@ -2286,13 +2296,13 @@
                     "type": "String"
                 }
             ],
-            "class": "syrup-state",
-            "module": "syrup",
-            "submodule": "syrup-state"
+            "class": "runtime-state",
+            "module": "runtime",
+            "submodule": "runtime-state"
         },
         {
             "file": "src/state.js",
-            "line": 119,
+            "line": 118,
             "description": "Get the state of a component.",
             "itemtype": "method",
             "name": "get",
@@ -2307,33 +2317,23 @@
                 "description": "the state of the component.",
                 "type": "String"
             },
-            "class": "syrup-state",
-            "module": "syrup",
-            "submodule": "syrup-state"
+            "class": "runtime-state",
+            "module": "runtime",
+            "submodule": "runtime-state"
         },
         {
             "file": "src/state.js",
-            "line": 128,
+            "line": 127,
             "description": "Remove all the states of the components from the memory.",
             "itemtype": "method",
             "name": "clear",
-            "class": "syrup-state",
-            "module": "syrup",
-            "submodule": "syrup-state"
-        },
-        {
-            "file": "src/syrup.js",
-            "line": 91,
-            "description": "syrup instance.",
-            "itemtype": "property",
-            "name": "syrup",
-            "type": "Syrup",
-            "class": "syrup",
-            "module": "syrup"
+            "class": "runtime-state",
+            "module": "runtime",
+            "submodule": "runtime-state"
         },
         {
             "file": "src/workflow.js",
-            "line": 763,
+            "line": 762,
             "description": "Change the state of a component.\n\nWorklow:<br>\n<br>\n0. Check if the component has not been destroyed <br>\n1. Check if the state is a method or an event <br>\n2. Search if there is a behavior with an action for the new state <br>\n3. If so, get the action(s) <br>\n4. Check if the conditons on input are compliant with the metamodel <br>\n5. Call the action(s) <br>\n6. If not an of event, check if the conditons on input are compliant with the metamodel <br>\n7. If all is ok, the state of the component is updated <br>\n8. Return the result <br>",
             "itemtype": "method",
             "name": "state",
@@ -2344,13 +2344,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "syrup-workflow",
-            "module": "syrup",
-            "submodule": "syrup-workflow"
+            "class": "runtime-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow"
         },
         {
             "file": "src/workflow.js",
-            "line": 787,
+            "line": 786,
             "description": "Stop the workflow engine.",
             "itemtype": "method",
             "name": "stop",
@@ -2361,23 +2361,23 @@
                     "type": "Object"
                 }
             ],
-            "class": "syrup-workflow",
-            "module": "syrup",
-            "submodule": "syrup-workflow"
+            "class": "runtime-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow"
         },
         {
             "file": "src/workflow.js",
-            "line": 797,
+            "line": 796,
             "description": "Restart the workflow engine from the last state.",
             "itemtype": "method",
             "name": "restart",
-            "class": "syrup-workflow",
-            "module": "syrup",
-            "submodule": "syrup-workflow"
+            "class": "runtime-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow"
         },
         {
             "file": "src/workflow.js",
-            "line": 804,
+            "line": 803,
             "description": "Check if conditions on input are compliant with the model before calling the action.",
             "itemtype": "method",
             "name": "checkParams",
@@ -2392,13 +2392,13 @@
                 "description": "true if condition on input are compliant with the model",
                 "type": "Boolean"
             },
-            "class": "syrup-workflow",
-            "module": "syrup",
-            "submodule": "syrup-workflow"
+            "class": "runtime-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow"
         },
         {
             "file": "src/workflow.js",
-            "line": 813,
+            "line": 812,
             "description": "Check if an action has the valid number of parameter.",
             "itemtype": "method",
             "name": "validParamNumbers",
@@ -2423,13 +2423,13 @@
                 "description": "true if the action is the valid number of parameters",
                 "type": "Boolean"
             },
-            "class": "syrup-workflow",
-            "module": "syrup",
-            "submodule": "syrup-workflow"
+            "class": "runtime-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow"
         },
         {
             "file": "src/workflow.js",
-            "line": 824,
+            "line": 823,
             "description": "Call an action that comes from an event.",
             "itemtype": "method",
             "name": "action",
@@ -2445,20 +2445,20 @@
                     "type": "Array"
                 }
             ],
-            "class": "syrup-workflow",
-            "module": "syrup",
-            "submodule": "syrup-workflow"
+            "class": "runtime-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow"
         },
         {
             "file": "build/system/system.js",
-            "line": 1263,
-            "description": "syrup core system",
+            "line": 1262,
+            "description": "Runtime core system",
             "itemtype": "property",
             "name": "system",
-            "type": "SyrupSystem",
-            "class": "syrup-system",
-            "module": "syrup",
-            "submodule": "syrup-system"
+            "type": "RuntimeSystem",
+            "class": "runtime-system",
+            "module": "runtime",
+            "submodule": "runtime-system"
         }
     ],
     "warnings": []

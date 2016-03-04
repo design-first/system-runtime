@@ -1,7 +1,6 @@
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -52,7 +51,7 @@ module.exports = function (grunt) {
             files: ['build/system/*.js', 'build/system/*.json']
         },
         yuidoc: {
-            syrup: {
+            runtime: {
                 name: '<%= pkg.name %>',
                 description: '<%= pkg.description %>',
                 version: '<%= pkg.version %>',
@@ -83,35 +82,35 @@ module.exports = function (grunt) {
                 },
                 customReporters: []
             },
-            syrup: {
+            runtime: {
                 specs: [
                     "test/module/**",
-                    "test/syrup/**"
+                    "test/runtime/**"
                 ]
             }
         },
         karma: {
-            syrup: {
+            runtime: {
                 configFile: 'karma.conf.js'
             }
         },
         browserify: {
-            syrupDebug: {
-                src: ['src/syrup.js'],
+            runtimeDebug: {
+                src: ['src/runtime.js'],
                 dest: 'build/system-runtime.js',
                 options: {
                     browserifyOptions: {
-                        standalone: 'syrup',
+                        standalone: 'runtime',
                         debug: true
                     }
                 }
             },
-            syrup: {
-                src: ['src/syrup.js'],
+            runtime: {
+                src: ['src/runtime.js'],
                 dest: 'build/system-runtime.min.js',
                 options: {
                     browserifyOptions: {
-                        standalone: 'syrup'
+                        standalone: 'runtime'
                     }
                 }
             }
@@ -119,7 +118,7 @@ module.exports = function (grunt) {
         uglify: {
             dist: {
                 files: {
-                    'build/<%= pkg.name %>.min.js': ['<%= browserify.syrup.dest %>']
+                    'build/<%= pkg.name %>.min.js': ['<%= browserify.runtime.dest %>']
                 }
             }
         },
@@ -144,7 +143,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/syrup.json': ['src/template/banner/system.txt']
+                    'build/runtime.json': ['src/template/banner/system.txt']
                 }
             },
             systemBehaviors: {
@@ -177,7 +176,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/syrup.json': ['build/syrup.json', 'src/system/behaviors/*/*.json']
+                    'build/runtime.json': ['build/runtime.json', 'src/system/behaviors/*/*.json']
                 }
             },
             systemSchemas: {
@@ -199,7 +198,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/syrup.json': ['build/syrup.json', 'src/system/schemas/*.json']
+                    'build/runtime.json': ['build/runtime.json', 'src/system/schemas/*.json']
                 }
             },
             systemTypes: {
@@ -221,7 +220,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/syrup.json': ['build/syrup.json', 'src/system/types/*.json']
+                    'build/runtime.json': ['build/runtime.json', 'src/system/types/*.json']
                 }
             },
             systemComponents: {
@@ -255,7 +254,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/syrup.json': ['build/syrup.json', 'src/system/components/*/*.json']
+                    'build/runtime.json': ['build/runtime.json', 'src/system/components/*/*.json']
                 }
             },
             systemFill: {
@@ -270,7 +269,7 @@ module.exports = function (grunt) {
                         system.behaviors = grunt.option('behaviors');
                         
                         // process addon in order to insert subsytem                 
-                        system.components.SyrupSystem = {};
+                        system.components.RuntimeSystem = {};
 
                         grunt.file.recurse('src/addons', loadSubSystem);
 
@@ -278,7 +277,7 @@ module.exports = function (grunt) {
                             if (filename.indexOf('.') !== 0) {
                                 var subSystem = grunt.file.readJSON(abspath);
 
-                                system.components.SyrupSystem[subSystem._id] = {
+                                system.components.RuntimeSystem[subSystem._id] = {
                                     "_id": subSystem._id,
                                     "name": subSystem.name,
                                     "version": subSystem.version,
@@ -293,23 +292,42 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/syrup.json': ['build/syrup.json']
+                    'build/runtime.json': ['build/runtime.json']
                 }
             },
             systemModule: {
                 files: {
-                    'build/system/system.js': ['src/template/banner/systemmodule.txt', 'build/syrup.json', 'src/template/footer/systemmodule.txt']
+                    'build/system/system.js': ['src/template/banner/systemmodule.txt', 'build/runtime.json', 'src/template/footer/systemmodule.txt']
                 }
             },
             licence: {
-                src: ['src/template/banner/licence.txt', 'build/system-runtime.min.js'],
-                dest: 'build/system-runtime.min.js'
+                options: {
+                    process: function (src, filepath) {
+                        var result = '';
+
+                        // ID & version
+                        result = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
+
+                        return result;
+                    }
+                },
+                files: {
+                    'build/system-runtime.min.js': ['src/template/banner/licence.txt', 'build/system-runtime.min.js']
+                }
             }
+            
+            
+            
+            
+            /*     licence: {
+                     src: ['src/template/banner/licence.txt', 'build/system-runtime.min.js'],
+                     dest: 'build/system-runtime.min.js'
+                 }*/
         },
         "merge-json": {
-            syrup: {
-                src: ["src/addons/*.json", "build/syrup.json"],
-                dest: "build/syrup.json"
+            runtime: {
+                src: ["src/addons/*.json", "build/runtime.json"],
+                dest: "build/runtime.json"
             }
         }
 
@@ -353,7 +371,7 @@ module.exports = function (grunt) {
 
     // test task
     grunt.registerTask('test', [
-        'jasmine_nodejs:syrup'
+        'jasmine_nodejs:runtime'
     ]);
 
     // debug task
@@ -364,7 +382,7 @@ module.exports = function (grunt) {
         'jsbeautifier',
         'jshint',
         'test',
-        'browserify:syrupDebug'
+        'browserify:runtimeDebug'
     ]);
 
     // build task
@@ -375,21 +393,21 @@ module.exports = function (grunt) {
         'jsbeautifier',
         'jshint',
         'test',
-        'browserify:syrupDebug',
-        'browserify:syrup',
+        'browserify:runtimeDebug',
+        'browserify:runtime',
         'uglify',
         'concat:licence',
-        'karma:syrup',
+        'karma:runtime',
         'yuidoc'
     ]);
     
     // build task
     grunt.registerTask('build-json', [
-        'browserify:syrupDebug',
-        'browserify:syrup',
+        'browserify:runtimeDebug',
+        'browserify:runtime',
         'uglify',
         'concat:licence',
-        'karma:syrup',
+        'karma:runtime',
         'yuidoc'
     ]);
 };

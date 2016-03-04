@@ -1,7 +1,6 @@
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -30,12 +29,12 @@
  * A behavior is a mecanism that allow users to add actions that will be executed 
  * when a specific state of a component will change.
  * 
- * @module syrup
- * @submodule syrup-behavior
- * @requires syrup-db
- * @requires syrup-helper
- * @requires syrup-channel
- * @class syrup-behavior
+ * @module runtime
+ * @submodule runtime-behavior
+ * @requires runtime-db
+ * @requires runtime-helper
+ * @requires runtime-channel
+ * @class runtime-behavior
  * @static
  */
 
@@ -63,9 +62,9 @@ var store = {};
  * @method createFunction
  * @param {String} name default name of the function 
  * @param {String} func a stringified function
- * @param {Boolean} core if true, the behavior will be treated as a syrup core behavior.
+ * @param {Boolean} core if true, the behavior will be treated as a Runtime core behavior.
  * In that case, the behavior can not be exported in a system (default false)
- * @param {Boolean} useCoreAPI if true, syrup core modules will be injected as parameters of the function (default false)
+ * @param {Boolean} useCoreAPI if true, Runtime core modules will be injected as parameters of the function (default false)
  * @return {Function} the created function
  * @private
  */
@@ -125,14 +124,14 @@ function createFunction(name, func, core, useCoreAPI) {
 
 
 /*
- * Add a behavior that will be stored in syrup database.
+ * Add a behavior that will be stored in Runtime database.
  * @method add
  * @param {String} id id of the component
  * @param {Object} state the state on which the action will be executed 
  * @param {Object} action the action to execute when the component will have a specific state 
- * @param {Boolean} useCoreAPI if true, syrup core modules will be injected as parameters of the action (default false)
+ * @param {Boolean} useCoreAPI if true, Runtime core modules will be injected as parameters of the action (default false)
  * @param {Boolean} core if true, behavior can not be exported
- * @return {String} id of the behavior created in syrup database
+ * @return {String} id of the behavior created in Runtime database
  */
 function add(id, state, action, useCoreAPI, core) {
     var behaviorId = $helper.generateId(),
@@ -149,7 +148,7 @@ function add(id, state, action, useCoreAPI, core) {
 
     store[behaviorId] = action;
 
-    $db.SyrupBehavior.insert({
+    $db.RuntimeBehavior.insert({
         "_id": behaviorId,
         "component": id,
         "state": state,
@@ -181,7 +180,7 @@ function remove(params) {
 
     if (params.componentId) {
         if (params.behaviorId) {
-            $db.SyrupBehavior.remove({
+            $db.RuntimeBehavior.remove({
                 "_id": params.behaviorId,
                 "component": params.componentId,
                 "state": params.state
@@ -189,12 +188,12 @@ function remove(params) {
             delete store[params.behaviorId];
         } else {
             if (params.state) {
-                result = $db.SyrupBehavior.remove({
+                result = $db.RuntimeBehavior.remove({
                     "component": params.componentId,
                     "state": params.state
                 });
             } else {
-                result = $db.SyrupBehavior.remove({
+                result = $db.RuntimeBehavior.remove({
                     "component": params.componentId
                 });
             }
@@ -228,7 +227,7 @@ function getActions(id, state) {
         dbResult = [],
         action = null;
 
-    dbResult = $db.SyrupBehavior.find({
+    dbResult = $db.RuntimeBehavior.find({
         "component": id,
         "state": state
     });
@@ -276,25 +275,25 @@ function get(id) {
  * This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed 
  * when a specific state of a component will change.
  * 
- * @module syrup
- * @submodule syrup-behavior
- * @requires syrup-db
- * @requires syrup-helper
- * @requires syrup-channel
- * @class syrup-behavior
+ * @module runtime
+ * @submodule runtime-behavior
+ * @requires runtime-db
+ * @requires runtime-helper
+ * @requires runtime-channel
+ * @class runtime-behavior
  * @static
  */
 
 
 /**
- * Add a behavior that will be stored in syrup database.
+ * Add a behavior that will be stored in Runtime database.
  * @method add
  * @param {String} id id of the component
  * @param {Object} state the state on which the action will be executed 
  * @param {Object} action the action to execute when the component will have a specific state 
- * @param {Boolean} useCoreAPI if true, syrup core modules will be injected as parameters of the action (default false)
+ * @param {Boolean} useCoreAPI if true, Runtime core modules will be injected as parameters of the action (default false)
  * @param {Boolean} core if true, behavior can not be exported
- * @return {String} id of the behavior created in syrup database
+ * @return {String} id of the behavior created in Runtime database
  */
 exports.add = add;
 

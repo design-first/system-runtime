@@ -1,0 +1,37 @@
+{
+    "_id": "RuntimeBehavior",
+    "_name": "RuntimeBehavior",
+    "_schema": "RuntimeBehaviorSchema",
+    "_inherit": ["RuntimeComponent"],
+    "_core": true,
+    "core": {
+        "type": "boolean",
+        "readOnly": false,
+        "mandatory": false,
+        "default": false
+    },
+    "useCoreAPI": {
+        "type": "boolean",
+        "readOnly": false,
+        "mandatory": false,
+        "default": false
+    },
+    "component": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    },
+    "action": {
+        "type": "javascript",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    },
+    "state": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+    }
+}

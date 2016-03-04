@@ -1,0 +1,11 @@
+{
+    "_id": "RuntimeBehaviorSchema",
+    "_name": "RuntimeBehaviorSchema",
+    "_inherit": ["RuntimeComponentSchema"],
+    "_core": true,
+    "core": "property",
+    "component": "property",
+    "action": "property",
+    "state": "property",
+    "useCoreAPI": "property"
+}

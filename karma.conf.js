@@ -1,7 +1,6 @@
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -53,11 +52,11 @@ module.exports = function (config) {
     
     // sauceLabConfig
     var sauceLabConfig = {
-        testName: 'SyrupJS Unit Tests',
+        testName: 'Runtime Unit Tests',
     }
     if (process.env.TRAVIS) {
         sauceLabConfig = {
-            testName: 'SyrupJS Unit Tests',
+            testName: 'Runtime Unit Tests',
             tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
             startConnect: false
         }
@@ -74,13 +73,13 @@ module.exports = function (config) {
         frameworks: ['jasmine'],
         files: [
             "build/system-runtime.min.js",
-            "test/syrup/syrup-spec.js",
-            "test/syrup/component-spec.js",
-            "test/syrup/metamodel-spec.js",
-            "test/syrup/database-spec.js",
-            "test/syrup/classInfo-spec.js",
-            "test/syrup/system-spec.js",
-            "test/syrup/mson-spec.js"
+            "test/runtime/runtime-spec.js",
+            "test/runtime/component-spec.js",
+            "test/runtime/metamodel-spec.js",
+            "test/runtime/database-spec.js",
+            "test/runtime/classInfo-spec.js",
+            "test/runtime/system-spec.js",
+            "test/runtime/mson-spec.js"
         ],
         reporters: reporters,
         preprocessors: {

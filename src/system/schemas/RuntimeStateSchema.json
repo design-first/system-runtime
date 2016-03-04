@@ -1,0 +1,7 @@
+{
+    "_id": "RuntimeStateSchema",
+    "_name": "RuntimeStateSchema",
+    "_core": true,
+    "name": "property",
+    "parameters": "property"
+}

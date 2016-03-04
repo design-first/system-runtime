@@ -21,12 +21,12 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.9</b>
+                    API Docs for Version: <b>1.0.0</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/syrup", "classes/syrup-behavior", "classes/syrup-component", "classes/syrup-db", "classes/syrup-helper", "classes/syrup-log", "classes/syrup-metamodel", "classes/syrup-state", "classes/syrup-system", "classes/syrup-workflow", "classes/SyrupDatabaseCollection", "classes/SyrupError", "modules/syrup", "modules/syrup-behavior", "modules/syrup-component", "modules/syrup-db", "modules/syrup-helper", "modules/syrup-log", "modules/syrup-metamodel", "modules/syrup-state", "modules/syrup-system", "modules/syrup-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/runtime", "classes/runtime-behavior", "classes/runtime-component", "classes/runtime-db", "classes/runtime-helper", "classes/runtime-log", "classes/runtime-metamodel", "classes/runtime-state", "classes/runtime-system", "classes/runtime-workflow", "classes/RuntimeDatabaseCollection", "classes/RuntimeError", "modules/runtime", "modules/runtime-behavior", "modules/runtime-component", "modules/runtime-db", "modules/runtime-helper", "modules/runtime-log", "modules/runtime-metamodel", "modules/runtime-state", "modules/runtime-system", "modules/runtime-workflow"]'>
         </form>
     </div>
 </div>
@@ -37,18 +37,18 @@
     <div id="sidebar">
     <div id="classes">
         <ul id="api-classes" class="nav nav-list">
-                <li><a href="../classes/syrup.html">syrup</a></li>
-                <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
-                <li><a href="../classes/syrup-component.html">syrup-component</a></li>
-                <li><a href="../classes/syrup-db.html">syrup-db</a></li>
-                <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
-                <li><a href="../classes/syrup-log.html">syrup-log</a></li>
-                <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
-                <li><a href="../classes/syrup-state.html">syrup-state</a></li>
-                <li><a href="../classes/syrup-system.html">syrup-system</a></li>
-                <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
-                <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
-                <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+                <li><a href="../classes/runtime.html">runtime</a></li>
+                <li><a href="../classes/runtime-behavior.html">runtime-behavior</a></li>
+                <li><a href="../classes/runtime-component.html">runtime-component</a></li>
+                <li><a href="../classes/runtime-db.html">runtime-db</a></li>
+                <li><a href="../classes/runtime-helper.html">runtime-helper</a></li>
+                <li><a href="../classes/runtime-log.html">runtime-log</a></li>
+                <li><a href="../classes/runtime-metamodel.html">runtime-metamodel</a></li>
+                <li><a href="../classes/runtime-state.html">runtime-state</a></li>
+                <li><a href="../classes/runtime-system.html">runtime-system</a></li>
+                <li><a href="../classes/runtime-workflow.html">runtime-workflow</a></li>
+                <li><a href="../classes/RuntimeDatabaseCollection.html">RuntimeDatabaseCollection</a></li>
+                <li><a href="../classes/RuntimeError.html">RuntimeError</a></li>
         </ul>
     </div>
     </div>
@@ -88,9 +88,8 @@
 <div class="file">
     <pre class="prettyprint linenums">
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -115,16 +114,16 @@
  */
 
 /**
- * This module manages syrup metamodel. &lt;br&gt;
- * syrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.
+ * This module manages Runtime metamodel. &lt;br&gt;
+ * Runtime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.
  * 
- * @module syrup
- * @submodule syrup-metamodel
- * @requires syrup-db
- * @requires syrup-log
- * @requires syrup-component
- * @requires syrup-workflow
- * @class syrup-metamodel
+ * @module runtime
+ * @submodule runtime-metamodel
+ * @requires runtime-db
+ * @requires runtime-log
+ * @requires runtime-component
+ * @requires runtime-workflow
+ * @class runtime-metamodel
  * @static
  */
 
@@ -191,7 +190,7 @@ function loadInMemory() {
     store.implementation = {};
 
     // load schemas
-    schemas = $db.SyrupSchema.find({});
+    schemas = $db.RuntimeSchema.find({});
 
     length = schemas.length;
     for (i = 0; i &lt; length; i++) {
@@ -207,7 +206,7 @@ function loadInMemory() {
     }
     
     // load types
-    types = $db.SyrupType.find({});
+    types = $db.RuntimeType.find({});
 
     length = types.length;
     for (i = 0; i &lt; length; i++) {
@@ -473,19 +472,19 @@ function checkCustomSchema(value, typeName) {
  * @private
  */
 function initDbStructure() {
-    $db.collection(&#x27;SyrupSchema&#x27;);
-    $db.collection(&#x27;SyrupExtendedSchema&#x27;);
-    $db.collection(&#x27;SyrupClassInfo&#x27;);
-    $db.collection(&#x27;SyrupBehavior&#x27;);
-    $db.collection(&#x27;SyrupState&#x27;);
-    $db.collection(&#x27;SyrupType&#x27;);
-    $db.collection(&#x27;SyrupMessage&#x27;);
-    $db.collection(&#x27;SyrupChannel&#x27;);
+    $db.collection(&#x27;RuntimeSchema&#x27;);
+    $db.collection(&#x27;RuntimeExtendedSchema&#x27;);
+    $db.collection(&#x27;RuntimeClassInfo&#x27;);
+    $db.collection(&#x27;RuntimeBehavior&#x27;);
+    $db.collection(&#x27;RuntimeState&#x27;);
+    $db.collection(&#x27;RuntimeType&#x27;);
+    $db.collection(&#x27;RuntimeMessage&#x27;);
+    $db.collection(&#x27;RuntimeChannel&#x27;);
 }
 
 
 /*
- * Create the Database structure (i.e. SyrupDatabaseCollection).
+ * Create the Database structure (i.e. RuntimeDatabaseCollection).
  * @method createDbStructure
  * @private
  */
@@ -504,7 +503,7 @@ function createDbStructure() {
 
     for (modelName in store.model) {
         modelDef = store.model[modelName];
-        $db.SyrupExtendedSchema.insert(modelDef);
+        $db.RuntimeExtendedSchema.insert(modelDef);
     }
 }
 
@@ -548,13 +547,13 @@ function createClassInfo() {
             modelDef[CLASS] !== false
             ) {
             if (!$component.get(id)) {
-                $db.SyrupClassInfo.insert({
+                $db.RuntimeClassInfo.insert({
                     &quot;_id&quot;: id,
                     &quot;metamodel&quot;: store.model[modelDef[SCHEMA]],
                     &quot;model&quot;: modelDef
                 });
             } else {
-                $db.SyrupClassInfo.update({
+                $db.RuntimeClassInfo.update({
                     &quot;_id&quot;: id
                 }, {
                         &quot;_id&quot;: id,
@@ -750,11 +749,11 @@ function schema(importedSchema) {
     // check if schema is compliant with the meta meta model
     if (isValidObject(schema, store.metadef.schema, false)) {
 
-        schemas = $db.SyrupSchema.find({ &#x27;_id&#x27;: id });
+        schemas = $db.RuntimeSchema.find({ &#x27;_id&#x27;: id });
         if (schemas.length) {
-            $db.SyrupSchema.update({ &#x27;_id&#x27;: id }, merge(schema, schemas[0]));
+            $db.RuntimeSchema.update({ &#x27;_id&#x27;: id }, merge(schema, schemas[0]));
         } else {
-            $db.SyrupSchema.insert(schema);
+            $db.RuntimeSchema.insert(schema);
         }
     } else {
         $workflow.stop({
@@ -776,7 +775,7 @@ function type(importedType) {
     // check if type is compliant with the meta meta model
     if (isValidObject(importedType, store.metadef.type)) {
         if (name) {
-            $db.SyrupType.insert(importedType);
+            $db.RuntimeType.insert(importedType);
         } else {
             $log.invalidTypeDefinition(importedType);
         }
@@ -1617,16 +1616,16 @@ function inheritFrom(name, parentName) {
 
 
 /**
- * This module manages syrup metamodel. &lt;br&gt;
- * syrup metamodel loads schemas and types, analyzes them and creates the component classes and related SyrupDatabaseCollections.
+ * This module manages Runtime metamodel. &lt;br&gt;
+ * Runtime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.
  * 
- * @module syrup
- * @submodule syrup-metamodel
- * @requires syrup-db
- * @requires syrup-log
- * @requires syrup-component
- * @requires syrup-workflow
- * @class syrup-metamodel
+ * @module runtime
+ * @submodule runtime-metamodel
+ * @requires runtime-db
+ * @requires runtime-log
+ * @requires runtime-component
+ * @requires runtime-workflow
+ * @class runtime-metamodel
  * @static
  */
 

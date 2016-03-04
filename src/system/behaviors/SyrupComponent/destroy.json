@@ -1,5 +1,5 @@
 {
-	"component": "SyrupComponent",
+	"component": "RuntimeComponent",
 	"state": "destroy",
 	"action": "function destroy() {\n    $component.destroy(this.id());\n}",
 	"core": true,

@@ -21,12 +21,12 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>0.9.9</b>
+                    API Docs for Version: <b>1.0.0</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/syrup", "classes/syrup-behavior", "classes/syrup-component", "classes/syrup-db", "classes/syrup-helper", "classes/syrup-log", "classes/syrup-metamodel", "classes/syrup-state", "classes/syrup-system", "classes/syrup-workflow", "classes/SyrupDatabaseCollection", "classes/SyrupError", "modules/syrup", "modules/syrup-behavior", "modules/syrup-component", "modules/syrup-db", "modules/syrup-helper", "modules/syrup-log", "modules/syrup-metamodel", "modules/syrup-state", "modules/syrup-system", "modules/syrup-workflow"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/runtime", "classes/runtime-behavior", "classes/runtime-component", "classes/runtime-db", "classes/runtime-helper", "classes/runtime-log", "classes/runtime-metamodel", "classes/runtime-state", "classes/runtime-system", "classes/runtime-workflow", "classes/RuntimeDatabaseCollection", "classes/RuntimeError", "modules/runtime", "modules/runtime-behavior", "modules/runtime-component", "modules/runtime-db", "modules/runtime-helper", "modules/runtime-log", "modules/runtime-metamodel", "modules/runtime-state", "modules/runtime-system", "modules/runtime-workflow"]'>
         </form>
     </div>
 </div>
@@ -37,18 +37,18 @@
     <div id="sidebar">
     <div id="classes">
         <ul id="api-classes" class="nav nav-list">
-                <li><a href="../classes/syrup.html">syrup</a></li>
-                <li><a href="../classes/syrup-behavior.html">syrup-behavior</a></li>
-                <li><a href="../classes/syrup-component.html">syrup-component</a></li>
-                <li><a href="../classes/syrup-db.html">syrup-db</a></li>
-                <li><a href="../classes/syrup-helper.html">syrup-helper</a></li>
-                <li><a href="../classes/syrup-log.html">syrup-log</a></li>
-                <li><a href="../classes/syrup-metamodel.html">syrup-metamodel</a></li>
-                <li><a href="../classes/syrup-state.html">syrup-state</a></li>
-                <li><a href="../classes/syrup-system.html">syrup-system</a></li>
-                <li><a href="../classes/syrup-workflow.html">syrup-workflow</a></li>
-                <li><a href="../classes/SyrupDatabaseCollection.html">SyrupDatabaseCollection</a></li>
-                <li><a href="../classes/SyrupError.html">SyrupError</a></li>
+                <li><a href="../classes/runtime.html">runtime</a></li>
+                <li><a href="../classes/runtime-behavior.html">runtime-behavior</a></li>
+                <li><a href="../classes/runtime-component.html">runtime-component</a></li>
+                <li><a href="../classes/runtime-db.html">runtime-db</a></li>
+                <li><a href="../classes/runtime-helper.html">runtime-helper</a></li>
+                <li><a href="../classes/runtime-log.html">runtime-log</a></li>
+                <li><a href="../classes/runtime-metamodel.html">runtime-metamodel</a></li>
+                <li><a href="../classes/runtime-state.html">runtime-state</a></li>
+                <li><a href="../classes/runtime-system.html">runtime-system</a></li>
+                <li><a href="../classes/runtime-workflow.html">runtime-workflow</a></li>
+                <li><a href="../classes/RuntimeDatabaseCollection.html">RuntimeDatabaseCollection</a></li>
+                <li><a href="../classes/RuntimeError.html">RuntimeError</a></li>
         </ul>
     </div>
     </div>
@@ -88,9 +88,8 @@
 <div class="file">
     <pre class="prettyprint linenums">
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -117,11 +116,11 @@
 /**
  * This module contains all the functions used by all the modules.
  * 
- * @module syrup
- * @submodule syrup-helper
- * @requires syrup-db
- * @requires syrup-component
- * @class syrup-helper
+ * @module runtime
+ * @submodule runtime-helper
+ * @requires runtime-db
+ * @requires runtime-component
+ * @class runtime-helper
  * @static
  */
 
@@ -135,21 +134,21 @@ var $component = require(&#x27;./component.js&#x27;);
 /* Private property */
 
 
-var syrupRef = null;
+var runtimeRef = null;
 
 
 /* Public method */
 
 
 /*
- * Check if a syrup instance exists.
- * @method isSyrup
- * @return {Boolean} true if a syrup instance exist
+ * Check if a Runtime instance exists.
+ * @method isRuntime
+ * @return {Boolean} true if a Runtime instance exist
  */
-function isSyrup() {
+function isRuntime() {
     var result = false;
 
-    if ($db.Syrup &amp;&amp; $db.Syrup.find().length) {
+    if ($db.Runtime &amp;&amp; $db.Runtime.find().length) {
         result = true;
     }
 
@@ -158,30 +157,30 @@ function isSyrup() {
 
 
 /*
- * Get the syrup instance.
- * @method getSyrup
- * @return {Syrup} syrup instance
+ * Get the Runtime instance.
+ * @method getRuntime
+ * @return {Runtime} Runtime instance
  */
-function getSyrup() {
-    var syrupId = &#x27;&#x27;;
+function getRuntime() {
+    var runtimeId = &#x27;&#x27;;
 
-    if (!syrupRef) {
-        if (isSyrup()) {
-            syrupId = $db.Syrup.find()[0]._id;
-            syrupRef = $component.get(syrupId);
+    if (!runtimeRef) {
+        if (isRuntime()) {
+            runtimeId = $db.Runtime.find()[0]._id;
+            runtimeRef = $component.get(runtimeId);
         } else {
-            syrupRef = {
+            runtimeRef = {
                 error: function error(err, data) {
-                    console.error(&#x27;syrup: &#x27; + err, data);
+                    console.error(&#x27;runtime: &#x27; + err, data);
                 },
                 warning: function warning(message) {
-                    console.warn(&#x27;syrup: &#x27; + message);
+                    console.warn(&#x27;runtime: &#x27; + message);
                 }
             };
         }
     }
 
-    return syrupRef;
+    return runtimeRef;
 }
 
 
@@ -225,29 +224,29 @@ function polyfill() {
 /**
  * This module contains all the functions used by all the modules.
  * 
- * @module syrup
- * @submodule syrup-helper
- * @requires syrup-db
- * @requires syrup-component
- * @class syrup-helper
+ * @module runtime
+ * @submodule runtime-helper
+ * @requires runtime-db
+ * @requires runtime-component
+ * @class runtime-helper
  * @static
  */
 
 
 /**
- * Get syrup instance.
- * @method getSyrup
- * @return {Syrup} syrup instance
+ * Get Runtime instance.
+ * @method getRuntime
+ * @return {Runtime} Runtime instance
  */
-exports.getSyrup = getSyrup;
+exports.getRuntime = getRuntime;
 
 
 /**
- * Check if a syrup instance exists.
- * @method isSyrup
- * @return {Boolean} true if a syrup instance exist
+ * Check if a Runtime instance exists.
+ * @method isRuntime
+ * @return {Boolean} true if a Runtime instance exist
  */
-exports.isSyrup = isSyrup;
+exports.isRuntime = isRuntime;
 
 
 /**

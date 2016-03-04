@@ -1,8 +1,8 @@
 {
     "name": "system-runtime",
-    "version": "0.9.9",
-    "description": "SyrupJS, the System Runtime Platform",
-    "homepage": "https://syrupjs.github.io",
+    "version": "1.0.0",
+    "description": "The System Runtime Platform",
+    "homepage": "https://system-runtime.github.io",
     "keywords": [
         "uml",
         "mda",
@@ -18,7 +18,7 @@
         "runtime",
         "json"
     ],
-    "main": "./src/syrup.js",
+    "main": "./src/runtime.js",
     "author": {
         "name": "erwan carriou",
         "email": "erwan.carriou@mac.com",

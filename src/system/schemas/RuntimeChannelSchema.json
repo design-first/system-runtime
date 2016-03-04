@@ -1,0 +1,7 @@
+{
+    "_id": "RuntimeChannelSchema",
+    "_name": "RuntimeChannelSchema",
+    "_inherit": ["RuntimeComponentSchema"],
+    "_core": true,
+    "send": "event"
+}

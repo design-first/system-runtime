@@ -1,5 +1,5 @@
 {
-	"component": "SyrupMetamodel",
+	"component": "RuntimeMetamodel",
 	"state": "type",
 	"action": "function type(type) {\n    $metamodel.type(type);\n}",
 	"core": true,

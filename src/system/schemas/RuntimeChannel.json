@@ -1,0 +1,17 @@
+{
+    "_id": "RuntimeChannel",
+    "_name": "RuntimeChannel",
+    "_schema": "RuntimeChannelSchema",
+    "_inherit": [
+        "RuntimeComponent"
+    ],
+    "_core": true,
+    "send": {
+        "params": [
+            {
+                "name": "message",
+                "type": "object"
+            }
+        ]
+    }
+}

@@ -1,6 +1,6 @@
 {
     "globals": {
-        "syrup": true
+        "runtime": true
     },
     "node" : true,
     "supernew": true

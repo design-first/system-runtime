@@ -1,9 +1,0 @@
-{
-    "_id": "SyrupMetamodelSchema",
-    "_name": "SyrupMetamodelSchema",
-    "_inherit": ["SyrupComponentSchema"],
-    "_core": true,
-    "schema": "method",
-    "type": "method",
-    "create": "method"
-}

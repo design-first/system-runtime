@@ -1,5 +1,5 @@
 {
-	"component": "SyrupMetamodel",
+	"component": "RuntimeMetamodel",
 	"state": "schema",
 	"action": "function schema(schema) {\n    $metamodel.schema(schema);\n}",
 	"core": true,

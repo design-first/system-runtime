@@ -1,9 +1,9 @@
 {
     "name": "system-runtime",
-    "version": "0.9.9",
-    "description": "SyrupJS, the System Runtime Platform",
+    "version": "1.0.0",
+    "description": "The System Runtime Platform",
     "license": "MIT",
-    "homepage": "https://syrupjs.github.io",
+    "homepage": "https://system-runtime.github.io",
     "author": {
         "name": "erwan carriou",
         "email": "erwan.carriou@mac.com",
@@ -36,7 +36,7 @@
         "node_modules",
         "test",
         "src",
-        "build/syrup.json",
+        "build/runtime.json",
         "Gruntfile.js",
         "karma.conf.js",
         "package.json",

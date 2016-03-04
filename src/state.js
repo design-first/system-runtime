@@ -1,7 +1,6 @@
 /*
- * SyrupJS
- * The System Runtime Platform
- * https://syrupjs.github.io
+ * Runtime
+ * https://system-runtime.github.io
  * @ecarriou
  *  
  * Copyright (c) 2016 Erwan Carriou
@@ -29,10 +28,10 @@
 /**
  * This module manages the states of all thecomponents.
  * 
- * @module syrup
- * @submodule syrup-state
- * @requires syrup-db
- * @class syrup-state
+ * @module runtime
+ * @submodule runtime-state
+ * @requires runtime-db
+ * @class runtime-state
  * @static
  */
 
@@ -64,7 +63,7 @@ function set(id, state, parameters) {
             "data": parameters
         }
     };
-    $db.store.SyrupState[id] = {
+    $db.store.RuntimeState[id] = {
         "name": state,
         "parameters": {
             "data": parameters
@@ -99,10 +98,10 @@ function clear() {
 /**
  * This module manages the states of all the components.
  * 
- * @module syrup
- * @submodule syrup-state
- * @requires syrup-db
- * @class syrup-state
+ * @module runtime
+ * @submodule runtime-state
+ * @requires runtime-db
+ * @class runtime-state
  * @static
  */
 
