@@ -12,7 +12,7 @@
 
 [JSON](http://json.org) is traditionnaly used to represent data. We use this format to store your model, components and the behaviors of your app.
 
-Runtime will load your JSON and run your app as a JVM (JSON Virtual Machine).
+Runtime will run your app as a JVM (JSON Virtual Machine).
 
 ## What contains Runtime ?
 
