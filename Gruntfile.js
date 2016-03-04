@@ -315,14 +315,6 @@ module.exports = function (grunt) {
                     'build/system-runtime.min.js': ['src/template/banner/licence.txt', 'build/system-runtime.min.js']
                 }
             }
-            
-            
-            
-            
-            /*     licence: {
-                     src: ['src/template/banner/licence.txt', 'build/system-runtime.min.js'],
-                     dest: 'build/system-runtime.min.js'
-                 }*/
         },
         "merge-json": {
             runtime: {
