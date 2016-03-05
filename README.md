@@ -8,13 +8,13 @@
 
 ## What is Runtime ?
 
-![Image Alt](https://system-runtime.github.io/img/system-runtime.png)
-
 #### a JSON Runtime Environment
 
 [JSON](http://json.org) is traditionnaly used to represent data. We use this format to store your model, components and the behaviors of your app.
 
 Runtime will run your app as a JRE (JSON Runtime Environment).
+
+![Image Alt](https://system-runtime.github.io/img/system-runtime.png)
 
 ## What contains Runtime ?
 
