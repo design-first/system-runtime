@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/system-sdk/system-runtime/badge.svg?branch=master)](https://coveralls.io/github/system-sdk/system-runtime?branch=master)
 [![devDependency Status](https://david-dm.org/system-sdk/system-runtime/dev-status.svg)](https://david-dm.org/system-sdk/system-runtime#info=devDependencies)
 
-![Image Alt](https://system-runtime.github.io/img/hero.jpg)
+![Image Alt](https://system-runtime.github.io/img/system-runtime.png)
 
 ## What is Runtime ?
 
