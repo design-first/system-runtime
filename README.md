@@ -16,6 +16,29 @@ Runtime will run your app as a JRE (JSON Runtime Environment).
 
 ![Image Alt](https://system-runtime.github.io/img/system-runtime.png)
 
+## How works Runtime ?
+
+Runtime executes your JSON client and server side.
+
+#### HTML example
+
+Just add a link tag in your HTML to excute your app:
+
+```html
+<link rel="system" type="application/json" href="app.json">
+```
+#### Node.js example
+
+Just require your JSON in Node.js to excute your app:
+
+```js
+var runtime = require('system-runtime');
+var app = require('./app.json');
+
+var systemId = runtime.require('db').system(app);
+runtime.require(systemId).main();
+```
+
 ## What contains Runtime ?
 
 #### A metamodel
