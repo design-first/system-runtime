@@ -6,13 +6,15 @@
 [![Coverage Status](https://coveralls.io/repos/github/system-sdk/system-runtime/badge.svg?branch=master)](https://coveralls.io/github/system-sdk/system-runtime?branch=master)
 [![devDependency Status](https://david-dm.org/system-sdk/system-runtime/dev-status.svg)](https://david-dm.org/system-sdk/system-runtime#info=devDependencies)
 
+![Image Alt](https://system-runtime.github.io/img/hero.jpg)
+
 ## What is Runtime ?
 
-#### a JSON Virtual Machine (JVM)
+#### a JSON Runtime Environment
 
 [JSON](http://json.org) is traditionnaly used to represent data. We use this format to store your model, components and the behaviors of your app.
 
-Runtime will run your app as a JVM (JSON Virtual Machine).
+Runtime will run your app as a JRE (JSON Runtime Environment).
 
 ## What contains Runtime ?
 

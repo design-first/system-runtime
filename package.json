@@ -1,7 +1,7 @@
 {
     "name": "system-runtime",
-    "version": "1.0.0",
-    "description": "The System Runtime Platform",
+    "version": "1.0.1",
+    "description": "The JSON Runtime Environment",
     "homepage": "https://system-runtime.github.io",
     "keywords": [
         "uml",
@@ -51,7 +51,7 @@
         "grunt-contrib-jshint": "^1.0.0",
         "grunt-contrib-uglify": "^1.0.0",
         "grunt-contrib-watch": "^0.6.1",
-        "grunt-contrib-yuidoc": "^0.10.0",
+        "grunt-contrib-yuidoc": "^1.0.0",
         "grunt-jasmine-nodejs": "^1.4.2",
         "grunt-jsbeautifier": "^0.2.10",
         "grunt-karma": "^0.12.0",
