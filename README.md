@@ -22,14 +22,14 @@ Runtime executes your JSON client and server side.
 
 #### HTML example
 
-Just add a link tag in your HTML to excute your app:
+Just add a link tag in your HTML to execute your app:
 
 ```html
 <link rel="system" type="application/json" href="app.json">
 ```
 #### Node.js example
 
-Just require your JSON in Node.js to excute your app:
+Just require your JSON in Node.js to execute your app:
 
 ```js
 var runtime = require('system-runtime');
