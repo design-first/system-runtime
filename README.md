@@ -10,9 +10,9 @@
 
 #### a JSON Runtime Environment
 
-[JSON](http://json.org) is traditionnaly used to represent data. We use this format to store your model, components and the behaviors of your app.
+[JSON](http://json.org) is traditionnaly used to represent data. We use this format to store the model, components and methods of your application. Runtime can run JSON that contains your application as a JRE (JSON Runtime Environment).
 
-Runtime will run your app as a JRE (JSON Runtime Environment).
+Runtime have APIs to export JavaScript code into JSON. After you can import this JSON in your client or server application.
 
 ![Image Alt](https://system-runtime.github.io/img/system-runtime.png)
 
@@ -35,8 +35,8 @@ Just require your JSON in Node.js to execute your app:
 var runtime = require('system-runtime');
 var app = require('./app.json');
 
-var systemId = runtime.require('db').system(app);
-runtime.require(systemId).main();
+var appId = runtime.require('db').system(app);
+runtime.require(appId).main();
 ```
 
 ## What contains Runtime ?
