@@ -25,17 +25,27 @@ Runtime executes your JSON client and server side.
 Just add a link tag in your HTML to execute your app:
 
 ```html
+<!-- just add a link tag in your HTML to execute your app -->
 <link rel="system" type="application/json" href="app.json">
+
+<!-- load Runtime -->
+<script src="/bower_components/system-runtime/build/system-runtime.min.js"></script>
 ```
 #### Node.js example
 
 Just require your JSON in Node.js to execute your app:
 
 ```js
+// require Runtime
 var runtime = require('system-runtime');
+
+// require your app
 var app = require('./app.json');
 
+// import your app into Runtime NoSQL DB
 var appId = runtime.require('db').system(app);
+
+// run your app
 runtime.require(appId).main();
 ```
 
