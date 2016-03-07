@@ -25,7 +25,7 @@ Runtime executes your JSON client and server side.
 Just add a link tag in your HTML to execute your app:
 
 ```html
-<!-- just add a link tag in your HTML to execute your app -->
+<!-- import your app -->
 <link rel="system" type="application/json" href="app.json">
 
 <!-- load Runtime -->
