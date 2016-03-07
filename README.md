@@ -12,7 +12,7 @@
 
 [JSON](http://json.org) is traditionnaly used to represent data. We use this format to store the model, components and methods of your application. Runtime can run JSON that contains your application as a JRE (JSON Runtime Environment).
 
-Runtime have APIs to export JavaScript code into JSON. After you can import this JSON in your client or server application.
+Runtime has APIs to serialize your JavaScript code into JSON. This JSON can be then imported and executed in a client or server application.
 
 ![Image Alt](https://system-runtime.github.io/img/system-runtime.png)
 
