@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.0.1</b>
+                    API Docs for Version: <b>1.0.2</b>
                 </p>
             </li>
         </div>
@@ -248,8 +248,10 @@ function dump() {
                     delete collection[id];
                 }
             }
-
-            dbDump.components[collectionName] = collection;
+            
+            if (Object.keys(collection).length) {
+                dbDump.components[collectionName] = collection;
+            }
         }
     }
 
@@ -300,7 +302,7 @@ function contains(source, target) {
  * @constructor
  * @param {String} name name of the new collection
  */
-var RuntimeDatabaseCollection = function (name) {
+var RuntimeDatabaseCollection = function(name) {
     if ($metamodel.get(name) || internalDB.indexOf(name) !== -1) {
         store[name] = {};
         this.name = name;
@@ -324,7 +326,7 @@ var RuntimeDatabaseCollection = function (name) {
  * $db.Person.find({&quot;name&quot;: &quot;laure&quot;, &quot;age&quot; : 24}); &lt;br&gt;
  * $db.Person.find([{&quot;name&quot;: &quot;rene&quot;}, {&quot;name&quot;: &quot;robert&quot;}]);
  */
-RuntimeDatabaseCollection.prototype.find = function (query) {
+RuntimeDatabaseCollection.prototype.find = function(query) {
     var result = [],
         id = &#x27;&#x27;,
         object = {};
@@ -376,7 +378,7 @@ RuntimeDatabaseCollection.prototype.find = function (query) {
  *      &quot;age&quot;: 43 &lt;br&gt;
  * }); &lt;br&gt;
  */
-RuntimeDatabaseCollection.prototype.insert = function (document) {
+RuntimeDatabaseCollection.prototype.insert = function(document) {
     var doc = [],
         Component = null,
         result = [];
@@ -460,7 +462,7 @@ RuntimeDatabaseCollection.prototype.insert = function (document) {
  * $db.Cars.update([{&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;code&quot;: &quot;AZD-65&quot;}], {&quot;price&quot;: &quot;10000$&quot;}); &lt;br&gt;
  * $db.Cars.update({&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;price&quot;: &quot;10000$&quot;}, {&quot;upsert&quot;: true}); &lt;br&gt;
  */
-RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
+RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
     var docs = this.find(query),
         updated = 0,
         i = 0,
@@ -554,7 +556,7 @@ RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
  * $db.Cars.remove({&quot;code&quot;: &quot;AZD-71&quot;}); &lt;br&gt;
  * $db.Cars.remove([{&quot;code&quot;: &quot;AZD-71&quot;}, {&quot;code&quot;: &quot;AZD-65&quot;}]); &lt;br&gt;
  */
-RuntimeDatabaseCollection.prototype.remove = function (query) {
+RuntimeDatabaseCollection.prototype.remove = function(query) {
     var result = [],
         id = &#x27;&#x27;,
         component = null,
@@ -625,7 +627,7 @@ RuntimeDatabaseCollection.prototype.remove = function (query) {
  * @method count
  * @return {Number} number of documents in the collection
  */
-RuntimeDatabaseCollection.prototype.count = function () {
+RuntimeDatabaseCollection.prototype.count = function() {
     var result = 0,
         objectId = &#x27;&#x27;;
     for (objectId in store[this.name]) {
@@ -663,6 +665,7 @@ function system(importedSystem) {
         behaviorId = &#x27;&#x27;,
         systems = [],
         id = null,
+        dbDump = null,
         mastersystem = null,
         behavior = null,
         exportedSystem = {};
@@ -711,28 +714,37 @@ function system(importedSystem) {
         result = importedSystem._id;
 
     } else { // export
-        exportedSystem = dump();
-
         // get id of the master system
         systems = exports.RuntimeSystem.find({
             &#x27;master&#x27;: true
         });
 
         if (systems.length) {
+                        
             mastersystem = systems[0];
             id = mastersystem._id;
+            
+            // prop
+            exportedSystem._id = id;
+            exportedSystem.name = mastersystem.name;
+            exportedSystem.description = mastersystem.description;
+            exportedSystem.version = mastersystem.version;
+            
+            // dump
+            dbDump = dump();
+            for (collectionName in dbDump) {
+                if (dbDump.hasOwnProperty(collectionName)) {
+                    exportedSystem[collectionName] = dbDump[collectionName];
+                }
+            }
+
             for (behaviorId in exportedSystem.behaviors) {
                 behavior = exportedSystem.behaviors[behaviorId];
                 if (behavior.state === &#x27;main&#x27;) {
                     behavior.component = id;
                 }
             }
-
-            exportedSystem.name = mastersystem.name;
-            exportedSystem.version = mastersystem.version;
-            exportedSystem.description = mastersystem.description;
-            exportedSystem._id = id;
-
+            
             result = JSON.stringify(exportedSystem);
         } else {
             $log.masterSystemNotFound();
@@ -766,7 +778,7 @@ function subsystem(params) {
         behavior = null,
         component = null,
         className = &#x27;&#x27;;
-    
+
     // default values
     result = exports.RuntimeSystem.find({
         &#x27;master&#x27;: true
@@ -852,7 +864,7 @@ function clear() {
     var length = 0,
         i = 0,
         collectionName = &#x27;&#x27;;
-    
+
     // remove collections
     length = collections.length;
     for (i = 0; i &lt; length; i++) {
@@ -890,7 +902,7 @@ function init() {
 
     // init metamodel
     $metamodel.init();
-    
+
     // reimport Runtime core system
     runtimeSystemId = exports.system(runtimeSystem);
     $component.get(runtimeSystemId).main();
@@ -966,8 +978,8 @@ exports.subsystem = subsystem;
  * @method clear
  */
 exports.clear = clear;
- 
- 
+
+
 /**
  * Init the database.
  * @method init

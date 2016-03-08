@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.0.1</b>
+                    API Docs for Version: <b>1.0.2</b>
                 </p>
             </li>
         </div>
@@ -1080,8 +1080,8 @@ var system = {
             &quot;component&quot;: &quot;RuntimeAdmin&quot;,
             &quot;state&quot;: &quot;stop&quot;,
             &quot;action&quot;: &quot;function stop() {\n    var worker = null,\n    channel = null;\n    \n    worker = this.require(&#x27;worker-admin&#x27;);\n    if (worker &amp;&amp; worker.worker()) {\n        worker.worker().port.onmessage = function () {};\n        worker.destroy();\n        \n        channel = this.require(&#x27;channel-admin&#x27;);\n        if (channel) {\n            channel.destroy();\n        }\n        \n        console.info(&#x27;runtime: admin is stopped&#x27;);\n    }\n}&quot;,
-            &quot;useCoreAPI&quot;: false,
-            &quot;core&quot;: false
+            &quot;useCoreAPI&quot;: true,
+            &quot;core&quot;: true
         },
         &quot;1fc101c23918773&quot;: {
             &quot;component&quot;: &quot;RuntimeComponent&quot;,
@@ -1106,172 +1106,172 @@ var system = {
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;11a0d1c5ac1ff12&quot;: {
-            &quot;_id&quot;: &quot;11a0d1c5ac1ff12&quot;,
+        &quot;1ed84139b91a4d6&quot;: {
+            &quot;_id&quot;: &quot;1ed84139b91a4d6&quot;,
             &quot;component&quot;: &quot;Runtime&quot;,
             &quot;state&quot;: &quot;error&quot;,
             &quot;action&quot;: &quot;function error(data) {\n    console.error(&#x27;runtime: &#x27; + data.message, data.error);\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1bc1d108a21355d&quot;: {
-            &quot;_id&quot;: &quot;1bc1d108a21355d&quot;,
+        &quot;167d5108df1e663&quot;: {
+            &quot;_id&quot;: &quot;167d5108df1e663&quot;,
             &quot;component&quot;: &quot;Runtime&quot;,
             &quot;state&quot;: &quot;system&quot;,
             &quot;action&quot;: &quot;function system(name) {\n    var System = null,\n    system = {},\n    systemId = &#x27;&#x27;,\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        System = this.require(&#x27;RuntimeSystem&#x27;);\n        system = new System(conf);\n    } else {\n        result = $db.RuntimeSystem.find({\n            &#x27;master&#x27;: true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;15e5611ba214590&quot;: {
-            &quot;_id&quot;: &quot;15e5611ba214590&quot;,
+        &quot;112fa1c2ce10dbc&quot;: {
+            &quot;_id&quot;: &quot;112fa1c2ce10dbc&quot;,
             &quot;component&quot;: &quot;Runtime&quot;,
             &quot;state&quot;: &quot;warning&quot;,
             &quot;action&quot;: &quot;function warning(message) {\n    console.warn(&#x27;runtime: &#x27; + message);\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;14b7a1dd8f16235&quot;: {
-            &quot;_id&quot;: &quot;14b7a1dd8f16235&quot;,
+        &quot;18460125071f76d&quot;: {
+            &quot;_id&quot;: &quot;18460125071f76d&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;collection&quot;,
             &quot;action&quot;: &quot;function collection(name) {\n    var result = {};\n    if (this.metamodel()[name] === &#x27;collection&#x27;) {\n        result = this.model()[name];\n    } \n    \n    return result; \n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1edba11cf015087&quot;: {
-            &quot;_id&quot;: &quot;1edba11cf015087&quot;,
+        &quot;12905142381cf59&quot;: {
+            &quot;_id&quot;: &quot;12905142381cf59&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;collections&quot;,
             &quot;action&quot;: &quot;function collections() {\n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length; \n    \n    for (i = 0; i &lt; length; i++) { \n        item = keys[i]; \n        if (this.metamodel()[item] === &#x27;collection&#x27;) {\n            result.push(item);\n        }\n    }\n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;18bf810ab71cb24&quot;: {
-            &quot;_id&quot;: &quot;18bf810ab71cb24&quot;,
+        &quot;180751695118a25&quot;: {
+            &quot;_id&quot;: &quot;180751695118a25&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;event&quot;,
             &quot;action&quot;: &quot;function event(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === &#x27;event&#x27;) {\n        result = this.model()[name];\n    } \n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1246a1d96f1d1b6&quot;: {
-            &quot;_id&quot;: &quot;1246a1d96f1d1b6&quot;,
+        &quot;196df1f3d31a02b&quot;: {
+            &quot;_id&quot;: &quot;196df1f3d31a02b&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;events&quot;,
             &quot;action&quot;: &quot;function events() {\n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length;\n    \n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;event&#x27;) {\n            result.push(item);\n        }\n    } \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;11c051a1d81a285&quot;: {
-            &quot;_id&quot;: &quot;11c051a1d81a285&quot;,
+        &quot;1d78e19f1410de5&quot;: {
+            &quot;_id&quot;: &quot;1d78e19f1410de5&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;link&quot;,
             &quot;action&quot;: &quot;function link(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === &#x27;link&#x27;) {\n        result = this.model()[name];\n    }\n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;15fac1509e1f236&quot;: {
-            &quot;_id&quot;: &quot;15fac1509e1f236&quot;,
+        &quot;1c22a1edde11ece&quot;: {
+            &quot;_id&quot;: &quot;1c22a1edde11ece&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;links&quot;,
             &quot;action&quot;: &quot;function links() { \n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;link&#x27;) {\n            result.push(item);\n        }\n    } return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1ed611c850133ae&quot;: {
-            &quot;_id&quot;: &quot;1ed611c850133ae&quot;,
+        &quot;1d1f513dbf1fbd5&quot;: {
+            &quot;_id&quot;: &quot;1d1f513dbf1fbd5&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;method&quot;,
             &quot;action&quot;: &quot;function method(name) {\n    var result = {};\n    if (this.metamodel()[name] === &#x27;method&#x27;) {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1ffe01407718387&quot;: {
-            &quot;_id&quot;: &quot;1ffe01407718387&quot;,
+        &quot;184821c1241f9ec&quot;: {
+            &quot;_id&quot;: &quot;184821c1241f9ec&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;methods&quot;,
             &quot;action&quot;: &quot;function methods() {\n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;method&#x27;) {\n            result.push(item);\n        }\n    } \n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;17fbe1fbd3109ce&quot;: {
-            &quot;_id&quot;: &quot;17fbe1fbd3109ce&quot;,
+        &quot;1208a1fc0e12af7&quot;: {
+            &quot;_id&quot;: &quot;1208a1fc0e12af7&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;properties&quot;,
             &quot;action&quot;: &quot;function properties() { \n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;property&#x27;) {\n            result.push(item);\n        }\n    } return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1cfcc1145a193d7&quot;: {
-            &quot;_id&quot;: &quot;1cfcc1145a193d7&quot;,
+        &quot;1457a1423e17dc1&quot;: {
+            &quot;_id&quot;: &quot;1457a1423e17dc1&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;property&quot;,
             &quot;action&quot;: &quot;function property(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === &#x27;property&#x27;) {\n        result = this.model()[name];\n    }\n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;155fb1bc861bd3b&quot;: {
-            &quot;_id&quot;: &quot;155fb1bc861bd3b&quot;,
+        &quot;1e12718b5a1ba9d&quot;: {
+            &quot;_id&quot;: &quot;1e12718b5a1ba9d&quot;,
             &quot;component&quot;: &quot;RuntimeComponent&quot;,
             &quot;state&quot;: &quot;destroy&quot;,
             &quot;action&quot;: &quot;function destroy() {\n    $component.destroy(this.id());\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1a53713bb113982&quot;: {
-            &quot;_id&quot;: &quot;1a53713bb113982&quot;,
+        &quot;143cc11cff14239&quot;: {
+            &quot;_id&quot;: &quot;143cc11cff14239&quot;,
             &quot;component&quot;: &quot;RuntimeComponent&quot;,
             &quot;state&quot;: &quot;off&quot;,
             &quot;action&quot;: &quot;function off(state, behaviorId) {\n    var args = [],\n    i = 0,\n    length = 0;\n    length = arguments.length;\n    \n    for (i = 0; i &lt; length - 6; i++) {\n        args.push(arguments[i]);\n    }\n    \n    if ($workflow.checkParams({\n        \&quot;component\&quot;: this, \n        \&quot;methodName\&quot;: \&quot;off\&quot;, \n        \&quot;args\&quot;: args\n        })) {\n        \n        if (state || behaviorId) {\n            if ($metamodel.isValidState(state, this.constructor.name)) {\n                $behavior.remove({\n                    \&quot;behaviorId\&quot;: behaviorId, \n                    \&quot;componentId\&quot;: this.id(), \n                    \&quot;state\&quot;: state\n                });\n            } else { \n                console.warn(\&quot;runtime: invoke \\&#x27;off\\&#x27; method of component &#x27;\&quot; + this.id() + \&quot;&#x27; with an invalid state &#x27;\&quot; + state + \&quot;&#x27;\&quot;); \n            }\n        } else {\n            $behavior.remove({\n                \&quot;componentId\&quot;: this.id()\n            });\n        }\n    }\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1524811ac21a1ff&quot;: {
-            &quot;_id&quot;: &quot;1524811ac21a1ff&quot;,
+        &quot;112781d1c81d904&quot;: {
+            &quot;_id&quot;: &quot;112781d1c81d904&quot;,
             &quot;component&quot;: &quot;RuntimeComponent&quot;,
             &quot;state&quot;: &quot;require&quot;,
             &quot;action&quot;: &quot;function require(id) {\n    return $component.get(id);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;15cee12ed517717&quot;: {
-            &quot;_id&quot;: &quot;15cee12ed517717&quot;,
+        &quot;1916e1ccf810a92&quot;: {
+            &quot;_id&quot;: &quot;1916e1ccf810a92&quot;,
             &quot;component&quot;: &quot;RuntimeDatabase&quot;,
             &quot;state&quot;: &quot;collections&quot;,
             &quot;action&quot;: &quot;function collections() {\n    var result = {},\n    collectionName = &#x27;&#x27;;\n    \n    for (collectionName in $db.store) {\n        if ($db.store.hasOwnProperty(collectionName) &amp;&amp; collectionName.indexOf(&#x27;Runtime&#x27;) !== 0) {\n            result[collectionName] = $db[collectionName];\n            \n        }\n    }\n    return result;\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;182c41e8fb1e1d3&quot;: {
-            &quot;_id&quot;: &quot;182c41e8fb1e1d3&quot;,
+        &quot;1af20102a81445e&quot;: {
+            &quot;_id&quot;: &quot;1af20102a81445e&quot;,
             &quot;component&quot;: &quot;RuntimeDatabase&quot;,
             &quot;state&quot;: &quot;subsystem&quot;,
             &quot;action&quot;: &quot;function subsystem(params) {\n    return $db.subsystem(params);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1fac21097c14045&quot;: {
-            &quot;_id&quot;: &quot;1fac21097c14045&quot;,
+        &quot;1151f1a0211d9fd&quot;: {
+            &quot;_id&quot;: &quot;1151f1a0211d9fd&quot;,
             &quot;component&quot;: &quot;RuntimeDatabase&quot;,
             &quot;state&quot;: &quot;system&quot;,
             &quot;action&quot;: &quot;function system(system) {\n    return $db.system(system);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;17e4215e0a14708&quot;: {
-            &quot;_id&quot;: &quot;17e4215e0a14708&quot;,
+        &quot;104c3199c316519&quot;: {
+            &quot;_id&quot;: &quot;104c3199c316519&quot;,
             &quot;component&quot;: &quot;RuntimeMetamodel&quot;,
             &quot;state&quot;: &quot;create&quot;,
             &quot;action&quot;: &quot;function create() {\n    $metamodel.create();\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1cf4f1c17c14450&quot;: {
-            &quot;_id&quot;: &quot;1cf4f1c17c14450&quot;,
+        &quot;1710b1b08a1b665&quot;: {
+            &quot;_id&quot;: &quot;1710b1b08a1b665&quot;,
             &quot;component&quot;: &quot;RuntimeMetamodel&quot;,
             &quot;state&quot;: &quot;schema&quot;,
             &quot;action&quot;: &quot;function schema(schema) {\n    $metamodel.schema(schema);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;16f9b169651061a&quot;: {
-            &quot;_id&quot;: &quot;16f9b169651061a&quot;,
+        &quot;12df717c5015705&quot;: {
+            &quot;_id&quot;: &quot;12df717c5015705&quot;,
             &quot;component&quot;: &quot;RuntimeMetamodel&quot;,
             &quot;state&quot;: &quot;type&quot;,
             &quot;action&quot;: &quot;function type(type) {\n    $metamodel.type(type);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1d82b1a62714a3a&quot;: {
-            &quot;_id&quot;: &quot;1d82b1a62714a3a&quot;,
+        &quot;1e45918c2e10e96&quot;: {
+            &quot;_id&quot;: &quot;1e45918c2e10e96&quot;,
             &quot;component&quot;: &quot;RuntimeSystem&quot;,
             &quot;state&quot;: &quot;sync&quot;,
             &quot;action&quot;: &quot;function sync() {\n    var system = JSON.parse($db.system());\n    \n    this.schemas(system.schemas);\n    this.types(system.types);\n    this.behaviors(system.behaviors);\n    this.components(system.components);\n}&quot;,
@@ -1282,13 +1282,14 @@ var system = {
     &quot;components&quot;: {
         &quot;RuntimeAdmin&quot;: {
             &quot;admin&quot;: {
-                &quot;_id&quot;: &quot;admin&quot;
+                &quot;_id&quot;: &quot;admin&quot;,
+                &quot;_core&quot;: true
             }
         },
         &quot;Runtime&quot;: {
             &quot;runtime&quot;: {
                 &quot;_id&quot;: &quot;runtime&quot;,
-                &quot;version&quot;: &quot;1.0.1&quot;
+                &quot;version&quot;: &quot;1.0.2&quot;
             }
         },
         &quot;RuntimeDatabase&quot;: {
@@ -1305,8 +1306,8 @@ var system = {
             &quot;18ed81de331252c&quot;: {
                 &quot;_id&quot;: &quot;18ed81de331252c&quot;,
                 &quot;name&quot;: &quot;system-admin&quot;,
-                &quot;version&quot;: &quot;0.1.0&quot;,
-                &quot;description&quot;: &quot;Runtime Component administration&quot;,
+                &quot;version&quot;: &quot;0.1.1&quot;,
+                &quot;description&quot;: &quot;Runtime Component administration &quot;,
                 &quot;subsystem&quot;: true,
                 &quot;master&quot;: false
             },
@@ -1329,7 +1330,7 @@ var system = {
         }
     },
     &quot;name&quot;: &quot;runtime&quot;,
-    &quot;version&quot;: &quot;1.0.1&quot;,
+    &quot;version&quot;: &quot;1.0.2&quot;,
     &quot;description&quot;: &quot;Runtime&quot;,
     &quot;_id&quot;: &quot;e89c617b6b15d24&quot;,
     &quot;master&quot;: false,

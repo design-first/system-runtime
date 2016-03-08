@@ -14,8 +14,6 @@
 
 Runtime has APIs to serialize your JavaScript code into JSON. This JSON can be then imported and executed in a client or server application.
 
-![Image Alt](https://system-runtime.github.io/img/system-runtime.png)
-
 ## How works Runtime ?
 
 Runtime executes your JSON client and server side.

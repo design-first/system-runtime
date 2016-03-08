@@ -2,7 +2,7 @@
     "project": {
         "name": "system-runtime",
         "description": "The JSON Runtime Environment",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "url": "https://system-runtime.github.io"
     },
     "files": {
@@ -152,7 +152,7 @@
             "namespaces": {},
             "tag": "main",
             "file": "build/system/system.js",
-            "line": 1253,
+            "line": 1254,
             "description": "This module is the main module of Runtime. <br>\nIt inits Runtime metamodel and loads Runtime core system.",
             "requires": [
                 "runtime-component",
@@ -224,7 +224,7 @@
             "module": "runtime",
             "namespace": "",
             "file": "src/db.js",
-            "line": 205,
+            "line": 207,
             "description": "This module manages Runtime database. <br>\nRuntime database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nRuntime Database is closely linked to Runtime metamodel and Runtime components because: <br>\n- all operations done by Runtime database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "runtime-component",
@@ -358,7 +358,7 @@
             "module": "runtime",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 1253,
+            "line": 1254,
             "description": "This module contains Runtime core system.",
             "static": 1
         }
@@ -419,7 +419,7 @@
             "submodule": "runtime-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 814,
+            "line": 826,
             "description": "This module manages Runtime database. <br>\nRuntime database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nRuntime database is closely linked to Runtime metamodel because: <br>\n- all operations done by Runtime database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "runtime-component",
@@ -439,7 +439,7 @@
             "submodule": "runtime-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 205,
+            "line": 207,
             "description": "A collection of documents managed by Runtime. <br>\nInternal collections manage core objects of Runtime (schema, type, ...). <br>\nPublic collections manage components of the same class. <br>",
             "is_constructor": 1,
             "params": [
@@ -609,7 +609,7 @@
             "submodule": "runtime-system",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 1253,
+            "line": 1254,
             "description": "This module contains Runtime core system."
         }
     },
@@ -839,7 +839,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 227,
+            "line": 229,
             "description": "Find a document into the collection.",
             "itemtype": "method",
             "name": "find",
@@ -863,7 +863,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 274,
+            "line": 276,
             "description": "Insert an new document into the collection. <br>\nBefore inserting the document, Runtime checks that the document is compliant\nwith its class definition. <br> \nThen, after inserting it, we create the component.",
             "itemtype": "method",
             "name": "insert",
@@ -887,7 +887,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 360,
+            "line": 362,
             "description": "Update documents into a collection.",
             "itemtype": "method",
             "name": "update",
@@ -921,7 +921,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 457,
+            "line": 459,
             "description": "Remove a document from the colllection. <br>\nWhen a document is removed, the component is destroyed.",
             "itemtype": "method",
             "name": "remove",
@@ -945,7 +945,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 534,
+            "line": 536,
             "description": "Count the number of documents in the collection.",
             "itemtype": "method",
             "name": "count",
@@ -959,7 +959,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 835,
+            "line": 847,
             "description": "Create a new {{#crossLink \"RuntimeDatabaseCollection\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "collection",
@@ -976,7 +976,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 843,
+            "line": 855,
             "description": "Runtime database store that lists all the collections.",
             "itemtype": "property",
             "name": "store",
@@ -987,7 +987,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 850,
+            "line": 862,
             "description": "Import/Export a Runtime system into/from the database.",
             "itemtype": "method",
             "name": "system",
@@ -1008,7 +1008,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 859,
+            "line": 871,
             "description": "Export a Runtime sub-system.",
             "itemtype": "method",
             "name": "subsystem",
@@ -1032,7 +1032,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 875,
+            "line": 887,
             "description": "Clear the database.",
             "itemtype": "method",
             "name": "clear",
@@ -1042,7 +1042,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 882,
+            "line": 894,
             "description": "Init the database.",
             "itemtype": "method",
             "name": "init",
@@ -2451,7 +2451,7 @@
         },
         {
             "file": "build/system/system.js",
-            "line": 1263,
+            "line": 1264,
             "description": "Runtime core system",
             "itemtype": "property",
             "name": "system",

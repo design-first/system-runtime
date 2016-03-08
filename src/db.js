@@ -159,8 +159,10 @@ function dump() {
                     delete collection[id];
                 }
             }
-
-            dbDump.components[collectionName] = collection;
+            
+            if (Object.keys(collection).length) {
+                dbDump.components[collectionName] = collection;
+            }
         }
     }
 
@@ -211,7 +213,7 @@ function contains(source, target) {
  * @constructor
  * @param {String} name name of the new collection
  */
-var RuntimeDatabaseCollection = function (name) {
+var RuntimeDatabaseCollection = function(name) {
     if ($metamodel.get(name) || internalDB.indexOf(name) !== -1) {
         store[name] = {};
         this.name = name;
@@ -235,7 +237,7 @@ var RuntimeDatabaseCollection = function (name) {
  * $db.Person.find({"name": "laure", "age" : 24}); <br>
  * $db.Person.find([{"name": "rene"}, {"name": "robert"}]);
  */
-RuntimeDatabaseCollection.prototype.find = function (query) {
+RuntimeDatabaseCollection.prototype.find = function(query) {
     var result = [],
         id = '',
         object = {};
@@ -287,7 +289,7 @@ RuntimeDatabaseCollection.prototype.find = function (query) {
  *      "age": 43 <br>
  * }); <br>
  */
-RuntimeDatabaseCollection.prototype.insert = function (document) {
+RuntimeDatabaseCollection.prototype.insert = function(document) {
     var doc = [],
         Component = null,
         result = [];
@@ -371,7 +373,7 @@ RuntimeDatabaseCollection.prototype.insert = function (document) {
  * $db.Cars.update([{"code": "AZD-71"}, {"code": "AZD-65"}], {"price": "10000$"}); <br>
  * $db.Cars.update({"code": "AZD-71"}, {"price": "10000$"}, {"upsert": true}); <br>
  */
-RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
+RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
     var docs = this.find(query),
         updated = 0,
         i = 0,
@@ -465,7 +467,7 @@ RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
  * $db.Cars.remove({"code": "AZD-71"}); <br>
  * $db.Cars.remove([{"code": "AZD-71"}, {"code": "AZD-65"}]); <br>
  */
-RuntimeDatabaseCollection.prototype.remove = function (query) {
+RuntimeDatabaseCollection.prototype.remove = function(query) {
     var result = [],
         id = '',
         component = null,
@@ -536,7 +538,7 @@ RuntimeDatabaseCollection.prototype.remove = function (query) {
  * @method count
  * @return {Number} number of documents in the collection
  */
-RuntimeDatabaseCollection.prototype.count = function () {
+RuntimeDatabaseCollection.prototype.count = function() {
     var result = 0,
         objectId = '';
     for (objectId in store[this.name]) {
@@ -574,6 +576,7 @@ function system(importedSystem) {
         behaviorId = '',
         systems = [],
         id = null,
+        dbDump = null,
         mastersystem = null,
         behavior = null,
         exportedSystem = {};
@@ -622,28 +625,37 @@ function system(importedSystem) {
         result = importedSystem._id;
 
     } else { // export
-        exportedSystem = dump();
-
         // get id of the master system
         systems = exports.RuntimeSystem.find({
             'master': true
         });
 
         if (systems.length) {
+                        
             mastersystem = systems[0];
             id = mastersystem._id;
+            
+            // prop
+            exportedSystem._id = id;
+            exportedSystem.name = mastersystem.name;
+            exportedSystem.description = mastersystem.description;
+            exportedSystem.version = mastersystem.version;
+            
+            // dump
+            dbDump = dump();
+            for (collectionName in dbDump) {
+                if (dbDump.hasOwnProperty(collectionName)) {
+                    exportedSystem[collectionName] = dbDump[collectionName];
+                }
+            }
+
             for (behaviorId in exportedSystem.behaviors) {
                 behavior = exportedSystem.behaviors[behaviorId];
                 if (behavior.state === 'main') {
                     behavior.component = id;
                 }
             }
-
-            exportedSystem.name = mastersystem.name;
-            exportedSystem.version = mastersystem.version;
-            exportedSystem.description = mastersystem.description;
-            exportedSystem._id = id;
-
+            
             result = JSON.stringify(exportedSystem);
         } else {
             $log.masterSystemNotFound();
@@ -677,7 +689,7 @@ function subsystem(params) {
         behavior = null,
         component = null,
         className = '';
-    
+
     // default values
     result = exports.RuntimeSystem.find({
         'master': true
@@ -763,7 +775,7 @@ function clear() {
     var length = 0,
         i = 0,
         collectionName = '';
-    
+
     // remove collections
     length = collections.length;
     for (i = 0; i < length; i++) {
@@ -801,7 +813,7 @@ function init() {
 
     // init metamodel
     $metamodel.init();
-    
+
     // reimport Runtime core system
     runtimeSystemId = exports.system(runtimeSystem);
     $component.get(runtimeSystemId).main();
@@ -877,8 +889,8 @@ exports.subsystem = subsystem;
  * @method clear
  */
 exports.clear = clear;
- 
- 
+
+
 /**
  * Init the database.
  * @method init
