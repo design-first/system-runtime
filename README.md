@@ -18,6 +18,47 @@ Runtime has APIs to serialize your JavaScript code into JSON. This JSON can be t
 
 Runtime executes your JSON client and server side.
 
+#### Runtime APIs
+
+Use Runtime APIs to create your application:
+
+```js
+// create an app
+var app = runtime.system('app');
+
+// add code in the main method
+app.on('main', function main() {
+    console.log('Hello world !');
+});
+
+// run the app
+app.main();
+```
+
+Runtime will automatically serialize it:
+
+```json
+{
+  "_id": "154cd18d0210516",
+  "name": "app",
+  "description": "",
+  "version": "0.0.1",
+  "schemas": {},
+  "types": {},
+  "behaviors": {
+    "1ea9c1d5f811ae1": {
+      "_id": "1ea9c1d5f811ae1",
+      "component": "154cd18d0210516",
+      "state": "main",
+      "action": "function main() {\n    console.log('Hello world !');\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "components": {}
+}
+```
+
 #### HTML example
 
 Just add a link tag in your HTML to execute your app:

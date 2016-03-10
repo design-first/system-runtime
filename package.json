@@ -1,7 +1,7 @@
 {
     "name": "system-runtime",
-    "version": "1.0.2",
-    "description": "The JSON Runtime Environment",
+    "version": "1.0.3",
+    "description": "Runtime, The JSON Runtime Environment",
     "homepage": "https://system-runtime.github.io",
     "keywords": [
         "uml",
