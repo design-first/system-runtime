@@ -35,7 +35,7 @@ app.on('main', function main() {
 app.main();
 ```
 
-Runtime will automatically serialize it:
+Runtime will automatically serialize it into JSON:
 
 ```json
 {
@@ -59,7 +59,7 @@ Runtime will automatically serialize it:
 }
 ```
 
-#### HTML example
+#### HTML import
 
 Just add a link tag in your HTML to execute your app:
 
@@ -70,7 +70,7 @@ Just add a link tag in your HTML to execute your app:
 <!-- load Runtime -->
 <script src="/bower_components/system-runtime/build/system-runtime.min.js"></script>
 ```
-#### Node.js example
+#### Node.js import
 
 Just require your JSON in Node.js to execute your app:
 
