@@ -102,7 +102,7 @@ var metamodel = runtime.require('metamodel');
 metamodel.schema({
     '_name': 'Jedi',
     'firstName': 'property',
-    'lastName': 'property',
+    'lastName': 'property'
 });
 
 // create your model
@@ -126,6 +126,10 @@ With [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson
 
 [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson) is based on [UML](http://uml.org), so learning it is very easy.
 
+#### A component factory
+
+Runtime uses the [Model-Driven Architecture](http://www.omg.org/mda/) approach to create classes based on your design. Use them to instantiate your components. 
+
 #### A NoSQL Database
 
 Runtime acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents. 
@@ -133,10 +137,6 @@ Runtime acts as an ODM (Object-Document Mapper) to manage your components as NoS
 Runtime has a micro NoSQL Database that stores your components and you can export/import them into another Runtime NoSQL Database. 
 
 Thanks to Runtime NoSQL Database, you can compose your model with an another one.
-
-#### A component factory
-
-Runtime uses the [Model-Driven Architecture](http://www.omg.org/mda/) approach to create classes based on your design. Use them to instantiate your components. 
 
 #### A workflow engine
 
