@@ -1,0 +1,35 @@
+{
+    "_name": "RuntimeMetamodel",
+    "_schema": "RuntimeMetamodel",
+    "_inherit": [
+        "RuntimeComponent"
+    ],
+    "_core": true,
+    "schema": {
+        "params": [
+            {
+                "name": "schema",
+                "type": "object"
+            }
+        ]
+    },
+    "model": {
+        "params": [
+            {
+                "name": "model",
+                "type": "object"
+            }
+        ]
+    },
+    "type": {
+        "params": [
+            {
+                "name": "type",
+                "type": "object"
+            }
+        ]
+    },
+    "create": {
+        "params": []
+    }
+}

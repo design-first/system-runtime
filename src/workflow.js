@@ -92,7 +92,7 @@ function getParamNames(id, methodName) {
         length = 0,
         i = 0;
 
-    method = $metamodel.get(id)[methodName];
+    method = $metamodel.getModel(id)[methodName];
     if (method) {
         params = method.params;
         if (params) {
@@ -125,7 +125,7 @@ function getParamNumber(id, methodName) {
         min = 0,
         max = 0;
 
-    method = $metamodel.get(id)[methodName];
+    method = $metamodel.getModel(id)[methodName];
     if (method) {
         params = method.params;
         if (params) {
@@ -162,7 +162,7 @@ function setDefaultValue(id, methodName, args) {
         length = 0,
         i = 0;
 
-    method = $metamodel.get(id)[methodName];
+    method = $metamodel.getModel(id)[methodName];
     if (method) {
         params = method.params;
         if (params) {
@@ -194,7 +194,7 @@ function getReturnType(id, methodName) {
     var resultType = null,
         result = null;
 
-    resultType = $metamodel.get(id)[methodName].result;
+    resultType = $metamodel.getModel(id)[methodName].result;
     if (resultType) {
         result = resultType;
     }
@@ -217,7 +217,7 @@ function getParamTypes(id, methodName) {
         length = 0,
         i = 0;
 
-    method = $metamodel.get(id)[methodName];
+    method = $metamodel.getModel(id)[methodName];
     if (method) {
         params = method.params;
         if (params) {
@@ -490,15 +490,15 @@ function checkParams(params) {
 
     switch (true) {
         case isCollection:
-            paramsType = ['number', $metamodel.get(componentClassName)[methodName].type[0], 'string'];
+            paramsType = ['number', $metamodel.getModel(componentClassName)[methodName].type[0], 'string'];
             paramsNumber = [3, 3];
             break;
         case isProperty:
-            paramsType = [$metamodel.get(componentClassName)[methodName].type];
+            paramsType = [$metamodel.getModel(componentClassName)[methodName].type];
             paramsNumber = [1, 1];
             break;
         case isLink:
-            paramsType = [$metamodel.get(componentClassName)[methodName].type];
+            paramsType = [$metamodel.getModel(componentClassName)[methodName].type];
             paramsNumber = [1, 1];
             break;
         default:
@@ -707,7 +707,7 @@ function stop(params) {
     }
     params.message = params.message || '';
 
-    exports.state = function () {
+    exports.state = function() {
     };
 
     if (params.error) {

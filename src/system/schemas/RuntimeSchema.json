@@ -1,9 +1,0 @@
-{
-    "_id": "RuntimeSchema",
-    "_name": "RuntimeSchema",
-    "_inherit": ["RuntimeComponentSchema"],
-    "_core": true,
-    "version": "property",
-    "system": "method",
-    "warning": "event"
-}

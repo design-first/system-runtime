@@ -1,0 +1,68 @@
+{
+    "_name": "RuntimeClassInfo",
+    "_schema": "RuntimeClassInfo",
+    "_inherit": ["RuntimeComponent"],
+    "_core": true,
+    "metamodel": {
+        "type": "object",
+        "readOnly": true,
+        "mandatory": true,
+        "default": {}
+    },
+    "model": {
+        "type": "object",
+        "readOnly": true,
+        "mandatory": true,
+        "default": {}
+    },
+    "property": {
+        "params": [{
+                "name": "name",
+                "type": "string"
+            }],
+        "result": "object"
+    },
+    "properties": {
+        "result": "array"
+    },
+    "link": {
+        "params": [{
+                "name": "name",
+                "type": "string"
+            }],
+        "result": "object"
+    },
+    "links": {
+        "result": "array"
+    },
+    "method": {
+        "params": [{
+                "name": "name",
+                "type": "string"
+            }],
+        "result": "object"
+    },
+    "methods": {
+        "result": "array"
+    },
+    "collection": {
+        "params": [{
+                "name": "name",
+                "type": "string"
+            }],
+        "result": "object"
+    },
+    "collections": {
+        "result": "array"
+    },
+    "event": {
+        "params": [{
+                "name": "name",
+                "type": "string"
+            }],
+        "result": "object"
+    },
+    "events": {
+        "result": "array"
+    }
+}

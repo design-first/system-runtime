@@ -1,19 +1,6 @@
 {
-    "_id": "RuntimeState",
     "_name": "RuntimeState",
-    "_schema": "RuntimeStateSchema",
-    "_class": false,
     "_core": true,
-    "name": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": true,
-        "default": ""
-    },
-    "parameters": {
-        "type": "object",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-    }
+    "name": "property",
+    "parameters": "property"
 }

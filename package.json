@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "1.0.3",
+    "version": "1.1.0",
     "description": "Runtime, The JSON Runtime Environment",
     "homepage": "https://system-runtime.github.io",
     "keywords": [
@@ -44,13 +44,13 @@
     "devDependencies": {
         "coveralls": "^2.11.3",
         "grunt": "^0.4.5",
-        "grunt-browserify": "^4.0.0",
+        "grunt-browserify": "^5.0.0",
         "grunt-cli": "^0.1.13",
         "grunt-contrib-clean": "^1.0.0",
         "grunt-contrib-concat": "^1.0.0",
         "grunt-contrib-jshint": "^1.0.0",
         "grunt-contrib-uglify": "^1.0.0",
-        "grunt-contrib-watch": "^0.6.1",
+        "grunt-contrib-watch": "^1.0.0",
         "grunt-contrib-yuidoc": "^1.0.0",
         "grunt-jasmine-nodejs": "^1.4.2",
         "grunt-jsbeautifier": "^0.2.10",

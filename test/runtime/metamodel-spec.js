@@ -13,17 +13,15 @@ describe('a metamodel instance', function () {
     it('can add a schema', function () {
         var metamodel = runtime.require('metamodel');
         metamodel.schema({
-            '_id': 'PersonTestSchema',
-            '_name': 'PersonTestSchema',
-            '_inherit': ['RuntimeComponentSchema'],
+            '_name': 'PersonTest',
+            '_inherit': ['RuntimeComponent'],
             'description': 'string',
             'firstName': 'property'
         });
 
-        metamodel.schema({
-            '_id': 'PersonTest',
+        metamodel.model({
             '_name': 'PersonTest',
-            '_schema': 'PersonTestSchema',
+            '_schema': 'PersonTest',
             '_inherit': ['RuntimeComponent'],
             'description': 'a person',
             'firstName': {
@@ -56,9 +54,8 @@ describe('a metamodel instance', function () {
         });
 
         metamodel.schema({
-            '_id': 'PersonSchema',
-            '_name': 'PersonSchema',
-            '_inherit': ['RuntimeComponentSchema'],
+            '_name': 'Person',
+            '_inherit': ['RuntimeComponent'],
             'description': 'string',
             'sex': 'property',
             'firstName': 'property',
@@ -66,10 +63,9 @@ describe('a metamodel instance', function () {
             'address': 'property'
         });
 
-        metamodel.schema({
-            '_id': 'Person',
+        metamodel.model({
             '_name': 'Person',
-            '_schema': 'PersonSchema',
+            '_schema': 'Person',
             '_inherit': ['RuntimeComponent'],
             'description': 'a person',
             'sex': {
@@ -120,9 +116,8 @@ describe('a metamodel instance', function () {
         var metamodel = runtime.require('metamodel');
 
         metamodel.schema({
-            '_id': 'PersonSchema',
-            '_name': 'PersonSchema',
-            '_inherit': ['RuntimeComponentSchema'],
+            '_name': 'Person',
+            '_inherit': ['RuntimeComponent'],
             'description': 'string',
             'sex': 'property',
             'firstName': 'property',
@@ -131,10 +126,9 @@ describe('a metamodel instance', function () {
             'father': 'link'
         });
 
-        metamodel.schema({
-            '_id': 'Person',
+        metamodel.model({
             '_name': 'Person',
-            '_schema': 'PersonSchema',
+            '_schema': 'Person',
             '_inherit': ['RuntimeComponent'],
             'description': 'a person',
             'sex': {
@@ -196,9 +190,8 @@ describe('a metamodel instance', function () {
         var metamodel = runtime.require('metamodel');
 
         metamodel.schema({
-            '_id': 'PersonSchema',
-            '_name': 'PersonSchema',
-            '_inherit': ['RuntimeComponentSchema'],
+            '_name': 'Person',
+            '_inherit': ['RuntimeComponent'],
             'description': 'string',
             'children': 'collection',
             'sex': 'property',
@@ -208,10 +201,9 @@ describe('a metamodel instance', function () {
             'father': 'link'
         });
 
-        metamodel.schema({
-            '_id': 'Person',
+        metamodel.model({
             '_name': 'Person',
-            '_schema': 'PersonSchema',
+            '_schema': 'Person',
             '_inherit': ['RuntimeComponent'],
             'description': 'a person',
             'sex': {
@@ -285,9 +277,8 @@ describe('a metamodel instance', function () {
         var metamodel = runtime.require('metamodel');
 
         metamodel.schema({
-            '_id': 'PersonSchema',
-            '_name': 'PersonSchema',
-            '_inherit': ['RuntimeComponentSchema'],
+            '_name': 'Person',
+            '_inherit': ['RuntimeComponent'],
             'description': 'string',
             'children': 'collection',
             'sex': 'property',
@@ -298,10 +289,9 @@ describe('a metamodel instance', function () {
             'son': 'property'
         });
 
-        metamodel.schema({
-            '_id': 'Person',
+        metamodel.model({
             '_name': 'Person',
-            '_schema': 'PersonSchema',
+            '_schema': 'Person',
             '_inherit': ['RuntimeComponent'],
             'description': 'a person',
             'sex': {

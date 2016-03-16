@@ -9,19 +9,17 @@ describe('a MSON schema', function () {
         var metamodel = runtime.require('metamodel');
 
         metamodel.schema({
-            '_id': 'PersonSchema_test',
-            '_name': 'PersonSchema_test',
-            '_inherit': ['RuntimeComponentSchema'],
+            '_name': 'Person_test',
+            '_inherit': ['RuntimeComponent'],
             'description': 'string',
             'firstName': 'property',
             'lastName': 'property',
             'getFullName': 'method'
         });
 
-        metamodel.schema({
-            '_id': 'Person_test',
+        metamodel.model({
             '_name': 'Person_test',
-            '_schema': 'PersonSchema_test',
+            '_schema': 'Person_test',
             '_inherit': ['RuntimeComponent'],
             'description': 'a person',
             'firstName': {
@@ -42,19 +40,17 @@ describe('a MSON schema', function () {
         });
 
         metamodel.schema({
-            '_id': 'TeacherSchema_test',
-            '_name': 'TeacherSchema_test',
-            '_inherit': ['RuntimeComponentSchema', 'PersonSchema_test'],
+            '_name': 'Teacher_test',
+            '_inherit': ['RuntimeComponent', 'Person_test'],
             'description': 'string',
             'firstName': 'property',
             'lastName': 'property',
             'getFullName': 'method'
         });
 
-        metamodel.schema({
-            '_id': 'Teacher_test',
+        metamodel.model({
             '_name': 'Teacher_test',
-            '_schema': 'PersonSchema_test',
+            '_schema': 'Person_test',
             '_inherit': ['RuntimeComponent', 'Person_test'],
             'description': 'a person',
             'firstName': {

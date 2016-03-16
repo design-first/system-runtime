@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.0.2</b>
+                    API Docs for Version: <b>1.1.0</b>
                 </p>
             </li>
         </div>
@@ -134,11 +134,11 @@
  * @property {RuntimeSystem} system
  */
 var system = {
-    &quot;schemas&quot;: {
-        &quot;Worker&quot;: {
-            &quot;_id&quot;: &quot;Worker&quot;,
+    &quot;models&quot;: {
+        &quot;19fe71f8af13886&quot;: {
+            &quot;_id&quot;: &quot;19fe71f8af13886&quot;,
             &quot;_name&quot;: &quot;Worker&quot;,
-            &quot;_schema&quot;: &quot;WorkerSchema&quot;,
+            &quot;_schema&quot;: &quot;Worker&quot;,
             &quot;_inherit&quot;: [
                 &quot;RuntimeComponent&quot;
             ],
@@ -156,30 +156,10 @@ var system = {
                 }]
             }
         },
-        &quot;WorkerSchema&quot;: {
-            &quot;_id&quot;: &quot;WorkerSchema&quot;,
-            &quot;_name&quot;: &quot;WorkerSchema&quot;,
-            &quot;_inherit&quot;: [
-                &quot;RuntimeComponentSchema&quot;
-            ],
-            &quot;_core&quot;: true,
-            &quot;worker&quot;: &quot;property&quot;,
-            &quot;send&quot;: &quot;method&quot;
-        },
-        &quot;RuntimeAdminSchema&quot;: {
-            &quot;_id&quot;: &quot;RuntimeAdminSchema&quot;,
-            &quot;_name&quot;: &quot;RuntimeAdminSchema&quot;,
-            &quot;_inherit&quot;: [
-                &quot;RuntimeComponentSchema&quot;
-            ],
-            &quot;_core&quot;: true,
-            &quot;start&quot;: &quot;method&quot;,
-            &quot;stop&quot;: &quot;method&quot;
-        },
-        &quot;RuntimeAdmin&quot;: {
-            &quot;_id&quot;: &quot;RuntimeAdmin&quot;,
+        &quot;138a81fa1f16435&quot;: {
+            &quot;_id&quot;: &quot;138a81fa1f16435&quot;,
             &quot;_name&quot;: &quot;RuntimeAdmin&quot;,
-            &quot;_schema&quot;: &quot;RuntimeAdminSchema&quot;,
+            &quot;_schema&quot;: &quot;RuntimeAdmin&quot;,
             &quot;_inherit&quot;: [
                 &quot;RuntimeComponent&quot;
             ],
@@ -194,36 +174,10 @@ var system = {
             },
             &quot;stop&quot;: {}
         },
-        &quot;RuntimeChannelSchema&quot;: {
-            &quot;_id&quot;: &quot;RuntimeChannelSchema&quot;,
-            &quot;_name&quot;: &quot;RuntimeChannelSchema&quot;,
-            &quot;sync&quot;: &quot;event&quot;,
-            &quot;loadSystem&quot;: &quot;event&quot;,
-            &quot;createSchema&quot;: &quot;event&quot;,
-            &quot;updateSchema&quot;: &quot;event&quot;,
-            &quot;deleteSchema&quot;: &quot;event&quot;,
-            &quot;createModel&quot;: &quot;event&quot;,
-            &quot;updateModel&quot;: &quot;event&quot;,
-            &quot;deleteModel&quot;: &quot;event&quot;,
-            &quot;createType&quot;: &quot;event&quot;,
-            &quot;updateType&quot;: &quot;event&quot;,
-            &quot;deleteType&quot;: &quot;event&quot;,
-            &quot;createComponent&quot;: &quot;event&quot;,
-            &quot;updateComponent&quot;: &quot;event&quot;,
-            &quot;deleteComponent&quot;: &quot;event&quot;,
-            &quot;createBehavior&quot;: &quot;event&quot;,
-            &quot;updateBehavior&quot;: &quot;event&quot;,
-            &quot;deleteBehavior&quot;: &quot;event&quot;,
-            &quot;_inherit&quot;: [
-                &quot;RuntimeComponentSchema&quot;
-            ],
-            &quot;_core&quot;: true,
-            &quot;send&quot;: &quot;event&quot;
-        },
-        &quot;RuntimeChannel&quot;: {
-            &quot;_id&quot;: &quot;RuntimeChannel&quot;,
+        &quot;135c71078810af2&quot;: {
+            &quot;_id&quot;: &quot;135c71078810af2&quot;,
             &quot;_name&quot;: &quot;RuntimeChannel&quot;,
-            &quot;_schema&quot;: &quot;RuntimeChannelSchema&quot;,
+            &quot;_schema&quot;: &quot;RuntimeChannel&quot;,
             &quot;_inherit&quot;: [
                 &quot;RuntimeComponent&quot;,
                 &quot;RuntimeComponent&quot;
@@ -366,20 +320,9 @@ var system = {
                 }]
             }
         },
-        &quot;RuntimeSchema&quot;: {
-            &quot;load&quot;: &quot;method&quot;,
-            &quot;ready&quot;: &quot;event&quot;,
-            &quot;_id&quot;: &quot;RuntimeSchema&quot;,
-            &quot;_name&quot;: &quot;RuntimeSchema&quot;,
-            &quot;_inherit&quot;: [
-                &quot;RuntimeComponentSchema&quot;
-            ],
-            &quot;_core&quot;: true,
-            &quot;version&quot;: &quot;property&quot;,
-            &quot;system&quot;: &quot;method&quot;,
-            &quot;warning&quot;: &quot;event&quot;
-        },
-        &quot;Runtime&quot;: {
+        &quot;14c7c105b31a160&quot;: {
+            &quot;_id&quot;: &quot;14c7c105b31a160&quot;,
+            &quot;_name&quot;: &quot;Runtime&quot;,
             &quot;load&quot;: {
                 &quot;params&quot;: [{
                     &quot;name&quot;: &quot;url&quot;,
@@ -392,9 +335,7 @@ var system = {
                 }]
             },
             &quot;ready&quot;: {},
-            &quot;_id&quot;: &quot;Runtime&quot;,
-            &quot;_name&quot;: &quot;Runtime&quot;,
-            &quot;_schema&quot;: &quot;RuntimeSchema&quot;,
+            &quot;_schema&quot;: &quot;Runtime&quot;,
             &quot;_inherit&quot;: [
                 &quot;RuntimeComponent&quot;
             ],
@@ -420,10 +361,9 @@ var system = {
                 &quot;result&quot;: &quot;object&quot;
             }
         },
-        &quot;RuntimeBehavior&quot;: {
-            &quot;_id&quot;: &quot;RuntimeBehavior&quot;,
+        &quot;178bf13d3315f22&quot;: {
             &quot;_name&quot;: &quot;RuntimeBehavior&quot;,
-            &quot;_schema&quot;: &quot;RuntimeBehaviorSchema&quot;,
+            &quot;_schema&quot;: &quot;RuntimeBehavior&quot;,
             &quot;_inherit&quot;: [
                 &quot;RuntimeComponent&quot;
             ],
@@ -457,25 +397,12 @@ var system = {
                 &quot;readOnly&quot;: false,
                 &quot;mandatory&quot;: true,
                 &quot;default&quot;: &quot;&quot;
-            }
+            },
+            &quot;_id&quot;: &quot;178bf13d3315f22&quot;
         },
-        &quot;RuntimeBehaviorSchema&quot;: {
-            &quot;_id&quot;: &quot;RuntimeBehaviorSchema&quot;,
-            &quot;_name&quot;: &quot;RuntimeBehaviorSchema&quot;,
-            &quot;_inherit&quot;: [
-                &quot;RuntimeComponentSchema&quot;
-            ],
-            &quot;_core&quot;: true,
-            &quot;core&quot;: &quot;property&quot;,
-            &quot;component&quot;: &quot;property&quot;,
-            &quot;action&quot;: &quot;property&quot;,
-            &quot;state&quot;: &quot;property&quot;,
-            &quot;useCoreAPI&quot;: &quot;property&quot;
-        },
-        &quot;RuntimeClassInfo&quot;: {
-            &quot;_id&quot;: &quot;RuntimeClassInfo&quot;,
+        &quot;13d721ad2816817&quot;: {
             &quot;_name&quot;: &quot;RuntimeClassInfo&quot;,
-            &quot;_schema&quot;: &quot;RuntimeClassInfoSchema&quot;,
+            &quot;_schema&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;_inherit&quot;: [
                 &quot;RuntimeComponent&quot;
             ],
@@ -541,32 +468,12 @@ var system = {
             },
             &quot;events&quot;: {
                 &quot;result&quot;: &quot;array&quot;
-            }
+            },
+            &quot;_id&quot;: &quot;13d721ad2816817&quot;
         },
-        &quot;RuntimeClassInfoSchema&quot;: {
-            &quot;_id&quot;: &quot;RuntimeClassInfoSchema&quot;,
-            &quot;_name&quot;: &quot;RuntimeClassInfoSchema&quot;,
-            &quot;_inherit&quot;: [
-                &quot;RuntimeComponentSchema&quot;
-            ],
-            &quot;_core&quot;: true,
-            &quot;model&quot;: &quot;property&quot;,
-            &quot;metamodel&quot;: &quot;property&quot;,
-            &quot;method&quot;: &quot;method&quot;,
-            &quot;methods&quot;: &quot;method&quot;,
-            &quot;property&quot;: &quot;method&quot;,
-            &quot;properties&quot;: &quot;method&quot;,
-            &quot;link&quot;: &quot;method&quot;,
-            &quot;links&quot;: &quot;method&quot;,
-            &quot;collections&quot;: &quot;method&quot;,
-            &quot;collection&quot;: &quot;method&quot;,
-            &quot;event&quot;: &quot;method&quot;,
-            &quot;events&quot;: &quot;method&quot;
-        },
-        &quot;RuntimeComponent&quot;: {
-            &quot;_id&quot;: &quot;RuntimeComponent&quot;,
+        &quot;1338519dc91d08a&quot;: {
             &quot;_name&quot;: &quot;RuntimeComponent&quot;,
-            &quot;_schema&quot;: &quot;RuntimeComponentSchema&quot;,
+            &quot;_schema&quot;: &quot;RuntimeComponent&quot;,
             &quot;_core&quot;: true,
             &quot;on&quot;: {
                 &quot;params&quot;: [{
@@ -618,24 +525,12 @@ var system = {
                     &quot;name&quot;: &quot;data&quot;,
                     &quot;type&quot;: &quot;errorParam&quot;
                 }]
-            }
+            },
+            &quot;_id&quot;: &quot;1338519dc91d08a&quot;
         },
-        &quot;RuntimeComponentSchema&quot;: {
-            &quot;_id&quot;: &quot;RuntimeComponentSchema&quot;,
-            &quot;_name&quot;: &quot;RuntimeComponentSchema&quot;,
-            &quot;_core&quot;: true,
-            &quot;classInfo&quot;: &quot;property&quot;,
-            &quot;on&quot;: &quot;method&quot;,
-            &quot;off&quot;: &quot;method&quot;,
-            &quot;require&quot;: &quot;method&quot;,
-            &quot;destroy&quot;: &quot;method&quot;,
-            &quot;init&quot;: &quot;method&quot;,
-            &quot;error&quot;: &quot;event&quot;
-        },
-        &quot;RuntimeDatabase&quot;: {
-            &quot;_id&quot;: &quot;RuntimeDatabase&quot;,
+        &quot;182b419ab71a897&quot;: {
             &quot;_name&quot;: &quot;RuntimeDatabase&quot;,
-            &quot;_schema&quot;: &quot;RuntimeDatabaseSchema&quot;,
+            &quot;_schema&quot;: &quot;RuntimeDatabase&quot;,
             &quot;_inherit&quot;: [
                 &quot;RuntimeComponent&quot;
             ],
@@ -690,26 +585,12 @@ var system = {
                     &quot;name&quot;: &quot;object&quot;,
                     &quot;type&quot;: &quot;string&quot;
                 }]
-            }
+            },
+            &quot;_id&quot;: &quot;182b419ab71a897&quot;
         },
-        &quot;RuntimeDatabaseSchema&quot;: {
-            &quot;_id&quot;: &quot;RuntimeDatabaseSchema&quot;,
-            &quot;_name&quot;: &quot;RuntimeDatabaseSchema&quot;,
-            &quot;_inherit&quot;: [
-                &quot;RuntimeComponentSchema&quot;
-            ],
-            &quot;_core&quot;: true,
-            &quot;system&quot;: &quot;method&quot;,
-            &quot;subsystem&quot;: &quot;method&quot;,
-            &quot;collections&quot;: &quot;method&quot;,
-            &quot;insert&quot;: &quot;event&quot;,
-            &quot;update&quot;: &quot;event&quot;,
-            &quot;remove&quot;: &quot;event&quot;
-        },
-        &quot;RuntimeMessage&quot;: {
-            &quot;_id&quot;: &quot;RuntimeMessage&quot;,
+        &quot;1e5721f15d16315&quot;: {
             &quot;_name&quot;: &quot;RuntimeMessage&quot;,
-            &quot;_schema&quot;: &quot;RuntimeMessageSchema&quot;,
+            &quot;_schema&quot;: &quot;RuntimeMessage&quot;,
             &quot;_core&quot;: true,
             &quot;event&quot;: {
                 &quot;type&quot;: &quot;string&quot;,
@@ -728,20 +609,12 @@ var system = {
                 &quot;readOnly&quot;: false,
                 &quot;mandatory&quot;: true,
                 &quot;default&quot;: []
-            }
+            },
+            &quot;_id&quot;: &quot;1e5721f15d16315&quot;
         },
-        &quot;RuntimeMessageSchema&quot;: {
-            &quot;_id&quot;: &quot;RuntimeMessageSchema&quot;,
-            &quot;_name&quot;: &quot;RuntimeMessageSchema&quot;,
-            &quot;_core&quot;: true,
-            &quot;event&quot;: &quot;property&quot;,
-            &quot;from&quot;: &quot;property&quot;,
-            &quot;data&quot;: &quot;property&quot;
-        },
-        &quot;RuntimeMetamodel&quot;: {
-            &quot;_id&quot;: &quot;RuntimeMetamodel&quot;,
+        &quot;1936d1421811edf&quot;: {
             &quot;_name&quot;: &quot;RuntimeMetamodel&quot;,
-            &quot;_schema&quot;: &quot;RuntimeMetamodelSchema&quot;,
+            &quot;_schema&quot;: &quot;RuntimeMetamodel&quot;,
             &quot;_inherit&quot;: [
                 &quot;RuntimeComponent&quot;
             ],
@@ -749,6 +622,12 @@ var system = {
             &quot;schema&quot;: {
                 &quot;params&quot;: [{
                     &quot;name&quot;: &quot;schema&quot;,
+                    &quot;type&quot;: &quot;object&quot;
+                }]
+            },
+            &quot;model&quot;: {
+                &quot;params&quot;: [{
+                    &quot;name&quot;: &quot;model&quot;,
                     &quot;type&quot;: &quot;object&quot;
                 }]
             },
@@ -760,23 +639,12 @@ var system = {
             },
             &quot;create&quot;: {
                 &quot;params&quot;: []
-            }
+            },
+            &quot;_id&quot;: &quot;1936d1421811edf&quot;
         },
-        &quot;RuntimeMetamodelSchema&quot;: {
-            &quot;_id&quot;: &quot;RuntimeMetamodelSchema&quot;,
-            &quot;_name&quot;: &quot;RuntimeMetamodelSchema&quot;,
-            &quot;_inherit&quot;: [
-                &quot;RuntimeComponentSchema&quot;
-            ],
-            &quot;_core&quot;: true,
-            &quot;schema&quot;: &quot;method&quot;,
-            &quot;type&quot;: &quot;method&quot;,
-            &quot;create&quot;: &quot;method&quot;
-        },
-        &quot;RuntimeState&quot;: {
-            &quot;_id&quot;: &quot;RuntimeState&quot;,
+        &quot;150011aeec1c76a&quot;: {
             &quot;_name&quot;: &quot;RuntimeState&quot;,
-            &quot;_schema&quot;: &quot;RuntimeStateSchema&quot;,
+            &quot;_schema&quot;: &quot;RuntimeState&quot;,
             &quot;_class&quot;: false,
             &quot;_core&quot;: true,
             &quot;name&quot;: {
@@ -790,19 +658,12 @@ var system = {
                 &quot;readOnly&quot;: false,
                 &quot;mandatory&quot;: false,
                 &quot;default&quot;: {}
-            }
+            },
+            &quot;_id&quot;: &quot;150011aeec1c76a&quot;
         },
-        &quot;RuntimeStateSchema&quot;: {
-            &quot;_id&quot;: &quot;RuntimeStateSchema&quot;,
-            &quot;_name&quot;: &quot;RuntimeStateSchema&quot;,
-            &quot;_core&quot;: true,
-            &quot;name&quot;: &quot;property&quot;,
-            &quot;parameters&quot;: &quot;property&quot;
-        },
-        &quot;RuntimeSystem&quot;: {
-            &quot;_id&quot;: &quot;RuntimeSystem&quot;,
+        &quot;1dbab15c5616d63&quot;: {
             &quot;_name&quot;: &quot;RuntimeSystem&quot;,
-            &quot;_schema&quot;: &quot;RuntimeSystemSchema&quot;,
+            &quot;_schema&quot;: &quot;RuntimeSystem&quot;,
             &quot;_inherit&quot;: [
                 &quot;RuntimeComponent&quot;
             ],
@@ -843,6 +704,12 @@ var system = {
                 &quot;mandatory&quot;: false,
                 &quot;default&quot;: {}
             },
+            &quot;models&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;readOnly&quot;: false,
+                &quot;mandatory&quot;: false,
+                &quot;default&quot;: {}
+            },
             &quot;behaviors&quot;: {
                 &quot;type&quot;: &quot;object&quot;,
                 &quot;readOnly&quot;: false,
@@ -863,13 +730,160 @@ var system = {
             },
             &quot;ready&quot;: {},
             &quot;sync&quot;: {},
-            &quot;main&quot;: {}
-        },
-        &quot;RuntimeSystemSchema&quot;: {
-            &quot;_id&quot;: &quot;RuntimeSystemSchema&quot;,
-            &quot;_name&quot;: &quot;RuntimeSystemSchema&quot;,
+            &quot;main&quot;: {},
+            &quot;_id&quot;: &quot;1dbab15c5616d63&quot;
+        }
+    },
+    &quot;schemas&quot;: {
+        &quot;155ab18d911ad9f&quot;: {
+            &quot;_id&quot;: &quot;155ab18d911ad9f&quot;,
+            &quot;_name&quot;: &quot;Worker&quot;,
             &quot;_inherit&quot;: [
-                &quot;RuntimeComponentSchema&quot;
+                &quot;RuntimeComponent&quot;
+            ],
+            &quot;_core&quot;: true,
+            &quot;worker&quot;: &quot;property&quot;,
+            &quot;send&quot;: &quot;method&quot;
+        },
+        &quot;10374180581a41f&quot;: {
+            &quot;_id&quot;: &quot;10374180581a41f&quot;,
+            &quot;_name&quot;: &quot;RuntimeAdmin&quot;,
+            &quot;_inherit&quot;: [
+                &quot;RuntimeComponent&quot;
+            ],
+            &quot;_core&quot;: true,
+            &quot;start&quot;: &quot;method&quot;,
+            &quot;stop&quot;: &quot;method&quot;
+        },
+        &quot;104ad1f48518376&quot;: {
+            &quot;_id&quot;: &quot;104ad1f48518376&quot;,
+            &quot;_name&quot;: &quot;RuntimeChannel&quot;,
+            &quot;sync&quot;: &quot;event&quot;,
+            &quot;loadSystem&quot;: &quot;event&quot;,
+            &quot;createSchema&quot;: &quot;event&quot;,
+            &quot;updateSchema&quot;: &quot;event&quot;,
+            &quot;deleteSchema&quot;: &quot;event&quot;,
+            &quot;createModel&quot;: &quot;event&quot;,
+            &quot;updateModel&quot;: &quot;event&quot;,
+            &quot;deleteModel&quot;: &quot;event&quot;,
+            &quot;createType&quot;: &quot;event&quot;,
+            &quot;updateType&quot;: &quot;event&quot;,
+            &quot;deleteType&quot;: &quot;event&quot;,
+            &quot;createComponent&quot;: &quot;event&quot;,
+            &quot;updateComponent&quot;: &quot;event&quot;,
+            &quot;deleteComponent&quot;: &quot;event&quot;,
+            &quot;createBehavior&quot;: &quot;event&quot;,
+            &quot;updateBehavior&quot;: &quot;event&quot;,
+            &quot;deleteBehavior&quot;: &quot;event&quot;,
+            &quot;_inherit&quot;: [
+                &quot;RuntimeComponent&quot;
+            ],
+            &quot;_core&quot;: true,
+            &quot;send&quot;: &quot;event&quot;
+        },
+        &quot;12e211d4cd120a6&quot;: {
+            &quot;_id&quot;: &quot;12e211d4cd120a6&quot;,
+            &quot;_name&quot;: &quot;Runtime&quot;,
+            &quot;load&quot;: &quot;method&quot;,
+            &quot;ready&quot;: &quot;event&quot;,
+            &quot;_inherit&quot;: [
+                &quot;RuntimeComponent&quot;
+            ],
+            &quot;_core&quot;: true,
+            &quot;version&quot;: &quot;property&quot;,
+            &quot;system&quot;: &quot;method&quot;,
+            &quot;warning&quot;: &quot;event&quot;
+        },
+        &quot;178ff1c35e1c7ad&quot;: {
+            &quot;_name&quot;: &quot;RuntimeBehavior&quot;,
+            &quot;_inherit&quot;: [
+                &quot;RuntimeComponent&quot;
+            ],
+            &quot;_core&quot;: true,
+            &quot;core&quot;: &quot;property&quot;,
+            &quot;component&quot;: &quot;property&quot;,
+            &quot;action&quot;: &quot;property&quot;,
+            &quot;state&quot;: &quot;property&quot;,
+            &quot;useCoreAPI&quot;: &quot;property&quot;,
+            &quot;_id&quot;: &quot;178ff1c35e1c7ad&quot;
+        },
+        &quot;1501515df51734e&quot;: {
+            &quot;_name&quot;: &quot;RuntimeClassInfo&quot;,
+            &quot;_inherit&quot;: [
+                &quot;RuntimeComponent&quot;
+            ],
+            &quot;_core&quot;: true,
+            &quot;model&quot;: &quot;property&quot;,
+            &quot;metamodel&quot;: &quot;property&quot;,
+            &quot;method&quot;: &quot;method&quot;,
+            &quot;methods&quot;: &quot;method&quot;,
+            &quot;property&quot;: &quot;method&quot;,
+            &quot;properties&quot;: &quot;method&quot;,
+            &quot;link&quot;: &quot;method&quot;,
+            &quot;links&quot;: &quot;method&quot;,
+            &quot;collections&quot;: &quot;method&quot;,
+            &quot;collection&quot;: &quot;method&quot;,
+            &quot;event&quot;: &quot;method&quot;,
+            &quot;events&quot;: &quot;method&quot;,
+            &quot;_id&quot;: &quot;1501515df51734e&quot;
+        },
+        &quot;1f95d1b3ae10d5e&quot;: {
+            &quot;_name&quot;: &quot;RuntimeComponent&quot;,
+            &quot;_core&quot;: true,
+            &quot;classInfo&quot;: &quot;property&quot;,
+            &quot;on&quot;: &quot;method&quot;,
+            &quot;off&quot;: &quot;method&quot;,
+            &quot;require&quot;: &quot;method&quot;,
+            &quot;destroy&quot;: &quot;method&quot;,
+            &quot;init&quot;: &quot;method&quot;,
+            &quot;error&quot;: &quot;event&quot;,
+            &quot;_id&quot;: &quot;1f95d1b3ae10d5e&quot;
+        },
+        &quot;1a3d311a5714874&quot;: {
+            &quot;_name&quot;: &quot;RuntimeDatabase&quot;,
+            &quot;_inherit&quot;: [
+                &quot;RuntimeComponent&quot;
+            ],
+            &quot;_core&quot;: true,
+            &quot;system&quot;: &quot;method&quot;,
+            &quot;subsystem&quot;: &quot;method&quot;,
+            &quot;collections&quot;: &quot;method&quot;,
+            &quot;insert&quot;: &quot;event&quot;,
+            &quot;update&quot;: &quot;event&quot;,
+            &quot;remove&quot;: &quot;event&quot;,
+            &quot;_id&quot;: &quot;1a3d311a5714874&quot;
+        },
+        &quot;1e117115d017d4d&quot;: {
+            &quot;_name&quot;: &quot;RuntimeMessage&quot;,
+            &quot;_core&quot;: true,
+            &quot;event&quot;: &quot;property&quot;,
+            &quot;from&quot;: &quot;property&quot;,
+            &quot;data&quot;: &quot;property&quot;,
+            &quot;_id&quot;: &quot;1e117115d017d4d&quot;
+        },
+        &quot;1eb16129ec1cc15&quot;: {
+            &quot;_name&quot;: &quot;RuntimeMetamodel&quot;,
+            &quot;_inherit&quot;: [
+                &quot;RuntimeComponent&quot;
+            ],
+            &quot;_core&quot;: true,
+            &quot;schema&quot;: &quot;method&quot;,
+            &quot;model&quot;: &quot;method&quot;,
+            &quot;type&quot;: &quot;method&quot;,
+            &quot;create&quot;: &quot;method&quot;,
+            &quot;_id&quot;: &quot;1eb16129ec1cc15&quot;
+        },
+        &quot;17a8e1b52912f55&quot;: {
+            &quot;_name&quot;: &quot;RuntimeState&quot;,
+            &quot;_core&quot;: true,
+            &quot;name&quot;: &quot;property&quot;,
+            &quot;parameters&quot;: &quot;property&quot;,
+            &quot;_id&quot;: &quot;17a8e1b52912f55&quot;
+        },
+        &quot;1c65d1b6fb1786c&quot;: {
+            &quot;_name&quot;: &quot;RuntimeSystem&quot;,
+            &quot;_inherit&quot;: [
+                &quot;RuntimeComponent&quot;
             ],
             &quot;_core&quot;: true,
             &quot;name&quot;: &quot;property&quot;,
@@ -878,12 +892,14 @@ var system = {
             &quot;version&quot;: &quot;property&quot;,
             &quot;description&quot;: &quot;property&quot;,
             &quot;schemas&quot;: &quot;property&quot;,
+            &quot;models&quot;: &quot;property&quot;,
             &quot;behaviors&quot;: &quot;property&quot;,
             &quot;types&quot;: &quot;property&quot;,
             &quot;components&quot;: &quot;property&quot;,
             &quot;sync&quot;: &quot;method&quot;,
             &quot;main&quot;: &quot;method&quot;,
-            &quot;ready&quot;: &quot;event&quot;
+            &quot;ready&quot;: &quot;event&quot;,
+            &quot;_id&quot;: &quot;1c65d1b6fb1786c&quot;
         }
     },
     &quot;types&quot;: {
@@ -1071,7 +1087,7 @@ var system = {
             &quot;_id&quot;: &quot;1c00c107e01c9b3&quot;,
             &quot;component&quot;: &quot;RuntimeAdmin&quot;,
             &quot;state&quot;: &quot;start&quot;,
-            &quot;action&quot;: &quot;function start(path) {\n    var Worker = null,\n    worker = null,\n    workerPath = &#x27;&#x27;,\n    RuntimeChannel = null,\n    runtimeChannel = null;\n    \n    if (path) {\n        workerPath = path + &#x27;/scripts/worker.js&#x27;;\n        workerPath = workerPath.replace(/\\/\\//g,&#x27;/&#x27;);\n    } else {\n        workerPath = &#x27;/designer/scripts/worker.js&#x27;;\n    }\n    \n    if (typeof SharedWorker !== &#x27;undefined&#x27;) {\n        \n        if (!this.require(&#x27;channel-admin&#x27;)) {\n            RuntimeChannel = this.require(&#x27;RuntimeChannel&#x27;);\n            runtimeChannel = new RuntimeChannel({\n                &#x27;_id&#x27;: &#x27;channel-admin&#x27;,\n                &#x27;_core&#x27;: true\n            });\n            \n            runtimeChannel.on(&#x27;send&#x27;, function send(message) {\n                this.require(&#x27;worker-admin&#x27;).worker().port.postMessage(message);\n            });\n            \n            // schema change events\n            runtimeChannel.on(&#x27;createSchema&#x27;, function createSchema(id, schema) {\n                this.require(&#x27;metamodel&#x27;).schema(schema);\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;updateSchema&#x27;, function updateSchema(id, schema) {\n                 this.require(&#x27;metamodel&#x27;).type(schema);\n                 this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;deleteSchema&#x27;, function deleteSchema(id) {\n                $db[&#x27;RuntimeSchema&#x27;].remove({&#x27;_id&#x27;: id});\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            // model change events\n            runtimeChannel.on(&#x27;createModel&#x27;, function createModel(id, model) {\n                this.require(&#x27;metamodel&#x27;).schema(model);\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;updateModel&#x27;, function updateModel(id, model) {\n                 this.require(&#x27;metamodel&#x27;).type(model);\n                 this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;deleteModel&#x27;, function deleteModel(id) {\n                $db[&#x27;RuntimeSchema&#x27;].remove({&#x27;_id&#x27;: id});\n                this.require(&#x27;metamodel&#x27;).create();\n                $component.removeFromMemory(id);\n            }, true);\n            \n            // type change events\n            runtimeChannel.on(&#x27;createType&#x27;, function createType(id, type) {\n                this.require(&#x27;metamodel&#x27;).type(type);\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;updateType&#x27;, function updateType(id, type) {\n                 this.require(&#x27;metamodel&#x27;).type(type);\n                 this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;deleteType&#x27;, function deleteType(id) {\n                $db[&#x27;RuntimeType&#x27;].remove({&#x27;_id&#x27;: id});\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            // component change events\n            runtimeChannel.on(&#x27;createComponent&#x27;, function createComponent(model, component) {\n                $db[model].insert(component);\n            }, true);\n            \n            runtimeChannel.on(&#x27;updateComponent&#x27;, function updateComponent(id, collection, component) {\n                $db[collection].update({&#x27;_id&#x27;: id}, component);\n            }, true);\n            \n            runtimeChannel.on(&#x27;deleteComponent&#x27;, function deleteComponent(id, collection) {\n                $db[collection].remove({&#x27;_id&#x27;: id});\n            }, true);\n            \n            // behavior change events\n            runtimeChannel.on(&#x27;createBehavior&#x27;, function createBehavior(component) {\n                $db[&#x27;RuntimeBehavior&#x27;].insert(component);\n            }, true);\n            runtimeChannel.on(&#x27;updateBehavior&#x27;, function updateBehavior(id, behavior) {\n                this.require(id).action(behavior.action);\n            });\n            runtimeChannel.on(&#x27;deleteBehavior&#x27;, function deleteBehavior(id) {\n                $db[&#x27;RuntimeBehavior&#x27;].remove({&#x27;_id&#x27;: id});                  \n            }, true);\n         \n            // System Designer event\n            runtimeChannel.on(&#x27;sync&#x27;, function sync() {\n                this.loadSystem(JSON.parse(this.require(&#x27;db&#x27;).system()));\n            });\n    \n            Worker = this.require(&#x27;Worker&#x27;);\n            worker = new Worker({\n                &#x27;_id&#x27;: &#x27;worker-admin&#x27;,\n                &#x27;_core&#x27;: true,\n                &#x27;worker&#x27;: new SharedWorker(workerPath),\n            });\n            \n            worker.worker().port.onmessage = function (e) {\n              $db.RuntimeMessage.insert(e.data);\n            };\n            \n            console.info(&#x27;runtime: admin is started&#x27;);\n        } else {\n            console.info(&#x27;runtime: admin is already started&#x27;);\n        }\n    } else {\n        console.info(&#x27;runtime: the browser can not run admin features&#x27;);\n    }\n}&quot;,
+            &quot;action&quot;: &quot;function start(path) {\n    var Worker = null,\n    worker = null,\n    workerPath = &#x27;&#x27;,\n    RuntimeChannel = null,\n    runtimeChannel = null;\n    \n    if (path) {\n        workerPath = path + &#x27;/scripts/worker.js&#x27;;\n        workerPath = workerPath.replace(/\\/\\//g,&#x27;/&#x27;);\n    } else {\n        workerPath = &#x27;/designer/scripts/worker.js&#x27;;\n    }\n    \n    if (typeof SharedWorker !== &#x27;undefined&#x27;) {\n        \n        if (!this.require(&#x27;channel-admin&#x27;)) {\n            RuntimeChannel = this.require(&#x27;RuntimeChannel&#x27;);\n            runtimeChannel = new RuntimeChannel({\n                &#x27;_id&#x27;: &#x27;channel-admin&#x27;,\n                &#x27;_core&#x27;: true\n            });\n            \n            runtimeChannel.on(&#x27;send&#x27;, function send(message) {\n                this.require(&#x27;worker-admin&#x27;).worker().port.postMessage(message);\n            });\n            \n            // schema change events\n            runtimeChannel.on(&#x27;createSchema&#x27;, function createSchema(id, schema) {\n                this.require(&#x27;metamodel&#x27;).schema(schema);\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;updateSchema&#x27;, function updateSchema(id, schema) {\n                 this.require(&#x27;metamodel&#x27;).type(schema);\n                 this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;deleteSchema&#x27;, function deleteSchema(id) {\n                $db[&#x27;Runtime&#x27;].remove({&#x27;_id&#x27;: id});\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            // model change events\n            runtimeChannel.on(&#x27;createModel&#x27;, function createModel(id, model) {\n                this.require(&#x27;metamodel&#x27;).schema(model);\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;updateModel&#x27;, function updateModel(id, model) {\n                 this.require(&#x27;metamodel&#x27;).type(model);\n                 this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;deleteModel&#x27;, function deleteModel(id) {\n                $db[&#x27;Runtime&#x27;].remove({&#x27;_id&#x27;: id});\n                this.require(&#x27;metamodel&#x27;).create();\n                $component.removeFromMemory(id);\n            }, true);\n            \n            // type change events\n            runtimeChannel.on(&#x27;createType&#x27;, function createType(id, type) {\n                this.require(&#x27;metamodel&#x27;).type(type);\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;updateType&#x27;, function updateType(id, type) {\n                 this.require(&#x27;metamodel&#x27;).type(type);\n                 this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            runtimeChannel.on(&#x27;deleteType&#x27;, function deleteType(id) {\n                $db[&#x27;RuntimeType&#x27;].remove({&#x27;_id&#x27;: id});\n                this.require(&#x27;metamodel&#x27;).create();\n            }, true);\n            \n            // component change events\n            runtimeChannel.on(&#x27;createComponent&#x27;, function createComponent(model, component) {\n                $db[model].insert(component);\n            }, true);\n            \n            runtimeChannel.on(&#x27;updateComponent&#x27;, function updateComponent(id, collection, component) {\n                $db[collection].update({&#x27;_id&#x27;: id}, component);\n            }, true);\n            \n            runtimeChannel.on(&#x27;deleteComponent&#x27;, function deleteComponent(id, collection) {\n                $db[collection].remove({&#x27;_id&#x27;: id});\n            }, true);\n            \n            // behavior change events\n            runtimeChannel.on(&#x27;createBehavior&#x27;, function createBehavior(component) {\n                $db[&#x27;RuntimeBehavior&#x27;].insert(component);\n            }, true);\n            runtimeChannel.on(&#x27;updateBehavior&#x27;, function updateBehavior(id, behavior) {\n                this.require(id).action(behavior.action);\n            });\n            runtimeChannel.on(&#x27;deleteBehavior&#x27;, function deleteBehavior(id) {\n                $db[&#x27;RuntimeBehavior&#x27;].remove({&#x27;_id&#x27;: id});                  \n            }, true);\n         \n            // System Designer event\n            runtimeChannel.on(&#x27;sync&#x27;, function sync() {\n                this.loadSystem(JSON.parse(this.require(&#x27;db&#x27;).system()));\n            });\n    \n            Worker = this.require(&#x27;Worker&#x27;);\n            worker = new Worker({\n                &#x27;_id&#x27;: &#x27;worker-admin&#x27;,\n                &#x27;_core&#x27;: true,\n                &#x27;worker&#x27;: new SharedWorker(workerPath),\n            });\n            \n            worker.worker().port.onmessage = function (e) {\n              $db.RuntimeMessage.insert(e.data);\n            };\n            \n            console.info(&#x27;runtime: admin is started&#x27;);\n        } else {\n            console.info(&#x27;runtime: admin is already started&#x27;);\n        }\n    } else {\n        console.info(&#x27;runtime: the browser can not run admin features&#x27;);\n    }\n}&quot;,
             &quot;useCoreAPI&quot;: true,
             &quot;core&quot;: true
         },
@@ -1106,172 +1122,180 @@ var system = {
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1ed84139b91a4d6&quot;: {
-            &quot;_id&quot;: &quot;1ed84139b91a4d6&quot;,
+        &quot;1bf9d16bf91afb5&quot;: {
+            &quot;_id&quot;: &quot;1bf9d16bf91afb5&quot;,
             &quot;component&quot;: &quot;Runtime&quot;,
             &quot;state&quot;: &quot;error&quot;,
             &quot;action&quot;: &quot;function error(data) {\n    console.error(&#x27;runtime: &#x27; + data.message, data.error);\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;167d5108df1e663&quot;: {
-            &quot;_id&quot;: &quot;167d5108df1e663&quot;,
+        &quot;11b7a15ac315959&quot;: {
+            &quot;_id&quot;: &quot;11b7a15ac315959&quot;,
             &quot;component&quot;: &quot;Runtime&quot;,
             &quot;state&quot;: &quot;system&quot;,
             &quot;action&quot;: &quot;function system(name) {\n    var System = null,\n    system = {},\n    systemId = &#x27;&#x27;,\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        System = this.require(&#x27;RuntimeSystem&#x27;);\n        system = new System(conf);\n    } else {\n        result = $db.RuntimeSystem.find({\n            &#x27;master&#x27;: true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;112fa1c2ce10dbc&quot;: {
-            &quot;_id&quot;: &quot;112fa1c2ce10dbc&quot;,
+        &quot;1d33619dc81b60b&quot;: {
+            &quot;_id&quot;: &quot;1d33619dc81b60b&quot;,
             &quot;component&quot;: &quot;Runtime&quot;,
             &quot;state&quot;: &quot;warning&quot;,
             &quot;action&quot;: &quot;function warning(message) {\n    console.warn(&#x27;runtime: &#x27; + message);\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;18460125071f76d&quot;: {
-            &quot;_id&quot;: &quot;18460125071f76d&quot;,
+        &quot;16622160b110e27&quot;: {
+            &quot;_id&quot;: &quot;16622160b110e27&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;collection&quot;,
             &quot;action&quot;: &quot;function collection(name) {\n    var result = {};\n    if (this.metamodel()[name] === &#x27;collection&#x27;) {\n        result = this.model()[name];\n    } \n    \n    return result; \n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;12905142381cf59&quot;: {
-            &quot;_id&quot;: &quot;12905142381cf59&quot;,
+        &quot;1d95c1916c14034&quot;: {
+            &quot;_id&quot;: &quot;1d95c1916c14034&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;collections&quot;,
             &quot;action&quot;: &quot;function collections() {\n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length; \n    \n    for (i = 0; i &lt; length; i++) { \n        item = keys[i]; \n        if (this.metamodel()[item] === &#x27;collection&#x27;) {\n            result.push(item);\n        }\n    }\n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;180751695118a25&quot;: {
-            &quot;_id&quot;: &quot;180751695118a25&quot;,
+        &quot;1f65a188551164c&quot;: {
+            &quot;_id&quot;: &quot;1f65a188551164c&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;event&quot;,
             &quot;action&quot;: &quot;function event(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === &#x27;event&#x27;) {\n        result = this.model()[name];\n    } \n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;196df1f3d31a02b&quot;: {
-            &quot;_id&quot;: &quot;196df1f3d31a02b&quot;,
+        &quot;1822a1702e1eb93&quot;: {
+            &quot;_id&quot;: &quot;1822a1702e1eb93&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;events&quot;,
             &quot;action&quot;: &quot;function events() {\n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length;\n    \n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;event&#x27;) {\n            result.push(item);\n        }\n    } \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1d78e19f1410de5&quot;: {
-            &quot;_id&quot;: &quot;1d78e19f1410de5&quot;,
+        &quot;18a061336314c83&quot;: {
+            &quot;_id&quot;: &quot;18a061336314c83&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;link&quot;,
             &quot;action&quot;: &quot;function link(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === &#x27;link&#x27;) {\n        result = this.model()[name];\n    }\n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1c22a1edde11ece&quot;: {
-            &quot;_id&quot;: &quot;1c22a1edde11ece&quot;,
+        &quot;1c06d191e21b00c&quot;: {
+            &quot;_id&quot;: &quot;1c06d191e21b00c&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;links&quot;,
             &quot;action&quot;: &quot;function links() { \n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;link&#x27;) {\n            result.push(item);\n        }\n    } return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1d1f513dbf1fbd5&quot;: {
-            &quot;_id&quot;: &quot;1d1f513dbf1fbd5&quot;,
+        &quot;1154a1923b1fd35&quot;: {
+            &quot;_id&quot;: &quot;1154a1923b1fd35&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;method&quot;,
             &quot;action&quot;: &quot;function method(name) {\n    var result = {};\n    if (this.metamodel()[name] === &#x27;method&#x27;) {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;184821c1241f9ec&quot;: {
-            &quot;_id&quot;: &quot;184821c1241f9ec&quot;,
+        &quot;173001afa91d041&quot;: {
+            &quot;_id&quot;: &quot;173001afa91d041&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;methods&quot;,
             &quot;action&quot;: &quot;function methods() {\n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;method&#x27;) {\n            result.push(item);\n        }\n    } \n    \n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1208a1fc0e12af7&quot;: {
-            &quot;_id&quot;: &quot;1208a1fc0e12af7&quot;,
+        &quot;17241117391afed&quot;: {
+            &quot;_id&quot;: &quot;17241117391afed&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;properties&quot;,
             &quot;action&quot;: &quot;function properties() { \n    var keys = Object.keys(this.metamodel()),\n    item = &#x27;&#x27;,\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i &lt; length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === &#x27;property&#x27;) {\n            result.push(item);\n        }\n    } return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1457a1423e17dc1&quot;: {
-            &quot;_id&quot;: &quot;1457a1423e17dc1&quot;,
+        &quot;16c39146e41ebbe&quot;: {
+            &quot;_id&quot;: &quot;16c39146e41ebbe&quot;,
             &quot;component&quot;: &quot;RuntimeClassInfo&quot;,
             &quot;state&quot;: &quot;property&quot;,
             &quot;action&quot;: &quot;function property(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === &#x27;property&#x27;) {\n        result = this.model()[name];\n    }\n    return result;\n}&quot;,
             &quot;core&quot;: true
         },
-        &quot;1e12718b5a1ba9d&quot;: {
-            &quot;_id&quot;: &quot;1e12718b5a1ba9d&quot;,
+        &quot;153241d25312889&quot;: {
+            &quot;_id&quot;: &quot;153241d25312889&quot;,
             &quot;component&quot;: &quot;RuntimeComponent&quot;,
             &quot;state&quot;: &quot;destroy&quot;,
             &quot;action&quot;: &quot;function destroy() {\n    $component.destroy(this.id());\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;143cc11cff14239&quot;: {
-            &quot;_id&quot;: &quot;143cc11cff14239&quot;,
+        &quot;11abb1a981122c8&quot;: {
+            &quot;_id&quot;: &quot;11abb1a981122c8&quot;,
             &quot;component&quot;: &quot;RuntimeComponent&quot;,
             &quot;state&quot;: &quot;off&quot;,
             &quot;action&quot;: &quot;function off(state, behaviorId) {\n    var args = [],\n    i = 0,\n    length = 0;\n    length = arguments.length;\n    \n    for (i = 0; i &lt; length - 6; i++) {\n        args.push(arguments[i]);\n    }\n    \n    if ($workflow.checkParams({\n        \&quot;component\&quot;: this, \n        \&quot;methodName\&quot;: \&quot;off\&quot;, \n        \&quot;args\&quot;: args\n        })) {\n        \n        if (state || behaviorId) {\n            if ($metamodel.isValidState(state, this.constructor.name)) {\n                $behavior.remove({\n                    \&quot;behaviorId\&quot;: behaviorId, \n                    \&quot;componentId\&quot;: this.id(), \n                    \&quot;state\&quot;: state\n                });\n            } else { \n                console.warn(\&quot;runtime: invoke \\&#x27;off\\&#x27; method of component &#x27;\&quot; + this.id() + \&quot;&#x27; with an invalid state &#x27;\&quot; + state + \&quot;&#x27;\&quot;); \n            }\n        } else {\n            $behavior.remove({\n                \&quot;componentId\&quot;: this.id()\n            });\n        }\n    }\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;112781d1c81d904&quot;: {
-            &quot;_id&quot;: &quot;112781d1c81d904&quot;,
+        &quot;1d0921944d10077&quot;: {
+            &quot;_id&quot;: &quot;1d0921944d10077&quot;,
             &quot;component&quot;: &quot;RuntimeComponent&quot;,
             &quot;state&quot;: &quot;require&quot;,
             &quot;action&quot;: &quot;function require(id) {\n    return $component.get(id);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1916e1ccf810a92&quot;: {
-            &quot;_id&quot;: &quot;1916e1ccf810a92&quot;,
+        &quot;1e5ef126d21597e&quot;: {
+            &quot;_id&quot;: &quot;1e5ef126d21597e&quot;,
             &quot;component&quot;: &quot;RuntimeDatabase&quot;,
             &quot;state&quot;: &quot;collections&quot;,
             &quot;action&quot;: &quot;function collections() {\n    var result = {},\n    collectionName = &#x27;&#x27;;\n    \n    for (collectionName in $db.store) {\n        if ($db.store.hasOwnProperty(collectionName) &amp;&amp; collectionName.indexOf(&#x27;Runtime&#x27;) !== 0) {\n            result[collectionName] = $db[collectionName];\n            \n        }\n    }\n    return result;\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1af20102a81445e&quot;: {
-            &quot;_id&quot;: &quot;1af20102a81445e&quot;,
+        &quot;1f2d21dada1e879&quot;: {
+            &quot;_id&quot;: &quot;1f2d21dada1e879&quot;,
             &quot;component&quot;: &quot;RuntimeDatabase&quot;,
             &quot;state&quot;: &quot;subsystem&quot;,
             &quot;action&quot;: &quot;function subsystem(params) {\n    return $db.subsystem(params);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1151f1a0211d9fd&quot;: {
-            &quot;_id&quot;: &quot;1151f1a0211d9fd&quot;,
+        &quot;1363317bdf142bb&quot;: {
+            &quot;_id&quot;: &quot;1363317bdf142bb&quot;,
             &quot;component&quot;: &quot;RuntimeDatabase&quot;,
             &quot;state&quot;: &quot;system&quot;,
             &quot;action&quot;: &quot;function system(system) {\n    return $db.system(system);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;104c3199c316519&quot;: {
-            &quot;_id&quot;: &quot;104c3199c316519&quot;,
+        &quot;1f06e1759f14677&quot;: {
+            &quot;_id&quot;: &quot;1f06e1759f14677&quot;,
             &quot;component&quot;: &quot;RuntimeMetamodel&quot;,
             &quot;state&quot;: &quot;create&quot;,
             &quot;action&quot;: &quot;function create() {\n    $metamodel.create();\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1710b1b08a1b665&quot;: {
-            &quot;_id&quot;: &quot;1710b1b08a1b665&quot;,
+        &quot;1f17e14b8615a04&quot;: {
+            &quot;_id&quot;: &quot;1f17e14b8615a04&quot;,
+            &quot;component&quot;: &quot;RuntimeMetamodel&quot;,
+            &quot;state&quot;: &quot;model&quot;,
+            &quot;action&quot;: &quot;function model(model) {\n    $metamodel.model(model);\n}&quot;,
+            &quot;core&quot;: true,
+            &quot;useCoreAPI&quot;: true
+        },
+        &quot;1da7f1b555164a2&quot;: {
+            &quot;_id&quot;: &quot;1da7f1b555164a2&quot;,
             &quot;component&quot;: &quot;RuntimeMetamodel&quot;,
             &quot;state&quot;: &quot;schema&quot;,
             &quot;action&quot;: &quot;function schema(schema) {\n    $metamodel.schema(schema);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;12df717c5015705&quot;: {
-            &quot;_id&quot;: &quot;12df717c5015705&quot;,
+        &quot;1bb7f166411e983&quot;: {
+            &quot;_id&quot;: &quot;1bb7f166411e983&quot;,
             &quot;component&quot;: &quot;RuntimeMetamodel&quot;,
             &quot;state&quot;: &quot;type&quot;,
             &quot;action&quot;: &quot;function type(type) {\n    $metamodel.type(type);\n}&quot;,
             &quot;core&quot;: true,
             &quot;useCoreAPI&quot;: true
         },
-        &quot;1e45918c2e10e96&quot;: {
-            &quot;_id&quot;: &quot;1e45918c2e10e96&quot;,
+        &quot;1446b1e83812ae2&quot;: {
+            &quot;_id&quot;: &quot;1446b1e83812ae2&quot;,
             &quot;component&quot;: &quot;RuntimeSystem&quot;,
             &quot;state&quot;: &quot;sync&quot;,
             &quot;action&quot;: &quot;function sync() {\n    var system = JSON.parse($db.system());\n    \n    this.schemas(system.schemas);\n    this.types(system.types);\n    this.behaviors(system.behaviors);\n    this.components(system.components);\n}&quot;,
@@ -1289,7 +1313,7 @@ var system = {
         &quot;Runtime&quot;: {
             &quot;runtime&quot;: {
                 &quot;_id&quot;: &quot;runtime&quot;,
-                &quot;version&quot;: &quot;1.0.2&quot;
+                &quot;version&quot;: &quot;1.1.0&quot;
             }
         },
         &quot;RuntimeDatabase&quot;: {
@@ -1306,7 +1330,7 @@ var system = {
             &quot;18ed81de331252c&quot;: {
                 &quot;_id&quot;: &quot;18ed81de331252c&quot;,
                 &quot;name&quot;: &quot;system-admin&quot;,
-                &quot;version&quot;: &quot;0.1.1&quot;,
+                &quot;version&quot;: &quot;0.2.0&quot;,
                 &quot;description&quot;: &quot;Runtime Component administration &quot;,
                 &quot;subsystem&quot;: true,
                 &quot;master&quot;: false
@@ -1330,7 +1354,7 @@ var system = {
         }
     },
     &quot;name&quot;: &quot;runtime&quot;,
-    &quot;version&quot;: &quot;1.0.2&quot;,
+    &quot;version&quot;: &quot;1.1.0&quot;,
     &quot;description&quot;: &quot;Runtime&quot;,
     &quot;_id&quot;: &quot;e89c617b6b15d24&quot;,
     &quot;master&quot;: false,

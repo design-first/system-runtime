@@ -1,0 +1,64 @@
+{
+    "_name": "RuntimeComponent",
+    "_schema": "RuntimeComponent",
+    "_core": true,
+    "on": {
+        "params": [{
+                "name": "state",
+                "type": "string"
+            },
+            {
+                "name": "handler",
+                "type": "function"
+            },
+            {
+                "name": "useCoreAPI",
+                "type": "boolean",
+                "mandatory": false
+            }
+        ]
+    },
+    "off": {
+        "params": [{
+                "name": "state",
+                "type": "string",
+                "mandatory": false
+            },
+            {
+                "name": "behaviorId",
+                "type": "string",
+                "mandatory": false
+            }
+        ]
+    },
+    "require": {
+        "params": [{
+                "name": "id",
+                "type": "string"
+            }
+        ]
+    },
+    "destroy": {
+        "params": []
+    },
+    "classInfo": {
+        "type": "@RuntimeClassInfo",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "init": {
+        "params": [{
+                "name": "conf",
+                "type": "object"
+            }
+        ]
+    },
+    "error": {
+        "params": [{
+                "name": "data",
+                "type": "errorParam"
+            }
+        ]
+    }
+}

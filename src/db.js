@@ -64,7 +64,8 @@ var store = {},
     internalDB = [
         'Runtime',
         'RuntimeSchema',
-        'RuntimeExtendedSchema',
+        'RuntimeModel',
+        'RuntimeGeneratedModel',
         'RuntimeBehavior',
         'RuntimeState',
         'RuntimeType',
@@ -77,7 +78,8 @@ var store = {},
     ],
     coreDb = [
         'RuntimeSchema',
-        'RuntimeExtendedSchema',
+        'RuntimeModel',
+        'RuntimeGeneratedModel',
         'RuntimeState',
         'RuntimeType'
     ];
@@ -104,8 +106,10 @@ function dump() {
         type = null,
         behavior = null,
         schema = null,
+        model = null,
         collection = null,
         schemaId = '',
+        modelId = '',
         length = 0,
         i = 0,
         id = '';
@@ -117,6 +121,17 @@ function dump() {
             schema = JSON.parse(JSON.stringify(store.RuntimeSchema[schemaId]));
             if (!schema._core) {
                 dbDump.schemas[schemaId] = schema;
+            }
+        }
+    }
+    
+    // models
+    dbDump.models = {};
+    if (exports.RuntimeModel.count()) {
+        for (modelId in store.RuntimeModel) {
+            model = JSON.parse(JSON.stringify(store.RuntimeModel[modelId]));
+            if (!model._core) {
+                dbDump.models[modelId] = model;
             }
         }
     }
@@ -159,7 +174,7 @@ function dump() {
                     delete collection[id];
                 }
             }
-            
+
             if (Object.keys(collection).length) {
                 dbDump.components[collectionName] = collection;
             }
@@ -214,7 +229,7 @@ function contains(source, target) {
  * @param {String} name name of the new collection
  */
 var RuntimeDatabaseCollection = function(name) {
-    if ($metamodel.get(name) || internalDB.indexOf(name) !== -1) {
+    if ($metamodel.getSchema(name) || internalDB.indexOf(name) !== -1) {
         store[name] = {};
         this.name = name;
         if (internalDB.indexOf(name) === -1) {
@@ -308,9 +323,10 @@ RuntimeDatabaseCollection.prototype.insert = function(document) {
 
         switch (true) {
             case this.name === 'RuntimeSchema':
+            case this.name === 'RuntimeModel':
             case this.name === 'RuntimeType':
-            case this.name === 'RuntimeExtendedSchema':
-            case $metamodel.isValidObject(obj, $metamodel.get(this.name)):
+            case this.name === 'RuntimeGeneratedModel':
+            case $metamodel.isValidObject(obj, $metamodel.getModel(this.name)):
 
                 if (typeof obj._id === 'undefined') {
                     obj._id = $helper.generateId();
@@ -379,7 +395,7 @@ RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
         i = 0,
         length = docs.length,
         attributeName = '',
-        schema = $metamodel.get(this.name),
+        schema = $metamodel.getModel(this.name),
         type = '';
 
     options = options || {};
@@ -406,7 +422,7 @@ RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
 
             for (attributeName in update) {
                 if (typeof docs[i][attributeName] !== 'undefined') {
-                    if (this.name !== 'RuntimeSchema') {
+                    if (this.name !== 'RuntimeSchema' && this.name !== 'RuntimeModel') {
                         // check type
                         type = '';
                         if (attributeName.indexOf('_') !== 0) {
@@ -573,6 +589,7 @@ function system(importedSystem) {
         componentId = '',
         typeName = '',
         schemaName = '',
+        modelName = '',
         behaviorId = '',
         systems = [],
         id = null,
@@ -591,6 +608,11 @@ function system(importedSystem) {
         // add schemas
         for (schemaName in importedSystem.schemas) {
             $metamodel.schema(importedSystem.schemas[schemaName]);
+        }
+
+        // add models
+        for (modelName in importedSystem.models) {
+            $metamodel.model(importedSystem.models[modelName]);
         }
 
         $metamodel.create();
@@ -631,16 +653,16 @@ function system(importedSystem) {
         });
 
         if (systems.length) {
-                        
+
             mastersystem = systems[0];
             id = mastersystem._id;
-            
+
             // prop
             exportedSystem._id = id;
             exportedSystem.name = mastersystem.name;
             exportedSystem.description = mastersystem.description;
             exportedSystem.version = mastersystem.version;
-            
+
             // dump
             dbDump = dump();
             for (collectionName in dbDump) {
@@ -655,7 +677,7 @@ function system(importedSystem) {
                     behavior.component = id;
                 }
             }
-            
+
             result = JSON.stringify(exportedSystem);
         } else {
             $log.masterSystemNotFound();
@@ -686,6 +708,7 @@ function subsystem(params) {
         length = 0,
         schema = null,
         type = null,
+        model = null,
         behavior = null,
         component = null,
         className = '';
@@ -714,6 +737,20 @@ function subsystem(params) {
             schema = result[i];
             if (!schema._core) {
                 system.schemas[schema._id] = schema;
+            }
+        }
+    }
+
+    // models
+    system.models = {};
+    if (params.models) {
+        result = exports.RuntimeModel.find(params.models);
+
+        length = result.length;
+        for (i = 0; i < length; i++) {
+            model = result[i];
+            if (!model._core) {
+                system.models[model._id] = model;
             }
         }
     }

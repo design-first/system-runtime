@@ -25,7 +25,7 @@
  * SOFTWARE. 
  */
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
@@ -126,7 +126,7 @@ module.exports = function (grunt) {
         concat: {
             systemInfos: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '';
 
                         function generateId() {
@@ -149,7 +149,7 @@ module.exports = function (grunt) {
             },
             systemBehaviors: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '',
                             uuid = '',
                             behaviors = {};
@@ -182,18 +182,29 @@ module.exports = function (grunt) {
             },
             systemSchemas: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '',
                             uuid = '',
                             schemas = {};
+
+                        function generateId() {
+                            function gen() {
+                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                            }
+                            return gen() + gen() + gen();
+                        }
 
                         if (filepath.indexOf('build') !== -1) {
                             grunt.option('schemas', {});
                             result = src + '\n"schemas" : {},';
                         } else {
                             uuid = JSON.parse(src)._id;
+                            if (typeof uuid === 'undefined') {
+                                uuid = generateId();
+                            }
                             schemas = grunt.option('schemas');
                             schemas[uuid] = JSON.parse(src);
+                            schemas[uuid]._id = uuid;
                         }
                         return result;
                     }
@@ -202,9 +213,42 @@ module.exports = function (grunt) {
                     'build/runtime.json': ['build/runtime.json', 'src/system/schemas/*.json']
                 }
             },
+            systemModels: {
+                options: {
+                    process: function(src, filepath) {
+                        var result = '',
+                            uuid = '',
+                            models = {};
+
+                        function generateId() {
+                            function gen() {
+                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                            }
+                            return gen() + gen() + gen();
+                        }
+
+                        if (filepath.indexOf('build') !== -1) {
+                            grunt.option('models', {});
+                            result = src + '\n"models" : {},';
+                        } else {
+                            uuid = JSON.parse(src)._id;
+                            if (typeof uuid === 'undefined') {
+                                uuid = generateId();
+                            }
+                            models = grunt.option('models');
+                            models[uuid] = JSON.parse(src);
+                            models[uuid]._id = uuid;
+                        }
+                        return result;
+                    }
+                },
+                files: {
+                    'build/runtime.json': ['build/runtime.json', 'src/system/models/*.json']
+                }
+            },
             systemTypes: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '',
                             uuid = '',
                             types = {};
@@ -226,7 +270,7 @@ module.exports = function (grunt) {
             },
             systemComponents: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '',
                             uuid = '',
                             collectionName = '',
@@ -260,15 +304,16 @@ module.exports = function (grunt) {
             },
             systemFill: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var system = {};
 
                         system = JSON.parse(src);
                         system.components = grunt.option('components');
                         system.schemas = grunt.option('schemas');
+                        system.models = grunt.option('models');
                         system.types = grunt.option('types');
                         system.behaviors = grunt.option('behaviors');
-                        
+
                         // process addon in order to insert subsytem                 
                         system.components.RuntimeSystem = {};
 
@@ -303,7 +348,7 @@ module.exports = function (grunt) {
             },
             licence: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '';
 
                         // ID & version
@@ -346,6 +391,7 @@ module.exports = function (grunt) {
         'concat:systemInfos',
         'concat:systemBehaviors',
         'concat:systemSchemas',
+        'concat:systemModels',
         'concat:systemTypes',
         'concat:systemComponents',
         'concat:systemFill'
@@ -393,7 +439,7 @@ module.exports = function (grunt) {
         'karma:runtime',
         'yuidoc'
     ]);
-    
+
     // build task
     grunt.registerTask('build-json', [
         'browserify:runtimeDebug',

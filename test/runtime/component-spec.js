@@ -10,9 +10,8 @@ describe('a component', function () {
         var metamodel = runtime.require('metamodel');
 
         metamodel.schema({
-            '_id': 'PersonSchema',
-            '_name': 'PersonSchema',
-            '_inherit': ['RuntimeComponentSchema'],
+            '_name': 'Person',
+            '_inherit': ['RuntimeComponent'],
             'description': 'string',
             'children': 'collection',
             'firstName': 'property',
@@ -22,10 +21,9 @@ describe('a component', function () {
             'moving': 'event'
         });
 
-        metamodel.schema({
-            '_id': 'Person',
+        metamodel.model({
             '_name': 'Person',
-            '_schema': 'PersonSchema',
+            '_schema': 'Person',
             '_inherit': ['RuntimeComponent'],
             'description': 'a person',
             'children': {

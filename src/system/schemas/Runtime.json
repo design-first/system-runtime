@@ -1,33 +1,11 @@
 {
-    "_id": "Runtime",
+    "_id": "12e211d4cd120a6",
     "_name": "Runtime",
-    "_schema": "RuntimeSchema",
     "_inherit": [
         "RuntimeComponent"
     ],
     "_core": true,
-    "version": {
-        "type": "string",
-        "readOnly": true,
-        "mandatory": true,
-        "default": "0.0.0"
-    },
-    "warning": {
-        "params": [
-            {
-                "name": "message",
-                "type": "string"
-            }
-        ]
-    },
-    "system": {
-        "params": [
-            {
-                "name": "name",
-                "type": "string",
-                "mandatory": false
-            }
-        ],
-        "result": "object"
-    }
+    "version": "property",
+    "system": "method",
+    "warning": "event"
 }

@@ -1,8 +1,0 @@
-{
-    "_id": "RuntimeMessageSchema",
-    "_name": "RuntimeMessageSchema",
-    "_core": true,
-    "event": "property",
-    "from": "property",
-    "data": "property"
-}

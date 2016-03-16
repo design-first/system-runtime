@@ -44,6 +44,7 @@ Runtime will automatically serialize it into JSON:
   "description": "",
   "version": "0.0.1",
   "schemas": {},
+  "models": {},
   "types": {},
   "behaviors": {
     "1ea9c1d5f811ae1": {

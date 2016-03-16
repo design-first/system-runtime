@@ -1,9 +1,0 @@
-{
-    "_id": "RuntimeMetamodelSchema",
-    "_name": "RuntimeMetamodelSchema",
-    "_inherit": ["RuntimeComponentSchema"],
-    "_core": true,
-    "schema": "method",
-    "type": "method",
-    "create": "method"
-}

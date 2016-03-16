@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.0.2</b>
+                    API Docs for Version: <b>1.1.0</b>
                 </p>
             </li>
         </div>
@@ -110,9 +110,10 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 			<ul>
 				<li><a href="#method-clear"><span class="im">clear</span>()</a></li>
 				<li><a href="#method-create"><span class="im">create</span>()</a></li>
-				<li><a href="#method-get"><span class="im">get</span>(<span class="ia">id</span>)</a></li>
 				<li><a href="#method-getMetaDef"><span class="im">getMetaDef</span>()</a></li>
+				<li><a href="#method-getModel"><span class="im">getModel</span>(<span class="ia">name</span>)</a></li>
 				<li><a href="#method-getParents"><span class="im">getParents</span>(<span class="ia">id</span>)</a></li>
+				<li><a href="#method-getSchema"><span class="im">getSchema</span>(<span class="ia">name</span>)</a></li>
 				<li><a href="#method-inheritFrom"><span class="im">inheritFrom</span>(<span class="ia">name</span><span class="ia">parentName</span>)</a></li>
 				<li><a href="#method-init"><span class="im">init</span>()</a></li>
 				<li><a href="#method-isCollection"><span class="im">isCollection</span>(<span class="ia">name</span><span class="ia">id</span>)</a></li>
@@ -124,6 +125,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 				<li><a href="#method-isValidObject"><span class="im">isValidObject</span>(<span class="ia">object</span><span class="ia">schema</span><span class="ia">strict</span><span class="ia">cleanRef</span>)</a></li>
 				<li><a href="#method-isValidState"><span class="im">isValidState</span>(<span class="ia">name</span><span class="ia">id</span>)</a></li>
 				<li><a href="#method-isValidType"><span class="im">isValidType</span>(<span class="ia">object</span><span class="ia">type</span>)</a></li>
+				<li><a href="#method-model"><span class="im">model</span>(<span class="ia">importedModel</span>)</a></li>
 				<li><a href="#method-prepareObject"><span class="im">prepareObject</span>(<span class="ia">object</span><span class="ia">schema</span>)</a></li>
 				<li><a href="#method-schema"><span class="im">schema</span>(<span class="ia">importedSchema</span>)</a></li>
 				<li><a href="#method-type"><span class="im">type</span>(<span class="ia">importedType</span>)</a></li>
@@ -156,7 +158,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1552"><code>src&#x2F;metamodel.js:1552</code></a>
+		<a href="../files/src_metamodel.js.html#l1781"><code>src&#x2F;metamodel.js:1781</code></a>
 		</p>
 
 
@@ -184,7 +186,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1575"><code>src&#x2F;metamodel.js:1575</code></a>
+		<a href="../files/src_metamodel.js.html#l1812"><code>src&#x2F;metamodel.js:1812</code></a>
 		</p>
 
 
@@ -195,67 +197,6 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 </div>
 
 
-
-</div>
-<div id="method-get" class="method item">
-	<div class="method-signature">
-	<span class="name"><code>get</code></span>
-
-		<div class="args">
-			<span class="paren">(</span><ul class="args-list inline commas">
-				<li class="arg">
-						<code>id</code>
-				</li>
-			</ul><span class="paren">)</span>
-		</div>
-		<span class="returns-inline">
-			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-		</span>
-	</div>
-
-
-
-
-
-
-	<div class="meta">
-				<p>
-				Defined in
-		<a href="../files/src_metamodel.js.html#l1582"><code>src&#x2F;metamodel.js:1582</code></a>
-		</p>
-
-
-
-	</div>
-
-	<div class="description"><p>Get a schema.</p>
-</div>
-
-		<div class="params">
-			<h4>Parameters:</h4>
-
-			<ul class="params-list">
-				<li class="param">
-						<code class="param-name">id</code>
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-
-					<div class="param-description"><p>id of the schema</p>
-</div>
-
-				</li>
-			</ul>
-		</div>
-
-		<div class="returns">
-			<h4>Returns:</h4>
-
-			<div class="returns-description">
-						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
-					<p>the schema</p>
-
-			</div>
-		</div>
 
 </div>
 <div id="method-getMetaDef" class="method item">
@@ -276,7 +217,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1591"><code>src&#x2F;metamodel.js:1591</code></a>
+		<a href="../files/src_metamodel.js.html#l1837"><code>src&#x2F;metamodel.js:1837</code></a>
 		</p>
 
 
@@ -293,6 +234,67 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 			<div class="returns-description">
 						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
 					<p>the metadefinition of the metamodel</p>
+
+			</div>
+		</div>
+
+</div>
+<div id="method-getModel" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>getModel</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>name</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+		<span class="returns-inline">
+			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+		</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+				<p>
+				Defined in
+		<a href="../files/src_metamodel.js.html#l1828"><code>src&#x2F;metamodel.js:1828</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Get a model.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">name</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>name of the model</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+		<div class="returns">
+			<h4>Returns:</h4>
+
+			<div class="returns-description">
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+					<p>the model</p>
 
 			</div>
 		</div>
@@ -322,7 +324,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1599"><code>src&#x2F;metamodel.js:1599</code></a>
+		<a href="../files/src_metamodel.js.html#l1845"><code>src&#x2F;metamodel.js:1845</code></a>
 		</p>
 
 
@@ -359,6 +361,67 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 		</div>
 
 </div>
+<div id="method-getSchema" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>getSchema</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>name</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+		<span class="returns-inline">
+			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+		</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+				<p>
+				Defined in
+		<a href="../files/src_metamodel.js.html#l1819"><code>src&#x2F;metamodel.js:1819</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Get a schema.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">name</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>name of the schema</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+		<div class="returns">
+			<h4>Returns:</h4>
+
+			<div class="returns-description">
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+					<p>the schema</p>
+
+			</div>
+		</div>
+
+</div>
 <div id="method-inheritFrom" class="method item">
 	<div class="method-signature">
 	<span class="name"><code>inheritFrom</code></span>
@@ -386,7 +449,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1608"><code>src&#x2F;metamodel.js:1608</code></a>
+		<a href="../files/src_metamodel.js.html#l1854"><code>src&#x2F;metamodel.js:1854</code></a>
 		</p>
 
 
@@ -447,7 +510,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1545"><code>src&#x2F;metamodel.js:1545</code></a>
+		<a href="../files/src_metamodel.js.html#l1774"><code>src&#x2F;metamodel.js:1774</code></a>
 		</p>
 
 
@@ -487,7 +550,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1701"><code>src&#x2F;metamodel.js:1701</code></a>
+		<a href="../files/src_metamodel.js.html#l1947"><code>src&#x2F;metamodel.js:1947</code></a>
 		</p>
 
 
@@ -560,7 +623,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1671"><code>src&#x2F;metamodel.js:1671</code></a>
+		<a href="../files/src_metamodel.js.html#l1917"><code>src&#x2F;metamodel.js:1917</code></a>
 		</p>
 
 
@@ -633,7 +696,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1691"><code>src&#x2F;metamodel.js:1691</code></a>
+		<a href="../files/src_metamodel.js.html#l1937"><code>src&#x2F;metamodel.js:1937</code></a>
 		</p>
 
 
@@ -706,7 +769,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1711"><code>src&#x2F;metamodel.js:1711</code></a>
+		<a href="../files/src_metamodel.js.html#l1957"><code>src&#x2F;metamodel.js:1957</code></a>
 		</p>
 
 
@@ -779,7 +842,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1681"><code>src&#x2F;metamodel.js:1681</code></a>
+		<a href="../files/src_metamodel.js.html#l1927"><code>src&#x2F;metamodel.js:1927</code></a>
 		</p>
 
 
@@ -852,7 +915,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1651"><code>src&#x2F;metamodel.js:1651</code></a>
+		<a href="../files/src_metamodel.js.html#l1897"><code>src&#x2F;metamodel.js:1897</code></a>
 		</p>
 
 
@@ -931,7 +994,7 @@ Runtime metamodel loads schemas and types, analyzes them and creates the compone
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1618"><code>src&#x2F;metamodel.js:1618</code></a>
+		<a href="../files/src_metamodel.js.html#l1864"><code>src&#x2F;metamodel.js:1864</code></a>
 		</p>
 
 
@@ -1024,7 +1087,7 @@ with the definition of the class.</p>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1661"><code>src&#x2F;metamodel.js:1661</code></a>
+		<a href="../files/src_metamodel.js.html#l1907"><code>src&#x2F;metamodel.js:1907</code></a>
 		</p>
 
 
@@ -1097,7 +1160,7 @@ with the definition of the class.</p>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1641"><code>src&#x2F;metamodel.js:1641</code></a>
+		<a href="../files/src_metamodel.js.html#l1887"><code>src&#x2F;metamodel.js:1887</code></a>
 		</p>
 
 
@@ -1143,6 +1206,55 @@ with the definition of the class.</p>
 		</div>
 
 </div>
+<div id="method-model" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>model</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>importedModel</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+				<p>
+				Defined in
+		<a href="../files/src_metamodel.js.html#l1796"><code>src&#x2F;metamodel.js:1796</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Add a new model.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">importedModel</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON" class="crosslink external" target="_blank">JSON</a></span>
+
+
+					<div class="param-description"><p>a mode to add</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+
+</div>
 <div id="method-prepareObject" class="method item">
 	<div class="method-signature">
 	<span class="name"><code>prepareObject</code></span>
@@ -1167,7 +1279,7 @@ with the definition of the class.</p>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1632"><code>src&#x2F;metamodel.js:1632</code></a>
+		<a href="../files/src_metamodel.js.html#l1878"><code>src&#x2F;metamodel.js:1878</code></a>
 		</p>
 
 
@@ -1225,7 +1337,7 @@ with the definition of the class.</p>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1559"><code>src&#x2F;metamodel.js:1559</code></a>
+		<a href="../files/src_metamodel.js.html#l1788"><code>src&#x2F;metamodel.js:1788</code></a>
 		</p>
 
 
@@ -1274,7 +1386,7 @@ with the definition of the class.</p>
 	<div class="meta">
 				<p>
 				Defined in
-		<a href="../files/src_metamodel.js.html#l1567"><code>src&#x2F;metamodel.js:1567</code></a>
+		<a href="../files/src_metamodel.js.html#l1804"><code>src&#x2F;metamodel.js:1804</code></a>
 		</p>
 
 

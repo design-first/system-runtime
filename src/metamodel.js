@@ -45,6 +45,7 @@ var $db = require('./db.js');
 var $log = require('./log.js');
 var $component = require('./component.js');
 var $workflow = require('./workflow.js');
+var $helper = require('./helper.js');
 
 
 /* Private properties */
@@ -65,17 +66,149 @@ var ID = '_id',
     defaultTypes = ['boolean', 'string', 'number', 'object', 'function', 'array'],
     store = {
         metadef: {},
-        catalog: {},
         inheritance: {},
         inheritanceTree: {},
-        model: {},
+        schemas: {},
+        compiledSchemas: {},
+        models: {},
+        generatedModels: {},
         states: {},
-        type: {},
-        implementation: {}
+        type: {}
     };
 
 
 /* Private methods */
+
+
+/*
+ * Generate the models.
+ * @method generateModels
+ * @private
+ */
+function generateModels() {
+    var att = '',
+        name = '',
+        schemaName = '',
+        schema = {},
+        modelName = '',
+        model = {},
+        models = {},
+        mergedModel = {},
+        parents = [],
+        length = 0,
+        i = 0;
+
+    for (schemaName in store.compiledSchemas) {
+        schema = store.compiledSchemas[schemaName];
+
+        // set model internal properties
+        model = {
+            "_name": schema._name,
+            "_schema": schema._name
+        };
+
+        // set _core
+        if (typeof schema._core !== 'undefined') {
+            model._core = schema._core;
+        }
+
+        // set inherit
+        if (Array.isArray(schema._inherit)) {
+            model._inherit = schema._inherit;
+        }
+
+        //  set model default values
+        for (att in schema) {
+            switch (true) {
+                case schema[att] === 'property':
+                    model[att] = {
+                        "type": "string",
+                        "readOnly": false,
+                        "mandatory": false,
+                        "default": ""
+                    };
+                    break;
+                case schema[att] === 'link':
+                    model[att] = {
+                        "type": "@RuntimeComponent",
+                        "readOnly": false,
+                        "mandatory": false,
+                        "default": {}
+                    };
+                    break;
+                case schema[att] === 'method':
+                    model[att] = {
+                        "params": [
+                            {
+                                "name": "param",
+                                "type": "string",
+                                "mandatory": false
+                            }
+                        ],
+                        "result": "string"
+                    };
+                    break;
+                case schema[att] === 'event':
+                    model[att] = {
+                        "params": [
+                            {
+                                "name": "param",
+                                "type": "string",
+                                "mandatory": false
+                            }
+                        ]
+                    };
+                    break;
+                case schema[att] === 'collection':
+                    model[att] = {
+                        "type": ["string"],
+                        "readOnly": false,
+                        "mandatory": false,
+                        "default": []
+                    };
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        store.generatedModels[model._name] = model;
+    }
+
+    for (modelName in store.generatedModels) {
+        model = store.generatedModels[modelName];
+        parents = model[INHERITS];
+
+        if (Array.isArray(parents)) {
+            length = parents.length;
+        } else {
+            length = 0;
+        }
+        for (i = 0; i < length; i++) {
+            name = parents[i];
+            models = $db.RuntimeModel.find({ '_name': name });
+            if (models.length) {
+                mergedModel = merge(models[0], model);
+                delete mergedModel._id;
+                store.generatedModels[name] = mergedModel;
+            }
+        }
+    }
+
+    for (modelName in store.generatedModels) {
+        model = store.generatedModels[modelName];
+        name = model[NAME];
+        models = $db.RuntimeModel.find({ '_name': name });
+        if (models.length) {
+            mergedModel = merge(models[0], model);
+            delete mergedModel._id;
+            store.generatedModels[name] = mergedModel;
+            $db.RuntimeModel.update({ '_name': name }, mergedModel);
+        } else {
+            $db.RuntimeModel.insert(model);
+        }
+    }
+}
 
 /*
  * Load schemas and types in memory.
@@ -86,20 +219,24 @@ function loadInMemory() {
     var schemas = [],
         types = [],
         schema = null,
+        model = {},
+        models = [],
         type = null,
         id = '',
+        name = '',
         inherit = '',
         i = 0,
         length = 0;
-        
+
     // init store
-    store.catalog = {};
     store.inheritance = {};
     store.inheritanceTree = {};
-    store.model = {};
+    store.schemas = {};
+    store.compiledSchemas = {};
+    store.models = {};
+    store.generatedModels = {};
     store.states = {};
     store.type = {};
-    store.implementation = {};
 
     // load schemas
     schemas = $db.RuntimeSchema.find({});
@@ -108,15 +245,26 @@ function loadInMemory() {
     for (i = 0; i < length; i++) {
         schema = schemas[i];
 
-        id = schema[ID];
+        name = schema[NAME];
         inherit = schema[INHERITS];
 
-        store.catalog[id] = schema;
+        store.schemas[name] = schema;
         if (inherit) {
-            store.inheritance[id] = inherit;
+            store.inheritance[name] = inherit;
         }
     }
-    
+
+    // load models
+    models = $db.RuntimeModel.find({});
+
+    length = models.length;
+    for (i = 0; i < length; i++) {
+        model = models[i];
+        name = model[NAME];
+
+        store.models[name] = model;
+    }
+
     // load types
     types = $db.RuntimeType.find({});
 
@@ -134,36 +282,35 @@ function loadInMemory() {
  * @private
  */
 function createInheritanceTree() {
-    var id = null,
-        ancestorId = null,
+    var name = '',
+        ancestorName = null,
         i = 0,
         nbParents = 0;
 
-    function _getAncestors(id, ancestorId) {
+    function _getAncestors(name, ancestorName) {
         var i = 0,
             nbParents = 0;
 
-        if (store.inheritance[ancestorId]) {
-            nbParents = store.inheritance[ancestorId].length;
+        if (store.inheritance[ancestorName]) {
+            nbParents = store.inheritance[ancestorName].length;
             if (nbParents) {
-                store.inheritanceTree[id] = store.inheritanceTree[id].concat(store.inheritance[ancestorId]);
+                store.inheritanceTree[name] = store.inheritanceTree[name].concat(store.inheritance[ancestorName]);
                 for (i = 0; i < nbParents; i++) {
-                    _getAncestors(id, store.inheritance[ancestorId][i]);
+                    _getAncestors(name, store.inheritance[ancestorName][i]);
                 }
             }
         }
     }
 
-    for (id in store.inheritance) {
-
-        nbParents = store.inheritance[id].length;
+    for (name in store.inheritance) {
+        nbParents = store.inheritance[name].length;
         if (nbParents) {
-            store.inheritanceTree[id] = store.inheritance[id];
+            store.inheritanceTree[name] = store.inheritance[name];
         }
         for (i = 0; i < nbParents; i++) {
-            ancestorId = store.inheritance[id][i];
+            ancestorName = store.inheritance[name][i];
 
-            _getAncestors(id, ancestorId);
+            _getAncestors(name, ancestorName);
         }
     }
 }
@@ -172,14 +319,14 @@ function createInheritanceTree() {
 /*
  * Extend a schema with the properties of its parent.
  * @method extend
- * @param {type} id id of the schema to extend
+ * @param {String} name name of the schema to extend
  * @return {JSON} object extended with the properties of its parent
  * @private
  */
-function extend(id) {
+function extend(name) {
     var sonExtend = {},
-        son = store.catalog[id],
-        ancestors = store.inheritanceTree[id],
+        son = store.schemas[name],
+        ancestors = store.inheritanceTree[name],
         length = 0,
         i = 0,
         ancestor = null,
@@ -190,7 +337,7 @@ function extend(id) {
         ancestors.reverse();
     }
     for (i = 0; i < length; i++) {
-        ancestor = store.catalog[ancestors[i]];
+        ancestor = store.schemas[ancestors[i]];
         for (prop in ancestor) {
             if (prop.indexOf('_') !== 0) {
                 sonExtend[prop] = ancestor[prop];
@@ -206,36 +353,35 @@ function extend(id) {
 
 /*
  * Add the models.
- * @method createModel
+ * @method compileSchemas
  * @private
  */
-function createModel() {
-    var id = '';
-    for (id in store.catalog) {
-        store.model[id] = extend(id);
+function compileSchemas() {
+    var name = '';
+    for (name in store.schemas) {
+        store.compiledSchemas[name] = extend(name);
     }
 }
 
 
 /*
- * Test if all the schema are compliants with their schemas.
- * @method checkImplementation
+ * Test if all the models are compliants with their schemas.
+ * @method checkModels
  * @private
  */
-function checkImplementation() {
-    var id = '',
+function checkModels() {
+    var name = '',
         classDef = null,
-        classImp = '';
+        schema = '';
 
-    for (id in store.model) {
-        classDef = store.model[id];
+    for (name in store.generatedModels) {
+        classDef = store.generatedModels[name];
         if (classDef && typeof classDef[SCHEMA] !== 'undefined') {
-            classImp = store.model[classDef[SCHEMA]];
-            if (classImp) {
-                checkImp(classDef, classImp);
-                store.implementation[classDef[ID]] = classImp[ID];
+            schema = store.compiledSchemas[classDef[SCHEMA]];
+            if (schema) {
+                checkImp(classDef, schema);
             } else {
-                $log.missingImplementation(classDef[SCHEMA], classDef[ID]);
+                $log.missingImplementation(classDef[SCHEMA], classDef[NAME]);
             }
         }
     }
@@ -243,20 +389,20 @@ function checkImplementation() {
 
 
 /*
- * Test if a schema is compliant with its schema.
- * @method checkStates
+ * Get all the states of a schema.
+ * @method getStates
  * @private
  */
-function checkStates() {
+function getStates() {
     var id = '',
         classDef = null,
         type = '',
         states = [],
         attribute = '';
 
-    for (id in store.model) {
+    for (id in store.compiledSchemas) {
         states = [];
-        classDef = store.model[id];
+        classDef = store.compiledSchemas[id];
         if (classDef && typeof classDef[SCHEMA] === 'undefined') {
             for (attribute in classDef) {
                 type = classDef[attribute];
@@ -290,10 +436,10 @@ function checkImp(classDef, classImp) {
             if (typeof classDef[property] !== 'undefined') {
                 value = classDef[property];
                 if (!checkSchema(value, classImp[property])) {
-                    $log.invalidTypeImp(property, classDef[ID]);
+                    $log.invalidTypeImp(property, classDef[NAME]);
                 }
             } else {
-                $log.missingPropertyImp(property, classDef[ID]);
+                $log.missingPropertyImp(property, classDef[NAME]);
             }
         }
     }
@@ -306,7 +452,7 @@ function checkImp(classDef, classImp) {
             property !== CLASS &&
             property !== CORE) {
             if (typeof classImp[property] === 'undefined') {
-                $log.unknownPropertyImp(property, classDef[ID]);
+                $log.unknownPropertyImp(property, classDef[NAME]);
             }
         }
     }
@@ -385,7 +531,8 @@ function checkCustomSchema(value, typeName) {
  */
 function initDbStructure() {
     $db.collection('RuntimeSchema');
-    $db.collection('RuntimeExtendedSchema');
+    $db.collection('RuntimeModel');
+    $db.collection('RuntimeGeneratedModel');
     $db.collection('RuntimeClassInfo');
     $db.collection('RuntimeBehavior');
     $db.collection('RuntimeState');
@@ -404,18 +551,18 @@ function createDbStructure() {
     var modelName = '',
         modelDef = {};
 
-    for (modelName in store.catalog) {
-        modelDef = store.catalog[modelName];
+    for (modelName in store.generatedModels) {
+        modelDef = store.generatedModels[modelName];
         if (typeof modelDef[SCHEMA] !== 'undefined' &&
-            typeof $db[modelDef[ID]] === 'undefined' &&
+            typeof $db[modelDef[NAME]] === 'undefined' &&
             modelDef[CLASS] !== false) {
-            $db.collection(modelDef[ID]);
+            $db.collection(modelDef[NAME]);
         }
     }
 
-    for (modelName in store.model) {
-        modelDef = store.model[modelName];
-        $db.RuntimeExtendedSchema.insert(modelDef);
+    for (modelName in store.generatedModels) {
+        modelDef = store.generatedModels[modelName];
+        $db.RuntimeGeneratedModel.insert(modelDef);
     }
 }
 
@@ -429,8 +576,8 @@ function createClass() {
     var modelName = '',
         modelDef = {};
 
-    for (modelName in store.model) {
-        modelDef = store.model[modelName];
+    for (modelName in store.generatedModels) {
+        modelDef = store.generatedModels[modelName];
         if (typeof modelDef[SCHEMA] !== 'undefined' && modelDef[CLASS] !== false) {
             $component.create({
                 "model": modelName
@@ -448,28 +595,28 @@ function createClass() {
 function createClassInfo() {
     var modelName = '',
         modelDef = {},
-        id = '';
+        name = '';
 
-    for (modelName in store.model) {
-        modelDef = store.model[modelName];
-        id = modelDef._id + 'Info';
+    for (modelName in store.generatedModels) {
+        modelDef = store.generatedModels[modelName];
+        name = modelDef[NAME] + 'Info';
 
         if (
             typeof modelDef[SCHEMA] !== 'undefined' &&
             modelDef[CLASS] !== false
-            ) {
-            if (!$component.get(id)) {
+        ) {
+            if (!$component.get(name)) {
                 $db.RuntimeClassInfo.insert({
-                    "_id": id,
-                    "metamodel": store.model[modelDef[SCHEMA]],
+                    "_id": name,
+                    "metamodel": store.compiledSchemas[modelDef[SCHEMA]],
                     "model": modelDef
                 });
             } else {
                 $db.RuntimeClassInfo.update({
-                    "_id": id
+                    "_id": name
                 }, {
-                        "_id": id,
-                        "metamodel": store.model[modelDef[SCHEMA]],
+                        "_id": name,
+                        "metamodel": store.compiledSchemas[modelDef[SCHEMA]],
                         "model": modelDef
                     });
             }
@@ -595,11 +742,11 @@ function hasType(value, type) {
  */
 function checkType(name, id, type) {
     var result = false,
-        componentSchema = store.model[id],
+        componentSchema = store.generatedModels[id],
         attributeType = '';
 
     if (componentSchema && componentSchema[SCHEMA]) {
-        componentSchema = store.model[componentSchema[SCHEMA]];
+        componentSchema = store.compiledSchemas[componentSchema[SCHEMA]];
     }
 
     if (componentSchema) {
@@ -617,9 +764,10 @@ function checkType(name, id, type) {
  * @method merge
  * @param {Object} source source schema
  * @param {Object} target target schema
+ * @param {Boolean} merge also private properties
  * @return {Object} merged schema
  */
-function merge(source, target) {
+function merge(source, target, all) {
     var propName = '',
         result = target;
 
@@ -644,6 +792,7 @@ function schema(importedSchema) {
         id = '',
         inherit = '',
         name = '',
+        mergedSchema = {},
         schemas = [];
 
     schema = JSON.parse(JSON.stringify(importedSchema));
@@ -652,29 +801,66 @@ function schema(importedSchema) {
     name = schema[NAME];
     inherit = schema[INHERITS];
 
-    // if no id, it will be the name by default
-    if (hasType(id, 'undefined')) {
-        id = name;
-        schema[ID] = name;
+    if (typeof schema[ID] === 'undefined') {
+        schema[ID] = $helper.generateId();
     }
 
     // check if schema is compliant with the meta meta model
     if (isValidObject(schema, store.metadef.schema, false)) {
-
-        schemas = $db.RuntimeSchema.find({ '_id': id });
+        schemas = $db.RuntimeSchema.find({ '_name': name });
         if (schemas.length) {
-            $db.RuntimeSchema.update({ '_id': id }, merge(schema, schemas[0]));
+            mergedSchema = merge(schema, schemas[0]);
+            delete mergedSchema._id;
+            $db.RuntimeSchema.update({ '_name': name }, mergedSchema);
         } else {
             $db.RuntimeSchema.insert(schema);
         }
     } else {
         $workflow.stop({
             "error": true,
-            "message": "the schema '" + JSON.stringify(importedSchema) + "' is not valid"
+            "message": "the schema '" + schema._name + "' is not valid"
         });
     }
 }
 
+
+/*
+ * Add a new model.
+ * @method model
+ * @param {JSON} importedModel model to add
+ */
+function model(importedModel) {
+    var model = null,
+        id = '',
+        inherit = '',
+        name = '',
+        mergedModel = {},
+        models = [];
+
+    model = JSON.parse(JSON.stringify(importedModel));
+    name = model[NAME];
+
+    if (typeof model[ID] === 'undefined') {
+        model[ID] = $helper.generateId();
+    }
+
+    // check if model is compliant with the meta meta model
+    if (isValidObject(model, store.metadef.model, false)) {
+        models = $db.RuntimeModel.find({ '_name': name });
+        if (models.length) {
+            mergedModel = merge(model, models[0]);
+            delete mergedModel._id;
+            $db.RuntimeModel.update({ '_name': name }, mergedModel);
+        } else {
+            $db.RuntimeModel.insert(model);
+        }
+    } else {
+        $workflow.stop({
+            "error": true,
+            "message": "the model '" + model._name + "' is not valid"
+        });
+    }
+}
 
 /*
  * Add a new type.
@@ -708,6 +894,32 @@ function init() {
     clear();
     store.metadef = {
         schema: {
+            "_id": {
+                "type": "string",
+                "mandatory": true
+            },
+            "_name": {
+                "type": "string",
+                "mandatory": true
+            },
+            "_inherit": {
+                "type": ["string"],
+                "mandatory": false
+            },
+            "_schema": {
+                "type": "string",
+                "mandatory": false
+            },
+            "_class": {
+                "type": "boolean",
+                "mandatory": false
+            },
+            "_core": {
+                "type": "boolean",
+                "mandatory": false
+            }
+        },
+        model: {
             "_id": {
                 "type": "string",
                 "mandatory": true
@@ -768,13 +980,14 @@ function init() {
 function clear() {
     store = {
         metadef: {},
-        catalog: {},
         inheritance: {},
         inheritanceTree: {},
-        model: {},
+        schemas: {},
+        compiledSchemas: {},
+        models: {},
+        generatedModels: {},
         states: {},
-        type: {},
-        implementation: {}
+        type: {}
     };
 }
 
@@ -786,9 +999,10 @@ function clear() {
 function create() {
     loadInMemory();
     createInheritanceTree();
-    createModel();
-    checkImplementation();
-    checkStates();
+    compileSchemas();
+    generateModels();
+    checkModels();
+    getStates();
     createDbStructure();
     createClass();
     createClassInfo();
@@ -864,13 +1078,13 @@ function isMethod(name, id) {
  */
 function isValidState(name, id) {
     var result = false,
-        componentSchema = store.model[id],
+        componentSchema = store.generatedModels[id],
         state = {};
 
     if (componentSchema && componentSchema[SCHEMA]) {
-        componentSchema = store.model[componentSchema[SCHEMA]];
+        componentSchema = store.generatedModels[componentSchema[SCHEMA]];
     }
-    state = store.states[componentSchema[ID]];
+    state = store.states[componentSchema[NAME]];
 
     if (Array.isArray(state)) {
         result = state.indexOf(name) !== -1;
@@ -904,7 +1118,7 @@ function isValidType(value, typeName) {
         }
         return isValid;
     }
-    
+
     /*
     * Check if an object is compliant with a type.
     * @return {Boolean} the object is compliant with the type
@@ -1332,7 +1546,7 @@ function isValidObject(object, schema, strict, cleanRef) {
         field = object[fieldName];
 
         if (!hasType(schema[fieldName], 'undefined') || fieldName === '_core') {
-            
+
             // case of _core
             if (fieldName !== '_core') {
                 typeSchema = schema[fieldName].type;
@@ -1411,14 +1625,29 @@ function prepareObject(object, schema) {
 
 /*
  * Get a schema.
- * @method get
- * @param {String} id of the schema
+ * @method getSchema
+ * @param {String} name of the schema
  * @return {Object} the schema
  */
-function get(id) {
+function getSchema(name) {
     var result = null;
-    if (store.model[id]) {
-        result = store.model[id];
+    if (store.compiledSchemas[name]) {
+        result = store.compiledSchemas[name];
+    }
+    return result;
+}
+
+
+/*
+ * Get a model.
+ * @method getModel
+ * @param {String} name of the model
+ * @return {Object} the model
+ */
+function getModel(name) {
+    var result = null;
+    if (store.generatedModels[name]) {
+        result = store.generatedModels[name];
     }
     return result;
 }
@@ -1436,18 +1665,18 @@ function getMetaDef() {
 
 
 /*
- * Get parents of a shema if any.
+ * Get parents of a schema if any.
  * @method get
  * @param {String} id id of the schema
  * @return {Array} id id of the parents
  */
 function getParents(id) {
     var result = [],
-        model = null;
+        schema = null;
 
-    model = store.model[id];
-    if (model) {
-        result = model[INHERITS];
+    schema = store.compiledSchemas[id];
+    if (schema) {
+        result = schema[INHERITS];
     }
     if (!result) {
         result = [];
@@ -1468,7 +1697,7 @@ function inheritFrom(name, parentName) {
         parents = [],
         i = 0,
         length = 0;
-        
+
     /*
      * 
      * Check if a class inherits from another one
@@ -1565,6 +1794,14 @@ exports.schema = schema;
 
 
 /**
+ * Add a new model.
+ * @method model
+ * @param {JSON} importedModel a mode to add
+ */
+exports.model = model;
+
+
+/**
  * Add a new type.
  * @method type
  * @param {JSON} importedType type to add
@@ -1581,11 +1818,20 @@ exports.create = create;
 
 /**
  * Get a schema.
- * @method get
- * @param {String} id id of the schema
+ * @method getSchema
+ * @param {String} name name of the schema
  * @return {Object} the schema
  */
-exports.get = get;
+exports.getSchema = getSchema;
+
+
+/**
+ * Get a model.
+ * @method getModel
+ * @param {String} name name of the model
+ * @return {Object} the model
+ */
+exports.getModel = getModel;
 
 
 /**

@@ -200,7 +200,7 @@ function getParamNames(id, methodName) {
         length = 0,
         i = 0;
 
-    params = $metamodel.get(id)[methodName].params;
+    params = $metamodel.getModel(id)[methodName].params;
     if (params) {
         length = params.length;
         for (i = 0; i < length; i++) {
@@ -226,8 +226,8 @@ function getProperties(id) {
         i = 0,
         result = [];
 
-    model = $metamodel.get(id);
-    schema = $metamodel.get(model._schema);
+    model = $metamodel.getModel(id);
+    schema = $metamodel.getSchema(model._schema);
 
     propNames = Object.keys(schema);
 
@@ -261,8 +261,8 @@ function getMethods(id) {
         i = 0,
         result = [];
 
-    model = $metamodel.get(id);
-    schema = $metamodel.get(model._schema);
+    model = $metamodel.getModel(id);
+    schema = $metamodel.getSchema(model._schema);
 
     propNames = Object.keys(schema);
 
@@ -292,8 +292,8 @@ function getEvents(id) {
         i = 0,
         result = [];
 
-    model = $metamodel.get(id);
-    schema = $metamodel.get(model._schema);
+    model = $metamodel.getModel(id);
+    schema = $metamodel.getSchema(model._schema);
 
     propNames = Object.keys(schema);
 
@@ -320,8 +320,8 @@ function createClass(classId) {
         config = config || {};
         var body = {};
 
-        if ($metamodel.isValidObject(config, $metamodel.get(classId), true, true)) {
-            $metamodel.prepareObject(config, $metamodel.get(classId));
+        if ($metamodel.isValidObject(config, $metamodel.getModel(classId), true, true)) {
+            $metamodel.prepareObject(config, $metamodel.getModel(classId));
         } else {
             $workflow.stop({
                 "error": true,

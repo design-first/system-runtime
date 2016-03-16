@@ -1,24 +1,7 @@
 {
-    "_id": "RuntimeMessage",
     "_name": "RuntimeMessage",
-    "_schema": "RuntimeMessageSchema",
     "_core": true,
-    "event": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": true,
-        "default": ""
-    },
-    "from": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": true,
-        "default": ""
-    },
-    "data": {
-        "type": "array",
-        "readOnly": false,
-        "mandatory": true,
-        "default": []
-    }
+    "event": "property",
+    "from": "property",
+    "data": "property"
 }
