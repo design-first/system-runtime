@@ -71,6 +71,7 @@ Just add a link tag in your HTML to execute your app:
 <!-- load Runtime -->
 <script src="/bower_components/system-runtime/build/system-runtime.min.js"></script>
 ```
+
 #### Node.js import
 
 Just require your JSON in Node.js to execute your app:
@@ -87,6 +88,32 @@ var appId = runtime.require('db').system(app);
 
 // run your app
 runtime.require(appId).main();
+```
+
+#### Component APIs
+
+You can create components in Runtime:
+
+```js
+// require Runtime metamodel
+var metamodel = runtime.require('metamodel');
+
+// define your component
+metamodel.schema({
+    '_name': 'Jedi',
+    'firstName': 'property',
+    'lastName': 'property',
+});
+
+// create your model
+metamodel.create();
+
+// use your component
+var Jedi = runtime.require('Jedi');
+var luke = new Jedi({
+    'firstName': 'Luke',
+    'lastName': 'SkyWalker'
+});
 ```
 
 ## What contains Runtime ?
