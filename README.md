@@ -114,6 +114,9 @@ var luke = new Jedi({
     'firstName': 'Luke',
     'lastName': 'SkyWalker'
 });
+
+// update its property
+luke.lastName('StarKiller');
 ```
 
 ## What contains Runtime ?
