@@ -1,8 +1,8 @@
 {
     "project": {
         "name": "system-runtime",
-        "description": "Runtime, The JSON Runtime Environment",
-        "version": "1.1.0",
+        "description": "Runtime, the JSON Runtime Environment",
+        "version": "1.1.1",
         "url": "https://system-runtime.github.io"
     },
     "files": {

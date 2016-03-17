@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.1.0</b>
+                    API Docs for Version: <b>1.1.1</b>
                 </p>
             </li>
         </div>
@@ -250,7 +250,7 @@ function generateModels() {
                     break;
                 case schema[att] === &#x27;collection&#x27;:
                     model[att] = {
-                        &quot;type&quot;: [&quot;string&quot;],
+                        &quot;type&quot;: [&quot;@RuntimeComponent&quot;],
                         &quot;readOnly&quot;: false,
                         &quot;mandatory&quot;: false,
                         &quot;default&quot;: []
@@ -1603,7 +1603,7 @@ function isValidObject(object, schema, strict, cleanRef) {
                                         break;
                                     }
                                 } else {
-                                    if (getClassName(field[i]) !== getReference(typeArray)) {
+                                    if (!inheritFrom(getClassName(field[i]), getReference(typeArray))) {    
                                         $log.invalidClassName(JSON.stringify(field[i]), getReference(typeArray), getClassName(field[i]));
                                         isValid = false;
                                         break;

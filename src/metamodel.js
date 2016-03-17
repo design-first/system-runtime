@@ -161,7 +161,7 @@ function generateModels() {
                     break;
                 case schema[att] === 'collection':
                     model[att] = {
-                        "type": ["string"],
+                        "type": ["@RuntimeComponent"],
                         "readOnly": false,
                         "mandatory": false,
                         "default": []
@@ -1514,7 +1514,7 @@ function isValidObject(object, schema, strict, cleanRef) {
                                         break;
                                     }
                                 } else {
-                                    if (getClassName(field[i]) !== getReference(typeArray)) {
+                                    if (!inheritFrom(getClassName(field[i]), getReference(typeArray))) {    
                                         $log.invalidClassName(JSON.stringify(field[i]), getReference(typeArray), getClassName(field[i]));
                                         isValid = false;
                                         break;
