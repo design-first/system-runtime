@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.1.1</b>
+                    API Docs for Version: <b>1.1.2</b>
                 </p>
             </li>
         </div>
@@ -511,7 +511,7 @@ RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
 
             for (attributeName in update) {
                 if (typeof docs[i][attributeName] !== &#x27;undefined&#x27;) {
-                    if (this.name !== &#x27;RuntimeSchema&#x27; &amp;&amp; this.name !== &#x27;RuntimeModel&#x27;) {
+                    if (this.name !== &#x27;RuntimeSchema&#x27; &amp;&amp; this.name !== &#x27;RuntimeModel&#x27; &amp;&amp; this.name !== &#x27;RuntimeGeneratedModel&#x27;) {
                         // check type
                         type = &#x27;&#x27;;
                         if (attributeName.indexOf(&#x27;_&#x27;) !== 0) {

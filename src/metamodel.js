@@ -91,12 +91,15 @@ function generateModels() {
         schemaName = '',
         schema = {},
         modelName = '',
+        modelParent = null,
+        modelExt = null,
+        modelDef = null,
         model = {},
         models = {},
         mergedModel = {},
         parents = [],
         length = 0,
-        i = 0;
+        i = 0; 
 
     for (schemaName in store.compiledSchemas) {
         schema = store.compiledSchemas[schemaName];
@@ -174,7 +177,8 @@ function generateModels() {
 
         store.generatedModels[model._name] = model;
     }
-
+    
+    // parents
     for (modelName in store.generatedModels) {
         model = store.generatedModels[modelName];
         parents = model[INHERITS];
@@ -186,27 +190,31 @@ function generateModels() {
         }
         for (i = 0; i < length; i++) {
             name = parents[i];
-            models = $db.RuntimeModel.find({ '_name': name });
-            if (models.length) {
-                mergedModel = merge(models[0], model);
+            modelParent = store.models[name];
+            if (modelParent) {
+                mergedModel = merge(modelParent, model);
                 delete mergedModel._id;
                 store.generatedModels[name] = mergedModel;
             }
         }
     }
 
+    // models to override
     for (modelName in store.generatedModels) {
         model = store.generatedModels[modelName];
         name = model[NAME];
-        models = $db.RuntimeModel.find({ '_name': name });
-        if (models.length) {
-            mergedModel = merge(models[0], model);
+        modelExt = store.models[name];
+        if (modelExt) {
+            mergedModel = merge(modelExt, model);
             delete mergedModel._id;
             store.generatedModels[name] = mergedModel;
-            $db.RuntimeModel.update({ '_name': name }, mergedModel);
-        } else {
-            $db.RuntimeModel.insert(model);
         }
+    }
+    
+    // save 
+    for (modelName in store.generatedModels) {
+        modelDef = store.generatedModels[modelName];
+        $db.RuntimeGeneratedModel.insert(modelDef);
     }
 }
 
@@ -236,7 +244,7 @@ function loadInMemory() {
     store.models = {};
     store.generatedModels = {};
     store.states = {};
-    store.type = {};
+    store.type = {}; 
 
     // load schemas
     schemas = $db.RuntimeSchema.find({});
@@ -558,11 +566,6 @@ function createDbStructure() {
             modelDef[CLASS] !== false) {
             $db.collection(modelDef[NAME]);
         }
-    }
-
-    for (modelName in store.generatedModels) {
-        modelDef = store.generatedModels[modelName];
-        $db.RuntimeGeneratedModel.insert(modelDef);
     }
 }
 

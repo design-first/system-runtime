@@ -422,7 +422,7 @@ RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
 
             for (attributeName in update) {
                 if (typeof docs[i][attributeName] !== 'undefined') {
-                    if (this.name !== 'RuntimeSchema' && this.name !== 'RuntimeModel') {
+                    if (this.name !== 'RuntimeSchema' && this.name !== 'RuntimeModel' && this.name !== 'RuntimeGeneratedModel') {
                         // check type
                         type = '';
                         if (attributeName.indexOf('_') !== 0) {
