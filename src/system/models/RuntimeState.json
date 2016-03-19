@@ -1,8 +1,5 @@
 {
     "_name": "RuntimeState",
-    "_schema": "RuntimeState",
-    "_class": false,
-    "_core": true,
     "name": {
         "type": "string",
         "readOnly": false,

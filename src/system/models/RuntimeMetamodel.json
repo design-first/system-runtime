@@ -1,9 +1,5 @@
 {
     "_name": "RuntimeMetamodel",
-    "_schema": "RuntimeMetamodel",
-    "_inherit": [
-        "RuntimeComponent"
-    ],
     "_core": true,
     "schema": {
         "params": [

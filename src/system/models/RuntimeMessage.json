@@ -1,7 +1,5 @@
 {
     "_name": "RuntimeMessage",
-    "_schema": "RuntimeMessage",
-    "_core": true,
     "event": {
         "type": "string",
         "readOnly": false,

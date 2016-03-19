@@ -1,8 +1,5 @@
 {
     "_name": "RuntimeClassInfo",
-    "_schema": "RuntimeClassInfo",
-    "_inherit": ["RuntimeComponent"],
-    "_core": true,
     "metamodel": {
         "type": "object",
         "readOnly": true,

@@ -1,11 +1,6 @@
 {
     "_id": "135c71078810af2",
     "_name": "RuntimeChannel",
-    "_schema": "RuntimeChannel",
-    "_inherit": [
-        "RuntimeComponent"
-    ],
-    "_core": true,
     "send": {
         "params": [
             {

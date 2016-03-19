@@ -1,5 +1,6 @@
 {
     "_name": "RuntimeComponent",
+    "_inherit": [],
     "_core": true,
     "classInfo": "property",
     "on": "method",

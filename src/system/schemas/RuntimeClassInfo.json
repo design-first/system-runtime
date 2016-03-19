@@ -1,6 +1,8 @@
 {
     "_name": "RuntimeClassInfo",
-    "_inherit": ["RuntimeComponent"],
+    "_inherit": [
+        "RuntimeComponent"
+    ],
     "_core": true,
     "model": "property",
     "metamodel": "property",

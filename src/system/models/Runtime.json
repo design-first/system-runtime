@@ -1,11 +1,6 @@
 {
     "_id": "14c7c105b31a160",
     "_name": "Runtime",
-    "_schema": "Runtime",
-    "_inherit": [
-        "RuntimeComponent"
-    ],
-    "_core": true,
     "version": {
         "type": "string",
         "readOnly": true,

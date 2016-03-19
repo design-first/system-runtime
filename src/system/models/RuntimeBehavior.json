@@ -1,8 +1,5 @@
 {
     "_name": "RuntimeBehavior",
-    "_schema": "RuntimeBehavior",
-    "_inherit": ["RuntimeComponent"],
-    "_core": true,
     "core": {
         "type": "boolean",
         "readOnly": false,

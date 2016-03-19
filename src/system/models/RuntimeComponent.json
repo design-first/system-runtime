@@ -1,7 +1,5 @@
 {
     "_name": "RuntimeComponent",
-    "_schema": "RuntimeComponent",
-    "_core": true,
     "on": {
         "params": [{
                 "name": "state",

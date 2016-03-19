@@ -99,7 +99,7 @@ function generateModels() {
         mergedModel = {},
         parents = [],
         length = 0,
-        i = 0; 
+        i = 0;
 
     for (schemaName in store.compiledSchemas) {
         schema = store.compiledSchemas[schemaName];
@@ -118,6 +118,11 @@ function generateModels() {
         // set inherit
         if (Array.isArray(schema._inherit)) {
             model._inherit = schema._inherit;
+        }
+
+        // set class
+        if (typeof schema._class !== 'undefined') {
+            model._class = schema._class;
         }
 
         //  set model default values
@@ -177,7 +182,7 @@ function generateModels() {
 
         store.generatedModels[model._name] = model;
     }
-    
+
     // parents
     for (modelName in store.generatedModels) {
         model = store.generatedModels[modelName];
@@ -210,7 +215,7 @@ function generateModels() {
             store.generatedModels[name] = mergedModel;
         }
     }
-    
+
     // save 
     for (modelName in store.generatedModels) {
         modelDef = store.generatedModels[modelName];
@@ -244,7 +249,7 @@ function loadInMemory() {
     store.models = {};
     store.generatedModels = {};
     store.states = {};
-    store.type = {}; 
+    store.type = {};
 
     // load schemas
     schemas = $db.RuntimeSchema.find({});
@@ -792,20 +797,18 @@ function merge(source, target, all) {
  */
 function schema(importedSchema) {
     var schema = null,
-        id = '',
-        inherit = '',
         name = '',
         mergedSchema = {},
         schemas = [];
 
     schema = JSON.parse(JSON.stringify(importedSchema));
-
-    id = schema[ID];
     name = schema[NAME];
-    inherit = schema[INHERITS];
 
     if (typeof schema[ID] === 'undefined') {
         schema[ID] = $helper.generateId();
+    }
+    if (typeof schema[INHERITS] === 'undefined') {
+        schema[INHERITS] = ['RuntimeComponent'];
     }
 
     // check if schema is compliant with the meta meta model
@@ -907,7 +910,8 @@ function init() {
             },
             "_inherit": {
                 "type": ["string"],
-                "mandatory": false
+                "mandatory": false,
+                "default": ["RuntimeComponent"]
             },
             "_schema": {
                 "type": "string",
@@ -1517,7 +1521,7 @@ function isValidObject(object, schema, strict, cleanRef) {
                                         break;
                                     }
                                 } else {
-                                    if (!inheritFrom(getClassName(field[i]), getReference(typeArray))) {    
+                                    if (!inheritFrom(getClassName(field[i]), getReference(typeArray))) {
                                         $log.invalidClassName(JSON.stringify(field[i]), getReference(typeArray), getClassName(field[i]));
                                         isValid = false;
                                         break;

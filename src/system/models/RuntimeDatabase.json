@@ -1,10 +1,5 @@
 {
     "_name": "RuntimeDatabase",
-    "_schema": "RuntimeDatabase",
-    "_inherit": [
-        "RuntimeComponent"
-    ],
-    "_core": true,
     "system": {
         "params": [
             {

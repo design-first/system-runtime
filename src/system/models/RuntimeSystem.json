@@ -1,10 +1,5 @@
 {
     "_name": "RuntimeSystem",
-    "_schema": "RuntimeSystem",
-    "_inherit": [
-        "RuntimeComponent"
-    ],
-    "_core": true,
     "name": {
         "type": "string",
         "readOnly": false,

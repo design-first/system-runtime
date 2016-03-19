@@ -1,6 +1,8 @@
 {
     "_name": "RuntimeBehavior",
-    "_inherit": ["RuntimeComponent"],
+    "_inherit": [
+        "RuntimeComponent"
+    ],
     "_core": true,
     "core": "property",
     "component": "property",
