@@ -1,5 +1,6 @@
 {
     "_name": "RuntimeClassInfo",
+    "_core": true,
     "metamodel": {
         "type": "object",
         "readOnly": true,
@@ -13,50 +14,60 @@
         "default": {}
     },
     "property": {
-        "params": [{
+        "params": [
+            {
                 "name": "name",
                 "type": "string"
-            }],
+            }
+        ],
         "result": "object"
     },
     "properties": {
         "result": "array"
     },
     "link": {
-        "params": [{
+        "params": [
+            {
                 "name": "name",
                 "type": "string"
-            }],
+            }
+        ],
         "result": "object"
     },
     "links": {
         "result": "array"
     },
     "method": {
-        "params": [{
+        "params": [
+            {
                 "name": "name",
                 "type": "string"
-            }],
+            }
+        ],
         "result": "object"
     },
     "methods": {
         "result": "array"
     },
     "collection": {
-        "params": [{
+        "params": [
+            {
                 "name": "name",
                 "type": "string"
-            }],
+            }
+        ],
         "result": "object"
     },
     "collections": {
         "result": "array"
     },
     "event": {
-        "params": [{
+        "params": [
+            {
                 "name": "name",
                 "type": "string"
-            }],
+            }
+        ],
         "result": "object"
     },
     "events": {

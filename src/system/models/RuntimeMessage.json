@@ -1,5 +1,6 @@
 {
     "_name": "RuntimeMessage",
+    "_core": true,
     "event": {
         "type": "string",
         "readOnly": false,

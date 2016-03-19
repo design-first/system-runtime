@@ -1,7 +1,9 @@
 {
     "_name": "RuntimeComponent",
+    "_core": true,
     "on": {
-        "params": [{
+        "params": [
+            {
                 "name": "state",
                 "type": "string"
             },
@@ -17,7 +19,8 @@
         ]
     },
     "off": {
-        "params": [{
+        "params": [
+            {
                 "name": "state",
                 "type": "string",
                 "mandatory": false
@@ -30,7 +33,8 @@
         ]
     },
     "require": {
-        "params": [{
+        "params": [
+            {
                 "name": "id",
                 "type": "string"
             }
@@ -46,14 +50,16 @@
         "default": {}
     },
     "init": {
-        "params": [{
+        "params": [
+            {
                 "name": "conf",
                 "type": "object"
             }
         ]
     },
     "error": {
-        "params": [{
+        "params": [
+            {
                 "name": "data",
                 "type": "errorParam"
             }

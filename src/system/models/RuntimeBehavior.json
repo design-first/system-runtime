@@ -1,5 +1,6 @@
 {
     "_name": "RuntimeBehavior",
+    "_core": true,
     "core": {
         "type": "boolean",
         "readOnly": false,
