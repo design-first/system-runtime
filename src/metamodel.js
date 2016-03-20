@@ -199,7 +199,7 @@ function generateModels() {
             if (modelParent) {
                 mergedModel = merge(modelParent, model);
                 delete mergedModel._id;
-                store.generatedModels[name] = mergedModel;
+                store.generatedModels[modelName] = mergedModel;
             }
         }
     }
