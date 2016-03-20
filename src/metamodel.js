@@ -183,6 +183,18 @@ function generateModels() {
         store.generatedModels[model._name] = model;
     }
 
+    // models to override
+    for (modelName in store.generatedModels) {
+        model = store.generatedModels[modelName];
+        name = model[NAME];
+        modelExt = store.models[name];
+        if (modelExt) {
+            mergedModel = merge(modelExt, model);
+            delete mergedModel._id;
+            store.generatedModels[name] = mergedModel;
+        }
+    }
+
     // parents
     for (modelName in store.generatedModels) {
         model = store.generatedModels[modelName];
@@ -195,24 +207,12 @@ function generateModels() {
         }
         for (i = 0; i < length; i++) {
             name = parents[i];
-            modelParent = store.models[name];
+            modelParent = store.generatedModels[name];
             if (modelParent) {
                 mergedModel = merge(modelParent, model);
                 delete mergedModel._id;
                 store.generatedModels[modelName] = mergedModel;
             }
-        }
-    }
-
-    // models to override
-    for (modelName in store.generatedModels) {
-        model = store.generatedModels[modelName];
-        name = model[NAME];
-        modelExt = store.models[name];
-        if (modelExt) {
-            mergedModel = merge(modelExt, model);
-            delete mergedModel._id;
-            store.generatedModels[name] = mergedModel;
         }
     }
 
