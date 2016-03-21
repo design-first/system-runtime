@@ -63,7 +63,7 @@ var ID = '_id',
     LINK_TYPE = 'link',
     COLLECTION_TYPE = 'collection',
     internalTypes = ['property', 'collection', 'link', 'method', 'event'],
-    defaultTypes = ['boolean', 'string', 'number', 'object', 'function', 'array'],
+    defaultTypes = ['boolean', 'string', 'number', 'object', 'function', 'array', 'any'],
     store = {
         metadef: {},
         inheritance: {},
@@ -130,10 +130,10 @@ function generateModels() {
             switch (true) {
                 case schema[att] === 'property':
                     model[att] = {
-                        "type": "string",
+                        "type": "any",
                         "readOnly": false,
                         "mandatory": false,
-                        "default": ""
+                        "default": undefined
                     };
                     break;
                 case schema[att] === 'link':
@@ -149,11 +149,11 @@ function generateModels() {
                         "params": [
                             {
                                 "name": "param",
-                                "type": "string",
+                                "type": "any",
                                 "mandatory": false
                             }
                         ],
-                        "result": "string"
+                        "result": "any"
                     };
                     break;
                 case schema[att] === 'event':
@@ -161,7 +161,7 @@ function generateModels() {
                         "params": [
                             {
                                 "name": "param",
-                                "type": "string",
+                                "type": "any",
                                 "mandatory": false
                             }
                         ]
@@ -688,6 +688,9 @@ function getType(value) {
     } else {
         type = typeof value;
     }
+    if (value === 'any') {
+        type = 'any';
+    }
 
     return type;
 }
@@ -730,6 +733,9 @@ function hasType(value, type) {
     switch (type) {
         case 'array':
             result = Array.isArray(value);
+            break;
+        case 'any':
+            result = true;
             break;
         default:
             result = (type === typeof value);
@@ -796,7 +802,9 @@ function merge(source, target, all) {
  * @param {JSON} importedSchema schema to add
  */
 function schema(importedSchema) {
-    var schema = null,
+    var id = null,
+        result = [],
+        schema = null,
         name = '',
         mergedSchema = {},
         schemas = [];
@@ -818,15 +826,16 @@ function schema(importedSchema) {
             mergedSchema = merge(schema, schemas[0]);
             delete mergedSchema._id;
             $db.RuntimeSchema.update({ '_name': name }, mergedSchema);
+            id = schemas[0]._id;
         } else {
-            $db.RuntimeSchema.insert(schema);
+            result = $db.RuntimeSchema.insert(schema);
+            id = result[0];
         }
     } else {
-        $workflow.stop({
-            "error": true,
-            "message": "the schema '" + schema._name + "' is not valid"
-        });
+        $log.invalidSchema(schema[NAME]);
     }
+
+    return id;
 }
 
 
@@ -837,7 +846,8 @@ function schema(importedSchema) {
  */
 function model(importedModel) {
     var model = null,
-        id = '',
+        id = null,
+        result = [],
         inherit = '',
         name = '',
         mergedModel = {},
@@ -857,15 +867,16 @@ function model(importedModel) {
             mergedModel = merge(model, models[0]);
             delete mergedModel._id;
             $db.RuntimeModel.update({ '_name': name }, mergedModel);
+            id = models[0]._id;
         } else {
-            $db.RuntimeModel.insert(model);
+            result = $db.RuntimeModel.insert(model);
+            id = result[0];
         }
     } else {
-        $workflow.stop({
-            "error": true,
-            "message": "the model '" + model._name + "' is not valid"
-        });
+        $log.invalidModel(model[NAME]);
     }
+
+    return id;
 }
 
 /*
@@ -874,21 +885,19 @@ function model(importedModel) {
  * @param {JSON} importedType type to add
  */
 function type(importedType) {
-    var name = importedType.name;
+    var id = null,
+        result = [],
+        name = importedType.name;
 
     // check if type is compliant with the meta meta model
     if (isValidObject(importedType, store.metadef.type)) {
-        if (name) {
-            $db.RuntimeType.insert(importedType);
-        } else {
-            $log.invalidTypeDefinition(importedType);
-        }
+        result = $db.RuntimeType.insert(importedType);
+        id = result[0];
     } else {
-        $workflow.stop({
-            "error": true,
-            "message": "the type '" + JSON.stringify(importedType) + "' is not valid"
-        });
+        $log.invalidTypeDefinition(name);
     }
+
+    return id;
 }
 
 
@@ -1161,7 +1170,7 @@ function isValidType(value, typeName) {
             default:
                 break;
         }
-        return true;
+        return isValid;
     }
 
     if (!hasType(typeName, 'undefined')) {
@@ -1357,7 +1366,7 @@ function isValidSchema(object, schema) {
     for (fieldName in schema) {
         field = schema[fieldName];
         mandatory = field.mandatory;
-        if (mandatory === true && hasType(object[fieldName], 'undefined')) {
+        if (mandatory === true && (hasType(object[fieldName], 'undefined') && object[fieldName] !== undefined)) {
             $log.missingProperty(fieldName);
             result = false;
             break;
@@ -1479,6 +1488,8 @@ function isValidObject(object, schema, strict, cleanRef) {
 
         realType = getType(typeSchema);
         switch (realType) {
+            case 'any':
+                break;
             case 'string':
                 if (isCustomType(realType)) {
                     isValid = isValidObject(field, typeSchema);

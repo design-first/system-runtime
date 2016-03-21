@@ -62,7 +62,7 @@ var PROPERTY_TYPE = 'property',
     METHOD_TYPE = 'method',
     EVENT_TYPE = 'event',
     store = {};
-    
+
 
 /* Private methods */
 
@@ -95,7 +95,7 @@ function RuntimeArray(conf) {
     }
 
     // init
-    arrDb.forEach(function (val) {
+    arrDb.forEach(function(val) {
         if (type.indexOf('@') !== -1) {
             arr.push($helper.getRuntime().require(val));
         } else {
@@ -316,18 +316,15 @@ function getEvents(id) {
  * @private
  */
 function createClass(classId) {
-    var body = function (config) {
+    var body = function(config) {
         config = config || {};
         var body = {};
 
-        if ($metamodel.isValidObject(config, $metamodel.getModel(classId), true, true)) {
-            $metamodel.prepareObject(config, $metamodel.getModel(classId));
-        } else {
-            $workflow.stop({
-                "error": true,
-                "message": "the parameters for creating a component of class '" + classId + "' are not compliant with the model"
-            });
+        if (!$metamodel.isValidObject(config, $metamodel.getModel(classId), true, true)) {
+            $log.invalidParameters(classId);
         }
+
+        $metamodel.prepareObject(config, $metamodel.getModel(classId));
 
         if (typeof config._id === 'undefined') {
             config._id = $helper.generateId();
@@ -336,7 +333,7 @@ function createClass(classId) {
         store[config._id] = this;
 
         // id
-        body = function () {
+        body = function() {
             return config._id;
         };
         /* jshint -W054 */
@@ -373,7 +370,7 @@ function createClass(classId) {
  * @private
  */
 function addId(Class, classId) {
-    var body = function () {
+    var body = function() {
         return classId;
     };
     /* jshint -W054 */
@@ -446,7 +443,7 @@ function addProperties(model, Class, classId) {
                         if (
                             $metamodel.isValidType(value, propertyType[0]) ||
                             ($metamodel.inheritFrom(value.constructor.name, propertyType[0].replace('@', '')) && (propertyType[0].indexOf('@') !== -1))
-                            ) {
+                        ) {
                             search = $db[classId].find({
                                 "_id": this.id()
                             });
@@ -496,10 +493,7 @@ function addProperties(model, Class, classId) {
                         }
                         return propertyValue;
                     } else {
-                        $workflow.stop({
-                            "error": true,
-                            "message": "trying to get the property '" + propertyName + "' on the destroyed component '" + this.id() + "'"
-                        });
+                        $log.destroyedComponentCall(propertyName, this.id());
                     }
                 } else {
                     if (propertyReadOnly) {
@@ -519,7 +513,7 @@ function addProperties(model, Class, classId) {
                                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                                     $helper.getRuntime().require('db').update(classId, this.id(), propertyName, value);
                                 }
-                                
+
                                 // case of RuntimeBehavior
                                 if (classId === 'RuntimeBehavior') {
                                     $behavior.removeFromMemory(this.id());
@@ -560,7 +554,7 @@ function addMethods(model, Class, classId) {
     methods.forEach(function method(methodName) {
         var paramsName = getParamNames(classId, methodName),
             params = paramsName.join(','),
-            body = function () {
+            body = function() {
                 var result = null;
 
                 result = $workflow.state({
@@ -598,7 +592,7 @@ function addEvents(model, Class, classId) {
     events.forEach(function event(methodName) {
         var paramsName = getParamNames(classId, methodName),
             params = paramsName.join(','),
-            body = function () {
+            body = function() {
                 var systems = [],
                     systemId = -1,
                     data = [],
@@ -662,7 +656,7 @@ function addEvents(model, Class, classId) {
  * @private
  */
 function addOn(Class, classId) {
-    var body = function (state, handler, useCoreAPI) {
+    var body = function(state, handler, useCoreAPI) {
         var behaviorId = '',
             currentState = '';
 
@@ -715,7 +709,7 @@ function addOn(Class, classId) {
  * @private
  */
 function addOnClass(Class, classId) {
-    var body = function (state, handler, useCoreAPI) {
+    var body = function(state, handler, useCoreAPI) {
         var behaviorId = '',
             currentState = '';
 
@@ -768,7 +762,7 @@ function addOnClass(Class, classId) {
  * @private
  */
 function addOffClass(Class, classId) {
-    var body = function (state, behaviorId) {
+    var body = function(state, behaviorId) {
         if ($workflow.checkParams({
             "component": this,
             "methodName": "off",
@@ -798,19 +792,19 @@ function addOffClass(Class, classId) {
  * @private
  */
 function addDestroyClass(Class) {
-    var body = function () {
+    var body = function() {
         var id = this.id(),
             result = [],
             i = 0,
             length = 0;
-        
+
         // if not virtual component
         if ($db[id]) {
             result = $db[id].remove();
         }
 
         delete store[id];
-        
+
         // remove behaviors
         $behavior.remove({
             'componentId': id
@@ -842,7 +836,7 @@ function addDestroyClass(Class) {
  * @private
  */
 function addClassInfoClass(Class) {
-    var body = function () {
+    var body = function() {
         return get(this.id() + 'Info');
     };
     /* jshint -W054 */
@@ -937,12 +931,12 @@ function destroy(id) {
         $db[classId].remove({
             "_id": id
         });
-        
+
         // remove behaviors
         $behavior.remove({
             'componentId': id
         });
-        
+
         // case of Behavior
         if (classId === 'RuntimeBehavior') {
             $behavior.removeFromMemory(id);

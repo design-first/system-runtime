@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.1.4</b>
+                    API Docs for Version: <b>1.1.5</b>
                 </p>
             </li>
         </div>
@@ -166,7 +166,7 @@ function unknownProperty(propertyName, schema) {
  * @param {String} property the property
  */
 function invalidPropertyType(propertyName, type, property) {
-    $helper.getRuntime().warning(&quot;invalid type for property &#x27;&quot; + JSON.stringify(propertyName) + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof property + &quot;&#x27;&quot;);
+    $helper.getRuntime().warning(&quot;invalid type for property &#x27;&quot; + JSON.stringify(propertyName) + &quot;&#x27;: expected type &#x27;&quot; + type + &quot;&#x27; instead of type &#x27;&quot; + typeof property + &quot;&#x27;&quot;);
 }
 
 
@@ -248,12 +248,12 @@ function unknownPropertyImp(property, schema) {
 
 
 /*
- * Invalid type definition.
+ * Try to add an invalid type.
  * @method invalidTypeDefinition
- * @param {Object} def a type definition
+ * @param {String} name a type definition
  */
-function invalidTypeDefinition(def) {
-    $helper.getRuntime().warning(&quot;can not load the definition of type &#x27;&quot; + def + &quot;&#x27;&quot;);
+function invalidTypeDefinition(name) {
+    $helper.getRuntime().warning(&quot;the type &#x27;&quot; + name + &quot;&#x27; is not valid&quot;);
 }
 
 
@@ -514,13 +514,55 @@ function updateUuid(currentId, newId, alreadyUsed) {
     }
 }
 
+
 /*
- * Try to change the state of a component that has been destroyed
+ * Try to change the state of a component that has been destroyed.
  * @method invalidUseOfComponent
  * @param {String} id id of the component
  */
 function invalidUseOfComponent(id) {
     $helper.getRuntime().warning(&quot;try to change the state of the destroyed component &#x27;&quot; + id + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Try to add an invalid schema.
+ * @method invalidSchema
+ * @param {String} name name of the schema
+ */
+function invalidSchema(name) {
+    $helper.getRuntime().warning(&quot;the schema &#x27;&quot; + name + &quot;&#x27; is not valid&quot;);
+}
+
+
+/*
+ * Try to add an invalid model.
+ * @method invalidModel
+ * @param {String} name name of the model
+ */
+function invalidModel(name) {
+    $helper.getRuntime().warning(&quot;the model &#x27;&quot; + name + &quot;&#x27; is not valid&quot;);
+}
+
+
+/*
+ * Invalid parameters set when creating an instance of a class.
+ * @method invalidParameters
+ * @param {String} classId class name of the component
+ */
+function invalidParameters(classId) {
+    $helper.getRuntime().warning(&quot;the parameters for creating a component of class &#x27;&quot; + classId + &quot;&#x27; are not compliant with the model&quot;);
+}
+
+
+/*
+ * Try to get the property of a destroyed component.
+ * @method destroyedComponentCall
+ * @param {String} propertyName name of the property
+ * @param {String} id id of the component
+ */
+function destroyedComponentCall(propertyName, id) {
+    $helper.getRuntime().warning(&quot;trying to get the property &#x27;&quot; + propertyName + &quot;&#x27; on the destroyed component &#x27;&quot; + id + &quot;&#x27;&quot;);
 }
 
 
@@ -621,9 +663,9 @@ exports.unknownPropertyImp = unknownPropertyImp;
 
 
 /**
- * Invalid type definition.
+ * Try to add an invalid type.
  * @method invalidTypeDefinition
- * @param {Object} def a type definition
+ * @param {String} name a type definition
  */
 exports.invalidTypeDefinition = invalidTypeDefinition;
 
@@ -835,6 +877,39 @@ exports.unknownPropertyOnDbUpdate = unknownPropertyOnDbUpdate;
  * @param {String} id id of the component
  */
 exports.invalidUseOfComponent = invalidUseOfComponent;
+
+
+/**
+ * Try to add an invalid schema.
+ * @method invalidSchema
+ * @param {String} name name of the schema
+ */
+exports.invalidSchema = invalidSchema;
+
+
+/**
+ * Try to add an invalid model.
+ * @method invalidModel
+ * @param {String} name name of the model
+ */
+exports.invalidModel = invalidModel;
+
+
+/**
+ * Invalid parameters set when creating an instance of a class.
+ * @method invalidParameters
+ * @param {String} classId class name of the component
+ */
+exports.invalidParameters = invalidParameters;
+
+
+/**
+ * Try to get the property of a destroyed component.
+ * @method destroyedComponentCall
+ * @param {String} propertyName name of the property
+ * @param {String} id id of the component
+ */
+exports.destroyedComponentCall = destroyedComponentCall;
     </pre>
 </div>
                     </div>

@@ -259,16 +259,21 @@ function checkResult(params) {
     returnType = getReturnType(componentClassName, methodName);
 
     if (returnType !== null) {
-        if (returnType === 'array') {
-            if (!Array.isArray(methodResult)) {
-                result = false;
-                $log.invalidResultType(component.id(), methodName);
-            }
-        } else {
-            if (typeof methodResult !== returnType) {
-                result = false;
-                $log.invalidResultType(component.id(), methodName);
-            }
+        switch (true) {
+            case returnType === 'any':
+                break;
+            case returnType === 'array':
+                if (!Array.isArray(methodResult)) {
+                    result = false;
+                    $log.invalidResultType(component.id(), methodName);
+                }
+                break;
+            default:
+                if (typeof methodResult !== returnType) {
+                    result = false;
+                    $log.invalidResultType(component.id(), methodName);
+                }
+                break;
         }
     }
 

@@ -241,6 +241,17 @@ describe('a component', function () {
 
         expect(yoda.lastName()).toBe('Grand Jedi Master');
     });
+    
+    it('can not set an invalid value', function () {
+        var Person = runtime.require('Person');
+        var yoda = new Person({
+            'firstName': 'Yoda',
+            'lastName': 'Master'
+        });
+        yoda.lastName(42);
+
+        expect(yoda.lastName()).toBe('Master');
+    });
 
     it('can add an item in a collection in the config', function () {
         var Person = runtime.require('Person');

@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.1.4</b>
+                    API Docs for Version: <b>1.1.5</b>
                 </p>
             </li>
         </div>
@@ -152,7 +152,7 @@ var ID = &#x27;_id&#x27;,
     LINK_TYPE = &#x27;link&#x27;,
     COLLECTION_TYPE = &#x27;collection&#x27;,
     internalTypes = [&#x27;property&#x27;, &#x27;collection&#x27;, &#x27;link&#x27;, &#x27;method&#x27;, &#x27;event&#x27;],
-    defaultTypes = [&#x27;boolean&#x27;, &#x27;string&#x27;, &#x27;number&#x27;, &#x27;object&#x27;, &#x27;function&#x27;, &#x27;array&#x27;],
+    defaultTypes = [&#x27;boolean&#x27;, &#x27;string&#x27;, &#x27;number&#x27;, &#x27;object&#x27;, &#x27;function&#x27;, &#x27;array&#x27;, &#x27;any&#x27;],
     store = {
         metadef: {},
         inheritance: {},
@@ -219,10 +219,10 @@ function generateModels() {
             switch (true) {
                 case schema[att] === &#x27;property&#x27;:
                     model[att] = {
-                        &quot;type&quot;: &quot;string&quot;,
+                        &quot;type&quot;: &quot;any&quot;,
                         &quot;readOnly&quot;: false,
                         &quot;mandatory&quot;: false,
-                        &quot;default&quot;: &quot;&quot;
+                        &quot;default&quot;: undefined
                     };
                     break;
                 case schema[att] === &#x27;link&#x27;:
@@ -238,11 +238,11 @@ function generateModels() {
                         &quot;params&quot;: [
                             {
                                 &quot;name&quot;: &quot;param&quot;,
-                                &quot;type&quot;: &quot;string&quot;,
+                                &quot;type&quot;: &quot;any&quot;,
                                 &quot;mandatory&quot;: false
                             }
                         ],
-                        &quot;result&quot;: &quot;string&quot;
+                        &quot;result&quot;: &quot;any&quot;
                     };
                     break;
                 case schema[att] === &#x27;event&#x27;:
@@ -250,7 +250,7 @@ function generateModels() {
                         &quot;params&quot;: [
                             {
                                 &quot;name&quot;: &quot;param&quot;,
-                                &quot;type&quot;: &quot;string&quot;,
+                                &quot;type&quot;: &quot;any&quot;,
                                 &quot;mandatory&quot;: false
                             }
                         ]
@@ -777,6 +777,9 @@ function getType(value) {
     } else {
         type = typeof value;
     }
+    if (value === &#x27;any&#x27;) {
+        type = &#x27;any&#x27;;
+    }
 
     return type;
 }
@@ -819,6 +822,9 @@ function hasType(value, type) {
     switch (type) {
         case &#x27;array&#x27;:
             result = Array.isArray(value);
+            break;
+        case &#x27;any&#x27;:
+            result = true;
             break;
         default:
             result = (type === typeof value);
@@ -885,7 +891,9 @@ function merge(source, target, all) {
  * @param {JSON} importedSchema schema to add
  */
 function schema(importedSchema) {
-    var schema = null,
+    var id = null,
+        result = [],
+        schema = null,
         name = &#x27;&#x27;,
         mergedSchema = {},
         schemas = [];
@@ -907,15 +915,16 @@ function schema(importedSchema) {
             mergedSchema = merge(schema, schemas[0]);
             delete mergedSchema._id;
             $db.RuntimeSchema.update({ &#x27;_name&#x27;: name }, mergedSchema);
+            id = schemas[0]._id;
         } else {
-            $db.RuntimeSchema.insert(schema);
+            result = $db.RuntimeSchema.insert(schema);
+            id = result[0];
         }
     } else {
-        $workflow.stop({
-            &quot;error&quot;: true,
-            &quot;message&quot;: &quot;the schema &#x27;&quot; + schema._name + &quot;&#x27; is not valid&quot;
-        });
+        $log.invalidSchema(schema[NAME]);
     }
+
+    return id;
 }
 
 
@@ -926,7 +935,8 @@ function schema(importedSchema) {
  */
 function model(importedModel) {
     var model = null,
-        id = &#x27;&#x27;,
+        id = null,
+        result = [],
         inherit = &#x27;&#x27;,
         name = &#x27;&#x27;,
         mergedModel = {},
@@ -946,15 +956,16 @@ function model(importedModel) {
             mergedModel = merge(model, models[0]);
             delete mergedModel._id;
             $db.RuntimeModel.update({ &#x27;_name&#x27;: name }, mergedModel);
+            id = models[0]._id;
         } else {
-            $db.RuntimeModel.insert(model);
+            result = $db.RuntimeModel.insert(model);
+            id = result[0];
         }
     } else {
-        $workflow.stop({
-            &quot;error&quot;: true,
-            &quot;message&quot;: &quot;the model &#x27;&quot; + model._name + &quot;&#x27; is not valid&quot;
-        });
+        $log.invalidModel(model[NAME]);
     }
+
+    return id;
 }
 
 /*
@@ -963,21 +974,19 @@ function model(importedModel) {
  * @param {JSON} importedType type to add
  */
 function type(importedType) {
-    var name = importedType.name;
+    var id = null,
+        result = [],
+        name = importedType.name;
 
     // check if type is compliant with the meta meta model
     if (isValidObject(importedType, store.metadef.type)) {
-        if (name) {
-            $db.RuntimeType.insert(importedType);
-        } else {
-            $log.invalidTypeDefinition(importedType);
-        }
+        result = $db.RuntimeType.insert(importedType);
+        id = result[0];
     } else {
-        $workflow.stop({
-            &quot;error&quot;: true,
-            &quot;message&quot;: &quot;the type &#x27;&quot; + JSON.stringify(importedType) + &quot;&#x27; is not valid&quot;
-        });
+        $log.invalidTypeDefinition(name);
     }
+
+    return id;
 }
 
 
@@ -1250,7 +1259,7 @@ function isValidType(value, typeName) {
             default:
                 break;
         }
-        return true;
+        return isValid;
     }
 
     if (!hasType(typeName, &#x27;undefined&#x27;)) {
@@ -1568,6 +1577,8 @@ function isValidObject(object, schema, strict, cleanRef) {
 
         realType = getType(typeSchema);
         switch (realType) {
+            case &#x27;any&#x27;:
+                break;
             case &#x27;string&#x27;:
                 if (isCustomType(realType)) {
                     isValid = isValidObject(field, typeSchema);

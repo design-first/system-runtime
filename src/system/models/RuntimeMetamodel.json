@@ -7,7 +7,8 @@
                 "name": "schema",
                 "type": "object"
             }
-        ]
+        ],
+        "result": "any"
     },
     "model": {
         "params": [
@@ -15,7 +16,8 @@
                 "name": "model",
                 "type": "object"
             }
-        ]
+        ],
+        "result": "any"
     },
     "type": {
         "params": [
@@ -23,7 +25,8 @@
                 "name": "type",
                 "type": "object"
             }
-        ]
+        ],
+        "result": "any"
     },
     "create": {
         "params": []

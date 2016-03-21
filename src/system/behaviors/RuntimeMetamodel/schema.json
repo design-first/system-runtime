@@ -1,7 +1,7 @@
 {
 	"component": "RuntimeMetamodel",
 	"state": "schema",
-	"action": "function schema(schema) {\n    $metamodel.schema(schema);\n}",
+	"action": "function schema(schema) {\n    return $metamodel.schema(schema);\n}",
 	"core": true,
 	"useCoreAPI": true
 }
