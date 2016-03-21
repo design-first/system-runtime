@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.1.5</b>
+                    API Docs for Version: <b>1.2.0</b>
                 </p>
             </li>
         </div>
@@ -1455,7 +1455,7 @@ function isValidSchema(object, schema) {
     for (fieldName in schema) {
         field = schema[fieldName];
         mandatory = field.mandatory;
-        if (mandatory === true &amp;&amp; hasType(object[fieldName], &#x27;undefined&#x27;)) {
+        if (mandatory === true &amp;&amp; (hasType(object[fieldName], &#x27;undefined&#x27;) &amp;&amp; object[fieldName] !== undefined)) {
             $log.missingProperty(fieldName);
             result = false;
             break;
