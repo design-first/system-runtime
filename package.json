@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Runtime, the JSON Runtime Environment",
     "homepage": "https://system-runtime.github.io",
     "keywords": [
