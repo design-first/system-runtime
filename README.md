@@ -98,17 +98,17 @@ You can create components in Runtime:
 // require Runtime metamodel
 var metamodel = runtime.require('metamodel');
 
-// define your component class
+// define a component class
 metamodel.schema({
     '_name': 'Jedi',
     'firstName': 'property',
     'lastName': 'property'
 });
 
-// create your model
+// create a model
 metamodel.create();
 
-// create your component
+// create a component
 var Jedi = runtime.require('Jedi');
 var luke = new Jedi({
     'firstName': 'Luke',
