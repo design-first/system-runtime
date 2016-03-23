@@ -320,6 +320,11 @@ function createClass(classId) {
         config = config || {};
         var body = {};
 
+        if (config.constructor.name !== 'Object') {
+            $log.invalidConctructorParameters(config, classId);
+            config = {};
+        }
+
         if (!$metamodel.isValidObject(config, $metamodel.getModel(classId), true, true)) {
             $log.invalidParameters(classId);
         }

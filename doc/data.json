@@ -2,7 +2,7 @@
     "project": {
         "name": "system-runtime",
         "description": "Runtime, the JSON Runtime Environment",
-        "version": "1.2.0",
+        "version": "1.2.1",
         "url": "https://system-runtime.github.io"
     },
     "files": {
@@ -198,7 +198,7 @@
             "module": "runtime",
             "namespace": "",
             "file": "src/component.js",
-            "line": 970,
+            "line": 975,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by Runtime.",
             "requires": [
                 "runtime-workflow",
@@ -267,7 +267,7 @@
             "module": "runtime",
             "namespace": "",
             "file": "src/log.js",
-            "line": 483,
+            "line": 494,
             "description": "This module contains all the functions that write a log.",
             "requires": [
                 "runtime-helper"
@@ -396,7 +396,7 @@
             "submodule": "runtime-component",
             "namespace": "",
             "file": "src/component.js",
-            "line": 970,
+            "line": 975,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by Runtime.",
             "requires": [
                 "runtime-workflow",
@@ -481,7 +481,7 @@
             "submodule": "runtime-log",
             "namespace": "",
             "file": "src/log.js",
-            "line": 483,
+            "line": 494,
             "description": "This module contains all the functions that write a log.",
             "requires": [
                 "runtime-helper"
@@ -749,7 +749,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 987,
+            "line": 992,
             "description": "Create a component from its configuration.",
             "itemtype": "method",
             "name": "create",
@@ -770,7 +770,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 997,
+            "line": 1002,
             "description": "Get a component by its id.",
             "itemtype": "method",
             "name": "get",
@@ -791,7 +791,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 1006,
+            "line": 1011,
             "description": "Remove a component with its id from the memory.",
             "itemtype": "method",
             "name": "removeFromMemory",
@@ -808,7 +808,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 1014,
+            "line": 1019,
             "description": "Remove all the components store in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -818,7 +818,7 @@
         },
         {
             "file": "src/component.js",
-            "line": 1021,
+            "line": 1026,
             "description": "Destroy a component from its id.",
             "itemtype": "method",
             "name": "destroy",
@@ -1131,7 +1131,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 494,
+            "line": 505,
             "description": "A property of a schema is unknown.",
             "itemtype": "method",
             "name": "unknownProperty",
@@ -1153,7 +1153,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 503,
+            "line": 514,
             "description": "Invalid type for a property.",
             "itemtype": "method",
             "name": "invalidPropertyType",
@@ -1180,7 +1180,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 513,
+            "line": 524,
             "description": "Invalid value for a type enum.",
             "itemtype": "method",
             "name": "invalidEnumValue",
@@ -1202,7 +1202,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 522,
+            "line": 533,
             "description": "Invalid class name for a component.",
             "itemtype": "method",
             "name": "invalidClassName",
@@ -1229,7 +1229,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 532,
+            "line": 543,
             "description": "Missing a property.",
             "itemtype": "method",
             "name": "missingProperty",
@@ -1246,7 +1246,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 540,
+            "line": 551,
             "description": "A class definition is missing.",
             "itemtype": "method",
             "name": "missingImplementation",
@@ -1268,7 +1268,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 549,
+            "line": 560,
             "description": "Invalid type for a property of a class definition.",
             "itemtype": "method",
             "name": "invalidTypeImp",
@@ -1290,7 +1290,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 558,
+            "line": 569,
             "description": "Missing a property for a class definition.",
             "itemtype": "method",
             "name": "missingPropertyImp",
@@ -1312,7 +1312,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 567,
+            "line": 578,
             "description": "Unkown property for a class definition.",
             "itemtype": "method",
             "name": "unknownPropertyImp",
@@ -1334,7 +1334,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 576,
+            "line": 587,
             "description": "Try to add an invalid type.",
             "itemtype": "method",
             "name": "invalidTypeDefinition",
@@ -1351,7 +1351,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 584,
+            "line": 595,
             "description": "Invalid property type.",
             "itemtype": "method",
             "name": "invalidPropertyName",
@@ -1383,7 +1383,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 595,
+            "line": 606,
             "description": "Trying to set a read-only property.",
             "itemtype": "method",
             "name": "readOnlyProperty",
@@ -1405,7 +1405,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 604,
+            "line": 615,
             "description": "Invalid document on a Runtime database insert operation.",
             "itemtype": "method",
             "name": "invalidDocumentOnDbInsert",
@@ -1427,7 +1427,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 613,
+            "line": 624,
             "description": "Invalid property on a Runtime database update operation.",
             "itemtype": "method",
             "name": "invalidPropertyTypeOnDbUpdate",
@@ -1464,7 +1464,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 625,
+            "line": 636,
             "description": "Call an unknown method of a class.",
             "itemtype": "method",
             "name": "unknownMethod",
@@ -1486,7 +1486,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 634,
+            "line": 645,
             "description": "Try to create an invalid RuntimeDatabaseCollection.",
             "itemtype": "method",
             "name": "invalidCollectionName",
@@ -1503,7 +1503,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 642,
+            "line": 653,
             "description": "Invalid result type of a method.",
             "itemtype": "method",
             "name": "invalidResultType",
@@ -1525,7 +1525,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 651,
+            "line": 662,
             "description": "Unknown class.",
             "itemtype": "method",
             "name": "unknownComponent",
@@ -1547,7 +1547,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 660,
+            "line": 671,
             "description": "The Runtime workflow has been restarted.",
             "itemtype": "method",
             "name": "workflowRestarted",
@@ -1557,7 +1557,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 667,
+            "line": 678,
             "description": "Invalid parameter number for a method.",
             "itemtype": "method",
             "name": "invalidParamNumber",
@@ -1579,7 +1579,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 676,
+            "line": 687,
             "description": "Invalid type parameters for a method.",
             "itemtype": "method",
             "name": "invalidParamType",
@@ -1606,7 +1606,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 687,
+            "line": 698,
             "description": "Add a more than one behavior to a state.",
             "itemtype": "method",
             "name": "behaviorNotUnique",
@@ -1628,7 +1628,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 696,
+            "line": 707,
             "description": "Can not add a behavior with an invalid state.",
             "itemtype": "method",
             "name": "invalidStateOn",
@@ -1650,7 +1650,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 705,
+            "line": 716,
             "description": "The call to a remove state of the behavior module is invalid.",
             "itemtype": "method",
             "name": "invalidStateOff",
@@ -1672,7 +1672,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 714,
+            "line": 725,
             "description": "The master system is not found.",
             "itemtype": "method",
             "name": "masterSystemNotFound",
@@ -1682,7 +1682,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 721,
+            "line": 732,
             "description": "Invalid type.",
             "itemtype": "method",
             "name": "invalidType",
@@ -1704,7 +1704,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 730,
+            "line": 741,
             "description": "Unknown type.",
             "itemtype": "method",
             "name": "unknownType",
@@ -1721,7 +1721,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 738,
+            "line": 749,
             "description": "A component has not been alreay created.",
             "itemtype": "method",
             "name": "canNotYetValidate",
@@ -1743,7 +1743,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 747,
+            "line": 758,
             "description": "A message send by the channel is invalid",
             "itemtype": "method",
             "name": "invalidChannelEvent",
@@ -1770,7 +1770,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 757,
+            "line": 768,
             "description": "invalid parameter number for an action add with on method.",
             "itemtype": "method",
             "name": "invalidParamNumberMethodOn",
@@ -1792,7 +1792,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 766,
+            "line": 777,
             "description": "Change the id of a component.",
             "itemtype": "method",
             "name": "updateUuid",
@@ -1819,7 +1819,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 776,
+            "line": 787,
             "description": "Unkonw property on a Runtime database update operation.",
             "itemtype": "method",
             "name": "unknownPropertyOnDbUpdate",
@@ -1841,7 +1841,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 785,
+            "line": 796,
             "description": "Try to change the state of a component that has been destroyed",
             "itemtype": "method",
             "name": "invalideUseOfComponent",
@@ -1858,7 +1858,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 793,
+            "line": 804,
             "description": "Try to add an invalid schema.",
             "itemtype": "method",
             "name": "invalidSchema",
@@ -1875,7 +1875,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 801,
+            "line": 812,
             "description": "Try to add an invalid model.",
             "itemtype": "method",
             "name": "invalidModel",
@@ -1892,7 +1892,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 809,
+            "line": 820,
             "description": "Invalid parameters set when creating an instance of a class.",
             "itemtype": "method",
             "name": "invalidParameters",
@@ -1909,7 +1909,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 817,
+            "line": 828,
             "description": "Try to get the property of a destroyed component.",
             "itemtype": "method",
             "name": "destroyedComponentCall",
@@ -1922,6 +1922,28 @@
                 {
                     "name": "id",
                     "description": "id of the component",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "src/log.js",
+            "line": 837,
+            "description": "Invalid parameter type  when creating an instance of a class.",
+            "itemtype": "method",
+            "name": "invalidConctructorParameters",
+            "params": [
+                {
+                    "name": "classId",
+                    "description": "class name of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "schema name",
                     "type": "String"
                 }
             ],

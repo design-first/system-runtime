@@ -477,6 +477,17 @@ function destroyedComponentCall(propertyName, id) {
 }
 
 
+/*
+ * Invalid parameter type  when creating an instance of a class.
+ * @method invalidConctructorParameters
+ * @param {String} classId class name of the component
+ * @param {String} name schema name
+ */
+function invalidConctructorParameters(object, name) {
+    $helper.getRuntime().warning("the constructor parameter '" + JSON.stringify(object) + "' for creating a component of class '" + name + "' is not an object");
+}
+
+
 /* exports */
 
 
@@ -821,3 +832,12 @@ exports.invalidParameters = invalidParameters;
  * @param {String} id id of the component
  */
 exports.destroyedComponentCall = destroyedComponentCall;
+
+
+/**
+ * Invalid parameter type  when creating an instance of a class.
+ * @method invalidConctructorParameters
+ * @param {String} classId class name of the component
+ * @param {String} name schema name
+ */
+exports.invalidConctructorParameters = invalidConctructorParameters;

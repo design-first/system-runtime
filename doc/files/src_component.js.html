@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.2.0</b>
+                    API Docs for Version: <b>1.2.1</b>
                 </p>
             </li>
         </div>
@@ -408,6 +408,11 @@ function createClass(classId) {
     var body = function(config) {
         config = config || {};
         var body = {};
+
+        if (config.constructor.name !== &#x27;Object&#x27;) {
+            $log.invalidConctructorParameters(config, classId);
+            config = {};
+        }
 
         if (!$metamodel.isValidObject(config, $metamodel.getModel(classId), true, true)) {
             $log.invalidParameters(classId);

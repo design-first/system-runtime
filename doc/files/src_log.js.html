@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.2.0</b>
+                    API Docs for Version: <b>1.2.1</b>
                 </p>
             </li>
         </div>
@@ -566,6 +566,17 @@ function destroyedComponentCall(propertyName, id) {
 }
 
 
+/*
+ * Invalid parameter type  when creating an instance of a class.
+ * @method invalidConctructorParameters
+ * @param {String} classId class name of the component
+ * @param {String} name schema name
+ */
+function invalidConctructorParameters(object, name) {
+    $helper.getRuntime().warning(&quot;the constructor parameter &#x27;&quot; + JSON.stringify(object) + &quot;&#x27; for creating a component of class &#x27;&quot; + name + &quot;&#x27; is not an object&quot;);
+}
+
+
 /* exports */
 
 
@@ -910,6 +921,15 @@ exports.invalidParameters = invalidParameters;
  * @param {String} id id of the component
  */
 exports.destroyedComponentCall = destroyedComponentCall;
+
+
+/**
+ * Invalid parameter type  when creating an instance of a class.
+ * @method invalidConctructorParameters
+ * @param {String} classId class name of the component
+ * @param {String} name schema name
+ */
+exports.invalidConctructorParameters = invalidConctructorParameters;
     </pre>
 </div>
                     </div>
