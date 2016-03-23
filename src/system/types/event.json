@@ -3,7 +3,13 @@
     "type": "object",
     "schema": {
         "params": {
-            "type": ["parameter"],
+            "type": [
+                "parameter"
+            ],
+            "mandatory": false
+        },
+        "description": {
+            "type": "string",
             "mandatory": false
         }
     },

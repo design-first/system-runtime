@@ -133,7 +133,8 @@ function generateModels() {
                         "type": "any",
                         "readOnly": false,
                         "mandatory": false,
-                        "default": undefined
+                        "default": undefined,
+                        "description": att
                     };
                     break;
                 case schema[att] === 'link':
@@ -141,7 +142,8 @@ function generateModels() {
                         "type": "@RuntimeComponent",
                         "readOnly": false,
                         "mandatory": false,
-                        "default": {}
+                        "default": {},
+                        "description": att
                     };
                     break;
                 case schema[att] === 'method':
@@ -153,7 +155,8 @@ function generateModels() {
                                 "mandatory": false
                             }
                         ],
-                        "result": "any"
+                        "result": "any",
+                        "description": att
                     };
                     break;
                 case schema[att] === 'event':
@@ -164,7 +167,8 @@ function generateModels() {
                                 "type": "any",
                                 "mandatory": false
                             }
-                        ]
+                        ],
+                        "description": att
                     };
                     break;
                 case schema[att] === 'collection':
@@ -172,7 +176,8 @@ function generateModels() {
                         "type": ["@RuntimeComponent"],
                         "readOnly": false,
                         "mandatory": false,
-                        "default": []
+                        "default": [],
+                        "description": att
                     };
                     break;
                 default:

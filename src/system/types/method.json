@@ -7,7 +7,13 @@
             "mandatory": false
         },
         "params": {
-            "type": ["parameter"],
+            "type": [
+                "parameter"
+            ],
+            "mandatory": false
+        },
+        "description": {
+            "type": "string",
             "mandatory": false
         }
     },

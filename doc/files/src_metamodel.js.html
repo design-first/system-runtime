@@ -222,7 +222,8 @@ function generateModels() {
                         &quot;type&quot;: &quot;any&quot;,
                         &quot;readOnly&quot;: false,
                         &quot;mandatory&quot;: false,
-                        &quot;default&quot;: undefined
+                        &quot;default&quot;: undefined,
+                        &quot;description&quot;: att
                     };
                     break;
                 case schema[att] === &#x27;link&#x27;:
@@ -230,7 +231,8 @@ function generateModels() {
                         &quot;type&quot;: &quot;@RuntimeComponent&quot;,
                         &quot;readOnly&quot;: false,
                         &quot;mandatory&quot;: false,
-                        &quot;default&quot;: {}
+                        &quot;default&quot;: {},
+                        &quot;description&quot;: att
                     };
                     break;
                 case schema[att] === &#x27;method&#x27;:
@@ -242,7 +244,8 @@ function generateModels() {
                                 &quot;mandatory&quot;: false
                             }
                         ],
-                        &quot;result&quot;: &quot;any&quot;
+                        &quot;result&quot;: &quot;any&quot;,
+                        &quot;description&quot;: att
                     };
                     break;
                 case schema[att] === &#x27;event&#x27;:
@@ -253,7 +256,8 @@ function generateModels() {
                                 &quot;type&quot;: &quot;any&quot;,
                                 &quot;mandatory&quot;: false
                             }
-                        ]
+                        ],
+                        &quot;description&quot;: att
                     };
                     break;
                 case schema[att] === &#x27;collection&#x27;:
@@ -261,7 +265,8 @@ function generateModels() {
                         &quot;type&quot;: [&quot;@RuntimeComponent&quot;],
                         &quot;readOnly&quot;: false,
                         &quot;mandatory&quot;: false,
-                        &quot;default&quot;: []
+                        &quot;default&quot;: [],
+                        &quot;description&quot;: att
                     };
                     break;
                 default:

@@ -17,6 +17,10 @@
         "default": {
             "type": "@type",
             "mandatory": true
+        },
+        "description": {
+            "type": "string",
+            "mandatory": false
         }
     },
     "core": true

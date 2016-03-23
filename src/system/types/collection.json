@@ -3,7 +3,9 @@
     "type": "object",
     "schema": {
         "type": {
-            "type": ["string"],
+            "type": [
+                "string"
+            ],
             "mandatory": true
         },
         "readOnly": {
@@ -17,6 +19,10 @@
         "default": {
             "type": "object",
             "mandatory": true
+        },
+        "description": {
+            "type": "string",
+            "mandatory": false
         }
     },
     "core": true
