@@ -301,34 +301,99 @@ function loadInMemory() {
  */
 function createInheritanceTree() {
     var name = '',
-        ancestorName = null,
-        i = 0,
-        nbParents = 0;
+    c3linerization = [],
+    ancestors = [];
 
-    function _getAncestors(name, ancestorName) {
+    function _isEmpty(elts) {
         var i = 0,
-            nbParents = 0;
+            length = 0,
+            result = true;
 
-        if (store.inheritance[ancestorName]) {
-            nbParents = store.inheritance[ancestorName].length;
-            if (nbParents) {
-                store.inheritanceTree[name] = store.inheritanceTree[name].concat(store.inheritance[ancestorName]);
-                for (i = 0; i < nbParents; i++) {
-                    _getAncestors(name, store.inheritance[ancestorName][i]);
-                }
+        length = elts.length;
+        for (i = 0; i < length; i++) {
+            if (elts[i].length) {
+                result = false;
+            }
+        }
+        return result;
+    }
+
+    function _removeCandidate(elt, elts) {
+        var i = 0,
+            length = 0,
+            arr = [];
+
+        length = elts.length;
+        for (i = 0; i < length; i++) {
+            if (elts[i].indexOf(elt) === 0) {
+                arr = elts[i];
+                arr.reverse();
+                arr.pop();
+                arr.reverse();
+                elts[i] = arr;
             }
         }
     }
 
-    for (name in store.inheritance) {
-        nbParents = store.inheritance[name].length;
-        if (nbParents) {
-            store.inheritanceTree[name] = store.inheritance[name];
-        }
-        for (i = 0; i < nbParents; i++) {
-            ancestorName = store.inheritance[name][i];
+    function _isCandidate(elt, elts) {
+        var result = true,
+            i = 0,
+            length = 0;
 
-            _getAncestors(name, ancestorName);
+        length = elts.length;
+        for (i = 0; i < length; i++) {
+            if (elts[i].indexOf(elt) > 0) {
+                result = false;
+            }
+        }
+
+        return result;
+    }
+
+    function _findCandidate(elts) {
+        var i = 0,
+            length = 0,
+            result = [];
+
+        length = elts.length;
+        for (i = 0; i < length; i++) {
+            if (_isCandidate(elts[i][0], elts)) {
+                result = elts[i][0];
+                _removeCandidate(elts[i][0], elts);
+                break;
+            }
+        }
+        return [result];
+    }
+
+    function _merge(elts) {
+        var result = [];
+
+        while (!_isEmpty(elts)) {
+            result = result.concat(_findCandidate(elts));
+        }
+        return result;
+    }
+
+    function _linerize(name) {
+        var result = [],
+            parents = store.inheritance[name].slice();
+
+        if (parents.length) {
+            result = [name].concat(_merge(parents.map(_linerize).concat([parents])));
+        } else {
+            result = [name];
+        }
+        return result;
+    }
+
+    for (name in store.inheritance) {
+        c3linerization = _linerize(name);
+        ancestors = c3linerization.reverse();
+        ancestors.pop();
+        ancestors.reverse();
+        if (ancestors.length) {
+            store.inheritanceTree[name] = ancestors;
         }
     }
 }

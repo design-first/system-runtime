@@ -41,7 +41,7 @@ describe('a MSON schema', function () {
 
         metamodel.schema({
             '_name': 'Teacher_test',
-            '_inherit': ['RuntimeComponent', 'Person_test'],
+            '_inherit': ['Person_test'],
             'description': 'string',
             'firstName': 'property',
             'lastName': 'property',
@@ -51,7 +51,7 @@ describe('a MSON schema', function () {
         metamodel.model({
             '_name': 'Teacher_test',
             '_schema': 'Person_test',
-            '_inherit': ['RuntimeComponent', 'Person_test'],
+            '_inherit': ['Person_test'],
             'description': 'a person',
             'firstName': {
                 'type': 'string',
