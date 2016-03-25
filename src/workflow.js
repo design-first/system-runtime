@@ -92,7 +92,12 @@ function getParamNames(id, methodName) {
         length = 0,
         i = 0;
 
-    method = $metamodel.getModel(id)[methodName];
+    if ($metamodel.getModel(id)) {
+        method = $metamodel.getModel(id)[methodName];
+    } else {
+        $log.unknownModel(id);
+    }
+
     if (method) {
         params = method.params;
         if (params) {
@@ -717,12 +722,16 @@ function stop(params) {
 
     if (params.error) {
         if (params.message) {
-            throw new RuntimeError("runtime has been stopped because " + params.message);
+            throw new RuntimeError('runtime has been stopped because ' + params.message);
         } else {
-            throw new RuntimeError("runtime has been stopped because of an unknown error");
+            throw new RuntimeError('runtime has been stopped because of an unknown error');
         }
     } else {
-        console.warn('runtime: runtime has been stopped');
+        if (params.message) {
+            console.error('runtime: runtime has been stopped because ' + params.message);
+        } else {
+            console.error('runtime: runtime has been stopped');
+        }
     }
 }
 

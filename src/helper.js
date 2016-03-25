@@ -41,6 +41,7 @@
 
 var $db = require('./db.js');
 var $component = require('./component.js');
+var $metamodel = require('./metamodel.js');
 
 
 /* Private property */
@@ -82,14 +83,26 @@ function getRuntime() {
             runtimeRef = $component.get(runtimeId);
         } else {
             runtimeRef = {
-                error: function error(err, data) {
-                    console.error('runtime: ' + err, data);
+                error: function error(err) {
+                    console.error('runtime: ' + err.message, err.error);
                 },
                 warning: function warning(message) {
                     console.warn('runtime: ' + message);
                 }
             };
         }
+    }
+
+    // case of metamodel creation
+    if (!$metamodel.getModel('Runtime')) {
+        runtimeRef = {
+            error: function error(err) {
+                console.error('runtime: ' + err.message, err.error);
+            },
+            warning: function warning(message) {
+                console.warn('runtime: ' + message);
+            }
+        };
     }
 
     return runtimeRef;
@@ -119,12 +132,12 @@ function polyfill() {
     // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer
     if (Function.prototype.name === undefined && Object.defineProperty !== undefined) {
         Object.defineProperty(Function.prototype, 'name', {
-            get: function () {
+            get: function() {
                 var funcNameRegex = /function\s([^(]{1,})\(/;
                 var results = (funcNameRegex).exec((this).toString());
                 return (results && results.length > 1) ? results[1].trim() : "";
             },
-            set: function (value) { }
+            set: function(value) { }
         });
     }
 }

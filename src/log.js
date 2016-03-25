@@ -488,6 +488,16 @@ function invalidConctructorParameters(object, name) {
 }
 
 
+/*
+ * Get the information of an unkown model.
+ * @method unknownModel
+ * @param {String} classId id of the class
+ */
+function unknownModel(classId) {
+    $helper.getRuntime().warning("try get the information of an unknown model '" + classId + "'");
+}
+
+
 /* exports */
 
 
@@ -841,3 +851,11 @@ exports.destroyedComponentCall = destroyedComponentCall;
  * @param {String} name schema name
  */
 exports.invalidConctructorParameters = invalidConctructorParameters;
+
+
+/**
+ * Get the information of an unkown model.
+ * @method unknownModel
+ * @param {String} classId id of the class
+ */
+exports.unknownModel = unknownModel;

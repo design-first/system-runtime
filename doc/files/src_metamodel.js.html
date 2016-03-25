@@ -390,9 +390,15 @@ function loadInMemory() {
  */
 function createInheritanceTree() {
     var name = &#x27;&#x27;,
-    c3linerization = [],
-    ancestors = [];
+        c3linerization = [],
+        ancestors = [];
 
+    /*
+     * Check if we have finisehd to linerize.
+     * @param {Array} elts array of elts
+     * @return {Boolean} true if all the arrays are empty
+     * @private
+     */
     function _isEmpty(elts) {
         var i = 0,
             length = 0,
@@ -407,6 +413,12 @@ function createInheritanceTree() {
         return result;
     }
 
+    /*
+     * Remove an elt from all the arrays.
+     * @param {String} elt element to remove
+     * @param {Array} elts array of elts
+     * @private
+     */
     function _removeCandidate(elt, elts) {
         var i = 0,
             length = 0,
@@ -424,6 +436,13 @@ function createInheritanceTree() {
         }
     }
 
+    /*
+     * Check the element is a good candidate.
+     * @param {String} elt element to remove
+     * @param {Array} elts array of elts
+     * @return {Boolean} true if the element is a good candidate.
+     * @private
+     */
     function _isCandidate(elt, elts) {
         var result = true,
             i = 0,
@@ -439,6 +458,12 @@ function createInheritanceTree() {
         return result;
     }
 
+    /*
+     * Find a candidate and return it.
+     * @param {Array} elts array of elts
+     * @return {Array} array containing the candidate
+     * @private
+     */
     function _findCandidate(elts) {
         var i = 0,
             length = 0,
@@ -447,23 +472,45 @@ function createInheritanceTree() {
         length = elts.length;
         for (i = 0; i &lt; length; i++) {
             if (_isCandidate(elts[i][0], elts)) {
-                result = elts[i][0];
+                result.push(elts[i][0]);
                 _removeCandidate(elts[i][0], elts);
                 break;
             }
         }
-        return [result];
+        return result;
     }
 
+    /*
+     * Merge the arrays.
+     * @param {Array} elts array of elts
+     * @return {Array} list of candidates returned by the merge
+     * @private
+     */
     function _merge(elts) {
-        var result = [];
+        var result = [],
+            candidates = [];
 
-        while (!_isEmpty(elts)) {
-            result = result.concat(_findCandidate(elts));
+        candidates = _findCandidate(elts);
+        while (candidates[0] !== undefined) {
+            result = result.concat(candidates);
+            candidates = _findCandidate(elts);
+        }
+
+        if (!_isEmpty(elts)) {
+            $workflow.stop({
+                &#x27;error&#x27;: false,
+                &#x27;message&#x27;: &#x27;a cyclic inheritance dependency has been found, please check the \&#x27;_inherit\&#x27; properties of your schemas&#x27;
+            });
         }
         return result;
     }
 
+    /*
+     * Start the linerieation from an element.
+     * @param {String} name name of the element
+     * @return {Array} list of candidates
+     * @private
+     */
     function _linerize(name) {
         var result = [],
             parents = store.inheritance[name].slice();
