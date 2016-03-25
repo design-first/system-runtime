@@ -8,9 +8,9 @@
 
 ## What is Runtime ?
 
-#### a JSON Runtime Environment
+#### a System Runtime Environment
 
-[JSON](http://json.org) is traditionnaly used to represent data. We use this format to store the model, components and methods of your application. Runtime can run JSON that contains your application as a JRE (JSON Runtime Environment).
+[JSON](http://json.org) is traditionnaly used to represent data. We use this format to store the model, components and methods of your application. Runtime can run JSON that contains your application as a SRE (Sytem Runtime Environment).
 
 Runtime has APIs to serialize your JavaScript code into JSON. This JSON can be then imported and executed in a client or server application.
 
