@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.2.1</b>
+                    API Docs for Version: <b>1.3.0</b>
                 </p>
             </li>
         </div>
@@ -527,7 +527,6 @@ function createInheritanceTree() {
         c3linerization = _linerize(name);
         ancestors = c3linerization.reverse();
         ancestors.pop();
-        ancestors.reverse();
         if (ancestors.length) {
             store.inheritanceTree[name] = ancestors;
         }
@@ -1895,13 +1894,9 @@ function getMetaDef() {
  * @return {Array} id id of the parents
  */
 function getParents(id) {
-    var result = [],
-        schema = null;
+    var result = [];
 
-    schema = store.compiledSchemas[id];
-    if (schema) {
-        result = schema[INHERITS];
-    }
+    result = store.inheritanceTree[id];
     if (!result) {
         result = [];
     }

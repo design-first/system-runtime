@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.2.1</b>
+                    API Docs for Version: <b>1.3.0</b>
                 </p>
             </li>
         </div>
@@ -817,9 +817,9 @@ function stop(params) {
         }
     } else {
         if (params.message) {
-            console.warn(&#x27;runtime: runtime has been stopped because &#x27; + params.message);
+            console.error(&#x27;runtime: runtime has been stopped because &#x27; + params.message);
         } else {
-            console.warn(&#x27;runtime: runtime has been stopped&#x27;);
+            console.error(&#x27;runtime: runtime has been stopped&#x27;);
         }
     }
 }

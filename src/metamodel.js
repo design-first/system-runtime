@@ -438,7 +438,6 @@ function createInheritanceTree() {
         c3linerization = _linerize(name);
         ancestors = c3linerization.reverse();
         ancestors.pop();
-        ancestors.reverse();
         if (ancestors.length) {
             store.inheritanceTree[name] = ancestors;
         }
@@ -1806,13 +1805,9 @@ function getMetaDef() {
  * @return {Array} id id of the parents
  */
 function getParents(id) {
-    var result = [],
-        schema = null;
+    var result = [];
 
-    schema = store.compiledSchemas[id];
-    if (schema) {
-        result = schema[INHERITS];
-    }
+    result = store.inheritanceTree[id];
     if (!result) {
         result = [];
     }

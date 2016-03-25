@@ -2,7 +2,7 @@
     "project": {
         "name": "system-runtime",
         "description": "Runtime, the JSON Runtime Environment",
-        "version": "1.2.1",
+        "version": "1.3.0",
         "url": "https://system-runtime.github.io"
     },
     "files": {
@@ -287,7 +287,7 @@
             "module": "runtime",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1894,
+            "line": 1889,
             "description": "This module manages Runtime metamodel. <br>\nRuntime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.",
             "requires": [
                 "runtime-db",
@@ -499,7 +499,7 @@
             "submodule": "runtime-metamodel",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1894,
+            "line": 1889,
             "description": "This module manages Runtime metamodel. <br>\nRuntime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.",
             "requires": [
                 "runtime-db",
@@ -1970,7 +1970,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1909,
+            "line": 1904,
             "description": "Init the metamodel.",
             "itemtype": "method",
             "name": "init",
@@ -1980,7 +1980,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1916,
+            "line": 1911,
             "description": "Remove the data of the metamodel from the memory.",
             "itemtype": "method",
             "name": "clear",
@@ -1990,7 +1990,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1923,
+            "line": 1918,
             "description": "Add a new schema.",
             "itemtype": "method",
             "name": "schema",
@@ -2007,7 +2007,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1931,
+            "line": 1926,
             "description": "Add a new model.",
             "itemtype": "method",
             "name": "model",
@@ -2024,7 +2024,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1939,
+            "line": 1934,
             "description": "Add a new type.",
             "itemtype": "method",
             "name": "type",
@@ -2041,7 +2041,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1947,
+            "line": 1942,
             "description": "Create the metamodel.",
             "itemtype": "method",
             "name": "create",
@@ -2051,7 +2051,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1954,
+            "line": 1949,
             "description": "Get a schema.",
             "itemtype": "method",
             "name": "getSchema",
@@ -2072,7 +2072,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1963,
+            "line": 1958,
             "description": "Get a model.",
             "itemtype": "method",
             "name": "getModel",
@@ -2093,7 +2093,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1972,
+            "line": 1967,
             "description": "Get the definition of the metamodel.",
             "itemtype": "method",
             "name": "getMetaDef",
@@ -2107,7 +2107,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1980,
+            "line": 1975,
             "description": "Get parents of a shema if any.",
             "itemtype": "method",
             "name": "getParents",
@@ -2128,7 +2128,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1989,
+            "line": 1984,
             "description": "Check if a class inherits from another one",
             "itemtype": "method",
             "name": "inheritFrom",
@@ -2154,7 +2154,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1999,
+            "line": 1994,
             "description": "Check if the object is compliant with the schema.\nUse it to test if the constructor of an object is compliant\nwith the definition of the class.",
             "itemtype": "method",
             "name": "isValidObject",
@@ -2190,7 +2190,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2013,
+            "line": 2008,
             "description": "Prepare the object in order to be compliant with the schema.",
             "itemtype": "method",
             "name": "prepareObject",
@@ -2212,7 +2212,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2022,
+            "line": 2017,
             "description": "Check if a value is compliant with a type.",
             "itemtype": "method",
             "name": "isValidType",
@@ -2238,7 +2238,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2032,
+            "line": 2027,
             "description": "Check if a value is compliant with a type enum.",
             "itemtype": "method",
             "name": "isValidEnum",
@@ -2264,7 +2264,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2042,
+            "line": 2037,
             "description": "Check if the name is a correct state for the component.",
             "itemtype": "method",
             "name": "isValidState",
@@ -2290,7 +2290,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2052,
+            "line": 2047,
             "description": "Check if an attribute of the schema is an event.",
             "itemtype": "method",
             "name": "isEvent",
@@ -2316,7 +2316,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2062,
+            "line": 2057,
             "description": "Check if an attribute of the schema is a property.",
             "itemtype": "method",
             "name": "isProperty",
@@ -2342,7 +2342,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2072,
+            "line": 2067,
             "description": "Check if an attribute of the schema is a link.",
             "itemtype": "method",
             "name": "isLink",
@@ -2368,7 +2368,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2082,
+            "line": 2077,
             "description": "Check if an attribute of the schema is a collection.",
             "itemtype": "method",
             "name": "isCollection",
@@ -2394,7 +2394,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2092,
+            "line": 2087,
             "description": "Check if an attribute of the schema is a method.",
             "itemtype": "method",
             "name": "isMethod",
