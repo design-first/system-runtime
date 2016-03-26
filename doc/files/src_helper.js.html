@@ -89,7 +89,7 @@
     <pre class="prettyprint linenums">
 /*
  * Runtime
- * The JSON Runtime Environment
+ * The System Runtime Environment
  * https://system-runtime.github.io
  * @ecarriou
  *  
@@ -172,6 +172,9 @@ function getRuntime() {
             runtimeRef = $component.get(runtimeId);
         } else {
             runtimeRef = {
+                require: function require(id) {
+                    return &#x27;&#x27;;
+                },
                 error: function error(err) {
                     console.error(&#x27;runtime: &#x27; + err.message, err.error);
                 },
@@ -185,6 +188,9 @@ function getRuntime() {
     // case of metamodel creation
     if (!$metamodel.getModel(&#x27;Runtime&#x27;)) {
         runtimeRef = {
+            require: function require(id) {
+                return &#x27;&#x27;;
+            },
             error: function error(err) {
                 console.error(&#x27;runtime: &#x27; + err.message, err.error);
             },

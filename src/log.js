@@ -1,6 +1,6 @@
 /*
  * Runtime
- * The JSON Runtime Environment
+ * The System Runtime Environment
  * https://system-runtime.github.io
  * @ecarriou
  *  
@@ -263,9 +263,15 @@ function invalidCollectionName(name) {
  * @method invalidResultType
  * @param {String} id id of the component
  * @param {String} methodName name ot the method
+ * @param {String} expectedType expected type
+ * @param {String} type current type
  */
-function invalidResultType(id, methodName) {
-    $helper.getRuntime().warning("invalid type on the result of method '" + methodName + "' on component '" + id + "'");
+function invalidResultType(id, methodName, expectedType, type) {
+    if (type) {
+        $helper.getRuntime().warning("invalid type for the result of method '" + methodName + "' on component '" + id + "': expected type '" + expectedType + "' instead of type '" + type + "'");
+    } else {
+        $helper.getRuntime().warning("invalid type for the result of method '" + methodName + "' on component '" + id + "': expected type '" + expectedType + "'");
+    }
 }
 
 
@@ -351,7 +357,7 @@ function invalidStateOff(id, stateName) {
  * @method masterSystemNotFound
  */
 function masterSystemNotFound() {
-    $helper.getRuntime().warning("the master system is not found");
+    $helper.getRuntime().warning("can not export the database because no system was defined");
 }
 
 
@@ -497,6 +503,15 @@ function unknownModel(classId) {
     $helper.getRuntime().warning("try get the information of an unknown model '" + classId + "'");
 }
 
+
+/**
+ * A schema is missing.
+ * @method missingSchema
+ * @param {String} name name of the schema
+ */
+function missingSchema(name) {
+    $helper.getRuntime().warning("the schema '" + name + "' is missing");
+}
 
 /* exports */
 
@@ -661,10 +676,12 @@ exports.invalidCollectionName = invalidCollectionName;
 
 
 /**
- * Invalid result type of a method.
+ * Invalid type result of a method.
  * @method invalidResultType
  * @param {String} id id of the component
  * @param {String} methodName name ot the method
+ * @param {String} expectedType expected type
+ * @param {String} type current type
  */
 exports.invalidResultType = invalidResultType;
 
@@ -859,3 +876,11 @@ exports.invalidConctructorParameters = invalidConctructorParameters;
  * @param {String} classId id of the class
  */
 exports.unknownModel = unknownModel;
+
+
+/**
+ * A schema is missing.
+ * @method missingSchema
+ * @param {String} name name of the schema
+ */
+exports.missingSchema = missingSchema;

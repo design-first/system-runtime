@@ -1,6 +1,6 @@
 /*
  * Runtime
- * The JSON Runtime Environment
+ * The System Runtime Environment
  * https://system-runtime.github.io
  * @ecarriou
  *  
@@ -83,6 +83,9 @@ function getRuntime() {
             runtimeRef = $component.get(runtimeId);
         } else {
             runtimeRef = {
+                require: function require(id) {
+                    return '';
+                },
                 error: function error(err) {
                     console.error('runtime: ' + err.message, err.error);
                 },
@@ -96,6 +99,9 @@ function getRuntime() {
     // case of metamodel creation
     if (!$metamodel.getModel('Runtime')) {
         runtimeRef = {
+            require: function require(id) {
+                return '';
+            },
             error: function error(err) {
                 console.error('runtime: ' + err.message, err.error);
             },

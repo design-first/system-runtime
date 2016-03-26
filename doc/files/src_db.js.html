@@ -89,7 +89,7 @@
     <pre class="prettyprint linenums">
 /*
  * Runtime
- * The JSON Runtime Environment
+ * The System Runtime Environment
  * https://system-runtime.github.io
  * @ecarriou
  *  
@@ -525,7 +525,7 @@ RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
                             if ($metamodel.isValidType(update[attributeName], type)) {
                                 docs[i][attributeName] = update[attributeName];
                                 updated = updated + 1;
-                                if ($helper.isRuntime()) {
+                                if ($helper.isRuntime() &amp;&amp; $helper.getRuntime().require(&#x27;db&#x27;)) {
                                     $helper.getRuntime().require(&#x27;db&#x27;).update(this.name, docs[i]._id, attributeName, update[attributeName]);
                                 }
                                 $workflow.state({
@@ -548,7 +548,7 @@ RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
                         // TODO more check in case of schema update
                         docs[i][attributeName] = update[attributeName];
                         updated = updated + 1;
-                        if ($helper.isRuntime()) {
+                        if ($helper.isRuntime() &amp;&amp; $helper.getRuntime().require(&#x27;db&#x27;)) {
                             $helper.getRuntime().require(&#x27;db&#x27;).update(this.name, docs[i]._id, attributeName, update[attributeName]);
                         }
                     }
@@ -769,6 +769,7 @@ function system(importedSystem) {
 
             result = JSON.stringify(exportedSystem);
         } else {
+            result = &quot;{}&quot;;
             $log.masterSystemNotFound();
         }
     }

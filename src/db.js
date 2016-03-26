@@ -1,6 +1,6 @@
 /*
  * Runtime
- * The JSON Runtime Environment
+ * The System Runtime Environment
  * https://system-runtime.github.io
  * @ecarriou
  *  
@@ -436,7 +436,7 @@ RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
                             if ($metamodel.isValidType(update[attributeName], type)) {
                                 docs[i][attributeName] = update[attributeName];
                                 updated = updated + 1;
-                                if ($helper.isRuntime()) {
+                                if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                                     $helper.getRuntime().require('db').update(this.name, docs[i]._id, attributeName, update[attributeName]);
                                 }
                                 $workflow.state({
@@ -459,7 +459,7 @@ RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
                         // TODO more check in case of schema update
                         docs[i][attributeName] = update[attributeName];
                         updated = updated + 1;
-                        if ($helper.isRuntime()) {
+                        if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                             $helper.getRuntime().require('db').update(this.name, docs[i]._id, attributeName, update[attributeName]);
                         }
                     }
@@ -680,6 +680,7 @@ function system(importedSystem) {
 
             result = JSON.stringify(exportedSystem);
         } else {
+            result = "{}";
             $log.masterSystemNotFound();
         }
     }

@@ -1,6 +1,6 @@
 /*
  * Runtime
- * The JSON Runtime Environment
+ * The System Runtime Environment
  * https://system-runtime.github.io
  * @ecarriou
  *  
@@ -130,7 +130,12 @@ function getParamNumber(id, methodName) {
         min = 0,
         max = 0;
 
-    method = $metamodel.getModel(id)[methodName];
+    if ($metamodel.getModel(id)) {
+        method = $metamodel.getModel(id)[methodName];
+    } else {
+        $log.unknownModel(id);
+    }
+
     if (method) {
         params = method.params;
         if (params) {
@@ -199,7 +204,12 @@ function getReturnType(id, methodName) {
     var resultType = null,
         result = null;
 
-    resultType = $metamodel.getModel(id)[methodName].result;
+    if ($metamodel.getModel(id)) {
+        resultType = $metamodel.getModel(id)[methodName].result;
+    } else {
+        $log.unknownModel(id);
+    }
+
     if (resultType) {
         result = resultType;
     }
@@ -222,7 +232,12 @@ function getParamTypes(id, methodName) {
         length = 0,
         i = 0;
 
-    method = $metamodel.getModel(id)[methodName];
+    if ($metamodel.getModel(id)) {
+        method = $metamodel.getModel(id)[methodName];
+    } else {
+        $log.unknownModel(id);
+    }
+
     if (method) {
         params = method.params;
         if (params) {
@@ -270,13 +285,13 @@ function checkResult(params) {
             case returnType === 'array':
                 if (!Array.isArray(methodResult)) {
                     result = false;
-                    $log.invalidResultType(component.id(), methodName);
+                    $log.invalidResultType(component.id(), methodName, returnType, null);
                 }
                 break;
             default:
                 if (typeof methodResult !== returnType) {
                     result = false;
-                    $log.invalidResultType(component.id(), methodName);
+                    $log.invalidResultType(component.id(), methodName, returnType, typeof methodResult);
                 }
                 break;
         }

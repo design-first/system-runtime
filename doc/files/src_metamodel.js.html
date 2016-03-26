@@ -89,7 +89,7 @@
     <pre class="prettyprint linenums">
 /*
  * Runtime
- * The JSON Runtime Environment
+ * The System Runtime Environment
  * https://system-runtime.github.io
  * @ecarriou
  *  
@@ -513,7 +513,43 @@ function createInheritanceTree() {
      */
     function _linerize(name) {
         var result = [],
+            parents = [],
+            i = 0,
+            length = 0;
+
+        /*
+         * Check if there is a cyclic dependency. 
+         * @param {String} name
+         * @param {String} item
+         * @return {Boolean} true if there is a cyclic dependency
+         * @private 
+         */
+        function _checkCyclicDep(name, item) {
+            var isCyclicDeb = false;
+
+            if (Array.isArray(store.inheritance[item]) &amp;&amp; store.inheritance[item].indexOf(name) !== -1) {
+                $workflow.stop({
+                    &#x27;error&#x27;: false,
+                    &#x27;message&#x27;: &#x27;a cyclic inheritance dependency with \’&#x27; + name + &#x27;\’ schema has been found, please check the \&#x27;_inherit\&#x27; properties of your schemas&#x27;
+                });
+                isCyclicDeb = true;
+            }
+            return isCyclicDeb;
+        }
+
+        if (Array.isArray(store.inheritance[name])) {
             parents = store.inheritance[name].slice();
+        } else {
+            $log.missingSchema(name);
+        }
+
+        length = parents.length;
+        for (i = 0; i &lt; length; i++) {
+            if (_checkCyclicDep(name, parents[i])) {
+                parents = [];
+                break;
+            }
+        }
 
         if (parents.length) {
             result = [name].concat(_merge(parents.map(_linerize).concat([parents])));
@@ -1493,7 +1529,7 @@ function isValidSchema(object, schema) {
             } else {
                 if (isReference(typeRef)) {
                     isValid = hasType(field, &#x27;object&#x27;) || hasType(field, &#x27;string&#x27;);
-                    // TODO maybe have a more stict validation that just a type checking
+                    // TODO maybe have a more strict validation than just a type checking
                 } else {
                     isValid = hasType(field, typeRef);
                 }
@@ -1660,7 +1696,7 @@ function isValidObject(object, schema, strict, cleanRef) {
 
         if (!hasType(comp, &#x27;undefined&#x27;)) {
             if (!inheritFrom(comp.constructor.name, typeRef)) {
-                //if (getClassName(comp) !== typeRef) { uncomment this case if we want a strict mode
+                //if (getClassName(comp) !== typeRef) { uncomment this line for a strict mode
                 isValid = false;
                 $log.invalidType(field, typeRef);
             } else {

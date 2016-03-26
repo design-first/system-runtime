@@ -1,6 +1,6 @@
 /*
  * Runtime v{version}
- * The JSON Runtime Environment
+ * The System Runtime Environment
  * https://system-runtime.github.io
  * @ecarriou
  *  
