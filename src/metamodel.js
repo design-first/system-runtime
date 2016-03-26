@@ -225,6 +225,10 @@ function generateModels() {
     for (modelName in store.generatedModels) {
         modelDef = store.generatedModels[modelName];
         $db.RuntimeGeneratedModel.insert(modelDef);
+
+        if (!modelDef._core) {
+            $log.generateModel(modelName);
+        }
     }
 }
 
@@ -270,6 +274,10 @@ function loadInMemory() {
         if (inherit) {
             store.inheritance[name] = inherit;
         }
+
+        if (!schema._core) {
+            $log.loadSchema(name);
+        }
     }
 
     // load models
@@ -281,6 +289,10 @@ function loadInMemory() {
         name = model[NAME];
 
         store.models[name] = model;
+
+        if (!model._core) {
+            $log.loadModel(name);
+        }
     }
 
     // load types
@@ -290,6 +302,10 @@ function loadInMemory() {
     for (i = 0; i < length; i++) {
         type = types[i];
         store.type[type.name] = type;
+
+        if (!type.core) {
+            $log.loadType(type.name);
+        }
     }
 }
 
@@ -408,10 +424,7 @@ function createInheritanceTree() {
         }
 
         if (!_isEmpty(elts)) {
-            $workflow.stop({
-                'error': false,
-                'message': 'a cyclic inheritance dependency has been found, please check the \'_inherit\' properties of your schemas'
-            });
+            $log.cyclicDependency();
         }
         return result;
     }
@@ -439,10 +452,7 @@ function createInheritanceTree() {
             var isCyclicDeb = false;
 
             if (Array.isArray(store.inheritance[item]) && store.inheritance[item].indexOf(name) !== -1) {
-                $workflow.stop({
-                    'error': false,
-                    'message': 'a cyclic inheritance dependency with \’' + name + '\’ schema has been found, please check the \'_inherit\' properties of your schemas'
-                });
+                $log.cyclicDependency(name);
                 isCyclicDeb = true;
             }
             return isCyclicDeb;
@@ -524,6 +534,10 @@ function extend(name) {
 function compileSchemas() {
     var name = '';
     for (name in store.schemas) {
+        if (!store.schemas[name]._core) {
+            $log.compileSchema(name);
+        }
+
         store.compiledSchemas[name] = extend(name);
     }
 }
@@ -544,6 +558,9 @@ function checkModels() {
         if (classDef && typeof classDef[SCHEMA] !== 'undefined') {
             schema = store.compiledSchemas[classDef[SCHEMA]];
             if (schema) {
+                if (!classDef._core) {
+                    $log.checkModel(classDef._name);
+                }
                 checkImp(classDef, schema);
             } else {
                 $log.missingImplementation(classDef[SCHEMA], classDef[NAME]);
@@ -695,6 +712,7 @@ function checkCustomSchema(value, typeName) {
  * @private
  */
 function initDbStructure() {
+    $db.collection('RuntimeLogger');
     $db.collection('RuntimeSchema');
     $db.collection('RuntimeModel');
     $db.collection('RuntimeGeneratedModel');
@@ -722,6 +740,10 @@ function createDbStructure() {
             typeof $db[modelDef[NAME]] === 'undefined' &&
             modelDef[CLASS] !== false) {
             $db.collection(modelDef[NAME]);
+
+            if (!modelDef._core) {
+                $log.createCollection(modelDef[NAME]);
+            }
         }
     }
 }
@@ -742,6 +764,9 @@ function createClass() {
             $component.create({
                 "model": modelName
             });
+            if (!modelDef._core) {
+                $log.createClass(modelName);
+            }
         }
     }
 }
@@ -1272,6 +1297,21 @@ function isValidState(name, id) {
 function isValidType(value, typeName) {
     var result = true;
 
+
+    function _isValidCustomType(value, typeName) {
+        var typeDef = store.type[typeName],
+            result = false;
+
+        if (typeDef.value.indexOf(value) !== -1) {
+            result = true;
+        }
+
+        if (result === false) {
+            $log.invalidEnumValue(value, typeName);
+        }
+        return result;
+    }
+
     function _checkReference(value, typeName) {
         var isValid = true;
         var typeRef = getReference(typeName);
@@ -1329,6 +1369,14 @@ function isValidType(value, typeName) {
         switch (true) {
             case isCustomType(typeName):
                 result = checkCustomSchema(value, typeName);
+
+                if (!result) {
+                    $log.invalidEnumType(value, typeName, store.type[typeName].type);
+                }
+
+                if (result) {
+                    result = _isValidCustomType(value, typeName);
+                }
                 break;
             case isReference(typeName):
                 result = _checkReference(value, typeName);

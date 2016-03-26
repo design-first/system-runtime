@@ -1,6 +1,0 @@
-{
-	"component": "Runtime",
-	"state": "warning",
-	"action": "function warning(message) {\n    console.warn('runtime: ' + message);\n}",
-	"core": true
-}

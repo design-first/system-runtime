@@ -1,7 +1,7 @@
 {
 	"component": "RuntimeMetamodel",
 	"state": "create",
-	"action": "function create() {\n    $metamodel.create();\n}",
+	"action": "function create() {\n        $log.modelCreationBegin(); \n        $metamodel.create();     \n        $log.modelCreationEnd();\n}",
 	"core": true,
 	"useCoreAPI": true
 }

@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.3.1</b>
+                    API Docs for Version: <b>1.3.2</b>
                 </p>
             </li>
         </div>
@@ -163,10 +163,12 @@ var store = {},
         &#x27;RuntimeSystem&#x27;,
         &#x27;RuntimeClassInfo&#x27;,
         &#x27;RuntimeMessage&#x27;,
-        &#x27;RuntimeChannel&#x27;
+        &#x27;RuntimeChannel&#x27;,
+        &#x27;RuntimeLogger&#x27;
     ],
     coreDb = [
         &#x27;RuntimeSchema&#x27;,
+        &#x27;RuntimeLogger&#x27;,
         &#x27;RuntimeModel&#x27;,
         &#x27;RuntimeGeneratedModel&#x27;,
         &#x27;RuntimeState&#x27;,
@@ -412,6 +414,7 @@ RuntimeDatabaseCollection.prototype.insert = function(document) {
 
         switch (true) {
             case this.name === &#x27;RuntimeSchema&#x27;:
+            case this.name === &#x27;RuntimeLogger&#x27;:
             case this.name === &#x27;RuntimeModel&#x27;:
             case this.name === &#x27;RuntimeType&#x27;:
             case this.name === &#x27;RuntimeGeneratedModel&#x27;:

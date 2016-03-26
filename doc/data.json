@@ -2,7 +2,7 @@
     "project": {
         "name": "system-runtime",
         "description": "Runtime, the System Runtime Environment",
-        "version": "1.3.1",
+        "version": "1.3.2",
         "url": "https://system-runtime.github.io"
     },
     "files": {
@@ -152,7 +152,7 @@
             "namespaces": {},
             "tag": "main",
             "file": "build/system/system.js",
-            "line": 1276,
+            "line": 1347,
             "description": "This module is the main module of Runtime. <br>\nIt inits Runtime metamodel and loads Runtime core system.",
             "requires": [
                 "runtime-component",
@@ -176,7 +176,7 @@
             "module": "runtime",
             "namespace": "",
             "file": "src/behavior.js",
-            "line": 275,
+            "line": 276,
             "description": "This module manages the behaviors of all components. \nA behavior is a mecanism that allow users to add actions that will be executed \nwhen a specific state of a component will change.",
             "requires": [
                 "runtime-db",
@@ -224,7 +224,7 @@
             "module": "runtime",
             "namespace": "",
             "file": "src/db.js",
-            "line": 222,
+            "line": 224,
             "description": "This module manages Runtime database. <br>\nRuntime database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nRuntime Database is closely linked to Runtime metamodel and Runtime components because: <br>\n- all operations done by Runtime database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "runtime-component",
@@ -246,7 +246,7 @@
             "module": "runtime",
             "namespace": "",
             "file": "src/helper.js",
-            "line": 155,
+            "line": 126,
             "description": "This module contains all the functions used by all the modules.",
             "requires": [
                 "runtime-db",
@@ -267,7 +267,7 @@
             "module": "runtime",
             "namespace": "",
             "file": "src/log.js",
-            "line": 519,
+            "line": 700,
             "description": "This module contains all the functions that write a log.",
             "requires": [
                 "runtime-helper"
@@ -287,7 +287,7 @@
             "module": "runtime",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1925,
+            "line": 1973,
             "description": "This module manages Runtime metamodel. <br>\nRuntime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.",
             "requires": [
                 "runtime-db",
@@ -358,7 +358,7 @@
             "module": "runtime",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 1276,
+            "line": 1347,
             "description": "This module contains Runtime core system.",
             "static": 1
         }
@@ -376,7 +376,7 @@
             "submodule": "runtime-behavior",
             "namespace": "",
             "file": "src/behavior.js",
-            "line": 275,
+            "line": 276,
             "description": "This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed \nwhen a specific state of a component will change.",
             "requires": [
                 "runtime-db",
@@ -419,7 +419,7 @@
             "submodule": "runtime-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 864,
+            "line": 867,
             "description": "This module manages Runtime database. <br>\nRuntime database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nRuntime database is closely linked to Runtime metamodel because: <br>\n- all operations done by Runtime database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "runtime-component",
@@ -439,7 +439,7 @@
             "submodule": "runtime-db",
             "namespace": "",
             "file": "src/db.js",
-            "line": 222,
+            "line": 224,
             "description": "A collection of documents managed by Runtime. <br>\nInternal collections manage core objects of Runtime (schema, type, ...). <br>\nPublic collections manage components of the same class. <br>",
             "is_constructor": 1,
             "params": [
@@ -462,7 +462,7 @@
             "submodule": "runtime-helper",
             "namespace": "",
             "file": "src/helper.js",
-            "line": 155,
+            "line": 126,
             "description": "This module contains all the functions used by all the modules.",
             "requires": [
                 "runtime-db",
@@ -481,7 +481,7 @@
             "submodule": "runtime-log",
             "namespace": "",
             "file": "src/log.js",
-            "line": 519,
+            "line": 700,
             "description": "This module contains all the functions that write a log.",
             "requires": [
                 "runtime-helper"
@@ -499,7 +499,7 @@
             "submodule": "runtime-metamodel",
             "namespace": "",
             "file": "src/metamodel.js",
-            "line": 1925,
+            "line": 1973,
             "description": "This module manages Runtime metamodel. <br>\nRuntime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.",
             "requires": [
                 "runtime-db",
@@ -561,7 +561,7 @@
             "submodule": "runtime-workflow",
             "namespace": "",
             "file": "src/workflow.js",
-            "line": 767,
+            "line": 768,
             "description": "This module manages the workflow of Runtime. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and of Runtime instance. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
                 "runtime-metamodel",
@@ -609,7 +609,7 @@
             "submodule": "runtime-system",
             "namespace": "",
             "file": "build/system/system.js",
-            "line": 1276,
+            "line": 1347,
             "description": "This module contains Runtime core system."
         }
     },
@@ -617,7 +617,7 @@
     "classitems": [
         {
             "file": "src/behavior.js",
-            "line": 289,
+            "line": 290,
             "description": "Add a behavior that will be stored in Runtime database.",
             "itemtype": "method",
             "name": "add",
@@ -658,7 +658,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 302,
+            "line": 303,
             "description": "Get a behavior by its id.",
             "itemtype": "method",
             "name": "get",
@@ -679,7 +679,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 311,
+            "line": 312,
             "description": "Remove a behavior with its id or remove all the behaviors for a specific state\nof the component.",
             "itemtype": "method",
             "name": "remove",
@@ -696,7 +696,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 323,
+            "line": 324,
             "description": "Get all the actions of a behavior for a component.",
             "itemtype": "method",
             "name": "getActions",
@@ -722,7 +722,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 333,
+            "line": 334,
             "description": "Remove all the behaviors stored in memory.",
             "itemtype": "method",
             "name": "clear",
@@ -732,7 +732,7 @@
         },
         {
             "file": "src/behavior.js",
-            "line": 340,
+            "line": 341,
             "description": "Remove a behavior with its id from the memory.",
             "itemtype": "method",
             "name": "removeFromMemory",
@@ -839,7 +839,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 244,
+            "line": 246,
             "description": "Find a document into the collection.",
             "itemtype": "method",
             "name": "find",
@@ -863,7 +863,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 291,
+            "line": 293,
             "description": "Insert an new document into the collection. <br>\nBefore inserting the document, Runtime checks that the document is compliant\nwith its class definition. <br> \nThen, after inserting it, we create the component.",
             "itemtype": "method",
             "name": "insert",
@@ -887,7 +887,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 378,
+            "line": 381,
             "description": "Update documents into a collection.",
             "itemtype": "method",
             "name": "update",
@@ -921,7 +921,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 475,
+            "line": 478,
             "description": "Remove a document from the colllection. <br>\nWhen a document is removed, the component is destroyed.",
             "itemtype": "method",
             "name": "remove",
@@ -945,7 +945,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 552,
+            "line": 555,
             "description": "Count the number of documents in the collection.",
             "itemtype": "method",
             "name": "count",
@@ -959,7 +959,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 885,
+            "line": 888,
             "description": "Create a new {{#crossLink \"RuntimeDatabaseCollection\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "collection",
@@ -976,7 +976,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 893,
+            "line": 896,
             "description": "Runtime database store that lists all the collections.",
             "itemtype": "property",
             "name": "store",
@@ -987,7 +987,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 900,
+            "line": 903,
             "description": "Import/Export a Runtime system into/from the database.",
             "itemtype": "method",
             "name": "system",
@@ -1008,7 +1008,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 909,
+            "line": 912,
             "description": "Export a Runtime sub-system.",
             "itemtype": "method",
             "name": "subsystem",
@@ -1032,7 +1032,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 925,
+            "line": 928,
             "description": "Clear the database.",
             "itemtype": "method",
             "name": "clear",
@@ -1042,7 +1042,7 @@
         },
         {
             "file": "src/db.js",
-            "line": 932,
+            "line": 935,
             "description": "Init the database.",
             "itemtype": "method",
             "name": "init",
@@ -1052,7 +1052,7 @@
         },
         {
             "file": "src/helper.js",
-            "line": 167,
+            "line": 138,
             "description": "Get Runtime instance.",
             "itemtype": "method",
             "name": "getRuntime",
@@ -1066,7 +1066,7 @@
         },
         {
             "file": "src/helper.js",
-            "line": 175,
+            "line": 146,
             "description": "Check if a Runtime instance exists.",
             "itemtype": "method",
             "name": "isRuntime",
@@ -1080,7 +1080,7 @@
         },
         {
             "file": "src/helper.js",
-            "line": 183,
+            "line": 154,
             "description": "Generate a uuid.",
             "itemtype": "method",
             "name": "generateId",
@@ -1094,7 +1094,7 @@
         },
         {
             "file": "src/helper.js",
-            "line": 191,
+            "line": 162,
             "description": "Add Polyfill",
             "itemtype": "method",
             "name": "polyfill",
@@ -1104,7 +1104,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 396,
+            "line": 447,
             "description": "A message send by the channel is invalid",
             "itemtype": "method",
             "name": "invalidChannelEvent",
@@ -1131,14 +1131,14 @@
         },
         {
             "file": "src/log.js",
-            "line": 507,
-            "description": "A schema is missing.",
+            "line": 711,
+            "description": "Set the level of the log.",
             "itemtype": "method",
-            "name": "missingSchema",
+            "name": "level",
             "params": [
                 {
-                    "name": "name",
-                    "description": "name of the schema",
+                    "name": "levelName",
+                    "description": "name of the level",
                     "type": "String"
                 }
             ],
@@ -1148,7 +1148,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 530,
+            "line": 719,
             "description": "A property of a schema is unknown.",
             "itemtype": "method",
             "name": "unknownProperty",
@@ -1170,7 +1170,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 539,
+            "line": 728,
             "description": "Invalid type for a property.",
             "itemtype": "method",
             "name": "invalidPropertyType",
@@ -1197,7 +1197,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 549,
+            "line": 738,
             "description": "Invalid value for a type enum.",
             "itemtype": "method",
             "name": "invalidEnumValue",
@@ -1219,7 +1219,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 558,
+            "line": 747,
             "description": "Invalid class name for a component.",
             "itemtype": "method",
             "name": "invalidClassName",
@@ -1246,7 +1246,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 568,
+            "line": 757,
             "description": "Missing a property.",
             "itemtype": "method",
             "name": "missingProperty",
@@ -1263,7 +1263,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 576,
+            "line": 765,
             "description": "A class definition is missing.",
             "itemtype": "method",
             "name": "missingImplementation",
@@ -1285,7 +1285,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 585,
+            "line": 774,
             "description": "Invalid type for a property of a class definition.",
             "itemtype": "method",
             "name": "invalidTypeImp",
@@ -1307,7 +1307,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 594,
+            "line": 783,
             "description": "Missing a property for a class definition.",
             "itemtype": "method",
             "name": "missingPropertyImp",
@@ -1329,7 +1329,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 603,
+            "line": 792,
             "description": "Unkown property for a class definition.",
             "itemtype": "method",
             "name": "unknownPropertyImp",
@@ -1351,7 +1351,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 612,
+            "line": 801,
             "description": "Try to add an invalid type.",
             "itemtype": "method",
             "name": "invalidTypeDefinition",
@@ -1368,7 +1368,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 620,
+            "line": 809,
             "description": "Invalid property type.",
             "itemtype": "method",
             "name": "invalidPropertyName",
@@ -1400,7 +1400,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 631,
+            "line": 820,
             "description": "Trying to set a read-only property.",
             "itemtype": "method",
             "name": "readOnlyProperty",
@@ -1422,7 +1422,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 640,
+            "line": 829,
             "description": "Invalid document on a Runtime database insert operation.",
             "itemtype": "method",
             "name": "invalidDocumentOnDbInsert",
@@ -1444,7 +1444,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 649,
+            "line": 838,
             "description": "Invalid property on a Runtime database update operation.",
             "itemtype": "method",
             "name": "invalidPropertyTypeOnDbUpdate",
@@ -1481,7 +1481,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 661,
+            "line": 850,
             "description": "Call an unknown method of a class.",
             "itemtype": "method",
             "name": "unknownMethod",
@@ -1503,7 +1503,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 670,
+            "line": 859,
             "description": "Try to create an invalid RuntimeDatabaseCollection.",
             "itemtype": "method",
             "name": "invalidCollectionName",
@@ -1520,7 +1520,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 678,
+            "line": 867,
             "description": "Invalid type result of a method.",
             "itemtype": "method",
             "name": "invalidResultType",
@@ -1552,7 +1552,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 689,
+            "line": 878,
             "description": "Unknown class.",
             "itemtype": "method",
             "name": "unknownComponent",
@@ -1574,7 +1574,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 698,
+            "line": 887,
             "description": "The Runtime workflow has been restarted.",
             "itemtype": "method",
             "name": "workflowRestarted",
@@ -1584,7 +1584,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 705,
+            "line": 894,
             "description": "Invalid parameter number for a method.",
             "itemtype": "method",
             "name": "invalidParamNumber",
@@ -1606,7 +1606,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 714,
+            "line": 903,
             "description": "Invalid type parameters for a method.",
             "itemtype": "method",
             "name": "invalidParamType",
@@ -1633,7 +1633,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 725,
+            "line": 914,
             "description": "Add a more than one behavior to a state.",
             "itemtype": "method",
             "name": "behaviorNotUnique",
@@ -1655,7 +1655,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 734,
+            "line": 923,
             "description": "Can not add a behavior with an invalid state.",
             "itemtype": "method",
             "name": "invalidStateOn",
@@ -1677,7 +1677,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 743,
+            "line": 932,
             "description": "The call to a remove state of the behavior module is invalid.",
             "itemtype": "method",
             "name": "invalidStateOff",
@@ -1699,7 +1699,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 752,
+            "line": 941,
             "description": "The master system is not found.",
             "itemtype": "method",
             "name": "masterSystemNotFound",
@@ -1709,7 +1709,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 759,
+            "line": 948,
             "description": "Invalid type.",
             "itemtype": "method",
             "name": "invalidType",
@@ -1731,7 +1731,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 768,
+            "line": 957,
             "description": "Unknown type.",
             "itemtype": "method",
             "name": "unknownType",
@@ -1748,7 +1748,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 776,
+            "line": 965,
             "description": "A component has not been alreay created.",
             "itemtype": "method",
             "name": "canNotYetValidate",
@@ -1770,7 +1770,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 785,
+            "line": 974,
             "description": "A message send by the channel is invalid",
             "itemtype": "method",
             "name": "invalidChannelEvent",
@@ -1797,7 +1797,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 795,
+            "line": 984,
             "description": "invalid parameter number for an action add with on method.",
             "itemtype": "method",
             "name": "invalidParamNumberMethodOn",
@@ -1819,7 +1819,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 804,
+            "line": 993,
             "description": "Change the id of a component.",
             "itemtype": "method",
             "name": "updateUuid",
@@ -1846,7 +1846,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 814,
+            "line": 1003,
             "description": "Unkonw property on a Runtime database update operation.",
             "itemtype": "method",
             "name": "unknownPropertyOnDbUpdate",
@@ -1868,7 +1868,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 823,
+            "line": 1012,
             "description": "Try to change the state of a component that has been destroyed",
             "itemtype": "method",
             "name": "invalideUseOfComponent",
@@ -1885,7 +1885,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 831,
+            "line": 1020,
             "description": "Try to add an invalid schema.",
             "itemtype": "method",
             "name": "invalidSchema",
@@ -1902,7 +1902,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 839,
+            "line": 1028,
             "description": "Try to add an invalid model.",
             "itemtype": "method",
             "name": "invalidModel",
@@ -1919,7 +1919,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 847,
+            "line": 1036,
             "description": "Invalid parameters set when creating an instance of a class.",
             "itemtype": "method",
             "name": "invalidParameters",
@@ -1936,7 +1936,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 855,
+            "line": 1044,
             "description": "Try to get the property of a destroyed component.",
             "itemtype": "method",
             "name": "destroyedComponentCall",
@@ -1958,7 +1958,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 864,
+            "line": 1053,
             "description": "Invalid parameter type  when creating an instance of a class.",
             "itemtype": "method",
             "name": "invalidConctructorParameters",
@@ -1980,7 +1980,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 873,
+            "line": 1062,
             "description": "Get the information of an unkown model.",
             "itemtype": "method",
             "name": "unknownModel",
@@ -1997,7 +1997,7 @@
         },
         {
             "file": "src/log.js",
-            "line": 881,
+            "line": 1070,
             "description": "A schema is missing.",
             "itemtype": "method",
             "name": "missingSchema",
@@ -2013,8 +2013,188 @@
             "submodule": "runtime-log"
         },
         {
+            "file": "src/log.js",
+            "line": 1078,
+            "description": "A cyclic dependency was found.",
+            "itemtype": "method",
+            "name": "missingSchema",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the schema where the cyclic dependency was found",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "src/log.js",
+            "line": 1086,
+            "description": "Invalid type for a type enum.",
+            "itemtype": "method",
+            "name": "invalidEnumType",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "the value",
+                    "type": "Object"
+                },
+                {
+                    "name": "typeName",
+                    "description": "name of the type",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "typeName of the type",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "src/log.js",
+            "line": 1096,
+            "description": "Load schema.",
+            "itemtype": "method",
+            "name": "loadSchema",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the schema",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "src/log.js",
+            "line": 1104,
+            "description": "Load model.",
+            "itemtype": "method",
+            "name": "loadModel",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the model",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "src/log.js",
+            "line": 1112,
+            "description": "Load type.",
+            "itemtype": "method",
+            "name": "loadType",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the type",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "src/log.js",
+            "line": 1120,
+            "description": "Compile schema.",
+            "itemtype": "method",
+            "name": "compileSchema",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the schema",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "src/log.js",
+            "line": 1128,
+            "description": "Generate model.",
+            "itemtype": "method",
+            "name": "generateModel",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the model",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "src/log.js",
+            "line": 1136,
+            "description": "Check model.",
+            "itemtype": "method",
+            "name": "checkModel",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the model",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "src/log.js",
+            "line": 1144,
+            "description": "Create collection.",
+            "itemtype": "method",
+            "name": "createCollection",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the collection",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "src/log.js",
+            "line": 1152,
+            "description": "Create class.",
+            "itemtype": "method",
+            "name": "createClass",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the class",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
             "file": "src/metamodel.js",
-            "line": 1940,
+            "line": 1988,
             "description": "Init the metamodel.",
             "itemtype": "method",
             "name": "init",
@@ -2024,7 +2204,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1947,
+            "line": 1995,
             "description": "Remove the data of the metamodel from the memory.",
             "itemtype": "method",
             "name": "clear",
@@ -2034,7 +2214,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1954,
+            "line": 2002,
             "description": "Add a new schema.",
             "itemtype": "method",
             "name": "schema",
@@ -2051,7 +2231,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1962,
+            "line": 2010,
             "description": "Add a new model.",
             "itemtype": "method",
             "name": "model",
@@ -2068,7 +2248,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1970,
+            "line": 2018,
             "description": "Add a new type.",
             "itemtype": "method",
             "name": "type",
@@ -2085,7 +2265,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1978,
+            "line": 2026,
             "description": "Create the metamodel.",
             "itemtype": "method",
             "name": "create",
@@ -2095,7 +2275,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1985,
+            "line": 2033,
             "description": "Get a schema.",
             "itemtype": "method",
             "name": "getSchema",
@@ -2116,7 +2296,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 1994,
+            "line": 2042,
             "description": "Get a model.",
             "itemtype": "method",
             "name": "getModel",
@@ -2137,7 +2317,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2003,
+            "line": 2051,
             "description": "Get the definition of the metamodel.",
             "itemtype": "method",
             "name": "getMetaDef",
@@ -2151,7 +2331,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2011,
+            "line": 2059,
             "description": "Get parents of a shema if any.",
             "itemtype": "method",
             "name": "getParents",
@@ -2172,7 +2352,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2020,
+            "line": 2068,
             "description": "Check if a class inherits from another one",
             "itemtype": "method",
             "name": "inheritFrom",
@@ -2198,7 +2378,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2030,
+            "line": 2078,
             "description": "Check if the object is compliant with the schema.\nUse it to test if the constructor of an object is compliant\nwith the definition of the class.",
             "itemtype": "method",
             "name": "isValidObject",
@@ -2234,7 +2414,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2044,
+            "line": 2092,
             "description": "Prepare the object in order to be compliant with the schema.",
             "itemtype": "method",
             "name": "prepareObject",
@@ -2256,7 +2436,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2053,
+            "line": 2101,
             "description": "Check if a value is compliant with a type.",
             "itemtype": "method",
             "name": "isValidType",
@@ -2282,7 +2462,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2063,
+            "line": 2111,
             "description": "Check if a value is compliant with a type enum.",
             "itemtype": "method",
             "name": "isValidEnum",
@@ -2308,7 +2488,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2073,
+            "line": 2121,
             "description": "Check if the name is a correct state for the component.",
             "itemtype": "method",
             "name": "isValidState",
@@ -2334,7 +2514,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2083,
+            "line": 2131,
             "description": "Check if an attribute of the schema is an event.",
             "itemtype": "method",
             "name": "isEvent",
@@ -2360,7 +2540,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2093,
+            "line": 2141,
             "description": "Check if an attribute of the schema is a property.",
             "itemtype": "method",
             "name": "isProperty",
@@ -2386,7 +2566,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2103,
+            "line": 2151,
             "description": "Check if an attribute of the schema is a link.",
             "itemtype": "method",
             "name": "isLink",
@@ -2412,7 +2592,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2113,
+            "line": 2161,
             "description": "Check if an attribute of the schema is a collection.",
             "itemtype": "method",
             "name": "isCollection",
@@ -2438,7 +2618,7 @@
         },
         {
             "file": "src/metamodel.js",
-            "line": 2123,
+            "line": 2171,
             "description": "Check if an attribute of the schema is a method.",
             "itemtype": "method",
             "name": "isMethod",
@@ -2527,7 +2707,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 792,
+            "line": 793,
             "description": "Change the state of a component.\n\nWorklow:<br>\n<br>\n0. Check if the component has not been destroyed <br>\n1. Check if the state is a method or an event <br>\n2. Search if there is a behavior with an action for the new state <br>\n3. If so, get the action(s) <br>\n4. Check if the conditons on input are compliant with the metamodel <br>\n5. Call the action(s) <br>\n6. If not an of event, check if the conditons on input are compliant with the metamodel <br>\n7. If all is ok, the state of the component is updated <br>\n8. Return the result <br>",
             "itemtype": "method",
             "name": "state",
@@ -2544,7 +2724,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 816,
+            "line": 817,
             "description": "Stop the workflow engine.",
             "itemtype": "method",
             "name": "stop",
@@ -2561,7 +2741,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 826,
+            "line": 827,
             "description": "Restart the workflow engine from the last state.",
             "itemtype": "method",
             "name": "restart",
@@ -2571,7 +2751,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 833,
+            "line": 834,
             "description": "Check if conditions on input are compliant with the model before calling the action.",
             "itemtype": "method",
             "name": "checkParams",
@@ -2592,7 +2772,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 842,
+            "line": 843,
             "description": "Check if an action has the valid number of parameter.",
             "itemtype": "method",
             "name": "validParamNumbers",
@@ -2623,7 +2803,7 @@
         },
         {
             "file": "src/workflow.js",
-            "line": 853,
+            "line": 854,
             "description": "Call an action that comes from an event.",
             "itemtype": "method",
             "name": "action",
@@ -2645,7 +2825,7 @@
         },
         {
             "file": "build/system/system.js",
-            "line": 1286,
+            "line": 1357,
             "description": "Runtime core system",
             "itemtype": "property",
             "name": "system",

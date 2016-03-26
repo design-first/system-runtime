@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.3.1</b>
+                    API Docs for Version: <b>1.3.2</b>
                 </p>
             </li>
         </div>
@@ -128,15 +128,70 @@
 
 
 var $helper = require(&#x27;./helper.js&#x27;);
-
+var $workflow = require(&#x27;./workflow.js&#x27;);
+var $metamodel = require(&#x27;./metamodel.js&#x27;);
+var $db = require(&#x27;./db.js&#x27;);
+var $component = require(&#x27;./component.js&#x27;);
 
 /* Private properties */
 
 
-var ID = &#x27;_id&#x27;;
+var ID = &#x27;_id&#x27;,
+    currentLevel = &#x27;warn&#x27;,
+    loggerRef = null,
+    fakeLoggerRef = {
+        info: function info(message) {
+            if (currentLevel === &#x27;info&#x27;) {
+                console.info(&#x27;runtime: &#x27; + message);
+            }
+        },
+        warn: function warning(message) {
+            if (currentLevel === &#x27;info&#x27; || currentLevel === &#x27;warn&#x27;) {
+                console.warn(&#x27;runtime: &#x27; + message);
+            }
+        },
+        error: function error(message) {
+            console.error(&#x27;runtime: &#x27; + message);
+        }
+    };
+
+/*
+ * Get the RuntimeLogger instance.
+ * @method getLogger
+ * @return {RuntimeLogger} RuntimeLogger instance
+ * @private
+ */
+function getLogger() {
+    var loggerId = &#x27;&#x27;,
+        result = null;
+
+    if (!$metamodel.getModel(&#x27;RuntimeLogger&#x27;)) {
+        result = fakeLoggerRef;
+    } else {
+        loggerId = $db.RuntimeLogger.find()[0][ID];
+        if (loggerId) {
+            loggerRef = $component.get(loggerId);
+            result = loggerRef;
+        } else {
+            result = fakeLoggerRef;
+        }
+    }
+
+    return result;
+}
 
 
 /* Public methods */
+
+
+/*
+ * Set the level of the log.
+ * @method level
+ * @param {String} levelName name of the level
+ */
+function level(levelName) {
+    currentLevel = levelName;
+}
 
 
 /*
@@ -154,7 +209,7 @@ function unknownProperty(propertyName, schema) {
         message = &quot;unknown property &#x27;&quot; + propertyName + &quot;&#x27; for the meta attribute &quot; + JSON.stringify(schema);
     }
 
-    $helper.getRuntime().warning(message);
+    getLogger().warn(message);
 }
 
 
@@ -166,7 +221,7 @@ function unknownProperty(propertyName, schema) {
  * @param {String} property the property
  */
 function invalidPropertyType(propertyName, type, property) {
-    $helper.getRuntime().warning(&quot;invalid type for property &#x27;&quot; + JSON.stringify(propertyName) + &quot;&#x27;: expected type &#x27;&quot; + type + &quot;&#x27; instead of type &#x27;&quot; + typeof property + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;invalid type for property &#x27;&quot; + JSON.stringify(propertyName) + &quot;&#x27;: expected type &#x27;&quot; + type + &quot;&#x27; instead of type &#x27;&quot; + typeof property + &quot;&#x27;&quot;);
 }
 
 
@@ -177,7 +232,7 @@ function invalidPropertyType(propertyName, type, property) {
  * @param {String} type the type defined by the schema
  */
 function invalidEnumValue(value, type) {
-    $helper.getRuntime().warning(&quot;invalid value for the enum value &#x27;&quot; + value + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof value + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;&#x27;&quot; + value + &quot;&#x27; is an invalid value for the type enum &#x27;&quot; + type + &quot;&#x27;&quot;);
 }
 
 
@@ -189,7 +244,7 @@ function invalidEnumValue(value, type) {
  * @param {String} constructorName name of the component class
  */
 function invalidClassName(componentId, type, constructorName) {
-    $helper.getRuntime().warning(&quot;invalid class name for component &#x27;&quot; + componentId + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + constructorName + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;invalid class name for component &#x27;&quot; + componentId + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + constructorName + &quot;&#x27;&quot;);
 }
 
 
@@ -199,7 +254,7 @@ function invalidClassName(componentId, type, constructorName) {
  * @param {String} propertyName name of the property
  */
 function missingProperty(propertyName) {
-    $helper.getRuntime().warning(&quot;missing property &#x27;&quot; + propertyName + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;missing property &#x27;&quot; + propertyName + &quot;&#x27;&quot;);
 }
 
 
@@ -210,7 +265,7 @@ function missingProperty(propertyName) {
  * @param {String} classToImp the class to implement
  */
 function missingImplementation(classSource, classToImp) {
-    $helper.getRuntime().warning(&quot;class &#x27;&quot; + classSource + &quot;&#x27; is missing for the implementation of the class &#x27;&quot; + classToImp + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;class &#x27;&quot; + classSource + &quot;&#x27; is missing for the implementation of the class &#x27;&quot; + classToImp + &quot;&#x27;&quot;);
 }
 
 
@@ -221,7 +276,7 @@ function missingImplementation(classSource, classToImp) {
  * @param {String} className a class name
  */
 function invalidTypeImp(property, className) {
-    $helper.getRuntime().warning(&quot;invalid type for property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + className + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;invalid type for property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + className + &quot;&#x27;&quot;);
 }
 
 
@@ -232,7 +287,7 @@ function invalidTypeImp(property, className) {
  * @param {String} className a class name
  */
 function missingPropertyImp(property, className) {
-    $helper.getRuntime().warning(&quot;missing property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + className + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;missing property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + className + &quot;&#x27;&quot;);
 }
 
 
@@ -243,7 +298,7 @@ function missingPropertyImp(property, className) {
  * @param {Object} schema a schema
  */
 function unknownPropertyImp(property, schema) {
-    $helper.getRuntime().warning(&quot;unknown property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + schema + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;unknown property &#x27;&quot; + property + &quot;&#x27; for the definition of &#x27;&quot; + schema + &quot;&#x27;&quot;);
 }
 
 
@@ -253,7 +308,7 @@ function unknownPropertyImp(property, schema) {
  * @param {String} name a type definition
  */
 function invalidTypeDefinition(name) {
-    $helper.getRuntime().warning(&quot;the type &#x27;&quot; + name + &quot;&#x27; is not valid&quot;);
+    getLogger().warn(&quot;the type &#x27;&quot; + name + &quot;&#x27; is not valid&quot;);
 }
 
 
@@ -266,11 +321,7 @@ function invalidTypeDefinition(name) {
  * @param {String} type type defined by the schema
  */
 function invalidPropertyName(id, propertyName, propertyValue, type) {
-    if (type.indexOf(&quot;#&quot;) !== -1) {
-        $helper.getRuntime().warning(&quot;invalid name for property &#x27;&quot; + propertyName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
-    } else {
-        $helper.getRuntime().warning(&quot;invalid name for property &#x27;&quot; + propertyName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
-    }
+    getLogger().warn(&quot;invalid value for property &#x27;&quot; + propertyName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
 }
 
 
@@ -281,7 +332,7 @@ function invalidPropertyName(id, propertyName, propertyValue, type) {
  * @param {String} propertyName name of the property
  */
 function readOnlyProperty(id, propertyName) {
-    $helper.getRuntime().warning(&quot;can not set read-only property &#x27;&quot; + propertyName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;can not set read-only property &#x27;&quot; + propertyName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
 }
 
 
@@ -292,7 +343,7 @@ function readOnlyProperty(id, propertyName) {
  * @param {String} collectionName the name of the colllection
  */
 function invalidDocumentOnDbInsert(doc, collectionName) {
-    $helper.getRuntime().warning(&quot;invalid document &#x27;&quot; + JSON.stringify(doc) + &quot;&#x27; on an insert operation on collection &#x27;&quot; + collectionName + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;invalid document &#x27;&quot; + JSON.stringify(doc) + &quot;&#x27; on an insert operation on collection &#x27;&quot; + collectionName + &quot;&#x27;&quot;);
 }
 
 
@@ -307,9 +358,9 @@ function invalidDocumentOnDbInsert(doc, collectionName) {
  */
 function invalidPropertyTypeOnDbUpdate(collectionName, id, propertyName, propertyValue, type) {
     if (type.indexOf(&quot;#&quot;) !== -1) {
-        $helper.getRuntime().warning(&quot;invalid type for property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on collection &#x27;&quot; + collectionName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+        getLogger().warn(&quot;invalid type for property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on collection &#x27;&quot; + collectionName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
     } else {
-        $helper.getRuntime().warning(&quot;invalid type for property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on collection &#x27;&quot; + collectionName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+        getLogger().warn(&quot;invalid type for property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on collection &#x27;&quot; + collectionName + &quot;&#x27;: expected &#x27;&quot; + type + &quot;&#x27; instead of &#x27;&quot; + typeof propertyValue + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
     }
 }
 
@@ -322,7 +373,7 @@ function invalidPropertyTypeOnDbUpdate(collectionName, id, propertyName, propert
  * @param {String} id id of the component
  */
 function unknownPropertyOnDbUpdate(propertyName, id) {
-    $helper.getRuntime().warning(&quot;unknown property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;unknown property &#x27;&quot; + propertyName + &quot;&#x27; on an update operation on component &#x27;&quot; + id + &quot;&#x27;&quot;);
 }
 
 
@@ -333,7 +384,7 @@ function unknownPropertyOnDbUpdate(propertyName, id) {
  * @param {String} methodName name of the method
  */
 function unknownMethod(classId, methodName) {
-    $helper.getRuntime().warning(&quot;try to call an unknown method &#x27;&quot; + methodName + &quot;&#x27; for the class &#x27;&quot; + classId + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;try to call an unknown method &#x27;&quot; + methodName + &quot;&#x27; for the class &#x27;&quot; + classId + &quot;&#x27;&quot;);
 }
 
 
@@ -343,7 +394,7 @@ function unknownMethod(classId, methodName) {
  * @param {String} name name of the collection
  */
 function invalidCollectionName(name) {
-    $helper.getRuntime().warning(&quot;invalid name for creating the collection &#x27;&quot; + name + &quot;&#x27;: there is no schema &#x27;&quot; + name + &quot;&#x27; in the metamodel&quot;);
+    getLogger().warn(&quot;invalid name for creating the collection &#x27;&quot; + name + &quot;&#x27;: there is no schema &#x27;&quot; + name + &quot;&#x27; in the metamodel&quot;);
 }
 
 
@@ -357,9 +408,9 @@ function invalidCollectionName(name) {
  */
 function invalidResultType(id, methodName, expectedType, type) {
     if (type) {
-        $helper.getRuntime().warning(&quot;invalid type for the result of method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;: expected type &#x27;&quot; + expectedType + &quot;&#x27; instead of type &#x27;&quot; + type + &quot;&#x27;&quot;);
+        getLogger().warn(&quot;invalid type for the result of method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;: expected type &#x27;&quot; + expectedType + &quot;&#x27; instead of type &#x27;&quot; + type + &quot;&#x27;&quot;);
     } else {
-        $helper.getRuntime().warning(&quot;invalid type for the result of method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;: expected type &#x27;&quot; + expectedType + &quot;&#x27;&quot;);
+        getLogger().warn(&quot;invalid type for the result of method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;: expected type &#x27;&quot; + expectedType + &quot;&#x27;&quot;);
     }
 }
 
@@ -371,7 +422,7 @@ function invalidResultType(id, methodName, expectedType, type) {
  * @param {String} componentId if of the component
  */
 function unknownComponent(className, componentId) {
-    $helper.getRuntime().warning(&quot;unkown class component &#x27;&quot; + className + &quot;&#x27; for component &#x27;&quot; + componentId + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;unkown class component &#x27;&quot; + className + &quot;&#x27; for component &#x27;&quot; + componentId + &quot;&#x27;&quot;);
 }
 
 
@@ -380,7 +431,7 @@ function unknownComponent(className, componentId) {
  * @method workflowRestarted
  */
 function workflowRestarted() {
-    $helper.getRuntime().warning(&#x27;runtime has been restarted&#x27;);
+    getLogger().warn(&#x27;runtime has been restarted&#x27;);
 }
 
 
@@ -391,7 +442,7 @@ function workflowRestarted() {
  * @param {String} methodName name of the component
  */
 function invalidParamNumber(id, methodName) {
-    $helper.getRuntime().warning(&quot;invalid number of parameters when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;invalid number of parameters when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
 }
 
 
@@ -404,7 +455,7 @@ function invalidParamNumber(id, methodName) {
  * 
  */
 function invalidParamType(id, methodName, paramName) {
-    $helper.getRuntime().warning(&quot;invalid type for the parameter &#x27;&quot; + paramName + &quot;&#x27; when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;invalid type for the parameter &#x27;&quot; + paramName + &quot;&#x27; when calling the method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
 }
 
 
@@ -415,7 +466,7 @@ function invalidParamType(id, methodName, paramName) {
  * @param {String} stateName name of the state
  */
 function behaviorNotUnique(id, stateName) {
-    $helper.getRuntime().warning(&quot;try to add more than one behavior for the state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;try to add more than one behavior for the state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
 }
 
 
@@ -426,7 +477,7 @@ function behaviorNotUnique(id, stateName) {
  * @param {String} stateName name of the state
  */
 function invalidStateOn(id, stateName) {
-    $helper.getRuntime().warning(&quot;try to add a behavior with an unkwown state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;try to add a behavior with an unkwown state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
 }
 
 
@@ -437,7 +488,7 @@ function invalidStateOn(id, stateName) {
  * @param {String} stateName name of the state
  */
 function invalidStateOff(id, stateName) {
-    $helper.getRuntime().warning(&quot;try to remove a behavior from an unkwown state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;try to remove a behavior from an unkwown state &#x27;&quot; + stateName + &quot;&#x27; on component class &#x27;&quot; + id + &quot;&#x27;&quot;);
 }
 
 
@@ -446,7 +497,7 @@ function invalidStateOff(id, stateName) {
  * @method masterSystemNotFound
  */
 function masterSystemNotFound() {
-    $helper.getRuntime().warning(&quot;can not export the database because no system was defined&quot;);
+    getLogger().warn(&quot;can not export the database because no system was defined&quot;);
 }
 
 
@@ -457,7 +508,7 @@ function masterSystemNotFound() {
  * @param {String} typeName expectec type defined by the schema
  */
 function invalidType(value, typeName) {
-    $helper.getRuntime().warning(&quot;invalid type for value &#x27;&quot; + JSON.stringify(value) + &quot;&#x27;: expected &#x27;&quot; + typeName + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;invalid type for value &#x27;&quot; + JSON.stringify(value) + &quot;&#x27;: expected &#x27;&quot; + typeName + &quot;&#x27;&quot;);
 }
 
 
@@ -467,7 +518,7 @@ function invalidType(value, typeName) {
  * @param {String} value value
  */
 function unknownType(value) {
-    $helper.getRuntime().warning(&quot;unknown type for value &#x27;&quot; + JSON.stringify(value) + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;unknown type for value &#x27;&quot; + JSON.stringify(value) + &quot;&#x27;&quot;);
 }
 
 
@@ -478,7 +529,7 @@ function unknownType(value) {
  * @param {String} className name of the class
  */
 function canNotYetValidate(id, className) {
-    $helper.getRuntime().warning(&quot;can not yet validate if the component &#x27;&quot; + JSON.stringify(id) + &quot;&#x27; is an instance of &#x27;&quot; + className + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;can not yet validate if the component &#x27;&quot; + JSON.stringify(id) + &quot;&#x27; is an instance of &#x27;&quot; + className + &quot;&#x27;&quot;);
 }
 
 
@@ -490,7 +541,7 @@ function canNotYetValidate(id, className) {
  * @param {String} type expected type
  */
 function invalidChannelEvent(message, eventName, type) {
-    $helper.getRuntime().warning(&quot;invalid type for the message &#x27;&quot; + JSON.stringify(message) + &quot;&#x27;: expected type &#x27;&quot; + type + &quot;&#x27; for event &#x27;&quot; + eventName + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;invalid type for the message &#x27;&quot; + JSON.stringify(message) + &quot;&#x27;: expected type &#x27;&quot; + type + &quot;&#x27; for event &#x27;&quot; + eventName + &quot;&#x27;&quot;);
 }
 
 
@@ -501,7 +552,7 @@ function invalidChannelEvent(message, eventName, type) {
  * @param {String} methodName name of the component
  */
 function invalidParamNumberMethodOn(id, methodName) {
-    $helper.getRuntime().warning(&quot;invalid number of parameters when adding an action on method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;invalid number of parameters when adding an action on method &#x27;&quot; + methodName + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;&quot;);
 }
 
 
@@ -514,9 +565,9 @@ function invalidParamNumberMethodOn(id, methodName) {
  */
 function updateUuid(currentId, newId, alreadyUsed) {
     if (alreadyUsed) {
-        $helper.getRuntime().warning(&quot;try to update a component of id &#x27;&quot; + currentId + &quot;&#x27; with the new id &#x27;&quot; + newId + &quot;&#x27; that is already used&quot;);
+        getLogger().warn(&quot;try to update a component of id &#x27;&quot; + currentId + &quot;&#x27; with the new id &#x27;&quot; + newId + &quot;&#x27; that is already used&quot;);
     } else {
-        $helper.getRuntime().warning(&quot;try to update a component of id &#x27;&quot; + currentId + &quot;&#x27; with the new id &#x27;&quot; + newId + &quot;&#x27;&quot;);
+        getLogger().warn(&quot;try to update a component of id &#x27;&quot; + currentId + &quot;&#x27; with the new id &#x27;&quot; + newId + &quot;&#x27;&quot;);
     }
 }
 
@@ -527,7 +578,7 @@ function updateUuid(currentId, newId, alreadyUsed) {
  * @param {String} id id of the component
  */
 function invalidUseOfComponent(id) {
-    $helper.getRuntime().warning(&quot;try to change the state of the destroyed component &#x27;&quot; + id + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;try to change the state of the destroyed component &#x27;&quot; + id + &quot;&#x27;&quot;);
 }
 
 
@@ -537,7 +588,7 @@ function invalidUseOfComponent(id) {
  * @param {String} name name of the schema
  */
 function invalidSchema(name) {
-    $helper.getRuntime().warning(&quot;the schema &#x27;&quot; + name + &quot;&#x27; is not valid&quot;);
+    getLogger().warn(&quot;the schema &#x27;&quot; + name + &quot;&#x27; is not valid&quot;);
 }
 
 
@@ -547,7 +598,7 @@ function invalidSchema(name) {
  * @param {String} name name of the model
  */
 function invalidModel(name) {
-    $helper.getRuntime().warning(&quot;the model &#x27;&quot; + name + &quot;&#x27; is not valid&quot;);
+    getLogger().warn(&quot;the model &#x27;&quot; + name + &quot;&#x27; is not valid&quot;);
 }
 
 
@@ -557,7 +608,7 @@ function invalidModel(name) {
  * @param {String} classId class name of the component
  */
 function invalidParameters(classId) {
-    $helper.getRuntime().warning(&quot;the parameters for creating a component of class &#x27;&quot; + classId + &quot;&#x27; are not compliant with the model&quot;);
+    getLogger().warn(&quot;the parameters for creating a component of class &#x27;&quot; + classId + &quot;&#x27; are not compliant with the model&quot;);
 }
 
 
@@ -568,7 +619,7 @@ function invalidParameters(classId) {
  * @param {String} id id of the component
  */
 function destroyedComponentCall(propertyName, id) {
-    $helper.getRuntime().warning(&quot;trying to get the property &#x27;&quot; + propertyName + &quot;&#x27; on the destroyed component &#x27;&quot; + id + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;trying to get the property &#x27;&quot; + propertyName + &quot;&#x27; on the destroyed component &#x27;&quot; + id + &quot;&#x27;&quot;);
 }
 
 
@@ -579,7 +630,7 @@ function destroyedComponentCall(propertyName, id) {
  * @param {String} name schema name
  */
 function invalidConctructorParameters(object, name) {
-    $helper.getRuntime().warning(&quot;the constructor parameter &#x27;&quot; + JSON.stringify(object) + &quot;&#x27; for creating a component of class &#x27;&quot; + name + &quot;&#x27; is not an object&quot;);
+    getLogger().warn(&quot;the constructor parameter &#x27;&quot; + JSON.stringify(object) + &quot;&#x27; for creating a component of class &#x27;&quot; + name + &quot;&#x27; is not an object&quot;);
 }
 
 
@@ -589,18 +640,148 @@ function invalidConctructorParameters(object, name) {
  * @param {String} classId id of the class
  */
 function unknownModel(classId) {
-    $helper.getRuntime().warning(&quot;try get the information of an unknown model &#x27;&quot; + classId + &quot;&#x27;&quot;);
+    getLogger().warn(&quot;try get the information of an unknown model &#x27;&quot; + classId + &quot;&#x27;&quot;);
 }
 
 
-/**
+/*
  * A schema is missing.
  * @method missingSchema
  * @param {String} name name of the schema
  */
 function missingSchema(name) {
-    $helper.getRuntime().warning(&quot;the schema &#x27;&quot; + name + &quot;&#x27; is missing&quot;);
+    getLogger().warn(&quot;the schema &#x27;&quot; + name + &quot;&#x27; is missing&quot;);
 }
+
+
+/*
+ * A cyclic dependency was found.
+ * @method missingSchema
+ * @param {String} name name of the schema where the cyclic dependency was found
+ */
+function cyclicDependency(name) {
+    if (name) {
+        $workflow.stop({
+            &#x27;error&#x27;: false,
+            &#x27;message&#x27;: &#x27;a cyclic inheritance dependency with \’&#x27; + name + &#x27;\’ schema has been found, please check the \&#x27;_inherit\&#x27; properties of your schemas&#x27;
+        });
+    } else {
+        $workflow.stop({
+            &#x27;error&#x27;: false,
+            &#x27;message&#x27;: &#x27;a cyclic inheritance dependency has been found, please check the \&#x27;_inherit\&#x27; properties of your schemas&#x27;
+        });
+    }
+}
+
+
+/*
+ * Invalid type for a type enum.
+ * @method invalidEnumType
+ * @param {Object} value the value
+ * @param {String} typeName name of the type
+ * @param {String} type typeName of the type
+ */
+function invalidEnumType(value, typeName, type) {
+    getLogger().warn(&quot;invalid type for enumerated type &#x27;&quot; + typeName + &quot;&#x27;: expected type &#x27;&quot; + type + &quot;&#x27; instead of type &#x27;&quot; + typeof value + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Load schema.
+ * @method loadSchema
+ * @param {String} name name of the schema
+ */
+function loadSchema(name) {
+    getLogger().info(&quot;load schema &#x27;&quot; + name + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Load model.
+ * @method loadModel
+ * @param {String} name name of the model
+ */
+function loadModel(name) {
+    getLogger().info(&quot;load model &#x27;&quot; + name + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Load type.
+ * @method loadType
+ * @param {String} name name of the type
+ */
+function loadType(name) {
+    getLogger().info(&quot;load type &#x27;&quot; + name + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Compile schema.
+ * @method compileSchema
+ * @param {String} name name of the schema
+ */
+function compileSchema(name) {
+    getLogger().info(&quot;compile schema &#x27;&quot; + name + &quot;&#x27;...&quot;);
+}
+
+
+/*
+ * Generate model.
+ * @method generateModel
+ * @param {String} name name of the model
+ */
+function generateModel(name) {
+    getLogger().info(&quot;generate model &#x27;&quot; + name + &quot;&#x27;...&quot;);
+}
+
+
+/*
+ * Check model.
+ * @method checkModel
+ * @param {String} name name of the model
+ */
+function checkModel(name) {
+    getLogger().info(&quot;analyze model &#x27;&quot; + name + &quot;&#x27;...&quot;);
+}
+
+
+/*
+ * Create collection.
+ * @method createCollection
+ * @param {String} name name of the collection
+ */
+function createCollection(name) {
+    getLogger().info(&quot;create collection &#x27;&quot; + name + &quot;&#x27;&quot;);
+}
+
+/*
+ * Create class.
+ * @method createClass
+ * @param {String} name name of the class
+ */
+function createClass(name) {
+    getLogger().info(&quot;create class &#x27;&quot; + name + &quot;&#x27;&quot;);
+}
+
+
+/*
+ * Begins model creation.
+ * @method modelCreationBegin
+ */
+function modelCreationBegin() {
+    getLogger().info(&quot;starting model creation...&quot;);
+}
+
+
+/*
+ * End model creation.
+ * @method modelCreationEnd
+ */
+function modelCreationEnd() {
+    getLogger().info(&quot;model creation ended&quot;);
+}
+
 
 /* exports */
 
@@ -614,6 +795,14 @@ function missingSchema(name) {
  * @class runtime-log
  * @static
  */
+
+
+/**
+ * Set the level of the log.
+ * @method level
+ * @param {String} levelName name of the level
+ */
+exports.level = level;
 
 
 /**
@@ -973,6 +1162,103 @@ exports.unknownModel = unknownModel;
  * @param {String} name name of the schema
  */
 exports.missingSchema = missingSchema;
+
+
+/**
+ * A cyclic dependency was found.
+ * @method missingSchema
+ * @param {String} name name of the schema where the cyclic dependency was found
+ */
+exports.cyclicDependency = cyclicDependency;
+
+
+/**
+ * Invalid type for a type enum.
+ * @method invalidEnumType
+ * @param {Object} value the value
+ * @param {String} typeName name of the type
+ * @param {String} type typeName of the type
+ */
+exports.invalidEnumType = invalidEnumType;
+
+
+/**
+ * Load schema.
+ * @method loadSchema
+ * @param {String} name name of the schema
+ */
+exports.loadSchema = loadSchema;
+
+
+/**
+ * Load model.
+ * @method loadModel
+ * @param {String} name name of the model
+ */
+exports.loadModel = loadModel;
+
+
+/**
+ * Load type.
+ * @method loadType
+ * @param {String} name name of the type
+ */
+exports.loadType = loadType;
+
+
+/** 
+ * Compile schema.
+ * @method compileSchema
+ * @param {String} name name of the schema
+ */
+exports.compileSchema = compileSchema;
+
+
+/**
+ * Generate model.
+ * @method generateModel
+ * @param {String} name name of the model
+ */
+exports.generateModel = generateModel;
+
+
+/**
+ * Check model.
+ * @method checkModel
+ * @param {String} name name of the model
+ */
+exports.checkModel = checkModel;
+
+
+/**
+ * Create collection.
+ * @method createCollection
+ * @param {String} name name of the collection
+ */
+exports.createCollection = createCollection;
+
+
+/**
+ * Create class.
+ * @method createClass
+ * @param {String} name name of the class
+ */
+exports.createClass = createClass;
+
+
+/*
+ * Begins model creation.
+ * @method modelCreationBegin
+ */
+exports.modelCreationBegin = modelCreationBegin;
+
+
+/*
+ * End model creation.
+ * @method modelCreationEnd
+ */
+exports.modelCreationEnd = modelCreationEnd;
+
     </pre>
 </div>
                     </div>

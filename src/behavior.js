@@ -105,6 +105,7 @@ function createFunction(name, func, core, useCoreAPI) {
         params.push('$workflow');
         params.push('$behavior');
         params.push('$state');
+        params.push('$log');
     }
 
     if (params[0] !== '') {

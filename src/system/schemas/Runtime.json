@@ -6,6 +6,5 @@
     ],
     "_core": true,
     "version": "property",
-    "system": "method",
-    "warning": "event"
+    "system": "method"
 }

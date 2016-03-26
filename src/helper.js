@@ -41,7 +41,6 @@
 
 var $db = require('./db.js');
 var $component = require('./component.js');
-var $metamodel = require('./metamodel.js');
 
 
 /* Private property */
@@ -75,40 +74,12 @@ function isRuntime() {
  * @return {Runtime} Runtime instance
  */
 function getRuntime() {
-    var runtimeId = '';
+    var runtimeId = '',
+        result = null;
 
     if (!runtimeRef) {
-        if (isRuntime()) {
-            runtimeId = $db.Runtime.find()[0]._id;
-            runtimeRef = $component.get(runtimeId);
-        } else {
-            runtimeRef = {
-                require: function require(id) {
-                    return '';
-                },
-                error: function error(err) {
-                    console.error('runtime: ' + err.message, err.error);
-                },
-                warning: function warning(message) {
-                    console.warn('runtime: ' + message);
-                }
-            };
-        }
-    }
-
-    // case of metamodel creation
-    if (!$metamodel.getModel('Runtime')) {
-        runtimeRef = {
-            require: function require(id) {
-                return '';
-            },
-            error: function error(err) {
-                console.error('runtime: ' + err.message, err.error);
-            },
-            warning: function warning(message) {
-                console.warn('runtime: ' + message);
-            }
-        };
+        runtimeId = $db.Runtime.find()[0]._id;
+        runtimeRef = $component.get(runtimeId);
     }
 
     return runtimeRef;

@@ -1,0 +1,34 @@
+{
+    "_name": "RuntimeLogger",
+    "_core": true,
+    "level": {
+        "type": "log",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "warn"
+    },
+    "info": {
+        "params": [
+            {
+                "name": "message",
+                "type": "string"
+            }
+        ]
+    },
+    "warn": {
+        "params": [
+            {
+                "name": "message",
+                "type": "string"
+            }
+        ]
+    },
+    "error": {
+        "params": [
+            {
+                "name": "message",
+                "type": "string"
+            }
+        ]
+    }
+}

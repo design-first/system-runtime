@@ -1,0 +1,10 @@
+{
+    "name": "log",
+    "type": "string",
+    "value": [
+        "info",
+        "warn",
+        "error"
+    ],
+    "core": true
+}

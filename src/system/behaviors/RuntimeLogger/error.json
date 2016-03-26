@@ -1,0 +1,6 @@
+{
+    "component": "RuntimeLogger",
+    "state": "error",
+    "action": "function error(message) {\n    console.error('runtime: ' + message);\n}",
+    "core": true
+}

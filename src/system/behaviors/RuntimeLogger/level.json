@@ -1,0 +1,7 @@
+{
+    "component": "RuntimeLogger",
+    "state": "level",
+    "action": "function level(val) {\n    $log.level(val);\n}",
+    "core": true,
+    "useCoreAPI": true
+}

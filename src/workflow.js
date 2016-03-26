@@ -384,6 +384,7 @@ function callAction(component, state, action, params, isEvent) {
             injectedParams.push(exports);
             injectedParams.push($behavior);
             injectedParams.push($state);
+            injectedParams.push($log);
         }
 
         if (isEvent) {

@@ -8,14 +8,6 @@
         "mandatory": true,
         "default": "0.0.0"
     },
-    "warning": {
-        "params": [
-            {
-                "name": "message",
-                "type": "string"
-            }
-        ]
-    },
     "system": {
         "params": [
             {

@@ -1,0 +1,11 @@
+{
+    "_name": "RuntimeLogger",
+    "_inherit": [
+        "RuntimeComponent"
+    ],
+    "_core": true,
+    "level": "property",
+    "info": "method",
+    "warn": "method",
+    "error": "method"
+}

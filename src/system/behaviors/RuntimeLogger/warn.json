@@ -1,0 +1,6 @@
+{
+    "component": "RuntimeLogger",
+    "state": "warn",
+    "action": "function warn(message) {\n    if (this.level() === 'info' || this.level() === 'warn') {\n        console.warn('runtime: ' + message);\n    } \n}",
+    "core": true
+}

@@ -74,10 +74,12 @@ var store = {},
         'RuntimeSystem',
         'RuntimeClassInfo',
         'RuntimeMessage',
-        'RuntimeChannel'
+        'RuntimeChannel',
+        'RuntimeLogger'
     ],
     coreDb = [
         'RuntimeSchema',
+        'RuntimeLogger',
         'RuntimeModel',
         'RuntimeGeneratedModel',
         'RuntimeState',
@@ -323,6 +325,7 @@ RuntimeDatabaseCollection.prototype.insert = function(document) {
 
         switch (true) {
             case this.name === 'RuntimeSchema':
+            case this.name === 'RuntimeLogger':
             case this.name === 'RuntimeModel':
             case this.name === 'RuntimeType':
             case this.name === 'RuntimeGeneratedModel':
