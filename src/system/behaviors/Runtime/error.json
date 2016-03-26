@@ -1,6 +1,0 @@
-{
-	"component": "Runtime",
-	"state": "error",
-	"action": "function error(data) {\n    console.error('runtime: ' + data.message, data.error);\n}",
-	"core": true
-}

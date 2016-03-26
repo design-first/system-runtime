@@ -1389,10 +1389,10 @@ function isValidType(value, typeName) {
 
     function _isValidCustomType(value, typeName) {
         var typeDef = store.type[typeName],
-            result = false;
-
-        if (typeDef.value.indexOf(value) !== -1) {
             result = true;
+
+        if (Array.isArray(typeDef.value) &amp;&amp; typeDef.value.indexOf(value) === -1) {
+            result = false;
         }
 
         if (result === false) {

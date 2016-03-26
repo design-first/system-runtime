@@ -163,13 +163,15 @@ var ID = &#x27;_id&#x27;,
  */
 function getLogger() {
     var loggerId = &#x27;&#x27;,
+        loggers = [],
         result = null;
 
     if (!$metamodel.getModel(&#x27;RuntimeLogger&#x27;)) {
         result = fakeLoggerRef;
     } else {
-        loggerId = $db.RuntimeLogger.find()[0][ID];
-        if (loggerId) {
+        loggers = $db.RuntimeLogger.find();
+        if (loggers.length) {
+            loggerId = loggers[0][ID];
             loggerRef = $component.get(loggerId);
             result = loggerRef;
         } else {
@@ -783,6 +785,18 @@ function modelCreationEnd() {
 }
 
 
+/*
+ * An error happened when invoking a behavior.
+ * @method actionInvokeError
+ * @param {String} state state
+ * @param {String} id component id
+ * @param {String} message
+ */
+function actionInvokeError(state, id, message) {
+    getLogger().error(&quot;error when trying to call the method &#x27;&quot; + state + &quot;&#x27; on component &#x27;&quot; + id + &quot;&#x27;: &quot; + message);
+}
+
+
 /* exports */
 
 
@@ -1259,6 +1273,15 @@ exports.modelCreationBegin = modelCreationBegin;
  */
 exports.modelCreationEnd = modelCreationEnd;
 
+
+/**
+ * An error happened when invoking a behavior.
+ * @method actionInvokeError
+ * @param {String} state state
+ * @param {String} id component id
+ * @param {String} message
+ */
+exports.actionInvokeError = actionInvokeError;
     </pre>
 </div>
                     </div>

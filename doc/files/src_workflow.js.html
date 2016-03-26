@@ -497,6 +497,7 @@ function callAction(component, state, action, params, isEvent) {
                     &quot;error&quot;: e
                 });
             }
+            $log.actionInvokeError(state, component.id(), e.message);
         }
     }
 
