@@ -102,6 +102,7 @@ function generateModels() {
         length = 0,
         i = 0;
 
+    // default values
     for (schemaName in store.compiledSchemas) {
         schema = store.compiledSchemas[schemaName];
 
@@ -212,16 +213,15 @@ function generateModels() {
         }
     }
 
-    // parents
+    // inheritance
     for (modelName in store.generatedModels) {
         model = store.generatedModels[modelName];
-        parents = model[INHERITS];
+        parents = getParents(modelName);
+        parents.reverse();
 
-        if (Array.isArray(parents)) {
-            length = parents.length;
-        } else {
-            length = 0;
-        }
+        var modelToMerge = JSON.parse(JSON.stringify(model));
+
+        length = parents.length;
         for (i = 0; i < length; i++) {
             name = parents[i];
             modelParent = store.generatedModels[name];
@@ -230,6 +230,15 @@ function generateModels() {
                 delete mergedModel._id;
                 store.generatedModels[modelName] = mergedModel;
             }
+        }
+
+        // last inherit 
+        // is the overriden model
+        modelExt = store.models[modelName];
+        if (modelExt) {
+            mergedModel = merge(modelExt, store.generatedModels[modelName]);
+            delete mergedModel._id;
+            store.generatedModels[modelName] = mergedModel;
         }
     }
 
@@ -1927,9 +1936,10 @@ function getMetaDef() {
 function getParents(id) {
     var result = [];
 
-    result = store.inheritanceTree[id];
-    if (!result) {
+    if (!store.inheritanceTree[id]) {
         result = [];
+    } else {
+        result = store.inheritanceTree[id].slice();
     }
 
     return result;

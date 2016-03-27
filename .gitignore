@@ -1,5 +1,5 @@
 /node_modules/
 /coverage/
-/build/runtime.json
+/build/
 /doc/
 /.vscode/
