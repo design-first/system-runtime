@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.3.2</b>
+                    API Docs for Version: <b>1.3.3</b>
                 </p>
             </li>
         </div>
@@ -88,7 +88,7 @@
 
 
 	<div class="well well-small">
-            Module: <a href="../modules/runtime-behavior.html">runtime-behavior</a><br>
+            Module: <a href="../modules/runtime-component.html">runtime-component</a><br>
             Parent Module: <a href="../modules/runtime.html">runtime</a>
     </div>
 
@@ -109,10 +109,16 @@ when a specific state of a component will change.</p>
 			<strong>Methods</strong>
 			<ul>
 				<li><a href="#method-add"><span class="im">add</span>(<span class="ia">id</span><span class="ia">state</span><span class="ia">action</span><span class="ia">useCoreAPI</span><span class="ia">core</span>)</a></li>
+				<li><a href="#method-add"><span class="im">add</span>(<span class="ia">id</span><span class="ia">state</span><span class="ia">action</span><span class="ia">useCoreAPI</span><span class="ia">core</span>)</a></li>
+				<li><a href="#method-clear"><span class="im">clear</span>()</a></li>
 				<li><a href="#method-clear"><span class="im">clear</span>()</a></li>
 				<li><a href="#method-get"><span class="im">get</span>(<span class="ia">id</span>)</a></li>
+				<li><a href="#method-get"><span class="im">get</span>(<span class="ia">id</span>)</a></li>
+				<li><a href="#method-getActions"><span class="im">getActions</span>(<span class="ia">id</span><span class="ia">state</span>)</a></li>
 				<li><a href="#method-getActions"><span class="im">getActions</span>(<span class="ia">id</span><span class="ia">state</span>)</a></li>
 				<li><a href="#method-remove"><span class="im">remove</span>(<span class="ia">params</span>)</a></li>
+				<li><a href="#method-remove"><span class="im">remove</span>(<span class="ia">params</span>)</a></li>
+				<li><a href="#method-removeFromMemory"><span class="im">removeFromMemory</span>(<span class="ia">id</span>)</a></li>
 				<li><a href="#method-removeFromMemory"><span class="im">removeFromMemory</span>(<span class="ia">id</span>)</a></li>
 			</ul>
 		</li>
@@ -162,6 +168,117 @@ when a specific state of a component will change.</p>
 
 
 	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-behavior.html">runtime-behavior</a> module.</p>
+				<p>
+				Defined in
+		<a href="../files/dist_system-runtime.js.html#l1647"><code>dist&#x2F;system-runtime.js:1647</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Add a behavior that will be stored in Runtime database.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">id</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>id of the component</p>
+</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">state</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+					<div class="param-description"><p>the state on which the action will be executed</p>
+</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">action</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+					<div class="param-description"><p>the action to execute when the component will have a specific state</p>
+</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">useCoreAPI</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+					<div class="param-description"><p>if true, Runtime core modules will be injected as parameters of the action (default false)</p>
+</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">core</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+					<div class="param-description"><p>if true, behavior can not be exported</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+		<div class="returns">
+			<h4>Returns:</h4>
+
+			<div class="returns-description">
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+					<p>id of the behavior created in Runtime database</p>
+
+			</div>
+		</div>
+
+</div>
+<div id="method-add" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>add</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>id</code>
+				</li>
+				<li class="arg">
+						<code>state</code>
+				</li>
+				<li class="arg">
+						<code>action</code>
+				</li>
+				<li class="arg">
+						<code>useCoreAPI</code>
+				</li>
+				<li class="arg">
+						<code>core</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+		<span class="returns-inline">
+			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+		</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-behavior.html">runtime-behavior</a> module.</p>
 				<p>
 				Defined in
 		<a href="../files/src_behavior.js.html#l290"><code>src&#x2F;behavior.js:290</code></a>
@@ -250,9 +367,39 @@ when a specific state of a component will change.</p>
 
 
 	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-behavior.html">runtime-behavior</a> module.</p>
 				<p>
 				Defined in
 		<a href="../files/src_behavior.js.html#l334"><code>src&#x2F;behavior.js:334</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Remove all the behaviors stored in memory.</p>
+</div>
+
+
+
+</div>
+<div id="method-clear" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>clear</code></span>
+
+		<span class="paren">()</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-behavior.html">runtime-behavior</a> module.</p>
+				<p>
+				Defined in
+		<a href="../files/dist_system-runtime.js.html#l1691"><code>dist&#x2F;system-runtime.js:1691</code></a>
 		</p>
 
 
@@ -287,9 +434,72 @@ when a specific state of a component will change.</p>
 
 
 	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-behavior.html">runtime-behavior</a> module.</p>
 				<p>
 				Defined in
 		<a href="../files/src_behavior.js.html#l303"><code>src&#x2F;behavior.js:303</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Get a behavior by its id.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">id</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>id of the behavior</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+		<div class="returns">
+			<h4>Returns:</h4>
+
+			<div class="returns-description">
+						<span class="type">Behavior</span>:
+					<p>the behavior</p>
+
+			</div>
+		</div>
+
+</div>
+<div id="method-get" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>get</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>id</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+		<span class="returns-inline">
+			<span class="type">Behavior</span>
+		</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-behavior.html">runtime-behavior</a> module.</p>
+				<p>
+				Defined in
+		<a href="../files/dist_system-runtime.js.html#l1660"><code>dist&#x2F;system-runtime.js:1660</code></a>
 		</p>
 
 
@@ -351,9 +561,84 @@ when a specific state of a component will change.</p>
 
 
 	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-behavior.html">runtime-behavior</a> module.</p>
 				<p>
 				Defined in
 		<a href="../files/src_behavior.js.html#l324"><code>src&#x2F;behavior.js:324</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Get all the actions of a behavior for a component.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">id</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>id of the component</p>
+</div>
+
+				</li>
+				<li class="param">
+						<code class="param-name">state</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>name of the state</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+		<div class="returns">
+			<h4>Returns:</h4>
+
+			<div class="returns-description">
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
+					<p>all the actions that have to be executed for a specific component and state</p>
+
+			</div>
+		</div>
+
+</div>
+<div id="method-getActions" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>getActions</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>id</code>
+				</li>
+				<li class="arg">
+						<code>state</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+		<span class="returns-inline">
+			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+		</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-behavior.html">runtime-behavior</a> module.</p>
+				<p>
+				Defined in
+		<a href="../files/dist_system-runtime.js.html#l1681"><code>dist&#x2F;system-runtime.js:1681</code></a>
 		</p>
 
 
@@ -418,9 +703,63 @@ when a specific state of a component will change.</p>
 
 
 	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-behavior.html">runtime-behavior</a> module.</p>
 				<p>
 				Defined in
 		<a href="../files/src_behavior.js.html#l312"><code>src&#x2F;behavior.js:312</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Remove a behavior with its id or remove all the behaviors for a specific state
+of the component.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">params</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+					<div class="param-description"><br>
+{String} componentId id of the component <br>
+{String} state state of the component <br>
+{String} behaviorId id of the behavior (optional)) <br></div>
+
+				</li>
+			</ul>
+		</div>
+
+
+</div>
+<div id="method-remove" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>remove</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>params</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-behavior.html">runtime-behavior</a> module.</p>
+				<p>
+				Defined in
+		<a href="../files/dist_system-runtime.js.html#l1669"><code>dist&#x2F;system-runtime.js:1669</code></a>
 		</p>
 
 
@@ -470,9 +809,60 @@ of the component.</p>
 
 
 	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-behavior.html">runtime-behavior</a> module.</p>
 				<p>
 				Defined in
 		<a href="../files/src_behavior.js.html#l341"><code>src&#x2F;behavior.js:341</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Remove a behavior with its id from the memory.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">id</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>id of the component</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+
+</div>
+<div id="method-removeFromMemory" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>removeFromMemory</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>id</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-behavior.html">runtime-behavior</a> module.</p>
+				<p>
+				Defined in
+		<a href="../files/dist_system-runtime.js.html#l1698"><code>dist&#x2F;system-runtime.js:1698</code></a>
 		</p>
 
 

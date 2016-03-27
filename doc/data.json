@@ -2,7 +2,7 @@
     "project": {
         "name": "system-runtime",
         "description": "Runtime, the System Runtime Environment",
-        "version": "1.3.2",
+        "version": "1.3.3",
         "url": "https://system-runtime.github.io"
     },
     "files": {
@@ -11,9 +11,7 @@
             "modules": {
                 "runtime-behavior": 1
             },
-            "classes": {
-                "runtime-behavior": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -22,9 +20,7 @@
             "modules": {
                 "runtime-component": 1
             },
-            "classes": {
-                "runtime-component": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -33,10 +29,7 @@
             "modules": {
                 "runtime-db": 1
             },
-            "classes": {
-                "runtime-db": 1,
-                "RuntimeDatabaseCollection": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -45,9 +38,7 @@
             "modules": {
                 "runtime-helper": 1
             },
-            "classes": {
-                "runtime-helper": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -56,9 +47,7 @@
             "modules": {
                 "runtime-log": 1
             },
-            "classes": {
-                "runtime-log": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -67,9 +56,7 @@
             "modules": {
                 "runtime-metamodel": 1
             },
-            "classes": {
-                "runtime-metamodel": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -78,9 +65,7 @@
             "modules": {
                 "runtime": 1
             },
-            "classes": {
-                "runtime": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -89,9 +74,7 @@
             "modules": {
                 "runtime-state": 1
             },
-            "classes": {
-                "runtime-state": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -100,19 +83,27 @@
             "modules": {
                 "runtime-workflow": 1
             },
-            "classes": {
-                "runtime-workflow": 1,
-                "RuntimeError": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "build/system/system.js": {
-            "name": "build/system/system.js",
+        "dist/system-runtime.js": {
+            "name": "dist/system-runtime.js",
             "modules": {
                 "runtime-system": 1
             },
             "classes": {
+                "runtime-behavior": 1,
+                "runtime-component": 1,
+                "runtime-db": 1,
+                "RuntimeDatabaseCollection": 1,
+                "runtime-helper": 1,
+                "runtime-log": 1,
+                "runtime-metamodel": 1,
+                "runtime": 1,
+                "runtime-state": 1,
+                "runtime-workflow": 1,
+                "RuntimeError": 1,
                 "runtime-system": 1
             },
             "fors": {},
@@ -151,8 +142,8 @@
             "fors": {},
             "namespaces": {},
             "tag": "main",
-            "file": "build/system/system.js",
-            "line": 1340,
+            "file": "dist/system-runtime.js",
+            "line": 1341,
             "description": "This module is the main module of Runtime. <br>\nIt inits Runtime metamodel and loads Runtime core system.",
             "requires": [
                 "runtime-component",
@@ -168,15 +159,15 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "runtime-behavior": 1
+                "runtime-system": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
             "module": "runtime",
             "namespace": "",
-            "file": "src/behavior.js",
-            "line": 276,
+            "file": "dist/system-runtime.js",
+            "line": 1341,
             "description": "This module manages the behaviors of all components. \nA behavior is a mecanism that allow users to add actions that will be executed \nwhen a specific state of a component will change.",
             "requires": [
                 "runtime-db",
@@ -190,15 +181,15 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "runtime-component": 1
+                "runtime-behavior": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
             "module": "runtime",
             "namespace": "",
-            "file": "src/component.js",
-            "line": 975,
+            "file": "dist/system-runtime.js",
+            "line": 1633,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by Runtime.",
             "requires": [
                 "runtime-workflow",
@@ -215,7 +206,7 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "runtime-db": 1,
+                "runtime-component": 1,
                 "RuntimeDatabaseCollection": 1
             },
             "fors": {},
@@ -223,8 +214,8 @@
             "namespaces": {},
             "module": "runtime",
             "namespace": "",
-            "file": "src/db.js",
-            "line": 224,
+            "file": "dist/system-runtime.js",
+            "line": 2961,
             "description": "This module manages Runtime database. <br>\nRuntime database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nRuntime Database is closely linked to Runtime metamodel and Runtime components because: <br>\n- all operations done by Runtime database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "runtime-component",
@@ -238,15 +229,15 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "runtime-helper": 1
+                "runtime-db": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
             "module": "runtime",
             "namespace": "",
-            "file": "src/helper.js",
-            "line": 126,
+            "file": "dist/system-runtime.js",
+            "line": 3604,
             "description": "This module contains all the functions used by all the modules.",
             "requires": [
                 "runtime-db",
@@ -259,15 +250,15 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "runtime-log": 1
+                "runtime-helper": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
             "module": "runtime",
             "namespace": "",
-            "file": "src/log.js",
-            "line": 714,
+            "file": "dist/system-runtime.js",
+            "line": 3803,
             "description": "This module contains all the functions that write a log.",
             "requires": [
                 "runtime-helper"
@@ -279,6 +270,7 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "runtime-log": 1,
                 "runtime-metamodel": 1
             },
             "fors": {},
@@ -286,8 +278,8 @@
             "namespaces": {},
             "module": "runtime",
             "namespace": "",
-            "file": "src/metamodel.js",
-            "line": 1973,
+            "file": "dist/system-runtime.js",
+            "line": 7013,
             "description": "This module manages Runtime metamodel. <br>\nRuntime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.",
             "requires": [
                 "runtime-db",
@@ -302,15 +294,15 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "runtime-state": 1
+                "runtime": 1
             },
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
             "module": "runtime",
             "namespace": "",
-            "file": "src/state.js",
-            "line": 99,
+            "file": "dist/system-runtime.js",
+            "line": 7296,
             "description": "This module manages the states of all thecomponents.",
             "requires": [
                 "runtime-db"
@@ -322,6 +314,7 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "runtime-state": 1,
                 "runtime-workflow": 1,
                 "RuntimeError": 1
             },
@@ -330,8 +323,8 @@
             "namespaces": {},
             "module": "runtime",
             "namespace": "",
-            "file": "src/workflow.js",
-            "line": 66,
+            "file": "dist/system-runtime.js",
+            "line": 7515,
             "description": "This module manages the workflow of Runtime. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and runtime. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
                 "runtime-metamodel",
@@ -349,16 +342,14 @@
             "name": "runtime-system",
             "submodules": {},
             "elements": {},
-            "classes": {
-                "runtime-system": 1
-            },
+            "classes": {},
             "fors": {},
             "is_submodule": 1,
             "namespaces": {},
             "module": "runtime",
             "namespace": "",
-            "file": "build/system/system.js",
-            "line": 1340,
+            "file": "dist/system-runtime.js",
+            "line": 29,
             "description": "This module contains Runtime core system.",
             "static": 1
         }
@@ -373,10 +364,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "runtime",
-            "submodule": "runtime-behavior",
+            "submodule": "runtime-component",
             "namespace": "",
-            "file": "src/behavior.js",
-            "line": 276,
+            "file": "dist/system-runtime.js",
+            "line": 1633,
             "description": "This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed \nwhen a specific state of a component will change.",
             "requires": [
                 "runtime-db",
@@ -393,10 +384,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "runtime",
-            "submodule": "runtime-component",
+            "submodule": "runtime-db",
             "namespace": "",
-            "file": "src/component.js",
-            "line": 975,
+            "file": "dist/system-runtime.js",
+            "line": 2679,
             "description": "This module manages the components. \nIt is the factory of all the components that are created by Runtime.",
             "requires": [
                 "runtime-workflow",
@@ -416,10 +407,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "runtime",
-            "submodule": "runtime-db",
+            "submodule": "runtime-helper",
             "namespace": "",
-            "file": "src/db.js",
-            "line": 867,
+            "file": "dist/system-runtime.js",
+            "line": 3604,
             "description": "This module manages Runtime database. <br>\nRuntime database is a micro NoSQL Database that contains: <br>\n- collections to store documents (schemas, types, components, ...) and <br>\n- APIs to import or export documents. <br>\n\nRuntime database is closely linked to Runtime metamodel because: <br>\n- all operations done by Runtime database must be compliant with the model before being finished, <br>\n- insert operation automatically creates a component and <br>\n- remove operation automatically destroy a component.",
             "requires": [
                 "runtime-component",
@@ -438,8 +429,8 @@
             "module": "runtime",
             "submodule": "runtime-db",
             "namespace": "",
-            "file": "src/db.js",
-            "line": 224,
+            "file": "dist/system-runtime.js",
+            "line": 2961,
             "description": "A collection of documents managed by Runtime. <br>\nInternal collections manage core objects of Runtime (schema, type, ...). <br>\nPublic collections manage components of the same class. <br>",
             "is_constructor": 1,
             "params": [
@@ -459,10 +450,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "runtime",
-            "submodule": "runtime-helper",
+            "submodule": "runtime-log",
             "namespace": "",
-            "file": "src/helper.js",
-            "line": 126,
+            "file": "dist/system-runtime.js",
+            "line": 3803,
             "description": "This module contains all the functions used by all the modules.",
             "requires": [
                 "runtime-db",
@@ -478,10 +469,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "runtime",
-            "submodule": "runtime-log",
+            "submodule": "runtime-metamodel",
             "namespace": "",
-            "file": "src/log.js",
-            "line": 714,
+            "file": "dist/system-runtime.js",
+            "line": 4558,
             "description": "This module contains all the functions that write a log.",
             "requires": [
                 "runtime-helper"
@@ -498,8 +489,8 @@
             "module": "runtime",
             "submodule": "runtime-metamodel",
             "namespace": "",
-            "file": "src/metamodel.js",
-            "line": 1973,
+            "file": "dist/system-runtime.js",
+            "line": 7013,
             "description": "This module manages Runtime metamodel. <br>\nRuntime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.",
             "requires": [
                 "runtime-db",
@@ -518,8 +509,8 @@
             "extension_for": [],
             "module": "runtime",
             "namespace": "",
-            "file": "src/runtime.js",
-            "line": 77,
+            "file": "dist/system-runtime.js",
+            "line": 7296,
             "description": "This module is the main module of Runtime. <br>\nIt inits Runtime metamodel and loads Runtime core system.",
             "requires": [
                 "runtime-component",
@@ -529,7 +520,8 @@
             "mainName": "runtime",
             "tag": "main",
             "itemtype": "main",
-            "_main": true
+            "_main": true,
+            "submodule": "runtime-state"
         },
         "runtime-state": {
             "name": "runtime-state",
@@ -540,10 +532,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "runtime",
-            "submodule": "runtime-state",
+            "submodule": "runtime-workflow",
             "namespace": "",
-            "file": "src/state.js",
-            "line": 99,
+            "file": "dist/system-runtime.js",
+            "line": 7415,
             "description": "This module manages the states of all the components.",
             "requires": [
                 "runtime-db"
@@ -560,8 +552,8 @@
             "module": "runtime",
             "submodule": "runtime-workflow",
             "namespace": "",
-            "file": "src/workflow.js",
-            "line": 769,
+            "file": "dist/system-runtime.js",
+            "line": 8218,
             "description": "This module manages the workflow of Runtime. It behaves like a workflow engine. <br>\nIt checks if the change of status of a component is valid to be executed. By valid, it means that:<br>\n- the state is valid for the component, <br>\n- the input (i.e. parameters) of all actions for the state are compliants with the model and <br>\n- the output of all actions are compliants with the model. <br>\n\nIf an error occurs, the workflow will call the error state of the component and of Runtime instance. <br>\nIf the error can break the consistency of the current system, the worklow will stop.",
             "requires": [
                 "runtime-metamodel",
@@ -585,8 +577,8 @@
             "module": "runtime",
             "submodule": "runtime-workflow",
             "namespace": "",
-            "file": "src/workflow.js",
-            "line": 66,
+            "file": "dist/system-runtime.js",
+            "line": 7515,
             "description": "The RuntimeError class.",
             "is_constructor": 1,
             "params": [
@@ -606,10 +598,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "runtime",
-            "submodule": "runtime-system",
+            "submodule": "runtime-behavior",
             "namespace": "",
-            "file": "build/system/system.js",
-            "line": 1340,
+            "file": "dist/system-runtime.js",
+            "line": 1341,
             "description": "This module contains Runtime core system."
         }
     },
@@ -2851,8 +2843,8 @@
             "submodule": "runtime-workflow"
         },
         {
-            "file": "build/system/system.js",
-            "line": 1350,
+            "file": "dist/system-runtime.js",
+            "line": 1351,
             "description": "Runtime core system",
             "itemtype": "property",
             "name": "system",
@@ -2860,6 +2852,2241 @@
             "class": "runtime-system",
             "module": "runtime",
             "submodule": "runtime-system"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 1647,
+            "description": "Add a behavior that will be stored in Runtime database.",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "state",
+                    "description": "the state on which the action will be executed",
+                    "type": "Object"
+                },
+                {
+                    "name": "action",
+                    "description": "the action to execute when the component will have a specific state",
+                    "type": "Object"
+                },
+                {
+                    "name": "useCoreAPI",
+                    "description": "if true, Runtime core modules will be injected as parameters of the action (default false)",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "core",
+                    "description": "if true, behavior can not be exported",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "id of the behavior created in Runtime database",
+                "type": "String"
+            },
+            "class": "runtime-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 1660,
+            "description": "Get a behavior by its id.",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the behavior",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the behavior",
+                "type": "Behavior"
+            },
+            "class": "runtime-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 1669,
+            "description": "Remove a behavior with its id or remove all the behaviors for a specific state\nof the component.",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "<br>\n{String} componentId id of the component <br>\n{String} state state of the component <br>\n{String} behaviorId id of the behavior (optional)) <br>",
+                    "type": "Object"
+                }
+            ],
+            "class": "runtime-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 1681,
+            "description": "Get all the actions of a behavior for a component.",
+            "itemtype": "method",
+            "name": "getActions",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "state",
+                    "description": "name of the state",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "all the actions that have to be executed for a specific component and state",
+                "type": "Array"
+            },
+            "class": "runtime-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 1691,
+            "description": "Remove all the behaviors stored in memory.",
+            "itemtype": "method",
+            "name": "clear",
+            "class": "runtime-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 1698,
+            "description": "Remove a behavior with its id from the memory.",
+            "itemtype": "method",
+            "name": "removeFromMemory",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-behavior",
+            "module": "runtime",
+            "submodule": "runtime-behavior"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 2696,
+            "description": "Create a component from its configuration.",
+            "itemtype": "method",
+            "name": "create",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "<br>\n{String} model model name <br>",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "component",
+                "type": "Component"
+            },
+            "class": "runtime-component",
+            "module": "runtime",
+            "submodule": "runtime-component"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 2706,
+            "description": "Get a component by its id.",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "component",
+                "type": "Component"
+            },
+            "class": "runtime-component",
+            "module": "runtime",
+            "submodule": "runtime-component"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 2715,
+            "description": "Remove a component with its id from the memory.",
+            "itemtype": "method",
+            "name": "removeFromMemory",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-component",
+            "module": "runtime",
+            "submodule": "runtime-component"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 2723,
+            "description": "Remove all the components store in memory.",
+            "itemtype": "method",
+            "name": "clear",
+            "class": "runtime-component",
+            "module": "runtime",
+            "submodule": "runtime-component"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 2730,
+            "description": "Destroy a component from its id.",
+            "itemtype": "method",
+            "name": "destroy",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component to destroy",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "if the component has been destroyed",
+                "type": "Boolean"
+            },
+            "class": "runtime-component",
+            "module": "runtime",
+            "submodule": "runtime-component"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 2983,
+            "description": "Find a document into the collection.",
+            "itemtype": "method",
+            "name": "find",
+            "params": [
+                {
+                    "name": "query",
+                    "description": "",
+                    "type": "Object|Array"
+                }
+            ],
+            "return": {
+                "description": "Array of documents that map the query",
+                "type": "Array"
+            },
+            "example": [
+                " \n$db.Person.find({\"name\": \"laure\"}); <br>\n$db.Person.find({\"name\": \"laure\", \"age\" : 24}); <br>\n$db.Person.find([{\"name\": \"rene\"}, {\"name\": \"robert\"}]);"
+            ],
+            "class": "RuntimeDatabaseCollection",
+            "module": "runtime",
+            "submodule": "runtime-db"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3030,
+            "description": "Insert an new document into the collection. <br>\nBefore inserting the document, Runtime checks that the document is compliant\nwith its class definition. <br> \nThen, after inserting it, we create the component.",
+            "itemtype": "method",
+            "name": "insert",
+            "params": [
+                {
+                    "name": "document",
+                    "description": "a new object to add",
+                    "type": "Object|Array"
+                }
+            ],
+            "return": {
+                "description": "array of id created",
+                "type": "Array"
+            },
+            "example": [
+                " \n$db.Person.insert({<br>\n     \"name\": \"bob\", <br>\n     \"firstName\": \"Saint-Clar\", <br>\n     \"age\": 43 <br>\n}); <br>"
+            ],
+            "class": "RuntimeDatabaseCollection",
+            "module": "runtime",
+            "submodule": "runtime-db"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3118,
+            "description": "Update documents into a collection.",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "query",
+                    "description": "query to find the documents to update",
+                    "type": "Object|Array"
+                },
+                {
+                    "name": "update",
+                    "description": "update to make",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "\n{Boolean} upsert true if we create a document when no document is found by the query",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Number of documents updated",
+                "type": "Number"
+            },
+            "example": [
+                " \n$db.Cars.update({\"code\": \"AZD-71\"}, {\"price\": \"10000$\"}); <br>\n$db.Cars.update([{\"code\": \"AZD-71\"}, {\"code\": \"AZD-65\"}], {\"price\": \"10000$\"}); <br>\n$db.Cars.update({\"code\": \"AZD-71\"}, {\"price\": \"10000$\"}, {\"upsert\": true}); <br>"
+            ],
+            "class": "RuntimeDatabaseCollection",
+            "module": "runtime",
+            "submodule": "runtime-db"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3215,
+            "description": "Remove a document from the colllection. <br>\nWhen a document is removed, the component is destroyed.",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "query",
+                    "description": "query to find the documents to remove",
+                    "type": "Object|Array"
+                }
+            ],
+            "return": {
+                "description": "list of documents id removed",
+                "type": "Array"
+            },
+            "example": [
+                " \n$db.Cars.remove({\"code\": \"AZD-71\"}); <br>\n$db.Cars.remove([{\"code\": \"AZD-71\"}, {\"code\": \"AZD-65\"}]); <br>"
+            ],
+            "class": "RuntimeDatabaseCollection",
+            "module": "runtime",
+            "submodule": "runtime-db"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3292,
+            "description": "Count the number of documents in the collection.",
+            "itemtype": "method",
+            "name": "count",
+            "return": {
+                "description": "number of documents in the collection",
+                "type": "Number"
+            },
+            "class": "RuntimeDatabaseCollection",
+            "module": "runtime",
+            "submodule": "runtime-db"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3625,
+            "description": "Create a new {{#crossLink \"RuntimeDatabaseCollection\"}}{{/crossLink}}.",
+            "itemtype": "method",
+            "name": "collection",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "of the collection",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-db",
+            "module": "runtime",
+            "submodule": "runtime-db"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3633,
+            "description": "Runtime database store that lists all the collections.",
+            "itemtype": "property",
+            "name": "store",
+            "type": "JSON",
+            "class": "runtime-db",
+            "module": "runtime",
+            "submodule": "runtime-db"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3640,
+            "description": "Import/Export a Runtime system into/from the database.",
+            "itemtype": "method",
+            "name": "system",
+            "params": [
+                {
+                    "name": "importedSystem",
+                    "description": "a Runtime system to import",
+                    "type": "JSON"
+                }
+            ],
+            "return": {
+                "description": "the id of the imported Runtime system or the current Runtime system",
+                "type": "String"
+            },
+            "class": "runtime-db",
+            "module": "runtime",
+            "submodule": "runtime-db"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3649,
+            "description": "Export a Runtime sub-system.",
+            "itemtype": "method",
+            "name": "subsystem",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "parameters",
+                    "type": "JSON"
+                }
+            ],
+            "return": {
+                "description": "a stringified Runtime sub-system",
+                "type": "String"
+            },
+            "example": [
+                "\n$db.subsystem({\"schemas\":{\"name\":\"Person\"}}); // filter export on schemas <br>\n$db.subsystem({\"types\":{\"name\":\"address\"}}); // filter export on types <br>\n$db.subsystem({\"behaviors\":{\"component\":\"laure\"}}); // filter export on behaviors <br>\n$db.subsystem({\"components\":{\"Person\": {\"country\": \"France\"}}}); // filter export on components <br>\n$db.subsystem({\"schemas\":{\"name\":\"Person\"},\"components\":{\"Person\": {\"country\": \"France\"}}}); // combine filters"
+            ],
+            "class": "runtime-db",
+            "module": "runtime",
+            "submodule": "runtime-db"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3665,
+            "description": "Clear the database.",
+            "itemtype": "method",
+            "name": "clear",
+            "class": "runtime-db",
+            "module": "runtime",
+            "submodule": "runtime-db"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3672,
+            "description": "Init the database.",
+            "itemtype": "method",
+            "name": "init",
+            "class": "runtime-db",
+            "module": "runtime",
+            "submodule": "runtime-db"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3815,
+            "description": "Get Runtime instance.",
+            "itemtype": "method",
+            "name": "getRuntime",
+            "return": {
+                "description": "Runtime instance",
+                "type": "Runtime"
+            },
+            "class": "runtime-helper",
+            "module": "runtime",
+            "submodule": "runtime-helper"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3823,
+            "description": "Check if a Runtime instance exists.",
+            "itemtype": "method",
+            "name": "isRuntime",
+            "return": {
+                "description": "true if a Runtime instance exist",
+                "type": "Boolean"
+            },
+            "class": "runtime-helper",
+            "module": "runtime",
+            "submodule": "runtime-helper"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3831,
+            "description": "Generate a uuid.",
+            "itemtype": "method",
+            "name": "generateId",
+            "return": {
+                "description": "a uuid",
+                "type": "String"
+            },
+            "class": "runtime-helper",
+            "module": "runtime",
+            "submodule": "runtime-helper"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 3839,
+            "description": "Add Polyfill",
+            "itemtype": "method",
+            "name": "polyfill",
+            "class": "runtime-helper",
+            "module": "runtime",
+            "submodule": "runtime-helper"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4293,
+            "description": "A message send by the channel is invalid",
+            "itemtype": "method",
+            "name": "invalidChannelEvent",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "message send",
+                    "type": "String"
+                },
+                {
+                    "name": "eventName",
+                    "description": "name of the event",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "expected type",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4569,
+            "description": "Set the level of the log.",
+            "itemtype": "method",
+            "name": "level",
+            "params": [
+                {
+                    "name": "levelName",
+                    "description": "name of the level",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4577,
+            "description": "A property of a schema is unknown.",
+            "itemtype": "method",
+            "name": "unknownProperty",
+            "params": [
+                {
+                    "name": "propertyName",
+                    "description": "the name of the property",
+                    "type": "String"
+                },
+                {
+                    "name": "schema",
+                    "description": "the schema definition",
+                    "type": "Object"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4586,
+            "description": "Invalid type for a property.",
+            "itemtype": "method",
+            "name": "invalidPropertyType",
+            "params": [
+                {
+                    "name": "propertyName",
+                    "description": "name of the peropety",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "the type defined by the schema",
+                    "type": "String"
+                },
+                {
+                    "name": "property",
+                    "description": "the property",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4596,
+            "description": "Invalid value for a type enum.",
+            "itemtype": "method",
+            "name": "invalidEnumValue",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "the value",
+                    "type": "Object"
+                },
+                {
+                    "name": "type",
+                    "description": "the type defined by the schema",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4605,
+            "description": "Invalid class name for a component.",
+            "itemtype": "method",
+            "name": "invalidClassName",
+            "params": [
+                {
+                    "name": "componentId",
+                    "description": "id of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "the type defined by the schema",
+                    "type": "String"
+                },
+                {
+                    "name": "constructorName",
+                    "description": "name of the component class",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4615,
+            "description": "Missing a property.",
+            "itemtype": "method",
+            "name": "missingProperty",
+            "params": [
+                {
+                    "name": "propertyName",
+                    "description": "name of the property",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4623,
+            "description": "A class definition is missing.",
+            "itemtype": "method",
+            "name": "missingImplementation",
+            "params": [
+                {
+                    "name": "classSource",
+                    "description": "a class",
+                    "type": "String"
+                },
+                {
+                    "name": "classToImp",
+                    "description": "the class to implement",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4632,
+            "description": "Invalid type for a property of a class definition.",
+            "itemtype": "method",
+            "name": "invalidTypeImp",
+            "params": [
+                {
+                    "name": "property",
+                    "description": "a property",
+                    "type": "String"
+                },
+                {
+                    "name": "className",
+                    "description": "a class name",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4641,
+            "description": "Missing a property for a class definition.",
+            "itemtype": "method",
+            "name": "missingPropertyImp",
+            "params": [
+                {
+                    "name": "property",
+                    "description": "a property",
+                    "type": "String"
+                },
+                {
+                    "name": "className",
+                    "description": "a class name",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4650,
+            "description": "Unkown property for a class definition.",
+            "itemtype": "method",
+            "name": "unknownPropertyImp",
+            "params": [
+                {
+                    "name": "property",
+                    "description": "a property",
+                    "type": "String"
+                },
+                {
+                    "name": "schema",
+                    "description": "a schema",
+                    "type": "Object"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4659,
+            "description": "Try to add an invalid type.",
+            "itemtype": "method",
+            "name": "invalidTypeDefinition",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "a type definition",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4667,
+            "description": "Invalid property type.",
+            "itemtype": "method",
+            "name": "invalidPropertyName",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "propertyName",
+                    "description": "name of the property",
+                    "type": "String"
+                },
+                {
+                    "name": "propertyValue",
+                    "description": "value of the property",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "type defined by the schema",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4678,
+            "description": "Trying to set a read-only property.",
+            "itemtype": "method",
+            "name": "readOnlyProperty",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "propertyName",
+                    "description": "name of the property",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4687,
+            "description": "Invalid document on a Runtime database insert operation.",
+            "itemtype": "method",
+            "name": "invalidDocumentOnDbInsert",
+            "params": [
+                {
+                    "name": "doc",
+                    "description": "a document",
+                    "type": "String"
+                },
+                {
+                    "name": "collectionName",
+                    "description": "the name of the colllection",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4696,
+            "description": "Invalid property on a Runtime database update operation.",
+            "itemtype": "method",
+            "name": "invalidPropertyTypeOnDbUpdate",
+            "params": [
+                {
+                    "name": "collectionName",
+                    "description": "the name of the colllection",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "propertyName",
+                    "description": "name of the property",
+                    "type": "String"
+                },
+                {
+                    "name": "propertyValue",
+                    "description": "value of the property",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "expected type defined by the schema",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4708,
+            "description": "Call an unknown method of a class.",
+            "itemtype": "method",
+            "name": "unknownMethod",
+            "params": [
+                {
+                    "name": "classId",
+                    "description": "id of the class",
+                    "type": "String"
+                },
+                {
+                    "name": "methodName",
+                    "description": "name of the method",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4717,
+            "description": "Try to create an invalid RuntimeDatabaseCollection.",
+            "itemtype": "method",
+            "name": "invalidCollectionName",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the collection",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4725,
+            "description": "Invalid type result of a method.",
+            "itemtype": "method",
+            "name": "invalidResultType",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "methodName",
+                    "description": "name ot the method",
+                    "type": "String"
+                },
+                {
+                    "name": "expectedType",
+                    "description": "expected type",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "current type",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4736,
+            "description": "Unknown class.",
+            "itemtype": "method",
+            "name": "unknownComponent",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the class",
+                    "type": "String"
+                },
+                {
+                    "name": "componentId",
+                    "description": "if of the component",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4745,
+            "description": "The Runtime workflow has been restarted.",
+            "itemtype": "method",
+            "name": "workflowRestarted",
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4752,
+            "description": "Invalid parameter number for a method.",
+            "itemtype": "method",
+            "name": "invalidParamNumber",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "methodName",
+                    "description": "name of the component",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4761,
+            "description": "Invalid type parameters for a method.",
+            "itemtype": "method",
+            "name": "invalidParamType",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "methodName",
+                    "description": "name of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "paramName",
+                    "description": "name of the parameter",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4772,
+            "description": "Add a more than one behavior to a state.",
+            "itemtype": "method",
+            "name": "behaviorNotUnique",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the class",
+                    "type": "String"
+                },
+                {
+                    "name": "stateName",
+                    "description": "name of the state",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4781,
+            "description": "Can not add a behavior with an invalid state.",
+            "itemtype": "method",
+            "name": "invalidStateOn",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the class",
+                    "type": "String"
+                },
+                {
+                    "name": "stateName",
+                    "description": "name of the state",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4790,
+            "description": "The call to a remove state of the behavior module is invalid.",
+            "itemtype": "method",
+            "name": "invalidStateOff",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the class",
+                    "type": "String"
+                },
+                {
+                    "name": "stateName",
+                    "description": "name of the state",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4799,
+            "description": "The master system is not found.",
+            "itemtype": "method",
+            "name": "masterSystemNotFound",
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4806,
+            "description": "Invalid type.",
+            "itemtype": "method",
+            "name": "invalidType",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "value of the type",
+                    "type": "Object"
+                },
+                {
+                    "name": "typeName",
+                    "description": "expectec type defined by the schema",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4815,
+            "description": "Unknown type.",
+            "itemtype": "method",
+            "name": "unknownType",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "value",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4823,
+            "description": "A component has not been alreay created.",
+            "itemtype": "method",
+            "name": "canNotYetValidate",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "className",
+                    "description": "name of the class",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4832,
+            "description": "A message send by the channel is invalid",
+            "itemtype": "method",
+            "name": "invalidChannelEvent",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "message send",
+                    "type": "String"
+                },
+                {
+                    "name": "eventName",
+                    "description": "name of the event",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "expected type",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4842,
+            "description": "invalid parameter number for an action add with on method.",
+            "itemtype": "method",
+            "name": "invalidParamNumberMethodOn",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "methodName",
+                    "description": "name of the component",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4851,
+            "description": "Change the id of a component.",
+            "itemtype": "method",
+            "name": "updateUuid",
+            "params": [
+                {
+                    "name": "currentId",
+                    "description": "id of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "newId",
+                    "description": "of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "alreadyUsed",
+                    "description": "newId already used",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4861,
+            "description": "Unkonw property on a Runtime database update operation.",
+            "itemtype": "method",
+            "name": "unknownPropertyOnDbUpdate",
+            "params": [
+                {
+                    "name": "propertyName",
+                    "description": "name of the property",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4870,
+            "description": "Try to change the state of a component that has been destroyed",
+            "itemtype": "method",
+            "name": "invalideUseOfComponent",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4878,
+            "description": "Try to add an invalid schema.",
+            "itemtype": "method",
+            "name": "invalidSchema",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the schema",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4886,
+            "description": "Try to add an invalid model.",
+            "itemtype": "method",
+            "name": "invalidModel",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the model",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4894,
+            "description": "Invalid parameters set when creating an instance of a class.",
+            "itemtype": "method",
+            "name": "invalidParameters",
+            "params": [
+                {
+                    "name": "classId",
+                    "description": "class name of the component",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4902,
+            "description": "Try to get the property of a destroyed component.",
+            "itemtype": "method",
+            "name": "destroyedComponentCall",
+            "params": [
+                {
+                    "name": "propertyName",
+                    "description": "name of the property",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4911,
+            "description": "Invalid parameter type  when creating an instance of a class.",
+            "itemtype": "method",
+            "name": "invalidConctructorParameters",
+            "params": [
+                {
+                    "name": "classId",
+                    "description": "class name of the component",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "schema name",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4920,
+            "description": "Get the information of an unkown model.",
+            "itemtype": "method",
+            "name": "unknownModel",
+            "params": [
+                {
+                    "name": "classId",
+                    "description": "id of the class",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4928,
+            "description": "A schema is missing.",
+            "itemtype": "method",
+            "name": "missingSchema",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the schema",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4936,
+            "description": "A cyclic dependency was found.",
+            "itemtype": "method",
+            "name": "missingSchema",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the schema where the cyclic dependency was found",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4944,
+            "description": "Invalid type for a type enum.",
+            "itemtype": "method",
+            "name": "invalidEnumType",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "the value",
+                    "type": "Object"
+                },
+                {
+                    "name": "typeName",
+                    "description": "name of the type",
+                    "type": "String"
+                },
+                {
+                    "name": "type",
+                    "description": "typeName of the type",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4954,
+            "description": "Load schema.",
+            "itemtype": "method",
+            "name": "loadSchema",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the schema",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4962,
+            "description": "Load model.",
+            "itemtype": "method",
+            "name": "loadModel",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the model",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4970,
+            "description": "Load type.",
+            "itemtype": "method",
+            "name": "loadType",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the type",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4978,
+            "description": "Compile schema.",
+            "itemtype": "method",
+            "name": "compileSchema",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the schema",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4986,
+            "description": "Generate model.",
+            "itemtype": "method",
+            "name": "generateModel",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the model",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 4994,
+            "description": "Check model.",
+            "itemtype": "method",
+            "name": "checkModel",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the model",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 5002,
+            "description": "Create collection.",
+            "itemtype": "method",
+            "name": "createCollection",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the collection",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 5010,
+            "description": "Create class.",
+            "itemtype": "method",
+            "name": "createClass",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the class",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 5032,
+            "description": "An error happened when invoking a behavior.",
+            "itemtype": "method",
+            "name": "actionInvokeError",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "state",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "component id",
+                    "type": "String"
+                },
+                {
+                    "name": "message",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-log",
+            "module": "runtime",
+            "submodule": "runtime-log"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7028,
+            "description": "Init the metamodel.",
+            "itemtype": "method",
+            "name": "init",
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7035,
+            "description": "Remove the data of the metamodel from the memory.",
+            "itemtype": "method",
+            "name": "clear",
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7042,
+            "description": "Add a new schema.",
+            "itemtype": "method",
+            "name": "schema",
+            "params": [
+                {
+                    "name": "importedSchema",
+                    "description": "a schema to add",
+                    "type": "JSON"
+                }
+            ],
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7050,
+            "description": "Add a new model.",
+            "itemtype": "method",
+            "name": "model",
+            "params": [
+                {
+                    "name": "importedModel",
+                    "description": "a mode to add",
+                    "type": "JSON"
+                }
+            ],
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7058,
+            "description": "Add a new type.",
+            "itemtype": "method",
+            "name": "type",
+            "params": [
+                {
+                    "name": "importedType",
+                    "description": "type to add",
+                    "type": "JSON"
+                }
+            ],
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7066,
+            "description": "Create the metamodel.",
+            "itemtype": "method",
+            "name": "create",
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7073,
+            "description": "Get a schema.",
+            "itemtype": "method",
+            "name": "getSchema",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the schema",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the schema",
+                "type": "Object"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7082,
+            "description": "Get a model.",
+            "itemtype": "method",
+            "name": "getModel",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the model",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the model",
+                "type": "Object"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7091,
+            "description": "Get the definition of the metamodel.",
+            "itemtype": "method",
+            "name": "getMetaDef",
+            "return": {
+                "description": "the metadefinition of the metamodel",
+                "type": "Object"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7099,
+            "description": "Get parents of a shema if any.",
+            "itemtype": "method",
+            "name": "getParents",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the schema",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "id id of the parents",
+                "type": "Array"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7108,
+            "description": "Check if a class inherits from another one",
+            "itemtype": "method",
+            "name": "inheritFrom",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the class",
+                    "type": "String"
+                },
+                {
+                    "name": "parentName",
+                    "description": "name of the parent",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the component inherit from the specific class name",
+                "type": "Boolean"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7118,
+            "description": "Check if the object is compliant with the schema.\nUse it to test if the constructor of an object is compliant\nwith the definition of the class.",
+            "itemtype": "method",
+            "name": "isValidObject",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "object to validate",
+                    "type": "Object"
+                },
+                {
+                    "name": "schema",
+                    "description": "schema that validates the object",
+                    "type": "Object"
+                },
+                {
+                    "name": "strict",
+                    "description": "true if validation is strict",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "cleanRef",
+                    "description": "true if we remove the reference to the object",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "true is the object is compliant with the schema",
+                "type": "Boolean"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7132,
+            "description": "Prepare the object in order to be compliant with the schema.",
+            "itemtype": "method",
+            "name": "prepareObject",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "object to prepare",
+                    "type": "Object"
+                },
+                {
+                    "name": "schema",
+                    "description": "schema that validates the object",
+                    "type": "Object"
+                }
+            ],
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7141,
+            "description": "Check if a value is compliant with a type.",
+            "itemtype": "method",
+            "name": "isValidType",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "object to validate",
+                    "type": "Object"
+                },
+                {
+                    "name": "type",
+                    "description": "type to use for validation",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the object is compliant with the type",
+                "type": "Boolean"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7151,
+            "description": "Check if a value is compliant with a type enum.",
+            "itemtype": "method",
+            "name": "isValidEnum",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "value to validate",
+                    "type": "String|Object"
+                },
+                {
+                    "name": "schema",
+                    "description": "schema to use for validation",
+                    "type": "Schema"
+                }
+            ],
+            "return": {
+                "description": "true if the object is compliant with the enum",
+                "type": "Boolean"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7161,
+            "description": "Check if the name is a correct state for the component.",
+            "itemtype": "method",
+            "name": "isValidState",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the state",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "component id",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the name is a correct state for the component",
+                "type": "Boolean"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7171,
+            "description": "Check if an attribute of the schema is an event.",
+            "itemtype": "method",
+            "name": "isEvent",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the attribute",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "component id",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the attribute is an event",
+                "type": "Boolean"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7181,
+            "description": "Check if an attribute of the schema is a property.",
+            "itemtype": "method",
+            "name": "isProperty",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the property",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "component id",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the attribute is a property",
+                "type": "Boolean"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7191,
+            "description": "Check if an attribute of the schema is a link.",
+            "itemtype": "method",
+            "name": "isLink",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the property",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "component id",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the attribute is a link",
+                "type": "Boolean"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7201,
+            "description": "Check if an attribute of the schema is a collection.",
+            "itemtype": "method",
+            "name": "isCollection",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the collection",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "component id",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the attribute is a collection",
+                "type": "Boolean"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7211,
+            "description": "Check if an attribute of the schema is a method.",
+            "itemtype": "method",
+            "name": "isMethod",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "name of the method",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "component id",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "true if the attribute is a method",
+                "type": "Boolean"
+            },
+            "class": "runtime-metamodel",
+            "module": "runtime",
+            "submodule": "runtime-metamodel"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7310,
+            "description": "Runtime instance.",
+            "itemtype": "property",
+            "name": "runtime",
+            "type": "Runtime",
+            "class": "runtime",
+            "module": "runtime"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7426,
+            "description": "Set the state of a component.",
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "component id on which change the state",
+                    "type": "String"
+                },
+                {
+                    "name": "state",
+                    "description": "the new state of the component",
+                    "type": "String"
+                }
+            ],
+            "class": "runtime-state",
+            "module": "runtime",
+            "submodule": "runtime-state"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7435,
+            "description": "Get the state of a component.",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "id of the component",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the state of the component.",
+                "type": "String"
+            },
+            "class": "runtime-state",
+            "module": "runtime",
+            "submodule": "runtime-state"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 7444,
+            "description": "Remove all the states of the components from the memory.",
+            "itemtype": "method",
+            "name": "clear",
+            "class": "runtime-state",
+            "module": "runtime",
+            "submodule": "runtime-state"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 8243,
+            "description": "Change the state of a component.\n\nWorklow:<br>\n<br>\n0. Check if the component has not been destroyed <br>\n1. Check if the state is a method or an event <br>\n2. Search if there is a behavior with an action for the new state <br>\n3. If so, get the action(s) <br>\n4. Check if the conditons on input are compliant with the metamodel <br>\n5. Call the action(s) <br>\n6. If not an of event, check if the conditons on input are compliant with the metamodel <br>\n7. If all is ok, the state of the component is updated <br>\n8. Return the result <br>",
+            "itemtype": "method",
+            "name": "state",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "params to change the state <br>\n{String} component id of the component <br>\n{String} state state of the component <br>\n{Array} data parameters to send to the action",
+                    "type": "Object"
+                }
+            ],
+            "class": "runtime-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 8267,
+            "description": "Stop the workflow engine.",
+            "itemtype": "method",
+            "name": "stop",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "parameters <br>\n{Boolean} error true if the stop of the workflow is due to an error (default false) <br>\n{String} message error message to log (default '')",
+                    "type": "Object"
+                }
+            ],
+            "class": "runtime-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 8277,
+            "description": "Restart the workflow engine from the last state.",
+            "itemtype": "method",
+            "name": "restart",
+            "class": "runtime-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 8284,
+            "description": "Check if conditions on input are compliant with the model before calling the action.",
+            "itemtype": "method",
+            "name": "checkParams",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "true if condition on input are compliant with the model",
+                "type": "Boolean"
+            },
+            "class": "runtime-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 8293,
+            "description": "Check if an action has the valid number of parameter.",
+            "itemtype": "method",
+            "name": "validParamNumbers",
+            "params": [
+                {
+                    "name": "className",
+                    "description": "name the class",
+                    "type": "String"
+                },
+                {
+                    "name": "state",
+                    "description": "state on which the action applied",
+                    "type": "String"
+                },
+                {
+                    "name": "action",
+                    "description": "action",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "true if the action is the valid number of parameters",
+                "type": "Boolean"
+            },
+            "class": "runtime-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow"
+        },
+        {
+            "file": "dist/system-runtime.js",
+            "line": 8304,
+            "description": "Call an action that comes from an event.",
+            "itemtype": "method",
+            "name": "action",
+            "params": [
+                {
+                    "name": "behaviorId",
+                    "description": "id of the behavior",
+                    "type": "String"
+                },
+                {
+                    "name": "params",
+                    "description": "parameters",
+                    "type": "Array"
+                }
+            ],
+            "class": "runtime-workflow",
+            "module": "runtime",
+            "submodule": "runtime-workflow"
         }
     ],
     "warnings": []

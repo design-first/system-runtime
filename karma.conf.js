@@ -73,7 +73,7 @@ module.exports = function (config) {
         basePath: './',
         frameworks: ['jasmine'],
         files: [
-            "build/system-runtime.min.js",
+            "dist/system-runtime.min.js",
             "test/runtime/runtime-spec.js",
             "test/runtime/component-spec.js",
             "test/runtime/metamodel-spec.js",
@@ -84,7 +84,7 @@ module.exports = function (config) {
         ],
         reporters: reporters,
         preprocessors: {
-            'build/system-runtime.min.js': ['coverage']
+            'dist/system-runtime.min.js': ['coverage']
         },
         colors: true,
         autoWatch: true,

@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.3.2</b>
+                    API Docs for Version: <b>1.3.3</b>
                 </p>
             </li>
         </div>
@@ -88,7 +88,7 @@
 
 
 	<div class="well well-small">
-            Module: <a href="../modules/runtime-db.html">runtime-db</a><br>
+            Module: <a href="../modules/runtime-helper.html">runtime-helper</a><br>
             Parent Module: <a href="../modules/runtime.html">runtime</a>
     </div>
 
@@ -119,9 +119,14 @@ Runtime database is a micro NoSQL Database that contains: <br></p>
 			<strong>Methods</strong>
 			<ul>
 				<li><a href="#method-clear"><span class="im">clear</span>()</a></li>
+				<li><a href="#method-clear"><span class="im">clear</span>()</a></li>
+				<li><a href="#method-collection"><span class="im">collection</span>(<span class="ia">name</span>)</a></li>
 				<li><a href="#method-collection"><span class="im">collection</span>(<span class="ia">name</span>)</a></li>
 				<li><a href="#method-init"><span class="im">init</span>()</a></li>
+				<li><a href="#method-init"><span class="im">init</span>()</a></li>
 				<li><a href="#method-subsystem"><span class="im">subsystem</span>(<span class="ia">params</span>)</a></li>
+				<li><a href="#method-subsystem"><span class="im">subsystem</span>(<span class="ia">params</span>)</a></li>
+				<li><a href="#method-system"><span class="im">system</span>(<span class="ia">importedSystem</span>)</a></li>
 				<li><a href="#method-system"><span class="im">system</span>(<span class="ia">importedSystem</span>)</a></li>
 			</ul>
 		</li>
@@ -129,6 +134,7 @@ Runtime database is a micro NoSQL Database that contains: <br></p>
 		<li>
 			<strong>Properties</strong>
 			<ul>
+				<li><a href="#prop-store"><span class="ip">store</span></a></li>
 				<li><a href="#prop-store"><span class="ip">store</span></a></li>
 			</ul>
 		</li>
@@ -156,9 +162,39 @@ Runtime database is a micro NoSQL Database that contains: <br></p>
 
 
 	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-db.html">runtime-db</a> module.</p>
 				<p>
 				Defined in
 		<a href="../files/src_db.js.html#l928"><code>src&#x2F;db.js:928</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Clear the database.</p>
+</div>
+
+
+
+</div>
+<div id="method-clear" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>clear</code></span>
+
+		<span class="paren">()</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-db.html">runtime-db</a> module.</p>
+				<p>
+				Defined in
+		<a href="../files/dist_system-runtime.js.html#l3665"><code>dist&#x2F;system-runtime.js:3665</code></a>
 		</p>
 
 
@@ -190,9 +226,60 @@ Runtime database is a micro NoSQL Database that contains: <br></p>
 
 
 	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-db.html">runtime-db</a> module.</p>
 				<p>
 				Defined in
 		<a href="../files/src_db.js.html#l888"><code>src&#x2F;db.js:888</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Create a new <a href="../classes/RuntimeDatabaseCollection.html" class="crosslink">RuntimeDatabaseCollection</a>.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">name</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+					<div class="param-description"><p>of the collection</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+
+</div>
+<div id="method-collection" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>collection</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>name</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-db.html">runtime-db</a> module.</p>
+				<p>
+				Defined in
+		<a href="../files/dist_system-runtime.js.html#l3625"><code>dist&#x2F;system-runtime.js:3625</code></a>
 		</p>
 
 
@@ -233,9 +320,39 @@ Runtime database is a micro NoSQL Database that contains: <br></p>
 
 
 	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-db.html">runtime-db</a> module.</p>
 				<p>
 				Defined in
 		<a href="../files/src_db.js.html#l935"><code>src&#x2F;db.js:935</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Init the database.</p>
+</div>
+
+
+
+</div>
+<div id="method-init" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>init</code></span>
+
+		<span class="paren">()</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-db.html">runtime-db</a> module.</p>
+				<p>
+				Defined in
+		<a href="../files/dist_system-runtime.js.html#l3672"><code>dist&#x2F;system-runtime.js:3672</code></a>
 		</p>
 
 
@@ -270,9 +387,84 @@ Runtime database is a micro NoSQL Database that contains: <br></p>
 
 
 	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-db.html">runtime-db</a> module.</p>
 				<p>
 				Defined in
 		<a href="../files/src_db.js.html#l912"><code>src&#x2F;db.js:912</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Export a Runtime sub-system.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">params</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON" class="crosslink external" target="_blank">JSON</a></span>
+
+
+					<div class="param-description"><p>parameters</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+		<div class="returns">
+			<h4>Returns:</h4>
+
+			<div class="returns-description">
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+					<p>a stringified Runtime sub-system</p>
+
+			</div>
+		</div>
+
+		<div class="example">
+			<h4>Example:</h4>
+
+			<div class="example-content">
+				<p>$db.subsystem({"schemas":{"name":"Person"}}); // filter export on schemas <br>
+$db.subsystem({"types":{"name":"address"}}); // filter export on types <br>
+$db.subsystem({"behaviors":{"component":"laure"}}); // filter export on behaviors <br>
+$db.subsystem({"components":{"Person": {"country": "France"}}}); // filter export on components <br>
+$db.subsystem({"schemas":{"name":"Person"},"components":{"Person": {"country": "France"}}}); // combine filters</p>
+
+			</div>
+		</div>
+</div>
+<div id="method-subsystem" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>subsystem</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>params</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+		<span class="returns-inline">
+			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+		</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-db.html">runtime-db</a> module.</p>
+				<p>
+				Defined in
+		<a href="../files/dist_system-runtime.js.html#l3649"><code>dist&#x2F;system-runtime.js:3649</code></a>
 		</p>
 
 
@@ -343,9 +535,72 @@ $db.subsystem({"schemas":{"name":"Person"},"components":{"Person": {"country": "
 
 
 	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-db.html">runtime-db</a> module.</p>
 				<p>
 				Defined in
 		<a href="../files/src_db.js.html#l903"><code>src&#x2F;db.js:903</code></a>
+		</p>
+
+
+
+	</div>
+
+	<div class="description"><p>Import/Export a Runtime system into/from the database.</p>
+</div>
+
+		<div class="params">
+			<h4>Parameters:</h4>
+
+			<ul class="params-list">
+				<li class="param">
+						<code class="param-name">importedSystem</code>
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON" class="crosslink external" target="_blank">JSON</a></span>
+
+
+					<div class="param-description"><p>a Runtime system to import</p>
+</div>
+
+				</li>
+			</ul>
+		</div>
+
+		<div class="returns">
+			<h4>Returns:</h4>
+
+			<div class="returns-description">
+						<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+					<p>the id of the imported Runtime system or the current Runtime system</p>
+
+			</div>
+		</div>
+
+</div>
+<div id="method-system" class="method item">
+	<div class="method-signature">
+	<span class="name"><code>system</code></span>
+
+		<div class="args">
+			<span class="paren">(</span><ul class="args-list inline commas">
+				<li class="arg">
+						<code>importedSystem</code>
+				</li>
+			</ul><span class="paren">)</span>
+		</div>
+		<span class="returns-inline">
+			<span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+		</span>
+	</div>
+
+
+
+
+
+
+	<div class="meta">
+					<p>Provided by the <a href="../modules/runtime-db.html">runtime-db</a> module.</p>
+				<p>
+				Defined in
+		<a href="../files/dist_system-runtime.js.html#l3640"><code>dist&#x2F;system-runtime.js:3640</code></a>
 		</p>
 
 
@@ -398,9 +653,36 @@ $db.subsystem({"schemas":{"name":"Person"},"components":{"Person": {"country": "
 
 
     <div class="meta">
+                    <p>Provided by the <a href="../modules/runtime-db.html">runtime-db</a> module.</p>
                 <p>
                 Defined in
         <a href="../files/src_db.js.html#l896"><code>src&#x2F;db.js:896</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Runtime database store that lists all the collections.</p>
+
+    </div>
+
+
+
+</div>
+<div id="prop-store" class="property item">
+    <h3 class="name"><code>store</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON" class="crosslink external" target="_blank">JSON</a></span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/runtime-db.html">runtime-db</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/dist_system-runtime.js.html#l3633"><code>dist&#x2F;system-runtime.js:3633</code></a>
         </p>
 
 

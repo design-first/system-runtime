@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "1.3.2",
+    "version": "1.3.3",
     "description": "Runtime, the System Runtime Environment",
     "license": "MIT",
     "homepage": "https://system-runtime.github.io",
@@ -13,7 +13,7 @@
         "type": "git",
         "url": "https://github.com/system-sdk/system-designer.git"
     },
-    "main": "build/system-runtime.min.js",
+    "main": "dist/system-runtime.min.js",
     "keywords": [
         "uml",
         "mda",
@@ -31,12 +31,11 @@
     ],
     "ignore": [
         "addons",
-        "build/system",
+        "build",
         "doc",
         "node_modules",
         "test",
         "src",
-        "build/runtime.json",
         "Gruntfile.js",
         "karma.conf.js",
         "package.json",

@@ -69,7 +69,7 @@ Just add a link tag in your HTML to execute your app:
 <link rel="system" type="application/json" href="app.json">
 
 <!-- load Runtime -->
-<script src="/bower_components/system-runtime/build/system-runtime.min.js"></script>
+<script src="/bower_components/system-runtime/dist/system-runtime.min.js"></script>
 ```
 
 #### Node.js import

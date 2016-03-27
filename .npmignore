@@ -1,0 +1,10 @@
+/addons/
+/doc/
+/test/
+/build/system/
+/src/addons/
+/src/system/
+/src/template/
+bower.json
+Gruntfile.js
+karma.conf.js

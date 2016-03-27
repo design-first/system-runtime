@@ -37,7 +37,7 @@ module.exports = function(grunt) {
                 }
             }
         },
-        clean: ['build/*.js', 'build/*.json', 'build/system'],
+        clean: ['doc', 'dist', 'build', 'coverage'],
         jshint: {
             files: [
                 'src/*.js',
@@ -59,7 +59,7 @@ module.exports = function(grunt) {
                 url: '<%= pkg.homepage %>',
                 options: {
                     linkNatives: 'true',
-                    paths: ['src', 'build/system'],
+                    paths: ['src', 'dist'],
                     themedir: 'node_modules/yuidoc-lucid-theme',
                     helpers: ['node_modules/yuidoc-lucid-theme/helpers/helpers.js'],
                     outdir: 'doc'
@@ -98,7 +98,7 @@ module.exports = function(grunt) {
         browserify: {
             runtimeDebug: {
                 src: ['src/runtime.js'],
-                dest: 'build/system-runtime.js',
+                dest: 'dist/system-runtime.js',
                 options: {
                     browserifyOptions: {
                         standalone: 'runtime',
@@ -108,7 +108,7 @@ module.exports = function(grunt) {
             },
             runtime: {
                 src: ['src/runtime.js'],
-                dest: 'build/system-runtime.min.js',
+                dest: 'dist/system-runtime.min.js',
                 options: {
                     browserifyOptions: {
                         standalone: 'runtime'
@@ -119,7 +119,7 @@ module.exports = function(grunt) {
         uglify: {
             dist: {
                 files: {
-                    'build/<%= pkg.name %>.min.js': ['<%= browserify.runtime.dest %>']
+                    'dist/<%= pkg.name %>.min.js': ['<%= browserify.runtime.dest %>']
                 }
             }
         },
@@ -358,7 +358,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    'build/system-runtime.min.js': ['src/template/banner/licence.txt', 'build/system-runtime.min.js']
+                    'dist/system-runtime.min.js': ['src/template/banner/licence.txt', 'dist/system-runtime.min.js']
                 }
             }
         },
