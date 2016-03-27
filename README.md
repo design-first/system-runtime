@@ -169,7 +169,7 @@ $ bower install system-runtime --save
 
 Add a `<script>` tag to your HTML page:
 ```html
-<script src="/bower_components/system-runtime/build/system-runtime.min.js"></script>
+<script src="/bower_components/system-runtime/dist/system-runtime.min.js"></script>
 ```
 
 Then you can use runtime on your script:
