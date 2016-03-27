@@ -115,7 +115,7 @@ var luke = new Jedi({
     'lastName': 'SkyWalker'
 });
 
-// update its property
+// update a property
 luke.lastName('StarKiller');
 ```
 
