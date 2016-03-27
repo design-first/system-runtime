@@ -83,8 +83,13 @@ function getLogger() {
         loggers = $db.RuntimeLogger.find();
         if (loggers.length) {
             loggerId = loggers[0][ID];
-            loggerRef = $component.get(loggerId);
-            result = loggerRef;
+
+            if ($component.get(loggerId)) {
+                loggerRef = $component.get(loggerId);
+                result = loggerRef;
+            } else {
+                result = fakeLoggerRef;
+            }
         } else {
             result = fakeLoggerRef;
         }
@@ -119,7 +124,7 @@ function unknownProperty(propertyName, schema) {
     if (schema[ID]) {
         message = "unknown property '" + propertyName + "' for the definition of " + schema[ID];
     } else {
-        message = "unknown property '" + propertyName + "' for the meta attribute " + JSON.stringify(schema);
+        message = "unknown property '" + propertyName + "' for a model";
     }
 
     getLogger().warn(message);
@@ -134,7 +139,7 @@ function unknownProperty(propertyName, schema) {
  * @param {String} property the property
  */
 function invalidPropertyType(propertyName, type, property) {
-    getLogger().warn("invalid type for property '" + JSON.stringify(propertyName) + "': expected type '" + type + "' instead of type '" + typeof property + "'");
+    getLogger().warn("invalid type for property '" + propertyName + "': expected type '" + type + "' instead of type '" + typeof property + "'");
 }
 
 
@@ -189,7 +194,10 @@ function missingImplementation(classSource, classToImp) {
  * @param {String} className a class name
  */
 function invalidTypeImp(property, className) {
-    getLogger().warn("invalid type for property '" + property + "' for the definition of '" + className + "'");
+    $workflow.stop({
+        'error': false,
+        'message': "the property '" + property + "' of the model '" + className + "' is invalid"
+    });
 }
 
 
@@ -211,7 +219,10 @@ function missingPropertyImp(property, className) {
  * @param {Object} schema a schema
  */
 function unknownPropertyImp(property, schema) {
-    getLogger().warn("unknown property '" + property + "' for the definition of '" + schema + "'");
+    $workflow.stop({
+        'error': false,
+        'message': "the model '" + schema + "' has an unknown property '" + property + "'"
+    });
 }
 
 
@@ -234,7 +245,11 @@ function invalidTypeDefinition(name) {
  * @param {String} type type defined by the schema
  */
 function invalidPropertyName(id, propertyName, propertyValue, type) {
-    getLogger().warn("invalid value for property '" + propertyName + "' on component '" + id + "'");
+    if (typeof type === 'string') {
+        getLogger().warn("invalid type for property '" + propertyName + "' on component '" + id + "': expected '" + type + "' instead of '" + typeof propertyValue + "' on component '" + id + "'");
+    } else {
+        getLogger().warn("invalid type for property type '" + propertyName + "' on component '" + id + "': expected 'string' instead of '" + typeof type + "' on component '" + id + "'");
+    }
 }
 
 
@@ -442,7 +457,7 @@ function unknownType(value) {
  * @param {String} className name of the class
  */
 function canNotYetValidate(id, className) {
-    getLogger().warn("can not yet validate if the component '" + JSON.stringify(id) + "' is an instance of '" + className + "'");
+    getLogger().warn("can not yet validate if the component '" + id + "' is an instance of '" + className + "'");
 }
 
 
@@ -705,6 +720,27 @@ function modelCreationEnd() {
  */
 function actionInvokeError(state, id, message) {
     getLogger().error("error when trying to call the method '" + state + "' on component '" + id + "': " + message);
+}
+
+
+/*
+ * Invalid name for the property of a schema.
+ * @method invalidSchemaProperty
+ * @param {String} name name of the schema
+ * @param {String} propName name of the property
+ */
+function invalidSchemaProperty(name, propName) {
+    getLogger().warn("invalid property '" + propName + "' for schema '" + name + "': only 'property', 'link', 'collection', 'method' and 'event' are allowed.");
+}
+
+
+/*
+ * Invalid format for the definition of a property
+ * @method invalidPropertyFormat
+ * @param {String} obj definition of a property
+ */
+function invalidPropertyFormat(obj) {
+    getLogger().warn("invalid format for a definition of a property': '" + obj + "' is not an object");
 }
 
 
@@ -1193,3 +1229,20 @@ exports.modelCreationEnd = modelCreationEnd;
  * @param {String} message
  */
 exports.actionInvokeError = actionInvokeError;
+
+
+/**
+ * Invalid name for the property of a schema.
+ * @method invalidSchemaProperty
+ * @param {String} name name of the schema
+ * @param {String} propName name of the property
+ */
+exports.invalidSchemaProperty = invalidSchemaProperty;
+
+
+/**
+ * Invalid format for the definition of a property
+ * @method invalidPropertyFormat
+ * @param {String} obj definition of a property
+ */
+exports.invalidPropertyFormat = invalidPropertyFormat;

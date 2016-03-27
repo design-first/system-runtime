@@ -181,6 +181,9 @@ function generateModels() {
                     };
                     break;
                 default:
+                    if (att.indexOf('_') !== 0) {
+                        $log.invalidSchemaProperty(schema._name, att);
+                    }
                     break;
             }
         }
@@ -788,7 +791,8 @@ function createClassInfo() {
 
         if (
             typeof modelDef[SCHEMA] !== 'undefined' &&
-            modelDef[CLASS] !== false
+            modelDef[CLASS] !== false && 
+            inheritFrom(modelDef[NAME], 'RuntimeComponent')
         ) {
             if (!$component.get(name)) {
                 $db.RuntimeClassInfo.insert({
@@ -846,7 +850,7 @@ function isCustomType(value) {
  * @private
  */
 function isReference(value) {
-    return value.indexOf('@') !== -1;
+ return value.indexOf('@') !== -1;
 }
 
 
@@ -1365,7 +1369,7 @@ function isValidType(value, typeName) {
         return isValid;
     }
 
-    if (!hasType(typeName, 'undefined')) {
+    if (hasType(typeName, 'string')) {
         switch (true) {
             case isCustomType(typeName):
                 result = checkCustomSchema(value, typeName);
@@ -1386,7 +1390,7 @@ function isValidType(value, typeName) {
                 break;
         }
     } else {
-        $log.invalidType(value, typeName);
+        result = false;
     }
 
     return result;
@@ -1495,7 +1499,7 @@ function isValidSchema(object, schema) {
             }
         }
         if (!isValid) {
-            $log.invalidPropertyType(field, typeRef, field);
+            $log.invalidPropertyType(fieldName, typeRef, field);
         }
         return isValid;
     }
@@ -1542,35 +1546,44 @@ function isValidSchema(object, schema) {
     }
 
     // type
-    for (fieldName in object) {
-        field = object[fieldName];
 
-        if (hasType(schema[fieldName], 'undefined')) {
-            $log.unknownProperty(fieldName, schema);
-            return false;
-        } else {
-            typeSchema = schema[fieldName].type;
-        }
+    if (hasType(object, 'object')) {
+        for (fieldName in object) {
+            field = object[fieldName];
 
-        switch (true) {
-            case isReference(typeSchema):
-                result = _isValidReference();
+            if (hasType(schema[fieldName], 'undefined')) {
+                $log.unknownProperty(fieldName, schema);
+                return false;
+            } else {
+                typeSchema = schema[fieldName].type;
+            }
+
+            switch (true) {
+                case isReference(typeSchema):
+                    result = _isValidReference();
+                    break;
+                default:
+                    result = _isValidType();
+                    break;
+            }
+            if (!result) {
                 break;
-            default:
-                result = _isValidType();
-                break;
+            }
         }
-    }
 
-    // mandatory
-    for (fieldName in schema) {
-        field = schema[fieldName];
-        mandatory = field.mandatory;
-        if (mandatory === true && (hasType(object[fieldName], 'undefined') && object[fieldName] !== undefined)) {
-            $log.missingProperty(fieldName);
-            result = false;
-            break;
+        // mandatory
+        for (fieldName in schema) {
+            field = schema[fieldName];
+            mandatory = field.mandatory;
+            if (mandatory === true && (hasType(object[fieldName], 'undefined') && object[fieldName] !== undefined)) {
+                $log.missingProperty(fieldName);
+                result = false;
+                break;
+            }
         }
+    } else {
+        result = false;
+        $log.invalidPropertyFormat(object);
     }
 
     return result;

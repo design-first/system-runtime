@@ -1,8 +1,6 @@
 {
     "_name": "RuntimeLogger",
-    "_inherit": [
-        "RuntimeComponent"
-    ],
+    "_inherit": [],
     "_core": true,
     "level": "property",
     "info": "method",

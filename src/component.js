@@ -346,7 +346,9 @@ function createClass(classId) {
         /* jshint +W054 */
 
         // classInfo
-        config.classInfo = classId + 'Info';
+        if ($metamodel.inheritFrom(classId, 'RuntimeComponent')) {
+            config.classInfo = classId + 'Info';
+        }
 
         // create link to db
         $db.store[classId][config._id] = config;

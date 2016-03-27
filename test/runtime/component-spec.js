@@ -12,7 +12,6 @@ describe('a component', function () {
         metamodel.schema({
             '_name': 'Person',
             '_inherit': ['RuntimeComponent'],
-            'description': 'string',
             'children': 'collection',
             'firstName': 'property',
             'lastName': 'property',
@@ -25,7 +24,6 @@ describe('a component', function () {
             '_name': 'Person',
             '_schema': 'Person',
             '_inherit': ['RuntimeComponent'],
-            'description': 'a person',
             'children': {
                 'type': ['@Person'],
                 'readOnly': false,
