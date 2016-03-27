@@ -53,6 +53,7 @@ var $helper = require('./helper.js');
 
 var ID = '_id',
     NAME = '_name',
+    DESCRIPTION = '_description',
     INHERITS = '_inherit',
     SCHEMA = '_schema',
     CLASS = '_class',
@@ -123,6 +124,11 @@ function generateModels() {
         // set class
         if (typeof schema._class !== 'undefined') {
             model._class = schema._class;
+        }
+
+        // set description 
+        if (typeof schema._description !== 'undefined') {
+            model._description = schema._description;
         }
 
         //  set model default values
@@ -617,6 +623,7 @@ function checkImp(classDef, classImp) {
     for (property in classImp) {
         if (property !== ID &&
             property !== NAME &&
+            property !== DESCRIPTION &&
             property !== INHERITS &&
             property !== SCHEMA &&
             property !== CLASS &&
@@ -635,6 +642,7 @@ function checkImp(classDef, classImp) {
     for (property in classDef) {
         if (property !== ID &&
             property !== NAME &&
+            property !== DESCRIPTION &&
             property !== INHERITS &&
             property !== SCHEMA &&
             property !== CLASS &&
@@ -1117,6 +1125,10 @@ function init() {
             "_core": {
                 "type": "boolean",
                 "mandatory": false
+            },
+            "_description": {
+                "type": "string",
+                "mandatory": false
             }
         },
         model: {
@@ -1143,6 +1155,10 @@ function init() {
             "_core": {
                 "type": "boolean",
                 "mandatory": false
+            },
+            "_description": {
+                "type": "string",
+                "mandatory": false
             }
         },
         type: {
@@ -1164,6 +1180,10 @@ function init() {
             },
             "core": {
                 "type": "boolean",
+                "mandatory": false
+            },
+            "_description": {
+                "type": "string",
                 "mandatory": false
             }
         }
