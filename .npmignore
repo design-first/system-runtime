@@ -1,7 +1,8 @@
 /addons/
 /doc/
 /test/
-/build/system/
+/coverage/
+/build/runtime.json
 /src/addons/
 /src/system/
 /src/template/
