@@ -134,7 +134,8 @@ function generateModels() {
                         "readOnly": false,
                         "mandatory": false,
                         "default": undefined,
-                        "description": att
+                        "description": att,
+                        "label": att
                     };
                     break;
                 case schema[att] === 'link':
@@ -143,7 +144,8 @@ function generateModels() {
                         "readOnly": false,
                         "mandatory": false,
                         "default": {},
-                        "description": att
+                        "description": att,
+                        "label": att
                     };
                     break;
                 case schema[att] === 'method':
@@ -177,7 +179,8 @@ function generateModels() {
                         "readOnly": false,
                         "mandatory": false,
                         "default": [],
-                        "description": att
+                        "description": att,
+                        "label": att
                     };
                     break;
                 default:
@@ -791,7 +794,7 @@ function createClassInfo() {
 
         if (
             typeof modelDef[SCHEMA] !== 'undefined' &&
-            modelDef[CLASS] !== false && 
+            modelDef[CLASS] !== false &&
             inheritFrom(modelDef[NAME], 'RuntimeComponent')
         ) {
             if (!$component.get(name)) {
@@ -850,7 +853,7 @@ function isCustomType(value) {
  * @private
  */
 function isReference(value) {
- return value.indexOf('@') !== -1;
+    return value.indexOf('@') !== -1;
 }
 
 

@@ -21,6 +21,10 @@
         "description": {
             "type": "string",
             "mandatory": false
+        },
+        "label": {
+            "type": "string",
+            "mandatory": false
         }
     },
     "core": true
