@@ -447,11 +447,12 @@ RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
                                     "state": attributeName,
                                     "data": [update[attributeName]]
                                 });
-                                $workflow.state({
+                              // TODO check if it is ok to invoke the mother class  
+                             /*   $workflow.state({
                                     "component": this.name,
                                     "state": attributeName,
                                     "data": [update[attributeName]]
-                                });
+                                });*/
                             } else {
                                 $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName]);
                             }

@@ -178,6 +178,16 @@ function RuntimeArray(conf) {
         return result;
     };
 
+    /* Override sort method.
+     * @sort
+     * @param {Function} funct the sort function
+     * @return {RuntimeArray} the current RuntimeArray
+     */
+    arr.sort = function sort(funct) {
+        arrDb.sort(funct);
+        return arr;
+    };
+
     return arr;
 }
 
