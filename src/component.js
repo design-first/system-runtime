@@ -61,6 +61,7 @@ var PROPERTY_TYPE = 'property',
     COLLECTION_TYPE = 'collection',
     METHOD_TYPE = 'method',
     EVENT_TYPE = 'event',
+    NAME = '_name',
     store = {};
 
 
@@ -237,7 +238,7 @@ function getProperties(id) {
         result = [];
 
     model = $metamodel.getModel(id);
-    schema = $metamodel.getSchema(model._schema);
+    schema = $metamodel.getSchema(model[NAME]);
 
     propNames = Object.keys(schema);
 
@@ -272,7 +273,7 @@ function getMethods(id) {
         result = [];
 
     model = $metamodel.getModel(id);
-    schema = $metamodel.getSchema(model._schema);
+    schema = $metamodel.getSchema(model[NAME]);
 
     propNames = Object.keys(schema);
 
@@ -303,7 +304,7 @@ function getEvents(id) {
         result = [];
 
     model = $metamodel.getModel(id);
-    schema = $metamodel.getSchema(model._schema);
+    schema = $metamodel.getSchema(model[NAME]);
 
     propNames = Object.keys(schema);
 

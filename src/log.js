@@ -179,11 +179,10 @@ function missingProperty(propertyName) {
 /*
  * A class definition is missing.
  * @method missingImplementation
- * @param {String} classSource a class
- * @param {String} classToImp the class to implement
+ * @param {String} name name of the missing schema
  */
-function missingImplementation(classSource, classToImp) {
-    getLogger().warn("class '" + classSource + "' is missing for the implementation of the class '" + classToImp + "'");
+function missingImplementation(name) {
+    getLogger().warn("schema '" + name + "' is missing.");
 }
 
 
@@ -815,8 +814,7 @@ exports.missingProperty = missingProperty;
 /**
  * A class definition is missing.
  * @method missingImplementation
- * @param {String} classSource a class
- * @param {String} classToImp the class to implement
+ * @param {String} name name of the missing schema
  */
 exports.missingImplementation = missingImplementation;
 

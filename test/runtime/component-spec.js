@@ -22,7 +22,6 @@ describe('a component', function () {
 
         metamodel.model({
             '_name': 'Person',
-            '_schema': 'Person',
             '_inherit': ['RuntimeComponent'],
             'children': {
                 'type': ['@Person'],

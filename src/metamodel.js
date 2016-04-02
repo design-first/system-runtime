@@ -55,7 +55,6 @@ var ID = '_id',
     NAME = '_name',
     DESCRIPTION = '_description',
     INHERITS = '_inherit',
-    SCHEMA = '_schema',
     CLASS = '_class',
     CORE = '_core',
     METHOD_TYPE = 'method',
@@ -109,7 +108,6 @@ function generateModels() {
         // set model internal properties
         model = {
             "_name": schema._name,
-            "_schema": schema._name
         };
 
         // set _core
@@ -140,7 +138,7 @@ function generateModels() {
                         "type": "any",
                         "readOnly": false,
                         "mandatory": false,
-                        "default": undefined,
+                        "default": null,
                         "description": att,
                         "label": att
                     };
@@ -576,15 +574,15 @@ function checkModels() {
 
     for (name in store.generatedModels) {
         classDef = store.generatedModels[name];
-        if (classDef && typeof classDef[SCHEMA] !== 'undefined') {
-            schema = store.compiledSchemas[classDef[SCHEMA]];
+        if (classDef) {
+            schema = store.compiledSchemas[name];
             if (schema) {
                 if (!classDef._core) {
-                    $log.checkModel(classDef._name);
+                    $log.checkModel(name);
                 }
                 checkImp(classDef, schema);
             } else {
-                $log.missingImplementation(classDef[SCHEMA], classDef[NAME]);
+                $log.missingImplementation(name);
             }
         }
     }
@@ -597,24 +595,24 @@ function checkModels() {
  * @private
  */
 function getStates() {
-    var id = '',
-        classDef = null,
+    var name = '',
+        schema = null,
         type = '',
         states = [],
         attribute = '';
 
-    for (id in store.compiledSchemas) {
+    for (name in store.compiledSchemas) {
         states = [];
-        classDef = store.compiledSchemas[id];
-        if (classDef && typeof classDef[SCHEMA] === 'undefined') {
-            for (attribute in classDef) {
-                type = classDef[attribute];
+        schema = store.compiledSchemas[name];
+        if (schema) {
+            for (attribute in schema) {
+                type = schema[attribute];
                 if (attribute.indexOf('_') !== 0 && internalTypes.indexOf(type) !== -1) {
                     states.push(attribute);
                 }
             }
         }
-        store.states[id] = states;
+        store.states[name] = states;
     }
 }
 
@@ -634,7 +632,6 @@ function checkImp(classDef, classImp) {
             property !== NAME &&
             property !== DESCRIPTION &&
             property !== INHERITS &&
-            property !== SCHEMA &&
             property !== CLASS &&
             property !== CORE) {
             if (typeof classDef[property] !== 'undefined') {
@@ -653,7 +650,6 @@ function checkImp(classDef, classImp) {
             property !== NAME &&
             property !== DESCRIPTION &&
             property !== INHERITS &&
-            property !== SCHEMA &&
             property !== CLASS &&
             property !== CORE) {
             if (typeof classImp[property] === 'undefined') {
@@ -759,8 +755,7 @@ function createDbStructure() {
 
     for (modelName in store.generatedModels) {
         modelDef = store.generatedModels[modelName];
-        if (typeof modelDef[SCHEMA] !== 'undefined' &&
-            typeof $db[modelDef[NAME]] === 'undefined' &&
+        if (typeof $db[modelDef[NAME]] === 'undefined' &&
             modelDef[CLASS] !== false) {
             $db.collection(modelDef[NAME]);
 
@@ -783,7 +778,7 @@ function createClass() {
 
     for (modelName in store.generatedModels) {
         modelDef = store.generatedModels[modelName];
-        if (typeof modelDef[SCHEMA] !== 'undefined' && modelDef[CLASS] !== false) {
+        if (modelDef[CLASS] !== false) {
             $component.create({
                 "model": modelName
             });
@@ -810,14 +805,13 @@ function createClassInfo() {
         name = modelDef[NAME] + 'Info';
 
         if (
-            typeof modelDef[SCHEMA] !== 'undefined' &&
             modelDef[CLASS] !== false &&
             inheritFrom(modelDef[NAME], 'RuntimeComponent')
         ) {
             if (!$component.get(name)) {
                 $db.RuntimeClassInfo.insert({
                     "_id": name,
-                    "metamodel": store.compiledSchemas[modelDef[SCHEMA]],
+                    "metamodel": store.compiledSchemas[modelName],
                     "model": modelDef
                 });
             } else {
@@ -825,7 +819,7 @@ function createClassInfo() {
                     "_id": name
                 }, {
                         "_id": name,
-                        "metamodel": store.compiledSchemas[modelDef[SCHEMA]],
+                        "metamodel": store.compiledSchemas[modelName],
                         "model": modelDef
                     });
             }
@@ -960,8 +954,8 @@ function checkType(name, id, type) {
         componentSchema = store.generatedModels[id],
         attributeType = '';
 
-    if (componentSchema && componentSchema[SCHEMA]) {
-        componentSchema = store.compiledSchemas[componentSchema[SCHEMA]];
+    if (componentSchema && componentSchema[NAME]) {
+        componentSchema = store.compiledSchemas[componentSchema[NAME]];
     }
 
     if (componentSchema) {
@@ -1123,10 +1117,6 @@ function init() {
                 "mandatory": false,
                 "default": ["RuntimeComponent"]
             },
-            "_schema": {
-                "type": "string",
-                "mandatory": false
-            },
             "_class": {
                 "type": "boolean",
                 "mandatory": false
@@ -1151,10 +1141,6 @@ function init() {
             },
             "_inherit": {
                 "type": ["string"],
-                "mandatory": false
-            },
-            "_schema": {
-                "type": "string",
                 "mandatory": false
             },
             "_class": {
@@ -1226,6 +1212,7 @@ function clear() {
  * @method create
  */
 function create() {
+    $log.modelCreationBegin();
     loadInMemory();
     createInheritanceTree();
     compileSchemas();
@@ -1235,6 +1222,7 @@ function create() {
     createDbStructure();
     createClass();
     createClassInfo();
+    $log.modelCreationEnd();
 }
 
 
@@ -1310,8 +1298,8 @@ function isValidState(name, id) {
         componentSchema = store.generatedModels[id],
         state = {};
 
-    if (componentSchema && componentSchema[SCHEMA]) {
-        componentSchema = store.generatedModels[componentSchema[SCHEMA]];
+    if (componentSchema && componentSchema[NAME]) {
+        componentSchema = store.generatedModels[componentSchema[NAME]];
     }
     state = store.states[componentSchema[NAME]];
 

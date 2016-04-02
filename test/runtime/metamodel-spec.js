@@ -20,7 +20,6 @@ describe('a metamodel instance', function () {
 
         metamodel.model({
             '_name': 'PersonTest',
-            '_schema': 'PersonTest',
             '_inherit': ['RuntimeComponent'],
             'firstName': {
                 'type': 'string',
@@ -62,7 +61,6 @@ describe('a metamodel instance', function () {
 
         metamodel.model({
             '_name': 'Person',
-            '_schema': 'Person',
             '_inherit': ['RuntimeComponent'],
             'sex': {
                 'type': 'sex',
@@ -123,7 +121,6 @@ describe('a metamodel instance', function () {
 
         metamodel.model({
             '_name': 'Person',
-            '_schema': 'Person',
             '_inherit': ['RuntimeComponent'],
             'sex': {
                 'type': 'sex',
@@ -196,7 +193,6 @@ describe('a metamodel instance', function () {
 
         metamodel.model({
             '_name': 'Person',
-            '_schema': 'Person',
             '_inherit': ['RuntimeComponent'],
             'sex': {
                 'type': 'sex',
@@ -282,7 +278,6 @@ describe('a metamodel instance', function () {
 
         metamodel.model({
             '_name': 'Person',
-            '_schema': 'Person',
             '_inherit': ['RuntimeComponent'],
             'sex': {
                 'type': 'sex',

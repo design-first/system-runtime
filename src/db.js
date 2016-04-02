@@ -126,7 +126,7 @@ function dump() {
             }
         }
     }
-    
+
     // models
     dbDump.models = {};
     if (exports.RuntimeModel.count()) {
@@ -447,14 +447,8 @@ RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
                                     "state": attributeName,
                                     "data": [update[attributeName]]
                                 });
-                              // TODO check if it is ok to invoke the mother class  
-                             /*   $workflow.state({
-                                    "component": this.name,
-                                    "state": attributeName,
-                                    "data": [update[attributeName]]
-                                });*/
                             } else {
-                                $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName]);
+                                $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName].type);
                             }
                         } else {
                             $log.unknownPropertyOnDbUpdate(attributeName, docs[i]._id);
