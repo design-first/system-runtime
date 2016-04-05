@@ -504,10 +504,18 @@ function addProperties(model, Class, classId) {
                 if (typeof value === 'undefined') {
                     component = $db.store[classId][this.id()];
                     if (component) {
-                        propertyValue = component[propertyName];
-
-                        if (propertyType.indexOf('@') !== -1) {
-                            propertyValue = get(propertyValue);
+                        switch (true) {
+                            case propertyType.indexOf('@') !== -1:
+                                propertyValue = get(component[propertyName]);
+                                break;
+                            case propertyType === 'json':
+                                propertyValue = JSON.parse(JSON.stringify(component[propertyName]));
+                                break;
+                            //case propertyType === 'object':
+                            //    break;
+                            default:
+                                propertyValue = component[propertyName];
+                                break;
                         }
                         return propertyValue;
                     } else {

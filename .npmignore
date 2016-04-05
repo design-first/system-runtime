@@ -10,3 +10,4 @@
 bower.json
 Gruntfile.js
 karma.conf.js
+*.log

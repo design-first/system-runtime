@@ -3,3 +3,4 @@
 /build/runtime.json
 /doc/
 /.vscode/
+*.log

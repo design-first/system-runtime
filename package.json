@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "Runtime, the System Runtime Environment",
     "homepage": "https://system-runtime.github.io",
     "keywords": [
@@ -43,7 +43,7 @@
     },
     "devDependencies": {
         "coveralls": "^2.11.3",
-        "grunt": "^0.4.5",
+        "grunt": "^1.0.1",
         "grunt-browserify": "^5.0.0",
         "grunt-cli": "^1.0.0",
         "grunt-contrib-clean": "^1.0.0",
