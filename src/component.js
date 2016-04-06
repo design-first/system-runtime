@@ -511,8 +511,6 @@ function addProperties(model, Class, classId) {
                             case propertyType === 'json':
                                 propertyValue = JSON.parse(JSON.stringify(component[propertyName]));
                                 break;
-                            //case propertyType === 'object':
-                            //    break;
                             default:
                                 propertyValue = component[propertyName];
                                 break;
