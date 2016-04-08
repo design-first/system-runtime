@@ -508,8 +508,8 @@ function addProperties(model, Class, classId) {
                             case propertyType.indexOf('@') !== -1:
                                 propertyValue = get(component[propertyName]);
                                 break;
-                            case propertyType === 'json':
-                                propertyValue = JSON.parse(JSON.stringify(component[propertyName]));
+                            case propertyType === 'date':
+                                propertyValue = new Date(component[propertyName]);
                                 break;
                             default:
                                 propertyValue = component[propertyName];
@@ -528,10 +528,16 @@ function addProperties(model, Class, classId) {
                             if (search.length) {
                                 component = search[0];
 
-                                if (propertyType.indexOf('@') !== -1) {
-                                    component[propertyName] = value.id();
-                                } else {
-                                    component[propertyName] = value;
+                                switch (true) {
+                                    case propertyType.indexOf('@') !== -1:
+                                        component[propertyName] = value.id();
+                                        break;
+                                    case propertyType === 'date':
+                                        component[propertyName] = value.toISOString();
+                                        break;
+                                    default:
+                                        component[propertyName] = value;
+                                        break;
                                 }
 
                                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {

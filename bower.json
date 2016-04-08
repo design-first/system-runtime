@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "description": "Runtime, the System Runtime Environment",
     "license": "MIT",
     "homepage": "https://system-runtime.github.io",
