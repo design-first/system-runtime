@@ -1,16 +1,16 @@
-describe('a metamodel instance', function () {
+describe('a metamodel instance', function() {
 
     // init
     if (typeof window === 'undefined') {
         runtime = require('../../src/runtime.js');
     }
 
-    it('exists', function () {
+    it('exists', function() {
         var metamodel = runtime.require('metamodel');
         expect(metamodel).toBeDefined();
     });
 
-    it('can add a schema', function () {
+    it('can add a schema', function() {
         var metamodel = runtime.require('metamodel');
         metamodel.schema({
             '_name': 'PersonTest',
@@ -33,14 +33,14 @@ describe('a metamodel instance', function () {
         expect(metamodel.require('PersonTest')).toBeDefined();
     });
 
-    it('can add a type', function () {
+    it('can add a type', function() {
         var metamodel = runtime.require('metamodel');
 
         metamodel.type({
             'name': 'address',
             'type': 'object',
             'schema': {
-                'planet': {'type': 'string', 'mandatory': true}
+                'planet': { 'type': 'string', 'mandatory': true }
             }
         });
 
@@ -103,10 +103,10 @@ describe('a metamodel instance', function () {
             }
         });
 
-        expect(yoda.address().planet).toBe('Dagobah');
+        expect(yoda.address().planet()).toBe('Dagobah');
     });
 
-    it('can create a one to one relationship', function () {
+    it('can create a one to one relationship', function() {
         var metamodel = runtime.require('metamodel');
 
         metamodel.schema({
@@ -177,7 +177,7 @@ describe('a metamodel instance', function () {
     });
 
 
-    it('can can create a one to many relationship', function () {
+    it('can can create a one to many relationship', function() {
         var metamodel = runtime.require('metamodel');
 
         metamodel.schema({
@@ -261,7 +261,7 @@ describe('a metamodel instance', function () {
     });
 
 
-    it('can create navigation threw model', function () {
+    it('can create navigation threw model', function() {
         var metamodel = runtime.require('metamodel');
 
         metamodel.schema({

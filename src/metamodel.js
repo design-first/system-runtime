@@ -870,12 +870,12 @@ function isReference(value) {
 
 /*
  * Get the real type of a value.
- * @method getType
+ * @method getRealType
  * @param {type} value
  * @return {String} type of the value
  * @private
  */
-function getType(value) {
+function getRealType(value) {
     var type = '';
 
     if (Array.isArray(value)) {
@@ -1287,6 +1287,31 @@ function isMethod(name, id) {
 
 
 /*
+ * Check if an attribute of the schema is a structure.
+ * @method isStructure
+ * @param {String} name name of the propertys
+ * @param {String} id component id
+ * @return {Boolean} true if the property is a structure
+ */
+function isStructure(name, id) {
+    var result = false,
+        model = store.generatedModels[id],
+        attributeType = '',
+        type = '';
+
+    if (model[name]) {
+        type = store.type[model[name].type];
+    }
+
+    if (type && type.schema) {
+        result = true;
+    }
+
+    return result;
+}
+
+
+/*
  * Check if the name is a correct state for the component.
  * @method isValidState
  * @param {String} name name of the state
@@ -1362,7 +1387,7 @@ function isValidType(value, typeName) {
             i = 0,
             length = 0;
 
-        realType = getType(typeName);
+        realType = getRealType(typeName);
         switch (realType) {
             case 'string':
                 isValid = hasType(value, typeName);
@@ -1532,7 +1557,7 @@ function isValidSchema(object, schema) {
     function _isValidType() {
         var isValid = true;
 
-        realType = getType(typeSchema);
+        realType = getRealType(typeSchema);
         switch (realType) {
             case 'string':
                 if (isCustomType(realType)) {
@@ -1719,7 +1744,7 @@ function isValidObject(object, schema, strict, cleanRef) {
         var isValid = true,
             typeArray = '';
 
-        realType = getType(typeSchema);
+        realType = getRealType(typeSchema);
         switch (realType) {
             case 'any':
                 break;
@@ -1728,13 +1753,13 @@ function isValidObject(object, schema, strict, cleanRef) {
                     isValid = isValidObject(field, typeSchema);
                 } else {
                     if (typeSchema === 'array') {
-                        if (getType(field) !== 'array') {
+                        if (getRealType(field) !== 'array') {
                             $log.invalidPropertyType(fieldName, typeSchema, field);
                             isValid = false;
                             break;
                         }
                     } else {
-                        if (getType(field) !== typeSchema) {
+                        if (getRealType(field) !== typeSchema) {
                             $log.invalidPropertyType(fieldName, typeSchema, field);
                             isValid = false;
                             break;
@@ -1751,13 +1776,13 @@ function isValidObject(object, schema, strict, cleanRef) {
                             isValid = isValidObject(field[i], store.type[typeArray].schema);
                         } else {
                             if (!isReference(typeArray)) {
-                                if (getType(field[i]) !== typeArray) {
+                                if (getRealType(field[i]) !== typeArray) {
                                     $log.invalidPropertyType(field[i], typeArray, field[i]);
                                     isValid = false;
                                     break;
                                 }
                             } else {
-                                if (getType(field[i]) === 'string') {
+                                if (getRealType(field[i]) === 'string') {
                                     // Case of an import of a system
                                     if (getClassName($component.get(field[i])) !== getReference(typeArray)) {
                                         $log.invalidClassName(JSON.stringify(field[i]), getReference(typeArray), getClassName(field[i]));
@@ -1899,6 +1924,21 @@ function getModel(name) {
     var result = null;
     if (store.generatedModels[name]) {
         result = store.generatedModels[name];
+    }
+    return result;
+}
+
+
+/*
+ * Get a type.
+ * @method getType
+ * @param {String} name of the type
+ * @return {Object} the type
+ */
+function getType(name) {
+    var result = null;
+    if (store.type[name] && store.type[name]) {
+        result = JSON.parse(JSON.stringify(store.type[name]));
     }
     return result;
 }
@@ -2210,3 +2250,22 @@ exports.isCollection = isCollection;
  * @return {Boolean} true if the attribute is a method
  */
 exports.isMethod = isMethod;
+
+
+/**
+ * Check if an attribute of the schema is a structure.
+ * @method isStructure
+ * @param {String} name name of the propertys
+ * @param {String} id component id
+ * @return {Boolean} true if the property is a structure
+ */
+exports.isStructure = isStructure;
+
+
+/**
+ * Get a type.
+ * @method getType
+ * @param {String} name of the type
+ * @return {Object} the type
+ */
+exports.getType = getType;

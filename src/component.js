@@ -289,6 +289,37 @@ function getMethods(id) {
 
 
 /*
+ * Get the schema of a structure.
+ * @method getStructureProperties
+ * @param {String} name of the property
+ * @param {String} name of the model
+ * @return {Array} list of property schema of the structure type
+ * @private
+ */
+function getStructureProperties(propertyName, model) {
+    var modelDef = null,
+        type = null,
+        structure = null,
+        result = [],
+        propNames = [];
+
+    modelDef = $metamodel.getModel(model);
+    type = modelDef[propertyName].type;
+    structure = $metamodel.getType(type);
+
+    if (structure.schema) {
+        propNames = Object.keys(structure.schema);
+        propNames.forEach(function(name) {
+            structure.schema[name].name = name;
+            result.push(structure.schema[name]);
+        });
+    }
+
+    return result;
+}
+
+
+/*
  * Get all the event of a class.
  * @method getEvents
  * @param {String} id id of the class
@@ -316,6 +347,55 @@ function getEvents(id) {
     }
 
     return result;
+}
+
+/*
+ * Get the value of a structure.
+ * @method getStructureValue
+ * @param {String} model name of the model
+ * @param {String} id name of the component
+ * @param {String} path 
+ * @return {Object} the value
+ * @private
+ */
+function getStructureValue(model, id, path) {
+    var result = null,
+        doc = $db.store[model][id],
+        subPath = path.split('.'),
+        length = subPath.length,
+        i = 0;
+
+    result = doc;
+
+    for (i = 0; i < length; i++) {
+        result = result[subPath[i]];
+    }
+    return result;
+}
+
+
+/*
+ * Set the value of a structure.
+ * @method getStructureValue
+ * @param {String} model name of the model
+ * @param {String} id name of the component
+ * @param {String} path 
+ * @param {String} value the value to set 
+ * @private
+ */
+function setStructureValue(model, id, path, value) {
+    var result = null,
+        doc = $db.store[model][id],
+        subPath = path.split('.'),
+        length = subPath.length,
+        i = 0;
+
+    result = doc;
+
+    for (i = 0; i < length - 1; i++) {
+        result = result[subPath[i]];
+    }
+    result[subPath[i]] = value;
 }
 
 
@@ -511,6 +591,9 @@ function addProperties(model, Class, classId) {
                             case propertyType === 'date':
                                 propertyValue = new Date(component[propertyName]);
                                 break;
+                            case $metamodel.isStructure(propertyName, classId):
+                                propertyValue = addStructure('', propertyName, model, this.id());
+                                break;
                             default:
                                 propertyValue = component[propertyName];
                                 break;
@@ -568,6 +651,117 @@ function addProperties(model, Class, classId) {
     });
 }
 
+
+/*
+ * Add structure properties to a component. All these properties will be accessed by a method with the same name.
+ * Some checks can be done in order to see if the set of properties is compliant with the model.
+ * @method addStructure
+ * @param {String} path parent path
+ * @param {String} name property name
+ * @param {String} model model name
+ * @param {String} id id of the component
+ * @return {Object} object that cointains methods to access the structure 
+ * @private
+ */
+function addStructure(path, name, model, id) {
+    var properties = getStructureProperties(name, model),
+        sructure = {};
+
+    properties.forEach(function property(prop) {
+        var body = {},
+            propertyName = '',
+            propertyType = '',
+            propertyReadOnly = '';
+
+        propertyName = prop.name;
+        propertyType = prop.type;
+        propertyReadOnly = prop.readOnly;
+
+        body = function body(value) {
+            var search = [],
+                component = null,
+                propertyValue = null,
+                parentPath = '',
+                fullPath = '';
+
+            if (path) {
+                parentPath = parentPath + '.' + name;
+            } else {
+                parentPath = name;
+            }
+            fullPath = parentPath + '.' + propertyName;
+
+            if (typeof value === 'undefined') {
+                component = $db.store[model][id];
+                if (component) {
+                    switch (true) {
+                        case propertyType.indexOf('@') !== -1:
+                            propertyValue = get(getStructureValue(model, id, fullPath));
+                            break;
+                        case propertyType === 'date':
+                            propertyValue = new Date(getStructureValue(model, id, fullPath));
+                            break;
+                        case $metamodel.isStructure(propertyName, model):
+                            propertyValue = addStructure(parentPath, propertyName, model, id);
+                            break;
+                        default:
+                            propertyValue = getStructureValue(model, id, fullPath);
+                            break;
+                    }
+                    return propertyValue;
+                } else {
+                    $log.destroyedComponentCall(fullPath, id);
+                }
+            } else {
+                if (propertyReadOnly) {
+                    $log.readOnlyProperty(id, fullPath);
+                } else {
+                    if ($metamodel.isValidType(value, propertyType)) {
+                        search = $db[model].find({ "_id": id });
+                        if (search.length) {
+                            component = search[0];
+
+                            switch (true) {
+                                case propertyType.indexOf('@') !== -1:
+                                    setStructureValue(model, id, fullPath, value.id());
+                                    break;
+                                case propertyType === 'date':
+                                    setStructureValue(model, id, fullPath, value.toISOString());
+                                    break;
+                                default:
+                                    setStructureValue(model, id, fullPath, value);
+                                    break;
+                            }
+
+                            if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
+                                $helper.getRuntime().require('db').update(model, id, fullPath, value);
+                            }
+
+                            // case of RuntimeBehavior
+                            if (model === 'RuntimeBehavior') {
+                                $behavior.removeFromMemory(id);
+                            }
+
+                            $workflow.state({
+                                "component": id,
+                                "state": fullPath,
+                                "data": [value]
+                            });
+                        }
+                    } else {
+                        $log.invalidPropertyName(id, fullPath, value, propertyType);
+                    }
+                }
+            }
+        };
+
+        /* jshint -W054 */
+        sructure[propertyName] = new Function("body", "return function " + propertyName + " (value) { return body.call(this,value) };")(body);
+        /* jshint +W054 */
+    });
+
+    return sructure;
+}
 
 /*
  * Add methods to a component.
