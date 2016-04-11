@@ -2,6 +2,7 @@
     "_name": "RuntimeLogger",
     "_core": true,
     "level": "property",
+    "debug": "method",
     "info": "method",
     "warn": "method",
     "error": "method"

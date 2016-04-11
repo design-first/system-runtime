@@ -51,13 +51,18 @@ var ID = '_id',
     currentLevel = 'warn',
     loggerRef = null,
     fakeLoggerRef = {
+        debug: function debug(message) {
+            if (currentLevel === 'debug') {
+                console.log('runtime: ' + message);
+            }
+        },
         info: function info(message) {
-            if (currentLevel === 'info') {
+            if (currentLevel === 'info' || currentLevel === 'debug') {
                 console.info('runtime: ' + message);
             }
         },
         warn: function warning(message) {
-            if (currentLevel === 'info' || currentLevel === 'warn') {
+            if (currentLevel === 'info' || currentLevel === 'warn' || currentLevel === 'debug') {
                 console.warn('runtime: ' + message);
             }
         },
@@ -245,7 +250,7 @@ function invalidTypeDefinition(name) {
  */
 function invalidPropertyName(id, propertyName, propertyValue, type) {
     if (typeof type === 'string') {
-        getLogger().warn("invalid type for property '" + propertyName + "' on component '" + id + "': expected '" + type + "' instead of '" + typeof propertyValue + "' on component '" + id + "'");
+        getLogger().warn("invalid type for property '" + propertyName + "' on component '" + id + "': expected '" + type.replace('@', '') + "' instead of '" + typeof propertyValue + "' on component '" + id + "'");
     } else {
         getLogger().warn("invalid type for property type '" + propertyName + "' on component '" + id + "': expected 'string' instead of '" + typeof type + "' on component '" + id + "'");
     }

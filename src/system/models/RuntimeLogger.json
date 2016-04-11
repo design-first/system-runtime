@@ -7,6 +7,14 @@
         "mandatory": false,
         "default": "warn"
     },
+    "debug": {
+        "params": [
+            {
+                "name": "message",
+                "type": "string"
+            }
+        ]
+    },
     "info": {
         "params": [
             {
