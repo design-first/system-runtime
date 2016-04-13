@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "1.4.3",
+    "version": "1.5.0",
     "description": "Runtime, the System Runtime Environment",
     "homepage": "https://system-runtime.github.io",
     "keywords": [
@@ -24,7 +24,7 @@
         "email": "erwan.carriou@mac.com",
         "twitter": "@ecarriou"
     },
-    "license": "MIT",
+    "license": "Apache-2.0",
     "repository": {
         "type": "git",
         "url": "https://github.com/system-sdk/system-runtime.git"

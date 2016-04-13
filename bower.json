@@ -1,8 +1,8 @@
 {
     "name": "system-runtime",
-    "version": "1.4.3",
+    "version": "1.5.0",
     "description": "Runtime, the System Runtime Environment",
-    "license": "MIT",
+    "license": "Apache-2.0",
     "homepage": "https://system-runtime.github.io",
     "author": {
         "name": "erwan carriou",
