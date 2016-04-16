@@ -1778,10 +1778,14 @@ function isValidObject(object, schema, strict, cleanRef) {
                             } else {
                                 if (getRealType(field[i]) === 'string') {
                                     // Case of an import of a system
-                                    if (getClassName($component.get(field[i])) !== getReference(typeArray)) {
-                                        $log.invalidClassName(JSON.stringify(field[i]), getReference(typeArray), getClassName(field[i]));
-                                        isValid = false;
-                                        break;
+                                    if ($component.get(field[i])) {
+                                        if (getClassName($component.get(field[i])) !== getReference(typeArray)) {
+                                            $log.invalidClassName(JSON.stringify(field[i]), getReference(typeArray), getClassName(field[i]));
+                                            isValid = false;
+                                            break;
+                                        }
+                                    } else {
+                                        $log.canNotYetValidate(field[i], getReference(typeArray));
                                     }
                                 } else {
                                     if (!inheritFrom(getClassName(field[i]), getReference(typeArray))) {

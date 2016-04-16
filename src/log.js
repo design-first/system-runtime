@@ -455,7 +455,7 @@ function unknownType(value) {
  * @param {String} className name of the class
  */
 function canNotYetValidate(id, className) {
-    getLogger().warn("can not yet validate if the component '" + id + "' is an instance of '" + className + "'");
+    getLogger().info("can not yet validate if the component '" + id + "' is an instance of '" + className + "'");
 }
 
 
