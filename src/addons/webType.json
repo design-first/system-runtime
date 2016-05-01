@@ -1,1 +1,0 @@
-{"name":"webType","version":"0.1.0","description":"Add types for web","_id":"1f6ff194df1c37a","schemas":{},"models":{},"types":{"html":{"name":"html","type":"string","core":true},"css":{"name":"css","type":"string","core":true}},"behaviors":{},"components":{},"master":false,"subsystem":false}

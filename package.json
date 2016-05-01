@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "1.5.3",
+    "version": "1.5.4",
     "description": "Runtime, the System Runtime Environment",
     "homepage": "https://system-runtime.github.io",
     "keywords": [
