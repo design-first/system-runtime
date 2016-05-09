@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "1.5.4",
+    "version": "1.5.5",
     "description": "Runtime, the System Runtime Environment",
     "homepage": "https://system-runtime.github.io",
     "keywords": [
@@ -14,7 +14,7 @@
         "nosql",
         "component",
         "system",
-        "isomorphic",
+        "universal",
         "runtime",
         "json"
     ],
@@ -54,15 +54,15 @@
         "grunt-contrib-yuidoc": "^1.0.0",
         "grunt-jasmine-nodejs": "^1.4.2",
         "grunt-jsbeautifier": "^0.2.10",
-        "grunt-karma": "^0.12.0",
+        "grunt-karma": "^1.0.0",
         "grunt-merge-json": "^0.9.5",
         "istanbul": "^0.4.0",
         "karma": "^0.13.3",
-        "karma-coverage": "^0.5.0",
-        "karma-firefox-launcher": "^0.1.6",
-        "karma-jasmine": "^0.3.6",
-        "karma-sauce-launcher": "^0.3.0",
-        "karma-script-launcher": "^0.2.0",
-        "yuidoc-lucid-theme": "^0.1.1"
+        "karma-coverage": "^1.0.0",
+        "karma-firefox-launcher": "^1.0.0",
+        "karma-jasmine": "^1.0.2",
+        "karma-sauce-launcher": "^1.0.0",
+        "karma-script-launcher": "^1.0.0",
+        "yuidoc-lucid-theme": "^0.1.2"
     }
 }
