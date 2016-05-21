@@ -1,4 +1,4 @@
-# Runtime
+# System Runtime
 
 [![npm version](https://badge.fury.io/js/system-runtime.svg)](http://badge.fury.io/js/system-runtime)
 [![Build Status](https://travis-ci.org/system-sdk/system-runtime.svg?branch=master)](https://travis-ci.org/system-sdk/system-runtime)
@@ -6,21 +6,21 @@
 [![Coverage Status](https://coveralls.io/repos/github/system-sdk/system-runtime/badge.svg?branch=master)](https://coveralls.io/github/system-sdk/system-runtime?branch=master)
 [![devDependency Status](https://david-dm.org/system-sdk/system-runtime/dev-status.svg)](https://david-dm.org/system-sdk/system-runtime#info=devDependencies)
 
-## What is Runtime ?
+## What is System Runtime ?
 
 #### a System Runtime Environment
 
-[JSON](http://json.org) is traditionnaly used to represent data. We use this format to store the model, components and methods of your application. Runtime can run JSON that contains your application as a SRE (System Runtime Environment).
+[JSON](http://json.org) is traditionnaly used to represent data. We use this format to store the model, components and methods of your application. System Runtime can run JSON that contains your application as a SRE (System Runtime Environment).
 
-Runtime has APIs to serialize your system into JSON. This JSON can be then imported and executed in a client or server application.
+System Runtime has APIs to serialize your system into JSON. This JSON can be then imported and executed in a client or server application.
 
-## How works Runtime ?
+## How works System Runtime ?
 
-Runtime executes your JSON client and server side.
+System Runtime executes your JSON client and server side.
 
-#### Runtime APIs
+#### System Runtime APIs
 
-Use Runtime APIs to create your application:
+Use System Runtime APIs to create your application:
 
 ```js
 // create an app
@@ -35,7 +35,7 @@ app.on('main', function main() {
 app.main();
 ```
 
-Runtime will automatically serialize it into JSON:
+System Runtime will automatically serialize it into JSON:
 
 ```json
 {
@@ -68,7 +68,7 @@ Just add a link tag in your HTML to execute your app:
 <!-- import your app -->
 <link rel="system" type="application/json" href="app.json">
 
-<!-- load Runtime -->
+<!-- load System Runtime -->
 <script src="/bower_components/system-runtime/dist/system-runtime.min.js"></script>
 ```
 
@@ -77,13 +77,13 @@ Just add a link tag in your HTML to execute your app:
 Just require your JSON in Node.js to execute your app:
 
 ```js
-// require Runtime
+// require System Runtime
 var runtime = require('system-runtime');
 
 // require your app
 var app = require('./app.json');
 
-// import your app into Runtime NoSQL DB
+// import your app into System Runtime NoSQL DB
 var appId = runtime.require('db').system(app);
 
 // run your app
@@ -92,10 +92,10 @@ runtime.require(appId).main();
 
 #### Component APIs
 
-You can create components in Runtime:
+You can create components in System Runtime:
 
 ```js
-// require Runtime metamodel
+// require System Runtime metamodel
 var metamodel = runtime.require('metamodel');
 
 // define a component class
@@ -119,11 +119,11 @@ var luke = new Jedi({
 luke.lastName('StarKiller');
 ```
 
-## What contains Runtime ?
+## What contains System Runtime ?
 
 #### A metamodel
 
-Runtime contains a metamodel to help you to design your model. The definition of the model is made on a JSON format called [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson), no code is needed. 
+System Runtime contains a metamodel to help you to design your model. The definition of the model is made on a JSON format called [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson), no code is needed. 
 
 With [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson) you can define types, classes, one to one / one to many relationships and multi inheritance between classes. 
 
@@ -131,21 +131,21 @@ With [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson
 
 #### A component factory
 
-Runtime uses the [Model-Driven Architecture](http://www.omg.org/mda/) approach to create classes based on your design. Use them to instantiate your components. 
+System Runtime uses the [Model-Driven Architecture](http://www.omg.org/mda/) approach to create classes based on your design. Use them to instantiate your components. 
 
 #### A NoSQL Database
 
-Runtime acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents. 
+System Runtime acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents. 
 
-Runtime has a micro NoSQL Database that stores your components and you can export/import them into another Runtime NoSQL Database. 
+System Runtime has a micro NoSQL Database that stores your components and you can export/import them into another System Runtime NoSQL Database. 
 
-Thanks to Runtime NoSQL Database, you can compose your model with an another one.
+Thanks to System Runtime NoSQL Database, you can compose your model with an another one.
 
 #### A workflow engine
 
-Runtime checks at runtime if the signatures of invoked methods are compliant with your model. 
+System Runtime checks at runtime if the signatures of invoked methods are compliant with your model. 
 
-With Runtime your components really behave the way you designed them. 
+With System Runtime your components really behave the way you designed them. 
 
 ## Installation
 
@@ -174,7 +174,7 @@ Add a `<script>` tag to your HTML page:
 
 Then you can use runtime on your script:
 ```js
-// example: get Runtime version
+// example: get System Runtime version
 runtime.version();
 ```
 
@@ -183,7 +183,7 @@ runtime.version();
 * [Quick Start](https://system-runtime.readme.io/docs/quick-start)
 * [Guide](https://system-runtime.readme.io/docs/installation)
 * [Examples](https://system-runtime.readme.io/docs/a-basic-hello-world)
-* [Build Runtime](https://system-runtime.readme.io/docs/extend-runtime)
+* [Build System Runtime](https://system-runtime.readme.io/docs/extend-runtime)
 
 ## Licence
 
