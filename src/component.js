@@ -914,7 +914,7 @@ function addOn(Class, classId) {
         return behaviorId;
     };
     /* jshint -W054 */
-    Class.prototype.on = new Function("body", "return function on (state,handler,useCoreAPI) { return body.call(this,state,handler,useCoreAPI) };")(body);
+    Class.prototype.on = new Function("body", "return function on (state,handler,useCoreAPI,isCore) { return body.call(this,state,handler,useCoreAPI,isCore) };")(body);
     /* jshint +W054 */
 }
 
@@ -967,7 +967,7 @@ function addOnClass(Class, classId) {
         return behaviorId;
     };
     /* jshint -W054 */
-    Class.on = new Function("body", "return function on (state,handler,useCoreAPI) { return body.call(this, state, handler, useCoreAPI) };")(body);
+    Class.on = new Function("body", "return function on (state,handler,useCoreAPI,isCore) { return body.call(this, state, handler, useCoreAPI,isCore) };")(body);
     /* jshint -W054 */
 }
 
