@@ -874,7 +874,7 @@ function addEvents(model, Class, classId) {
  * @private
  */
 function addOn(Class, classId) {
-    var body = function(state, handler, useCoreAPI) {
+    var body = function(state, handler, useCoreAPI, isCore) {
         var behaviorId = '',
             currentState = '';
 
@@ -896,7 +896,7 @@ function addOn(Class, classId) {
                     $log.behaviorNotUnique(classId, state);
                 } else {
                     if ($worklow.validParamNumbers(classId, state, handler)) {
-                        behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI);
+                        behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI, isCore);
 
                         currentState = $state.get(this.id());
                         if (currentState && state === currentState.name) {
@@ -927,7 +927,7 @@ function addOn(Class, classId) {
  * @private
  */
 function addOnClass(Class, classId) {
-    var body = function(state, handler, useCoreAPI) {
+    var body = function(state, handler, useCoreAPI, isCore) {
         var behaviorId = '',
             currentState = '';
 
@@ -949,7 +949,7 @@ function addOnClass(Class, classId) {
                     $log.behaviorNotUnique(classId, state);
                 } else {
                     if ($worklow.validParamNumbers(classId, state, handler)) {
-                        behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI);
+                        behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI, isCore);
 
                         currentState = $state.get(this.id());
                         if (currentState && state === currentState.name) {

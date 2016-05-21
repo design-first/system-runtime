@@ -532,8 +532,8 @@ function checkParams(params) {
     if (typeof length === 'undefined') {
         length = 1;
     }
-
-    if (paramsNumber.indexOf(length) === -1) {
+    
+    if (length < paramsNumber[0] || paramsNumber[1] < length) {
         result = false;
         $log.invalidParamNumber(component.id(), methodName);
     }

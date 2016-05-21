@@ -15,7 +15,14 @@
             {
                 "name": "useCoreAPI",
                 "type": "boolean",
-                "mandatory": false
+                "mandatory": false,
+                "default": false
+            },
+            {
+                "name": "isCore",
+                "type": "boolean",
+                "mandatory": false,
+                "default": false
             }
         ]
     },
