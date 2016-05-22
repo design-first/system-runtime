@@ -39,9 +39,10 @@
         "Gruntfile.js",
         "karma.conf.js",
         "package.json",
+        "bower.json",
         ".jshintrc",
         ".travis.yml",
-        ".bower.json",
-        "bower.json"
+        ".npmignore",
+        ".vscode"
     ]
 }
