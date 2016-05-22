@@ -43,6 +43,7 @@
         ".jshintrc",
         ".travis.yml",
         ".npmignore",
+        ".gitignore",
         ".vscode"
     ]
 }

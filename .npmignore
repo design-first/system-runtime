@@ -14,4 +14,5 @@ karma.conf.js
 .vscode
 .jshintrc
 .travis.yml
-.npmignore
+.npmignore$
+.gitignore
