@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "1.6.3",
+    "version": "1.6.4",
     "description": "System Runtime, a JavaScript library that runs systems",
     "homepage": "https://system-runtime.github.io",
     "keywords": [
@@ -54,7 +54,7 @@
         "grunt-contrib-yuidoc": "^1.0.0",
         "grunt-jasmine-nodejs": "^1.4.2",
         "grunt-jsbeautifier": "^0.2.10",
-        "grunt-karma": "^1.0.0",
+        "grunt-karma": "^2.0.0",
         "grunt-merge-json": "^0.9.5",
         "istanbul": "^0.4.0",
         "karma": "^0.13.3",
