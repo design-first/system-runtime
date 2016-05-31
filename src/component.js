@@ -90,7 +90,7 @@ function RuntimeArray(conf) {
     }
 
     // init
-    arrDb.forEach(function(val) {
+    arrDb.forEach(function (val) {
         if (type.indexOf('@') !== -1) {
             arr.push($helper.getRuntime().require(val));
         } else {
@@ -180,6 +180,15 @@ function RuntimeArray(conf) {
      */
     arr.sort = function sort(funct) {
         arrDb.sort(funct);
+        return arr;
+    };
+
+    /* Override reverse method.
+     * @reverse
+     * @return {RuntimeArray} the reversed RuntimeArray
+     */
+    arr.reverse = function reverse() {
+        arrDb.reverse();
         return arr;
     };
 
@@ -303,7 +312,7 @@ function getStructureProperties(propertyName, model) {
 
     if (structure.schema) {
         propNames = Object.keys(structure.schema);
-        propNames.forEach(function(name) {
+        propNames.forEach(function (name) {
             structure.schema[name].name = name;
             result.push(structure.schema[name]);
         });
@@ -401,7 +410,7 @@ function setStructureValue(model, id, path, value) {
  * @private
  */
 function createClass(classId) {
-    var body = function(config) {
+    var body = function (config) {
         config = config || {};
         var body = {};
 
@@ -423,7 +432,7 @@ function createClass(classId) {
         store[config._id] = this;
 
         // id
-        body = function() {
+        body = function () {
             return config._id;
         };
         /* jshint -W054 */
@@ -462,7 +471,7 @@ function createClass(classId) {
  * @private
  */
 function addId(Class, classId) {
-    var body = function() {
+    var body = function () {
         return classId;
     };
     /* jshint -W054 */
@@ -772,7 +781,7 @@ function addMethods(model, Class, classId) {
     methods.forEach(function method(methodName) {
         var paramsName = getParamNames(classId, methodName),
             params = paramsName.join(','),
-            body = function() {
+            body = function () {
                 var result = null;
 
                 result = $workflow.state({
@@ -810,7 +819,7 @@ function addEvents(model, Class, classId) {
     events.forEach(function event(methodName) {
         var paramsName = getParamNames(classId, methodName),
             params = paramsName.join(','),
-            body = function() {
+            body = function () {
                 var systems = [],
                     systemId = -1,
                     data = [],
@@ -874,7 +883,7 @@ function addEvents(model, Class, classId) {
  * @private
  */
 function addOn(Class, classId) {
-    var body = function(state, handler, useCoreAPI, isCore) {
+    var body = function (state, handler, useCoreAPI, isCore) {
         var behaviorId = '',
             currentState = '';
 
@@ -927,7 +936,7 @@ function addOn(Class, classId) {
  * @private
  */
 function addOnClass(Class, classId) {
-    var body = function(state, handler, useCoreAPI, isCore) {
+    var body = function (state, handler, useCoreAPI, isCore) {
         var behaviorId = '',
             currentState = '';
 
@@ -980,7 +989,7 @@ function addOnClass(Class, classId) {
  * @private
  */
 function addOffClass(Class, classId) {
-    var body = function(state, behaviorId) {
+    var body = function (state, behaviorId) {
         if ($workflow.checkParams({
             "component": this,
             "methodName": "off",
@@ -1010,7 +1019,7 @@ function addOffClass(Class, classId) {
  * @private
  */
 function addDestroyClass(Class) {
-    var body = function() {
+    var body = function () {
         var id = this.id(),
             result = [],
             i = 0,
@@ -1054,7 +1063,7 @@ function addDestroyClass(Class) {
  * @private
  */
 function addClassInfoClass(Class) {
-    var body = function() {
+    var body = function () {
         return get(this.id() + 'Info');
     };
     /* jshint -W054 */
