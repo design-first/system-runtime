@@ -279,7 +279,7 @@ var system = {
                 "result": "object"
             }
         },
-        "1fa72199321fc41": {
+        "1be8115c8810ffe": {
             "_name": "RuntimeBehavior",
             "_core": true,
             "core": {
@@ -312,9 +312,9 @@ var system = {
                 "mandatory": true,
                 "default": ""
             },
-            "_id": "1fa72199321fc41"
+            "_id": "1be8115c8810ffe"
         },
-        "12e3018b731634c": {
+        "163551798c15125": {
             "_name": "RuntimeClassInfo",
             "_core": true,
             "metamodel": {
@@ -379,7 +379,7 @@ var system = {
             "events": {
                 "result": "array"
             },
-            "_id": "12e3018b731634c"
+            "_id": "163551798c15125"
         },
         "123751cb591de26": {
             "_id": "123751cb591de26",
@@ -443,7 +443,7 @@ var system = {
                 }]
             }
         },
-        "1ef8816c071bfd5": {
+        "193991e86d1c624": {
             "_name": "RuntimeDatabase",
             "_core": true,
             "system": {
@@ -497,9 +497,9 @@ var system = {
                     "type": "string"
                 }]
             },
-            "_id": "1ef8816c071bfd5"
+            "_id": "193991e86d1c624"
         },
-        "15830196591a84d": {
+        "1c85817af71a308": {
             "_name": "RuntimeLogger",
             "_core": true,
             "level": {
@@ -532,9 +532,9 @@ var system = {
                     "type": "string"
                 }]
             },
-            "_id": "15830196591a84d"
+            "_id": "1c85817af71a308"
         },
-        "10c7b1badc14f55": {
+        "105a419e1814d21": {
             "_name": "RuntimeMessage",
             "_core": true,
             "event": {
@@ -555,9 +555,9 @@ var system = {
                 "mandatory": true,
                 "default": []
             },
-            "_id": "10c7b1badc14f55"
+            "_id": "105a419e1814d21"
         },
-        "109ed1d6211b602": {
+        "198b2180ae178d1": {
             "_name": "RuntimeMetamodel",
             "_core": true,
             "schema": {
@@ -584,9 +584,9 @@ var system = {
             "create": {
                 "params": []
             },
-            "_id": "109ed1d6211b602"
+            "_id": "198b2180ae178d1"
         },
-        "16cb5180bf19fcc": {
+        "1af3f1d1611891a": {
             "_name": "RuntimeState",
             "_core": true,
             "name": {
@@ -601,9 +601,9 @@ var system = {
                 "mandatory": false,
                 "default": {}
             },
-            "_id": "16cb5180bf19fcc"
+            "_id": "1af3f1d1611891a"
         },
-        "116be1407d1c435": {
+        "1bca4186ff1d47c": {
             "_name": "RuntimeSystem",
             "_core": true,
             "name": {
@@ -669,7 +669,7 @@ var system = {
             "ready": {},
             "sync": {},
             "main": {},
-            "_id": "116be1407d1c435"
+            "_id": "1bca4186ff1d47c"
         }
     },
     "schemas": {
@@ -735,7 +735,7 @@ var system = {
             "version": "property",
             "system": "method"
         },
-        "1681619a441516e": {
+        "16fd012ab81e65c": {
             "_name": "RuntimeBehavior",
             "_inherit": [
                 "RuntimeComponent"
@@ -746,9 +746,9 @@ var system = {
             "action": "property",
             "state": "property",
             "useCoreAPI": "property",
-            "_id": "1681619a441516e"
+            "_id": "16fd012ab81e65c"
         },
-        "1f1a414def1ec32": {
+        "1fba118c1c19775": {
             "_name": "RuntimeClassInfo",
             "_inherit": [
                 "RuntimeComponent"
@@ -766,7 +766,7 @@ var system = {
             "collection": "method",
             "event": "method",
             "events": "method",
-            "_id": "1f1a414def1ec32"
+            "_id": "1fba118c1c19775"
         },
         "111df11e2b19fde": {
             "_id": "111df11e2b19fde",
@@ -781,7 +781,7 @@ var system = {
             "init": "method",
             "error": "event"
         },
-        "1001c129fb1059f": {
+        "1bd9a1ca5c15902": {
             "_name": "RuntimeDatabase",
             "_inherit": [
                 "RuntimeComponent"
@@ -793,9 +793,9 @@ var system = {
             "insert": "event",
             "update": "event",
             "remove": "event",
-            "_id": "1001c129fb1059f"
+            "_id": "1bd9a1ca5c15902"
         },
-        "15d55101f319aab": {
+        "184ee172af1799a": {
             "_name": "RuntimeLogger",
             "_core": true,
             "level": "property",
@@ -803,18 +803,18 @@ var system = {
             "info": "method",
             "warn": "method",
             "error": "method",
-            "_id": "15d55101f319aab"
+            "_id": "184ee172af1799a"
         },
-        "102cd1ea6518c37": {
+        "1cd281bb5a1a273": {
             "_name": "RuntimeMessage",
             "_inherit": [],
             "_core": true,
             "event": "property",
             "from": "property",
             "data": "property",
-            "_id": "102cd1ea6518c37"
+            "_id": "1cd281bb5a1a273"
         },
-        "168901692315c62": {
+        "111d81dc7113592": {
             "_name": "RuntimeMetamodel",
             "_inherit": [
                 "RuntimeComponent"
@@ -824,18 +824,18 @@ var system = {
             "model": "method",
             "type": "method",
             "create": "method",
-            "_id": "168901692315c62"
+            "_id": "111d81dc7113592"
         },
-        "190d41d79015c36": {
+        "1222b170561f119": {
             "_name": "RuntimeState",
             "_inherit": [],
             "_core": true,
             "_class": false,
             "name": "property",
             "parameters": "property",
-            "_id": "190d41d79015c36"
+            "_id": "1222b170561f119"
         },
-        "16edc169e511023": {
+        "1d792163261a7df": {
             "_name": "RuntimeSystem",
             "_inherit": [
                 "RuntimeComponent"
@@ -854,7 +854,7 @@ var system = {
             "sync": "method",
             "main": "method",
             "ready": "event",
-            "_id": "16edc169e511023"
+            "_id": "1d792163261a7df"
         }
     },
     "types": {
@@ -1150,202 +1150,202 @@ var system = {
             "core": true,
             "useCoreAPI": true
         },
-        "1f3fb1dbac1ad1f": {
-            "_id": "1f3fb1dbac1ad1f",
+        "13e58173791b0b0": {
+            "_id": "13e58173791b0b0",
             "component": "Runtime",
             "state": "system",
             "action": "function system(name) {\n    var System = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        System = this.require('RuntimeSystem');\n        system = new System(conf);\n    } else {\n        result = $db.RuntimeSystem.find({\n            'master': true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1f5491f17915fa2": {
-            "_id": "1f5491f17915fa2",
+        "11199169131b133": {
+            "_id": "11199169131b133",
             "component": "RuntimeClassInfo",
             "state": "collection",
             "action": "function collection(name) {\n    var result = {};\n    if (this.metamodel()[name] === 'collection') {\n        result = this.model()[name];\n    } \n    \n    return result; \n}",
             "core": true
         },
-        "1e4c41ac0516c24": {
-            "_id": "1e4c41ac0516c24",
+        "1a5af16d6e17249": {
+            "_id": "1a5af16d6e17249",
             "component": "RuntimeClassInfo",
             "state": "collections",
             "action": "function collections() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length; \n    \n    for (i = 0; i < length; i++) { \n        item = keys[i]; \n        if (this.metamodel()[item] === 'collection') {\n            result.push(item);\n        }\n    }\n    \n    return result;\n}",
             "core": true
         },
-        "15d221e7651739a": {
-            "_id": "15d221e7651739a",
+        "1b6691773a10c21": {
+            "_id": "1b6691773a10c21",
             "component": "RuntimeClassInfo",
             "state": "event",
             "action": "function event(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'event') {\n        result = this.model()[name];\n    } \n    \n    return result;\n}",
             "core": true
         },
-        "184ec1dfc118206": {
-            "_id": "184ec1dfc118206",
+        "169171f94f1739a": {
+            "_id": "169171f94f1739a",
             "component": "RuntimeClassInfo",
             "state": "events",
             "action": "function events() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'event') {\n            result.push(item);\n        }\n    } \n    return result;\n}",
             "core": true
         },
-        "1e2301017d161f5": {
-            "_id": "1e2301017d161f5",
+        "162a51c5521a4d8": {
+            "_id": "162a51c5521a4d8",
             "component": "RuntimeClassInfo",
             "state": "link",
             "action": "function link(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'link') {\n        result = this.model()[name];\n    }\n    return result;\n}",
             "core": true
         },
-        "118ac1133814425": {
-            "_id": "118ac1133814425",
+        "11ddd13fcd104b6": {
+            "_id": "11ddd13fcd104b6",
             "component": "RuntimeClassInfo",
             "state": "links",
             "action": "function links() { \n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'link') {\n            result.push(item);\n        }\n    } return result;\n}",
             "core": true
         },
-        "1120d164cc128da": {
-            "_id": "1120d164cc128da",
+        "19ab81c90a1571b": {
+            "_id": "19ab81c90a1571b",
             "component": "RuntimeClassInfo",
             "state": "method",
             "action": "function method(name) {\n    var result = {};\n    if (this.metamodel()[name] === 'method') {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}",
             "core": true
         },
-        "1eb931d6bd1e653": {
-            "_id": "1eb931d6bd1e653",
+        "1404310cc61064a": {
+            "_id": "1404310cc61064a",
             "component": "RuntimeClassInfo",
             "state": "methods",
             "action": "function methods() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'method') {\n            result.push(item);\n        }\n    } \n    \n    return result;\n}",
             "core": true
         },
-        "13acc1ca8b12ede": {
-            "_id": "13acc1ca8b12ede",
+        "11e64186cc15122": {
+            "_id": "11e64186cc15122",
             "component": "RuntimeClassInfo",
             "state": "properties",
             "action": "function properties() { \n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'property') {\n            result.push(item);\n        }\n    } return result;\n}",
             "core": true
         },
-        "1398513bf512d2a": {
-            "_id": "1398513bf512d2a",
+        "1e5351ae5b13596": {
+            "_id": "1e5351ae5b13596",
             "component": "RuntimeClassInfo",
             "state": "property",
             "action": "function property(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'property') {\n        result = this.model()[name];\n    }\n    return result;\n}",
             "core": true
         },
-        "1abf6107b01be0c": {
-            "_id": "1abf6107b01be0c",
+        "1aa2e112a7179d8": {
+            "_id": "1aa2e112a7179d8",
             "component": "RuntimeComponent",
             "state": "destroy",
             "action": "function destroy() {\n    $component.destroy(this.id());\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "14ba310cec1a23e": {
-            "_id": "14ba310cec1a23e",
+        "11fed145d515de7": {
+            "_id": "11fed145d515de7",
             "component": "RuntimeComponent",
             "state": "off",
             "action": "function off(state, behaviorId) {\n    var args = [],\n    i = 0,\n    length = 0;\n    length = arguments.length;\n    \n    for (i = 0; i < length - 7; i++) {\n        args.push(arguments[i]);\n    }\n    \n    if ($workflow.checkParams({\n        \"component\": this, \n        \"methodName\": \"off\", \n        \"args\": args\n        })) {\n        \n        if (state || behaviorId) {\n            if ($metamodel.isValidState(state, this.constructor.name)) {\n                $behavior.remove({\n                    \"behaviorId\": behaviorId, \n                    \"componentId\": this.id(), \n                    \"state\": state\n                });\n            } else { \n                this.require('logger').warn(\"invoke \\'off\\' method of component '\" + this.id() + \"' with an invalid state '\" + state + \"'\"); \n            }\n        } else {\n            $behavior.remove({\n                \"componentId\": this.id()\n            });\n        }\n    }\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "10c8019ddb11e0b": {
-            "_id": "10c8019ddb11e0b",
+        "167e8105f119268": {
+            "_id": "167e8105f119268",
             "component": "RuntimeComponent",
             "state": "require",
             "action": "function require(id) {\n    return $component.get(id);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1faa512a7112485": {
-            "_id": "1faa512a7112485",
+        "142041f5f51d64d": {
+            "_id": "142041f5f51d64d",
             "component": "RuntimeDatabase",
             "state": "collections",
             "action": "function collections() {\n    var result = {},\n    collectionName = '';\n    \n    for (collectionName in $db.store) {\n        if ($db.store.hasOwnProperty(collectionName) && collectionName.indexOf('Runtime') !== 0) {\n            result[collectionName] = $db[collectionName];\n            \n        }\n    }\n    return result;\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1a7d81976d1569f": {
-            "_id": "1a7d81976d1569f",
+        "10fa31f9d318ae1": {
+            "_id": "10fa31f9d318ae1",
             "component": "RuntimeDatabase",
             "state": "subsystem",
             "action": "function subsystem(params) {\n    return $db.subsystem(params);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "133bc1e3341f9c4": {
-            "_id": "133bc1e3341f9c4",
+        "15b2f162291af23": {
+            "_id": "15b2f162291af23",
             "component": "RuntimeDatabase",
             "state": "system",
             "action": "function system(system) {\n    return $db.system(system);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1e60a1415c15a1e": {
-            "_id": "1e60a1415c15a1e",
+        "1dff114f661b895": {
+            "_id": "1dff114f661b895",
             "component": "RuntimeLogger",
             "state": "debug",
             "action": "function debug(message) {\n    if (this.level() === 'debug') {\n        console.log('runtime: ' + message);\n    }\n}",
             "core": true
         },
-        "1a6d11848a1dfea": {
-            "_id": "1a6d11848a1dfea",
+        "122d017593144c1": {
+            "_id": "122d017593144c1",
             "component": "RuntimeLogger",
             "state": "error",
             "action": "function error(message) {\n    console.error('runtime: ' + message);\n}",
             "core": true
         },
-        "17d151b55c10354": {
-            "_id": "17d151b55c10354",
+        "1d7bb16baa1fec2": {
+            "_id": "1d7bb16baa1fec2",
             "component": "RuntimeLogger",
             "state": "info",
             "action": "function info(message) {\n    if (this.level() === 'info' || this.level() === 'debug') {\n        console.info('runtime: ' + message);\n    }\n}",
             "core": true
         },
-        "16bde1961d1b85e": {
-            "_id": "16bde1961d1b85e",
+        "1b9b310f5f10c9b": {
+            "_id": "1b9b310f5f10c9b",
             "component": "RuntimeLogger",
             "state": "level",
             "action": "function level(val) {\n    $log.level(val);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "14e86134f71ab6f": {
-            "_id": "14e86134f71ab6f",
+        "10a611abe119e61": {
+            "_id": "10a611abe119e61",
             "component": "RuntimeLogger",
             "state": "warn",
             "action": "function warn(message) {\n    if (this.level() === 'info' || this.level() === 'warn' || this.level() === 'debug') {\n        console.warn('runtime: ' + message);\n    } \n}",
             "core": true
         },
-        "115471c8a7197c0": {
-            "_id": "115471c8a7197c0",
+        "1044d1a88b1a21b": {
+            "_id": "1044d1a88b1a21b",
             "component": "RuntimeMetamodel",
             "state": "create",
             "action": "function create() {\n        $metamodel.create();\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "181dc134c41c6ab": {
-            "_id": "181dc134c41c6ab",
+        "122341483915cd5": {
+            "_id": "122341483915cd5",
             "component": "RuntimeMetamodel",
             "state": "model",
             "action": "function model(model) {\n    return $metamodel.model(model);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1004314737184f2": {
-            "_id": "1004314737184f2",
+        "1530b108f31ed4d": {
+            "_id": "1530b108f31ed4d",
             "component": "RuntimeMetamodel",
             "state": "schema",
             "action": "function schema(schema) {\n    return $metamodel.schema(schema);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1531112be117878": {
-            "_id": "1531112be117878",
+        "123e21328e117cd": {
+            "_id": "123e21328e117cd",
             "component": "RuntimeMetamodel",
             "state": "type",
             "action": "function type(type) {\n    return $metamodel.type(type);\n}",
             "core": true,
             "useCoreAPI": true
         },
-        "1712e1041816940": {
-            "_id": "1712e1041816940",
+        "11ac813e5b1ccc6": {
+            "_id": "11ac813e5b1ccc6",
             "component": "RuntimeSystem",
             "state": "sync",
             "action": "function sync() {\n    var system = JSON.parse($db.system());\n    \n    this.schemas(system.schemas);\n    this.types(system.types);\n    this.behaviors(system.behaviors);\n    this.components(system.components);\n}",

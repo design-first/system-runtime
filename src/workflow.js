@@ -259,10 +259,16 @@ function checkResult(params) {
 
     var component = params.component || null,
         methodName = params.methodName || '',
-        methodResult = params.methodResult || undefined,
+        methodResult = null,
         componentClassName = '',
         returnType = null,
         result = true;
+
+    if (typeof params.methodResult !== 'undefined') {
+        methodResult = params.methodResult;
+    } else {
+        methodResult = undefined;
+    }
 
     if (component.constructor.name === 'Function') {
         componentClassName = component.name;
@@ -532,7 +538,7 @@ function checkParams(params) {
     if (typeof length === 'undefined') {
         length = 1;
     }
-    
+
     if (length < paramsNumber[0] || paramsNumber[1] < length) {
         result = false;
         $log.invalidParamNumber(component.id(), methodName);
@@ -728,7 +734,7 @@ function stop(params) {
     }
     params.message = params.message || '';
 
-    exports.state = function() {
+    exports.state = function () {
     };
 
     if (params.error) {
