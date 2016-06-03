@@ -893,7 +893,12 @@ function getRealType(value) {
  * @private
  */
 function getClassName(obj) {
-    return obj.constructor.name;
+    var result = '';
+    
+    if (obj && obj.constructor) {
+        result = obj.constructor.name;
+    }
+    return result;
 }
 
 
