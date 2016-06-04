@@ -45,7 +45,7 @@ var ID = '_id',
     currentLevel = 'warn',
     loggerRef = null,
     fakeLoggerRef = {
-        currentLevel : 'warn',
+        currentLevel: 'warn',
         level: function debug(levelName) {
             if (levelName) {
                 this.currentLevel = levelName;
@@ -199,10 +199,7 @@ function missingImplementation(name) {
  * @param {String} className a class name
  */
 function invalidTypeImp(property, className) {
-    $workflow.stop({
-        'error': false,
-        'message': "the property '" + property + "' of the model '" + className + "' is invalid"
-    });
+    getLogger().error("the property '" + property + "' of the model '" + className + "' is invalid");
 }
 
 
@@ -224,10 +221,7 @@ function missingPropertyImp(property, className) {
  * @param {Object} schema a schema
  */
 function unknownPropertyImp(property, schema) {
-    $workflow.stop({
-        'error': false,
-        'message': "the model '" + schema + "' has an unknown property '" + property + "'"
-    });
+    getLogger().error("the model '" + schema + "' has an unknown property '" + property + "'");
 }
 
 
@@ -594,15 +588,9 @@ function missingSchema(name) {
  */
 function cyclicDependency(name) {
     if (name) {
-        $workflow.stop({
-            'error': false,
-            'message': 'a cyclic inheritance dependency with \’' + name + '\’ schema has been found, please check the \'_inherit\' properties of your schemas'
-        });
+        getLogger().error('a cyclic inheritance dependency with \’' + name + '\’ schema has been found, please check the \'_inherit\' properties of your schemas');
     } else {
-        $workflow.stop({
-            'error': false,
-            'message': 'a cyclic inheritance dependency has been found, please check the \'_inherit\' properties of your schemas'
-        });
+        getLogger().error('a cyclic inheritance dependency has been found, please check the \'_inherit\' properties of your schemas');
     }
 }
 
