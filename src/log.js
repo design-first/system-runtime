@@ -45,18 +45,25 @@ var ID = '_id',
     currentLevel = 'warn',
     loggerRef = null,
     fakeLoggerRef = {
+        currentLevel : 'warn',
+        level: function debug(levelName) {
+            if (levelName) {
+                this.currentLevel = levelName;
+            }
+            return this.currentLevel;
+        },
         debug: function debug(message) {
-            if (currentLevel === 'debug') {
+            if (this.currentLevel === 'debug') {
                 console.log('runtime: ' + message);
             }
         },
         info: function info(message) {
-            if (currentLevel === 'info' || currentLevel === 'debug') {
+            if (this.currentLevel === 'info' || this.currentLevel === 'debug') {
                 console.info('runtime: ' + message);
             }
         },
         warn: function warning(message) {
-            if (currentLevel === 'info' || currentLevel === 'warn' || currentLevel === 'debug') {
+            if (this.currentLevel === 'info' || this.currentLevel === 'warn' || this.currentLevel === 'debug') {
                 console.warn('runtime: ' + message);
             }
         },
