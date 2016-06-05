@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "1.6.5",
+    "version": "1.6.6",
     "description": "System Runtime, a JavaScript library that runs systems",
     "homepage": "https://system-runtime.github.io",
     "keywords": [
