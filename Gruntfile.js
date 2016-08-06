@@ -19,7 +19,7 @@
  * limitations under the License.
  */
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
@@ -118,231 +118,14 @@ module.exports = function(grunt) {
             }
         },
         concat: {
-            systemInfos: {
-                options: {
-                    process: function(src, filepath) {
-                        var result = '';
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            return gen() + gen() + gen();
-                        }
-
-                        // ID & version
-                        src = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
-                        result = src.replace('{id}', generateId());
-
-                        return result;
-                    }
-                },
-                files: {
-                    'build/runtime.json': ['src/template/banner/system.txt']
-                }
-            },
-            systemBehaviors: {
-                options: {
-                    process: function(src, filepath) {
-                        var result = '',
-                            uuid = '',
-                            behaviors = {};
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            return gen() + gen() + gen();
-                        }
-
-                        if (filepath.indexOf('build') !== -1) {
-                            grunt.option('behaviors', {});
-                            result = src + '\n"behaviors" : {},';
-                        } else {
-                            behaviors = grunt.option('behaviors');
-                            uuid = JSON.parse(src)._id;
-                            if (typeof uuid === 'undefined') {
-                                uuid = generateId();
-                                src = src.replace('{', '{"_id":"' + uuid + '",');
-                            }
-                            behaviors[uuid] = JSON.parse(src);
-                        }
-                        return result;
-                    }
-                },
-                files: {
-                    'build/runtime.json': ['build/runtime.json', 'src/system/behaviors/*/*.json']
-                }
-            },
-            systemSchemas: {
-                options: {
-                    process: function(src, filepath) {
-                        var result = '',
-                            uuid = '',
-                            schemas = {};
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            return gen() + gen() + gen();
-                        }
-
-                        if (filepath.indexOf('build') !== -1) {
-                            grunt.option('schemas', {});
-                            result = src + '\n"schemas" : {},';
-                        } else {
-                            uuid = JSON.parse(src)._id;
-                            if (typeof uuid === 'undefined') {
-                                uuid = generateId();
-                            }
-                            schemas = grunt.option('schemas');
-                            schemas[uuid] = JSON.parse(src);
-                            schemas[uuid]._id = uuid;
-                        }
-                        return result;
-                    }
-                },
-                files: {
-                    'build/runtime.json': ['build/runtime.json', 'src/system/schemas/*.json']
-                }
-            },
-            systemModels: {
-                options: {
-                    process: function(src, filepath) {
-                        var result = '',
-                            uuid = '',
-                            models = {};
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            return gen() + gen() + gen();
-                        }
-
-                        if (filepath.indexOf('build') !== -1) {
-                            grunt.option('models', {});
-                            result = src + '\n"models" : {},';
-                        } else {
-                            uuid = JSON.parse(src)._id;
-                            if (typeof uuid === 'undefined') {
-                                uuid = generateId();
-                            }
-                            models = grunt.option('models');
-                            models[uuid] = JSON.parse(src);
-                            models[uuid]._id = uuid;
-                        }
-                        return result;
-                    }
-                },
-                files: {
-                    'build/runtime.json': ['build/runtime.json', 'src/system/models/*.json']
-                }
-            },
-            systemTypes: {
-                options: {
-                    process: function(src, filepath) {
-                        var result = '',
-                            uuid = '',
-                            types = {};
-
-                        if (filepath.indexOf('build') !== -1) {
-                            grunt.option('types', {});
-                            result = src + '\n"types" : {},';
-                        } else {
-                            uuid = JSON.parse(src).name;
-                            types = grunt.option('types');
-                            types[uuid] = JSON.parse(src);
-                        }
-                        return result;
-                    }
-                },
-                files: {
-                    'build/runtime.json': ['build/runtime.json', 'src/system/types/*.json']
-                }
-            },
-            systemComponents: {
-                options: {
-                    process: function(src, filepath) {
-                        var result = '',
-                            uuid = '',
-                            collectionName = '',
-                            components = {};
-
-                        if (filepath.indexOf('build') !== -1) {
-                            result = src + '\n"components" : {}\n}';
-                            grunt.option('components', {});
-                        } else {
-                            components = grunt.option('components');
-
-                            uuid = JSON.parse(src)._id;
-
-                            collectionName = filepath.split('components/')[1];
-                            collectionName = collectionName.split('/')[0];
-
-                            src = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
-
-                            if (typeof components[collectionName] === 'undefined') {
-                                components[collectionName] = {};
-                            }
-
-                            components[collectionName][uuid] = JSON.parse(src);
-                        }
-                        return result;
-                    }
-                },
-                files: {
-                    'build/runtime.json': ['build/runtime.json', 'src/system/components/*/*.json']
-                }
-            },
-            systemFill: {
-                options: {
-                    process: function(src, filepath) {
-                        var system = {};
-
-                        system = JSON.parse(src);
-                        system.components = grunt.option('components');
-                        system.schemas = grunt.option('schemas');
-                        system.models = grunt.option('models');
-                        system.types = grunt.option('types');
-                        system.behaviors = grunt.option('behaviors');
-
-                        // process addon in order to insert subsytem                 
-                        system.components.RuntimeSystem = {};
-
-                        grunt.file.recurse('src/addons', loadSubSystem);
-
-                        function loadSubSystem(abspath, rootdir, subdir, filename) {
-                            if (filename.indexOf('.') !== 0) {
-                                var subSystem = grunt.file.readJSON(abspath);
-
-                                system.components.RuntimeSystem[subSystem._id] = {
-                                    "_id": subSystem._id,
-                                    "name": subSystem.name,
-                                    "version": subSystem.version,
-                                    "description": subSystem.description,
-                                    "subsystem": true,
-                                    "master": false
-                                };
-                            }
-                        }
-
-                        return JSON.stringify(system);
-                    }
-                },
-                files: {
-                    'build/runtime.json': ['build/runtime.json']
-                }
-            },
             systemModule: {
                 files: {
-                    'build/system/system.js': ['src/template/banner/systemmodule.txt', 'build/runtime.json', 'src/template/footer/systemmodule.txt']
+                    'build/system/system.js': ['src/template/banner/systemmodule.txt', 'build/sytem-runtime.json', 'src/template/footer/systemmodule.txt']
                 }
             },
             licence: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '';
 
                         // ID & version
@@ -358,8 +141,8 @@ module.exports = function(grunt) {
         },
         "merge-json": {
             runtime: {
-                src: ["src/addons/*.json", "build/runtime.json"],
-                dest: "build/runtime.json"
+                src: ["src/addons/*.json", "src/system/system-runtime.json"],
+                dest: "build/sytem-runtime.json"
             }
         }
 
@@ -380,23 +163,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
 
 
-    // system JSON task
-    grunt.registerTask('system-json', [
-        'concat:systemInfos',
-        'concat:systemBehaviors',
-        'concat:systemSchemas',
-        'concat:systemModels',
-        'concat:systemTypes',
-        'concat:systemComponents',
-        'concat:systemFill'
-    ]);
-
-    // system node task
-    grunt.registerTask('system-js', [
-        'concat:systemModule',
-        'jsbeautifier'
-    ]);
-
     // doc task
     grunt.registerTask('doc', [
         'yuidoc'
@@ -409,9 +175,8 @@ module.exports = function(grunt) {
 
     // debug task
     grunt.registerTask('debug', [
-        'system-json',
         'merge-json',
-        'system-js',
+        'concat:systemModule',
         'jsbeautifier',
         'jshint',
         'test',
@@ -420,22 +185,11 @@ module.exports = function(grunt) {
 
     // build task
     grunt.registerTask('build', [
-        'system-json',
         'merge-json',
-        'system-js',
+        'concat:systemModule',
         'jsbeautifier',
         'jshint',
         'test',
-        'browserify:runtimeDebug',
-        'browserify:runtime',
-        'uglify',
-        'concat:licence',
-        'karma:runtime',
-        'yuidoc'
-    ]);
-
-    // build task
-    grunt.registerTask('build-json', [
         'browserify:runtimeDebug',
         'browserify:runtime',
         'uglify',

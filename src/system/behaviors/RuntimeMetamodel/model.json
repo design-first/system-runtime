@@ -1,7 +1,0 @@
-{
-	"component": "RuntimeMetamodel",
-	"state": "model",
-	"action": "function model(model) {\n    return $metamodel.model(model);\n}",
-	"core": true,
-	"useCoreAPI": true
-}

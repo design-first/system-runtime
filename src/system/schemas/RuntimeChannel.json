@@ -1,9 +1,0 @@
-{
-    "_id": "104ad1f48518376",
-    "_name": "RuntimeChannel",
-    "_inherit": [
-        "RuntimeComponent"
-    ],
-    "_core": true,
-    "send": "event"
-}

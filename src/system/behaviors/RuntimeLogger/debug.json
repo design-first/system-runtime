@@ -1,6 +1,0 @@
-{
-	"component": "RuntimeLogger",
-	"state": "debug",
-	"action": "function debug(message) {\n    if (this.level() === 'debug') {\n        console.log('runtime: ' + message);\n    }\n}",
-	"core": true
-}

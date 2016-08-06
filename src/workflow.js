@@ -285,13 +285,13 @@ function checkResult(params) {
             case returnType === 'array':
                 if (!Array.isArray(methodResult)) {
                     result = false;
-                    $log.invalidResultType(component.id(), methodName, returnType, null);
+                    $log.invalidResultType(component.id(), component.constructor.name, methodName, returnType, null);
                 }
                 break;
             default:
                 if (typeof methodResult !== returnType) {
                     result = false;
-                    $log.invalidResultType(component.id(), methodName, returnType, typeof methodResult);
+                    $log.invalidResultType(component.id(), component.constructor.name, methodName, returnType, typeof methodResult);
                 }
                 break;
         }
@@ -408,7 +408,7 @@ function callAction(component, state, action, params, isEvent) {
                     "error": e
                 });
             }
-            $log.actionInvokeError(state, component.id(), e.message);
+            $log.actionInvokeError(state, component.id(), component.constructor.name, e.message);
         }
     }
 
@@ -541,7 +541,7 @@ function checkParams(params) {
 
     if (length < paramsNumber[0] || paramsNumber[1] < length) {
         result = false;
-        $log.invalidParamNumber(component.id(), methodName);
+        $log.invalidParamNumber(component.id(), component.constructor.name, methodName);
     }
 
     for (i = 0; i < length; i++) {
@@ -549,14 +549,14 @@ function checkParams(params) {
         if (typeof param === 'undefined') {
             if (i < paramsNumber[0]) {
                 result = false;
-                $log.invalidParamNumber(component.id(), methodName);
+                $log.invalidParamNumber(component.id(), component.constructor.name, methodName);
             } else {
                 continue;
             }
         } else {
             if (!$metamodel.isValidType(param, paramsType[i])) {
                 result = false;
-                $log.invalidParamType(component.id(), methodName, paramsName[i]);
+                $log.invalidParamType(component.id(), component.constructor.name, methodName, paramsName[i]);
             }
         }
     }

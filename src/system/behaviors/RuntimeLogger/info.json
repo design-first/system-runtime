@@ -1,6 +1,0 @@
-{
-	"component": "RuntimeLogger",
-	"state": "info",
-	"action": "function info(message) {\n    if (this.level() === 'info' || this.level() === 'debug') {\n        console.info('runtime: ' + message);\n    }\n}",
-	"core": true
-}

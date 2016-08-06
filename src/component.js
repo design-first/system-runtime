@@ -76,6 +76,7 @@ function RuntimeArray(conf) {
         arrDb = [],
         type = '',
         id = '',
+        classId = '',
         propertyName = '',
         isReadOnly = false;
 
@@ -84,6 +85,7 @@ function RuntimeArray(conf) {
     id = conf.id || '';
     propertyName = conf.propertyName || '';
     arrDb = conf.arr || [];
+    classId = conf.classId || '';
 
     if (typeof conf.readOnly !== 'undefined') {
         isReadOnly = conf.readOnly;
@@ -119,7 +121,7 @@ function RuntimeArray(conf) {
                         "data": [arrDb.length, val.id(), 'add']
                     });
                 } else {
-                    $log.invalidPropertyName(id, propertyName, val.id(), type);
+                    $log.invalidPropertyName(id, classId, propertyName, val.id(), type);
                 }
             } else {
                 if (val && $metamodel.isValidType(val, type)) {
@@ -131,11 +133,11 @@ function RuntimeArray(conf) {
                         "data": [arrDb.length, val, 'add']
                     });
                 } else {
-                    $log.invalidPropertyName(id, propertyName, val, type);
+                    $log.invalidPropertyName(id, classId, propertyName, val, type);
                 }
             }
         } else {
-            $log.readOnlyProperty(id, propertyName);
+            $log.readOnlyProperty(id, classId, propertyName);
         }
         return arrDb.length;
     };
@@ -168,7 +170,7 @@ function RuntimeArray(conf) {
                 }
             }
         } else {
-            $log.readOnlyProperty(id, propertyName);
+            $log.readOnlyProperty(id, classId, propertyName);
         }
         return result;
     };
@@ -539,7 +541,7 @@ function addProperties(model, Class, classId) {
                     }
                 } else {
                     if (propertyReadOnly) {
-                        $log.readOnlyProperty(this.id(), propertyName);
+                        $log.readOnlyProperty(this.id(), this.constructor.name, propertyName);
                     } else {
                         if (
                             $metamodel.isValidType(value, propertyType[0]) ||
@@ -569,7 +571,7 @@ function addProperties(model, Class, classId) {
                                     "data": [position, realVal, 'add']
                                 });
                             } else {
-                                $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
+                                $log.invalidPropertyName(this.id(), this.constructor.name, propertyName, value, propertyType);
                             }
                         }
                     }
@@ -607,7 +609,7 @@ function addProperties(model, Class, classId) {
                     }
                 } else {
                     if (propertyReadOnly) {
-                        $log.readOnlyProperty(this.id(), propertyName);
+                        $log.readOnlyProperty(this.id(), this.constructor.name, propertyName);
                     } else {
                         if ($metamodel.isValidType(value, propertyType)) {
                             search = $db[classId].find({ "_id": this.id() });
@@ -642,7 +644,7 @@ function addProperties(model, Class, classId) {
                                 });
                             }
                         } else {
-                            $log.invalidPropertyName(this.id(), propertyName, value, propertyType);
+                            $log.invalidPropertyName(this.id(), this.constructor.name, propertyName, value, propertyType);
                         }
                     }
                 }
@@ -717,7 +719,7 @@ function addStructure(path, name, model, id) {
                 }
             } else {
                 if (propertyReadOnly) {
-                    $log.readOnlyProperty(id, fullPath);
+                    $log.readOnlyProperty(id, model, fullPath);
                 } else {
                     if ($metamodel.isValidType(value, propertyType)) {
                         search = $db[model].find({ "_id": id });
@@ -752,7 +754,7 @@ function addStructure(path, name, model, id) {
                             });
                         }
                     } else {
-                        $log.invalidPropertyName(id, fullPath, value, propertyType);
+                        $log.invalidPropertyName(id, model, fullPath, value, propertyType);
                     }
                 }
             }
@@ -913,7 +915,7 @@ function addOn(Class, classId) {
                         }
 
                     } else {
-                        $log.invalidParamNumberMethodOn(this.id(), state);
+                        $log.invalidParamNumberMethodOn(this.id(), this.constructor.name, state);
                     }
                 }
             } else {
@@ -966,7 +968,7 @@ function addOnClass(Class, classId) {
                         }
 
                     } else {
-                        $log.invalidParamNumberMethodOn(this.id(), state);
+                        $log.invalidParamNumberMethodOn(this.id(), this.constructor.name, state);
                     }
                 }
             } else {

@@ -1,6 +1,0 @@
-{
-	"component": "RuntimeClassInfo",
-	"state": "property",
-	"action": "function property(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'property') {\n        result = this.model()[name];\n    }\n    return result;\n}",
-	"core": true
-}

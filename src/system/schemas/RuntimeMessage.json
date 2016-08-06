@@ -1,8 +1,0 @@
-{
-    "_name": "RuntimeMessage",
-    "_inherit": [],
-    "_core": true,
-    "event": "property",
-    "from": "property",
-    "data": "property"
-}

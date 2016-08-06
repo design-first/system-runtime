@@ -224,7 +224,7 @@ function contains(source, target) {
  * @constructor
  * @param {String} name name of the new collection
  */
-var RuntimeDatabaseCollection = function(name) {
+var RuntimeDatabaseCollection = function (name) {
     if ($metamodel.getSchema(name) || internalDB.indexOf(name) !== -1) {
         store[name] = {};
         this.name = name;
@@ -248,7 +248,7 @@ var RuntimeDatabaseCollection = function(name) {
  * $db.Person.find({"name": "laure", "age" : 24}); <br>
  * $db.Person.find([{"name": "rene"}, {"name": "robert"}]);
  */
-RuntimeDatabaseCollection.prototype.find = function(query) {
+RuntimeDatabaseCollection.prototype.find = function (query) {
     var result = [],
         id = '',
         object = {};
@@ -300,7 +300,7 @@ RuntimeDatabaseCollection.prototype.find = function(query) {
  *      "age": 43 <br>
  * }); <br>
  */
-RuntimeDatabaseCollection.prototype.insert = function(document) {
+RuntimeDatabaseCollection.prototype.insert = function (document) {
     var doc = [],
         Component = null,
         result = [];
@@ -343,20 +343,15 @@ RuntimeDatabaseCollection.prototype.insert = function(document) {
 
                 if (this.name === 'RuntimeMessage') {
                     if ($helper.isRuntime()) {
-                        systems = exports.RuntimeSystem.find({
-                            'master': true
-                        });
-                        if (!systems.length || (systems.length && systems[0]._id !== obj.from)) {
-                            channels = exports.RuntimeChannel.find({});
-                            var length = channels.length;
-                            for (var i = 0; i < length; i++) {
-                                channel = $helper.getRuntime().require(channels[i]._id);
-                                $workflow.state({
-                                    "component": channels[i]._id,
-                                    "state": obj.event,
-                                    "data": obj.data
-                                });
-                            }
+                        channels = exports.RuntimeChannel.find({});
+                        var length = channels.length;
+                        for (var i = 0; i < length; i++) {
+                            channel = $helper.getRuntime().require(channels[i]._id);
+                            $workflow.state({
+                                "component": channels[i]._id,
+                                "state": obj.event,
+                                "data": obj.data
+                            });
                         }
                     }
                 }
@@ -386,7 +381,7 @@ RuntimeDatabaseCollection.prototype.insert = function(document) {
  * $db.Cars.update([{"code": "AZD-71"}, {"code": "AZD-65"}], {"price": "10000$"}); <br>
  * $db.Cars.update({"code": "AZD-71"}, {"price": "10000$"}, {"upsert": true}); <br>
  */
-RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
+RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
     var docs = this.find(query),
         updated = 0,
         i = 0,
@@ -445,7 +440,7 @@ RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
                                 $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName].type);
                             }
                         } else {
-                            $log.unknownPropertyOnDbUpdate(attributeName, docs[i]._id);
+                            $log.unknownPropertyOnDbUpdate(this.name, attributeName, docs[i]._id);
                         }
                     } else {
                         // TODO more check in case of schema update
@@ -475,7 +470,7 @@ RuntimeDatabaseCollection.prototype.update = function(query, update, options) {
  * $db.Cars.remove({"code": "AZD-71"}); <br>
  * $db.Cars.remove([{"code": "AZD-71"}, {"code": "AZD-65"}]); <br>
  */
-RuntimeDatabaseCollection.prototype.remove = function(query) {
+RuntimeDatabaseCollection.prototype.remove = function (query) {
     var result = [],
         id = '',
         component = null,
@@ -546,7 +541,7 @@ RuntimeDatabaseCollection.prototype.remove = function(query) {
  * @method count
  * @return {Number} number of documents in the collection
  */
-RuntimeDatabaseCollection.prototype.count = function() {
+RuntimeDatabaseCollection.prototype.count = function () {
     var result = 0,
         objectId = '';
     for (objectId in store[this.name]) {

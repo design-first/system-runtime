@@ -239,15 +239,22 @@ function invalidTypeDefinition(name) {
  * Invalid property name.
  * @method invalidPropertyName
  * @param {String} id id of the component
+ * @param {String} className class name of the component
  * @param {String} propertyName name of the property
  * @param {String} propertyValue value of the property
  * @param {String} type type defined by the schema
  */
-function invalidPropertyName(id, propertyName, propertyValue, type) {
+function invalidPropertyName(id, className, propertyName, propertyValue, type) {
+    var classInfo = '';
+
+    if (className !== 'Function') {
+        classInfo = " (class '" + className + "')";
+    }
+
     if (typeof type === 'string') {
-        getLogger().warn("invalid type for property '" + propertyName + "' on component '" + id + "': expected '" + type.replace('@', '') + "' instead of '" + typeof propertyValue + "' on component '" + id + "'");
+        getLogger().warn("invalid type for property '" + propertyName + "' on component '" + id + "'" + classInfo + ": expected '" + type.replace('@', '') + "' instead of '" + typeof propertyValue + "'");
     } else {
-        getLogger().warn("invalid type for property type '" + propertyName + "' on component '" + id + "': expected 'string' instead of '" + typeof type + "' on component '" + id + "'");
+        getLogger().warn("invalid type for property type '" + propertyName + "' on component '" + classInfo + ": expected 'string' instead of '" + typeof type + "'");
     }
 }
 
@@ -256,10 +263,16 @@ function invalidPropertyName(id, propertyName, propertyValue, type) {
  * Trying to set a read-only property.
  * @method readOnlyProperty
  * @param {String} id id of the component
+ * @param {String} className class name of the component
  * @param {String} propertyName name of the property
  */
-function readOnlyProperty(id, propertyName) {
-    getLogger().warn("can not set read-only property '" + propertyName + "' on component '" + id + "'");
+function readOnlyProperty(id, className, propertyName) {
+    var classInfo = '';
+
+    if (className !== 'Function') {
+        classInfo = " (class '" + className + "')";
+    }
+    getLogger().warn("can not set read-only property '" + propertyName + "' on component '" + id + "'" + classInfo);
 }
 
 
@@ -296,11 +309,12 @@ function invalidPropertyTypeOnDbUpdate(collectionName, id, propertyName, propert
 /*
  * Unkonw property on a Runtime database update operation.
  * @method unknownPropertyOnDbUpdate
+ * @param {String} collectionName the name of the colllection
  * @param {String} propertyName name of the property
  * @param {String} id id of the component
  */
-function unknownPropertyOnDbUpdate(propertyName, id) {
-    getLogger().warn("unknown property '" + propertyName + "' on an update operation on component '" + id + "'");
+function unknownPropertyOnDbUpdate(propertyName, collectionName, id) {
+    getLogger().warn("unknown property '" + propertyName + "' on an update operation on collection '" + collectionName + "' with component '" + id + "'");
 }
 
 
@@ -329,15 +343,22 @@ function invalidCollectionName(name) {
  * Invalid type result of a method.
  * @method invalidResultType
  * @param {String} id id of the component
+ * @param {String} className class name of the component
  * @param {String} methodName name ot the method
  * @param {String} expectedType expected type
  * @param {String} type current type
  */
-function invalidResultType(id, methodName, expectedType, type) {
+function invalidResultType(id, className, methodName, expectedType, type) {
+    var classInfo = '';
+
+    if (className !== 'Function') {
+        classInfo = " (class '" + className + "')";
+    }
+
     if (type) {
-        getLogger().warn("invalid type for the result of method '" + methodName + "' on component '" + id + "': expected type '" + expectedType + "' instead of type '" + type + "'");
+        getLogger().warn("invalid type for the result of method '" + methodName + "' on component '" + id + "'" + classInfo + ": expected type '" + expectedType + "' instead of type '" + type + "'");
     } else {
-        getLogger().warn("invalid type for the result of method '" + methodName + "' on component '" + id + "': expected type '" + expectedType + "'");
+        getLogger().warn("invalid type for the result of method '" + methodName + "' on component '" + id + "'" + classInfo + ": expected type '" + expectedType + "'");
     }
 }
 
@@ -366,10 +387,17 @@ function workflowRestarted() {
  * invalid parameter number for a method.
  * @method invalidParamNumber
  * @param {String} id id of the component
+ * @param {String} className class name of the component
  * @param {String} methodName name of the component
  */
-function invalidParamNumber(id, methodName) {
-    getLogger().warn("invalid number of parameters when calling the method '" + methodName + "' on component '" + id + "'");
+function invalidParamNumber(id, className, methodName) {
+    var classInfo = '';
+
+    if (className !== 'Function') {
+        classInfo = " (class '" + className + "')";
+    }
+
+    getLogger().warn("invalid number of parameters when calling the method '" + methodName + "' on component '" + id + "'" + classInfo);
 }
 
 
@@ -377,12 +405,18 @@ function invalidParamNumber(id, methodName) {
  * Invalid type parameters for a method.
  * @method invalidParamType
  * @param {String} id id of the component
+ * @param {String} className class name of the component
  * @param {String} methodName name of the component
  * @param {String} paramName name of the parameter
  * 
  */
-function invalidParamType(id, methodName, paramName) {
-    getLogger().warn("invalid type for the parameter '" + paramName + "' when calling the method '" + methodName + "' on component '" + id + "'");
+function invalidParamType(id, className, methodName, paramName) {
+    var classInfo = '';
+
+    if (className !== 'Function') {
+        classInfo = " (class '" + className + "')";
+    }
+    getLogger().warn("invalid type for the parameter '" + paramName + "' when calling the method '" + methodName + "' on component '" + id + "'" + classInfo);
 }
 
 
@@ -393,7 +427,7 @@ function invalidParamType(id, methodName, paramName) {
  * @param {String} stateName name of the state
  */
 function behaviorNotUnique(id, stateName) {
-    getLogger().warn("try to add more than one behavior for the state '" + stateName + "' on component class '" + id + "'");
+    getLogger().warn("try to add more than one behavior for the state '" + stateName + "' on class '" + id + "'");
 }
 
 
@@ -404,7 +438,7 @@ function behaviorNotUnique(id, stateName) {
  * @param {String} stateName name of the state
  */
 function invalidStateOn(id, stateName) {
-    getLogger().warn("try to add a behavior with an unkwown state '" + stateName + "' on component class '" + id + "'");
+    getLogger().warn("try to add a behavior with an unkwown state '" + stateName + "' on class '" + id + "'");
 }
 
 
@@ -415,7 +449,7 @@ function invalidStateOn(id, stateName) {
  * @param {String} stateName name of the state
  */
 function invalidStateOff(id, stateName) {
-    getLogger().warn("try to remove a behavior from an unkwown state '" + stateName + "' on component class '" + id + "'");
+    getLogger().warn("try to remove a behavior from an unkwown state '" + stateName + "' on class '" + id + "'");
 }
 
 
@@ -476,10 +510,16 @@ function invalidChannelEvent(message, eventName, type) {
  * invalid parameter number for an action add with on method.
  * @method invalidParamNumberMethodOn
  * @param {String} id id of the component
+ * @param {String} className class name of the component
  * @param {String} methodName name of the component
  */
-function invalidParamNumberMethodOn(id, methodName) {
-    getLogger().warn("invalid number of parameters when adding an action on method '" + methodName + "' on component '" + id + "'");
+function invalidParamNumberMethodOn(id, className, methodName) {
+    var classInfo = '';
+
+    if (className !== 'Function') {
+        classInfo = " (class '" + className + "')";
+    }
+    getLogger().warn("invalid number of parameters when adding an action on method '" + methodName + "' on component '" + id + "'" + classInfo);
 }
 
 
@@ -709,10 +749,15 @@ function modelCreationEnd() {
  * @method actionInvokeError
  * @param {String} state state
  * @param {String} id component id
+ * @param {String} className component class name
  * @param {String} message
  */
-function actionInvokeError(state, id, message) {
-    getLogger().error("error when trying to call the method '" + state + "' on component '" + id + "': " + message);
+function actionInvokeError(state, id, className, message) {
+    if (className !== 'Function') {
+        getLogger().error("error when trying to call the method '" + state + "' on component '" + id + "' (class '" + className + "'): " + message);
+    } else {
+        getLogger().error("error when trying to call the method '" + state + "' on component '" + id + "': " + message);
+    }
 }
 
 
@@ -852,6 +897,7 @@ exports.invalidTypeDefinition = invalidTypeDefinition;
  * Invalid property type.
  * @method invalidPropertyName
  * @param {String} id id of the component
+ * @param {String} className class name of the component
  * @param {String} propertyName name of the property
  * @param {String} propertyValue value of the property
  * @param {String} type type defined by the schema
@@ -863,6 +909,7 @@ exports.invalidPropertyName = invalidPropertyName;
  * Trying to set a read-only property.
  * @method readOnlyProperty
  * @param {String} id id of the component
+ * @param {String} className class name of the component
  * @param {String} propertyName name of the property
  */
 exports.readOnlyProperty = readOnlyProperty;
@@ -910,6 +957,7 @@ exports.invalidCollectionName = invalidCollectionName;
  * Invalid type result of a method.
  * @method invalidResultType
  * @param {String} id id of the component
+ *  * @param {String} className class name of the component
  * @param {String} methodName name ot the method
  * @param {String} expectedType expected type
  * @param {String} type current type
@@ -937,6 +985,7 @@ exports.workflowRestarted = workflowRestarted;
  * Invalid parameter number for a method.
  * @method invalidParamNumber
  * @param {String} id id of the component
+ * @param {String} className class name of the component
  * @param {String} methodName name of the component
  */
 exports.invalidParamNumber = invalidParamNumber;
@@ -946,6 +995,7 @@ exports.invalidParamNumber = invalidParamNumber;
  * Invalid type parameters for a method.
  * @method invalidParamType
  * @param {String} id id of the component
+ * @param {String} className class name of the component
  * @param {String} methodName name of the component
  * @param {String} paramName name of the parameter
  * 
@@ -1026,6 +1076,7 @@ exports.invalidChannelEvent = invalidChannelEvent;
 /**
  * invalid parameter number for an action add with on method.
  * @method invalidParamNumberMethodOn
+ * @param {String} className class name of the component
  * @param {String} id id of the component
  * @param {String} methodName name of the component
  */
@@ -1045,6 +1096,7 @@ exports.updateUuid = updateUuid;
 /**
  * Unkonw property on a Runtime database update operation.
  * @method unknownPropertyOnDbUpdate
+ * @param {String} collectionName the name of the colllection
  * @param {String} propertyName name of the property
  * @param {String} id id of the component
  */
@@ -1218,6 +1270,7 @@ exports.modelCreationEnd = modelCreationEnd;
  * @method actionInvokeError
  * @param {String} state state
  * @param {String} id component id
+ * @param {String} className component class name
  * @param {String} message
  */
 exports.actionInvokeError = actionInvokeError;
