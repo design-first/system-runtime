@@ -46,7 +46,7 @@ module.exports = function (grunt) {
             files: ['build/system/*.js', 'build/system/*.json']
         },
         yuidoc: {
-            runtime: {
+            modules: {
                 name: '<%= pkg.name %>',
                 description: '<%= pkg.description %>',
                 version: '<%= pkg.version %>',
@@ -77,7 +77,7 @@ module.exports = function (grunt) {
                 },
                 customReporters: []
             },
-            runtime: {
+            modules: {
                 specs: [
                     "test/module/**",
                     "test/runtime/**"
@@ -85,12 +85,12 @@ module.exports = function (grunt) {
             }
         },
         karma: {
-            runtime: {
+            release: {
                 configFile: 'karma.conf.js'
             }
         },
         browserify: {
-            runtimeDebug: {
+            debug: {
                 src: ['src/runtime.js'],
                 dest: 'dist/system-runtime.js',
                 options: {
@@ -100,7 +100,7 @@ module.exports = function (grunt) {
                     }
                 }
             },
-            runtime: {
+            release: {
                 src: ['src/runtime.js'],
                 dest: 'dist/system-runtime.min.js',
                 options: {
@@ -111,9 +111,9 @@ module.exports = function (grunt) {
             }
         },
         uglify: {
-            dist: {
+            release: {
                 files: {
-                    'dist/<%= pkg.name %>.min.js': ['<%= browserify.runtime.dest %>']
+                    'dist/<%= pkg.name %>.min.js': ['<%= browserify.release.dest %>']
                 }
             }
         },
@@ -123,7 +123,7 @@ module.exports = function (grunt) {
                     'build/system/system.js': ['src/template/banner/systemmodule.txt', 'build/sytem-runtime.json', 'src/template/footer/systemmodule.txt']
                 }
             },
-            licence: {
+            license: {
                 options: {
                     process: function (src, filepath) {
                         var result = '';
@@ -135,12 +135,12 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'dist/system-runtime.min.js': ['src/template/banner/licence.txt', 'dist/system-runtime.min.js']
+                    'dist/system-runtime.min.js': ['src/template/banner/license.txt', 'dist/system-runtime.min.js']
                 }
             }
         },
         "merge-json": {
-            runtime: {
+            system: {
                 src: ["src/addons/*.json", "src/system/system-runtime.json"],
                 dest: "build/sytem-runtime.json"
             }
@@ -170,7 +170,7 @@ module.exports = function (grunt) {
 
     // test task
     grunt.registerTask('test', [
-        'jasmine_nodejs:runtime'
+        'jasmine_nodejs:modules'
     ]);
 
     // debug task
@@ -180,7 +180,7 @@ module.exports = function (grunt) {
         'jsbeautifier',
         'jshint',
         'test',
-        'browserify:runtimeDebug'
+        'browserify:debug'
     ]);
 
     // build task
@@ -190,11 +190,11 @@ module.exports = function (grunt) {
         'jsbeautifier',
         'jshint',
         'test',
-        'browserify:runtimeDebug',
-        'browserify:runtime',
-        'uglify',
-        'concat:licence',
-        'karma:runtime',
+        'browserify:debug',
+        'browserify:release',
+        'uglify:release',
+        'concat:license',
+        'karma:release',
         'yuidoc'
     ]);
 };
