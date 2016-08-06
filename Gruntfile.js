@@ -127,8 +127,6 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result = '';
-
-                        // ID & version
                         result = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
 
                         return result;
@@ -145,7 +143,6 @@ module.exports = function (grunt) {
                 dest: "build/sytem-runtime.json"
             }
         }
-
     });
 
 
@@ -195,6 +192,6 @@ module.exports = function (grunt) {
         'uglify:release',
         'concat:license',
         'karma:release',
-        'yuidoc'
+        'doc'
     ]);
 };
