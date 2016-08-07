@@ -805,7 +805,7 @@ function createClassInfo() {
             if (!$component.get(name)) {
                 $db.RuntimeClassInfo.insert({
                     "_id": name,
-                    "metamodel": store.compiledSchemas[modelName],
+                    "schema": store.compiledSchemas[modelName],
                     "model": modelDef
                 });
             } else {
@@ -813,7 +813,7 @@ function createClassInfo() {
                     "_id": name
                 }, {
                         "_id": name,
-                        "metamodel": store.compiledSchemas[modelName],
+                        "schema": store.compiledSchemas[modelName],
                         "model": modelDef
                     });
             }

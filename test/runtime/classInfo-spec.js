@@ -10,9 +10,9 @@ describe('a ClassInfo instance', function () {
         expect(model).toBeDefined();
     });
 
-    it('can show its metamodel', function () {
-        var metamodel = runtime.classInfo().metamodel();
-        expect(metamodel).toBeDefined();
+    it('can show its schema', function () {
+        var schema = runtime.classInfo().schema();
+        expect(schema).toBeDefined();
     });
 
     it('can show a definition of a property', function () {

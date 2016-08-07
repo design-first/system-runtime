@@ -21,8 +21,21 @@
 			"_inherit": [
 				"RuntimeComponent"
 			],
-			"sync": {},
-			"loadSystem": {
+			"_core": true,
+			"$editorUpdateSchemaName": {
+				"params": [
+					{
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"name": "id",
+						"type": "string"
+					}
+				]
+			},
+			"$designerSync": {},
+			"$appLoadSystem": {
 				"params": [
 					{
 						"name": "system",
@@ -30,31 +43,39 @@
 					}
 				]
 			},
-			"createSchema": {
+			"$designerCreateBehavior": {
+				"params": [
+					{
+						"name": "behavior",
+						"type": "object"
+					}
+				]
+			},
+			"$editorUpdateBehavior": {
 				"params": [
 					{
 						"name": "id",
 						"type": "string"
 					},
 					{
-						"name": "schema",
+						"name": "behavior",
 						"type": "object"
 					}
 				]
 			},
-			"updateSchema": {
+			"$designerUpdateBehavior": {
 				"params": [
 					{
 						"name": "id",
 						"type": "string"
 					},
 					{
-						"name": "schema",
+						"name": "behavior",
 						"type": "object"
 					}
 				]
 			},
-			"deleteSchema": {
+			"$editorDeleteBehavior": {
 				"params": [
 					{
 						"name": "id",
@@ -62,31 +83,7 @@
 					}
 				]
 			},
-			"createModel": {
-				"params": [
-					{
-						"name": "id",
-						"type": "string"
-					},
-					{
-						"name": "model",
-						"type": "object"
-					}
-				]
-			},
-			"updateModel": {
-				"params": [
-					{
-						"name": "id",
-						"type": "string"
-					},
-					{
-						"name": "model",
-						"type": "object"
-					}
-				]
-			},
-			"deleteModel": {
+			"$designerDeleteBehavior": {
 				"params": [
 					{
 						"name": "id",
@@ -94,39 +91,7 @@
 					}
 				]
 			},
-			"createType": {
-				"params": [
-					{
-						"name": "id",
-						"type": "string"
-					},
-					{
-						"name": "type",
-						"type": "object"
-					}
-				]
-			},
-			"updateType": {
-				"params": [
-					{
-						"name": "id",
-						"type": "string"
-					},
-					{
-						"name": "type",
-						"type": "object"
-					}
-				]
-			},
-			"deleteType": {
-				"params": [
-					{
-						"name": "id",
-						"type": "string"
-					}
-				]
-			},
-			"createComponent": {
+			"$designerCreateComponent": {
 				"params": [
 					{
 						"name": "collection",
@@ -138,7 +103,7 @@
 					}
 				]
 			},
-			"updateComponent": {
+			"$editorUpdateComponent": {
 				"params": [
 					{
 						"name": "id",
@@ -154,7 +119,23 @@
 					}
 				]
 			},
-			"deleteComponent": {
+			"$designerUpdateComponent": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "collection",
+						"type": "string"
+					},
+					{
+						"name": "component",
+						"type": "object"
+					}
+				]
+			},
+			"$editorDeleteComponent": {
 				"params": [
 					{
 						"name": "id",
@@ -166,27 +147,43 @@
 					}
 				]
 			},
-			"createBehavior": {
-				"params": [
-					{
-						"name": "behavior",
-						"type": "object"
-					}
-				]
-			},
-			"updateBehavior": {
+			"$designerDeleteComponent": {
 				"params": [
 					{
 						"name": "id",
 						"type": "string"
 					},
 					{
-						"name": "behavior",
+						"name": "collection",
+						"type": "string"
+					}
+				]
+			},
+			"$designerCreateType": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "type",
 						"type": "object"
 					}
 				]
 			},
-			"deleteBehavior": {
+			"$editorUpdateType": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "type",
+						"type": "object"
+					}
+				]
+			},
+			"$editorDeleteType": {
 				"params": [
 					{
 						"name": "id",
@@ -194,7 +191,150 @@
 					}
 				]
 			},
-			"_core": true,
+			"$designerCreateSchema": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "schema",
+						"type": "object"
+					}
+				]
+			},
+			"$editorUpdateSchema": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "schema",
+						"type": "object"
+					}
+				]
+			},
+			"$editorUpdateSchemaId": {
+				"params": [
+					{
+						"name": "oldId",
+						"type": "string"
+					},
+					{
+						"name": "newId",
+						"type": "string"
+					}
+				]
+			},
+			"$designerDeleteSchema": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					}
+				]
+			},
+			"$designerCreateModel": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "model",
+						"type": "object"
+					}
+				]
+			},
+			"$editorUpdateModel": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "model",
+						"type": "object"
+					}
+				]
+			},
+			"$designerUpdateModel": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "model",
+						"type": "object"
+					}
+				]
+			},
+			"$editorUpdateModelId": {
+				"params": [
+					{
+						"name": "oldId",
+						"type": "string"
+					},
+					{
+						"name": "newId",
+						"type": "string"
+					}
+				]
+			},
+			"$designerDeleteModel": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					}
+				]
+			},
+			"$editorUpdateSystem": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "system",
+						"type": "object"
+					}
+				]
+			},
+			"$appLogDebug": {
+				"params": [
+					{
+						"name": "message",
+						"type": "string"
+					}
+				]
+			},
+			"$appLogInfo": {
+				"params": [
+					{
+						"name": "message",
+						"type": "string"
+					}
+				]
+			},
+			"$appLogWarn": {
+				"params": [
+					{
+						"name": "message",
+						"type": "string"
+					}
+				]
+			},
+			"$appLogError": {
+				"params": [
+					{
+						"name": "message",
+						"type": "string"
+					}
+				]
+			},
 			"send": {
 				"params": [
 					{
@@ -336,12 +476,6 @@
 		"158321dced1014a": {
 			"_name": "RuntimeClassInfo",
 			"_core": true,
-			"metamodel": {
-				"type": "object",
-				"readOnly": true,
-				"mandatory": true,
-				"default": {}
-			},
 			"model": {
 				"type": "object",
 				"readOnly": true,
@@ -408,7 +542,13 @@
 			"events": {
 				"result": "array"
 			},
-			"_id": "158321dced1014a"
+			"_id": "158321dced1014a",
+			"schema": {
+				"type": "object",
+				"readOnly": true,
+				"mandatory": true,
+				"default": {}
+			}
 		},
 		"123751cb591de26": {
 			"_id": "123751cb591de26",
@@ -759,23 +899,37 @@
 			"_id": "104ad1f48518376",
 			"_name": "RuntimeChannel",
 			"_core": true,
-			"sync": "event",
-			"loadSystem": "event",
-			"createSchema": "event",
-			"updateSchema": "event",
-			"deleteSchema": "event",
-			"createModel": "event",
-			"updateModel": "event",
-			"deleteModel": "event",
-			"createType": "event",
-			"updateType": "event",
-			"deleteType": "event",
-			"createComponent": "event",
-			"updateComponent": "event",
-			"deleteComponent": "event",
-			"createBehavior": "event",
-			"updateBehavior": "event",
-			"deleteBehavior": "event",
+			"$editorUpdateSystem": "event",
+			"$editorUpdateSchema": "event",
+			"$editorUpdateSchemaId": "event",
+			"$editorUpdateSchemaName": "event",
+			"$editorUpdateModel": "event",
+			"$editorUpdateModelId": "event",
+			"$editorUpdateType": "event",
+			"$editorDeleteType": "event",
+			"$editorUpdateBehavior": "event",
+			"$editorDeleteBehavior": "event",
+			"$editorUpdateComponent": "event",
+			"$editorDeleteComponent": "event",
+			"$appLogDebug": "event",
+			"$appLogInfo": "event",
+			"$appLogWarn": "event",
+			"$appLogError": "event",
+			"$appLoadSystem": "event",
+			"$designerSync": "event",
+			"$designerCreateBehavior": "event",
+			"$designerCreateComponent": "event",
+			"$designerCreateType": "event",
+			"$designerCreateSchema": "event",
+			"$designerCreateModel": "event",
+			"$designerDeleteSchema": "event",
+			"$designerDeleteModel": "event",
+			"$designerDeleteType": "event",
+			"$designerDeleteBehavior": "event",
+			"$designerDeleteComponent": "event",
+			"$designerUpdateComponent": "event",
+			"$designerUpdateModel": "event",
+			"$designerUpdateBehavior": "event",
 			"_inherit": [
 				"RuntimeComponent"
 			],
@@ -827,7 +981,7 @@
 			],
 			"_core": true,
 			"model": "property",
-			"metamodel": "property",
+			"schema": "property",
 			"method": "method",
 			"methods": "method",
 			"property": "method",
@@ -1162,7 +1316,7 @@
 			"_id": "1c00c107e01c9b3",
 			"component": "RuntimeAdmin",
 			"state": "start",
-			"action": "function start() {\n    var RuntimeChannel = null,\n        runtimeChannel = null;\n\n    if (!this.require('channel-admin')) {\n        RuntimeChannel = this.require('RuntimeChannel');\n        runtimeChannel = new RuntimeChannel({\n            '_id': 'channel-admin',\n            '_core': true\n        });\n        \n        runtimeChannel.on('send', function send(message) {\n            this.require('admin').designerWindow().postMessage(JSON.stringify(message), '*');\n        }, false, true);\n        \n        // schema change events\n        runtimeChannel.on('createSchema', function createSchema(id, schema) {\n            this.require('logger').level('warn');\n            this.require('metamodel').schema(schema);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, false, true);\n        \n        runtimeChannel.on('updateSchema', function updateSchema(id, schema) {\n            this.require('logger').level('warn');\n            this.require('metamodel').schema(schema);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, false, true);\n        \n        runtimeChannel.on('deleteSchema', function deleteSchema(id) {\n            this.require('logger').level('warn');\n            var search = $db.RuntimeSchema.find({ '_id': id }),\n                modelName = '',\n                modelId = '';\n\n            if (search.length) {\n                modelName = search[0]._name;\n                $db.RuntimeSchema.remove({ '_id': id });\n\n                search = $db.RuntimeModel.find({ '_name': modelName });\n                if (search.length) {\n                    modelId = search[0]._id;\n                    $db.RuntimeModel.remove({ '_id': modelId });\n                    $component.removeFromMemory(modelName);\n                }\n\n                search = $db.RuntimeGeneratedModel.find({ '_name': modelName });\n                if (search.length) {\n                    modelId = search[0]._id;\n                    $db.RuntimeGeneratedModel.remove({ '_id': modelId });\n                    $component.removeFromMemory(modelName);\n                }\n                this.require('metamodel').create();\n            }\n            this.require('logger').level('debug');\n        }, true, true);\n        \n        // model change events\n        runtimeChannel.on('createModel', function createModel(id, model) {\n            this.require('logger').level('warn');\n            this.require('metamodel').model(model);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, false, true);\n        \n        runtimeChannel.on('updateModel', function updateModel(id, model) {\n            this.require('logger').level('warn');\n            this.require('metamodel').model(model);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, false, true);\n        \n        runtimeChannel.on('deleteModel', function deleteModel(id) {\n            this.require('logger').level('warn');\n            var search = $db.RuntimeModel.find({ '_id': id }),\n                modelName = '',\n                modelId = '';\n\n            if (search.length) {\n                modelName = search[0]._name;\n                $db.RuntimeModel.remove({ '_id': id });\n                $component.removeFromMemory(modelName);\n            }\n\n            search = $db.RuntimeGeneratedModel.find({ '_name': modelName });\n            if (search.length) {\n                modelId = search[0]._id;\n                $db.RuntimeGeneratedModel.remove({ '_id': modelId });\n                $component.removeFromMemory(modelName);\n            }\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n        \n        // type change events\n        runtimeChannel.on('createType', function createType(id, type) {\n            this.require('logger').level('warn');\n            this.require('metamodel').type(type);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, false, true);\n        \n        runtimeChannel.on('updateType', function updateType(id, type) {\n            this.require('logger').level('warn');\n            this.require('metamodel').type(type);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, false, true);\n        \n        runtimeChannel.on('deleteType', function deleteType(id) {\n            this.require('logger').level('warn');\n            $db.RuntimeType.remove({ 'name': id });\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n        \n        // component change events\n        runtimeChannel.on('createComponent', function createComponent(model, component) {\n            $db[model].insert(component);\n        }, true, true);\n        \n        runtimeChannel.on('updateComponent', function updateComponent(id, collection, component) {\n            $db[collection].update({'_id': id}, component, {'upsert': true});\n        }, true, true);\n        \n        runtimeChannel.on('deleteComponent', function deleteComponent(id, collection) {\n            $db[collection].remove({'_id': id});\n        }, true, true);\n        \n        // behavior change events\n        runtimeChannel.on('createBehavior', function createBehavior(component) {\n            $db.RuntimeBehavior.insert(component);\n        }, true, true);\n        \n        runtimeChannel.on('updateBehavior', function updateBehavior(id, behavior) {\n            if (this.require(id)) {\n              this.require(id).action(behavior.action);\n              if (behavior.state === 'main') {\n                  this.require(behavior.component).main();    \n              }\n            }\n        }, false, true);\n        \n        runtimeChannel.on('deleteBehavior', function deleteBehavior(id) {\n            $db.RuntimeBehavior.remove({'_id': id});                  \n        }, true, true);\n     \n        // System Designer event\n        runtimeChannel.on('sync', function sync() {\n            var designerWindow = this.require('admin').designerWindow(),\n                system = null;\n            \n            this.require('admin').designerWindow(null);\n            system = JSON.parse(this.require('db').system());\n            designerWindow = this.require('admin').designerWindow(designerWindow);\n            \n            this.loadSystem(system);\n        }, false, true);\n        \n        window.addEventListener('message', function (event) {\n            var data = null;\n            try {\n                data = JSON.parse(event.data);\n                if (data && \n                    typeof data.event !== 'undefined' && \n                    typeof data.from !== 'undefined' &&  \n                    typeof data.data !== 'undefined') {\n                    this.designerWindow(event.source);\n                    $db.RuntimeMessage.insert(data);\n                }\n            } catch(e) {\n            }\n        }.bind(this), false);\n        \n        this.require('logger').info('admin is started');\n    } else {\n        this.require('logger').info('admin is already started');\n    }\n}",
+			"action": "function start() {\n    var RuntimeChannel = null,\n        runtimeChannel = null;\n\n    if (!this.require('channel-admin')) {\n        RuntimeChannel = this.require('RuntimeChannel');\n        runtimeChannel = new RuntimeChannel({\n            '_id': 'channel-admin',\n            '_core': true\n        });\n\n        runtimeChannel.on('send', function send(message) {\n            this.require('admin').designerWindow().postMessage(JSON.stringify(message), '*');\n        }, false, true);\n\n        // schema change events\n        channel.on('$designerCreateSchema', function $designerCreateSchema(id, schema) {\n            this.require('logger').level('warn');\n            this.require('metamodel').schema(schema);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$editorUpdateSchema', function $editorUpdateSchema(id, schema) {\n            this.require('logger').level('warn');\n            this.require('metamodel').schema(schema);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$designerDeleteSchema', function $designerDeleteSchema(id) {\n            this.require('logger').level('warn');\n            var search = $db.RuntimeSchema.find({ '_id': id }),\n                modelName = '',\n                modelId = '';\n\n            if (search.length) {\n                modelName = search[0]._name;\n                $db.RuntimeSchema.remove({ '_id': id });\n\n                search = $db.RuntimeModel.find({ '_name': modelName });\n                if (search.length) {\n                    modelId = search[0]._id;\n                    $db.RuntimeModel.remove({ '_id': modelId });\n                    $component.removeFromMemory(modelName);\n                }\n\n                search = $db.RuntimeGeneratedModel.find({ '_name': modelName });\n                if (search.length) {\n                    modelId = search[0]._id;\n                    $db.RuntimeGeneratedModel.remove({ '_id': modelId });\n                    $component.removeFromMemory(modelName);\n                }\n                this.require('metamodel').create();\n            }\n            this.require('logger').level('debug');\n        }, true, true);\n\n        // model change events\n        channel.on('$designerCreateModel', function $designerCreateModel(id, model) {\n            this.require('logger').level('warn');\n            this.require('metamodel').model(model);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$editorUpdateModel', function $editorUpdateModel(id, model) {\n            this.require('logger').level('warn');\n            this.require('metamodel').model(model);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$designerUpdateModel', function $designerUpdateModel(id, model) {\n            this.require('logger').level('warn');\n            this.require('metamodel').model(model);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$designerDeleteModel', function $designerDeleteModel(id) {\n            this.require('logger').level('warn');\n            var search = $db.RuntimeModel.find({ '_id': id }),\n                modelName = '',\n                modelId = '';\n\n            if (search.length) {\n                modelName = search[0]._name;\n                $db.RuntimeModel.remove({ '_id': id });\n                $component.removeFromMemory(modelName);\n            }\n\n            search = $db.RuntimeGeneratedModel.find({ '_name': modelName });\n            if (search.length) {\n                modelId = search[0]._id;\n                $db.RuntimeGeneratedModel.remove({ '_id': modelId });\n                $component.removeFromMemory(modelName);\n            }\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        // type change events\n        channel.on('$designerCreateType', function $designerCreateType(id, type) {\n            this.require('logger').level('warn');\n            this.require('metamodel').type(type);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$editorUpdateType', function $editorUpdateType(id, type) {\n            this.require('logger').level('warn');\n            this.require('metamodel').type(type);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n\n        }, true, true);\n\n        channel.on('$editorDeleteType', function $editorDeleteType(id) {\n            this.require('logger').level('warn');\n            $db.RuntimeType.remove({ 'name': id });\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$designerDeleteType', function $designerDeleteType(id) {\n            this.require('logger').level('warn');\n            $db.RuntimeType.remove({ 'name': id });\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        // component change events\n        channel.on('$designerCreateComponent', function $designerCreateComponent(model, component) {\n            $db[model].insert(component);\n        }, true, true);\n\n        channel.on('$editorUpdateComponent', function $editorUpdateComponent(id, collection, component) {\n            $db[collection].update({ '_id': id }, component, { 'upsert': true });\n        }, true, true);\n\n        channel.on('$designerUpdateComponent', function $editorUpdateComponent(id, collection, component) {\n            $db[collection].update({ '_id': id }, component, { 'upsert': true });\n        }, true, true);\n\n        channel.on('$editorDeleteComponent', function $editorDeleteComponent(id, collection) {\n            $db[collection].remove({ '_id': id });\n        }, true, true);\n\n        channel.on('$designerDeleteComponent', function $designerDeleteComponent(id, collection) {\n            $db[collection].remove({ '_id': id });\n        }, true, true);\n\n        // behavior change events\n        channel.on('$designerCreateBehavior', function createBehavior(component) {\n            $db.RuntimeBehavior.insert(component);\n        }, true, true);\n\n        channel.on('$editorUpdateBehavior', function $editorUpdateBehavior(id, behavior) {\n            if (this.require(id)) {\n                this.require(id).action(behavior.action);\n                if (behavior.state === 'main') {\n                    this.require(behavior.component).main();\n                }\n            }\n        }, true, true);\n\n        channel.on('$designerUpdateBehavior', function $designerUpdateBehavior(id, behavior) {\n            if (this.require(id)) {\n                this.require(id).action(behavior.action);\n                if (behavior.state === 'main') {\n                    this.require(behavior.component).main();\n                }\n            }\n        }, true, true);\n\n        channel.on('$editorDeleteBehavior', function $editorDeleteBehavior(id) {\n            $db.RuntimeBehavior.remove({ '_id': id });\n        }, true, true);\n\n        channel.on('$designerDeleteBehavior', function $editorDeleteBehavior(id) {\n            $db.RuntimeBehavior.remove({ '_id': id });\n        }, true, true);\n\n        // System Designer event\n        runtimeChannel.on('$designerSync', function sync() {\n            var designerWindow = this.require('admin').designerWindow(),\n                system = null;\n\n            this.require('admin').designerWindow(null);\n            system = JSON.parse(this.require('db').system());\n            designerWindow = this.require('admin').designerWindow(designerWindow);\n\n            this.$appLoadSystem(system);\n        }, false, true);\n\n        window.addEventListener('message', function (event) {\n            var data = null;\n            try {\n                data = JSON.parse(event.data);\n                if (data &&\n                    typeof data.event !== 'undefined' &&\n                    typeof data.from !== 'undefined' &&\n                    typeof data.data !== 'undefined') {\n                    this.designerWindow(event.source);\n                    $db.RuntimeMessage.insert(data);\n                }\n            } catch (e) {\n            }\n        }.bind(this), false);\n\n        this.require('logger').info('admin is started');\n    } else {\n        this.require('logger').info('admin is already started');\n    }\n}",
 			"useCoreAPI": true,
 			"core": true
 		},
@@ -1234,70 +1388,70 @@
 			"_id": "155141e40312cd8",
 			"component": "RuntimeClassInfo",
 			"state": "collection",
-			"action": "function collection(name) {\n    var result = {};\n    if (this.metamodel()[name] === 'collection') {\n        result = this.model()[name];\n    } \n    \n    return result; \n}",
+			"action": "function collection(name) {\n    var result = {};\n    if (this.schema()[name] === 'collection') {\n        result = this.model()[name];\n    } \n    \n    return result; \n}",
 			"core": true
 		},
 		"1f6941a0c012c1f": {
 			"_id": "1f6941a0c012c1f",
 			"component": "RuntimeClassInfo",
 			"state": "collections",
-			"action": "function collections() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length; \n    \n    for (i = 0; i < length; i++) { \n        item = keys[i]; \n        if (this.metamodel()[item] === 'collection') {\n            result.push(item);\n        }\n    }\n    \n    return result;\n}",
+			"action": "function collections(name) {\n    var keys = Object.keys(this.schema()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length; \n    \n    for (i = 0; i < length; i++) { \n        item = keys[i]; \n        if (this.schema()[item] === 'collection') {\n            result.push(item);\n        }\n    }\n    \n    return result;\n}",
 			"core": true
 		},
 		"1ef711b4171c849": {
 			"_id": "1ef711b4171c849",
 			"component": "RuntimeClassInfo",
 			"state": "event",
-			"action": "function event(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'event') {\n        result = this.model()[name];\n    } \n    \n    return result;\n}",
+			"action": "function event(name) {\n    var result = {};\n    \n    if (this.schema()[name] === 'event') {\n        result = this.model()[name];\n    } \n    \n    return result;\n}",
 			"core": true
 		},
 		"1bae51b6ed1d25c": {
 			"_id": "1bae51b6ed1d25c",
 			"component": "RuntimeClassInfo",
 			"state": "events",
-			"action": "function events() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'event') {\n            result.push(item);\n        }\n    } \n    return result;\n}",
+			"action": "function events(name) {\n    var keys = Object.keys(this.schema()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.schema()[item] === 'event') {\n            result.push(item);\n        }\n    } \n    return result;\n}",
 			"core": true
 		},
 		"19ac2125221528b": {
 			"_id": "19ac2125221528b",
 			"component": "RuntimeClassInfo",
 			"state": "link",
-			"action": "function link(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'link') {\n        result = this.model()[name];\n    }\n    return result;\n}",
+			"action": "function link(name) {\n    var result = {};\n    \n    if (this.schema()[name] === 'link') {\n        result = this.model()[name];\n    }\n    return result;\n}",
 			"core": true
 		},
 		"17ed21dfc01b8e8": {
 			"_id": "17ed21dfc01b8e8",
 			"component": "RuntimeClassInfo",
 			"state": "links",
-			"action": "function links() { \n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'link') {\n            result.push(item);\n        }\n    } return result;\n}",
+			"action": "function links(name) { \n    var keys = Object.keys(this.schema()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.schema()[item] === 'link') {\n            result.push(item);\n        }\n    } return result;\n}",
 			"core": true
 		},
 		"11ce318a561ac61": {
 			"_id": "11ce318a561ac61",
 			"component": "RuntimeClassInfo",
 			"state": "method",
-			"action": "function method(name) {\n    var result = {};\n    if (this.metamodel()[name] === 'method') {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}",
+			"action": "function method(name) {\n    var result = {};\n    if (this.schema()[name] === 'method') {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}",
 			"core": true
 		},
 		"12ff2190a018046": {
 			"_id": "12ff2190a018046",
 			"component": "RuntimeClassInfo",
 			"state": "methods",
-			"action": "function methods() {\n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'method') {\n            result.push(item);\n        }\n    } \n    \n    return result;\n}",
+			"action": "function methods(name) {\n    var keys = Object.keys(this.schema()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.schema()[item] === 'method') {\n            result.push(item);\n        }\n    } \n    \n    return result;\n}",
 			"core": true
 		},
 		"1028d1681e1fd58": {
 			"_id": "1028d1681e1fd58",
 			"component": "RuntimeClassInfo",
 			"state": "properties",
-			"action": "function properties() { \n    var keys = Object.keys(this.metamodel()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.metamodel()[item] === 'property') {\n            result.push(item);\n        }\n    } return result;\n}",
+			"action": "function properties(name) { \n    var keys = Object.keys(this.schema()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.schema()[item] === 'property') {\n            result.push(item);\n        }\n    } return result;\n}",
 			"core": true
 		},
 		"18eeb10c5319368": {
 			"_id": "18eeb10c5319368",
 			"component": "RuntimeClassInfo",
 			"state": "property",
-			"action": "function property(name) {\n    var result = {};\n    \n    if (this.metamodel()[name] === 'property') {\n        result = this.model()[name];\n    }\n    return result;\n}",
+			"action": "function property(name) {\n    var result = {};\n    \n    if (this.schema()[name] === 'property') {\n        result = this.model()[name];\n    }\n    return result;\n}",
 			"core": true
 		},
 		"1ba721201114b6b": {
@@ -1442,7 +1596,7 @@
 		"Runtime": {
 			"runtime": {
 				"_id": "runtime",
-				"version": "2.0.0"
+				"version": "1.7.0"
 			}
 		},
 		"RuntimeDatabase": {
@@ -1463,7 +1617,7 @@
 		"RuntimeSystem": {}
 	},
 	"name": "system-runtime",
-	"version": "2.0.0",
+	"version": "1.7.0",
 	"description": "Runtime",
 	"_id": "e89c617b6b15d24",
 	"master": true,

@@ -126,10 +126,7 @@ module.exports = function (grunt) {
             license: {
                 options: {
                     process: function (src, filepath) {
-                        var result = '';
-                        result = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
-
-                        return result;
+                        return src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
                     }
                 },
                 files: {
