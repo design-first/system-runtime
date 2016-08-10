@@ -42,6 +42,7 @@ var $component = require('./component.js');
 
 
 var ID = '_id',
+    NAME = '_name',
     currentLevel = 'warn',
     loggerRef = null,
     fakeLoggerRef = {
@@ -127,8 +128,8 @@ function level(levelName) {
 function unknownProperty(propertyName, schema) {
     var message = '';
 
-    if (schema[ID]) {
-        message = "unknown property '" + propertyName + "' for the definition of " + schema[ID];
+    if (schema[NAME]) {
+        message = "unknown property '" + propertyName + "' for the definition of '" + schema[NAME] + "'";
     } else {
         message = "unknown property '" + propertyName + "' for a model";
     }
