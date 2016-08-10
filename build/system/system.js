@@ -300,7 +300,7 @@ var system = {
             "send": {
                 "params": [{
                     "name": "message",
-                    "type": "object"
+                    "type": "message"
                 }]
             }
         },

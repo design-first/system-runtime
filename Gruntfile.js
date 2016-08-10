@@ -135,7 +135,6 @@ module.exports = function (grunt) {
                 dest: "build/sytem-runtime.json"
             }
         }
-
     });
 
 
