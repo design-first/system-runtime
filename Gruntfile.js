@@ -124,11 +124,6 @@ module.exports = function (grunt) {
                 }
             },
             license: {
-                options: {
-                    process: function (src, filepath) {
-                        return src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
-                    }
-                },
                 files: {
                     'dist/system-runtime.min.js': ['src/template/banner/license.txt', 'dist/system-runtime.min.js']
                 }
@@ -140,6 +135,7 @@ module.exports = function (grunt) {
                 dest: "build/sytem-runtime.json"
             }
         }
+
     });
 
 
