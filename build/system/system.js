@@ -783,7 +783,23 @@ var system = {
             },
             "uninstall": {
                 "params": [{
-                    "name": "id",
+                    "name": "url",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "start": {
+                "params": [{
+                    "name": "url",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "stop": {
+                "params": [{
+                    "name": "url",
                     "type": "string",
                     "mandatory": true,
                     "default": ""
@@ -995,7 +1011,9 @@ var system = {
                 "RuntimeComponent"
             ],
             "install": "method",
-            "uninstall": "method"
+            "uninstall": "method",
+            "start": "method",
+            "stop": "method"
         }
     },
     "types": {
@@ -1489,7 +1507,7 @@ var system = {
             "_id": "14c1517b711cb78",
             "component": "RuntimeOSGi",
             "state": "uninstall",
-            "action": "function uninstall(id) { \n\tvar result = '';\n\treturn result;\n}",
+            "action": "function uninstall(url) { \n\tvar result = '';\n\treturn result;\n}",
             "useCoreAPI": false,
             "core": true
         },
@@ -1508,6 +1526,22 @@ var system = {
             "action": "function main() { \n  var subsystems = [],\n      systems = [],\n      system = null,\n      scripts = [],\n      script = null,\n      logLevel = 'warn',\n      i = 0,\n      length = 0;\n  \n  // in a browser\n  if (typeof document !== 'undefined') {\n    \n      subsystems = $db.RuntimeSystem.find({\n      'subsystem': true\n      });\n      subsystems.forEach(function (subsystem) {\n          var subsystemId = subsystem._id;\n          this.require(subsystemId).main();\n      }, this); \n    \n      systems = document.querySelectorAll('link[rel=system]');\n      length = systems.length;\n      \n      // logger\n      scripts = document.querySelectorAll('script[log]');\n      if (scripts.length) {\n          logLevel = scripts[0].getAttribute('log');\n          this.require('logger').level(logLevel);\n      }\n      \n      // systems\n      for (i = 0; i < length; i++) {\n          system = systems[i];\n          \n          if (system.getAttribute('async') === 'false') {\n              this.require('runtime').install(system.href, false);\n          } else {\n              this.require('runtime').install(system.href, true);\n          }\n      }\n      \n      // designer\n      scripts = document.querySelectorAll('script[designer]');\n      if (scripts.length) {\n          this.require('admin').start();\n      }\n      \n      // ready event\n      if (length === 0) {\n         this.require('runtime').ready();\n      }\n  }\t\n}",
             "useCoreAPI": true,
             "core": true
+        },
+        "105f219c6813643": {
+            "_id": "105f219c6813643",
+            "component": "RuntimeOSGi",
+            "state": "start",
+            "action": "function start(url) { \n\tvar result = '';\n\treturn result;\n}",
+            "useCoreAPI": false,
+            "core": false
+        },
+        "1a81a1f00d17269": {
+            "_id": "1a81a1f00d17269",
+            "component": "RuntimeOSGi",
+            "state": "stop",
+            "action": "function stop(url) { \n\tvar result = '';\n\treturn result;\n}",
+            "useCoreAPI": false,
+            "core": false
         }
     },
     "components": {
