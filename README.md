@@ -73,20 +73,14 @@ Just add a link tag in your HTML to execute your app:
 
 #### Node.js import
 
-Just require your JSON in Node.js to execute your app:
+Just call *install* API to install and start your app:
 
 ```js
 // require System Runtime
 var runtime = require('system-runtime');
 
-// require your app
-var app = require('./app.json');
-
-// import your app into System Runtime NoSQL DB
-var appId = runtime.require('db').system(app);
-
-// run your app
-runtime.require(appId).main();
+// install your app
+runtime.install('app.json');
 ```
 
 #### Component APIs
