@@ -36,7 +36,9 @@
 'use strict';
 
 // add require at global level
-global.require = require;
+if (typeof window === 'undefined') {
+    global.require = require;
+}
 
 var $db = require('./db.js');
 var $component = require('./component.js');
