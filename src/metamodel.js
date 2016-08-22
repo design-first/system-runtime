@@ -93,7 +93,10 @@ function generateModels() {
         mergedModel = {},
         parents = [],
         length = 0,
-        i = 0;
+        i = 0,
+        j = 0,
+        nbAncestors = 0,
+        sortInheritTree = [];
 
     // default values
     for (schemaName in store.compiledSchemas) {
@@ -206,31 +209,38 @@ function generateModels() {
     }
 
     // inheritance
-    for (modelName in store.generatedModels) {
+    sortInheritTree = sortInheritanceTree();
+
+    nbAncestors = sortInheritTree.length;
+    for (i = 0; i < nbAncestors; i++) {
+        modelName = sortInheritTree[i];
         model = store.generatedModels[modelName];
-        parents = getParents(modelName);
-        parents.reverse();
 
-        var modelToMerge = JSON.parse(JSON.stringify(model));
+        if (model) {
+            parents = getParents(modelName);
+            parents.reverse();
 
-        length = parents.length;
-        for (i = 0; i < length; i++) {
-            name = parents[i];
-            modelParent = store.generatedModels[name];
-            if (modelParent) {
-                mergedModel = merge(modelParent, model);
+            var modelToMerge = JSON.parse(JSON.stringify(model));
+
+            length = parents.length;
+            for (j = 0; j < length; j++) {
+                name = parents[j];
+                modelParent = store.generatedModels[name];
+                if (modelParent) {
+                    mergedModel = merge(modelParent, model);
+                    delete mergedModel._id;
+                    store.generatedModels[modelName] = mergedModel;
+                }
+            }
+
+            // last inherit 
+            // is the overriden model
+            modelExt = store.models[modelName];
+            if (modelExt) {
+                mergedModel = merge(modelExt, store.generatedModels[modelName]);
                 delete mergedModel._id;
                 store.generatedModels[modelName] = mergedModel;
             }
-        }
-
-        // last inherit 
-        // is the overriden model
-        modelExt = store.models[modelName];
-        if (modelExt) {
-            mergedModel = merge(modelExt, store.generatedModels[modelName]);
-            delete mergedModel._id;
-            store.generatedModels[modelName] = mergedModel;
         }
     }
 
@@ -536,6 +546,38 @@ function extend(name) {
         sonExtend[prop] = son[prop];
     }
     return sonExtend;
+}
+
+
+/*
+ * Get sorted InheritanceTree structure.
+ * @method sortInheritanceTree
+ * @return {Array} sorted InheritanceTree structure
+ * @private
+ */
+function sortInheritanceTree() {
+    var result = [],
+        temp = {},
+        keys = [],
+        modelName = '',
+        nbAncestors = 0;
+
+    for (modelName in store.inheritanceTree) {
+        nbAncestors = store.inheritanceTree[modelName].length;
+        if (typeof temp[nbAncestors] === 'undefined') {
+            temp[nbAncestors] = [];
+        }
+        temp[nbAncestors].push(modelName);
+    }
+
+    keys = Object.keys(temp).sort();
+    keys.forEach(function (index) {
+        temp[index].forEach(function (model) {
+            result.push(model);
+        });
+    });
+
+    return result;
 }
 
 
@@ -894,7 +936,7 @@ function getRealType(value) {
  */
 function getClassName(obj) {
     var result = '';
-    
+
     if (obj && obj.constructor) {
         result = obj.constructor.name;
     }

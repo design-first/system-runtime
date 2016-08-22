@@ -356,18 +356,6 @@ var system = {
         "14c7c105b31a160": {
             "_id": "14c7c105b31a160",
             "_name": "Runtime",
-            "load": {
-                "params": [{
-                    "name": "url",
-                    "type": "string"
-                }, {
-                    "name": "async",
-                    "type": "boolean",
-                    "mandatory": false,
-                    "default": true
-                }]
-            },
-            "ready": {},
             "_core": true,
             "version": {
                 "type": "string",
@@ -382,7 +370,8 @@ var system = {
                     "mandatory": false
                 }],
                 "result": "object"
-            }
+            },
+            "ready": {}
         },
         "166971fd9d107fd": {
             "_name": "RuntimeBehavior",
@@ -775,6 +764,31 @@ var system = {
             "sync": {},
             "main": {},
             "_id": "170521b88614387"
+        },
+        "100b91ed2211b15": {
+            "_id": "100b91ed2211b15",
+            "_name": "RuntimeOSGi",
+            "install": {
+                "params": [{
+                    "name": "url",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }, {
+                    "name": "async",
+                    "type": "boolean",
+                    "mandatory": false,
+                    "default": true
+                }]
+            },
+            "uninstall": {
+                "params": [{
+                    "name": "id",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            }
         }
     },
     "schemas": {
@@ -845,14 +859,13 @@ var system = {
         "12e211d4cd120a6": {
             "_id": "12e211d4cd120a6",
             "_name": "Runtime",
-            "load": "method",
-            "ready": "event",
             "_inherit": [
-                "RuntimeComponent"
+                "RuntimeOSGi"
             ],
             "_core": true,
             "version": "property",
-            "system": "method"
+            "system": "method",
+            "ready": "event"
         },
         "1ac07185641fa9f": {
             "_name": "RuntimeBehavior",
@@ -974,6 +987,15 @@ var system = {
             "main": "method",
             "ready": "event",
             "_id": "1cb761fa4510dca"
+        },
+        "157931f7a31b61d": {
+            "_id": "157931f7a31b61d",
+            "_name": "RuntimeOSGi",
+            "_inherit": [
+                "RuntimeComponent"
+            ],
+            "install": "method",
+            "uninstall": "method"
         }
     },
     "types": {
@@ -1253,22 +1275,6 @@ var system = {
             "useCoreAPI": false,
             "core": true
         },
-        "1aaee1e6311ff39": {
-            "_id": "1aaee1e6311ff39",
-            "component": "runtime",
-            "state": "load",
-            "action": "function load(url, async) {\n    var xhr = null,\n    callbackLoad = null;\n    xhr = new XMLHttpRequest();\n    \n    callbackLoad = function callbackLoad(system) {\n        var sysId = $db.system(system),\n        sys = $component.get(sysId),\n        systems = document.querySelectorAll('link[rel=system]'),\n        nbSubsystem = $db.RuntimeSystem.find({\n            'subsystem': true\n        }); \n        if (sys) {\n            sys.main();\n        } \n        if (systems.length + 1 + nbSubsystem.length === $db.RuntimeSystem.count()) {\n            $component.get('runtime').ready();\n        }\n    };\n    \n    if (async) {\n        xhr.open('GET', url, true);\n        xhr.onreadystatechange = function () {\n            if (xhr.readyState === 4) {\n                if (xhr.status === 200) {\n                    callbackLoad(JSON.parse(xhr.response));\n                }\n            }\n        };\n        xhr.send(null);\n    } else {\n        xhr.open('GET', url, false);\n        xhr.send(null);\n        if (xhr.status === 200) {\n            callbackLoad(JSON.parse(xhr.response));\n        }\n    }\n}",
-            "core": true,
-            "useCoreAPI": true
-        },
-        "1f6001773a18791": {
-            "_id": "1f6001773a18791",
-            "component": "e89c617b6b15d24",
-            "state": "main",
-            "action": "function main() {\n    var subsystems = [],\n        systems = [],\n        system = null,\n        scripts = [],\n        script = null,\n        logLevel = 'warn',\n        i = 0,\n        length = 0;\n    \n    subsystems = $db.RuntimeSystem.find({\n        'subsystem': true\n    });\n    subsystems.forEach(function (subsystem) {\n        var subsystemId = subsystem._id;\n        this.require(subsystemId).main();\n    }, this); \n    \n    if (typeof document !== 'undefined') {\n        systems = document.querySelectorAll('link[rel=system]');\n        length = systems.length;\n        \n        // logger\n        scripts = document.querySelectorAll('script[log]');\n        if (scripts.length) {\n            logLevel = scripts[0].getAttribute('log');\n            this.require('logger').level(logLevel);\n        }\n        \n        // systems\n        for (i = 0; i < length; i++) {\n            system = systems[i];\n            \n            if (system.getAttribute('async') === 'false') {\n                this.require('runtime').load(system.href, false);\n            } else {\n                this.require('runtime').load(system.href, true);\n            }\n        }\n        \n        // designer\n        scripts = document.querySelectorAll('script[designer]');\n        if (scripts.length) {\n            this.require('admin').start();\n        }\n        \n        // ready event\n        if (length === 0) {\n           this.require('runtime').ready();\n        }\n    }\n}",
-            "core": true,
-            "useCoreAPI": true
-        },
         "13010167f313f87": {
             "_id": "13010167f313f87",
             "component": "Runtime",
@@ -1470,6 +1476,38 @@ var system = {
             "action": "function sync() {\n    var system = JSON.parse($db.system());\n    \n    this.schemas(system.schemas);\n    this.types(system.types);\n    this.behaviors(system.behaviors);\n    this.components(system.components);\n}",
             "core": true,
             "useCoreAPI": true
+        },
+        "1ef951f1411b895": {
+            "_id": "1ef951f1411b895",
+            "component": "RuntimeOSGi",
+            "state": "install",
+            "action": "function install(url, async) { \n  var system = {},\n      systemId = '',\n      callbackLoad = null,\n      xhr = null;\n\n  if (typeof global !== 'undefined') {\n    if (url.indexOf('.json') !== -1) {\n      system = global.require(global.process.env.PWD + '/' + url);\n    } else {\n      system = global.require(url);\n    }\n    systemId = this.require('db').system(system);\n    this.require(systemId).main();\n  } else {\n    xhr = new XMLHttpRequest();\n    callbackLoad = function callbackLoad(system) {\n      var sysId = $db.system(system),\n          sys = $component.get(sysId),\n          systems = document.querySelectorAll('link[rel=system]'),\n          nbSubsystem = $db.RuntimeSystem.find({\n              'subsystem': true\n          });\n          \n      if (sys) {\n          sys.main();\n      } \n      if (systems.length + 1 + nbSubsystem.length === $db.RuntimeSystem.count()) {\n          $component.get('runtime').ready();\n      }\n    };\n    \n    if (async) {\n      xhr.open('GET', url, true);\n      xhr.onreadystatechange = function () {\n        if (xhr.readyState === 4) {\n          if (xhr.status === 200) {\n            callbackLoad(JSON.parse(xhr.response));\n          }\n        }\n      };\n      xhr.send(null);\n    } else {\n      xhr.open('GET', url, false);\n      xhr.send(null);\n      if (xhr.status === 200) {\n        callbackLoad(JSON.parse(xhr.response));\n      }\n    }\n  }\n}",
+            "useCoreAPI": true,
+            "core": true
+        },
+        "14c1517b711cb78": {
+            "_id": "14c1517b711cb78",
+            "component": "RuntimeOSGi",
+            "state": "uninstall",
+            "action": "function uninstall(id) { \n\tvar result = '';\n\treturn result;\n}",
+            "useCoreAPI": false,
+            "core": true
+        },
+        "1f2fc1d2201048f": {
+            "_id": "1f2fc1d2201048f",
+            "component": "Runtime",
+            "state": "ready",
+            "action": "function ready() { \n}",
+            "useCoreAPI": false,
+            "core": false
+        },
+        "1cb9d103d41dd97": {
+            "_id": "1cb9d103d41dd97",
+            "component": "e89c617b6b15d24",
+            "state": "main",
+            "action": "function main() { \n  var subsystems = [],\n      systems = [],\n      system = null,\n      scripts = [],\n      script = null,\n      logLevel = 'warn',\n      i = 0,\n      length = 0;\n  \n  // in a browser\n  if (typeof document !== 'undefined') {\n    \n      subsystems = $db.RuntimeSystem.find({\n      'subsystem': true\n      });\n      subsystems.forEach(function (subsystem) {\n          var subsystemId = subsystem._id;\n          this.require(subsystemId).main();\n      }, this); \n    \n      systems = document.querySelectorAll('link[rel=system]');\n      length = systems.length;\n      \n      // logger\n      scripts = document.querySelectorAll('script[log]');\n      if (scripts.length) {\n          logLevel = scripts[0].getAttribute('log');\n          this.require('logger').level(logLevel);\n      }\n      \n      // systems\n      for (i = 0; i < length; i++) {\n          system = systems[i];\n          \n          if (system.getAttribute('async') === 'false') {\n              this.require('runtime').install(system.href, false);\n          } else {\n              this.require('runtime').install(system.href, true);\n          }\n      }\n      \n      // designer\n      scripts = document.querySelectorAll('script[designer]');\n      if (scripts.length) {\n          this.require('admin').start();\n      }\n      \n      // ready event\n      if (length === 0) {\n         this.require('runtime').ready();\n      }\n  }\t\n}",
+            "useCoreAPI": true,
+            "core": true
         }
     },
     "components": {
@@ -1489,7 +1527,7 @@ var system = {
         "Runtime": {
             "runtime": {
                 "_id": "runtime",
-                "version": "1.7.0"
+                "version": "1.7.1"
             }
         },
         "RuntimeDatabase": {
@@ -1510,7 +1548,7 @@ var system = {
         "RuntimeSystem": {}
     },
     "name": "system-runtime",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "description": "Runtime",
     "_id": "e89c617b6b15d24",
     "master": false,

@@ -35,6 +35,9 @@
 
 'use strict';
 
+// add require at global level
+global.require = require;
+
 var $db = require('./db.js');
 var $component = require('./component.js');
 var $metamodel = require('./metamodel.js');
