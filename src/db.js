@@ -624,7 +624,8 @@ function system(importedSystem) {
             if (systems[0]._id === importedSystem._id) {
                 importedSystem.master = true;
             } else {
-                importedSystem.master = false;
+                importedSystem.master = true;
+                systems[0].master = false;
             }
         }
 
