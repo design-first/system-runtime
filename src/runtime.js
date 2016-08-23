@@ -76,13 +76,12 @@ channel.$systemInstalled(sytemId);
 system.status('resolved');
 channel.$systemResolved(sytemId);
 system.status('starting');
-channel.$systemStarting(sytemId);
+channel.$systemStarted(sytemId);
 
 system.main(); // deprecated
 system.start();
 
 system.status('active');
-channel.$systemActive(sytemId);
 
 
 /* exports */

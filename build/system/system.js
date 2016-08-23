@@ -319,31 +319,23 @@ var system = {
                     "default": ""
                 }]
             },
-            "$systemStarting": {
-                "params": [{
-                    "name": "id",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }]
-            },
-            "$systemActive": {
-                "params": [{
-                    "name": "id",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }]
-            },
-            "$systemStopping": {
-                "params": [{
-                    "name": "id",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }]
-            },
             "$systemUninstalled": {
+                "params": [{
+                    "name": "id",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "$systemStarted": {
+                "params": [{
+                    "name": "id",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "$systemStopped": {
                 "params": [{
                     "name": "id",
                     "type": "string",
@@ -930,9 +922,8 @@ var system = {
             "send": "event",
             "$systemInstalled": "event",
             "$systemResolved": "event",
-            "$systemStarting": "event",
-            "$systemActive": "event",
-            "$systemStopping": "event",
+            "$systemStarted": "event",
+            "$systemStopped": "event",
             "$systemUninstalled": "event"
         },
         "12fa8181ce127a0": {
@@ -1605,7 +1596,7 @@ var system = {
             "_id": "1ef951f1411b895",
             "component": "RuntimeOSGi",
             "state": "install",
-            "action": "function install(url, autoStart, async) { \n  var system = {},\n      systemId = '',\n      callbackLoad = null,\n      xhr = null,\n      result = '',\n      channel = $component.get('channel');\n  \n  if (typeof url === 'object') {\n    systemId = runtime.require('db').system(url); \n    if (systemId) {\n      system = runtime.require(systemId);\n      \n      system.status('installed');    \n      channel.$systemInstalled(systemId);\n      system.status('resolved');\n      channel.$systemResolved(systemId);\n      \n      if (autoStart) {\n        system.status('starting');\n        channel.$systemStarting(systemId);\n        system.main(); // deprecated\n        system.start();\n        system.status('active');\n        channel.$systemActive(systemId);\n      }\n      \n      result = systemId;\n    }\n  } else {   \n    if (typeof global !== 'undefined') {\n      if (url.indexOf('.json') !== -1) {\n        system = global.require(global.process.env.PWD + '/' + url);\n      } else {\n        system = global.require(url);\n      }\n      systemId = this.require('db').system(system);\n      if (this.require(systemId).main) {\n        this.require(systemId).main();\n      }\n      if (this.require(systemId).start) {\n        this.require(systemId).start();\n      }\n      result = sysId;\n    } else {\n      xhr = new XMLHttpRequest();\n      callbackLoad = function callbackLoad(system) {\n        var sysId = $db.system(system),\n            sys = $component.get(sysId),\n            channel = $component.get('channel');\n            \n        sys.status('installed');    \n        channel.$systemInstalled(sysId);\n        if (!sys.master()) {\n          sys.status('resolved');\n          channel.$systemResolved(sysId);\n        }\n        if (sys && autoStart) {\n          if (sys.master()) {\n            sys.status('resolved');\n            channel.$systemResolved(sysId);\n          }\n          sys.status('starting');\n          channel.$systemStarting(sysId);\n          if (sys.main) {\n            sys.main(); // deprecated\n          }\n          if (sys.start) {\n            sys.start();\n          }\n          sys.status('active');\n          channel.$systemActive(sysId);\n          result = sysId;\n        } \n      };\n      \n      if (async) {\n        xhr.open('GET', url, true);\n        xhr.onreadystatechange = function () {\n          if (xhr.readyState === 4) {\n            if (xhr.status === 200) {\n              callbackLoad(JSON.parse(xhr.response));\n            }\n          }\n        };\n        xhr.send(null);\n      } else {\n        xhr.open('GET', url, false);\n        xhr.send(null);\n        if (xhr.status === 200) {\n          callbackLoad(JSON.parse(xhr.response));\n        }\n      }\n    }\n  }\n  return result;\n}",
+            "action": "function install(url, autoStart, async) { \n  var importedSystem = null,\n      system = {},\n      systemId = '',\n      callbackLoad = null,\n      xhr = null,\n      result = '',\n      channel = $component.get('channel');\n      \n  if (typeof url === 'object') {\n    importedSystem = url;\n  } else {\n    if (url.indexOf('{') === 0) {\n      importedSystem = JSON.parse(url);\n    }\n  }\n  \n  if (importedSystem) {\n    systemId = runtime.require('db').system(importedSystem); \n    if (systemId) {\n      system = runtime.require(systemId);\n      \n      system.status('installed');    \n      channel.$systemInstalled(systemId);\n      system.status('resolved');\n      channel.$systemResolved(systemId);\n      \n      if (autoStart) {\n        system.status('starting');\n        system.main(); // deprecated\n        system.start();\n        channel.$systemStarted(systemId);\n        system.status('active');\n      }\n      \n      result = systemId;\n    }\n  } else {   \n    if (typeof global !== 'undefined') {\n      if (url.indexOf('.json') !== -1) {\n        system = global.require(global.process.env.PWD + '/' + url);\n      } else {\n        system = global.require(url);\n      }\n      systemId = this.require('db').system(system);\n      if (this.require(systemId).main) {\n        this.require(systemId).main();\n      }\n      if (this.require(systemId).start) {\n        this.require(systemId).start();\n      }\n      result = sysId;\n    } else {\n      xhr = new XMLHttpRequest();\n      callbackLoad = function callbackLoad(system) {\n        var sysId = $db.system(system),\n            sys = $component.get(sysId),\n            channel = $component.get('channel');\n            \n        sys.status('installed');    \n        channel.$systemInstalled(sysId);\n        if (!sys.master()) {\n          sys.status('resolved');\n          channel.$systemResolved(sysId);\n        }\n        if (sys && autoStart) {\n          if (sys.master()) {\n            sys.status('resolved');\n            channel.$systemResolved(sysId);\n          }\n          sys.status('starting');\n          if (sys.main) {\n            sys.main(); // deprecated\n          }\n          if (sys.start) {\n            sys.start();\n          }\n          channel.$systemStarted(sysId);\n          sys.status('active');\n          result = sysId;\n        } \n      };\n      \n      if (async) {\n        xhr.open('GET', url, true);\n        xhr.onreadystatechange = function () {\n          if (xhr.readyState === 4) {\n            if (xhr.status === 200) {\n              callbackLoad(JSON.parse(xhr.response));\n            }\n          }\n        };\n        xhr.send(null);\n      } else {\n        xhr.open('GET', url, false);\n        xhr.send(null);\n        if (xhr.status === 200) {\n          callbackLoad(JSON.parse(xhr.response));\n        }\n      }\n    }\n  }\n  return result;\n}",
             "useCoreAPI": true,
             "core": true
         },
@@ -1629,7 +1620,7 @@ var system = {
             "_id": "105f219c6813643",
             "component": "RuntimeOSGi",
             "state": "start",
-            "action": "function start(id) { \n\tvar system = this.require(id),\n\t    channel = this.require('channel');\n\t\n\tsystem.status('starting');\n\tchannel.$systemStarting(id);\n\tif (system.main) {\n\t  system.main();\n\t}\n\tif (system.start) {\n\t  system.start();\n\t}\n\tsystem.status('active');\n\tchannel.$systemActive(id);\n}",
+            "action": "function start(id) { \n\tvar system = this.require(id),\n\t    channel = this.require('channel');\n\t\n\tsystem.status('starting');\n\tif (system.main) {\n\t  system.main();\n\t}\n\tif (system.start) {\n\t  system.start();\n\t}\n\tchannel.$systemStarted(id);\n\tsystem.status('active');\n}",
             "useCoreAPI": false,
             "core": true
         },
@@ -1637,7 +1628,7 @@ var system = {
             "_id": "1a81a1f00d17269",
             "component": "RuntimeOSGi",
             "state": "stop",
-            "action": "function stop(id) { \n\tvar system = this.require(id),\n\t    channel = this.require('channel');\n\t\n\tsystem.status('stopping');\n\tchannel.$systemStopping(id);\n\tif (system.stop) {\n\t  system.stop();\n\t}\n\tsystem.status('resolved');\n\tchannel.$systemResolved(id);\n}",
+            "action": "function stop(id) { \n\tvar system = this.require(id),\n\t    channel = this.require('channel');\n\t\n\tsystem.status('stopping');\n\tif (system.stop) {\n\t  system.stop();\n\t}\n\tchannel.$systemStopped(id);\n\tsystem.status('resolved');\n\tchannel.$systemResolved(id);\n}",
             "useCoreAPI": false,
             "core": true
         },
@@ -1652,8 +1643,8 @@ var system = {
         "12e491859c13918": {
             "_id": "12e491859c13918",
             "component": "RuntimeChannel",
-            "state": "$systemActive",
-            "action": "function $systemActive(id) { \n  var systems = null;\n    \n  if (id !== 'e89c617b6b15d24') {\n    if (typeof global === 'undefined' && typeof document !== 'undefined') {\n      systems = document.querySelectorAll('link[rel=system]');\n         \n      if ($state.get('runtime') && $state.get('runtime').name === 'ready') {    \n      } else {\n        if (systems.length + 1 === $db.RuntimeSystem.count()) {\n          $component.get('runtime').ready();\n        }\n      }\n    }\n  }\n}",
+            "state": "$systemStarted",
+            "action": "function $systemStarted(id) { \n  var systems = null;\n    \n  if (id !== 'e89c617b6b15d24') {\n    if (typeof global === 'undefined' && typeof document !== 'undefined') {\n      systems = document.querySelectorAll('link[rel=system]');\n         \n      if ($state.get('runtime') && $state.get('runtime').name === 'ready') {    \n      } else {\n        if (systems.length + 1 === $db.RuntimeSystem.count()) {\n          $component.get('runtime').ready();\n        }\n      }\n    }\n  }\n}",
             "useCoreAPI": true,
             "core": true
         },
@@ -1669,7 +1660,7 @@ var system = {
             "_id": "1e9021bd4e1bc6e",
             "component": "RuntimeChannel",
             "state": "$systemInstalled",
-            "action": "function $systemInstalled(id) {\n    var systems = null,\n        dependencies = [],\n        master = [],\n        canStart = true;\n\n    if (id !== 'e89c617b6b15d24') {\n        if (typeof global === 'undefined' && typeof document !== 'undefined') {\n            \n            // if all systems are installed\n            systems = $db.RuntimeSystem.find({});\n\n            systems.forEach(function (system) {\n                var sys = this.require(system._id);\n                if (sys.status() === 'none') {\n                    canStart = false;\n                }\n            }.bind(this));\n\n            // start all the systems\n            if (canStart) {\n                dependencies = $db.RuntimeSystem.find({\n                    'master': false\n                });\n\n                dependencies.forEach(function (dep) {\n                    var system = this.require(dep._id);\n                    channel = this.require('channel');\n                    \n                    if (system.status() === 'resolved') {\n                      system.status('starting');\n                      channel.$systemStarting(dep._id);\n                      system.start();\n                      system.status('active');\n                      channel.$systemActive(dep._id);\n                    }\n                }.bind(this));\n\n                master = $db.RuntimeSystem.find({\n                    'master': true\n                });\n\n                master.forEach(function (dep) {\n                    var system = this.require(dep._id);\n                    channel = this.require('channel');\n                    \n                    if (system.status() === 'installed') {\n                      system.status('resolved');\n                      channel.$systemResolved(dep._id);\n                      system.status('starting');\n                      channel.$systemStarting(dep._id);\n                      system.start();\n                      system.status('active');\n                      channel.$systemActive(dep._id);\n                    }\n                }.bind(this));\n            }\n        }\n    }\n}",
+            "action": "function $systemInstalled(id) {\n    var systems = null,\n        dependencies = [],\n        master = [],\n        canStart = true;\n\n    if (id !== 'e89c617b6b15d24') {\n        if (typeof global === 'undefined' && typeof document !== 'undefined') {\n            \n            // if all systems are installed\n            systems = $db.RuntimeSystem.find({});\n\n            systems.forEach(function (system) {\n                var sys = this.require(system._id);\n                if (sys.status() === 'none') {\n                    canStart = false;\n                }\n            }.bind(this));\n\n            // start all the systems\n            if (canStart) {\n                dependencies = $db.RuntimeSystem.find({\n                    'master': false\n                });\n\n                dependencies.forEach(function (dep) {\n                    var system = this.require(dep._id);\n                    channel = this.require('channel');\n                    \n                    if (system.status() === 'resolved') {\n                      system.status('starting');\n                      system.start();\n                      channel.$systemStarted(dep._id);\n                      system.status('active');\n                    }\n                }.bind(this));\n\n                master = $db.RuntimeSystem.find({\n                    'master': true\n                });\n\n                master.forEach(function (dep) {\n                    var system = this.require(dep._id);\n                    channel = this.require('channel');\n                    \n                    if (system.status() === 'installed') {\n                      system.status('resolved');\n                      channel.$systemResolved(dep._id);\n                      system.status('starting');\n                      system.start();\n                      channel.$systemStarted(dep._id);\n                      system.status('active');\n                    }\n                }.bind(this));\n            }\n        }\n    }\n}",
             "useCoreAPI": true,
             "core": true
         }

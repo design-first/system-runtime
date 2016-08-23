@@ -650,6 +650,8 @@ function system(importedSystem) {
             exportedSystem.name = mastersystem.name;
             exportedSystem.description = mastersystem.description;
             exportedSystem.version = mastersystem.version;
+            exportedSystem.master = true;
+            exportedSystem.subsystem = false;
 
             // dump
             dbDump = dump();
