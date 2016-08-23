@@ -1789,7 +1789,7 @@
 			"state": "status",
 			"action": "function status(value) { \n  if (this.require('logger')) {\n\t  this.require('logger').info('The system \\'' + this.name() + '\\' has now for status \\'' + value + '\\'.');\n  }\n}",
 			"useCoreAPI": false,
-			"core": false
+			"core": true
 		},
 		"1e9021bd4e1bc6e": {
 			"_id": "1e9021bd4e1bc6e",
