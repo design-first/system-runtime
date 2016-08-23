@@ -823,7 +823,7 @@ function addEvents(model, Class, classId) {
             params = paramsName.join(','),
             body = function () {
                 var systems = [],
-                    systemId = -1,
+                    systemId = 'e89c617b6b15d24',
                     data = [],
                     i = 0,
                     length = -1,
@@ -835,27 +835,27 @@ function addEvents(model, Class, classId) {
                     });
                     if (systems.length) {
                         systemId = systems[0]._id;
-
-                        message.from = systemId;
-                        length = arguments.length;
-                        for (i = 0; i < length; i++) {
-                            data.push(arguments[i]);
-                        }
-                        message.data = data;
-                        message.event = methodName;
-
-                        $db.RuntimeMessage.insert(message);
-
-                        $workflow.state({
-                            "component": this.id(),
-                            "state": "send",
-                            "data": [{
-                                "event": message.event,
-                                "from": message.from,
-                                "data": message.data
-                            }]
-                        });
                     }
+
+                    message.from = systemId;
+                    length = arguments.length;
+                    for (i = 0; i < length; i++) {
+                        data.push(arguments[i]);
+                    }
+                    message.data = data;
+                    message.event = methodName;
+
+                    $db.RuntimeMessage.insert(message);
+
+                    $workflow.state({
+                        "component": this.id(),
+                        "state": "send",
+                        "data": [{
+                            "event": message.event,
+                            "from": message.from,
+                            "data": message.data
+                        }]
+                    });
                 } else {
                     $workflow.state({
                         "component": this.id(),

@@ -660,7 +660,7 @@ function system(importedSystem) {
 
             for (behaviorId in exportedSystem.behaviors) {
                 behavior = exportedSystem.behaviors[behaviorId];
-                if (behavior.state === 'main') {
+                if (behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') {
                     behavior.component = id;
                 }
             }

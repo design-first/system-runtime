@@ -36,7 +36,7 @@
 'use strict';
 
 // add require at global level
-if (typeof window === 'undefined') {
+if (typeof window === 'undefined' && typeof global !== 'undefined') {
     global.require = require;
 }
 
@@ -50,7 +50,8 @@ var $helper = require('./helper.js');
 /* Private Property */
 
 var sytemId = '',
-    system = '';
+    system = '',
+    channel = null;
 
 
 /* Polyfill */
@@ -66,8 +67,22 @@ $metamodel.init();
 
 
 sytemId = $db.system($system.system);
+
 system = $component.get(sytemId);
-system.main();
+channel = $component.get('channel');
+
+system.status('installed');
+channel.$systemInstalled(sytemId);
+system.status('resolved');
+channel.$systemResolved(sytemId);
+system.status('starting');
+channel.$systemStarting(sytemId);
+
+system.main(); // deprecated
+system.start();
+
+system.status('active');
+channel.$systemActive(sytemId);
 
 
 /* exports */

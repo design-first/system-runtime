@@ -302,6 +302,54 @@ var system = {
                     "name": "message",
                     "type": "message"
                 }]
+            },
+            "$systemInstalled": {
+                "params": [{
+                    "name": "id",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "$systemResolved": {
+                "params": [{
+                    "name": "id",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "$systemStarting": {
+                "params": [{
+                    "name": "id",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "$systemActive": {
+                "params": [{
+                    "name": "id",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "$systemStopping": {
+                "params": [{
+                    "name": "id",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "$systemUninstalled": {
+                "params": [{
+                    "name": "id",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
             }
         },
         "1f4141671514c2c": {
@@ -771,19 +819,25 @@ var system = {
             "install": {
                 "params": [{
                     "name": "url",
-                    "type": "string",
+                    "type": "any",
                     "mandatory": true,
                     "default": ""
+                }, {
+                    "name": "autoStart",
+                    "type": "boolean",
+                    "mandatory": false,
+                    "default": true
                 }, {
                     "name": "async",
                     "type": "boolean",
                     "mandatory": false,
                     "default": true
-                }]
+                }],
+                "result": "string"
             },
             "uninstall": {
                 "params": [{
-                    "name": "url",
+                    "name": "id",
                     "type": "string",
                     "mandatory": true,
                     "default": ""
@@ -791,7 +845,7 @@ var system = {
             },
             "start": {
                 "params": [{
-                    "name": "url",
+                    "name": "id",
                     "type": "string",
                     "mandatory": true,
                     "default": ""
@@ -799,12 +853,29 @@ var system = {
             },
             "stop": {
                 "params": [{
-                    "name": "url",
+                    "name": "id",
                     "type": "string",
                     "mandatory": true,
                     "default": ""
                 }]
-            }
+            },
+            "status": {
+                "result": "object"
+            },
+            "_core": true
+        },
+        "1b2811b092143f5": {
+            "_id": "1b2811b092143f5",
+            "_name": "RuntimeSystemOSGi",
+            "start": {},
+            "stop": {},
+            "status": {
+                "type": "osgiStates",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "none"
+            },
+            "_core": true
         }
     },
     "schemas": {
@@ -856,7 +927,13 @@ var system = {
             "_inherit": [
                 "RuntimeComponent"
             ],
-            "send": "event"
+            "send": "event",
+            "$systemInstalled": "event",
+            "$systemResolved": "event",
+            "$systemStarting": "event",
+            "$systemActive": "event",
+            "$systemStopping": "event",
+            "$systemUninstalled": "event"
         },
         "12fa8181ce127a0": {
             "_id": "12fa8181ce127a0",
@@ -955,7 +1032,9 @@ var system = {
         },
         "14caa1c46414ee1": {
             "_name": "RuntimeMessage",
-            "_inherit": [],
+            "_inherit": [
+                "RuntimeComponent"
+            ],
             "_core": true,
             "event": "property",
             "from": "property",
@@ -984,9 +1063,10 @@ var system = {
             "_id": "158711d6f215e4b"
         },
         "1cb761fa4510dca": {
+            "_id": "1cb761fa4510dca",
             "_name": "RuntimeSystem",
             "_inherit": [
-                "RuntimeComponent"
+                "RuntimeSystemOSGi"
             ],
             "_core": true,
             "name": "property",
@@ -1001,8 +1081,7 @@ var system = {
             "components": "property",
             "sync": "method",
             "main": "method",
-            "ready": "event",
-            "_id": "1cb761fa4510dca"
+            "ready": "event"
         },
         "157931f7a31b61d": {
             "_id": "157931f7a31b61d",
@@ -1010,8 +1089,21 @@ var system = {
             "_inherit": [
                 "RuntimeComponent"
             ],
+            "_core": true,
             "install": "method",
             "uninstall": "method",
+            "start": "method",
+            "stop": "method",
+            "status": "method"
+        },
+        "145fe10c7514298": {
+            "_id": "145fe10c7514298",
+            "_name": "RuntimeSystemOSGi",
+            "_inherit": [
+                "RuntimeComponent"
+            ],
+            "_core": true,
+            "status": "property",
             "start": "method",
             "stop": "method"
         }
@@ -1242,6 +1334,20 @@ var system = {
                 }
             },
             "core": true
+        },
+        "osgiStates": {
+            "name": "osgiStates",
+            "type": "string",
+            "value": [
+                "none",
+                "installed",
+                "resolved",
+                "starting",
+                "active",
+                "stopping",
+                "uninstalled"
+            ],
+            "core": true
         }
     },
     "behaviors": {
@@ -1249,7 +1355,7 @@ var system = {
             "_id": "1c00c107e01c9b3",
             "component": "RuntimeAdmin",
             "state": "start",
-            "action": "function start() {\n    var RuntimeChannel = null,\n        channel = null;\n\n    if (!this.require('channel-admin')) {\n        RuntimeChannel = this.require('RuntimeChannel');\n        channel = new RuntimeChannel({\n            '_id': 'channel-admin',\n            '_core': true\n        });\n\n        channel.on('send', function send(message) {\n            this.require('admin').designerWindow().postMessage(JSON.stringify(message), '*');\n        }, false, true);\n\n        // schema change events\n        channel.on('$designerCreateSchema', function $designerCreateSchema(id, schema) {\n            this.require('logger').level('warn');\n            this.require('metamodel').schema(schema);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$editorUpdateSchema', function $editorUpdateSchema(id, schema) {\n            this.require('logger').level('warn');\n            this.require('metamodel').schema(schema);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$designerDeleteSchema', function $designerDeleteSchema(id) {\n            this.require('logger').level('warn');\n            var search = $db.RuntimeSchema.find({ '_id': id }),\n                modelName = '',\n                modelId = '';\n\n            if (search.length) {\n                modelName = search[0]._name;\n                $db.RuntimeSchema.remove({ '_id': id });\n\n                search = $db.RuntimeModel.find({ '_name': modelName });\n                if (search.length) {\n                    modelId = search[0]._id;\n                    $db.RuntimeModel.remove({ '_id': modelId });\n                    $component.removeFromMemory(modelName);\n                }\n\n                search = $db.RuntimeGeneratedModel.find({ '_name': modelName });\n                if (search.length) {\n                    modelId = search[0]._id;\n                    $db.RuntimeGeneratedModel.remove({ '_id': modelId });\n                    $component.removeFromMemory(modelName);\n                }\n                this.require('metamodel').create();\n            }\n            this.require('logger').level('debug');\n        }, true, true);\n\n        // model change events\n        channel.on('$designerCreateModel', function $designerCreateModel(id, model) {\n            this.require('logger').level('warn');\n            this.require('metamodel').model(model);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$editorUpdateModel', function $editorUpdateModel(id, model) {\n            this.require('logger').level('warn');\n            this.require('metamodel').model(model);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$designerUpdateModel', function $designerUpdateModel(id, model) {\n            this.require('logger').level('warn');\n            this.require('metamodel').model(model);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$designerDeleteModel', function $designerDeleteModel(id) {\n            this.require('logger').level('warn');\n            var search = $db.RuntimeModel.find({ '_id': id }),\n                modelName = '',\n                modelId = '';\n\n            if (search.length) {\n                modelName = search[0]._name;\n                $db.RuntimeModel.remove({ '_id': id });\n                $component.removeFromMemory(modelName);\n            }\n\n            search = $db.RuntimeGeneratedModel.find({ '_name': modelName });\n            if (search.length) {\n                modelId = search[0]._id;\n                $db.RuntimeGeneratedModel.remove({ '_id': modelId });\n                $component.removeFromMemory(modelName);\n            }\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        // type change events\n        channel.on('$designerCreateType', function $designerCreateType(id, type) {\n            this.require('logger').level('warn');\n            this.require('metamodel').type(type);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$editorUpdateType', function $editorUpdateType(id, type) {\n            this.require('logger').level('warn');\n            this.require('metamodel').type(type);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n\n        }, true, true);\n\n        channel.on('$editorDeleteType', function $editorDeleteType(id) {\n            this.require('logger').level('warn');\n            $db.RuntimeType.remove({ 'name': id });\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$designerDeleteType', function $designerDeleteType(id) {\n            this.require('logger').level('warn');\n            $db.RuntimeType.remove({ 'name': id });\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        // component change events\n        channel.on('$designerCreateComponent', function $designerCreateComponent(model, component) {\n            $db[model].insert(component);\n        }, true, true);\n\n        channel.on('$editorUpdateComponent', function $editorUpdateComponent(id, collection, component) {\n            $db[collection].update({ '_id': id }, component, { 'upsert': true });\n        }, true, true);\n\n        channel.on('$designerUpdateComponent', function $editorUpdateComponent(id, collection, component) {\n            $db[collection].update({ '_id': id }, component, { 'upsert': true });\n        }, true, true);\n\n        channel.on('$editorDeleteComponent', function $editorDeleteComponent(id, collection) {\n            $db[collection].remove({ '_id': id });\n        }, true, true);\n\n        channel.on('$designerDeleteComponent', function $designerDeleteComponent(id, collection) {\n            $db[collection].remove({ '_id': id });\n        }, true, true);\n\n        // behavior change events\n        channel.on('$designerCreateBehavior', function createBehavior(component) {\n            $db.RuntimeBehavior.insert(component);\n        }, true, true);\n\n        channel.on('$editorUpdateBehavior', function $editorUpdateBehavior(id, behavior) {\n            if (this.require(id)) {\n                this.require(id).action(behavior.action);\n                if (behavior.state === 'main') {\n                    this.require(behavior.component).main();\n                }\n            }\n        }, true, true);\n\n        channel.on('$designerUpdateBehavior', function $designerUpdateBehavior(id, behavior) {\n            if (this.require(id)) {\n                this.require(id).action(behavior.action);\n                if (behavior.state === 'main') {\n                    this.require(behavior.component).main();\n                }\n            }\n        }, true, true);\n\n        channel.on('$editorDeleteBehavior', function $editorDeleteBehavior(id) {\n            $db.RuntimeBehavior.remove({ '_id': id });\n        }, true, true);\n\n        channel.on('$designerDeleteBehavior', function $editorDeleteBehavior(id) {\n            $db.RuntimeBehavior.remove({ '_id': id });\n        }, true, true);\n\n        // System Designer event\n        channel.on('$designerSync', function sync() {\n            var designerWindow = this.require('admin').designerWindow(),\n                system = null;\n\n            this.require('admin').designerWindow(null);\n            system = JSON.parse(this.require('db').system());\n            designerWindow = this.require('admin').designerWindow(designerWindow);\n\n            this.$appLoadSystem(system);\n        }, false, true);\n\n        window.addEventListener('message', function (event) {\n            var data = null;\n            try {\n                data = JSON.parse(event.data);\n                if (data &&\n                    typeof data.event !== 'undefined' &&\n                    typeof data.from !== 'undefined' &&\n                    typeof data.data !== 'undefined') {\n                    this.designerWindow(event.source);\n                    $db.RuntimeMessage.insert(data);\n                }\n            } catch (e) {\n            }\n        }.bind(this), false);\n\n        this.require('logger').info('admin is started');\n    } else {\n        this.require('logger').info('admin is already started');\n    }\n}",
+            "action": "function start() {\n    var RuntimeChannel = null,\n        channel = null;\n\n    if (!this.require('channel-admin')) {\n        RuntimeChannel = this.require('RuntimeChannel');\n        channel = new RuntimeChannel({\n            '_id': 'channel-admin',\n            '_core': true\n        });\n\n        channel.on('send', function send(message) {\n            this.require('admin').designerWindow().postMessage(JSON.stringify(message), '*');\n        }, false, true);\n\n        // schema change events\n        channel.on('$designerCreateSchema', function $designerCreateSchema(id, schema) {\n            this.require('logger').level('warn');\n            this.require('metamodel').schema(schema);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$editorUpdateSchema', function $editorUpdateSchema(id, schema) {\n            this.require('logger').level('warn');\n            this.require('metamodel').schema(schema);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$designerDeleteSchema', function $designerDeleteSchema(id) {\n            this.require('logger').level('warn');\n            var search = $db.RuntimeSchema.find({ '_id': id }),\n                modelName = '',\n                modelId = '';\n\n            if (search.length) {\n                modelName = search[0]._name;\n                $db.RuntimeSchema.remove({ '_id': id });\n\n                search = $db.RuntimeModel.find({ '_name': modelName });\n                if (search.length) {\n                    modelId = search[0]._id;\n                    $db.RuntimeModel.remove({ '_id': modelId });\n                    $component.removeFromMemory(modelName);\n                }\n\n                search = $db.RuntimeGeneratedModel.find({ '_name': modelName });\n                if (search.length) {\n                    modelId = search[0]._id;\n                    $db.RuntimeGeneratedModel.remove({ '_id': modelId });\n                    $component.removeFromMemory(modelName);\n                }\n                this.require('metamodel').create();\n            }\n            this.require('logger').level('debug');\n        }, true, true);\n\n        // model change events\n        channel.on('$designerCreateModel', function $designerCreateModel(id, model) {\n            this.require('logger').level('warn');\n            this.require('metamodel').model(model);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$editorUpdateModel', function $editorUpdateModel(id, model) {\n            this.require('logger').level('warn');\n            this.require('metamodel').model(model);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$designerUpdateModel', function $designerUpdateModel(id, model) {\n            this.require('logger').level('warn');\n            this.require('metamodel').model(model);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$designerDeleteModel', function $designerDeleteModel(id) {\n            this.require('logger').level('warn');\n            var search = $db.RuntimeModel.find({ '_id': id }),\n                modelName = '',\n                modelId = '';\n\n            if (search.length) {\n                modelName = search[0]._name;\n                $db.RuntimeModel.remove({ '_id': id });\n                $component.removeFromMemory(modelName);\n            }\n\n            search = $db.RuntimeGeneratedModel.find({ '_name': modelName });\n            if (search.length) {\n                modelId = search[0]._id;\n                $db.RuntimeGeneratedModel.remove({ '_id': modelId });\n                $component.removeFromMemory(modelName);\n            }\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        // type change events\n        channel.on('$designerCreateType', function $designerCreateType(id, type) {\n            this.require('logger').level('warn');\n            this.require('metamodel').type(type);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$editorUpdateType', function $editorUpdateType(id, type) {\n            this.require('logger').level('warn');\n            this.require('metamodel').type(type);\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n\n        }, true, true);\n\n        channel.on('$editorDeleteType', function $editorDeleteType(id) {\n            this.require('logger').level('warn');\n            $db.RuntimeType.remove({ 'name': id });\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        channel.on('$designerDeleteType', function $designerDeleteType(id) {\n            this.require('logger').level('warn');\n            $db.RuntimeType.remove({ 'name': id });\n            this.require('metamodel').create();\n            this.require('logger').level('debug');\n        }, true, true);\n\n        // component change events\n        channel.on('$designerCreateComponent', function $designerCreateComponent(model, component) {\n            $db[model].insert(component);\n        }, true, true);\n\n        channel.on('$editorUpdateComponent', function $editorUpdateComponent(id, collection, component) {\n            $db[collection].update({ '_id': id }, component, { 'upsert': true });\n        }, true, true);\n\n        channel.on('$designerUpdateComponent', function $editorUpdateComponent(id, collection, component) {\n            $db[collection].update({ '_id': id }, component, { 'upsert': true });\n        }, true, true);\n\n        channel.on('$editorDeleteComponent', function $editorDeleteComponent(id, collection) {\n            $db[collection].remove({ '_id': id });\n        }, true, true);\n\n        channel.on('$designerDeleteComponent', function $designerDeleteComponent(id, collection) {\n            $db[collection].remove({ '_id': id });\n        }, true, true);\n\n        // behavior change events\n        channel.on('$designerCreateBehavior', function createBehavior(component) {\n            $db.RuntimeBehavior.insert(component);\n        }, true, true);\n\n        channel.on('$editorUpdateBehavior', function $editorUpdateBehavior(id, behavior) {\n            if (this.require(id)) {\n                this.require(id).action(behavior.action);\n                if (behavior.state === 'main') {\n                    this.require(behavior.component).main();\n                }\n                if (behavior.state === 'start') {\n                    this.require(behavior.component).start();\n                }\n            }\n        }, true, true);\n\n        channel.on('$designerUpdateBehavior', function $designerUpdateBehavior(id, behavior) {\n            if (this.require(id)) {\n                this.require(id).action(behavior.action);\n                if (behavior.state === 'main') {\n                    this.require(behavior.component).main();\n                }\n                if (behavior.state === 'start') {\n                    this.require(behavior.component).start();\n                }\n            }\n        }, true, true);\n\n        channel.on('$editorDeleteBehavior', function $editorDeleteBehavior(id) {\n            $db.RuntimeBehavior.remove({ '_id': id });\n        }, true, true);\n\n        channel.on('$designerDeleteBehavior', function $editorDeleteBehavior(id) {\n            $db.RuntimeBehavior.remove({ '_id': id });\n        }, true, true);\n\n        // System Designer event\n        channel.on('$designerSync', function sync() {\n            var designerWindow = this.require('admin').designerWindow(),\n                system = null;\n\n            this.require('admin').designerWindow(null);\n            system = JSON.parse(this.require('db').system());\n            designerWindow = this.require('admin').designerWindow(designerWindow);\n\n            this.$appLoadSystem(system);\n        }, false, true);\n\n        window.addEventListener('message', function (event) {\n            var data = null;\n            try {\n                data = JSON.parse(event.data);\n                if (data &&\n                    typeof data.event !== 'undefined' &&\n                    typeof data.from !== 'undefined' &&\n                    typeof data.data !== 'undefined') {\n                    this.designerWindow(event.source);\n                    $db.RuntimeMessage.insert(data);\n                }\n            } catch (e) {\n            }\n        }.bind(this), false);\n\n        this.require('logger').info('admin is started');\n    } else {\n        this.require('logger').info('admin is already started');\n    }\n}",
             "useCoreAPI": true,
             "core": true
         },
@@ -1499,7 +1605,7 @@ var system = {
             "_id": "1ef951f1411b895",
             "component": "RuntimeOSGi",
             "state": "install",
-            "action": "function install(url, async) { \n  var system = {},\n      systemId = '',\n      callbackLoad = null,\n      xhr = null;\n\n  if (typeof global !== 'undefined') {\n    if (url.indexOf('.json') !== -1) {\n      system = global.require(global.process.env.PWD + '/' + url);\n    } else {\n      system = global.require(url);\n    }\n    systemId = this.require('db').system(system);\n    this.require(systemId).main();\n  } else {\n    xhr = new XMLHttpRequest();\n    callbackLoad = function callbackLoad(system) {\n      var sysId = $db.system(system),\n          sys = $component.get(sysId),\n          systems = document.querySelectorAll('link[rel=system]'),\n          nbSubsystem = $db.RuntimeSystem.find({\n              'subsystem': true\n          });\n          \n      if (sys) {\n          sys.main();\n      } \n      if (systems.length + 1 + nbSubsystem.length === $db.RuntimeSystem.count()) {\n          $component.get('runtime').ready();\n      }\n    };\n    \n    if (async) {\n      xhr.open('GET', url, true);\n      xhr.onreadystatechange = function () {\n        if (xhr.readyState === 4) {\n          if (xhr.status === 200) {\n            callbackLoad(JSON.parse(xhr.response));\n          }\n        }\n      };\n      xhr.send(null);\n    } else {\n      xhr.open('GET', url, false);\n      xhr.send(null);\n      if (xhr.status === 200) {\n        callbackLoad(JSON.parse(xhr.response));\n      }\n    }\n  }\n}",
+            "action": "function install(url, autoStart, async) { \n  var system = {},\n      systemId = '',\n      callbackLoad = null,\n      xhr = null,\n      result = '',\n      channel = $component.get('channel');\n  \n  if (typeof url === 'object') {\n    systemId = runtime.require('db').system(url); \n    if (systemId) {\n      system = runtime.require(systemId);\n      \n      system.status('installed');    \n      channel.$systemInstalled(systemId);\n      system.status('resolved');\n      channel.$systemResolved(systemId);\n      \n      if (autoStart) {\n        system.status('starting');\n        channel.$systemStarting(systemId);\n        system.start();\n        system.status('active');\n        channel.$systemActive(systemId);\n      }\n      \n      result = systemId;\n    }\n  } else {   \n    if (typeof global !== 'undefined') {\n      if (url.indexOf('.json') !== -1) {\n        system = global.require(global.process.env.PWD + '/' + url);\n      } else {\n        system = global.require(url);\n      }\n      systemId = this.require('db').system(system);\n      if (this.require(systemId).main) {\n        this.require(systemId).main();\n      }\n      if (this.require(systemId).start) {\n        this.require(systemId).start();\n      }\n      result = sysId;\n    } else {\n      xhr = new XMLHttpRequest();\n      callbackLoad = function callbackLoad(system) {\n        var sysId = $db.system(system),\n            sys = $component.get(sysId),\n            channel = $component.get('channel');\n            \n        sys.status('installed');    \n        channel.$systemInstalled(sysId);\n        sys.status('resolved');\n        channel.$systemResolved(sysId);\n        if (sys && autoStart) {\n          sys.status('starting');\n          channel.$systemStarting(sysId);\n          if (sys.main) {\n            sys.main(); // deprecated\n          }\n          if (sys.start) {\n            sys.start();\n          }\n          sys.status('active');\n          channel.$systemActive(sysId);\n          result = sysId;\n        } \n      };\n      \n      if (async) {\n        xhr.open('GET', url, true);\n        xhr.onreadystatechange = function () {\n          if (xhr.readyState === 4) {\n            if (xhr.status === 200) {\n              callbackLoad(JSON.parse(xhr.response));\n            }\n          }\n        };\n        xhr.send(null);\n      } else {\n        xhr.open('GET', url, false);\n        xhr.send(null);\n        if (xhr.status === 200) {\n          callbackLoad(JSON.parse(xhr.response));\n        }\n      }\n    }\n  }\n  return result;\n}",
             "useCoreAPI": true,
             "core": true
         },
@@ -1507,23 +1613,15 @@ var system = {
             "_id": "14c1517b711cb78",
             "component": "RuntimeOSGi",
             "state": "uninstall",
-            "action": "function uninstall(url) { \n\tvar result = '';\n\treturn result;\n}",
-            "useCoreAPI": false,
+            "action": "function uninstall(id) { \n\tvar search = {},\n\t    system = null,\n\t    behaviorId = '',\n\t    collection =  '',\n\t    componentId = '',\n\t    length = 0,\n\t    i = 0;\n\t\n\tsearch = $db.RuntimeSystem.find({\n\t  '_id': id\n\t});\n\t\n\tif (search.length) {\n\t  system = search[0];\n\t  // remove behaviors\n\t  if (system.behaviors) {\n\t    for (behaviorId in system.behaviors) {\n\t      $db.RuntimeBehavior.remove({ \n\t        '_id': system.behaviors[behaviorId]._id\n\t      });\n\t    }\n\t  }\n\t  // remove components\n\t  if (system.components) {\n\t    for (collection in system.behaviors) {\n\t      for (componentId in system.behaviors[collection]) {\n\t        $db[collection].remove({ \n\t          '_id': componentId\n\t        });\n\t      }\n\t    }\n\t  }\n\t}\n\t\n\tthis.require(id).status('uninstalled');\n\tchannel.$systemUninstalled(id);\n}",
+            "useCoreAPI": true,
             "core": true
-        },
-        "1f2fc1d2201048f": {
-            "_id": "1f2fc1d2201048f",
-            "component": "Runtime",
-            "state": "ready",
-            "action": "function ready() { \n}",
-            "useCoreAPI": false,
-            "core": false
         },
         "1cb9d103d41dd97": {
             "_id": "1cb9d103d41dd97",
             "component": "e89c617b6b15d24",
-            "state": "main",
-            "action": "function main() { \n  var subsystems = [],\n      systems = [],\n      system = null,\n      scripts = [],\n      script = null,\n      logLevel = 'warn',\n      i = 0,\n      length = 0;\n  \n  // in a browser\n  if (typeof document !== 'undefined') {\n    \n      subsystems = $db.RuntimeSystem.find({\n      'subsystem': true\n      });\n      subsystems.forEach(function (subsystem) {\n          var subsystemId = subsystem._id;\n          this.require(subsystemId).main();\n      }, this); \n    \n      systems = document.querySelectorAll('link[rel=system]');\n      length = systems.length;\n      \n      // logger\n      scripts = document.querySelectorAll('script[log]');\n      if (scripts.length) {\n          logLevel = scripts[0].getAttribute('log');\n          this.require('logger').level(logLevel);\n      }\n      \n      // systems\n      for (i = 0; i < length; i++) {\n          system = systems[i];\n          \n          if (system.getAttribute('async') === 'false') {\n              this.require('runtime').install(system.href, false);\n          } else {\n              this.require('runtime').install(system.href, true);\n          }\n      }\n      \n      // designer\n      scripts = document.querySelectorAll('script[designer]');\n      if (scripts.length) {\n          this.require('admin').start();\n      }\n      \n      // ready event\n      if (length === 0) {\n         this.require('runtime').ready();\n      }\n  }\t\n}",
+            "state": "start",
+            "action": "function start() { \n  var subsystems = [],\n      systems = [],\n      system = null,\n      scripts = [],\n      script = null,\n      logLevel = 'warn',\n      i = 0,\n      length = 0;\n  \n  // in a browser\n  if (typeof document !== 'undefined') {\n    \n      subsystems = $db.RuntimeSystem.find({\n      'subsystem': true\n      });\n      subsystems.forEach(function (subsystem) {\n          var subsystemId = subsystem._id;\n          if (this.require(subsystemId).main) {\n            this.require(subsystemId).main();\n          } \n          if (this.require(subsystemId).start) {\n            this.require(subsystemId).start();\n          } \n      }, this); \n    \n      systems = document.querySelectorAll('link[rel=system]');\n      length = systems.length;\n      \n      // logger\n      scripts = document.querySelectorAll('script[log]');\n      if (scripts.length) {\n          logLevel = scripts[0].getAttribute('log');\n          this.require('logger').level(logLevel);\n      }\n      \n      // systems\n      for (i = 0; i < length; i++) {\n          system = systems[i];\n          \n          if (system.getAttribute('async') === 'false') {\n              this.require('runtime').install(system.href, true, false);\n          } else {\n              this.require('runtime').install(system.href, true, true);\n          }\n      }\n      \n      // designer\n      scripts = document.querySelectorAll('script[designer]');\n      if (scripts.length) {\n          this.require('admin').start();\n      }\n      \n      // ready event\n      if (length === 0) {\n         this.require('runtime').ready();\n      }\n  }\t\n}",
             "useCoreAPI": true,
             "core": true
         },
@@ -1531,15 +1629,39 @@ var system = {
             "_id": "105f219c6813643",
             "component": "RuntimeOSGi",
             "state": "start",
-            "action": "function start(url) { \n\tvar result = '';\n\treturn result;\n}",
+            "action": "function start(id) { \n\tvar system = this.require(id),\n\t    channel = this.require('channel');\n\t\n\tsystem.status('starting');\n\tchannel.$systemStarting(id);\n\tif (system.main) {\n\t  system.main();\n\t}\n\tif (system.start) {\n\t  system.start();\n\t}\n\tsystem.status('active');\n\tchannel.$systemActive(id);\n}",
             "useCoreAPI": false,
-            "core": false
+            "core": true
         },
         "1a81a1f00d17269": {
             "_id": "1a81a1f00d17269",
             "component": "RuntimeOSGi",
             "state": "stop",
-            "action": "function stop(url) { \n\tvar result = '';\n\treturn result;\n}",
+            "action": "function stop(id) { \n\tvar system = this.require(id),\n\t    channel = this.require('channel');\n\t\n\tsystem.status('stopping');\n\tchannel.$systemStopping(id);\n\tif (system.stop) {\n\t  system.stop();\n\t}\n\tsystem.status('resolved');\n\tchannel.$systemResolved(id);\n}",
+            "useCoreAPI": false,
+            "core": true
+        },
+        "116851b602128d1": {
+            "_id": "116851b602128d1",
+            "component": "RuntimeOSGi",
+            "state": "status",
+            "action": "function status() { \n\tvar result = {},\n\t    system = null,\n\t    length = 0,\n\t    i = 0;\n\t\n\tsystems = $db.RuntimeSystem.find({});\n\t\n\tlength = systems.length;\n\tfor (i = 0; i < length; i++) {\n\t    system = systems[i];\n\t    result[system._id] = {\n\t      'status': system.status,\n\t      'name': system.name,\n\t      'version': system.version,\n\t      'master': system.master\n\t    };\n\t}\n\t\n\treturn result;\n}",
+            "useCoreAPI": true,
+            "core": true
+        },
+        "12e491859c13918": {
+            "_id": "12e491859c13918",
+            "component": "RuntimeChannel",
+            "state": "$systemActive",
+            "action": "function $systemActive(id) { \n  var systems = null,\n      nbSubsystem = 0;\n    \n  if (id !== 'e89c617b6b15d24') {\n    if (typeof global === 'undefined' && typeof document !== 'undefined') {\n      systems = document.querySelectorAll('link[rel=system]'),\n      nbSubsystem = $db.RuntimeSystem.find({\n          'subsystem': true\n      });\n         \n      if ($state.get('runtime') && $state.get('runtime').name === 'ready') {    \n      } else {\n        if (systems.length + 1 + nbSubsystem.length === $db.RuntimeSystem.count()) {\n            $component.get('runtime').ready();\n        }\n      }\n    }\n  }\n}",
+            "useCoreAPI": true,
+            "core": true
+        },
+        "13d241dd91134bb": {
+            "_id": "13d241dd91134bb",
+            "component": "RuntimeSystemOSGi",
+            "state": "status",
+            "action": "function status(value) { \n  if (this.require('logger')) {\n\t  this.require('logger').info('The system \\'' + this.name() + '\\' has now for status \\'' + value + '\\'.');\n  }\n}",
             "useCoreAPI": false,
             "core": false
         }
@@ -1561,7 +1683,7 @@ var system = {
         "Runtime": {
             "runtime": {
                 "_id": "runtime",
-                "version": "1.7.1"
+                "version": "1.8.0"
             }
         },
         "RuntimeDatabase": {
@@ -1579,10 +1701,15 @@ var system = {
                 "_id": "metamodel"
             }
         },
-        "RuntimeSystem": {}
+        "RuntimeSystem": {},
+        "RuntimeChannel": {
+            "channel": {
+                "_id": "channel"
+            }
+        }
     },
     "name": "system-runtime",
-    "version": "1.7.1",
+    "version": "1.8.0",
     "description": "Runtime",
     "_id": "e89c617b6b15d24",
     "master": false,

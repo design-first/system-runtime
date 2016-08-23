@@ -25,13 +25,13 @@ Use System Runtime APIs to create your application:
 // create an app
 var app = runtime.system('app');
 
-// add code in the main method
-app.on('main', function main() {
+// add code in the start method
+app.on('start', function start() {
     console.log('Hello world !');
 });
 
 // run the app
-app.main();
+app.start();
 ```
 
 System Runtime will automatically serialize it into JSON:
@@ -49,8 +49,8 @@ System Runtime will automatically serialize it into JSON:
     "1ea9c1d5f811ae1": {
       "_id": "1ea9c1d5f811ae1",
       "component": "154cd18d0210516",
-      "state": "main",
-      "action": "function main() {\n    console.log('Hello world !');\n}",
+      "state": "start",
+      "action": "function start() {\n    console.log('Hello world !');\n}",
       "useCoreAPI": false,
       "core": false
     }
@@ -79,7 +79,7 @@ Just call *install* API to install and start your app:
 // require System Runtime
 var runtime = require('system-runtime');
 
-// install your app
+// install and start your app
 runtime.install('app.json');
 ```
 
