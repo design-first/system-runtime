@@ -411,6 +411,13 @@ var system = {
                 }],
                 "result": "object"
             },
+            "message": {
+                "params": [{
+                    "name": "msg",
+                    "type": "message",
+                    "mandatory": true
+                }]
+            },
             "ready": {}
         },
         "166971fd9d107fd": {
@@ -949,6 +956,7 @@ var system = {
             "_core": true,
             "version": "property",
             "system": "method",
+            "message": "method",
             "ready": "event"
         },
         "1ac07185641fa9f": {
@@ -1661,6 +1669,14 @@ var system = {
             "component": "RuntimeChannel",
             "state": "$systemInstalled",
             "action": "function $systemInstalled(id) {\n    var systems = null,\n        dependencies = [],\n        master = [],\n        canStart = true;\n\n    if (id !== 'e89c617b6b15d24') {\n        if (typeof global === 'undefined' && typeof document !== 'undefined') {\n            \n            // if all systems are installed\n            systems = $db.RuntimeSystem.find({});\n\n            systems.forEach(function (system) {\n                var sys = this.require(system._id);\n                if (sys.status() === 'none') {\n                    canStart = false;\n                }\n            }.bind(this));\n\n            // start all the systems\n            if (canStart) {\n                dependencies = $db.RuntimeSystem.find({\n                    'master': false\n                });\n\n                dependencies.forEach(function (dep) {\n                    var system = this.require(dep._id);\n                    channel = this.require('channel');\n                    \n                    if (system.status() === 'resolved') {\n                      system.status('starting');\n                      system.start();\n                      channel.$systemStarted(dep._id);\n                      system.status('active');\n                    }\n                }.bind(this));\n\n                master = $db.RuntimeSystem.find({\n                    'master': true\n                });\n\n                master.forEach(function (dep) {\n                    var system = this.require(dep._id);\n                    channel = this.require('channel');\n                    \n                    if (system.status() === 'installed') {\n                      system.status('resolved');\n                      channel.$systemResolved(dep._id);\n                      system.status('starting');\n                      system.start();\n                      channel.$systemStarted(dep._id);\n                      system.status('active');\n                    }\n                }.bind(this));\n            }\n        }\n    }\n}",
+            "useCoreAPI": true,
+            "core": true
+        },
+        "1cfa4145f614da8": {
+            "_id": "1cfa4145f614da8",
+            "component": "Runtime",
+            "state": "message",
+            "action": "function message(msg) { \n\t$db.RuntimeMessage.insert(msg);\n}",
             "useCoreAPI": true,
             "core": true
         }
