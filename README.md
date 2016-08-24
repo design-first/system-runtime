@@ -79,8 +79,10 @@ Just call *install* API to install and start your app:
 // require System Runtime
 var runtime = require('system-runtime');
 
-// install and start your app
-runtime.install('app.json');
+// install 
+var appId = runtime.install('app.json');
+// start
+runtime.start(appId);
 ```
 
 #### Component APIs

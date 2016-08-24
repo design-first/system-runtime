@@ -825,7 +825,7 @@ var system = {
                     "name": "autoStart",
                     "type": "boolean",
                     "mandatory": false,
-                    "default": true
+                    "default": false
                 }, {
                     "name": "async",
                     "type": "boolean",
