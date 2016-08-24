@@ -1754,7 +1754,7 @@
 			"_id": "105f219c6813643",
 			"component": "RuntimeOSGi",
 			"state": "start",
-			"action": "function start(id) { \n\tvar system = this.require(id),\n\t    channel = this.require('channel');\n\t\n\tsystem.status('starting');\n\tif (system.main) {\n\t  system.main();\n\t}\n\tif (system.start) {\n\t  system.start();\n\t}\n\tchannel.$systemStarted(id);\n\tsystem.status('active');\n}",
+			"action": "function start(id) { \n\tvar system = this.require(id),\n\t    channel = this.require('channel');\n\t\n\tif (system.status() === 'resolved') {\n  \tsystem.status('starting');\n  \tif (system.main) {\n  \t  system.main();\n  \t}\n  \tif (system.start) {\n  \t  system.start();\n  \t}\n  \tchannel.$systemStarted(id);\n  \tsystem.status('active');\n\t}\n}",
 			"useCoreAPI": false,
 			"core": true
 		},
@@ -1762,7 +1762,7 @@
 			"_id": "1a81a1f00d17269",
 			"component": "RuntimeOSGi",
 			"state": "stop",
-			"action": "function stop(id) { \n\tvar system = this.require(id),\n\t    channel = this.require('channel');\n\t\n\tsystem.status('stopping');\n\tif (system.stop) {\n\t  system.stop();\n\t}\n\tchannel.$systemStopped(id);\n\tsystem.status('resolved');\n\tchannel.$systemResolved(id);\n}",
+			"action": "function stop(id) { \n\tvar system = this.require(id),\n\t    channel = this.require('channel');\n\t    \n\tif (system.status() === 'active') {\n  \tsystem.status('stopping');\n  \tif (system.stop) {\n  \t  system.stop();\n  \t}\n  \tchannel.$systemStopped(id);\n  \tsystem.status('resolved');\n  \tchannel.$systemResolved(id);\n\t}\n}",
 			"useCoreAPI": false,
 			"core": true
 		},
