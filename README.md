@@ -9,9 +9,9 @@
 
 #### a System Runtime Environment
 
-[JSON](http://json.org) is traditionnaly used to represent data. We use this format to store the model, components and methods of your application.
+[JSON](http://json.org) is traditionnaly used to represent data. We use this format to store the model, components and methods of your application. System Runtime can run this JSON like a bundle in [OSGi](https://www.osgi.org).
 
-System Runtime has APIs to serialize your application into JSON. This JSON can be then imported and executed in a client or server application. System Runtime can run JSON that contains your application like a bundle in [OSGi](https://www.osgi.org).
+System Runtime has APIs to serialize your application into JSON. This JSON can be then imported and executed in a client or server application.
 
 ## How works System Runtime ?
 
