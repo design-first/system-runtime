@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "1.8.0",
+    "version": "1.8.1",
     "description": "System Runtime, a JavaScript library that runs systems",
     "homepage": "https://system-runtime.github.io",
     "keywords": [
@@ -16,7 +16,8 @@
         "system",
         "universal",
         "runtime",
-        "json"
+        "json",
+        "osgi"
     ],
     "main": "./src/runtime.js",
     "author": {
