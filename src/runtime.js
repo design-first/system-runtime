@@ -71,17 +71,17 @@ sytemId = $db.system($system.system);
 system = $component.get(sytemId);
 channel = $component.get('channel');
 
-system.status('installed');
+system.state('installed');
 channel.$systemInstalled(sytemId);
-system.status('resolved');
+system.state('resolved');
 channel.$systemResolved(sytemId);
-system.status('starting');
+system.state('starting');
 channel.$systemStarted(sytemId);
 
 system.main(); // deprecated
 system.start();
 
-system.status('active');
+system.state('active');
 
 
 /* exports */

@@ -53,7 +53,7 @@ module.exports = function (grunt) {
                 url: '<%= pkg.homepage %>',
                 options: {
                     linkNatives: 'true',
-                    paths: ['src', 'dist'],
+                    paths: ['src', 'build/system'],
                     themedir: 'node_modules/yuidoc-lucid-theme',
                     helpers: ['node_modules/yuidoc-lucid-theme/helpers/helpers.js'],
                     outdir: 'doc'
