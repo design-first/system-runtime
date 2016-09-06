@@ -91,35 +91,6 @@ var appId = runtime.install('app.json');
 runtime.start(appId);
 ```
 
-#### Component APIs
-
-You can create components in System Runtime:
-
-```js
-// require System Runtime metamodel
-var metamodel = runtime.require('metamodel');
-
-// define a component class
-metamodel.schema({
-    '_name': 'Jedi',
-    'firstName': 'property',
-    'lastName': 'property'
-});
-
-// create a model
-metamodel.create();
-
-// create a component
-var Jedi = runtime.require('Jedi');
-var luke = new Jedi({
-    'firstName': 'Luke',
-    'lastName': 'SkyWalker'
-});
-
-// update a property
-luke.lastName('StarKiller');
-```
-
 ## What contains System Runtime ?
 
 #### A metamodel
