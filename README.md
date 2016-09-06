@@ -7,15 +7,15 @@
 
 ## What is System Runtime ?
 
-#### a System Runtime Environment
+#### a Bundle Runtime
 
-[JSON](http://json.org) is traditionnaly used to represent data. We use this format to store the model, components and methods of your application. System Runtime can run this JSON like a bundle in [OSGi](https://www.osgi.org).
+System Runtime can create, install and start bundles like in [OSGi](https://www.osgi.org). 
 
-System Runtime has APIs to serialize your application into JSON. This JSON can be then imported and executed in a client or server application.
+System Runtime can bundle the model, components and methods of your application into a [JSON](http://json.org) object. This bundle can be then installed and started in a client or server application.
 
 ## How works System Runtime ?
 
-System Runtime executes your JSON client and server side.
+System Runtime executes your bundles client and server side.
 
 #### System Runtime APIs
 
@@ -34,8 +34,14 @@ app.on('start', function start() {
 app.start();
 ```
 
-System Runtime will automatically serialize it into JSON:
+Now you can bundle your application into a JSON object:
 
+```js
+// create a bundle
+runtime.bundle();
+```
+
+It will return this JSON:
 ```json
 {
   "_id": "154cd18d0210516",
@@ -61,10 +67,10 @@ System Runtime will automatically serialize it into JSON:
 
 #### HTML import
 
-Just add a link tag in your HTML to execute your app:
+Just add a link tag in your HTML to install and start your bundle:
 
 ```html
-<!-- import your app -->
+<!-- Install your bundle -->
 <link rel="system" type="application/json" href="app.json">
 
 <!-- load System Runtime -->
@@ -73,7 +79,7 @@ Just add a link tag in your HTML to execute your app:
 
 #### Node.js import
 
-Just call *install* API to install and start your app:
+Just call *install* API to install and start your bundle:
 
 ```js
 // require System Runtime
