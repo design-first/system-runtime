@@ -7,7 +7,7 @@
 
 ## What is System Runtime ?
 
-#### a Bundle Runtime
+#### a System Bundle Runtime
 
 System Runtime can create, install and start bundles like in [OSGi](https://www.osgi.org). 
 
