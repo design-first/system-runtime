@@ -882,6 +882,9 @@ var system = {
                     "mandatory": false,
                     "default": null
                 }]
+            },
+            "bundle": {
+                "result": "string"
             }
         },
         "1b2811b092143f5": {
@@ -910,6 +913,9 @@ var system = {
                     "mandatory": false,
                     "default": null
                 }]
+            },
+            "bundle": {
+                "result": "string"
             }
         }
     },
@@ -1131,7 +1137,8 @@ var system = {
             "start": "method",
             "stop": "method",
             "status": "method",
-            "update": "method"
+            "update": "method",
+            "bundle": "method"
         },
         "145fe10c7514298": {
             "_id": "145fe10c7514298",
@@ -1145,7 +1152,8 @@ var system = {
             "start": "method",
             "stop": "method",
             "uninstall": "method",
-            "update": "method"
+            "update": "method",
+            "bundle": "method"
         }
     },
     "types": {
@@ -1743,6 +1751,22 @@ var system = {
             "state": "update",
             "action": "function update(sys) { \n\tthis.require('runtime').update(this.id(), sys);\n}",
             "useCoreAPI": false,
+            "core": true
+        },
+        "19cf317d7217331": {
+            "_id": "19cf317d7217331",
+            "component": "RuntimeOSGi",
+            "state": "bundle",
+            "action": "function bundle() { \n\tvar result = this.require('db').system();\n\treturn result;\n}",
+            "useCoreAPI": false,
+            "core": true
+        },
+        "14b77144911ce48": {
+            "_id": "14b77144911ce48",
+            "component": "RuntimeSystemOSGi",
+            "state": "bundle",
+            "action": "function bundle() { \n\tvar result = '',\n\tsystem = [];\n\t\n\tsystems = $db.RuntimeSystem.find({\n    '_id': this.id()\n  });\n  \n  if (systems.length) {\n    result = JSON.stringify(systems[0]);\n  }\n  \n\treturn result;\n}",
+            "useCoreAPI": true,
             "core": true
         }
     },
