@@ -150,6 +150,19 @@ Then you can use runtime on your script:
 runtime.version();
 ```
 
+#### CDN
+
+Add a `<script>` tag to your HTML page:
+```html
+<script src="https://cdn.jsdelivr.net/system-runtime/1.8.3/system-runtime.min.js"></script>
+```
+
+Then you can use runtime on your script:
+```js
+// example: get System Runtime version
+runtime.version();
+```
+
 ## Documentation
 
 * [Quick Start](https://system-runtime.readme.io/docs/quick-start)
