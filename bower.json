@@ -46,6 +46,7 @@
         ".travis.yml",
         ".npmignore",
         ".gitignore",
-        ".vscode"
+        ".vscode",
+        ".DS_Store"
     ]
 }

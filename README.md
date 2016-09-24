@@ -7,11 +7,11 @@
 
 ## What is System Runtime ?
 
-#### a System Bundle Runtime
-
-System Runtime can create, install and start bundles like in [OSGi](https://www.osgi.org). 
+#### OSGi for JavaScript
 
 System Runtime can bundle the model, components and methods of your application into a [JSON](http://json.org) object. This bundle can be then installed and started in a client or server application.
+
+In fact, System Runtime can create, install and start bundles like in [OSGi](https://www.osgi.org). 
 
 ## How works System Runtime ?
 

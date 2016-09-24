@@ -4,3 +4,4 @@
 /doc/
 /.vscode/
 *.log
+.DS_Store
