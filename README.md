@@ -1,5 +1,7 @@
 # System Runtime
 
+[![Join the chat at https://gitter.im/system-sdk/system-runtime](https://badges.gitter.im/system-sdk/system-runtime.svg)](https://gitter.im/system-sdk/system-runtime?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/system-sdk/system-runtime.svg?branch=master)](https://travis-ci.org/system-sdk/system-runtime)
 [![Sauce Test Status](https://saucelabs.com/buildstatus/system-runtime)](https://saucelabs.com/u/system-runtime)
 [![Coverage Status](https://coveralls.io/repos/github/system-sdk/system-runtime/badge.svg?branch=master)](https://coveralls.io/github/system-sdk/system-runtime?branch=master)
