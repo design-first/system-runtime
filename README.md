@@ -79,7 +79,7 @@ Just add a link tag in your HTML to install and start your bundle:
 
 #### Install the bundle in Node.js
 
-Just call *install* API to install and start your bundle:
+Like in [OSGi](https://www.osgi.org), just call *install* API to install and start your bundle:
 
 ```js
 // require System Runtime
