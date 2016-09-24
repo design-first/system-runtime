@@ -17,7 +17,7 @@ In fact, System Runtime can create, install and start bundles like in [OSGi](htt
 
 System Runtime executes your bundles client and server side.
 
-#### System Runtime APIs
+#### Create a bunle
 
 Use System Runtime APIs to create your application:
 
@@ -65,7 +65,7 @@ It will return this JSON:
 }
 ```
 
-#### HTML import
+#### Install the bundle in HTML
 
 Just add a link tag in your HTML to install and start your bundle:
 
@@ -77,7 +77,7 @@ Just add a link tag in your HTML to install and start your bundle:
 <script src="/bower_components/system-runtime/dist/system-runtime.min.js"></script>
 ```
 
-#### Node.js import
+#### Install the bundle in Node.js
 
 Just call *install* API to install and start your bundle:
 
