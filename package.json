@@ -1,7 +1,7 @@
 {
     "name": "system-runtime",
     "version": "1.8.3",
-    "description": "A System Bundle Runtime",
+    "description": "A JavaScript library that runs systems",
     "homepage": "https://system-runtime.github.io",
     "keywords": [
         "uml",

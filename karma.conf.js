@@ -1,6 +1,6 @@
 /*
  * System Runtime
- * Design | Create | Compose
+ *
  * https://system-runtime.github.io
  * @ecarriou
  * 
