@@ -2,7 +2,6 @@
  * System Runtime
  *
  * https://system-runtime.github.io
- * @ecarriou
  * 
  * Copyright 2016 Erwan Carriou
  *
