@@ -18,7 +18,7 @@ In fact, System Runtime can create, install and start bundles like in [OSGi](htt
 
 System Runtime executes your bundles client and server side.
 
-#### Create a bunle
+#### Create a bundle
 
 Use System Runtime APIs to create your application:
 
