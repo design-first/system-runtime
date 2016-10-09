@@ -1450,7 +1450,7 @@ var system = {
             "_id": "13010167f313f87",
             "component": "Runtime",
             "state": "system",
-            "action": "function system(name) {\n    var System = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        System = this.require('RuntimeSystem');\n        system = new System(conf);\n    } else {\n        result = $db.RuntimeSystem.find({\n            'master': true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}",
+            "action": "function system(name) {\n    var RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        RuntimeSystem = this.require('RuntimeSystem');\n        system = new RuntimeSystem(conf);\n    } else {\n        result = $db.RuntimeSystem.find({\n            'master': true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}",
             "core": true,
             "useCoreAPI": true
         },
@@ -1692,7 +1692,7 @@ var system = {
             "_id": "116851b602128d1",
             "component": "RuntimeOSGi",
             "state": "status",
-            "action": "function status() { \n\tvar result = {},\n\t    system = null,\n\t    length = 0,\n\t    i = 0;\n\t\n\tsystems = $db.RuntimeSystem.find({});\n\t\n\tlength = systems.length;\n\tfor (i = 0; i < length; i++) {\n\t    system = systems[i];\n\t    result[system.name] = {\n\t      'id': system._id,\n\t      'state': system.state,\n\t      'name': system.name,\n\t      'version': system.version,\n\t      'master': system.master\n\t    };\n\t}\n\t\n\treturn result;\n}",
+            "action": "function status() { \n\tvar result = {},\n\t    system = null,\n\t    length = 0,\n\t    i = 0;\n\t\n\tsystems = $db.RuntimeSystem.find({});\n\t\n\tlength = systems.length;\n\tfor (i = 0; i < length; i++) {\n\t    system = systems[i];\n\t    result[system.name] = {\n\t      'id': system._id,\n\t      'state': system.state,\n\t      'name': system.name,\n\t      'version': system.version,\n\t      'location': system.location,\n\t      'master': system.master\n\t    };\n\t}\n\t\n\treturn result;\n}",
             "useCoreAPI": true,
             "core": true
         },
@@ -1786,7 +1786,7 @@ var system = {
         "Runtime": {
             "runtime": {
                 "_id": "runtime",
-                "version": "1.8.3"
+                "version": "1.8.4"
             }
         },
         "RuntimeDatabase": {
@@ -1812,7 +1812,7 @@ var system = {
         }
     },
     "name": "system-runtime",
-    "version": "1.8.3",
+    "version": "1.8.4",
     "description": "Runtime",
     "_id": "e89c617b6b15d24",
     "master": false,

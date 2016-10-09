@@ -75,7 +75,7 @@ Just add a link tag in your HTML to install and start your bundle:
 <link rel="system" type="application/json" href="app.json">
 
 <!-- load System Runtime -->
-<script src="/bower_components/system-runtime/dist/system-runtime.min.js"></script>
+<script src="https://cdn.jsdelivr.net/system-runtime/1.8.3/system-runtime.min.js"></script>
 ```
 
 #### Install the bundle in Node.js
