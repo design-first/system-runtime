@@ -155,7 +155,7 @@ runtime.version();
 
 Add a `<script>` tag to your HTML page:
 ```html
-<script src="https://cdn.jsdelivr.net/system-runtime/1.8.3/system-runtime.min.js"></script>
+<script src="https://cdn.jsdelivr.net/system-runtime/1.8.5/system-runtime.min.js"></script>
 ```
 
 Then you can use runtime on your script:
