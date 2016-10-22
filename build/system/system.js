@@ -1740,7 +1740,7 @@ var system = {
             "_id": "15643114f31bf40",
             "component": "RuntimeSystemOSGi",
             "state": "state",
-            "action": "function state(value) { \n  if (this.require('logger')) {\n\t  this.require('logger').info('the state of the system \\'' + this.name() + '\\' is now \\'' + value + '\\'');\n  }\t\n}",
+            "action": "function state(value) { \n  if (this.require('logger')) {\n\t  this.require('logger').debug('the state of the system \\'' + this.name() + '\\' is now \\'' + value + '\\'');\n  }\t\n}",
             "useCoreAPI": false,
             "core": true
         },
@@ -1786,7 +1786,7 @@ var system = {
         "Runtime": {
             "runtime": {
                 "_id": "runtime",
-                "version": "1.8.5"
+                "version": "1.8.6"
             }
         },
         "RuntimeDatabase": {
@@ -1812,8 +1812,8 @@ var system = {
         }
     },
     "name": "system-runtime",
-    "version": "1.8.5",
-    "description": "Runtime",
+    "version": "1.8.6",
+    "description": "System Runtime",
     "_id": "e89c617b6b15d24",
     "master": false,
     "subsystem": false

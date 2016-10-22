@@ -490,7 +490,7 @@ function unknownType(value) {
  * @param {String} className name of the class
  */
 function canNotYetValidate(id, className) {
-    getLogger().info("can not yet validate if the component '" + id + "' is an instance of '" + className + "'");
+    getLogger().debug("can not yet validate if the component '" + id + "' is an instance of '" + className + "'");
 }
 
 
@@ -653,7 +653,7 @@ function invalidEnumType(value, typeName, type) {
  * @param {String} name name of the schema
  */
 function loadSchema(name) {
-    getLogger().info("load schema '" + name + "'");
+    getLogger().debug("load schema '" + name + "'");
 }
 
 
@@ -663,7 +663,7 @@ function loadSchema(name) {
  * @param {String} name name of the model
  */
 function loadModel(name) {
-    getLogger().info("load model '" + name + "'");
+    getLogger().debug("load model '" + name + "'");
 }
 
 
@@ -673,7 +673,7 @@ function loadModel(name) {
  * @param {String} name name of the type
  */
 function loadType(name) {
-    getLogger().info("load type '" + name + "'");
+    getLogger().debug("load type '" + name + "'");
 }
 
 
@@ -683,7 +683,7 @@ function loadType(name) {
  * @param {String} name name of the schema
  */
 function compileSchema(name) {
-    getLogger().info("compile schema '" + name + "'...");
+    getLogger().debug("compile schema '" + name + "'...");
 }
 
 
@@ -693,7 +693,7 @@ function compileSchema(name) {
  * @param {String} name name of the model
  */
 function generateModel(name) {
-    getLogger().info("generate model '" + name + "'...");
+    getLogger().debug("generate model '" + name + "'...");
 }
 
 
@@ -703,7 +703,7 @@ function generateModel(name) {
  * @param {String} name name of the model
  */
 function checkModel(name) {
-    getLogger().info("analyze model '" + name + "'...");
+    getLogger().debug("analyze model '" + name + "'...");
 }
 
 
@@ -713,7 +713,7 @@ function checkModel(name) {
  * @param {String} name name of the collection
  */
 function createCollection(name) {
-    getLogger().info("create collection '" + name + "'");
+    getLogger().debug("create collection '" + name + "'");
 }
 
 /*
@@ -722,7 +722,7 @@ function createCollection(name) {
  * @param {String} name name of the class
  */
 function createClass(name) {
-    getLogger().info("create class '" + name + "'");
+    getLogger().debug("create class '" + name + "'");
 }
 
 
@@ -731,7 +731,7 @@ function createClass(name) {
  * @method modelCreationBegin
  */
 function modelCreationBegin() {
-    getLogger().info("starting model creation...");
+    getLogger().debug("starting model creation...");
 }
 
 
@@ -740,7 +740,7 @@ function modelCreationBegin() {
  * @method modelCreationEnd
  */
 function modelCreationEnd() {
-    getLogger().info("model creation ended");
+    getLogger().debug("model creation ended");
 }
 
 
