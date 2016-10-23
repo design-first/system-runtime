@@ -1786,7 +1786,7 @@ var system = {
         "Runtime": {
             "runtime": {
                 "_id": "runtime",
-                "version": "1.8.7"
+                "version": "1.8.8"
             }
         },
         "RuntimeDatabase": {
@@ -1812,7 +1812,7 @@ var system = {
         }
     },
     "name": "system-runtime",
-    "version": "1.8.7",
+    "version": "1.8.8",
     "description": "System Runtime",
     "_id": "e89c617b6b15d24",
     "master": false,

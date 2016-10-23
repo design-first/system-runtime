@@ -1406,12 +1406,14 @@ function isValidType(value, typeName) {
         var typeRef = getReference(typeName);
         var component = value;
 
-        if (hasType(value, 'string')) {
-            component = $component.get(value);
-        }
-        if (getClassName(component) !== typeRef && JSON.stringify(component) !== '{}') {
-            isValid = false;
-            $log.invalidType(value, typeName.replace('@', ''));
+        if (value !== '') {
+            if (hasType(value, 'string')) {
+                component = $component.get(value);
+            }
+            if (getClassName(component) !== typeRef && JSON.stringify(component) !== '{}') {
+                isValid = false;
+                $log.invalidType(value, typeName.replace('@', ''));
+            }
         }
         return isValid;
     }
@@ -1765,10 +1767,8 @@ function isValidObject(object, schema, strict, cleanRef) {
             // check for default value of an object ({} or null)
             switch (true) {
                 case (hasType(field, 'object') && field !== null && Object.keys(field).length > 0):
-                case hasType(field, 'string'):
-                    if (field !== '') {
-                        $log.canNotYetValidate(field, typeRef);
-                    }
+                case hasType(field, 'string') && field !== '':
+                    $log.canNotYetValidate(field, typeRef);
                     break;
                 default:
                     break;
