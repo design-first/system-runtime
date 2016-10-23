@@ -1766,7 +1766,9 @@ function isValidObject(object, schema, strict, cleanRef) {
             switch (true) {
                 case (hasType(field, 'object') && field !== null && Object.keys(field).length > 0):
                 case hasType(field, 'string'):
-                    $log.canNotYetValidate(field, typeRef);
+                    if (field !== '') {
+                        $log.canNotYetValidate(field, typeRef);
+                    }
                     break;
                 default:
                     break;
@@ -1831,7 +1833,9 @@ function isValidObject(object, schema, strict, cleanRef) {
                                             break;
                                         }
                                     } else {
-                                        $log.canNotYetValidate(field[i], getReference(typeArray));
+                                        if (field[i] !== '') {
+                                            $log.canNotYetValidate(field[i], getReference(typeArray));
+                                        }
                                     }
                                 } else {
                                     if (!inheritFrom(getClassName(field[i]), getReference(typeArray))) {
