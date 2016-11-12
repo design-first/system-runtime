@@ -87,7 +87,7 @@ Like in [OSGi](https://www.osgi.org), just call *install* API to install and sta
 var runtime = require('system-runtime');
 
 // install & start
-var appId = runtime.install('app.json');
+runtime.install('app.json');
 ```
 
 ## What contains System Runtime ?
