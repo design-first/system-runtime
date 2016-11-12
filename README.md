@@ -86,7 +86,7 @@ Like in [OSGi](https://www.osgi.org), just call *install* API to install and sta
 // require System Runtime
 var runtime = require('system-runtime');
 
-// install & start
+// install your bundle 
 runtime.install('app.json');
 ```
 
