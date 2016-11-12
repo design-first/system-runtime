@@ -1,69 +1,69 @@
 {
-    "name": "system-runtime",
-    "version": "1.8.8",
-    "description": "A JavaScript library that runs systems",
-    "homepage": "https://system-runtime.github.io",
-    "keywords": [
-        "uml",
-        "mda",
-        "metamodel",
-        "model",
-        "schema",
-        "odm",
-        "design",
-        "nosql",
-        "component",
-        "system",
-        "universal",
-        "runtime",
-        "json",
-        "osgi",
-        "bundle"
-    ],
-    "main": "./src/runtime.js",
-    "author": {
-        "name": "erwan carriou",
-        "email": "erwan.carriou@mac.com",
-        "twitter": "@ecarriou"
-    },
-    "license": "Apache-2.0",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/system-sdk/system-runtime.git"
-    },
-    "bugs": {
-        "url": "https://github.com/system-sdk/system-runtime/issues"
-    },
-    "scripts": {
-        "watch": "grunt watch",
-        "doc": "grunt doc",
-        "test": "grunt test",
-        "clean": "grunt clean",
-        "debug": "grunt debug",
-        "build": "grunt build"
-    },
-    "devDependencies": {
-        "coveralls": "^2.11.3",
-        "grunt": "^1.0.1",
-        "grunt-browserify": "^5.0.0",
-        "grunt-cli": "^1.0.0",
-        "grunt-contrib-clean": "^1.0.0",
-        "grunt-contrib-concat": "^1.0.0",
-        "grunt-contrib-jshint": "^1.0.0",
-        "grunt-contrib-uglify": "^2.0.0",
-        "grunt-contrib-watch": "^1.0.0",
-        "grunt-contrib-yuidoc": "^1.0.0",
-        "grunt-jasmine-nodejs": "^1.5.4",
-        "grunt-jsbeautifier": "^0.2.10",
-        "grunt-karma": "^2.0.0",
-        "grunt-merge-json": "^0.9.5",
-        "istanbul": "^0.4.5",
-        "karma": "^1.2.0",
-        "karma-coverage": "^1.0.0",
-        "karma-firefox-launcher": "^1.0.0",
-        "karma-jasmine": "^1.0.2",
-        "karma-sauce-launcher": "^1.0.0",
-        "karma-script-launcher": "^1.0.0",
-        "yuidoc-lucid-theme": "^0.1.2"
-    }
+  "name": "system-runtime",
+  "version": "1.8.9",
+  "description": "A JavaScript library that runs systems",
+  "homepage": "https://system-runtime.github.io",
+  "keywords": [
+    "uml",
+    "mda",
+    "metamodel",
+    "model",
+    "schema",
+    "odm",
+    "design",
+    "nosql",
+    "component",
+    "system",
+    "universal",
+    "runtime",
+    "json",
+    "osgi",
+    "bundle"
+  ],
+  "main": "./src/runtime.js",
+  "author": {
+    "name": "erwan carriou",
+    "email": "erwan.carriou@mac.com",
+    "twitter": "@ecarriou"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/system-sdk/system-runtime.git"
+  },
+  "bugs": {
+    "url": "https://github.com/system-sdk/system-runtime/issues"
+  },
+  "scripts": {
+    "watch": "grunt watch",
+    "doc": "grunt doc",
+    "test": "grunt test",
+    "clean": "grunt clean",
+    "debug": "grunt debug",
+    "build": "grunt build"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.15",
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-cli": "^1.0.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-contrib-yuidoc": "^1.0.0",
+    "grunt-jasmine-nodejs": "^1.5.4",
+    "grunt-jsbeautifier": "^0.2.10",
+    "grunt-karma": "^2.0.0",
+    "grunt-merge-json": "^0.9.5",
+    "istanbul": "^0.4.5",
+    "karma": "^1.2.0",
+    "karma-coverage": "^1.0.0",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-sauce-launcher": "^1.1.0",
+    "karma-script-launcher": "^1.0.0",
+    "yuidoc-lucid-theme": "^0.1.2"
+  }
 }
