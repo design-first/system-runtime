@@ -71,7 +71,7 @@ It will return this JSON:
 Just add a link tag in your HTML to install and start your bundle:
 
 ```html
-<!-- Install your bundle -->
+<!-- install your bundle -->
 <link rel="system" type="application/json" href="app.json">
 
 <!-- load System Runtime -->
