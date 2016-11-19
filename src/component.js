@@ -620,7 +620,11 @@ function addProperties(model, Class, classId) {
                                         component[propertyName] = value.id();
                                         break;
                                     case propertyType === 'date':
-                                        component[propertyName] = value.toISOString();
+                                        if (typeof value === 'string') {
+                                            component[propertyName] = value;
+                                        } else {
+                                            component[propertyName] = value.toISOString();
+                                        }
                                         break;
                                     default:
                                         component[propertyName] = value;

@@ -56,7 +56,7 @@ var ID = '_id',
     LINK_TYPE = 'link',
     COLLECTION_TYPE = 'collection',
     internalTypes = ['property', 'collection', 'link', 'method', 'event'],
-    defaultTypes = ['boolean', 'string', 'number', 'object', 'function', 'array', 'any'],
+    defaultTypes = ['boolean', 'string', 'number', 'object', 'function', 'array', 'date', 'any'],
     store = {
         metadef: {},
         inheritance: {},
@@ -134,7 +134,7 @@ function generateModels() {
                         "type": "any",
                         "readOnly": false,
                         "mandatory": false,
-                        "default": null,
+                        "default": "",
                         "description": att,
                         "label": att
                     };
@@ -144,7 +144,7 @@ function generateModels() {
                         "type": "@RuntimeComponent",
                         "readOnly": false,
                         "mandatory": false,
-                        "default": {},
+                        "default": "",
                         "description": att,
                         "label": att
                     };
@@ -963,11 +963,20 @@ function isValidEnumValue(value, enumValue) {
  * @returns {Boolean} true is value has type 'type'
  */
 function hasType(value, type) {
-    var result = true;
+    var result = true,
+        date = null;
 
     switch (type) {
         case 'array':
             result = Array.isArray(value);
+            break;
+        case 'date':
+            if (typeof value === 'string') {
+                date = new Date(value);
+                result = !isNaN(date.getDate());
+            } else {
+                result = value instanceof Date;
+            }
             break;
         case 'any':
             result = true;
@@ -1784,6 +1793,7 @@ function isValidObject(object, schema, strict, cleanRef) {
      */
     function _isValidType(field, typeSchema) {
         var isValid = true,
+            date = null,
             typeArray = '';
 
         realType = getRealType(typeSchema);
@@ -1801,10 +1811,19 @@ function isValidObject(object, schema, strict, cleanRef) {
                             break;
                         }
                     } else {
-                        if (getRealType(field) !== typeSchema) {
-                            $log.invalidPropertyType(fieldName, typeSchema, field);
-                            isValid = false;
-                            break;
+                        if (typeSchema === 'date') {
+                            date = new Date(field);
+                            isValid = !isNaN(date.getDate());
+                            if (!isValid) {
+                                $log.invalidPropertyType(fieldName, typeSchema, field);
+                                break;
+                            }
+                        } else {
+                            if (getRealType(field) !== typeSchema) {
+                                $log.invalidPropertyType(fieldName, typeSchema, field);
+                                isValid = false;
+                                break;
+                            }
                         }
                     }
                 }
