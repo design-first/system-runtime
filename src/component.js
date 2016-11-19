@@ -716,6 +716,9 @@ function addStructure(path, name, model, id) {
                             propertyValue = getStructureValue(model, id, fullPath);
                             break;
                     }
+                    if (propertyValue === undefined && prop.default !== undefined) {
+                        propertyValue = prop.default;
+                    }
                     return propertyValue;
                 } else {
                     $log.destroyedComponentCall(fullPath, id);
