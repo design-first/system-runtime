@@ -19,47 +19,13 @@
  */
 
 module.exports = function (config) {
-    // customLaunchers
-    var customLaunchers = {
-        sl_chrome: {
-            base: 'SauceLabs',
-            browserName: 'chrome',
-            version: '48'
-        },
-        sl_firefox: {
-            base: 'SauceLabs',
-            browserName: 'firefox',
-            version: '44'
-        },
-        sl_ie_11: {
-            base: 'SauceLabs',
-            browserName: 'internet explorer',
-            version: '11'
-        }
-    };
-    
     // browers
     var browsers = ['Firefox'];
-    if (process.env.TRAVIS) {
-        browsers = Object.keys(customLaunchers);
-    }
-    
-    // sauceLabConfig
-    var sauceLabConfig = {
-        testName: 'Runtime Unit Tests',
-    }
-    if (process.env.TRAVIS) {
-        sauceLabConfig = {
-            testName: 'Runtime Unit Tests',
-            tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
-            startConnect: false
-        }
-    }
     
     // reporters
     var reporters = ['progress', 'coverage'];
     if (process.env.TRAVIS) {
-       reporters = ['progress', 'coverage', 'dots', 'saucelabs']
+       reporters = ['progress', 'coverage', 'dots']
     }
 
     config.set({
@@ -85,12 +51,9 @@ module.exports = function (config) {
             'karma-coverage',
             'karma-script-launcher',
             'karma-firefox-launcher',
-            'karma-sauce-launcher',
             'karma-jasmine'
         ],
         singleRun: true,
-        sauceLabs: sauceLabConfig,
-        customLaunchers: customLaunchers,
         browsers: browsers
     });
 };

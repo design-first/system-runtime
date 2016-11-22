@@ -62,7 +62,6 @@
     "karma-coverage": "^1.0.0",
     "karma-firefox-launcher": "^1.0.0",
     "karma-jasmine": "^1.0.2",
-    "karma-sauce-launcher": "^1.1.0",
     "karma-script-launcher": "^1.0.0",
     "yuidoc-lucid-theme": "^0.1.2"
   }
