@@ -6,4 +6,3 @@ before_script:
 script:
     - npm test
     - istanbul cover jasmine-node --captureExceptions test/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
-    - npm run build
