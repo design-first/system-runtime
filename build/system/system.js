@@ -341,14 +341,6 @@ var system = {
                     "mandatory": true,
                     "default": ""
                 }]
-            },
-            "$systemUpdated": {
-                "params": [{
-                    "name": "id",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }]
             }
         },
         "1f4141671514c2c": {
@@ -864,19 +856,6 @@ var system = {
                 "result": "object"
             },
             "_core": true,
-            "update": {
-                "params": [{
-                    "name": "id",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }, {
-                    "name": "sys",
-                    "type": "json",
-                    "mandatory": false,
-                    "default": null
-                }]
-            },
             "bundle": {
                 "result": "string"
             }
@@ -900,14 +879,6 @@ var system = {
                 "default": ""
             },
             "uninstall": {},
-            "update": {
-                "params": [{
-                    "name": "sys",
-                    "type": "json",
-                    "mandatory": false,
-                    "default": null
-                }]
-            },
             "bundle": {
                 "result": "string"
             }
@@ -965,7 +936,6 @@ var system = {
             "send": "event",
             "$systemInstalled": "event",
             "$systemResolved": "event",
-            "$systemUpdated": "event",
             "$systemStarted": "event",
             "$systemStopped": "event",
             "$systemUninstalled": "event"
@@ -1131,7 +1101,6 @@ var system = {
             "start": "method",
             "stop": "method",
             "status": "method",
-            "update": "method",
             "bundle": "method"
         },
         "145fe10c7514298": {
@@ -1146,7 +1115,6 @@ var system = {
             "start": "method",
             "stop": "method",
             "uninstall": "method",
-            "update": "method",
             "bundle": "method"
         }
     },
@@ -1723,27 +1691,11 @@ var system = {
             "useCoreAPI": false,
             "core": true
         },
-        "13377136af17cc8": {
-            "_id": "13377136af17cc8",
-            "component": "RuntimeOSGi",
-            "state": "update",
-            "action": "function update(id, sys) { \n\tvar system = this.require(id),\n\t    channel = this.require('channel'),\n\t    systemId = '';\n\t\n\tif (system) {\n\t  switch (system.state()) {\n\t    case 'installed':\n\t    case 'resolved':\n\t      if (sys) {\n\t        this.require('db').system(id, sys);\n\t        system.start();\n\t        channel.$systemUpdated(id);\n\t      } else {\n\t        if (system.location()) {\n\t          this.require('runtime').install(system.location(), true);\n\t          channel.$systemUpdated(id);\n\t        }\n\t      }\n\t      break;\n\t    case 'starting':\n\t    case 'stopping': \n\t      if (sys) {\n\t        system.stop();\n\t        this.require('db').system(id, sys);\n\t        system.start();\n\t        channel.$systemUpdated(id);\n\t      } else {\n\t        if (system.location()) {\n\t          system.stop();\n\t          this.require('runtime').install(system.location(), true);\n\t          channel.$systemUpdated(id);\n\t        }\n\t      }\n\t      break;\n\t   case 'active':\n\t   \t  if (sys) {\n\t   \t    system.stop();\n\t        this.require('db').system(id, sys);\n\t        system.start();\n\t        channel.$systemUpdated(id);\n\t      } else {\n\t        if (system.location()) {\n\t          system.stop();\n\t          this.require('runtime').install(system.location(), true);\n\t          channel.$systemUpdated(id);\n\t        }\n\t      }\n\t   \t  break;\n \t   \tcase 'uninstalled':\n \t   \t  break;\n\t    default:\n\t      break;\n\t  }\n\t}\n}",
-            "useCoreAPI": false,
-            "core": true
-        },
         "15643114f31bf40": {
             "_id": "15643114f31bf40",
             "component": "RuntimeSystemOSGi",
             "state": "state",
             "action": "function state(value) { \n  if (this.require('logger')) {\n\t  this.require('logger').debug('the state of the system \\'' + this.name() + '\\' is now \\'' + value + '\\'');\n  }\t\n}",
-            "useCoreAPI": false,
-            "core": true
-        },
-        "11df11636019fec": {
-            "_id": "11df11636019fec",
-            "component": "RuntimeSystemOSGi",
-            "state": "update",
-            "action": "function update(sys) { \n\tthis.require('runtime').update(this.id(), sys);\n}",
             "useCoreAPI": false,
             "core": true
         },
