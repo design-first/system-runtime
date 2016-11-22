@@ -114,6 +114,10 @@ function RuntimeArray(conf) {
                 if (val && $metamodel.inheritFrom(val.constructor.name, type.replace('@', ''))) {
                     arrDb.push(val.id());
 
+                    if ($helper.isRuntime()) {
+                        $helper.getRuntime().require('db').update(classId, id, propertyName, arrDb);
+                    }
+
                     $workflow.state({
                         "component": id,
                         "state": propertyName,
@@ -125,6 +129,10 @@ function RuntimeArray(conf) {
             } else {
                 if (val && $metamodel.isValidType(val, type)) {
                     arrDb.push(val);
+
+                    if ($helper.isRuntime()) {
+                        $helper.getRuntime().require('db').update(classId, id, propertyName, arrDb);
+                    }
 
                     $workflow.state({
                         "component": id,
@@ -153,6 +161,10 @@ function RuntimeArray(conf) {
         if (!isReadOnly) {
             if (arrDb.length !== 0) {
                 val = arrDb.pop();
+
+                if ($helper.isRuntime()) {
+                    $helper.getRuntime().require('db').update(classId, id, propertyName, arrDb);
+                }
 
                 $workflow.state({
                     "component": id,
@@ -506,13 +518,55 @@ function addProperties(model, Class, classId) {
         propertyType = prop.type;
         propertyReadOnly = prop.readOnly;
 
+        function _isValidCollection(coll, type) {
+            var result = true;
+
+            coll.forEach(function (val) {
+                if (
+                    !(
+                        $metamodel.isValidType(val, type) &&
+                        ($metamodel.inheritFrom(val.constructor.name, type.replace('@', '')) && (type.indexOf('@') !== -1)))
+                ) {
+                    result = result && false;
+                }
+            });
+
+            return true;
+        }
+
+        function _getRealCollection(coll, type) {
+            var result = [];
+
+            coll.forEach(function (val) {
+                if (type[0].indexOf('@') !== -1) {
+                    switch (true) {
+                        case typeof val === 'string':
+                            result.push(val);
+                            break;
+                        case typeof val.id !== 'undefined':
+                            result.push(val.id());
+                            break;
+                        default:
+                            result.push(null);
+                            break;
+                    }
+                } else {
+                    result.push(val);
+                }
+            });
+
+            return result;
+        }
+
         if (Array.isArray(propertyType)) { // in case of array, return a sub array
             body = function body(position, value) {
                 var search = [],
                     component = null,
                     runtimeArr = null,
                     val = null,
-                    realVal = null;
+                    realVal = null,
+                    i = 0,
+                    length = 0;
 
                 if (typeof value === 'undefined') {
                     if (typeof position === 'undefined') {
@@ -528,14 +582,53 @@ function addProperties(model, Class, classId) {
 
                         return runtimeArr;
                     } else {
-                        val = $db.store[classId][this.id()][propertyName][position];
-                        if (val) {
-                            if (propertyType[0].indexOf('@') !== -1) {
-                                realVal = $helper.getRuntime().require(val);
+                        if (Array.isArray(position)) { // we replace the collection
+                            if (_isValidCollection(position, propertyType[0])) {
+                                search = $db[classId].find({
+                                    "_id": this.id()
+                                });
+                                if (search.length) {
+
+                                    component = search[0];
+                                    realVal = _getRealCollection(position, propertyType[0]);
+
+                                    length = component[propertyName];
+                                    for (i = 0; i < length; i++) {
+                                        $workflow.state({
+                                            "component": this.id(),
+                                            "state": propertyName,
+                                            "data": [i, component[propertyName][i], 'remove']
+                                        });
+                                    }
+
+                                    component[propertyName] = realVal;
+
+                                    if ($helper.isRuntime()) {
+                                        $helper.getRuntime().require('db').update(classId, this.id(), propertyName, realVal);
+                                    }
+
+                                    length = realVal;
+                                    for (i = 0; i < length; i++) {
+                                        $workflow.state({
+                                            "component": this.id(),
+                                            "state": propertyName,
+                                            "data": [i, realVal[i], 'add']
+                                        });
+                                    }
+                                }
                             } else {
-                                realVal = val;
+                                $log.invalidPropertyName(this.id(), this.constructor.name, propertyName, position, propertyType);
                             }
-                            return realVal;
+                        } else {
+                            val = $db.store[classId][this.id()][propertyName][position];
+                            if (val) {
+                                if (propertyType[0].indexOf('@') !== -1) {
+                                    realVal = $helper.getRuntime().require(val);
+                                } else {
+                                    realVal = val;
+                                }
+                                return realVal;
+                            }
                         }
                     }
                 } else {
@@ -552,7 +645,17 @@ function addProperties(model, Class, classId) {
                             if (search.length) {
 
                                 if (propertyType[0].indexOf('@') !== -1) {
-                                    realVal = value.id();
+                                    switch (true) {
+                                        case typeof value === 'string':
+                                            realVal = value;
+                                            break;
+                                        case typeof value.id !== 'undefined':
+                                            realVal = value.id();
+                                            break;
+                                        default:
+                                            realVal = '';
+                                            break;
+                                    }
                                 } else {
                                     realVal = value;
                                 }
@@ -561,7 +664,7 @@ function addProperties(model, Class, classId) {
                                 component[propertyName][position] = realVal;
 
                                 if ($helper.isRuntime()) {
-                                    $helper.getRuntime().require('db').update(classId, this.id(), propertyName, realVal);
+                                    $helper.getRuntime().require('db').update(classId, this.id(), propertyName, component[propertyName]);
                                 }
 
                                 $workflow.state({
@@ -569,9 +672,9 @@ function addProperties(model, Class, classId) {
                                     "state": propertyName,
                                     "data": [position, realVal, 'add']
                                 });
-                            } else {
-                                $log.invalidPropertyName(this.id(), this.constructor.name, propertyName, value, propertyType);
                             }
+                        } else {
+                            $log.invalidPropertyName(this.id(), this.constructor.name, propertyName, value, propertyType);
                         }
                     }
                 }
