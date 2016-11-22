@@ -1358,6 +1358,11 @@ var system = {
                 "uninstalled"
             ],
             "core": true
+        },
+        "text": {
+            "name": "text",
+            "type": "string",
+            "core": true
         }
     },
     "behaviors": {
