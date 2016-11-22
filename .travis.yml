@@ -1,11 +1,6 @@
 language: node_js
 node_js:
     -  "5"
-addons:
-  sauce_connect:
-    username: "system-runtime"
-    access_key:
-        secure: "TIOf9WlmwKnrXRoz6EmwL8Hpr/fwfDSTw99IsI4Eu4mVMnL+o+HeAPH1M/BqT0WPvCN3QH+orbgM9NoNP6qN/yFtMSJ3bSME9VE0QSRTXiAiuf+JTfN0a8MTbM6pa2NYak7kpxIhl8/30jEot4w39Mc004DlSNAWTXlf0wTkx8E="
 before_script:
   - npm install jasmine-node -g
 script:
