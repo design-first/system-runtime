@@ -283,7 +283,7 @@ function readOnlyProperty(id, className, propertyName) {
  * @param {String} collectionName the name of the colllection
  */
 function invalidDocumentOnDbInsert(doc, collectionName) {
-    getLogger().warn("invalid document '" + JSON.stringify(doc) + "' on an insert operation on collection '" + collectionName + "'");
+    getLogger().warn("invalid document '" + JSON.stringify(doc).replace(/,/g, ', ') + "' on an insert operation on collection '" + collectionName + "'");
 }
 
 
@@ -593,11 +593,11 @@ function destroyedComponentCall(propertyName, id) {
 /*
  * Invalid parameter type  when creating an instance of a class.
  * @method invalidConctructorParameters
- * @param {String} classId class name of the component
+ * @param {String} object configuration
  * @param {String} name schema name
  */
 function invalidConctructorParameters(object, name) {
-    getLogger().warn("the constructor parameter '" + JSON.stringify(object) + "' for creating a component of class '" + name + "' is not an object");
+    getLogger().warn("the constructor parameter '" + JSON.stringify(object).replace(/,/g, ', ') + "' for creating a component of class '" + name + "' is not an object");
 }
 
 
@@ -1147,7 +1147,7 @@ exports.destroyedComponentCall = destroyedComponentCall;
 /**
  * Invalid parameter type  when creating an instance of a class.
  * @method invalidConctructorParameters
- * @param {String} classId class name of the component
+ * @param {String} object configuration
  * @param {String} name schema name
  */
 exports.invalidConctructorParameters = invalidConctructorParameters;
