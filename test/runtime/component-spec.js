@@ -143,7 +143,7 @@ describe('a component', function () {
         var behaviorId = yoda3.on('moving', function () {
             this.adress('Dagobah');
         });
-        
+
         yoda3.require(behaviorId).destroy();
 
         yoda3.moving();
@@ -238,7 +238,7 @@ describe('a component', function () {
 
         expect(yoda.lastName()).toBe('Grand Jedi Master');
     });
-    
+
     it('can not set an invalid value', function () {
         var Person = runtime.require('Person');
         var yoda = new Person({
@@ -285,6 +285,24 @@ describe('a component', function () {
         expect(anakin.children(0).id()).toBe(luke.id());
     });
 
+    it('can add items in a collection with api', function () {
+        var Person = runtime.require('Person');
+
+        var luke = new Person({
+            'firstName': 'Luke',
+            'lastName': 'Skywalker'
+        });
+
+        var anakin = new Person({
+            'firstName': 'Anakin',
+            'lastName': 'Skywalker'
+        });
+
+        anakin.children([luke, anakin]);
+
+        expect(anakin.children().length).toBe(2);
+    });
+
     it('can remove an item of a collection with pop', function () {
         var Person = runtime.require('Person');
 
@@ -318,6 +336,25 @@ describe('a component', function () {
         anakin.children().push(luke);
 
         expect(anakin.children(0).id()).toBe(luke.id());
+    });
+
+    it('can clear a collection with api', function () {
+        var Person = runtime.require('Person');
+
+        var luke = new Person({
+            'firstName': 'Luke',
+            'lastName': 'Skywalker'
+        });
+
+        var anakin = new Person({
+            'firstName': 'Anakin',
+            'lastName': 'Skywalker'
+        });
+
+        anakin.children([luke, anakin]);
+        anakin.children([]);
+
+        expect(anakin.children().length).toBe(0);
     });
 
     it('can destroy itself', function () {
