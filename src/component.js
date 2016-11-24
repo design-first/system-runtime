@@ -604,7 +604,7 @@ function addProperties(model, Class, classId) {
                                     component[propertyName] = realVal;
 
                                     if ($helper.isRuntime()) {
-                                        $helper.getRuntime().require('db').update(classId, this.id(), propertyName, realVal);
+                                        $helper.getRuntime().require('db').update(classId, this.id(), propertyName, component[propertyName]);
                                     }
 
                                     length = realVal;
