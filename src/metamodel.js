@@ -1206,6 +1206,10 @@ function init() {
             }
         },
         type: {
+            "_id": {
+                "type": "string",
+                "mandatory": false
+            },
             "name": {
                 "type": "string",
                 "mandatory": true

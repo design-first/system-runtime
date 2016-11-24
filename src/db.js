@@ -136,7 +136,6 @@ function dump() {
     if (exports.RuntimeType.count()) {
         for (typeId in store.RuntimeType) {
             type = JSON.parse(JSON.stringify(store.RuntimeType[typeId]));
-            delete type._id;
             if (!type.core) {
                 dbDump.types[type.name] = type;
             }
