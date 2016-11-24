@@ -620,14 +620,18 @@ function addProperties(model, Class, classId) {
                                 $log.invalidPropertyName(this.id(), this.constructor.name, propertyName, position, propertyType);
                             }
                         } else {
-                            val = $db.store[classId][this.id()][propertyName][position];
-                            if (val) {
-                                if (propertyType[0].indexOf('@') !== -1) {
-                                    realVal = $helper.getRuntime().require(val);
-                                } else {
-                                    realVal = val;
+                            if (typeof position === 'number') {
+                                val = $db.store[classId][this.id()][propertyName][position];
+                                if (val) {
+                                    if (propertyType[0].indexOf('@') !== -1) {
+                                        realVal = $helper.getRuntime().require(val);
+                                    } else {
+                                        realVal = val;
+                                    }
+                                    return realVal;
                                 }
-                                return realVal;
+                            } else {
+                                $log.invalidPropertyName(this.id(), this.constructor.name, propertyName, position, 'number');
                             }
                         }
                     }
