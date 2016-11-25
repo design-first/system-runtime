@@ -115,7 +115,12 @@ function RuntimeArray(conf) {
                     arrDb.push(val.id());
 
                     if ($helper.isRuntime()) {
-                        $helper.getRuntime().require('db').update(classId, id, propertyName, arrDb);
+                        $helper.getRuntime().require('db').update({
+                            'collection': classId,
+                            'id': id,
+                            'field': propertyName,
+                            'value': arrDb
+                        });
                     }
 
                     $workflow.state({
@@ -131,7 +136,12 @@ function RuntimeArray(conf) {
                     arrDb.push(val);
 
                     if ($helper.isRuntime()) {
-                        $helper.getRuntime().require('db').update(classId, id, propertyName, arrDb);
+                        $helper.getRuntime().require('db').update({
+                            'collection': classId,
+                            'id': id,
+                            'field': propertyName,
+                            'value': arrDb
+                        });
                     }
 
                     $workflow.state({
@@ -163,7 +173,12 @@ function RuntimeArray(conf) {
                 val = arrDb.pop();
 
                 if ($helper.isRuntime()) {
-                    $helper.getRuntime().require('db').update(classId, id, propertyName, arrDb);
+                    $helper.getRuntime().require('db').update({
+                        'collection': classId,
+                        'id': id,
+                        'field': propertyName,
+                        'value': arrDb
+                    });
                 }
 
                 $workflow.state({
@@ -461,7 +476,10 @@ function createClass(classId) {
         $db.store[classId][config._id] = config;
 
         if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-            $helper.getRuntime().require('db').insert(classId, config);
+            $helper.getRuntime().require('db').insert({
+                collection: classId,
+                document: config
+            });
         }
 
         Object.freeze(this);
@@ -604,7 +622,12 @@ function addProperties(model, Class, classId) {
                                     component[propertyName] = realVal;
 
                                     if ($helper.isRuntime()) {
-                                        $helper.getRuntime().require('db').update(classId, this.id(), propertyName, component[propertyName]);
+                                        $helper.getRuntime().require('db').update({
+                                            'collection': classId,
+                                            'id': this.id(),
+                                            'field': propertyName,
+                                            'value': component[propertyName]
+                                        });
                                     }
 
                                     length = realVal;
@@ -668,7 +691,12 @@ function addProperties(model, Class, classId) {
                                 component[propertyName][position] = realVal;
 
                                 if ($helper.isRuntime()) {
-                                    $helper.getRuntime().require('db').update(classId, this.id(), propertyName, component[propertyName]);
+                                    $helper.getRuntime().require('db').update({
+                                        'collection': classId,
+                                        'id': this.id(),
+                                        'field': propertyName,
+                                        'value': component[propertyName]
+                                    });
                                 }
 
                                 $workflow.state({
@@ -739,7 +767,12 @@ function addProperties(model, Class, classId) {
                                 }
 
                                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                                    $helper.getRuntime().require('db').update(classId, this.id(), propertyName, value);
+                                    $helper.getRuntime().require('db').update({
+                                        'collection': classId,
+                                        'id': this.id(),
+                                        'field': propertyName,
+                                        'value': value
+                                    });
                                 }
 
                                 // case of RuntimeBehavior
@@ -852,7 +885,12 @@ function addStructure(path, name, model, id) {
                             }
 
                             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                                $helper.getRuntime().require('db').update(model, id, fullPath, value);
+                                $helper.getRuntime().require('db').update({
+                                    'collection': model,
+                                    'id': id,
+                                    'field': fullPath,
+                                    'value': value
+                                });
                             }
 
                             // case of RuntimeBehavior

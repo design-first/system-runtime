@@ -606,35 +606,20 @@ var system = {
             },
             "insert": {
                 "params": [{
-                    "name": "classId",
-                    "type": "string"
-                }, {
-                    "name": "object",
-                    "type": "object"
+                    "name": "event",
+                    "type": "dbInsertEvent"
                 }]
             },
             "update": {
                 "params": [{
-                    "name": "schema",
-                    "type": "string"
-                }, {
-                    "name": "componentId",
-                    "type": "string"
-                }, {
-                    "name": "attributeName",
-                    "type": "string"
-                }, {
-                    "name": "attributeValue",
-                    "type": "object"
+                    "name": "event",
+                    "type": "dbUpdateEvent"
                 }]
             },
             "remove": {
                 "params": [{
-                    "name": "classId",
-                    "type": "string"
-                }, {
-                    "name": "object",
-                    "type": "string"
+                    "name": "event",
+                    "type": "dbRemoveEvent"
                 }]
             },
             "_id": "18a51169d7112d4"
@@ -1363,6 +1348,67 @@ var system = {
             "name": "text",
             "type": "string",
             "core": true
+        },
+        "dbInsertEvent": {
+            "_id": "148ef1e19810e6d",
+            "name": "dbInsertEvent",
+            "type": "object",
+            "schema": {
+                "collection": {
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                },
+                "document": {
+                    "type": "object",
+                    "mandatory": true,
+                    "default": {}
+                }
+            }
+        },
+        "dbRemoveEvent": {
+            "_id": "1952e1ac4213f4a",
+            "name": "dbRemoveEvent",
+            "type": "object",
+            "schema": {
+                "collection": {
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                },
+                "id": {
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }
+            }
+        },
+        "dbUpdateEvent": {
+            "_id": "1f5c41309711752",
+            "name": "dbUpdateEvent",
+            "type": "object",
+            "schema": {
+                "collection": {
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                },
+                "id": {
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                },
+                "field": {
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                },
+                "value": {
+                    "type": "object",
+                    "mandatory": true,
+                    "default": {}
+                }
+            }
         }
     },
     "behaviors": {

@@ -335,7 +335,10 @@ RuntimeDatabaseCollection.prototype.insert = function (document) {
                     result.push(component.id());
                 } else {
                     if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                        $helper.getRuntime().require('db').insert(this.name, obj);
+                        $helper.getRuntime().require('db').insert({
+                            collection: this.name,
+                            document: obj
+                        });
                     }
                 }
 
@@ -427,7 +430,12 @@ RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
                                 docs[i][attributeName] = update[attributeName];
                                 updated = updated + 1;
                                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                                    $helper.getRuntime().require('db').update(this.name, docs[i]._id, attributeName, update[attributeName]);
+                                    $helper.getRuntime().require('db').update({
+                                        'collection': this.name,
+                                        'id': docs[i]._id,
+                                        'field': attributeName,
+                                        'value': update[attributeName]
+                                    });
                                 }
                                 $workflow.state({
                                     "component": docs[i]._id,
@@ -445,7 +453,12 @@ RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
                         docs[i][attributeName] = update[attributeName];
                         updated = updated + 1;
                         if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                            $helper.getRuntime().require('db').update(this.name, docs[i]._id, attributeName, update[attributeName]);
+                            $helper.getRuntime().require('db').update({
+                                'collection': this.name,
+                                'id': docs[i]._id,
+                                'field': attributeName,
+                                'value': update[attributeName]
+                            });
                         }
                     }
                 }
@@ -490,7 +503,10 @@ RuntimeDatabaseCollection.prototype.remove = function (query) {
                             component.destroy();
                         }
                         if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                            $helper.getRuntime().require('db').remove(this.name, id);
+                            $helper.getRuntime().require('db').remove({
+                                'collection': this.name,
+                                'id': id
+                            });
                         }
                         result.push(id);
                     }
@@ -507,7 +523,10 @@ RuntimeDatabaseCollection.prototype.remove = function (query) {
                         component.destroy();
                     }
                     if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                        $helper.getRuntime().require('db').remove(this.name, id);
+                        $helper.getRuntime().require('db').remove({
+                            'collection': this.name,
+                            'id': id
+                        });
                     }
                     result.push(id);
                 }
@@ -524,7 +543,10 @@ RuntimeDatabaseCollection.prototype.remove = function (query) {
                 }
             }
             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                $helper.getRuntime().require('db').remove(this.name, id);
+                $helper.getRuntime().require('db').remove({
+                    'collection': this.name,
+                    'id': id
+                });
             }
             result.push(id);
         }
