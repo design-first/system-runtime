@@ -457,7 +457,7 @@ function validParamNumbers(className, state, action) {
 
     switch (true) {
         case isCollection:
-            modelNumberParam = [3, 3];
+            modelNumberParam = [2, 2];
             break;
         case isProperty:
             modelNumberParam = [1, 1];
@@ -516,8 +516,8 @@ function checkParams(params) {
 
     switch (true) {
         case isCollection:
-            paramsType = ['number', $metamodel.getModel(componentClassName)[methodName].type[0], 'string'];
-            paramsNumber = [3, 3];
+            paramsType = [$metamodel.getModel(componentClassName)[methodName].type[0], 'string'];
+            paramsNumber = [2, 2];
             break;
         case isProperty:
             paramsType = [$metamodel.getModel(componentClassName)[methodName].type];

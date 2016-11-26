@@ -625,6 +625,7 @@ var system = {
             "_id": "18a51169d7112d4"
         },
         "16b9d1ac2216ffe": {
+            "_id": "16b9d1ac2216ffe",
             "_name": "RuntimeLogger",
             "_core": true,
             "level": {
@@ -636,28 +637,27 @@ var system = {
             "debug": {
                 "params": [{
                     "name": "message",
-                    "type": "string"
+                    "type": "any"
                 }]
             },
             "info": {
                 "params": [{
                     "name": "message",
-                    "type": "string"
+                    "type": "any"
                 }]
             },
             "warn": {
                 "params": [{
                     "name": "message",
-                    "type": "string"
+                    "type": "any"
                 }]
             },
             "error": {
                 "params": [{
                     "name": "message",
-                    "type": "string"
+                    "type": "any"
                 }]
-            },
-            "_id": "16b9d1ac2216ffe"
+            }
         },
         "1d9b6139411aa91": {
             "_name": "RuntimeMessage",

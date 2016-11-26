@@ -297,14 +297,8 @@ function invalidDocumentOnDbInsert(doc, collectionName) {
  * @param {String} type expected type defined by the schema
  */
 function invalidPropertyTypeOnDbUpdate(collectionName, id, propertyName, propertyValue, type) {
-    if (type.indexOf("#") !== -1) {
-        getLogger().warn("invalid type for property '" + propertyName + "' on an update operation on collection '" + collectionName + "': expected '" + type + "' instead of '" + propertyValue + "' on component '" + id + "'");
-    } else {
-        getLogger().warn("invalid type for property '" + propertyName + "' on an update operation on collection '" + collectionName + "': expected '" + type + "' instead of '" + typeof propertyValue + "' on component '" + id + "'");
-    }
+    getLogger().warn("invalid type when trying to update the property '" + propertyName + "' of document '" + id + "' (collection '" + collectionName + "') with the value '" + JSON.stringify(propertyValue) + "': expected type '" + type + "'");
 }
-
-
 
 /*
  * Unkonw property on a Runtime database update operation.

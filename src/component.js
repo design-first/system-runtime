@@ -99,12 +99,11 @@ function RuntimeArray(conf) {
         }
     });
 
-    /* Override push method.
-     * @push
-     * @param {RuntimeComponent|Object} value
-     */
-    arr.push = function push(val) {
-        var isClass = false;
+    function _add(val, action, start, deleteCount) {
+        var isClass = false,
+            i = 0,
+            length = 0,
+            del = [];
 
         if (!isReadOnly) {
 
@@ -112,7 +111,28 @@ function RuntimeArray(conf) {
 
             if (isClass) {
                 if (val && $metamodel.inheritFrom(val.constructor.name, type.replace('@', ''))) {
-                    arrDb.push(val.id());
+                    switch (true) {
+                        case action === 'push':
+                            arrDb.push(val.id());
+                            break;
+                        case action === 'unshift':
+                            arrDb.unshift(val.id());
+                            break;
+                        case action === 'splice':
+                            del = arrDb.splice(start, deleteCount, val);
+
+                            length = del.length;
+                            for (i = 0; i < length; i++) {
+                                $workflow.state({
+                                    "component": id,
+                                    "state": propertyName,
+                                    "data": [del[i], 'remove']
+                                });
+                            }
+                            break;
+                        default:
+                            break;
+                    }
 
                     if ($helper.isRuntime()) {
                         $helper.getRuntime().require('db').update({
@@ -126,14 +146,30 @@ function RuntimeArray(conf) {
                     $workflow.state({
                         "component": id,
                         "state": propertyName,
-                        "data": [arrDb.length, val.id(), 'add']
+                        "data": [val.id(), 'add']
                     });
                 } else {
-                    $log.invalidPropertyName(id, classId, propertyName, val.id(), type);
+                    if (typeof val.id !== 'undefined') {
+                        $log.invalidPropertyName(id, classId, propertyName, val.id(), type);
+                    } else {
+                        $log.invalidPropertyName(id, classId, propertyName, val, type);
+                    }
                 }
             } else {
                 if (val && $metamodel.isValidType(val, type)) {
-                    arrDb.push(val);
+                    switch (true) {
+                        case action === 'push':
+                            arrDb.push(val);
+                            break;
+                        case action === 'unshift':
+                            arrDb.unshift(val);
+                            break;
+                        case action === 'splice':
+                            arrDb.splice(start, deleteCount, val);
+                            break;
+                        default:
+                            break;
+                    }
 
                     if ($helper.isRuntime()) {
                         $helper.getRuntime().require('db').update({
@@ -147,7 +183,7 @@ function RuntimeArray(conf) {
                     $workflow.state({
                         "component": id,
                         "state": propertyName,
-                        "data": [arrDb.length, val, 'add']
+                        "data": [val, 'add']
                     });
                 } else {
                     $log.invalidPropertyName(id, classId, propertyName, val, type);
@@ -157,20 +193,26 @@ function RuntimeArray(conf) {
             $log.readOnlyProperty(id, classId, propertyName);
         }
         return arrDb.length;
-    };
+    }
 
-    /* Override pop method.
-     * @pop
-     * @return {RuntimeComponent|Object} value
-     */
-    arr.pop = function pop() {
+    function _remove(action) {
         var result,
             val = null,
             isClass = false;
 
         if (!isReadOnly) {
             if (arrDb.length !== 0) {
-                val = arrDb.pop();
+
+                switch (true) {
+                    case action === 'pop':
+                        val = arrDb.pop();
+                        break;
+                    case action === 'shift':
+                        val = arrDb.shift();
+                        break;
+                    default:
+                        break;
+                }
 
                 if ($helper.isRuntime()) {
                     $helper.getRuntime().require('db').update({
@@ -184,7 +226,7 @@ function RuntimeArray(conf) {
                 $workflow.state({
                     "component": id,
                     "state": propertyName,
-                    "data": [arrDb.length, val, 'remove']
+                    "data": [val, 'remove']
                 });
 
                 isClass = type.indexOf('@') !== -1;
@@ -199,6 +241,57 @@ function RuntimeArray(conf) {
             $log.readOnlyProperty(id, classId, propertyName);
         }
         return result;
+    }
+
+    /* Override push method.
+     * @push
+     * @param {RuntimeComponent|Object} val
+     */
+    arr.push = function push(val) {
+        return _add(val, 'push');
+    };
+
+    /* Override unshift method.
+     * @unshift
+     * @param {RuntimeComponent|Object} val
+     */
+    arr.unshift = function unshift(val) {
+        return _add(val, 'unshift');
+    };
+
+    /* Override concat method.
+     * @push
+     * @param {RuntimeComponent|Object} arr
+     */
+    arr.concat = function concat(arr) {
+        var i = 0,
+            length = 0;
+
+        if (Array.isArray(arr)) {
+            length = arr.length;
+            for (i = 0; i < length; i++) {
+                _add(arr[i], 'push');
+            }
+        }
+
+        conf.arr = arrDb;
+        return new RuntimeArray(conf);
+    };
+
+    /* Override pop method.
+     * @pop
+     * @return {RuntimeComponent|Object} value
+     */
+    arr.pop = function pop() {
+        return _remove('pop');
+    };
+
+    /* Override shift method.
+     * @shift
+     * @return {RuntimeComponent|Object} value
+     */
+    arr.shift = function shift() {
+        return _remove('shift');
     };
 
     /* Override sort method.
@@ -208,6 +301,16 @@ function RuntimeArray(conf) {
      */
     arr.sort = function sort(funct) {
         arrDb.sort(funct);
+
+        if ($helper.isRuntime()) {
+            $helper.getRuntime().require('db').update({
+                'collection': classId,
+                'id': id,
+                'field': propertyName,
+                'value': arrDb
+            });
+        }
+
         return arr;
     };
 
@@ -217,7 +320,60 @@ function RuntimeArray(conf) {
      */
     arr.reverse = function reverse() {
         arrDb.reverse();
+
+        if ($helper.isRuntime()) {
+            $helper.getRuntime().require('db').update({
+                'collection': classId,
+                'id': id,
+                'field': propertyName,
+                'value': arrDb
+            });
+        }
         return arr;
+    };
+
+    /* Override splice method.
+     * @splice
+     * @return {RuntimeArray} the spliced RuntimeArray
+     */
+    arr.splice = function splice(start, deleteCount, val) {
+        var result = [],
+            i = 0,
+            length = 0;
+
+        if (typeof val !== 'undefined') {
+            _add(val, 'splice', start, deleteCount);
+        } else {
+            result = arrDb.splice(start, deleteCount);
+
+            if ($helper.isRuntime()) {
+                $helper.getRuntime().require('db').update({
+                    'collection': classId,
+                    'id': id,
+                    'field': propertyName,
+                    'value': arrDb
+                });
+            }
+
+            length = result.length;
+            for (i = 0; i < length; i++) {
+                $workflow.state({
+                    "component": id,
+                    "state": propertyName,
+                    "data": [result[i], 'remove']
+                });
+            }
+        }
+        return result;
+    };
+
+    /* Override slice method.
+     * @slice
+     * @return {RuntimeArray} the sliced RuntimeArray
+     */
+    arr.slice = function slice(begin, end) {
+        var result = arrDb.slice(begin, end);
+        return result;
     };
 
     return arr;
@@ -610,14 +766,11 @@ function addProperties(model, Class, classId) {
                                     component = search[0];
                                     realVal = _getRealCollection(position, propertyType[0]);
 
-                                    length = component[propertyName];
-                                    for (i = 0; i < length; i++) {
-                                        $workflow.state({
-                                            "component": this.id(),
-                                            "state": propertyName,
-                                            "data": [i, component[propertyName][i], 'remove']
-                                        });
-                                    }
+                                    $workflow.state({
+                                        "component": this.id(),
+                                        "state": propertyName,
+                                        "data": [realVal, 'reset']
+                                    });
 
                                     component[propertyName] = realVal;
 
@@ -627,15 +780,6 @@ function addProperties(model, Class, classId) {
                                             'id': this.id(),
                                             'field': propertyName,
                                             'value': component[propertyName]
-                                        });
-                                    }
-
-                                    length = realVal;
-                                    for (i = 0; i < length; i++) {
-                                        $workflow.state({
-                                            "component": this.id(),
-                                            "state": propertyName,
-                                            "data": [i, realVal[i], 'add']
                                         });
                                     }
                                 }
@@ -702,7 +846,7 @@ function addProperties(model, Class, classId) {
                                 $workflow.state({
                                     "component": this.id(),
                                     "state": propertyName,
-                                    "data": [position, realVal, 'add']
+                                    "data": [realVal, 'add']
                                 });
                             }
                         } else {
@@ -752,7 +896,11 @@ function addProperties(model, Class, classId) {
 
                                 switch (true) {
                                     case propertyType.indexOf('@') !== -1:
-                                        component[propertyName] = value.id();
+                                        if (value === null) {
+                                            component[propertyName] = value;
+                                        } else {
+                                            component[propertyName] = value.id();
+                                        }
                                         break;
                                     case propertyType === 'date':
                                         if (typeof value === 'string') {

@@ -1419,7 +1419,7 @@ function isValidType(value, typeName) {
         var typeRef = getReference(typeName);
         var component = value;
 
-        if (value !== '') {
+        if (value !== '' && value !== null) {
             if (hasType(value, 'string')) {
                 component = $component.get(value);
             }
@@ -1850,8 +1850,8 @@ function isValidObject(object, schema, strict, cleanRef) {
                                 if (getRealType(field[i]) === 'string') {
                                     // Case of an import of a system
                                     if ($component.get(field[i])) {
-                                        if (getClassName($component.get(field[i])) !== getReference(typeArray)) {
-                                            $log.invalidClassName(JSON.stringify(field[i]), getReference(typeArray), getClassName(field[i]));
+                                        if (!inheritFrom(getClassName($component.get(field[i])), getReference(typeArray))) {
+                                            $log.invalidClassName(JSON.stringify(field[i]), getReference(typeArray), getClassName($component.get(field[i])));
                                             isValid = false;
                                             break;
                                         }
