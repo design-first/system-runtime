@@ -1223,7 +1223,7 @@ function init() {
                 "mandatory": false
             },
             "value": {
-                "type": ["string"],
+                "type": ["any"],
                 "mandatory": false
             },
             "core": {
@@ -1823,7 +1823,7 @@ function isValidObject(object, schema, strict, cleanRef) {
                                 break;
                             }
                         } else {
-                            if (getRealType(field) !== typeSchema) {
+                            if (getRealType(field) !== typeSchema && getRealType(field) !== 'any') {
                                 $log.invalidPropertyType(fieldName, typeSchema, field);
                                 isValid = false;
                                 break;
@@ -1841,7 +1841,7 @@ function isValidObject(object, schema, strict, cleanRef) {
                             isValid = isValidObject(field[i], store.type[typeArray].schema);
                         } else {
                             if (!isReference(typeArray)) {
-                                if (getRealType(field[i]) !== typeArray) {
+                                if (getRealType(field[i]) !== typeArray && typeArray !== 'any') {
                                     $log.invalidPropertyType(field[i], typeArray, field[i]);
                                     isValid = false;
                                     break;
