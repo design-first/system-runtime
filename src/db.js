@@ -327,6 +327,8 @@ RuntimeDatabaseCollection.prototype.insert = function (document) {
                     obj._id = $helper.generateId();
                 }
 
+                $metamodel.prepareObject(obj, $metamodel.getModel(this.name));
+
                 store[this.name][obj._id] = obj;
 
                 Component = $component.get(this.name);
@@ -337,7 +339,7 @@ RuntimeDatabaseCollection.prototype.insert = function (document) {
                     if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                         $helper.getRuntime().require('db').insert({
                             collection: this.name,
-                            document: obj
+                            document: JSON.parse(JSON.stringify(obj))
                         });
                     }
                 }
