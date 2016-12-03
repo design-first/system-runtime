@@ -18,4 +18,14 @@ describe('a Runtime instance', function () {
         var id = runtime.system('a system');
         expect(id).toBeDefined();
     });
+
+    it('can bundle a system', function () {
+        var bundle = runtime.bundle();
+        expect(bundle).toBeDefined();
+    });
+
+    it('can get the status of all installed systems', function () {
+        var status = runtime.status();
+        expect(status).toBeDefined();
+    });
 });

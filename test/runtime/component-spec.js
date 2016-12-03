@@ -250,6 +250,43 @@ describe('a component', function () {
         expect(yoda.lastName()).toBe('Master');
     });
 
+    it('can add a link to anoter components', function () {
+        var Person = runtime.require('Person');
+
+        var anakin = new Person({
+            'firstName': 'Anakin',
+            'lastName': 'Skywalker'
+        });
+
+        var leia = new Person({
+            'firstName': 'Leia Amidala',
+            'lastName': 'Skywalker'
+        });
+
+        leia.father(anakin);
+
+        expect(leia.father().firstName()).toBe('Anakin');
+    });
+
+    it('can remove a link to anoter components', function () {
+        var Person = runtime.require('Person');
+
+        var anakin = new Person({
+            'firstName': 'Anakin',
+            'lastName': 'Skywalker'
+        });
+
+        var leia = new Person({
+            'firstName': 'Leia Amidala',
+            'lastName': 'Skywalker'
+        });
+
+        leia.father(anakin);
+        leia.father(null);
+
+        expect(leia.father()).toBe(undefined);
+    });
+
     it('can add an item in a collection in the config', function () {
         var Person = runtime.require('Person');
 
