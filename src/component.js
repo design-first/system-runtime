@@ -634,7 +634,7 @@ function createClass(classId) {
         if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
             $helper.getRuntime().require('db').insert({
                 collection: classId,
-                document: JSON.parse(JSON.stringify(config))
+                document: config
             });
         }
 

@@ -339,7 +339,7 @@ RuntimeDatabaseCollection.prototype.insert = function (document) {
                     if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                         $helper.getRuntime().require('db').insert({
                             collection: this.name,
-                            document: JSON.parse(JSON.stringify(obj))
+                            document: obj
                         });
                     }
                 }
