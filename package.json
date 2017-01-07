@@ -29,10 +29,10 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/system-sdk/system-runtime.git"
+    "url": "https://github.com/design-first/system-runtime.git"
   },
   "bugs": {
-    "url": "https://github.com/system-sdk/system-runtime/issues"
+    "url": "https://github.com/design-first/system-runtime/issues"
   },
   "scripts": {
     "watch": "grunt watch",

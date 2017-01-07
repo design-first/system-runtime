@@ -1,9 +1,9 @@
 # System Runtime
 
-[![Build Status](https://travis-ci.org/system-sdk/system-runtime.svg?branch=master)](https://travis-ci.org/system-sdk/system-runtime)
-[![Coverage Status](https://coveralls.io/repos/github/system-sdk/system-runtime/badge.svg?branch=master)](https://coveralls.io/github/system-sdk/system-runtime?branch=master)
-[![devDependency Status](https://david-dm.org/system-sdk/system-runtime/dev-status.svg)](https://david-dm.org/system-sdk/system-runtime#info=devDependencies)
-[![Join the chat at https://gitter.im/system-sdk/system-runtime](https://badges.gitter.im/system-sdk/system-runtime.svg)](https://gitter.im/system-sdk/system-runtime?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/design-first/system-runtime.svg?branch=master)](https://travis-ci.org/design-first/system-runtime)
+[![Coverage Status](https://coveralls.io/repos/github/design-first/system-runtime/badge.svg?branch=master)](https://coveralls.io/github/design-first/system-runtime?branch=master)
+[![devDependency Status](https://david-dm.org/design-first/system-runtime/dev-status.svg)](https://david-dm.org/design-first/system-runtime#info=devDependencies)
+[![Join the chat at https://gitter.im/design-first/system-runtime](https://badges.gitter.im/design-first/system-runtime.svg)](https://gitter.im/design-first/system-runtime?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## What is System Runtime ?
 
