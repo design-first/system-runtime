@@ -119,7 +119,7 @@ module.exports = function (grunt) {
         concat: {
             systemModule: {
                 files: {
-                    'build/system/system.js': ['src/template/banner/systemmodule.txt', 'build/sytem-runtime.json', 'src/template/footer/systemmodule.txt']
+                    'build/system/system.js': ['src/template/banner/systemmodule.txt', 'build/system-runtime.json', 'src/template/footer/systemmodule.txt']
                 }
             },
             license: {
@@ -131,7 +131,7 @@ module.exports = function (grunt) {
         "merge-json": {
             system: {
                 src: ["src/addons/*.json", "src/system/system-runtime.json"],
-                dest: "build/sytem-runtime.json"
+                dest: "build/system-runtime.json"
             }
         }
     });
