@@ -74,7 +74,7 @@ Just add a link tag in your HTML to install and start your bundle:
 <link rel="system" type="application/json" href="app.json">
 
 <!-- load System Runtime -->
-<script src="https://cdn.jsdelivr.net/system-runtime/1.9.2/system-runtime.min.js"></script>
+<script src="https://cdn.jsdelivr.net/system-runtime/1.9.4/system-runtime.min.js"></script>
 ```
 
 #### Install the bundle in Node.js
@@ -152,7 +152,7 @@ runtime.version();
 
 Add a `<script>` tag to your HTML page:
 ```html
-<script src="https://cdn.jsdelivr.net/system-runtime/1.9.2/system-runtime.min.js"></script>
+<script src="https://cdn.jsdelivr.net/system-runtime/1.9.4/system-runtime.min.js"></script>
 ```
 
 Then you can use runtime on your script:

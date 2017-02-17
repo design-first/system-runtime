@@ -1,6 +1,6 @@
 {
     "name": "system-runtime",
-    "version": "1.9.3",
+    "version": "1.9.4",
     "description": "A JavaScript library that runs systems",
     "license": "Apache-2.0",
     "homepage": "https://designfirst.io/systemruntime/",
