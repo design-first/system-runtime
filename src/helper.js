@@ -88,7 +88,12 @@ function generateId() {
     function gen() {
         return Math.floor((1 + Math.random()) * 0x10000).toString(16);
     }
-    return gen() + gen() + gen();
+    function getPrefix() {
+        var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
+        return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
+    }
+    
+    return getPrefix() + gen() + gen() + gen();
 }
 
 
