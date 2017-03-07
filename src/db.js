@@ -248,6 +248,7 @@ var RuntimeDatabaseCollection = function (name) {
  */
 RuntimeDatabaseCollection.prototype.find = function (query) {
     var result = [],
+        resultId = {},
         id = '',
         object = {};
 
@@ -259,7 +260,10 @@ RuntimeDatabaseCollection.prototype.find = function (query) {
                 for (id in store[this.name]) {
                     object = store[this.name][id];
                     if (contains(criteria, object)) {
-                        result.push(object);
+                        if (typeof resultId[id] === 'undefined') {
+                            result.push(object);
+                            resultId[id] = true;
+                        }
                     }
                 }
             }.bind(this));
