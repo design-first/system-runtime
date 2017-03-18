@@ -956,6 +956,46 @@ var system = {
             "bundle": {
                 "result": "string"
             }
+        },
+        "o1e1e01e6b41cec3": {
+            "_id": "o1e1e01e6b41cec3",
+            "_name": "RuntimeLog",
+            "action": {
+                "type": "dbAction",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "insert"
+            },
+            "collection": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "id": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "field": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "value": {
+                "type": "any",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "order": {
+                "type": "number",
+                "readOnly": false,
+                "mandatory": false,
+                "default": 0
+            }
         }
     },
     "schemas": {
@@ -1193,6 +1233,19 @@ var system = {
             "stop": "method",
             "uninstall": "method",
             "bundle": "method"
+        },
+        "f1a10d1067d1b23a": {
+            "_id": "f1a10d1067d1b23a",
+            "_name": "RuntimeLog",
+            "_inherit": [
+                "RuntimeComponent"
+            ],
+            "action": "property",
+            "collection": "property",
+            "id": "property",
+            "field": "property",
+            "value": "property",
+            "order": "property"
         }
     },
     "types": {
@@ -1501,6 +1554,16 @@ var system = {
                     "default": null
                 }
             }
+        },
+        "dbAction": {
+            "_id": "e1950e16f2914da9",
+            "name": "dbAction",
+            "type": "string",
+            "value": [
+                "insert",
+                "update",
+                "remove"
+            ]
         }
     },
     "behaviors": {
@@ -1524,7 +1587,7 @@ var system = {
             "_id": "16764100d51b5f8",
             "component": "RuntimeStorage",
             "state": "set",
-            "action": "function set(key, value) {\n    var store = this.store(),\n        item = {};\n    \n    store[key] = value;\n    this.store(store);\n    \n    item[key] = JSON.stringify(value);\n    \n    switch (true) {\n        case typeof localStorage !== 'undefined':\n            localStorage.setItem(key, JSON.stringify(value)); \n            break;\n        default:\n            break;\n    }\n}",
+            "action": "function set(key, value) {\n    var store = this.store(),\n        item = {};\n    \n    store[key] = value;\n    this.store(store);\n\n    item[key] = JSON.stringify(value);\n    \n    switch (true) {\n        case typeof localStorage !== 'undefined':\n            localStorage.setItem(key, JSON.stringify(value)); \n            break;\n        default:\n            break;\n    }\n}",
             "useCoreAPI": false,
             "core": true
         },
@@ -1886,7 +1949,8 @@ var system = {
         },
         "RuntimeLogger": {
             "logger": {
-                "_id": "logger"
+                "_id": "logger",
+                "level": "warn"
             }
         },
         "RuntimeMetamodel": {

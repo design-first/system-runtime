@@ -776,6 +776,7 @@ function initDbStructure() {
     $db.collection('RuntimeType');
     $db.collection('RuntimeMessage');
     $db.collection('RuntimeChannel');
+    $db.collection('RuntimeLog');
 }
 
 

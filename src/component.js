@@ -631,6 +631,8 @@ function createClass(classId) {
         // create link to db
         $db.store[classId][config._id] = config;
 
+        $db.createLog('insert', classId, config._id, '', config);
+
         if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
             $helper.getRuntime().require('db').insert({
                 collection: classId,

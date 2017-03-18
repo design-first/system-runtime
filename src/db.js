@@ -68,19 +68,31 @@ var store = {},
         'RuntimeClassInfo',
         'RuntimeMessage',
         'RuntimeChannel',
-        'RuntimeLogger'
+        'RuntimeLogger',
+        'RuntimeLog'
     ],
     coreDb = [
+        'RuntimeLog',
         'RuntimeSchema',
         'RuntimeLogger',
         'RuntimeModel',
         'RuntimeGeneratedModel',
         'RuntimeState',
         'RuntimeType'
-    ];
+    ],
+    logOrder = 0;
 
 
 /* Private methods */
+
+
+/*
+ * Increment Log
+ * @method incLogOrder
+ */
+function incLogOrder() {
+    return logOrder++;
+}
 
 
 /*
@@ -340,6 +352,8 @@ RuntimeDatabaseCollection.prototype.insert = function (document) {
                     component = new Component(obj);
                     result.push(component.id());
                 } else {
+                    createLog('insert', this.name, obj._id, '', obj);
+
                     if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                         $helper.getRuntime().require('db').insert({
                             collection: this.name,
@@ -435,6 +449,9 @@ RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
                             if ($metamodel.isValidType(update[attributeName], type)) {
                                 docs[i][attributeName] = update[attributeName];
                                 updated = updated + 1;
+
+                                createLog('update', this.name, docs[i]._id, attributeName, update[attributeName]);
+
                                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                                     $helper.getRuntime().require('db').update({
                                         'collection': this.name,
@@ -457,6 +474,9 @@ RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
                     } else {
                         // TODO more check in case of schema update
                         docs[i][attributeName] = update[attributeName];
+
+                        createLog('update', this.name, docs[i]._id, attributeName, update[attributeName]);
+
                         updated = updated + 1;
                         if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                             $helper.getRuntime().require('db').update({
@@ -504,6 +524,9 @@ RuntimeDatabaseCollection.prototype.remove = function (query) {
 
                     if (contains(criteria, object)) {
                         delete store[this.name][id];
+
+                        createLog('remove', this.name, id, '', '');
+
                         component = $component.get(id);
                         if (component) {
                             component.destroy();
@@ -524,6 +547,9 @@ RuntimeDatabaseCollection.prototype.remove = function (query) {
 
                 if (contains(query, object)) {
                     delete store[this.name][id];
+
+                    createLog('remove', this.name, id, '', '');
+
                     component = $component.get(id);
                     if (component) {
                         component.destroy();
@@ -541,6 +567,8 @@ RuntimeDatabaseCollection.prototype.remove = function (query) {
     } else {
         for (id in store[this.name]) {
             delete store[this.name][id];
+
+            createLog('remove', this.name, id, '', '');
 
             if (coreDb.indexOf(this.name) == -1) {
                 component = $component.get(id);
@@ -578,6 +606,40 @@ RuntimeDatabaseCollection.prototype.count = function () {
 
 
 /* Public methods */
+
+
+/*
+ * Create a Log
+ * @method createLog
+ * @param {String} action CRUD action that happenned
+ * @param {String} collection collection of the 
+ * @param {String} id id of the component
+ * @param {String} field field of the component
+ * @param {String} value value of the field of the component
+ */
+function createLog(action, collection, id, field, value) {
+    var logId = $helper.generateId();
+
+    collection = collection || '';
+    id = id || '';
+    field = field || '';
+    value = value || '';
+
+    // clean log every 1000 logs
+    if (Object.keys(store.RuntimeLog).length > 1000) {
+        store.RuntimeLog = {};
+    }
+
+    store.RuntimeLog[logId] = {
+        _id: logId,
+        action: action,
+        collection: collection,
+        id: id,
+        field: field,
+        value: value,
+        order: incLogOrder()
+    };
+}
 
 
 /*
@@ -897,6 +959,17 @@ function init() {
  * @static
  */
 
+
+/**
+ * Create a Log
+ * @method createLog
+ * @param {String} action CRUD action that happenned
+ * @param {String} collection collection of the 
+ * @param {String} id id of the component
+ * @param {String} field field of the component
+ * @param {String} value value of the field of the component
+ */
+exports.createLog = createLog;
 
 /**
  * Create a new {{#crossLink "RuntimeDatabaseCollection"}}{{/crossLink}}.
