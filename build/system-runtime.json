@@ -509,8 +509,8 @@
 			"system": {
 				"params": [
 					{
-						"name": "name",
-						"type": "string",
+						"name": "params",
+						"type": "any",
 						"mandatory": false
 					}
 				],
@@ -1695,7 +1695,7 @@
 			"_id": "13010167f313f87",
 			"component": "Runtime",
 			"state": "system",
-			"action": "function system(name) {\n    var RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n    \n    if (name) {\n        conf.master = true;\n        conf.name = name;\n        RuntimeSystem = this.require('RuntimeSystem');\n        system = new RuntimeSystem(conf);\n    } else {\n        result = $db.RuntimeSystem.find({\n            'master': true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}",
+			"action": "function system(params) {\n    var RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n    \n    if (params) {\n        if (typeof params === 'string') {\n          conf.master = true;\n          conf.name = params;\n        } else {\n          conf = params;\n          conf.master = true;\n        }\n        RuntimeSystem = this.require('RuntimeSystem');\n        system = new RuntimeSystem(conf);\n    } else {\n        result = $db.RuntimeSystem.find({\n            'master': true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}",
 			"core": true,
 			"useCoreAPI": true
 		},
