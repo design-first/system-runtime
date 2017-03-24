@@ -395,19 +395,25 @@ function callAction(component, state, action, params, isEvent) {
         if (e instanceof RuntimeError) {
             throw e;
         } else {
-            if (component && component.error) {
-                component.error({
-                    "message": "error when trying to call the method '" + state + "' on component '" + component.id() + "'",
-                    "error": e
-                });
+             /* jshint -W054 */
+            if (new Function() === undefined) {
+             /* jshint +W054 */    
+                console.error('runtime: can not execute new Function() instruction in the current context.');
+            } else {
+                if (component && component.error) {
+                    component.error({
+                        "message": "error when trying to call the method '" + state + "' on component '" + component.id() + "'",
+                        "error": e
+                    });
+                }
+                if ($helper.getRuntime()) {
+                    $helper.getRuntime().error({
+                        "message": "error when trying to call the method '" + state + "' on component '" + component.id() + "'",
+                        "error": e
+                    });
+                }
+                $log.actionInvokeError(state, component.id(), component.constructor.name, e.message);
             }
-            if ($helper.getRuntime()) {
-                $helper.getRuntime().error({
-                    "message": "error when trying to call the method '" + state + "' on component '" + component.id() + "'",
-                    "error": e
-                });
-            }
-            $log.actionInvokeError(state, component.id(), component.constructor.name, e.message);
         }
     }
 
