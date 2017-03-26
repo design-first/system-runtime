@@ -1737,7 +1737,7 @@ var system = {
             "_id": "15ab1112e81b1b4",
             "component": "RuntimeDatabase",
             "state": "system",
-            "action": "function system(system) {\n    return $db.system(system);\n}",
+            "action": "function system(system) {\n    var result  = '';\n    \n    if (system) {\n      result = $db.system(system);\n      this.require(result).state('active');\n    } else {\n      result = $db.system();\n    }\n    return result;\n}",
             "core": true,
             "useCoreAPI": true
         },
@@ -1897,14 +1897,6 @@ var system = {
             "useCoreAPI": false,
             "core": true
         },
-        "15643114f31bf40": {
-            "_id": "15643114f31bf40",
-            "component": "RuntimeSystemOSGi",
-            "state": "state",
-            "action": "function state(value) { \n  if (this.require('logger')) {\n\t  this.require('logger').debug('the state of the system \\'' + this.name() + '\\' is now \\'' + value + '\\'');\n  }\t\n}",
-            "useCoreAPI": false,
-            "core": true
-        },
         "19cf317d7217331": {
             "_id": "19cf317d7217331",
             "component": "RuntimeOSGi",
@@ -1939,7 +1931,7 @@ var system = {
         "Runtime": {
             "runtime": {
                 "_id": "runtime",
-                "version": "1.9.5"
+                "version": "1.9.6"
             }
         },
         "RuntimeDatabase": {
@@ -1966,7 +1958,7 @@ var system = {
         }
     },
     "name": "system-runtime",
-    "version": "1.9.5",
+    "version": "1.9.6",
     "description": "System Runtime",
     "_id": "e89c617b6b15d24",
     "master": false,
