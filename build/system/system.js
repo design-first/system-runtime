@@ -995,7 +995,8 @@ var system = {
                 "readOnly": false,
                 "mandatory": false,
                 "default": 0
-            }
+            },
+            "_core": true
         }
     },
     "schemas": {
@@ -1240,6 +1241,7 @@ var system = {
             "_inherit": [
                 "RuntimeComponent"
             ],
+            "_core": true,
             "action": "property",
             "collection": "property",
             "id": "property",
@@ -1496,6 +1498,7 @@ var system = {
         },
         "dbInsertEvent": {
             "_id": "148ef1e19810e6d",
+            "core": true,
             "name": "dbInsertEvent",
             "type": "object",
             "schema": {
@@ -1515,6 +1518,7 @@ var system = {
             "_id": "1952e1ac4213f4a",
             "name": "dbRemoveEvent",
             "type": "object",
+            "core": true,
             "schema": {
                 "collection": {
                     "type": "string",
@@ -1530,6 +1534,7 @@ var system = {
         },
         "dbUpdateEvent": {
             "_id": "1f5c41309711752",
+            "core": true,
             "name": "dbUpdateEvent",
             "type": "object",
             "schema": {
@@ -1557,6 +1562,7 @@ var system = {
         },
         "dbAction": {
             "_id": "e1950e16f2914da9",
+            "core": true,
             "name": "dbAction",
             "type": "string",
             "value": [
@@ -1931,7 +1937,7 @@ var system = {
         "Runtime": {
             "runtime": {
                 "_id": "runtime",
-                "version": "1.9.6"
+                "version": "1.9.7"
             }
         },
         "RuntimeDatabase": {
@@ -1958,7 +1964,7 @@ var system = {
         }
     },
     "name": "system-runtime",
-    "version": "1.9.6",
+    "version": "1.9.7",
     "description": "System Runtime",
     "_id": "e89c617b6b15d24",
     "master": false,
