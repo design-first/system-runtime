@@ -22,7 +22,7 @@ Use System Runtime APIs to create your application:
 
 ```js
 // create an app
-var app = runtime.system('app');
+let app = runtime.system('app');
 
 // add code in the start method
 app.on('start', function start() {
@@ -73,7 +73,7 @@ Just add a link tag in your HTML to install and start your bundle:
 <link rel="system" type="application/json" href="app.json">
 
 <!-- load System Runtime -->
-<script src="https://cdn.jsdelivr.net/system-runtime/1.9.8/system-runtime.min.js"></script>
+<script src="https://cdn.jsdelivr.net/system-runtime/1.9.9/system-runtime.min.js"></script>
 ```
 
 #### Install the bundle in Node.js
@@ -82,7 +82,7 @@ Like in [OSGi](https://www.osgi.org), just call *install* API to install and sta
 
 ```js
 // require System Runtime
-var runtime = require('system-runtime');
+let runtime = require('system-runtime');
 
 // install your bundle 
 runtime.install('app.json');
@@ -118,20 +118,32 @@ With System Runtime your components really behave the way you designed them.
 
 ## Installation
 
-#### Node.js
+#### NPM
 
+Install System Runtime:
 ```sh
 $ npm install system-runtime --save
 ```
 
-Then:
-
+To use it server-side:
 ```js
-var runtime = require('system-runtime');
+let runtime = require('system-runtime');
+```
+
+To use it client-side, add a `<script>` tag to your HTML page:
+```html
+<script src="/node_modules/system-runtime/dist/system-runtime.min.js"></script>
+```
+
+Then you can use `runtime` on your script:
+```js
+// example: get System Runtime version
+runtime.version();
 ```
 
 #### Bower
 
+Install System Runtime:
 ```sh
 $ bower install system-runtime --save
 ```
@@ -141,7 +153,7 @@ Add a `<script>` tag to your HTML page:
 <script src="/bower_components/system-runtime/dist/system-runtime.min.js"></script>
 ```
 
-Then you can use runtime on your script:
+Then you can use `runtime` on your script:
 ```js
 // example: get System Runtime version
 runtime.version();
@@ -151,10 +163,10 @@ runtime.version();
 
 Add a `<script>` tag to your HTML page:
 ```html
-<script src="https://cdn.jsdelivr.net/system-runtime/1.9.8/system-runtime.min.js"></script>
+<script src="https://cdn.jsdelivr.net/system-runtime/1.9.9/system-runtime.min.js"></script>
 ```
 
-Then you can use runtime on your script:
+Then you can use `runtime` on your script:
 ```js
 // example: get System Runtime version
 runtime.version();
