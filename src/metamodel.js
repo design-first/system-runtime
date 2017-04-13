@@ -202,7 +202,6 @@ function generateModels() {
         modelExt = store.models[name];
         if (modelExt) {
             mergedModel = merge(modelExt, model);
-            delete mergedModel._id;
             store.generatedModels[name] = mergedModel;
         }
     }
@@ -227,7 +226,6 @@ function generateModels() {
                 modelParent = store.generatedModels[name];
                 if (modelParent) {
                     mergedModel = merge(modelParent, model);
-                    delete mergedModel._id;
                     store.generatedModels[modelName] = mergedModel;
                 }
             }
@@ -237,7 +235,6 @@ function generateModels() {
             modelExt = store.models[modelName];
             if (modelExt) {
                 mergedModel = merge(modelExt, store.generatedModels[modelName]);
-                delete mergedModel._id;
                 store.generatedModels[modelName] = mergedModel;
             }
         }
@@ -1069,7 +1066,6 @@ function schema(importedSchema) {
         schemas = $db.RuntimeSchema.find({ '_name': name });
         if (schemas.length) {
             mergedSchema = merge(schema, schemas[0]);
-            delete mergedSchema._id;
             $db.RuntimeSchema.update({ '_name': name }, mergedSchema);
             id = schemas[0]._id;
         } else {
@@ -1110,7 +1106,6 @@ function model(importedModel) {
         models = $db.RuntimeModel.find({ '_name': name });
         if (models.length) {
             mergedModel = merge(model, models[0]);
-            delete mergedModel._id;
             $db.RuntimeModel.update({ '_name': name }, mergedModel);
             id = models[0]._id;
         } else {
