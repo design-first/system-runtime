@@ -211,9 +211,16 @@ function contains(source, target) {
                     break;
                 }
             } else {
-                if (target[property] !== source[property]) {
-                    result = false;
-                    break;
+                if (Array.isArray(target[property]) && !Array.isArray(source[property])) {
+                    if (target[property].indexOf(source[property])) {
+                        result = false;
+                        break;
+                    }
+                } else {
+                    if (target[property] !== source[property]) {
+                        result = false;
+                        break;
+                    }
                 }
             }
         } else {

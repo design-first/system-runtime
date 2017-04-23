@@ -1465,28 +1465,24 @@ function isValidType(value, typeName) {
         return isValid;
     }
 
-    if (hasType(typeName, 'string')) {
-        switch (true) {
-            case isCustomType(typeName):
-                result = checkCustomSchema(value, typeName);
+    switch (true) {
+        case isCustomType(typeName):
+            result = checkCustomSchema(value, typeName);
 
-                if (!result) {
-                    $log.invalidEnumType(value, typeName, store.type[typeName].type);
-                }
+            if (!result) {
+                $log.invalidEnumType(value, typeName, store.type[typeName].type);
+            }
 
-                if (result) {
-                    result = _isValidCustomType(value, typeName);
-                }
-                break;
-            case isReference(typeName):
-                result = _checkReference(value, typeName);
-                break;
-            default:
-                result = _isValidType(value, typeName);
-                break;
-        }
-    } else {
-        result = false;
+            if (result) {
+                result = _isValidCustomType(value, typeName);
+            }
+            break;
+        case isReference(typeName):
+            result = _checkReference(value, typeName);
+            break;
+        default:
+            result = _isValidType(value, typeName);
+            break;
     }
 
     return result;
@@ -1525,7 +1521,7 @@ function isValidEnum(value, schema) {
     } else {
         result = (hasType(value, schema.type)) && schema.value.indexOf(value) !== -1;
         if (!result) {
-            $log.invalidEnumValue(value, schema.type);
+            $log.invalidEnumValue(value, schema.name);
         }
     }
 
@@ -1834,7 +1830,7 @@ function isValidObject(object, schema, strict, cleanRef) {
                     typeArray = typeSchema[0];
                     for (i = 0; i < length; i++) {
                         if (isCustomType(typeArray)) {
-                            isValid = isValidObject(field[i], store.type[typeArray].schema);
+                            isValid = _isValidCustomType(field[i], typeArray);
                         } else {
                             if (!isReference(typeArray)) {
                                 if (getRealType(field[i]) !== typeArray && typeArray !== 'any') {

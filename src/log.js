@@ -410,7 +410,11 @@ function invalidParamType(id, className, methodName, paramName) {
     if (className !== 'Function') {
         classInfo = " (class '" + className + "')";
     }
-    getLogger().warn("invalid type for the parameter '" + paramName + "' when calling the method '" + methodName + "' on component '" + id + "'" + classInfo);
+    if (paramName !== undefined) { 
+        getLogger().warn("invalid type for the parameter '" + paramName + "' when calling the method '" + methodName + "' on component '" + id + "'" + classInfo);
+    } else {
+        getLogger().warn("invalid type for a parameter when calling the method '" + methodName + "' on component '" + id + "'" + classInfo);
+    }
 }
 
 

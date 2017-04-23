@@ -395,9 +395,9 @@ function callAction(component, state, action, params, isEvent) {
         if (e instanceof RuntimeError) {
             throw e;
         } else {
-             /* jshint -W054 */
+            /* jshint -W054 */
             if (new Function() === undefined) {
-             /* jshint +W054 */    
+                /* jshint +W054 */
                 console.error('runtime: can not execute new Function() instruction in the current context.');
             } else {
                 if (component && component.error) {
@@ -522,7 +522,11 @@ function checkParams(params) {
 
     switch (true) {
         case isCollection:
-            paramsType = [$metamodel.getModel(componentClassName)[methodName].type[0], 'string'];
+            if (args && args[1] && args[1] === 'reset') {
+                paramsType = [[$metamodel.getModel(componentClassName)[methodName].type[0]], 'string'];
+            } else {
+                paramsType = [$metamodel.getModel(componentClassName)[methodName].type[0], 'string'];
+            }
             paramsNumber = [2, 2];
             break;
         case isProperty:

@@ -126,7 +126,7 @@ function RuntimeArray(conf) {
                                 $workflow.state({
                                     "component": id,
                                     "state": propertyName,
-                                    "data": [del[i], 'remove']
+                                    "data": [store[del[i]], 'remove']
                                 });
                             }
                             break;
@@ -146,7 +146,7 @@ function RuntimeArray(conf) {
                     $workflow.state({
                         "component": id,
                         "state": propertyName,
-                        "data": [val.id(), 'add']
+                        "data": [val, 'add']
                     });
                 } else {
                     if (typeof val.id !== 'undefined') {
@@ -223,12 +223,6 @@ function RuntimeArray(conf) {
                     });
                 }
 
-                $workflow.state({
-                    "component": id,
-                    "state": propertyName,
-                    "data": [val, 'remove']
-                });
-
                 isClass = type.indexOf('@') !== -1;
 
                 if (isClass) {
@@ -236,6 +230,13 @@ function RuntimeArray(conf) {
                 } else {
                     result = val;
                 }
+
+                $workflow.state({
+                    "component": id,
+                    "state": propertyName,
+                    "data": [result, 'remove']
+                });
+
             }
         } else {
             $log.readOnlyProperty(id, classId, propertyName);
@@ -339,7 +340,9 @@ function RuntimeArray(conf) {
     arr.splice = function splice(start, deleteCount, val) {
         var result = [],
             i = 0,
-            length = 0;
+            length = 0,
+            isClass = false,
+            data = null;
 
         if (typeof val !== 'undefined') {
             _add(val, 'splice', start, deleteCount);
@@ -357,10 +360,18 @@ function RuntimeArray(conf) {
 
             length = result.length;
             for (i = 0; i < length; i++) {
+
+                isClass = type.indexOf('@') !== -1;
+                if (isClass) {
+                    data = store[result[i]];
+                } else {
+                    data = result[i];
+                }
+
                 $workflow.state({
                     "component": id,
                     "state": propertyName,
-                    "data": [result[i], 'remove']
+                    "data": [data, 'remove']
                 });
             }
         }
@@ -771,7 +782,7 @@ function addProperties(model, Class, classId) {
                                     $workflow.state({
                                         "component": this.id(),
                                         "state": propertyName,
-                                        "data": [realVal, 'reset']
+                                        "data": [position, 'reset']
                                     });
 
                                     component[propertyName] = realVal;
@@ -848,7 +859,7 @@ function addProperties(model, Class, classId) {
                                 $workflow.state({
                                     "component": this.id(),
                                     "state": propertyName,
-                                    "data": [realVal, 'add']
+                                    "data": [value, 'add']
                                 });
                             }
                         } else {
