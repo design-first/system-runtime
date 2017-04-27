@@ -212,7 +212,7 @@ function contains(source, target) {
                 }
             } else {
                 if (Array.isArray(target[property]) && !Array.isArray(source[property])) {
-                    if (target[property].indexOf(source[property])) {
+                    if (target[property].indexOf(source[property]) === -1) {
                         result = false;
                         break;
                     }
