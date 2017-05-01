@@ -201,14 +201,28 @@ function dump() {
  */
 function contains(source, target) {
     var result = true,
-        property = '';
+        findInArray = false,
+        property = '',
+        i = 0,
+        length = 0;
 
     for (property in source) {
         if (typeof target[property] !== 'undefined') {
             if (source[property] instanceof RegExp) {
-                if (target[property].match(source[property]) === null) {
-                    result = false;
-                    break;
+                if (Array.isArray(target[property]) && !Array.isArray(source[property])) {
+                    length = target[property].length;
+                    for (i = 0; i < length; i++) {
+                        if (target[property][i].match && target[property][i].match(source[property]) !== null) {
+                            findInArray = true;
+                            break;
+                        }
+                    }
+                    result = findInArray;
+                } else {
+                    if (target[property].match(source[property]) === null) {
+                        result = false;
+                        break;
+                    }
                 }
             } else {
                 if (Array.isArray(target[property]) && !Array.isArray(source[property])) {
