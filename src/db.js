@@ -212,14 +212,14 @@ function contains(source, target) {
                 if (Array.isArray(target[property]) && !Array.isArray(source[property])) {
                     length = target[property].length;
                     for (i = 0; i < length; i++) {
-                        if (target[property][i].match && target[property][i].match(source[property]) !== null) {
+                        if (target[property][i].toString().match(source[property]) !== null) {
                             findInArray = true;
                             break;
                         }
                     }
                     result = findInArray;
                 } else {
-                    if (target[property].match(source[property]) === null) {
+                    if (target[property].toString().match(source[property]) === null) {
                         result = false;
                         break;
                     }
