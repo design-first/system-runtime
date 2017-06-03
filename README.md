@@ -179,6 +179,10 @@ runtime.version();
 * [Examples](https://system-runtime.readme.io/docs/a-basic-hello-world)
 * [Build System Runtime](https://system-runtime.readme.io/docs/extend-runtime)
 
+## Code of Conduct
+
+* [Code of Conduct](https://system-designer.readme.io/docs/code-of-conduct)
+
 ## License
 
 Copyright 2017 Erwan Carriou
