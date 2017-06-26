@@ -179,9 +179,10 @@ runtime.version();
 * [Examples](https://system-runtime.readme.io/docs/a-basic-hello-world)
 * [Build System Runtime](https://system-runtime.readme.io/docs/extend-runtime)
 
-## Code of Conduct
+## Community
 
 * [Code of Conduct](CODE_OF_CONDUCT.md)
+* [Contributing Guidelines](CONTRIBUTING.md)
 
 ## License
 
