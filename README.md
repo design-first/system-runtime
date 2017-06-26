@@ -181,7 +181,7 @@ runtime.version();
 
 ## Code of Conduct
 
-* [Code of Conduct](https://system-designer.readme.io/docs/code-of-conduct)
+* [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ## License
 
