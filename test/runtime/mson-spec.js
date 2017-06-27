@@ -5,7 +5,7 @@ describe('a MSON schema', function() {
         runtime = require('../../src/runtime.js');
     }
 
-    it('can make inheritance at class level', function() {
+    it('can make inheritance at schema level', function() {
         var metamodel = runtime.require('metamodel');
 
         metamodel.schema({

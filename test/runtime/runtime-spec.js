@@ -1,4 +1,4 @@
-describe('a Runtime instance', function () {
+describe('a System Runtime instance', function () {
 
     // init
     if (typeof window === 'undefined') {

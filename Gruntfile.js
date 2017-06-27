@@ -61,8 +61,8 @@ module.exports = function (grunt) {
         },
         jasmine_nodejs: {
             options: {
-                specNameSuffix: "spec.js",
-                helperNameSuffix: "helper.js",
+                specNameSuffix: 'spec.js',
+                helperNameSuffix: 'helper.js',
                 useHelpers: false,
                 stopOnFailure: false,
                 reporters: {
@@ -70,7 +70,7 @@ module.exports = function (grunt) {
                         colors: true,
                         cleanStack: 1,
                         verbosity: 4,
-                        listStyle: "indent",
+                        listStyle: 'indent',
                         activity: false
                     },
                 },
@@ -78,8 +78,8 @@ module.exports = function (grunt) {
             },
             modules: {
                 specs: [
-                    "test/module/**",
-                    "test/runtime/**"
+                    'test/module/**',
+                    'test/runtime/**'
                 ]
             }
         },
@@ -130,8 +130,8 @@ module.exports = function (grunt) {
         },
         "merge-json": {
             system: {
-                src: ["src/addons/*.json", "src/system/system-runtime.json"],
-                dest: "build/system-runtime.json"
+                src: ['src/addons/*.json', 'src/system/system-runtime.json'],
+                dest: 'build/system-runtime.json'
             }
         }
     });
