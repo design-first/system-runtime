@@ -9,6 +9,8 @@
 bower.json
 Gruntfile.js
 karma.conf.js
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
 *.log
 .vscode
 .jshintrc

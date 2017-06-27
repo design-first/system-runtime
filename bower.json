@@ -40,6 +40,8 @@
         "src",
         "Gruntfile.js",
         "karma.conf.js",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
         "package.json",
         "bower.json",
         ".jshintrc",
