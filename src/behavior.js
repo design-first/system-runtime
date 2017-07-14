@@ -63,55 +63,55 @@ var store = {};
  * @private
  */
 function createFunction(name, func, core, useCoreAPI) {
-    var funcName = '',
-        beginBody = -1,
-        funcParams = '',
-        params = [],
-        paramsClean = [],
-        funcBody = '',
-        header = '',
-        action = null;
+  var funcName = '',
+    beginBody = -1,
+    funcParams = '',
+    params = [],
+    paramsClean = [],
+    funcBody = '',
+    header = '',
+    action = null;
 
-    beginBody = func.indexOf('{');
-    header = func.substring(0, beginBody);
+  beginBody = func.indexOf('{');
+  header = func.substring(0, beginBody);
 
-    funcName = header.split('(')[0].replace('function', '').trim();
-    funcParams = header.split('(')[1].replace(')', '').trim();
+  funcName = header.split('(')[0].replace('function', '').trim();
+  funcParams = header.split('(')[1].replace(')', '').trim();
 
-    params = funcParams.split(',');
-    params.forEach(function (param) {
-        paramsClean.push(param.trim());
-    });
+  params = funcParams.split(',');
+  params.forEach(function (param) {
+    paramsClean.push(param.trim());
+  });
 
-    funcBody = func.substring(beginBody + 1);
-    funcBody = funcBody.substring(0, funcBody.lastIndexOf('}')).trim();
+  funcBody = func.substring(beginBody + 1);
+  funcBody = funcBody.substring(0, funcBody.lastIndexOf('}')).trim();
 
-    funcName = funcName || name;
+  funcName = funcName || name;
 
-    if (params[0] === '') {
-        params = [];
-    }
-    if (useCoreAPI) {
-        params.push('$component');
-        params.push('$db');
-        params.push('$metamodel');
-        params.push('$workflow');
-        params.push('$behavior');
-        params.push('$state');
-        params.push('$log');
-    }
+  if (params[0] === '') {
+    params = [];
+  }
+  if (useCoreAPI) {
+    params.push('$component');
+    params.push('$db');
+    params.push('$metamodel');
+    params.push('$workflow');
+    params.push('$behavior');
+    params.push('$state');
+    params.push('$log');
+  }
 
-    if (params[0] !== '') {
-        /* jshint -W054 */
-        action = new Function("body", "return function " + funcName + " (" + params.join(',') + ") { return new Function('" + params.join("','") + "', body).apply(this, arguments) };")(funcBody);
-        /* jshint +W054 */
-    } else {
-        /* jshint -W054 */
-        action = new Function("body", "return function " + funcName + " () { return new Function(body).apply(this, arguments) };")(funcBody);
-        /* jshint +W054 */
-    }
+  if (params[0] !== '') {
+    /* jshint -W054 */
+    action = new Function("body", "return function " + funcName + " (" + params.join(',') + ") { return new Function('" + params.join("','") + "', body).apply(this, arguments) };")(funcBody);
+    /* jshint +W054 */
+  } else {
+    /* jshint -W054 */
+    action = new Function("body", "return function " + funcName + " () { return new Function(body).apply(this, arguments) };")(funcBody);
+    /* jshint +W054 */
+  }
 
-    return action;
+  return action;
 }
 
 
@@ -129,30 +129,30 @@ function createFunction(name, func, core, useCoreAPI) {
  * @return {String} id of the behavior created in Runtime database
  */
 function add(id, state, action, useCoreAPI, core) {
-    var behaviorId = $helper.generateId(),
-        strAction = action.toString();
+  var behaviorId = $helper.generateId(),
+    strAction = action.toString();
 
-    if (typeof core === 'undefined') {
-        core = false;
-    }
-    if (typeof useCoreAPI === 'undefined') {
-        useCoreAPI = false;
-    }
+  if (typeof core === 'undefined') {
+    core = false;
+  }
+  if (typeof useCoreAPI === 'undefined') {
+    useCoreAPI = false;
+  }
 
-    action = createFunction(state, strAction, core, useCoreAPI);
+  action = createFunction(state, strAction, core, useCoreAPI);
 
-    store[behaviorId] = action;
+  store[behaviorId] = action;
 
-    $db.RuntimeBehavior.insert({
-        "_id": behaviorId,
-        "component": id,
-        "state": state,
-        "action": strAction,
-        "useCoreAPI": useCoreAPI,
-        "core": core
-    });
+  $db.RuntimeBehavior.insert({
+    "_id": behaviorId,
+    "component": id,
+    "state": state,
+    "action": strAction,
+    "useCoreAPI": useCoreAPI,
+    "core": core
+  });
 
-    return behaviorId;
+  return behaviorId;
 }
 
 
@@ -166,37 +166,37 @@ function add(id, state, action, useCoreAPI, core) {
  * {String} behaviorId id of the behavior (optional)) <br>
  */
 function remove(params) {
-    var result = [];
+  var result = [];
 
-    params = params || {};
-    params.behaviorId = params.behaviorId || '';
-    params.componentId = params.componentId || '';
-    params.state = params.state || '';
+  params = params || {};
+  params.behaviorId = params.behaviorId || '';
+  params.componentId = params.componentId || '';
+  params.state = params.state || '';
 
-    if (params.componentId) {
-        if (params.behaviorId) {
-            $db.RuntimeBehavior.remove({
-                "_id": params.behaviorId,
-                "component": params.componentId,
-                "state": params.state
-            });
-            delete store[params.behaviorId];
-        } else {
-            if (params.state) {
-                result = $db.RuntimeBehavior.remove({
-                    "component": params.componentId,
-                    "state": params.state
-                });
-            } else {
-                result = $db.RuntimeBehavior.remove({
-                    "component": params.componentId
-                });
-            }
-            result.forEach(function (id) {
-                delete store[id];
-            });
-        }
+  if (params.componentId) {
+    if (params.behaviorId) {
+      $db.RuntimeBehavior.remove({
+        "_id": params.behaviorId,
+        "component": params.componentId,
+        "state": params.state
+      });
+      delete store[params.behaviorId];
+    } else {
+      if (params.state) {
+        result = $db.RuntimeBehavior.remove({
+          "component": params.componentId,
+          "state": params.state
+        });
+      } else {
+        result = $db.RuntimeBehavior.remove({
+          "component": params.componentId
+        });
+      }
+      result.forEach(function (id) {
+        delete store[id];
+      });
     }
+  }
 }
 
 
@@ -206,7 +206,7 @@ function remove(params) {
  * @param {String} id id of the component
  */
 function removeFromMemory(id) {
-    delete store[id];
+  delete store[id];
 }
 
 
@@ -218,28 +218,28 @@ function removeFromMemory(id) {
  * @return {Array} all the actions that have to be executed for a specific component and state
  */
 function getActions(id, state) {
-    var result = [],
-        dbResult = [],
-        action = null;
+  var result = [],
+    dbResult = [],
+    action = null;
 
-    dbResult = $db.RuntimeBehavior.find({
-        "component": id,
-        "state": state
+  dbResult = $db.RuntimeBehavior.find({
+    "component": id,
+    "state": state
+  });
+
+  dbResult.forEach(function (behavior) {
+    action = store[behavior._id];
+    if (typeof action === 'undefined') {
+      action = createFunction(behavior.state, behavior.action, behavior.core, behavior.useCoreAPI);
+      store[behavior._id] = action;
+    }
+    result.push({
+      "useCoreAPI": behavior.useCoreAPI,
+      "action": action
     });
+  });
 
-    dbResult.forEach(function (behavior) {
-        action = store[behavior._id];
-        if (typeof action === 'undefined') {
-            action = createFunction(behavior.state, behavior.action, behavior.core, behavior.useCoreAPI);
-            store[behavior._id] = action;
-        }
-        result.push({
-            "useCoreAPI": behavior.useCoreAPI,
-            "action": action
-        });
-    });
-
-    return result;
+  return result;
 }
 
 
@@ -248,7 +248,7 @@ function getActions(id, state) {
  * @method clear
  */
 function clear() {
-    store = {};
+  store = {};
 }
 
 
@@ -259,7 +259,7 @@ function clear() {
  * @return {Behavior} the behavior
  */
 function get(id) {
-    return store[id];
+  return store[id];
 }
 
 

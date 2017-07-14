@@ -36,7 +36,7 @@
 
 // add require at global level
 if (typeof window === 'undefined' && typeof global !== 'undefined') {
-    global.require = require;
+  global.require = require;
 }
 
 var $db = require('./db.js');
@@ -49,8 +49,8 @@ var $helper = require('./helper.js');
 /* Private Property */
 
 var sytemId = '',
-    system = '',
-    channel = null;
+  system = '',
+  channel = null;
 
 
 /* Polyfill */

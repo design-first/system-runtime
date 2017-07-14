@@ -53,34 +53,34 @@ var $workflow = require('./workflow.js');
 
 
 var store = {},
-    collections = [],
-    internalDB = [
-        'Runtime',
-        'RuntimeSchema',
-        'RuntimeModel',
-        'RuntimeGeneratedModel',
-        'RuntimeBehavior',
-        'RuntimeState',
-        'RuntimeType',
-        'RuntimeMetamodel',
-        'RuntimeDatabase',
-        'RuntimeSystem',
-        'RuntimeClassInfo',
-        'RuntimeMessage',
-        'RuntimeChannel',
-        'RuntimeLogger',
-        'RuntimeLog'
-    ],
-    coreDb = [
-        'RuntimeLog',
-        'RuntimeSchema',
-        'RuntimeLogger',
-        'RuntimeModel',
-        'RuntimeGeneratedModel',
-        'RuntimeState',
-        'RuntimeType'
-    ],
-    logOrder = 0;
+  collections = [],
+  internalDB = [
+    'Runtime',
+    'RuntimeSchema',
+    'RuntimeModel',
+    'RuntimeGeneratedModel',
+    'RuntimeBehavior',
+    'RuntimeState',
+    'RuntimeType',
+    'RuntimeMetamodel',
+    'RuntimeDatabase',
+    'RuntimeSystem',
+    'RuntimeClassInfo',
+    'RuntimeMessage',
+    'RuntimeChannel',
+    'RuntimeLogger',
+    'RuntimeLog'
+  ],
+  coreDb = [
+    'RuntimeLog',
+    'RuntimeSchema',
+    'RuntimeLogger',
+    'RuntimeModel',
+    'RuntimeGeneratedModel',
+    'RuntimeState',
+    'RuntimeType'
+  ],
+  logOrder = 0;
 
 
 /* Private methods */
@@ -91,7 +91,7 @@ var store = {},
  * @method incLogOrder
  */
 function incLogOrder() {
-    return logOrder++;
+  return logOrder++;
 }
 
 
@@ -106,88 +106,88 @@ function incLogOrder() {
  * @private
  */
 function dump() {
-    var dbDump = {},
-        collectionName = '',
-        behaviorId = '',
-        typeId = '',
-        type = null,
-        behavior = null,
-        schema = null,
-        model = null,
-        collection = null,
-        schemaId = '',
-        modelId = '',
-        length = 0,
-        i = 0,
-        id = '';
+  var dbDump = {},
+    collectionName = '',
+    behaviorId = '',
+    typeId = '',
+    type = null,
+    behavior = null,
+    schema = null,
+    model = null,
+    collection = null,
+    schemaId = '',
+    modelId = '',
+    length = 0,
+    i = 0,
+    id = '';
 
-    // schemas
-    dbDump.schemas = {};
-    if (exports.RuntimeSchema.count()) {
-        for (schemaId in store.RuntimeSchema) {
-            schema = JSON.parse(JSON.stringify(store.RuntimeSchema[schemaId]));
-            if (!schema._core) {
-                dbDump.schemas[schemaId] = schema;
-            }
-        }
+  // schemas
+  dbDump.schemas = {};
+  if (exports.RuntimeSchema.count()) {
+    for (schemaId in store.RuntimeSchema) {
+      schema = JSON.parse(JSON.stringify(store.RuntimeSchema[schemaId]));
+      if (!schema._core) {
+        dbDump.schemas[schemaId] = schema;
+      }
     }
+  }
 
-    // models
-    dbDump.models = {};
-    if (exports.RuntimeModel.count()) {
-        for (modelId in store.RuntimeModel) {
-            model = JSON.parse(JSON.stringify(store.RuntimeModel[modelId]));
-            if (!model._core) {
-                dbDump.models[modelId] = model;
-            }
-        }
+  // models
+  dbDump.models = {};
+  if (exports.RuntimeModel.count()) {
+    for (modelId in store.RuntimeModel) {
+      model = JSON.parse(JSON.stringify(store.RuntimeModel[modelId]));
+      if (!model._core) {
+        dbDump.models[modelId] = model;
+      }
     }
+  }
 
-    // types
-    dbDump.types = {};
-    if (exports.RuntimeType.count()) {
-        for (typeId in store.RuntimeType) {
-            type = JSON.parse(JSON.stringify(store.RuntimeType[typeId]));
-            if (!type.core) {
-                dbDump.types[type.name] = type;
-            }
-        }
+  // types
+  dbDump.types = {};
+  if (exports.RuntimeType.count()) {
+    for (typeId in store.RuntimeType) {
+      type = JSON.parse(JSON.stringify(store.RuntimeType[typeId]));
+      if (!type.core) {
+        dbDump.types[type.name] = type;
+      }
     }
+  }
 
-    // behaviors
-    dbDump.behaviors = {};
-    for (behaviorId in store.RuntimeBehavior) {
-        behavior = JSON.parse(JSON.stringify(store.RuntimeBehavior[behaviorId]));
-        delete behavior.classInfo;
+  // behaviors
+  dbDump.behaviors = {};
+  for (behaviorId in store.RuntimeBehavior) {
+    behavior = JSON.parse(JSON.stringify(store.RuntimeBehavior[behaviorId]));
+    delete behavior.classInfo;
 
-        if (!behavior.core) {
-            dbDump.behaviors[behaviorId] = behavior;
-        }
+    if (!behavior.core) {
+      dbDump.behaviors[behaviorId] = behavior;
     }
+  }
 
-    // components
-    dbDump.components = {};
-    length = collections.length;
-    for (i = 0; i < length; i++) {
-        collectionName = collections[i];
-        if (exports[collectionName].count()) {
-            collection = JSON.parse(JSON.stringify(store[collectionName]));
+  // components
+  dbDump.components = {};
+  length = collections.length;
+  for (i = 0; i < length; i++) {
+    collectionName = collections[i];
+    if (exports[collectionName].count()) {
+      collection = JSON.parse(JSON.stringify(store[collectionName]));
 
-            for (id in collection) {
-                delete collection[id].classInfo;
+      for (id in collection) {
+        delete collection[id].classInfo;
 
-                if (collection[id]._core) {
-                    delete collection[id];
-                }
-            }
-
-            if (Object.keys(collection).length) {
-                dbDump.components[collectionName] = collection;
-            }
+        if (collection[id]._core) {
+          delete collection[id];
         }
-    }
+      }
 
-    return dbDump;
+      if (Object.keys(collection).length) {
+        dbDump.components[collectionName] = collection;
+      }
+    }
+  }
+
+  return dbDump;
 }
 
 
@@ -200,49 +200,49 @@ function dump() {
  * @private
  */
 function contains(source, target) {
-    var result = true,
-        findInArray = false,
-        property = '',
-        i = 0,
-        length = 0;
+  var result = true,
+    findInArray = false,
+    property = '',
+    i = 0,
+    length = 0;
 
-    for (property in source) {
-        if (typeof target[property] !== 'undefined') {
-            if (source[property] instanceof RegExp) {
-                if (Array.isArray(target[property]) && !Array.isArray(source[property])) {
-                    length = target[property].length;
-                    for (i = 0; i < length; i++) {
-                        if (target[property][i].toString().match(source[property]) !== null) {
-                            findInArray = true;
-                            break;
-                        }
-                    }
-                    result = findInArray;
-                } else {
-                    if (target[property].toString().match(source[property]) === null) {
-                        result = false;
-                        break;
-                    }
-                }
-            } else {
-                if (Array.isArray(target[property]) && !Array.isArray(source[property])) {
-                    if (target[property].indexOf(source[property]) === -1) {
-                        result = false;
-                        break;
-                    }
-                } else {
-                    if (target[property] !== source[property]) {
-                        result = false;
-                        break;
-                    }
-                }
+  for (property in source) {
+    if (typeof target[property] !== 'undefined') {
+      if (source[property] instanceof RegExp) {
+        if (Array.isArray(target[property]) && !Array.isArray(source[property])) {
+          length = target[property].length;
+          for (i = 0; i < length; i++) {
+            if (target[property][i].toString().match(source[property]) !== null) {
+              findInArray = true;
+              break;
             }
+          }
+          result = findInArray;
         } else {
+          if (target[property].toString().match(source[property]) === null) {
             result = false;
             break;
+          }
         }
+      } else {
+        if (Array.isArray(target[property]) && !Array.isArray(source[property])) {
+          if (target[property].indexOf(source[property]) === -1) {
+            result = false;
+            break;
+          }
+        } else {
+          if (target[property] !== source[property]) {
+            result = false;
+            break;
+          }
+        }
+      }
+    } else {
+      result = false;
+      break;
     }
-    return result;
+  }
+  return result;
 }
 
 
@@ -256,15 +256,15 @@ function contains(source, target) {
  * @param {String} name name of the new collection
  */
 var RuntimeDatabaseCollection = function (name) {
-    if ($metamodel.getSchema(name) || internalDB.indexOf(name) !== -1) {
-        store[name] = {};
-        this.name = name;
-        if (internalDB.indexOf(name) === -1) {
-            collections.push(name);
-        }
-    } else {
-        $log.invalidCollectionName(name);
+  if ($metamodel.getSchema(name) || internalDB.indexOf(name) !== -1) {
+    store[name] = {};
+    this.name = name;
+    if (internalDB.indexOf(name) === -1) {
+      collections.push(name);
     }
+  } else {
+    $log.invalidCollectionName(name);
+  }
 };
 
 
@@ -280,42 +280,42 @@ var RuntimeDatabaseCollection = function (name) {
  * $db.Person.find([{"name": "rene"}, {"name": "robert"}]);
  */
 RuntimeDatabaseCollection.prototype.find = function (query) {
-    var result = [],
-        resultId = {},
-        id = '',
-        object = {};
+  var result = [],
+    resultId = {},
+    id = '',
+    object = {};
 
-    query = query || null;
+  query = query || null;
 
-    if (query && Object.keys(query).length) {
-        if (Array.isArray(query)) {
-            query.forEach(function multi_search(criteria) {
-                for (id in store[this.name]) {
-                    object = store[this.name][id];
-                    if (contains(criteria, object)) {
-                        if (typeof resultId[id] === 'undefined') {
-                            result.push(object);
-                            resultId[id] = true;
-                        }
-                    }
-                }
-            }.bind(this));
-        } else {
-            for (id in store[this.name]) {
-                object = store[this.name][id];
-                if (contains(query, object)) {
-                    result.push(object);
-                }
-            }
-        }
-    } else {
+  if (query && Object.keys(query).length) {
+    if (Array.isArray(query)) {
+      query.forEach(function multi_search(criteria) {
         for (id in store[this.name]) {
-            object = store[this.name][id];
-            result.push(object);
+          object = store[this.name][id];
+          if (contains(criteria, object)) {
+            if (typeof resultId[id] === 'undefined') {
+              result.push(object);
+              resultId[id] = true;
+            }
+          }
         }
+      }.bind(this));
+    } else {
+      for (id in store[this.name]) {
+        object = store[this.name][id];
+        if (contains(query, object)) {
+          result.push(object);
+        }
+      }
     }
+  } else {
+    for (id in store[this.name]) {
+      object = store[this.name][id];
+      result.push(object);
+    }
+  }
 
-    return result;
+  return result;
 };
 
 
@@ -336,76 +336,76 @@ RuntimeDatabaseCollection.prototype.find = function (query) {
  * }); <br>
  */
 RuntimeDatabaseCollection.prototype.insert = function (document) {
-    var doc = [],
-        Component = null,
-        result = [];
+  var doc = [],
+    Component = null,
+    result = [];
 
-    if (Array.isArray(document)) {
-        doc = document;
-    } else {
-        doc.push(document);
-    }
+  if (Array.isArray(document)) {
+    doc = document;
+  } else {
+    doc.push(document);
+  }
 
-    doc.forEach(function multi_insert(obj) {
-        var component = null,
-            channels = [],
-            channel = null,
-            systems = [];
+  doc.forEach(function multi_insert(obj) {
+    var component = null,
+      channels = [],
+      channel = null,
+      systems = [];
 
-        switch (true) {
-            case this.name === 'RuntimeSchema':
-            case this.name === 'RuntimeLogger':
-            case this.name === 'RuntimeModel':
-            case this.name === 'RuntimeType':
-            case this.name === 'RuntimeGeneratedModel':
-            case $metamodel.isValidObject(obj, $metamodel.getModel(this.name)):
+    switch (true) {
+      case this.name === 'RuntimeSchema':
+      case this.name === 'RuntimeLogger':
+      case this.name === 'RuntimeModel':
+      case this.name === 'RuntimeType':
+      case this.name === 'RuntimeGeneratedModel':
+      case $metamodel.isValidObject(obj, $metamodel.getModel(this.name)):
 
-                if (typeof obj._id === 'undefined') {
-                    obj._id = $helper.generateId();
-                }
-
-                $metamodel.prepareObject(obj, $metamodel.getModel(this.name));
-
-                store[this.name][obj._id] = obj;
-
-                Component = $component.get(this.name);
-                if (Component) {
-                    component = new Component(obj);
-                    result.push(component.id());
-                } else {
-                    createLog('insert', this.name, obj._id, '', obj);
-
-                    if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                        $helper.getRuntime().require('db').insert({
-                            collection: this.name,
-                            document: obj
-                        });
-                    }
-                }
-
-                if (this.name === 'RuntimeMessage') {
-                    if ($helper.isRuntime()) {
-                        channels = exports.RuntimeChannel.find({});
-                        var length = channels.length;
-                        for (var i = 0; i < length; i++) {
-                            channel = $helper.getRuntime().require(channels[i]._id);
-                            $workflow.state({
-                                "component": channels[i]._id,
-                                "state": obj.event,
-                                "data": obj.data
-                            });
-                        }
-                    }
-                }
-
-                break;
-            default:
-                $log.invalidDocumentOnDbInsert(obj, this.name);
-                break;
+        if (typeof obj._id === 'undefined') {
+          obj._id = $helper.generateId();
         }
-    }.bind(this));
 
-    return result;
+        $metamodel.prepareObject(obj, $metamodel.getModel(this.name));
+
+        store[this.name][obj._id] = obj;
+
+        Component = $component.get(this.name);
+        if (Component) {
+          component = new Component(obj);
+          result.push(component.id());
+        } else {
+          createLog('insert', this.name, obj._id, '', obj);
+
+          if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
+            $helper.getRuntime().require('db').insert({
+              collection: this.name,
+              document: obj
+            });
+          }
+        }
+
+        if (this.name === 'RuntimeMessage') {
+          if ($helper.isRuntime()) {
+            channels = exports.RuntimeChannel.find({});
+            var length = channels.length;
+            for (var i = 0; i < length; i++) {
+              channel = $helper.getRuntime().require(channels[i]._id);
+              $workflow.state({
+                "component": channels[i]._id,
+                "state": obj.event,
+                "data": obj.data
+              });
+            }
+          }
+        }
+
+        break;
+      default:
+        $log.invalidDocumentOnDbInsert(obj, this.name);
+        break;
+    }
+  }.bind(this));
+
+  return result;
 };
 
 
@@ -424,96 +424,96 @@ RuntimeDatabaseCollection.prototype.insert = function (document) {
  * $db.Cars.update({"code": "AZD-71"}, {"price": "10000$"}, {"upsert": true}); <br>
  */
 RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
-    var docs = this.find(query),
-        updated = 0,
-        i = 0,
-        length = docs.length,
-        attributeName = '',
-        schema = $metamodel.getModel(this.name),
-        type = '';
+  var docs = this.find(query),
+    updated = 0,
+    i = 0,
+    length = docs.length,
+    attributeName = '',
+    schema = $metamodel.getModel(this.name),
+    type = '';
 
-    options = options || {};
-    if (typeof options.upsert === 'undefined') {
-        options.upsert = options.upsert || false;
+  options = options || {};
+  if (typeof options.upsert === 'undefined') {
+    options.upsert = options.upsert || false;
+  }
+
+  if (update) {
+
+    // upsert case
+    if (length === 0 && options.upsert) {
+      if (query._id) {
+        update._id = query._id;
+      }
+      this.insert(update);
+      updated = updated + 1;
     }
 
-    if (update) {
+    for (i = 0; i < length; i++) {
+      // case of update of _id
+      if (typeof update._id !== 'undefined' && update._id !== docs[i]._id) {
+        $log.updateUuid(docs[i]._id, update._id, typeof $component.get(update._id) !== 'undefined');
+      }
 
-        // upsert case
-        if (length === 0 && options.upsert) {
-            if (query._id) {
-                update._id = query._id;
+      for (attributeName in update) {
+        if (typeof docs[i][attributeName] !== 'undefined') {
+          if (this.name !== 'RuntimeSchema' && this.name !== 'RuntimeModel' && this.name !== 'RuntimeGeneratedModel') {
+            // check type
+            type = '';
+            if (attributeName.indexOf('_') !== 0) {
+              type = schema[attributeName].type;
+            } else {
+              if ($metamodel.getMetaDef()[attributeName]) {
+                type = $metamodel.getMetaDef()[attributeName].type;
+              }
             }
-            this.insert(update);
-            updated = updated + 1;
-        }
+            if (type) {
+              if ($metamodel.isValidType(update[attributeName], type)) {
+                docs[i][attributeName] = update[attributeName];
+                updated = updated + 1;
 
-        for (i = 0; i < length; i++) {
-            // case of update of _id
-            if (typeof update._id !== 'undefined' && update._id !== docs[i]._id) {
-                $log.updateUuid(docs[i]._id, update._id, typeof $component.get(update._id) !== 'undefined');
-            }
+                createLog('update', this.name, docs[i]._id, attributeName, update[attributeName]);
 
-            for (attributeName in update) {
-                if (typeof docs[i][attributeName] !== 'undefined') {
-                    if (this.name !== 'RuntimeSchema' && this.name !== 'RuntimeModel' && this.name !== 'RuntimeGeneratedModel') {
-                        // check type
-                        type = '';
-                        if (attributeName.indexOf('_') !== 0) {
-                            type = schema[attributeName].type;
-                        } else {
-                            if ($metamodel.getMetaDef()[attributeName]) {
-                                type = $metamodel.getMetaDef()[attributeName].type;
-                            }
-                        }
-                        if (type) {
-                            if ($metamodel.isValidType(update[attributeName], type)) {
-                                docs[i][attributeName] = update[attributeName];
-                                updated = updated + 1;
-
-                                createLog('update', this.name, docs[i]._id, attributeName, update[attributeName]);
-
-                                if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                                    $helper.getRuntime().require('db').update({
-                                        'collection': this.name,
-                                        'id': docs[i]._id,
-                                        'field': attributeName,
-                                        'value': update[attributeName]
-                                    });
-                                }
-                                $workflow.state({
-                                    "component": docs[i]._id,
-                                    "state": attributeName,
-                                    "data": [update[attributeName]]
-                                });
-                            } else {
-                                $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName].type);
-                            }
-                        } else {
-                            $log.unknownPropertyOnDbUpdate(this.name, attributeName, docs[i]._id);
-                        }
-                    } else {
-                        // TODO more check in case of schema update
-                        docs[i][attributeName] = update[attributeName];
-
-                        createLog('update', this.name, docs[i]._id, attributeName, update[attributeName]);
-
-                        updated = updated + 1;
-                        if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                            $helper.getRuntime().require('db').update({
-                                'collection': this.name,
-                                'id': docs[i]._id,
-                                'field': attributeName,
-                                'value': update[attributeName]
-                            });
-                        }
-                    }
+                if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
+                  $helper.getRuntime().require('db').update({
+                    'collection': this.name,
+                    'id': docs[i]._id,
+                    'field': attributeName,
+                    'value': update[attributeName]
+                  });
                 }
+                $workflow.state({
+                  "component": docs[i]._id,
+                  "state": attributeName,
+                  "data": [update[attributeName]]
+                });
+              } else {
+                $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName].type);
+              }
+            } else {
+              $log.unknownPropertyOnDbUpdate(this.name, attributeName, docs[i]._id);
             }
-        }
-    }
+          } else {
+            // TODO more check in case of schema update
+            docs[i][attributeName] = update[attributeName];
 
-    return updated;
+            createLog('update', this.name, docs[i]._id, attributeName, update[attributeName]);
+
+            updated = updated + 1;
+            if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
+              $helper.getRuntime().require('db').update({
+                'collection': this.name,
+                'id': docs[i]._id,
+                'field': attributeName,
+                'value': update[attributeName]
+              });
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return updated;
 };
 
 
@@ -529,85 +529,85 @@ RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
  * $db.Cars.remove([{"code": "AZD-71"}, {"code": "AZD-65"}]); <br>
  */
 RuntimeDatabaseCollection.prototype.remove = function (query) {
-    var result = [],
-        id = '',
-        component = null,
-        object = {};
+  var result = [],
+    id = '',
+    component = null,
+    object = {};
 
-    query = query || null;
+  query = query || null;
 
-    if (query && Object.keys(query).length) {
+  if (query && Object.keys(query).length) {
 
-        if (Array.isArray(query)) {
-            query.forEach(function multi_remove(criteria) {
-                for (id in store[this.name]) {
-                    object = store[this.name][id];
-
-                    if (contains(criteria, object)) {
-                        delete store[this.name][id];
-
-                        createLog('remove', this.name, id, '', '');
-
-                        component = $component.get(id);
-                        if (component) {
-                            component.destroy();
-                        }
-                        if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                            $helper.getRuntime().require('db').remove({
-                                'collection': this.name,
-                                'id': id
-                            });
-                        }
-                        result.push(id);
-                    }
-                }
-            }.bind(this));
-        } else {
-            for (id in store[this.name]) {
-                object = store[this.name][id];
-
-                if (contains(query, object)) {
-                    delete store[this.name][id];
-
-                    createLog('remove', this.name, id, '', '');
-
-                    component = $component.get(id);
-                    if (component) {
-                        component.destroy();
-                    }
-                    if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                        $helper.getRuntime().require('db').remove({
-                            'collection': this.name,
-                            'id': id
-                        });
-                    }
-                    result.push(id);
-                }
-            }
-        }
-    } else {
+    if (Array.isArray(query)) {
+      query.forEach(function multi_remove(criteria) {
         for (id in store[this.name]) {
+          object = store[this.name][id];
+
+          if (contains(criteria, object)) {
             delete store[this.name][id];
 
             createLog('remove', this.name, id, '', '');
 
-            if (coreDb.indexOf(this.name) == -1) {
-                component = $component.get(id);
-                if (component) {
-                    component.destroy();
-                }
+            component = $component.get(id);
+            if (component) {
+              component.destroy();
             }
             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                $helper.getRuntime().require('db').remove({
-                    'collection': this.name,
-                    'id': id
-                });
+              $helper.getRuntime().require('db').remove({
+                'collection': this.name,
+                'id': id
+              });
             }
             result.push(id);
+          }
         }
-    }
+      }.bind(this));
+    } else {
+      for (id in store[this.name]) {
+        object = store[this.name][id];
 
-    return result;
+        if (contains(query, object)) {
+          delete store[this.name][id];
+
+          createLog('remove', this.name, id, '', '');
+
+          component = $component.get(id);
+          if (component) {
+            component.destroy();
+          }
+          if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
+            $helper.getRuntime().require('db').remove({
+              'collection': this.name,
+              'id': id
+            });
+          }
+          result.push(id);
+        }
+      }
+    }
+  } else {
+    for (id in store[this.name]) {
+      delete store[this.name][id];
+
+      createLog('remove', this.name, id, '', '');
+
+      if (coreDb.indexOf(this.name) == -1) {
+        component = $component.get(id);
+        if (component) {
+          component.destroy();
+        }
+      }
+      if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
+        $helper.getRuntime().require('db').remove({
+          'collection': this.name,
+          'id': id
+        });
+      }
+      result.push(id);
+    }
+  }
+
+  return result;
 };
 
 
@@ -617,12 +617,12 @@ RuntimeDatabaseCollection.prototype.remove = function (query) {
  * @return {Number} number of documents in the collection
  */
 RuntimeDatabaseCollection.prototype.count = function () {
-    var result = 0,
-        objectId = '';
-    for (objectId in store[this.name]) {
-        result++;
-    }
-    return result;
+  var result = 0,
+    objectId = '';
+  for (objectId in store[this.name]) {
+    result++;
+  }
+  return result;
 };
 
 
@@ -639,27 +639,27 @@ RuntimeDatabaseCollection.prototype.count = function () {
  * @param {String} value value of the field of the component
  */
 function createLog(action, collection, id, field, value) {
-    var logId = $helper.generateId();
+  var logId = $helper.generateId();
 
-    collection = collection || '';
-    id = id || '';
-    field = field || '';
-    value = value || '';
+  collection = collection || '';
+  id = id || '';
+  field = field || '';
+  value = value || '';
 
-    // clean log every 1000 logs
-    if (Object.keys(store.RuntimeLog).length > 1000) {
-        store.RuntimeLog = {};
-    }
+  // clean log every 1000 logs
+  if (Object.keys(store.RuntimeLog).length > 1000) {
+    store.RuntimeLog = {};
+  }
 
-    store.RuntimeLog[logId] = {
-        _id: logId,
-        action: action,
-        collection: collection,
-        id: id,
-        field: field,
-        value: value,
-        order: incLogOrder()
-    };
+  store.RuntimeLog[logId] = {
+    _id: logId,
+    action: action,
+    collection: collection,
+    id: id,
+    field: field,
+    value: value,
+    order: incLogOrder()
+  };
 }
 
 
@@ -669,7 +669,7 @@ function createLog(action, collection, id, field, value) {
  * @param {String} name of the collection
  */
 function collection(name) {
-    exports[name] = new RuntimeDatabaseCollection(name);
+  exports[name] = new RuntimeDatabaseCollection(name);
 }
 
 
@@ -680,110 +680,110 @@ function collection(name) {
  * @return {String} the id of the imported Runtime system or the if of the current Runtime system
  */
 function system(importedSystem) {
-    var result = '',
-        collectionName = '',
-        componentId = '',
-        typeName = '',
-        schemaName = '',
-        modelName = '',
-        behaviorId = '',
-        systems = [],
-        id = null,
-        dbDump = null,
-        mastersystem = null,
-        behavior = null,
-        exportedSystem = {};
+  var result = '',
+    collectionName = '',
+    componentId = '',
+    typeName = '',
+    schemaName = '',
+    modelName = '',
+    behaviorId = '',
+    systems = [],
+    id = null,
+    dbDump = null,
+    mastersystem = null,
+    behavior = null,
+    exportedSystem = {};
 
-    if (importedSystem) { // import
+  if (importedSystem) { // import
 
-        // add types
-        for (typeName in importedSystem.types) {
-            $metamodel.type(importedSystem.types[typeName]);
-        }
-
-        // add schemas
-        for (schemaName in importedSystem.schemas) {
-            $metamodel.schema(importedSystem.schemas[schemaName]);
-        }
-
-        // add models
-        for (modelName in importedSystem.models) {
-            $metamodel.model(importedSystem.models[modelName]);
-        }
-
-        $metamodel.create();
-
-        //add behaviors
-        for (behaviorId in importedSystem.behaviors) {
-            exports.RuntimeBehavior.insert(importedSystem.behaviors[behaviorId]);
-        }
-
-        // add components
-        for (collectionName in importedSystem.components) {
-            for (componentId in importedSystem.components[collectionName]) {
-                exports[collectionName].insert(importedSystem.components[collectionName][componentId]);
-            }
-        }
-
-        // reset info if already a master system
-        systems = exports.RuntimeSystem.find({
-            'master': true
-        });
-        if (systems.length) {
-            if (systems[0]._id === importedSystem._id) {
-                importedSystem.master = true;
-            } else {
-                importedSystem.master = true;
-                systems[0].master = false;
-            }
-        }
-
-        // insert the system in DB
-        exports.RuntimeSystem.insert(importedSystem);
-
-        result = importedSystem._id;
-
-    } else { // export
-        // get id of the master system
-        systems = exports.RuntimeSystem.find({
-            'master': true
-        });
-
-        if (systems.length) {
-
-            mastersystem = systems[0];
-            id = mastersystem._id;
-
-            // prop
-            exportedSystem._id = id;
-            exportedSystem.name = mastersystem.name;
-            exportedSystem.description = mastersystem.description;
-            exportedSystem.version = mastersystem.version;
-            exportedSystem.master = true;
-            exportedSystem.subsystem = false;
-
-            // dump
-            dbDump = dump();
-            for (collectionName in dbDump) {
-                if (dbDump.hasOwnProperty(collectionName)) {
-                    exportedSystem[collectionName] = dbDump[collectionName];
-                }
-            }
-
-            for (behaviorId in exportedSystem.behaviors) {
-                behavior = exportedSystem.behaviors[behaviorId];
-                if (behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') {
-                    behavior.component = id;
-                }
-            }
-
-            result = JSON.stringify(exportedSystem);
-        } else {
-            result = "{}";
-            $log.masterSystemNotFound();
-        }
+    // add types
+    for (typeName in importedSystem.types) {
+      $metamodel.type(importedSystem.types[typeName]);
     }
-    return result;
+
+    // add schemas
+    for (schemaName in importedSystem.schemas) {
+      $metamodel.schema(importedSystem.schemas[schemaName]);
+    }
+
+    // add models
+    for (modelName in importedSystem.models) {
+      $metamodel.model(importedSystem.models[modelName]);
+    }
+
+    $metamodel.create();
+
+    //add behaviors
+    for (behaviorId in importedSystem.behaviors) {
+      exports.RuntimeBehavior.insert(importedSystem.behaviors[behaviorId]);
+    }
+
+    // add components
+    for (collectionName in importedSystem.components) {
+      for (componentId in importedSystem.components[collectionName]) {
+        exports[collectionName].insert(importedSystem.components[collectionName][componentId]);
+      }
+    }
+
+    // reset info if already a master system
+    systems = exports.RuntimeSystem.find({
+      'master': true
+    });
+    if (systems.length) {
+      if (systems[0]._id === importedSystem._id) {
+        importedSystem.master = true;
+      } else {
+        importedSystem.master = true;
+        systems[0].master = false;
+      }
+    }
+
+    // insert the system in DB
+    exports.RuntimeSystem.insert(importedSystem);
+
+    result = importedSystem._id;
+
+  } else { // export
+    // get id of the master system
+    systems = exports.RuntimeSystem.find({
+      'master': true
+    });
+
+    if (systems.length) {
+
+      mastersystem = systems[0];
+      id = mastersystem._id;
+
+      // prop
+      exportedSystem._id = id;
+      exportedSystem.name = mastersystem.name;
+      exportedSystem.description = mastersystem.description;
+      exportedSystem.version = mastersystem.version;
+      exportedSystem.master = true;
+      exportedSystem.subsystem = false;
+
+      // dump
+      dbDump = dump();
+      for (collectionName in dbDump) {
+        if (dbDump.hasOwnProperty(collectionName)) {
+          exportedSystem[collectionName] = dbDump[collectionName];
+        }
+      }
+
+      for (behaviorId in exportedSystem.behaviors) {
+        behavior = exportedSystem.behaviors[behaviorId];
+        if (behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') {
+          behavior.component = id;
+        }
+      }
+
+      result = JSON.stringify(exportedSystem);
+    } else {
+      result = "{}";
+      $log.masterSystemNotFound();
+    }
+  }
+  return result;
 }
 
 
@@ -801,106 +801,106 @@ function system(importedSystem) {
  * $db.subsystem({"schemas":{"name":"Person"},"components":{"Person": {"country": "France"}}}); // combine filters
  */
 function subsystem(params) {
-    var system = {},
-        result = [],
-        defaultName = '',
-        i = 0,
-        length = 0,
-        schema = null,
-        type = null,
-        model = null,
-        behavior = null,
-        component = null,
-        className = '';
+  var system = {},
+    result = [],
+    defaultName = '',
+    i = 0,
+    length = 0,
+    schema = null,
+    type = null,
+    model = null,
+    behavior = null,
+    component = null,
+    className = '';
 
-    // default values
-    result = exports.RuntimeSystem.find({
-        'master': true
-    });
-    if (result.length) {
-        defaultName = result[0].name;
+  // default values
+  result = exports.RuntimeSystem.find({
+    'master': true
+  });
+  if (result.length) {
+    defaultName = result[0].name;
+  }
+
+  system.name = params.name || 'sub_' + defaultName;
+  system.version = params.version || '0.0.1';
+  system.description = params.description || '';
+
+  system.subsystem = true;
+
+  // schemas
+  system.schemas = {};
+  if (params.schemas) {
+    result = exports.RuntimeSchema.find(params.schema);
+
+    length = result.length;
+    for (i = 0; i < length; i++) {
+      schema = result[i];
+      if (!schema._core) {
+        system.schemas[schema._id] = schema;
+      }
     }
+  }
 
-    system.name = params.name || 'sub_' + defaultName;
-    system.version = params.version || '0.0.1';
-    system.description = params.description || '';
+  // models
+  system.models = {};
+  if (params.models) {
+    result = exports.RuntimeModel.find(params.models);
 
-    system.subsystem = true;
+    length = result.length;
+    for (i = 0; i < length; i++) {
+      model = result[i];
+      if (!model._core) {
+        system.models[model._id] = model;
+      }
+    }
+  }
 
-    // schemas
-    system.schemas = {};
-    if (params.schemas) {
-        result = exports.RuntimeSchema.find(params.schema);
+  // types
+  system.types = {};
+  if (params.types) {
+    result = exports.RuntimeType.find(params.types);
 
+    length = result.length;
+    for (i = 0; i < length; i++) {
+      type = result[i];
+      if (!type._core) {
+        system.types[type._id] = type;
+      }
+    }
+  }
+
+  // behaviors
+  system.behaviors = {};
+  if (params.behaviors) {
+    behavior = exports.RuntimeBehavior.find(params.behaviors);
+
+    length = result.length;
+    for (i = 0; i < length; i++) {
+      behavior = result[i];
+      if (!behavior.core) {
+        system.behaviors[behavior._id] = behavior;
+      }
+    }
+  }
+
+  // components
+  system.components = {};
+  if (params.components) {
+    for (className in params.components) {
+      if (exports[className]) {
+        system.components[className] = {};
+
+        result = exports[className].find(params.components[className]);
         length = result.length;
         for (i = 0; i < length; i++) {
-            schema = result[i];
-            if (!schema._core) {
-                system.schemas[schema._id] = schema;
-            }
+          component = result[i];
+          system.components[className][component._id] = component;
         }
+      }
     }
+  }
 
-    // models
-    system.models = {};
-    if (params.models) {
-        result = exports.RuntimeModel.find(params.models);
-
-        length = result.length;
-        for (i = 0; i < length; i++) {
-            model = result[i];
-            if (!model._core) {
-                system.models[model._id] = model;
-            }
-        }
-    }
-
-    // types
-    system.types = {};
-    if (params.types) {
-        result = exports.RuntimeType.find(params.types);
-
-        length = result.length;
-        for (i = 0; i < length; i++) {
-            type = result[i];
-            if (!type._core) {
-                system.types[type._id] = type;
-            }
-        }
-    }
-
-    // behaviors
-    system.behaviors = {};
-    if (params.behaviors) {
-        behavior = exports.RuntimeBehavior.find(params.behaviors);
-
-        length = result.length;
-        for (i = 0; i < length; i++) {
-            behavior = result[i];
-            if (!behavior.core) {
-                system.behaviors[behavior._id] = behavior;
-            }
-        }
-    }
-
-    // components
-    system.components = {};
-    if (params.components) {
-        for (className in params.components) {
-            if (exports[className]) {
-                system.components[className] = {};
-
-                result = exports[className].find(params.components[className]);
-                length = result.length;
-                for (i = 0; i < length; i++) {
-                    component = result[i];
-                    system.components[className][component._id] = component;
-                }
-            }
-        }
-    }
-
-    return JSON.stringify(system);
+  return JSON.stringify(system);
 }
 
 
@@ -909,23 +909,23 @@ function subsystem(params) {
  * @method clear
  */
 function clear() {
-    var length = 0,
-        i = 0,
-        collectionName = '';
+  var length = 0,
+    i = 0,
+    collectionName = '';
 
-    // remove collections
-    length = collections.length;
-    for (i = 0; i < length; i++) {
-        collectionName = collections[i];
-        exports[collectionName].remove();
-    }
+  // remove collections
+  length = collections.length;
+  for (i = 0; i < length; i++) {
+    collectionName = collections[i];
+    exports[collectionName].remove();
+  }
 
-    // remove internal collections
-    length = internalDB.length;
-    for (i = 0; i < length; i++) {
-        collectionName = internalDB[i];
-        exports[collectionName].remove();
-    }
+  // remove internal collections
+  length = internalDB.length;
+  for (i = 0; i < length; i++) {
+    collectionName = internalDB[i];
+    exports[collectionName].remove();
+  }
 }
 
 
@@ -934,26 +934,26 @@ function clear() {
  * @method init
  */
 function init() {
-    var runtimeSystemId = '',
-        runtimeSystem = null;
+  var runtimeSystemId = '',
+    runtimeSystem = null;
 
-    runtimeSystem = exports.RuntimeSystem.find({
-        '_id': 'e89c617b6b15d24'
-    })[0];
+  runtimeSystem = exports.RuntimeSystem.find({
+    '_id': 'e89c617b6b15d24'
+  })[0];
 
-    // clear all the data in memory
-    exports.clear();
-    $component.clear();
-    $metamodel.clear();
-    $state.clear();
-    $behavior.clear();
+  // clear all the data in memory
+  exports.clear();
+  $component.clear();
+  $metamodel.clear();
+  $state.clear();
+  $behavior.clear();
 
-    // init metamodel
-    $metamodel.init();
+  // init metamodel
+  $metamodel.init();
 
-    // reimport Runtime core system
-    runtimeSystemId = exports.system(runtimeSystem);
-    $component.get(runtimeSystemId).main();
+  // reimport Runtime core system
+  runtimeSystemId = exports.system(runtimeSystem);
+  $component.get(runtimeSystemId).main();
 }
 
 

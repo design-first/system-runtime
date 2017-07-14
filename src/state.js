@@ -51,18 +51,18 @@ var store = {};
  * @param {Object} parameters parameters
  */
 function set(id, state, parameters) {
-    store[id] = {
-        "name": state,
-        "parameters": {
-            "data": parameters
-        }
-    };
-    $db.store.RuntimeState[id] = {
-        "name": state,
-        "parameters": {
-            "data": parameters
-        }
-    };
+  store[id] = {
+    "name": state,
+    "parameters": {
+      "data": parameters
+    }
+  };
+  $db.store.RuntimeState[id] = {
+    "name": state,
+    "parameters": {
+      "data": parameters
+    }
+  };
 }
 
 
@@ -73,7 +73,7 @@ function set(id, state, parameters) {
  * @return {String} state of the component
  */
 function get(id) {
-    return store[id];
+  return store[id];
 }
 
 
@@ -82,7 +82,7 @@ function get(id) {
  * @method clear
  */
 function clear() {
-    store = {};
+  store = {};
 }
 
 
