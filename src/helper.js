@@ -51,13 +51,13 @@ var runtimeRef = null;
  * @return {Boolean} true if a Runtime instance exist
  */
 function isRuntime() {
-    var result = false;
+  var result = false;
 
-    if ($db.Runtime && $db.Runtime.find().length) {
-        result = true;
-    }
+  if ($db.Runtime && $db.Runtime.find().length) {
+    result = true;
+  }
 
-    return result;
+  return result;
 }
 
 
@@ -67,15 +67,15 @@ function isRuntime() {
  * @return {Runtime} Runtime instance
  */
 function getRuntime() {
-    var runtimeId = '',
-        result = null;
+  var runtimeId = '',
+    result = null;
 
-    if (!runtimeRef) {
-        runtimeId = $db.Runtime.find()[0]._id;
-        runtimeRef = $component.get(runtimeId);
-    }
+  if (!runtimeRef) {
+    runtimeId = $db.Runtime.find()[0]._id;
+    runtimeRef = $component.get(runtimeId);
+  }
 
-    return runtimeRef;
+  return runtimeRef;
 }
 
 
@@ -85,15 +85,15 @@ function getRuntime() {
  * @return {String} a uuid
  */
 function generateId() {
-    function gen() {
-        return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-    }
-    function getPrefix() {
-        var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
-        return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
-    }
-    
-    return getPrefix() + gen() + gen() + gen();
+  function gen() {
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+  }
+  function getPrefix() {
+    var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
+    return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
+  }
+
+  return getPrefix() + gen() + gen() + gen();
 }
 
 
@@ -103,18 +103,18 @@ function generateId() {
  */
 function polyfill() {
 
-    // fixing constructor.name property in IE
-    // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer
-    if (Function.prototype.name === undefined && Object.defineProperty !== undefined) {
-        Object.defineProperty(Function.prototype, 'name', {
-            get: function() {
-                var funcNameRegex = /function\s([^(]{1,})\(/;
-                var results = (funcNameRegex).exec((this).toString());
-                return (results && results.length > 1) ? results[1].trim() : "";
-            },
-            set: function(value) { }
-        });
-    }
+  // fixing constructor.name property in IE
+  // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer
+  if (Function.prototype.name === undefined && Object.defineProperty !== undefined) {
+    Object.defineProperty(Function.prototype, 'name', {
+      get: function () {
+        var funcNameRegex = /function\s([^(]{1,})\(/;
+        var results = (funcNameRegex).exec((this).toString());
+        return (results && results.length > 1) ? results[1].trim() : "";
+      },
+      set: function (value) { }
+    });
+  }
 }
 
 
