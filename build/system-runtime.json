@@ -1333,7 +1333,6 @@
 			"schema": {
 				"type": {
 					"type": [
-						"string",
 						"string"
 					],
 					"mandatory": true
@@ -1392,7 +1391,6 @@
 			"schema": {
 				"params": {
 					"type": [
-						"parameter",
 						"parameter"
 					],
 					"mandatory": false
@@ -1457,10 +1455,6 @@
 				"debug",
 				"info",
 				"warn",
-				"error",
-				"debug",
-				"info",
-				"warn",
 				"error"
 			],
 			"core": true
@@ -1494,7 +1488,6 @@
 				},
 				"params": {
 					"type": [
-						"parameter",
 						"parameter"
 					],
 					"mandatory": false
@@ -1564,13 +1557,6 @@
 			"name": "osgiStates",
 			"type": "string",
 			"value": [
-				"none",
-				"installed",
-				"resolved",
-				"starting",
-				"active",
-				"stopping",
-				"uninstalled",
 				"none",
 				"installed",
 				"resolved",
@@ -1656,9 +1642,6 @@
 			"name": "dbAction",
 			"type": "string",
 			"value": [
-				"insert",
-				"update",
-				"remove",
 				"insert",
 				"update",
 				"remove"

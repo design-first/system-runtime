@@ -1257,7 +1257,6 @@ var system = {
             "schema": {
                 "type": {
                     "type": [
-                        "string",
                         "string"
                     ],
                     "mandatory": true
@@ -1316,7 +1315,6 @@ var system = {
             "schema": {
                 "params": {
                     "type": [
-                        "parameter",
                         "parameter"
                     ],
                     "mandatory": false
@@ -1381,10 +1379,6 @@ var system = {
                 "debug",
                 "info",
                 "warn",
-                "error",
-                "debug",
-                "info",
-                "warn",
                 "error"
             ],
             "core": true
@@ -1418,7 +1412,6 @@ var system = {
                 },
                 "params": {
                     "type": [
-                        "parameter",
                         "parameter"
                     ],
                     "mandatory": false
@@ -1488,13 +1481,6 @@ var system = {
             "name": "osgiStates",
             "type": "string",
             "value": [
-                "none",
-                "installed",
-                "resolved",
-                "starting",
-                "active",
-                "stopping",
-                "uninstalled",
                 "none",
                 "installed",
                 "resolved",
@@ -1580,9 +1566,6 @@ var system = {
             "name": "dbAction",
             "type": "string",
             "value": [
-                "insert",
-                "update",
-                "remove",
                 "insert",
                 "update",
                 "remove"
