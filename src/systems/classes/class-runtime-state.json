@@ -1,0 +1,41 @@
+{
+  "_id": "z16d3d1f9e814b7b",
+  "name": "class-runtime-state",
+  "description": "System State",
+  "version": "1.0.0",
+  "behaviors": {},
+  "schemas": {
+    "158711d6f215e4b": {
+      "_name": "RuntimeState",
+      "_inherit": [],
+      "_core": true,
+      "_class": false,
+      "name": "property",
+      "parameters": "property",
+      "_id": "158711d6f215e4b"
+    }
+  },
+  "models": {
+    "177ac136891629f": {
+      "_name": "RuntimeState",
+      "_core": true,
+      "name": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": true,
+        "default": ""
+      },
+      "parameters": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "_id": "177ac136891629f"
+    }
+  },
+  "types": {},
+  "components": {},
+  "master": false,
+  "subsystem": false
+}

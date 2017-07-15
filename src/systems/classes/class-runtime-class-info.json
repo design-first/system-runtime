@@ -1,0 +1,183 @@
+{
+  "_id": "h1d73618e2b1d129",
+  "name": "class-runtime-class-info",
+  "description": "Runtime ClassInfo",
+  "version": "1.0.0",
+  "behaviors": {
+    "155141e40312cd8": {
+      "_id": "155141e40312cd8",
+      "component": "RuntimeClassInfo",
+      "state": "collection",
+      "action": "function collection(name) {\n    var result = {};\n    if (this.schema()[name] === 'collection') {\n        result = this.model()[name];\n    } \n    \n    return result; \n}",
+      "core": true
+    },
+    "1f6941a0c012c1f": {
+      "_id": "1f6941a0c012c1f",
+      "component": "RuntimeClassInfo",
+      "state": "collections",
+      "action": "function collections(name) {\n    var keys = Object.keys(this.schema()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length; \n    \n    for (i = 0; i < length; i++) { \n        item = keys[i]; \n        if (this.schema()[item] === 'collection') {\n            result.push(item);\n        }\n    }\n    \n    return result;\n}",
+      "core": true
+    },
+    "1ef711b4171c849": {
+      "_id": "1ef711b4171c849",
+      "component": "RuntimeClassInfo",
+      "state": "event",
+      "action": "function event(name) {\n    var result = {};\n    \n    if (this.schema()[name] === 'event') {\n        result = this.model()[name];\n    } \n    \n    return result;\n}",
+      "core": true
+    },
+    "1bae51b6ed1d25c": {
+      "_id": "1bae51b6ed1d25c",
+      "component": "RuntimeClassInfo",
+      "state": "events",
+      "action": "function events(name) {\n    var keys = Object.keys(this.schema()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    \n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.schema()[item] === 'event') {\n            result.push(item);\n        }\n    } \n    return result;\n}",
+      "core": true
+    },
+    "19ac2125221528b": {
+      "_id": "19ac2125221528b",
+      "component": "RuntimeClassInfo",
+      "state": "link",
+      "action": "function link(name) {\n    var result = {};\n    \n    if (this.schema()[name] === 'link') {\n        result = this.model()[name];\n    }\n    return result;\n}",
+      "core": true
+    },
+    "17ed21dfc01b8e8": {
+      "_id": "17ed21dfc01b8e8",
+      "component": "RuntimeClassInfo",
+      "state": "links",
+      "action": "function links(name) { \n    var keys = Object.keys(this.schema()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.schema()[item] === 'link') {\n            result.push(item);\n        }\n    } return result;\n}",
+      "core": true
+    },
+    "11ce318a561ac61": {
+      "_id": "11ce318a561ac61",
+      "component": "RuntimeClassInfo",
+      "state": "method",
+      "action": "function method(name) {\n    var result = {};\n    if (this.schema()[name] === 'method') {\n        result = this.model()[name];\n        \n    }\n    \n    return result;\n}",
+      "core": true
+    },
+    "12ff2190a018046": {
+      "_id": "12ff2190a018046",
+      "component": "RuntimeClassInfo",
+      "state": "methods",
+      "action": "function methods(name) {\n    var keys = Object.keys(this.schema()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.schema()[item] === 'method') {\n            result.push(item);\n        }\n    } \n    \n    return result;\n}",
+      "core": true
+    },
+    "1028d1681e1fd58": {
+      "_id": "1028d1681e1fd58",
+      "component": "RuntimeClassInfo",
+      "state": "properties",
+      "action": "function properties(name) { \n    var keys = Object.keys(this.schema()),\n    item = '',\n    result = [],\n    i = 0,\n    length = 0;\n    length = keys.length;\n    \n    for (i = 0; i < length; i++) {\n        item = keys[i];\n        if (this.schema()[item] === 'property') {\n            result.push(item);\n        }\n    } return result;\n}",
+      "core": true
+    },
+    "18eeb10c5319368": {
+      "_id": "18eeb10c5319368",
+      "component": "RuntimeClassInfo",
+      "state": "property",
+      "action": "function property(name) {\n    var result = {};\n    \n    if (this.schema()[name] === 'property') {\n        result = this.model()[name];\n    }\n    return result;\n}",
+      "core": true
+    }
+  },
+  "schemas": {
+    "1c00b13a1b1bc92": {
+      "_name": "RuntimeClassInfo",
+      "_inherit": [
+        "RuntimeComponent"
+      ],
+      "_core": true,
+      "model": "property",
+      "schema": "property",
+      "method": "method",
+      "methods": "method",
+      "property": "method",
+      "properties": "method",
+      "link": "method",
+      "links": "method",
+      "collections": "method",
+      "collection": "method",
+      "event": "method",
+      "events": "method",
+      "_id": "1c00b13a1b1bc92"
+    }
+  },
+  "models": {
+    "158321dced1014a": {
+      "_name": "RuntimeClassInfo",
+      "_core": true,
+      "model": {
+        "type": "object",
+        "readOnly": true,
+        "mandatory": true,
+        "default": {}
+      },
+      "property": {
+        "params": [
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "result": "object"
+      },
+      "properties": {
+        "result": "array"
+      },
+      "link": {
+        "params": [
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "result": "object"
+      },
+      "links": {
+        "result": "array"
+      },
+      "method": {
+        "params": [
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "result": "object"
+      },
+      "methods": {
+        "result": "array"
+      },
+      "collection": {
+        "params": [
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "result": "object"
+      },
+      "collections": {
+        "result": "array"
+      },
+      "event": {
+        "params": [
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "result": "object"
+      },
+      "events": {
+        "result": "array"
+      },
+      "_id": "158321dced1014a",
+      "schema": {
+        "type": "object",
+        "readOnly": true,
+        "mandatory": true,
+        "default": {}
+      }
+    }
+  },
+  "types": {},
+  "components": {},
+  "master": false,
+  "subsystem": false
+}

@@ -1,0 +1,343 @@
+{
+  "name": "types",
+  "master": false,
+  "subsystem": false,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {},
+  "models": {},
+  "behaviors": {
+    "p1fb6018b381a085": {
+      "_id": "p1fb6018b381a085",
+      "component": "w1eecb1e8e816cda",
+      "state": "start",
+      "action": "function start() { \n\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {
+    "collection": {
+      "name": "collection",
+      "type": "object",
+      "schema": {
+        "type": {
+          "type": [
+            "string"
+          ],
+          "mandatory": true
+        },
+        "readOnly": {
+          "type": "boolean",
+          "mandatory": true
+        },
+        "mandatory": {
+          "type": "boolean",
+          "mandatory": true
+        },
+        "default": {
+          "type": "object",
+          "mandatory": true
+        },
+        "description": {
+          "type": "string",
+          "mandatory": false
+        },
+        "label": {
+          "type": "string",
+          "mandatory": false
+        }
+      },
+      "core": true
+    },
+    "css": {
+      "name": "css",
+      "type": "string",
+      "core": true
+    },
+    "date": {
+      "name": "date",
+      "type": "object",
+      "core": true
+    },
+    "errorParam": {
+      "name": "errorParam",
+      "type": "object",
+      "schema": {
+        "message": {
+          "type": "string",
+          "mandatory": true
+        },
+        "error": {
+          "type": "object",
+          "mandatory": true
+        }
+      },
+      "core": true
+    },
+    "event": {
+      "name": "event",
+      "type": "object",
+      "schema": {
+        "params": {
+          "type": [
+            "parameter"
+          ],
+          "mandatory": false
+        },
+        "description": {
+          "type": "string",
+          "mandatory": false
+        }
+      },
+      "core": true
+    },
+    "html": {
+      "name": "html",
+      "type": "string",
+      "core": true
+    },
+    "javascript": {
+      "name": "javascript",
+      "type": "string",
+      "core": true
+    },
+    "json": {
+      "name": "json",
+      "type": "object",
+      "core": true
+    },
+    "link": {
+      "name": "link",
+      "type": "object",
+      "schema": {
+        "type": {
+          "type": "string",
+          "mandatory": true
+        },
+        "readOnly": {
+          "type": "boolean",
+          "mandatory": true
+        },
+        "mandatory": {
+          "type": "boolean",
+          "mandatory": true
+        },
+        "default": {
+          "type": "@type",
+          "mandatory": true
+        },
+        "description": {
+          "type": "string",
+          "mandatory": false
+        },
+        "label": {
+          "type": "string",
+          "mandatory": false
+        }
+      },
+      "core": true
+    },
+    "log": {
+      "name": "log",
+      "type": "string",
+      "value": [
+        "debug",
+        "info",
+        "warn",
+        "error"
+      ],
+      "core": true
+    },
+    "message": {
+      "name": "message",
+      "type": "object",
+      "schema": {
+        "event": {
+          "type": "string",
+          "mandatory": true
+        },
+        "from": {
+          "type": "string",
+          "mandatory": false
+        },
+        "data": {
+          "type": "object",
+          "mandatory": true
+        }
+      },
+      "core": true
+    },
+    "method": {
+      "name": "method",
+      "type": "object",
+      "schema": {
+        "result": {
+          "type": "string",
+          "mandatory": false
+        },
+        "params": {
+          "type": [
+            "parameter"
+          ],
+          "mandatory": false
+        },
+        "description": {
+          "type": "string",
+          "mandatory": false
+        }
+      },
+      "core": true
+    },
+    "parameter": {
+      "name": "parameter",
+      "type": "object",
+      "schema": {
+        "name": {
+          "type": "string",
+          "mandatory": true
+        },
+        "type": {
+          "type": "string",
+          "mandatory": true
+        },
+        "mandatory": {
+          "type": "boolean",
+          "mandatory": false
+        },
+        "default": {
+          "type": "@type",
+          "mandatory": false
+        }
+      },
+      "core": true
+    },
+    "property": {
+      "name": "property",
+      "type": "object",
+      "schema": {
+        "type": {
+          "type": "string",
+          "mandatory": true
+        },
+        "readOnly": {
+          "type": "boolean",
+          "mandatory": true
+        },
+        "mandatory": {
+          "type": "boolean",
+          "mandatory": true
+        },
+        "default": {
+          "type": "@type",
+          "mandatory": true
+        },
+        "description": {
+          "type": "string",
+          "mandatory": false
+        },
+        "label": {
+          "type": "string",
+          "mandatory": false
+        }
+      },
+      "core": true
+    },
+    "osgiStates": {
+      "name": "osgiStates",
+      "type": "string",
+      "value": [
+        "none",
+        "installed",
+        "resolved",
+        "starting",
+        "active",
+        "stopping",
+        "uninstalled"
+      ],
+      "core": true
+    },
+    "text": {
+      "name": "text",
+      "type": "string",
+      "core": true
+    },
+    "dbInsertEvent": {
+      "_id": "148ef1e19810e6d",
+      "core": true,
+      "name": "dbInsertEvent",
+      "type": "object",
+      "schema": {
+        "collection": {
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        },
+        "document": {
+          "type": "object",
+          "mandatory": true,
+          "default": {}
+        }
+      }
+    },
+    "dbRemoveEvent": {
+      "_id": "1952e1ac4213f4a",
+      "name": "dbRemoveEvent",
+      "type": "object",
+      "core": true,
+      "schema": {
+        "collection": {
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        },
+        "id": {
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        }
+      }
+    },
+    "dbUpdateEvent": {
+      "_id": "1f5c41309711752",
+      "core": true,
+      "name": "dbUpdateEvent",
+      "type": "object",
+      "schema": {
+        "collection": {
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        },
+        "id": {
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        },
+        "field": {
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        },
+        "value": {
+          "type": "any",
+          "mandatory": true,
+          "default": null
+        }
+      }
+    },
+    "dbAction": {
+      "_id": "e1950e16f2914da9",
+      "core": true,
+      "name": "dbAction",
+      "type": "string",
+      "value": [
+        "insert",
+        "update",
+        "remove"
+      ]
+    }
+  },
+  "components": {},
+  "_id": "w1eecb1e8e816cda"
+}

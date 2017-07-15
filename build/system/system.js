@@ -422,84 +422,6 @@ var system = {
                 }]
             }
         },
-        "1f4141671514c2c": {
-            "_id": "1f4141671514c2c",
-            "_name": "RuntimeStorage",
-            "get": {
-                "params": [{
-                    "name": "key",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }]
-            },
-            "set": {
-                "params": [{
-                        "name": "key",
-                        "type": "string",
-                        "mandatory": true,
-                        "default": ""
-                    },
-                    {
-                        "name": "value",
-                        "type": "any",
-                        "mandatory": true,
-                        "default": null
-                    }
-                ]
-            },
-            "changed": {
-                "params": [{
-                    "name": "changed",
-                    "type": "object",
-                    "mandatory": true,
-                    "default": {}
-                }]
-            },
-            "clear": {},
-            "remove": {
-                "params": [{
-                    "name": "key",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }]
-            },
-            "_core": true,
-            "store": {
-                "type": "object",
-                "readOnly": false,
-                "mandatory": false,
-                "default": {}
-            }
-        },
-        "14c7c105b31a160": {
-            "_id": "14c7c105b31a160",
-            "_name": "Runtime",
-            "_core": true,
-            "version": {
-                "type": "string",
-                "readOnly": true,
-                "mandatory": true,
-                "default": "0.0.0"
-            },
-            "system": {
-                "params": [{
-                    "name": "params",
-                    "type": "any",
-                    "mandatory": false
-                }],
-                "result": "object"
-            },
-            "message": {
-                "params": [{
-                    "name": "msg",
-                    "type": "message",
-                    "mandatory": true
-                }]
-            },
-            "ready": {}
-        },
         "166971fd9d107fd": {
             "_name": "RuntimeBehavior",
             "_core": true,
@@ -711,6 +633,47 @@ var system = {
             },
             "_id": "18a51169d7112d4"
         },
+        "o1e1e01e6b41cec3": {
+            "_id": "o1e1e01e6b41cec3",
+            "_name": "RuntimeLog",
+            "action": {
+                "type": "dbAction",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "insert"
+            },
+            "collection": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "id": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "field": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "value": {
+                "type": "any",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "order": {
+                "type": "number",
+                "readOnly": false,
+                "mandatory": false,
+                "default": 0
+            },
+            "_core": true
+        },
         "16b9d1ac2216ffe": {
             "_id": "16b9d1ac2216ffe",
             "_name": "RuntimeLogger",
@@ -798,6 +761,57 @@ var system = {
             },
             "_id": "1628c13c22152e6"
         },
+        "100b91ed2211b15": {
+            "_id": "100b91ed2211b15",
+            "_name": "RuntimeOSGi",
+            "install": {
+                "params": [{
+                        "name": "url",
+                        "type": "any",
+                        "mandatory": true,
+                        "default": ""
+                    },
+                    {
+                        "name": "async",
+                        "type": "boolean",
+                        "mandatory": false,
+                        "default": true
+                    }
+                ],
+                "result": "string"
+            },
+            "uninstall": {
+                "params": [{
+                    "name": "id",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "start": {
+                "params": [{
+                    "name": "id",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "stop": {
+                "params": [{
+                    "name": "id",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "status": {
+                "result": "object"
+            },
+            "_core": true,
+            "bundle": {
+                "result": "string"
+            }
+        },
         "177ac136891629f": {
             "_name": "RuntimeState",
             "_core": true,
@@ -814,6 +828,80 @@ var system = {
                 "default": {}
             },
             "_id": "177ac136891629f"
+        },
+        "1f4141671514c2c": {
+            "_id": "1f4141671514c2c",
+            "_name": "RuntimeStorage",
+            "get": {
+                "params": [{
+                    "name": "key",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "set": {
+                "params": [{
+                        "name": "key",
+                        "type": "string",
+                        "mandatory": true,
+                        "default": ""
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "mandatory": true,
+                        "default": null
+                    }
+                ]
+            },
+            "changed": {
+                "params": [{
+                    "name": "changed",
+                    "type": "object",
+                    "mandatory": true,
+                    "default": {}
+                }]
+            },
+            "clear": {},
+            "remove": {
+                "params": [{
+                    "name": "key",
+                    "type": "string",
+                    "mandatory": true,
+                    "default": ""
+                }]
+            },
+            "_core": true,
+            "store": {
+                "type": "object",
+                "readOnly": false,
+                "mandatory": false,
+                "default": {}
+            }
+        },
+        "1b2811b092143f5": {
+            "_id": "1b2811b092143f5",
+            "_name": "RuntimeSystemOSGi",
+            "start": {},
+            "stop": {},
+            "_core": true,
+            "state": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "none"
+            },
+            "location": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "uninstall": {},
+            "bundle": {
+                "result": "string"
+            }
         },
         "170521b88614387": {
             "_name": "RuntimeSystem",
@@ -883,120 +971,32 @@ var system = {
             "main": {},
             "_id": "170521b88614387"
         },
-        "100b91ed2211b15": {
-            "_id": "100b91ed2211b15",
-            "_name": "RuntimeOSGi",
-            "install": {
-                "params": [{
-                        "name": "url",
-                        "type": "any",
-                        "mandatory": true,
-                        "default": ""
-                    },
-                    {
-                        "name": "async",
-                        "type": "boolean",
-                        "mandatory": false,
-                        "default": true
-                    }
-                ],
-                "result": "string"
+        "14c7c105b31a160": {
+            "_id": "14c7c105b31a160",
+            "_name": "Runtime",
+            "_core": true,
+            "version": {
+                "type": "string",
+                "readOnly": true,
+                "mandatory": true,
+                "default": "0.0.0"
             },
-            "uninstall": {
+            "system": {
                 "params": [{
-                    "name": "id",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }]
-            },
-            "start": {
-                "params": [{
-                    "name": "id",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }]
-            },
-            "stop": {
-                "params": [{
-                    "name": "id",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }]
-            },
-            "status": {
+                    "name": "params",
+                    "type": "any",
+                    "mandatory": false
+                }],
                 "result": "object"
             },
-            "_core": true,
-            "bundle": {
-                "result": "string"
-            }
-        },
-        "1b2811b092143f5": {
-            "_id": "1b2811b092143f5",
-            "_name": "RuntimeSystemOSGi",
-            "start": {},
-            "stop": {},
-            "_core": true,
-            "state": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "none"
+            "message": {
+                "params": [{
+                    "name": "msg",
+                    "type": "message",
+                    "mandatory": true
+                }]
             },
-            "location": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "uninstall": {},
-            "bundle": {
-                "result": "string"
-            }
-        },
-        "o1e1e01e6b41cec3": {
-            "_id": "o1e1e01e6b41cec3",
-            "_name": "RuntimeLog",
-            "action": {
-                "type": "dbAction",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "insert"
-            },
-            "collection": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "id": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "field": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "value": {
-                "type": "any",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "order": {
-                "type": "number",
-                "readOnly": false,
-                "mandatory": false,
-                "default": 0
-            },
-            "_core": true
+            "ready": {}
         }
     },
     "schemas": {
@@ -1058,32 +1058,6 @@ var system = {
             "$systemStopped": "event",
             "$systemUninstalled": "event"
         },
-        "12fa8181ce127a0": {
-            "_id": "12fa8181ce127a0",
-            "_name": "RuntimeStorage",
-            "_inherit": [
-                "RuntimeComponent"
-            ],
-            "_core": true,
-            "store": "property",
-            "get": "method",
-            "set": "method",
-            "remove": "method",
-            "clear": "method",
-            "changed": "event"
-        },
-        "12e211d4cd120a6": {
-            "_id": "12e211d4cd120a6",
-            "_name": "Runtime",
-            "_inherit": [
-                "RuntimeOSGi"
-            ],
-            "_core": true,
-            "version": "property",
-            "system": "method",
-            "message": "method",
-            "ready": "event"
-        },
         "1ac07185641fa9f": {
             "_name": "RuntimeBehavior",
             "_inherit": [
@@ -1144,6 +1118,20 @@ var system = {
             "remove": "event",
             "_id": "1723516a30132ac"
         },
+        "f1a10d1067d1b23a": {
+            "_id": "f1a10d1067d1b23a",
+            "_name": "RuntimeLog",
+            "_inherit": [
+                "RuntimeComponent"
+            ],
+            "_core": true,
+            "action": "property",
+            "collection": "property",
+            "id": "property",
+            "field": "property",
+            "value": "property",
+            "order": "property"
+        },
         "1268f1dddd1fea7": {
             "_name": "RuntimeLogger",
             "_core": true,
@@ -1177,6 +1165,20 @@ var system = {
             "create": "method",
             "_id": "193f1166eb16609"
         },
+        "157931f7a31b61d": {
+            "_id": "157931f7a31b61d",
+            "_name": "RuntimeOSGi",
+            "_inherit": [
+                "RuntimeComponent"
+            ],
+            "_core": true,
+            "install": "method",
+            "uninstall": "method",
+            "start": "method",
+            "stop": "method",
+            "status": "method",
+            "bundle": "method"
+        },
         "158711d6f215e4b": {
             "_name": "RuntimeState",
             "_inherit": [],
@@ -1185,6 +1187,34 @@ var system = {
             "name": "property",
             "parameters": "property",
             "_id": "158711d6f215e4b"
+        },
+        "12fa8181ce127a0": {
+            "_id": "12fa8181ce127a0",
+            "_name": "RuntimeStorage",
+            "_inherit": [
+                "RuntimeComponent"
+            ],
+            "_core": true,
+            "store": "property",
+            "get": "method",
+            "set": "method",
+            "remove": "method",
+            "clear": "method",
+            "changed": "event"
+        },
+        "145fe10c7514298": {
+            "_id": "145fe10c7514298",
+            "_name": "RuntimeSystemOSGi",
+            "_inherit": [
+                "RuntimeComponent"
+            ],
+            "_core": true,
+            "state": "property",
+            "location": "property",
+            "start": "method",
+            "stop": "method",
+            "uninstall": "method",
+            "bundle": "method"
         },
         "1cb761fa4510dca": {
             "_id": "1cb761fa4510dca",
@@ -1207,47 +1237,17 @@ var system = {
             "main": "method",
             "ready": "event"
         },
-        "157931f7a31b61d": {
-            "_id": "157931f7a31b61d",
-            "_name": "RuntimeOSGi",
+        "12e211d4cd120a6": {
+            "_id": "12e211d4cd120a6",
+            "_name": "Runtime",
             "_inherit": [
-                "RuntimeComponent"
+                "RuntimeOSGi"
             ],
             "_core": true,
-            "install": "method",
-            "uninstall": "method",
-            "start": "method",
-            "stop": "method",
-            "status": "method",
-            "bundle": "method"
-        },
-        "145fe10c7514298": {
-            "_id": "145fe10c7514298",
-            "_name": "RuntimeSystemOSGi",
-            "_inherit": [
-                "RuntimeComponent"
-            ],
-            "_core": true,
-            "state": "property",
-            "location": "property",
-            "start": "method",
-            "stop": "method",
-            "uninstall": "method",
-            "bundle": "method"
-        },
-        "f1a10d1067d1b23a": {
-            "_id": "f1a10d1067d1b23a",
-            "_name": "RuntimeLog",
-            "_inherit": [
-                "RuntimeComponent"
-            ],
-            "_core": true,
-            "action": "property",
-            "collection": "property",
-            "id": "property",
-            "field": "property",
-            "value": "property",
-            "order": "property"
+            "version": "property",
+            "system": "method",
+            "message": "method",
+            "ready": "event"
         }
     },
     "types": {
@@ -1257,6 +1257,7 @@ var system = {
             "schema": {
                 "type": {
                     "type": [
+                        "string",
                         "string"
                     ],
                     "mandatory": true
@@ -1315,6 +1316,7 @@ var system = {
             "schema": {
                 "params": {
                     "type": [
+                        "parameter",
                         "parameter"
                     ],
                     "mandatory": false
@@ -1379,6 +1381,10 @@ var system = {
                 "debug",
                 "info",
                 "warn",
+                "error",
+                "debug",
+                "info",
+                "warn",
                 "error"
             ],
             "core": true
@@ -1412,6 +1418,7 @@ var system = {
                 },
                 "params": {
                     "type": [
+                        "parameter",
                         "parameter"
                     ],
                     "mandatory": false
@@ -1481,6 +1488,13 @@ var system = {
             "name": "osgiStates",
             "type": "string",
             "value": [
+                "none",
+                "installed",
+                "resolved",
+                "starting",
+                "active",
+                "stopping",
+                "uninstalled",
                 "none",
                 "installed",
                 "resolved",
@@ -1568,6 +1582,9 @@ var system = {
             "value": [
                 "insert",
                 "update",
+                "remove",
+                "insert",
+                "update",
                 "remove"
             ]
         }
@@ -1581,53 +1598,21 @@ var system = {
             "useCoreAPI": true,
             "core": true
         },
-        "1ca0f1020412d4f": {
-            "_id": "1ca0f1020412d4f",
-            "component": "RuntimeStorage",
-            "state": "get",
-            "action": "function get(key) {\n  var result = null;\n  \n  if (typeof this.store()[key]) {\n    result = this.store()[key];\n  }\n  return result;\n}",
-            "useCoreAPI": false,
+        "12e491859c13918": {
+            "_id": "12e491859c13918",
+            "component": "RuntimeChannel",
+            "state": "$systemStarted",
+            "action": "function $systemStarted(id) { \n  var systems = null;\n    \n  if (id !== 'e89c617b6b15d24') {\n    if (typeof document !== 'undefined') {\n      systems = document.querySelectorAll('link[rel=system]');\n         \n      if ($state.get('runtime') && $state.get('runtime').name === 'ready') {    \n      } else {\n        if (systems.length + 1 === $db.RuntimeSystem.count()) {\n          $component.get('runtime').ready();\n        }\n      }\n    }\n  }\n}",
+            "useCoreAPI": true,
             "core": true
         },
-        "16764100d51b5f8": {
-            "_id": "16764100d51b5f8",
-            "component": "RuntimeStorage",
-            "state": "set",
-            "action": "function set(key, value) {\n    var store = this.store(),\n        item = {};\n    \n    store[key] = value;\n    this.store(store);\n\n    item[key] = JSON.stringify(value);\n    \n    try {\n      switch (true) {\n        case typeof localStorage !== 'undefined':\n          localStorage.setItem(key, JSON.stringify(value)); \n          break;\n        default:\n          break;\n      }\n    } catch(e) {}\n}",
-            "useCoreAPI": false,
+        "1e9021bd4e1bc6e": {
+            "_id": "1e9021bd4e1bc6e",
+            "component": "RuntimeChannel",
+            "state": "$systemInstalled",
+            "action": "function $systemInstalled(id) {\n    var systems = null,\n        dependencies = [],\n        master = [],\n        canStart = true;\n\n    if (id !== 'e89c617b6b15d24') {\n      // if all systems are installed\n      systems = $db.RuntimeSystem.find({});\n\n      systems.forEach(function (system) {\n          var sys = this.require(system._id);\n          if (sys.state() === 'none') {\n              canStart = false;\n          }\n      }.bind(this));\n\n      // start all the systems\n      if (canStart) {\n          dependencies = $db.RuntimeSystem.find({\n              'master': false\n          });\n\n          dependencies.forEach(function (dep) {\n              var system = this.require(dep._id);\n              channel = this.require('channel');\n              \n              if (system.state() === 'resolved') {\n                system.state('starting');\n                system.start();\n                channel.$systemStarted(dep._id);\n                system.state('active');\n              }\n          }.bind(this));\n\n          master = $db.RuntimeSystem.find({\n              'master': true\n          });\n\n          master.forEach(function (dep) {\n              var system = this.require(dep._id);\n              channel = this.require('channel');\n              \n              if (system.state() === 'resolved') {\n                system.state('starting');\n                system.start();\n                channel.$systemStarted(dep._id);\n                system.state('active');\n              }\n          }.bind(this));\n      }\n  }\n}",
+            "useCoreAPI": true,
             "core": true
-        },
-        "134b616b1016f60": {
-            "_id": "134b616b1016f60",
-            "component": "RuntimeStorage",
-            "state": "clear",
-            "action": "function clear() {\n  this.store({});\n  try {  \n    switch (true) {\n      case typeof localStorage !== 'undefined':\n        localStorage.clear(); \n        break;\n      default:\n        break;\n    }\n  }  catch(e) {}\n}",
-            "useCoreAPI": false,
-            "core": true
-        },
-        "14c7f1a8431b3d5": {
-            "_id": "14c7f1a8431b3d5",
-            "component": "RuntimeStorage",
-            "state": "init",
-            "action": "function init(conf) {\n  try {\n    switch (true) {\n      case typeof localStorage !== 'undefined':\n        // init \n        var keys = Object.keys(localStorage),\n            store = {},\n            i = 0,\n            length = 0;\n            \n        length = keys.length;    \n        for (i = 0; i < length; i++) {\n            try {\n              store[keys[i]] = JSON.parse(localStorage[keys[i]]);\n            } catch (e) {}\n        }\n        this.store(store);\n        \n        // event\n        window.addEventListener('storage', function (e) {\n          var obj = {},\n              store = this.store();\n              \n          try {\n            store[e.key] = JSON.parse(e.newValue);\n            this.store(store);\n           \n            obj[e.key] = {};\n            obj[e.key].oldValue = JSON.parse(e.oldValue);\n            obj[e.key].newValue = JSON.parse(e.newValue);\n            \n            this.changed(obj);\n          } catch (e) {}\n        }.bind(this));\n        break;\n      default:\n        break;\n    }\n  } catch (e) {}\n}",
-            "useCoreAPI": false,
-            "core": true
-        },
-        "1a4921ac7112bd4": {
-            "_id": "1a4921ac7112bd4",
-            "component": "RuntimeStorage",
-            "state": "remove",
-            "action": "function remove(key) {\n  var store = this.store();\n  \n  delete store[key];\n  this.store(store);\n  \n  try {\n    switch (true) {\n      case typeof localStorage !== 'undefined':\n        localStorage.removeItem(key); \n        break;\n      default:\n        break;\n    }\n  } catch(e) {}\n}",
-            "useCoreAPI": false,
-            "core": true
-        },
-        "13010167f313f87": {
-            "_id": "13010167f313f87",
-            "component": "Runtime",
-            "state": "system",
-            "action": "function system(params) {\n    var RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n    \n    if (params) {\n        if (typeof params === 'string') {\n          conf.master = true;\n          conf.name = params;\n        } else {\n          conf = params;\n          conf.master = true;\n        }\n        RuntimeSystem = this.require('RuntimeSystem');\n        system = new RuntimeSystem(conf);\n        system.state('active');\n    } else {\n        result = $db.RuntimeSystem.find({\n            'master': true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}",
-            "core": true,
-            "useCoreAPI": true
         },
         "155141e40312cd8": {
             "_id": "155141e40312cd8",
@@ -1815,14 +1800,6 @@ var system = {
             "core": true,
             "useCoreAPI": true
         },
-        "129f71568717a22": {
-            "_id": "129f71568717a22",
-            "component": "RuntimeSystem",
-            "state": "sync",
-            "action": "function sync() {\n    var system = JSON.parse($db.system());\n    \n    this.schemas(system.schemas);\n    this.types(system.types);\n    this.behaviors(system.behaviors);\n    this.components(system.components);\n}",
-            "core": true,
-            "useCoreAPI": true
-        },
         "1ef951f1411b895": {
             "_id": "1ef951f1411b895",
             "component": "RuntimeOSGi",
@@ -1836,14 +1813,6 @@ var system = {
             "component": "RuntimeOSGi",
             "state": "uninstall",
             "action": "function uninstall(id) { \n\tvar search = {},\n\t    system = null,\n\t    behaviorId = '',\n\t    collection =  '',\n\t    componentId = '',\n\t    length = 0,\n\t    i = 0,\n\t    coreComponents = ['admin', 'channel', 'db', 'logger', 'metamodel', 'runtime'];\n\t\n\tsearch = $db.RuntimeSystem.find({\n\t  '_id': id\n\t});\n\t\n\tif (search.length) {\n\t  system = search[0];\n\t  // remove behaviors\n\t  if (system.behaviors) {\n\t    for (behaviorId in system.behaviors) {\n\t      $db.RuntimeBehavior.remove({ \n\t        '_id': system.behaviors[behaviorId]._id\n\t      });\n\t    }\n\t  }\n\t  // remove components\n\t  if (system.components) {\n\t    for (collection in system.components) {\n\t      for (componentId in system.components[collection]) {\n\t        if (coreComponents.indexOf(componentId) === -1) {\n  \t        $db[collection].remove({ \n  \t          '_id': componentId\n  \t        });\n\t        }\n\t      }\n\t    }\n\t  }\n\t}\n\t\n\tthis.require(id).state('uninstalled');\n\tchannel.$systemUninstalled(id);\n}",
-            "useCoreAPI": true,
-            "core": true
-        },
-        "1cb9d103d41dd97": {
-            "_id": "1cb9d103d41dd97",
-            "component": "e89c617b6b15d24",
-            "state": "start",
-            "action": "function start() {\n  var subsystems = [],\n    systems = [],\n    system = null,\n    scripts = [],\n    script = null,\n    mode = '',\n    logLevel = 'warn',\n    i = 0,\n    length = 0;\n\n  // in a browser\n  if (typeof document !== 'undefined') {\n    systems = document.querySelectorAll('link[rel=system]');\n    length = systems.length;\n\n    // logger\n    scripts = document.querySelectorAll('script[log]');\n    if (scripts.length) {\n      logLevel = scripts[0].getAttribute('log');\n      this.require('logger').level(logLevel);\n    }\n\n    // mode\n    scripts = document.querySelectorAll('script[mode]');\n    if (scripts.length) {\n      mode = scripts[0].getAttribute('mode');\n      \n      if (mode === 'dev') {\n        document.addEventListener('dragenter', function (e) {\n          e.stopPropagation();\n          e.preventDefault();\n        }, false);\n\n        document.addEventListener('dragover', function (e) {\n          e.stopPropagation();\n          e.preventDefault();\n        }, false);\n\n        document.addEventListener('drop', function (e) {\n          e.stopPropagation();\n          e.preventDefault();\n          var files = e.dataTransfer.files;\n          var reader = new FileReader();\n          var json = '';\n          reader.onload = function (event) {\n            json += event.target.result;\n          };\n          reader.onloadend = function () {\n            var sys = JSON.parse(json);\n            runtime.install(sys);\n          };\n          reader.readAsText(files[0], 'UTF-8');\n        });\n      }\n      if (mode === 'design') {\n        this.require('admin').start();\n      }\n    }\n\n    // systems\n    for (i = 0; i < length; i++) {\n      system = systems[i];\n\n      if (system.getAttribute('async') === 'false') {\n        this.require('runtime').install(system.href, false);\n      } else {\n        this.require('runtime').install(system.href, true);\n      }\n    }\n\n    // designer (deprecated)\n    scripts = document.querySelectorAll('script[designer]');\n    if (scripts.length) {\n      this.require('admin').start();\n    }\n\n    // ready event\n    if (length === 0) {\n      this.require('runtime').ready();\n    }\n  }\n}",
             "useCoreAPI": true,
             "core": true
         },
@@ -1871,28 +1840,52 @@ var system = {
             "useCoreAPI": true,
             "core": true
         },
-        "12e491859c13918": {
-            "_id": "12e491859c13918",
-            "component": "RuntimeChannel",
-            "state": "$systemStarted",
-            "action": "function $systemStarted(id) { \n  var systems = null;\n    \n  if (id !== 'e89c617b6b15d24') {\n    if (typeof document !== 'undefined') {\n      systems = document.querySelectorAll('link[rel=system]');\n         \n      if ($state.get('runtime') && $state.get('runtime').name === 'ready') {    \n      } else {\n        if (systems.length + 1 === $db.RuntimeSystem.count()) {\n          $component.get('runtime').ready();\n        }\n      }\n    }\n  }\n}",
-            "useCoreAPI": true,
+        "19cf317d7217331": {
+            "_id": "19cf317d7217331",
+            "component": "RuntimeOSGi",
+            "state": "bundle",
+            "action": "function bundle() { \n\tvar result = this.require('db').system();\n\treturn result;\n}",
+            "useCoreAPI": false,
             "core": true
         },
-        "1e9021bd4e1bc6e": {
-            "_id": "1e9021bd4e1bc6e",
-            "component": "RuntimeChannel",
-            "state": "$systemInstalled",
-            "action": "function $systemInstalled(id) {\n    var systems = null,\n        dependencies = [],\n        master = [],\n        canStart = true;\n\n    if (id !== 'e89c617b6b15d24') {\n      // if all systems are installed\n      systems = $db.RuntimeSystem.find({});\n\n      systems.forEach(function (system) {\n          var sys = this.require(system._id);\n          if (sys.state() === 'none') {\n              canStart = false;\n          }\n      }.bind(this));\n\n      // start all the systems\n      if (canStart) {\n          dependencies = $db.RuntimeSystem.find({\n              'master': false\n          });\n\n          dependencies.forEach(function (dep) {\n              var system = this.require(dep._id);\n              channel = this.require('channel');\n              \n              if (system.state() === 'resolved') {\n                system.state('starting');\n                system.start();\n                channel.$systemStarted(dep._id);\n                system.state('active');\n              }\n          }.bind(this));\n\n          master = $db.RuntimeSystem.find({\n              'master': true\n          });\n\n          master.forEach(function (dep) {\n              var system = this.require(dep._id);\n              channel = this.require('channel');\n              \n              if (system.state() === 'resolved') {\n                system.state('starting');\n                system.start();\n                channel.$systemStarted(dep._id);\n                system.state('active');\n              }\n          }.bind(this));\n      }\n  }\n}",
-            "useCoreAPI": true,
+        "1ca0f1020412d4f": {
+            "_id": "1ca0f1020412d4f",
+            "component": "RuntimeStorage",
+            "state": "get",
+            "action": "function get(key) {\n  var result = null;\n  \n  if (typeof this.store()[key]) {\n    result = this.store()[key];\n  }\n  return result;\n}",
+            "useCoreAPI": false,
             "core": true
         },
-        "1cfa4145f614da8": {
-            "_id": "1cfa4145f614da8",
-            "component": "Runtime",
-            "state": "message",
-            "action": "function message(msg) { \n\t$db.RuntimeMessage.insert(msg);\n}",
-            "useCoreAPI": true,
+        "16764100d51b5f8": {
+            "_id": "16764100d51b5f8",
+            "component": "RuntimeStorage",
+            "state": "set",
+            "action": "function set(key, value) {\n    var store = this.store(),\n        item = {};\n    \n    store[key] = value;\n    this.store(store);\n\n    item[key] = JSON.stringify(value);\n    \n    try {\n      switch (true) {\n        case typeof localStorage !== 'undefined':\n          localStorage.setItem(key, JSON.stringify(value)); \n          break;\n        default:\n          break;\n      }\n    } catch(e) {}\n}",
+            "useCoreAPI": false,
+            "core": true
+        },
+        "134b616b1016f60": {
+            "_id": "134b616b1016f60",
+            "component": "RuntimeStorage",
+            "state": "clear",
+            "action": "function clear() {\n  this.store({});\n  try {  \n    switch (true) {\n      case typeof localStorage !== 'undefined':\n        localStorage.clear(); \n        break;\n      default:\n        break;\n    }\n  }  catch(e) {}\n}",
+            "useCoreAPI": false,
+            "core": true
+        },
+        "14c7f1a8431b3d5": {
+            "_id": "14c7f1a8431b3d5",
+            "component": "RuntimeStorage",
+            "state": "init",
+            "action": "function init(conf) {\n  try {\n    switch (true) {\n      case typeof localStorage !== 'undefined':\n        // init \n        var keys = Object.keys(localStorage),\n            store = {},\n            i = 0,\n            length = 0;\n            \n        length = keys.length;    \n        for (i = 0; i < length; i++) {\n            try {\n              store[keys[i]] = JSON.parse(localStorage[keys[i]]);\n            } catch (e) {}\n        }\n        this.store(store);\n        \n        // event\n        window.addEventListener('storage', function (e) {\n          var obj = {},\n              store = this.store();\n              \n          try {\n            store[e.key] = JSON.parse(e.newValue);\n            this.store(store);\n           \n            obj[e.key] = {};\n            obj[e.key].oldValue = JSON.parse(e.oldValue);\n            obj[e.key].newValue = JSON.parse(e.newValue);\n            \n            this.changed(obj);\n          } catch (e) {}\n        }.bind(this));\n        break;\n      default:\n        break;\n    }\n  } catch (e) {}\n}",
+            "useCoreAPI": false,
+            "core": true
+        },
+        "1a4921ac7112bd4": {
+            "_id": "1a4921ac7112bd4",
+            "component": "RuntimeStorage",
+            "state": "remove",
+            "action": "function remove(key) {\n  var store = this.store();\n  \n  delete store[key];\n  this.store(store);\n  \n  try {\n    switch (true) {\n      case typeof localStorage !== 'undefined':\n        localStorage.removeItem(key); \n        break;\n      default:\n        break;\n    }\n  } catch(e) {}\n}",
+            "useCoreAPI": false,
             "core": true
         },
         "182c51edc31ad97": {
@@ -1903,19 +1896,51 @@ var system = {
             "useCoreAPI": false,
             "core": true
         },
-        "19cf317d7217331": {
-            "_id": "19cf317d7217331",
-            "component": "RuntimeOSGi",
-            "state": "bundle",
-            "action": "function bundle() { \n\tvar result = this.require('db').system();\n\treturn result;\n}",
-            "useCoreAPI": false,
-            "core": true
-        },
         "14b77144911ce48": {
             "_id": "14b77144911ce48",
             "component": "RuntimeSystemOSGi",
             "state": "bundle",
             "action": "function bundle() { \n\tvar result = '',\n\tsystem = [];\n\t\n\tsystems = $db.RuntimeSystem.find({\n    '_id': this.id()\n  });\n  \n  if (systems.length) {\n    result = JSON.stringify(systems[0]);\n  }\n  \n\treturn result;\n}",
+            "useCoreAPI": true,
+            "core": true
+        },
+        "129f71568717a22": {
+            "_id": "129f71568717a22",
+            "component": "RuntimeSystem",
+            "state": "sync",
+            "action": "function sync() {\n    var system = JSON.parse($db.system());\n    \n    this.schemas(system.schemas);\n    this.types(system.types);\n    this.behaviors(system.behaviors);\n    this.components(system.components);\n}",
+            "core": true,
+            "useCoreAPI": true
+        },
+        "13010167f313f87": {
+            "_id": "13010167f313f87",
+            "component": "Runtime",
+            "state": "system",
+            "action": "function system(params) {\n    var RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n    \n    if (params) {\n        if (typeof params === 'string') {\n          conf.master = true;\n          conf.name = params;\n        } else {\n          conf = params;\n          conf.master = true;\n        }\n        RuntimeSystem = this.require('RuntimeSystem');\n        system = new RuntimeSystem(conf);\n        system.state('active');\n    } else {\n        result = $db.RuntimeSystem.find({\n            'master': true\n        });\n        if (result.length) {\n            systemId = result[0]._id;\n            system = $component.get(systemId);\n        }\n    }\n    return system;\n}",
+            "core": true,
+            "useCoreAPI": true
+        },
+        "1cfa4145f614da8": {
+            "_id": "1cfa4145f614da8",
+            "component": "Runtime",
+            "state": "message",
+            "action": "function message(msg) { \n\t$db.RuntimeMessage.insert(msg);\n}",
+            "useCoreAPI": true,
+            "core": true
+        },
+        "p1fb6018b381a085": {
+            "_id": "p1fb6018b381a085",
+            "component": "w1eecb1e8e816cda",
+            "state": "start",
+            "action": "function start() { \n\t\n}",
+            "useCoreAPI": false,
+            "core": false
+        },
+        "1cb9d103d41dd97": {
+            "_id": "1cb9d103d41dd97",
+            "component": "e89c617b6b15d24",
+            "state": "start",
+            "action": "function start() {\n  var subsystems = [],\n    systems = [],\n    system = null,\n    scripts = [],\n    script = null,\n    mode = '',\n    logLevel = 'warn',\n    i = 0,\n    length = 0;\n\n  // in a browser\n  if (typeof document !== 'undefined') {\n    systems = document.querySelectorAll('link[rel=system]');\n    length = systems.length;\n\n    // logger\n    scripts = document.querySelectorAll('script[log]');\n    if (scripts.length) {\n      logLevel = scripts[0].getAttribute('log');\n      this.require('logger').level(logLevel);\n    }\n\n    // mode\n    scripts = document.querySelectorAll('script[mode]');\n    if (scripts.length) {\n      mode = scripts[0].getAttribute('mode');\n      \n      if (mode === 'dev') {\n        document.addEventListener('dragenter', function (e) {\n          e.stopPropagation();\n          e.preventDefault();\n        }, false);\n\n        document.addEventListener('dragover', function (e) {\n          e.stopPropagation();\n          e.preventDefault();\n        }, false);\n\n        document.addEventListener('drop', function (e) {\n          e.stopPropagation();\n          e.preventDefault();\n          var files = e.dataTransfer.files;\n          var reader = new FileReader();\n          var json = '';\n          reader.onload = function (event) {\n            json += event.target.result;\n          };\n          reader.onloadend = function () {\n            var sys = JSON.parse(json);\n            runtime.install(sys);\n          };\n          reader.readAsText(files[0], 'UTF-8');\n        });\n      }\n      if (mode === 'design') {\n        this.require('admin').start();\n      }\n    }\n\n    // systems\n    for (i = 0; i < length; i++) {\n      system = systems[i];\n\n      if (system.getAttribute('async') === 'false') {\n        this.require('runtime').install(system.href, false);\n      } else {\n        this.require('runtime').install(system.href, true);\n      }\n    }\n\n    // designer (deprecated)\n    scripts = document.querySelectorAll('script[designer]');\n    if (scripts.length) {\n      this.require('admin').start();\n    }\n\n    // ready event\n    if (length === 0) {\n      this.require('runtime').ready();\n    }\n  }\n}",
             "useCoreAPI": true,
             "core": true
         }
@@ -1928,16 +1953,9 @@ var system = {
                 "designerWindow": null
             }
         },
-        "RuntimeStorage": {
-            "storage": {
-                "_id": "storage",
-                "_core": true
-            }
-        },
-        "Runtime": {
-            "runtime": {
-                "_id": "runtime",
-                "version": "2.0.0-alpha.1"
+        "RuntimeChannel": {
+            "channel": {
+                "_id": "channel"
             }
         },
         "RuntimeDatabase": {
@@ -1956,10 +1974,16 @@ var system = {
                 "_id": "metamodel"
             }
         },
-        "RuntimeSystem": {},
-        "RuntimeChannel": {
-            "channel": {
-                "_id": "channel"
+        "RuntimeStorage": {
+            "storage": {
+                "_id": "storage",
+                "_core": true
+            }
+        },
+        "Runtime": {
+            "runtime": {
+                "_id": "runtime",
+                "version": "2.0.0-alpha.1"
             }
         }
     },

@@ -1,0 +1,111 @@
+{
+  "_id": "a15c391b38613309",
+  "name": "class-runtime-database",
+  "description": "Runtime Database",
+  "version": "1.0.0",
+  "behaviors": {
+    "1a5111d17a1800c": {
+      "_id": "1a5111d17a1800c",
+      "component": "RuntimeDatabase",
+      "state": "collections",
+      "action": "function collections() {\n    var result = {},\n    collectionName = '';\n    \n    for (collectionName in $db.store) {\n        if ($db.store.hasOwnProperty(collectionName) && collectionName.indexOf('Runtime') !== 0) {\n            result[collectionName] = $db[collectionName];\n            \n        }\n    }\n    return result;\n}",
+      "core": true,
+      "useCoreAPI": true
+    },
+    "1e5bf167ca1b61e": {
+      "_id": "1e5bf167ca1b61e",
+      "component": "RuntimeDatabase",
+      "state": "subsystem",
+      "action": "function subsystem(params) {\n    return $db.subsystem(params);\n}",
+      "core": true,
+      "useCoreAPI": true
+    },
+    "15ab1112e81b1b4": {
+      "_id": "15ab1112e81b1b4",
+      "component": "RuntimeDatabase",
+      "state": "system",
+      "action": "function system(system) {\n    var result  = '';\n    \n    if (system) {\n      result = $db.system(system);\n      this.require(result).state('active');\n    } else {\n      result = $db.system();\n    }\n    return result;\n}",
+      "core": true,
+      "useCoreAPI": true
+    }
+  },
+  "schemas": {
+    "1723516a30132ac": {
+      "_name": "RuntimeDatabase",
+      "_inherit": [
+        "RuntimeComponent"
+      ],
+      "_core": true,
+      "system": "method",
+      "subsystem": "method",
+      "collections": "method",
+      "insert": "event",
+      "update": "event",
+      "remove": "event",
+      "_id": "1723516a30132ac"
+    }
+  },
+  "models": {
+    "18a51169d7112d4": {
+      "_name": "RuntimeDatabase",
+      "_core": true,
+      "system": {
+        "params": [
+          {
+            "name": "system",
+            "type": "object",
+            "mandatory": false
+          }
+        ],
+        "result": "string"
+      },
+      "subsystem": {
+        "params": [
+          {
+            "name": "params",
+            "type": "object"
+          }
+        ],
+        "result": "string"
+      },
+      "collections": {
+        "result": "object"
+      },
+      "insert": {
+        "params": [
+          {
+            "name": "event",
+            "type": "dbInsertEvent"
+          }
+        ]
+      },
+      "update": {
+        "params": [
+          {
+            "name": "event",
+            "type": "dbUpdateEvent"
+          }
+        ]
+      },
+      "remove": {
+        "params": [
+          {
+            "name": "event",
+            "type": "dbRemoveEvent"
+          }
+        ]
+      },
+      "_id": "18a51169d7112d4"
+    }
+  },
+  "types": {},
+  "components": {
+    "RuntimeDatabase": {
+      "db": {
+        "_id": "db"
+      }
+    }
+  },
+  "master": false,
+  "subsystem": false
+}
