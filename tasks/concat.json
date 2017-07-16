@@ -2,16 +2,16 @@
   "systemModule": {
     "files": {
       "build/system/system.js": [
-        "src/template/banner/systemmodule.txt",
+        "src/banners/systemmodule-header.txt",
         "build/system-runtime.json",
-        "src/template/footer/systemmodule.txt"
+        "src/banners/systemmodule-footer.txt"
       ]
     }
   },
   "license": {
     "files": {
       "dist/system-runtime.min.js": [
-        "src/template/banner/license.txt",
+        "src/banners/license.txt",
         "dist/system-runtime.min.js"
       ]
     }
