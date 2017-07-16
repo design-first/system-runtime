@@ -1,0 +1,25 @@
+{
+  "debug": {
+    "src": [
+      "src/runtime.js"
+    ],
+    "dest": "dist/system-runtime.js",
+    "options": {
+      "browserifyOptions": {
+        "standalone": "runtime",
+        "debug": true
+      }
+    }
+  },
+  "release": {
+    "src": [
+      "src/runtime.js"
+    ],
+    "dest": "dist/system-runtime.min.js",
+    "options": {
+      "browserifyOptions": {
+        "standalone": "runtime"
+      }
+    }
+  }
+}

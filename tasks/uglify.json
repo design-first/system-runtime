@@ -1,0 +1,9 @@
+{
+  "release": {
+    "files": {
+      "dist/<%= pkg.name %>.min.js": [
+        "<%= browserify.release.dest %>"
+      ]
+    }
+  }
+}

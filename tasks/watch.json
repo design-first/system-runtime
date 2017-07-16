@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "files": [
+      "src/*.js"
+    ],
+    "tasks": [
+      "jshint",
+      "test"
+    ],
+    "options": {
+      "spawn": false
+    }
+  }
+}

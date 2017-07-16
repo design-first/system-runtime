@@ -1,0 +1,24 @@
+{
+  "options": {
+    "specNameSuffix": "spec.js",
+    "helperNameSuffix": "helper.js",
+    "useHelpers": false,
+    "stopOnFailure": false,
+    "reporters": {
+      "console": {
+        "colors": true,
+        "cleanStack": 1,
+        "verbosity": 4,
+        "listStyle": "indent",
+        "activity": false
+      }
+    },
+    "customReporters": []
+  },
+  "modules": {
+    "specs": [
+      "test/module/**",
+      "test/runtime/**"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "build": [
+    "doc",
+    "dist",
+    "build",
+    "coverage"
+  ]
+}

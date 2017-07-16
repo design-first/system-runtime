@@ -1,0 +1,10 @@
+{
+  "files": [
+    "src/*.js",
+    "build/system/*.js",
+    "test/*.js"
+  ],
+  "options": {
+    "jshintrc": true
+  }
+}

@@ -21,119 +21,17 @@
 module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    watch: {
-      scripts: {
-        files: ['src/*.js'],
-        tasks: ['jshint', 'test'],
-        options: {
-          spawn: false
-        }
-      }
-    },
-    clean: ['doc', 'dist', 'build', 'coverage'],
-    jshint: {
-      files: [
-        'src/*.js',
-        'build/system/*.js',
-        'test/*.js'
-      ],
-      options: {
-        jshintrc: true
-      }
-    },
-    jsbeautifier: {
-      files: ['build/system/*.js', 'build/system/*.json']
-    },
-    yuidoc: {
-      modules: {
-        name: '<%= pkg.name %>',
-        description: '<%= pkg.description %>',
-        version: '<%= pkg.version %>',
-        url: '<%= pkg.homepage %>',
-        options: {
-          linkNatives: 'true',
-          paths: ['src', 'build/system'],
-          themedir: 'node_modules/yuidoc-lucid-theme',
-          helpers: ['node_modules/yuidoc-lucid-theme/helpers/helpers.js'],
-          outdir: 'doc'
-        }
-      }
-    },
-    jasmine_nodejs: {
-      options: {
-        specNameSuffix: 'spec.js',
-        helperNameSuffix: 'helper.js',
-        useHelpers: false,
-        stopOnFailure: false,
-        reporters: {
-          console: {
-            colors: true,
-            cleanStack: 1,
-            verbosity: 4,
-            listStyle: 'indent',
-            activity: false
-          },
-        },
-        customReporters: []
-      },
-      modules: {
-        specs: [
-          'test/module/**',
-          'test/runtime/**'
-        ]
-      }
-    },
-    karma: {
-      release: {
-        configFile: 'karma.conf.js'
-      }
-    },
-    browserify: {
-      debug: {
-        src: ['src/runtime.js'],
-        dest: 'dist/system-runtime.js',
-        options: {
-          browserifyOptions: {
-            standalone: 'runtime',
-            debug: true
-          }
-        }
-      },
-      release: {
-        src: ['src/runtime.js'],
-        dest: 'dist/system-runtime.min.js',
-        options: {
-          browserifyOptions: {
-            standalone: 'runtime'
-          }
-        }
-      }
-    },
-    uglify: {
-      release: {
-        files: {
-          'dist/<%= pkg.name %>.min.js': ['<%= browserify.release.dest %>']
-        }
-      }
-    },
-    concat: {
-      systemModule: {
-        files: {
-          'build/system/system.js': ['src/template/banner/systemmodule.txt', 'build/system-runtime.json', 'src/template/footer/systemmodule.txt']
-        }
-      },
-      license: {
-        files: {
-          'dist/system-runtime.min.js': ['src/template/banner/license.txt', 'dist/system-runtime.min.js']
-        }
-      }
-    },
-    "merge-json": {
-      system: {
-        src: ['src/systems/classes/*.json', 'src/systems/types/*.json', 'addons/*.json', 'src/systems/core/*.json'],
-        dest: 'build/system-runtime.json'
-      }
-    }
+    watch: grunt.file.readJSON('tasks/watch.json'),
+    clean: grunt.file.readJSON('tasks/clean.json'),
+    jshint: grunt.file.readJSON('tasks/jshint.json'),
+    jsbeautifier: grunt.file.readJSON('tasks/jsbeautifier.json'),
+    yuidoc: grunt.file.readJSON('tasks/yuidoc.json'),
+    jasmine_nodejs: grunt.file.readJSON('tasks/jasmine_nodejs.json'),
+    karma: grunt.file.readJSON('tasks/karma.json'),
+    browserify: grunt.file.readJSON('tasks/browserify.json'),
+    uglify: grunt.file.readJSON('tasks/uglify.json'),
+    concat: grunt.file.readJSON('tasks/concat.json'),
+    'merge-json': grunt.file.readJSON('tasks/merge-json.json')
   });
 
   grunt.loadNpmTasks('grunt-browserify');
@@ -153,6 +51,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test', [
+    'merge-json',
+    'concat:systemModule',
     'jasmine_nodejs:modules'
   ]);
 
@@ -161,7 +61,7 @@ module.exports = function (grunt) {
     'concat:systemModule',
     'jsbeautifier',
     'jshint',
-    'test',
+    'jasmine_nodejs:modules',
     'browserify:debug',
     'browserify:release',
     'uglify:release',
