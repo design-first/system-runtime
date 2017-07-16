@@ -46,10 +46,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-yuidoc');
   grunt.loadNpmTasks('grunt-karma');
 
-  grunt.registerTask('doc', [
-    'yuidoc'
-  ]);
-
   grunt.registerTask('test', [
     'merge-json',
     'concat:systemModule',
@@ -67,6 +63,6 @@ module.exports = function (grunt) {
     'uglify:release',
     'concat:license',
     'karma:release',
-    'doc'
+    'yuidoc'
   ]);
 };
