@@ -136,8 +136,6 @@ module.exports = function (grunt) {
     }
   });
 
-
-  // default tasks
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -150,28 +148,14 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-yuidoc');
   grunt.loadNpmTasks('grunt-karma');
 
-
-  // doc task
   grunt.registerTask('doc', [
     'yuidoc'
   ]);
 
-  // test task
   grunt.registerTask('test', [
     'jasmine_nodejs:modules'
   ]);
 
-  // debug task
-  grunt.registerTask('debug', [
-    'merge-json',
-    'concat:systemModule',
-    'jsbeautifier',
-    'jshint',
-    'test',
-    'browserify:debug'
-  ]);
-
-  // build task
   grunt.registerTask('build', [
     'merge-json',
     'concat:systemModule',

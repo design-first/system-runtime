@@ -39,7 +39,6 @@
     "doc": "grunt doc",
     "test": "grunt test",
     "clean": "grunt clean",
-    "debug": "grunt debug",
     "build": "grunt build"
   },
   "devDependencies": {

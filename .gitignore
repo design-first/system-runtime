@@ -1,7 +1,8 @@
 /node_modules/
 /coverage/
-/build/runtime.json
 /doc/
+/build/
+/dist/
 /.vscode/
 *.log
 .DS_Store
