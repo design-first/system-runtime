@@ -11,7 +11,7 @@ describe('a component', function () {
 
     metamodel.schema({
       '_name': 'Person',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'children': 'collection',
       'firstName': 'property',
       'lastName': 'property',
@@ -22,7 +22,7 @@ describe('a component', function () {
 
     metamodel.model({
       '_name': 'Person',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'children': {
         'type': ['@Person'],
         'readOnly': false,
@@ -423,7 +423,7 @@ describe('a component', function () {
       '_core': true
     });
 
-    expect(runtime.require('db').system().indexOf('Shadow')).toBe(-1);
+    expect(runtime.bundle().indexOf('Shadow')).toBe(-1);
   });
 
 });

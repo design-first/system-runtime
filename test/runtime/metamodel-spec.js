@@ -14,13 +14,13 @@ describe('a metamodel instance', function () {
     var metamodel = runtime.require('metamodel');
     metamodel.schema({
       '_name': 'PersonTest',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'firstName': 'property'
     });
 
     metamodel.model({
       '_name': 'PersonTest',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'firstName': {
         'type': 'string',
         'readOnly': false,
@@ -52,7 +52,7 @@ describe('a metamodel instance', function () {
 
     metamodel.schema({
       '_name': 'Person',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'sex': 'property',
       'firstName': 'property',
       'lastName': 'property',
@@ -61,7 +61,7 @@ describe('a metamodel instance', function () {
 
     metamodel.model({
       '_name': 'Person',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'sex': {
         'type': 'sex',
         'readOnly': true,
@@ -111,7 +111,7 @@ describe('a metamodel instance', function () {
 
     metamodel.schema({
       '_name': 'Person',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'sex': 'property',
       'firstName': 'property',
       'lastName': 'property',
@@ -121,7 +121,7 @@ describe('a metamodel instance', function () {
 
     metamodel.model({
       '_name': 'Person',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'sex': {
         'type': 'sex',
         'readOnly': true,
@@ -182,7 +182,7 @@ describe('a metamodel instance', function () {
 
     metamodel.schema({
       '_name': 'Person',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'children': 'collection',
       'sex': 'property',
       'firstName': 'property',
@@ -193,7 +193,7 @@ describe('a metamodel instance', function () {
 
     metamodel.model({
       '_name': 'Person',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'sex': {
         'type': 'sex',
         'readOnly': true,
@@ -266,7 +266,7 @@ describe('a metamodel instance', function () {
 
     metamodel.schema({
       '_name': 'Person',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'children': 'collection',
       'sex': 'property',
       'firstName': 'property',
@@ -278,7 +278,7 @@ describe('a metamodel instance', function () {
 
     metamodel.model({
       '_name': 'Person',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'sex': {
         'type': 'sex',
         'readOnly': true,

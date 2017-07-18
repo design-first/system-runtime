@@ -23,10 +23,10 @@
  * It inits Runtime metamodel and loads Runtime core system.
  * 
  * @module runtime
- * @requires runtime-component
- * @requires runtime-metamodel
- * @requires runtime-system
- * @requires runtime-helper
+ * @requires component
+ * @requires metamodel
+ * @requires system
+ * @requires helper
  * @main runtime
  * @class runtime
  * @static
@@ -65,7 +65,7 @@ $metamodel.init();
 /* Init runtime from a system */
 
 
-sytemId = $db.system($system.system);
+sytemId = $db.importSystem($system.system);
 
 system = $component.get(sytemId);
 channel = $component.get('channel');
@@ -77,7 +77,6 @@ channel.$systemResolved(sytemId);
 system.state('starting');
 channel.$systemStarted(sytemId);
 
-system.main(); // deprecated
 system.start();
 
 system.state('active');
@@ -91,9 +90,9 @@ system.state('active');
  * It inits Runtime metamodel and loads Runtime core system.
  * 
  * @module runtime
- * @requires runtime-component
- * @requires runtime-metamodel
- * @requires runtime-system
+ * @requires component
+ * @requires metamodel
+ * @requires system
  * @main runtime
  * @class runtime
  * @static
@@ -101,8 +100,8 @@ system.state('active');
 
 
 /**
- * Runtime instance.
+ * _Runtime instance.
  * @property runtime
- * @type Runtime
+ * @type _Runtime
  */
 module.exports = $component.get('runtime');

@@ -64,30 +64,6 @@ It will return this JSON:
 }
 ```
 
-#### Install the bundle in HTML
-
-Just add a link tag in your HTML to install and start your bundle:
-
-```html
-<!-- install your bundle -->
-<link rel="system" type="application/json" href="app.json">
-
-<!-- load System Runtime -->
-<script src="https://cdn.jsdelivr.net/npm/system-runtime@1.9.16/dist/system-runtime.min.js"></script>
-```
-
-#### Install the bundle in Node.js
-
-Like in [OSGi](https://www.osgi.org), just call *install* API to install and start your bundle:
-
-```js
-// require System Runtime
-let runtime = require('system-runtime');
-
-// install your bundle 
-runtime.install('app.json');
-```
-
 ## What contains System Runtime ?
 
 #### A metamodel
@@ -114,63 +90,7 @@ Thanks to System Runtime NoSQL Database, you can compose your model with an anot
 
 System Runtime checks at runtime if the signatures of invoked methods are compliant with your model. 
 
-With System Runtime your components really behave the way you designed them. 
-
-## Installation
-
-#### NPM
-
-Install System Runtime:
-```sh
-$ npm install system-runtime --save
-```
-
-To use it server-side:
-```js
-let runtime = require('system-runtime');
-```
-
-To use it client-side, add a `<script>` tag to your HTML page:
-```html
-<script src="/node_modules/system-runtime/dist/system-runtime.min.js"></script>
-```
-
-Then you can use `runtime` on your script:
-```js
-// example: get System Runtime version
-runtime.version();
-```
-
-#### Bower
-
-Install System Runtime:
-```sh
-$ bower install system-runtime --save
-```
-
-Add a `<script>` tag to your HTML page:
-```html
-<script src="/bower_components/system-runtime/dist/system-runtime.min.js"></script>
-```
-
-Then you can use `runtime` on your script:
-```js
-// example: get System Runtime version
-runtime.version();
-```
-
-#### CDN
-
-Add a `<script>` tag to your HTML page:
-```html
-<script src="https://cdn.jsdelivr.net/npm/system-runtime@1.9.16/dist/system-runtime.min.js"></script>
-```
-
-Then you can use `runtime` on your script:
-```js
-// example: get System Runtime version
-runtime.version();
-```
+With System Runtime your components really behave the way you designed them.
 
 ## Documentation
 

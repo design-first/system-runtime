@@ -1,12 +1,12 @@
 {
   "_id": "z16d3d1f9e814b7b",
   "name": "class-runtime-state",
-  "description": "System State",
+  "description": "State",
   "version": "1.0.0",
   "behaviors": {},
   "schemas": {
     "158711d6f215e4b": {
-      "_name": "RuntimeState",
+      "_name": "_State",
       "_inherit": [],
       "_core": true,
       "_class": false,
@@ -17,7 +17,7 @@
   },
   "models": {
     "177ac136891629f": {
-      "_name": "RuntimeState",
+      "_name": "_State",
       "_core": true,
       "name": {
         "type": "string",

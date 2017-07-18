@@ -21,11 +21,10 @@
 /**
  * This module contains all the functions used by all the modules.
  * 
- * @module runtime
- * @submodule runtime-helper
- * @requires runtime-db
- * @requires runtime-component
- * @class runtime-helper
+ * @module helper
+ * @requires db
+ * @requires component
+ * @class helper
  * @static
  */
 
@@ -53,7 +52,7 @@ var runtimeRef = null;
 function isRuntime() {
   var result = false;
 
-  if ($db.Runtime && $db.Runtime.find().length) {
+  if ($db._Runtime && $db._Runtime.find().length) {
     result = true;
   }
 
@@ -64,14 +63,14 @@ function isRuntime() {
 /*
  * Get the Runtime instance.
  * @method getRuntime
- * @return {Runtime} Runtime instance
+ * @return {_Runtime} Runtime instance
  */
 function getRuntime() {
   var runtimeId = '',
     result = null;
 
   if (!runtimeRef) {
-    runtimeId = $db.Runtime.find()[0]._id;
+    runtimeId = $db._Runtime.find()[0]._id;
     runtimeRef = $component.get(runtimeId);
   }
 
@@ -110,7 +109,7 @@ function polyfill() {
       get: function () {
         var funcNameRegex = /function\s([^(]{1,})\(/;
         var results = (funcNameRegex).exec((this).toString());
-        return (results && results.length > 1) ? results[1].trim() : "";
+        return (results && results.length > 1) ? results[1].trim() : '';
       },
       set: function (value) { }
     });
@@ -124,11 +123,10 @@ function polyfill() {
 /**
  * This module contains all the functions used by all the modules.
  * 
- * @module runtime
- * @submodule runtime-helper
- * @requires runtime-db
- * @requires runtime-component
- * @class runtime-helper
+ * @module helper
+ * @requires db
+ * @requires component
+ * @class helper
  * @static
  */
 
@@ -136,7 +134,7 @@ function polyfill() {
 /**
  * Get Runtime instance.
  * @method getRuntime
- * @return {Runtime} Runtime instance
+ * @return {_Runtime} Runtime instance
  */
 exports.getRuntime = getRuntime;
 

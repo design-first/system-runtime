@@ -22,10 +22,9 @@
 /**
  * This module manages the states of all thecomponents.
  * 
- * @module runtime
- * @submodule runtime-state
- * @requires runtime-db
- * @class runtime-state
+ * @module state
+ * @requires db
+ * @class state
  * @static
  */
 
@@ -52,15 +51,15 @@ var store = {};
  */
 function set(id, state, parameters) {
   store[id] = {
-    "name": state,
-    "parameters": {
-      "data": parameters
+    'name': state,
+    'parameters': {
+      'data': parameters
     }
   };
-  $db.store.RuntimeState[id] = {
-    "name": state,
-    "parameters": {
-      "data": parameters
+  $db.store._State[id] = {
+    'name': state,
+    'parameters': {
+      'data': parameters
     }
   };
 }
@@ -92,10 +91,9 @@ function clear() {
 /**
  * This module manages the states of all the components.
  * 
- * @module runtime
- * @submodule runtime-state
- * @requires runtime-db
- * @class runtime-state
+ * @module state
+ * @requires db
+ * @class state
  * @static
  */
 

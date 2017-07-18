@@ -10,7 +10,7 @@ describe('a MSON schema', function () {
 
     metamodel.schema({
       '_name': 'Person_test',
-      '_inherit': ['RuntimeComponent'],
+      '_inherit': ['_Component'],
       'firstName': 'property',
       'lastName': 'property',
       'getFullName': 'method'

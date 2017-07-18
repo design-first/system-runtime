@@ -31,7 +31,7 @@ module.exports = function (grunt) {
     browserify: grunt.file.readJSON('tasks/browserify.json'),
     uglify: grunt.file.readJSON('tasks/uglify.json'),
     concat: grunt.file.readJSON('tasks/concat.json'),
-    'merge-json': grunt.file.readJSON('tasks/merge-json.json')
+    json_merge: grunt.file.readJSON('tasks/json_merge.json')
   });
 
   grunt.loadNpmTasks('grunt-browserify');
@@ -42,18 +42,18 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-jsbeautifier');
   grunt.loadNpmTasks('grunt-jasmine-nodejs');
-  grunt.loadNpmTasks('grunt-merge-json');
+  grunt.loadNpmTasks('grunt-json-merge');
   grunt.loadNpmTasks('grunt-contrib-yuidoc');
   grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('test', [
-    'merge-json',
+    'json_merge',
     'concat:systemModule',
     'jasmine_nodejs:modules'
   ]);
 
   grunt.registerTask('build', [
-    'merge-json',
+    'json_merge',
     'concat:systemModule',
     'jsbeautifier',
     'jshint',

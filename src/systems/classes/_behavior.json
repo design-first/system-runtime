@@ -1,14 +1,14 @@
 {
   "_id": "k157f01869d1e145",
   "name": "class-runtime-behavior",
-  "description": "Runtime Behavior",
+  "description": "Behavior",
   "version": "1.0.0",
   "behaviors": {},
   "schemas": {
     "1ac07185641fa9f": {
-      "_name": "RuntimeBehavior",
+      "_name": "_Behavior",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ],
       "_core": true,
       "core": "property",
@@ -21,7 +21,7 @@
   },
   "models": {
     "166971fd9d107fd": {
-      "_name": "RuntimeBehavior",
+      "_name": "_Behavior",
       "_core": true,
       "core": {
         "type": "boolean",

@@ -22,15 +22,14 @@
  * This module manages the components. 
  * It is the factory of all the components that are created by Runtime.
  * 
- * @module runtime
- * @submodule runtime-component
- * @requires runtime-workflow
- * @requires runtime-db
- * @requires runtime-metamodel
- * @requires runtime-behavior
- * @requires runtime-helper
- * @requires runtime-log
- * @class runtime-component
+ * @module component
+ * @requires workflow
+ * @requires db
+ * @requires metamodel
+ * @requires behavior
+ * @requires helper
+ * @requires log
+ * @class component
  * @static 
  */
 
@@ -63,14 +62,14 @@ var PROPERTY_TYPE = 'property',
 
 /*
  * Sub class to override push and pop method of Array Class.
- * @class RuntimeArray
+ * @class _Array
  * @param {Object} conf
  * {String} classId name of the class
  * {String} type type of the array
  * {Array} arr array
  * @private
  */
-function RuntimeArray(conf) {
+function _Array(conf) {
   var arr = [],
     arrDb = [],
     type = '',
@@ -124,9 +123,9 @@ function RuntimeArray(conf) {
               length = del.length;
               for (i = 0; i < length; i++) {
                 $workflow.state({
-                  "component": id,
-                  "state": propertyName,
-                  "data": [store[del[i]], 'remove']
+                  'component': id,
+                  'state': propertyName,
+                  'data': [store[del[i]], 'remove']
                 });
               }
               break;
@@ -144,9 +143,9 @@ function RuntimeArray(conf) {
           }
 
           $workflow.state({
-            "component": id,
-            "state": propertyName,
-            "data": [val, 'add']
+            'component': id,
+            'state': propertyName,
+            'data': [val, 'add']
           });
         } else {
           if (typeof val.id !== 'undefined') {
@@ -181,9 +180,9 @@ function RuntimeArray(conf) {
           }
 
           $workflow.state({
-            "component": id,
-            "state": propertyName,
-            "data": [val, 'add']
+            'component': id,
+            'state': propertyName,
+            'data': [val, 'add']
           });
         } else {
           $log.invalidPropertyName(id, classId, propertyName, val, type);
@@ -232,9 +231,9 @@ function RuntimeArray(conf) {
         }
 
         $workflow.state({
-          "component": id,
-          "state": propertyName,
-          "data": [result, 'remove']
+          'component': id,
+          'state': propertyName,
+          'data': [result, 'remove']
         });
 
       }
@@ -246,7 +245,7 @@ function RuntimeArray(conf) {
 
   /* Override push method.
    * @push
-   * @param {RuntimeComponent|Object} val
+   * @param {_Component|Object} val
    */
   arr.push = function push(val) {
     return _add(val, 'push');
@@ -254,7 +253,7 @@ function RuntimeArray(conf) {
 
   /* Override unshift method.
    * @unshift
-   * @param {RuntimeComponent|Object} val
+   * @param {_Component|Object} val
    */
   arr.unshift = function unshift(val) {
     return _add(val, 'unshift');
@@ -262,7 +261,7 @@ function RuntimeArray(conf) {
 
   /* Override concat method.
    * @push
-   * @param {RuntimeComponent|Object} arr
+   * @param {_Component|Object} arr
    */
   arr.concat = function concat(arr) {
     var i = 0,
@@ -276,12 +275,12 @@ function RuntimeArray(conf) {
     }
 
     conf.arr = arrDb;
-    return new RuntimeArray(conf);
+    return new _Array(conf);
   };
 
   /* Override pop method.
    * @pop
-   * @return {RuntimeComponent|Object} value
+   * @return {_Component|Object} value
    */
   arr.pop = function pop() {
     return _remove('pop');
@@ -289,7 +288,7 @@ function RuntimeArray(conf) {
 
   /* Override shift method.
    * @shift
-   * @return {RuntimeComponent|Object} value
+   * @return {_Component|Object} value
    */
   arr.shift = function shift() {
     return _remove('shift');
@@ -298,7 +297,7 @@ function RuntimeArray(conf) {
   /* Override sort method.
    * @sort
    * @param {Function} funct the sort function
-   * @return {RuntimeArray} the current RuntimeArray
+   * @return {_Array} the current _Array
    */
   arr.sort = function sort(funct) {
     arrDb.sort(funct);
@@ -317,7 +316,7 @@ function RuntimeArray(conf) {
 
   /* Override reverse method.
    * @reverse
-   * @return {RuntimeArray} the reversed RuntimeArray
+   * @return {_Array} the reversed _Array
    */
   arr.reverse = function reverse() {
     arrDb.reverse();
@@ -335,7 +334,7 @@ function RuntimeArray(conf) {
 
   /* Override splice method.
    * @splice
-   * @return {RuntimeArray} the spliced RuntimeArray
+   * @return {_Array} the spliced _Array
    */
   arr.splice = function splice(start, deleteCount, val) {
     var result = [],
@@ -369,9 +368,9 @@ function RuntimeArray(conf) {
         }
 
         $workflow.state({
-          "component": id,
-          "state": propertyName,
-          "data": [data, 'remove']
+          'component': id,
+          'state': propertyName,
+          'data': [data, 'remove']
         });
       }
     }
@@ -380,7 +379,7 @@ function RuntimeArray(conf) {
 
   /* Override slice method.
    * @slice
-   * @return {RuntimeArray} the sliced RuntimeArray
+   * @return {_Array} the sliced _Array
    */
   arr.slice = function slice(begin, end) {
     var result = arrDb.slice(begin, end);
@@ -391,7 +390,7 @@ function RuntimeArray(conf) {
 }
 
 /* jshint -W058 */
-RuntimeArray.prototype = new Array;
+_Array.prototype = new Array;
 /* jshint +W058 */
 
 
@@ -444,9 +443,9 @@ function getProperties(id) {
   for (i = 0; i < length; i++) {
     if (schema[propNames[i]] === LINK_TYPE || schema[propNames[i]] === PROPERTY_TYPE || schema[propNames[i]] === COLLECTION_TYPE) {
       result.push({
-        "name": propNames[i],
-        "type": model[propNames[i]].type,
-        "readOnly": model[propNames[i]].readOnly
+        'name': propNames[i],
+        'type': model[propNames[i]].type,
+        'readOnly': model[propNames[i]].readOnly
       });
     }
   }
@@ -631,11 +630,11 @@ function createClass(classId) {
       return config._id;
     };
     /* jshint -W054 */
-    this.id = new Function("body", "return function id () { return body.call(this) };")(body);
+    this.id = new Function('body', 'return function id () { return body.call(this) };')(body);
     /* jshint +W054 */
 
     // classInfo
-    if ($metamodel.inheritFrom(classId, 'RuntimeComponent')) {
+    if ($metamodel.inheritFrom(classId, '_Component')) {
       config.classInfo = classId + 'Info';
     }
 
@@ -658,7 +657,7 @@ function createClass(classId) {
     }
   };
   /* jshint -W054 */
-  return new Function("body", "return function " + classId + " (config) { body.call(this,config) };")(body);
+  return new Function('body', 'return function ' + classId + ' (config) { body.call(this,config) };')(body);
   /* jshint +W054 */
 }
 
@@ -675,7 +674,7 @@ function addId(Class, classId) {
     return classId;
   };
   /* jshint -W054 */
-  Class.id = new Function("body", "return function id (prop, val) { return body.call(this, prop, val) };")(body);
+  Class.id = new Function('body', 'return function id (prop, val) { return body.call(this, prop, val) };')(body);
   /* jshint +W054 */
 }
 
@@ -758,13 +757,13 @@ function addProperties(model, Class, classId) {
         if (typeof value === 'undefined') {
           if (typeof position === 'undefined') {
 
-            runtimeArr = new RuntimeArray({
-              "id": this.id(),
-              "propertyName": propertyName,
-              "readOnly": propertyReadOnly,
-              "classId": classId,
-              "type": propertyType[0],
-              "arr": $db.store[classId][this.id()][propertyName]
+            runtimeArr = new _Array({
+              'id': this.id(),
+              'propertyName': propertyName,
+              'readOnly': propertyReadOnly,
+              'classId': classId,
+              'type': propertyType[0],
+              'arr': $db.store[classId][this.id()][propertyName]
             });
 
             return runtimeArr;
@@ -772,7 +771,7 @@ function addProperties(model, Class, classId) {
             if (Array.isArray(position)) { // we replace the collection
               if (_isValidCollection(position, propertyType[0])) {
                 search = $db[classId].find({
-                  "_id": this.id()
+                  '_id': this.id()
                 });
                 if (search.length) {
 
@@ -780,9 +779,9 @@ function addProperties(model, Class, classId) {
                   realVal = _getRealCollection(position, propertyType[0]);
 
                   $workflow.state({
-                    "component": this.id(),
-                    "state": propertyName,
-                    "data": [position, 'reset']
+                    'component': this.id(),
+                    'state': propertyName,
+                    'data': [position, 'reset']
                   });
 
                   component[propertyName] = realVal;
@@ -824,7 +823,7 @@ function addProperties(model, Class, classId) {
               ($metamodel.inheritFrom(value.constructor.name, propertyType[0].replace('@', '')) && (propertyType[0].indexOf('@') !== -1))
             ) {
               search = $db[classId].find({
-                "_id": this.id()
+                '_id': this.id()
               });
               if (search.length) {
 
@@ -857,9 +856,9 @@ function addProperties(model, Class, classId) {
                 }
 
                 $workflow.state({
-                  "component": this.id(),
-                  "state": propertyName,
-                  "data": [value, 'add']
+                  'component': this.id(),
+                  'state': propertyName,
+                  'data': [value, 'add']
                 });
               }
             } else {
@@ -869,7 +868,7 @@ function addProperties(model, Class, classId) {
         }
       };
       /* jshint -W054 */
-      Class.prototype[propertyName] = new Function("body", "return function " + propertyName + " (position,value) { return body.call(this, position, value) };")(body);
+      Class.prototype[propertyName] = new Function('body', 'return function ' + propertyName + ' (position,value) { return body.call(this, position, value) };')(body);
       /* jshint +W054 */
     } else {
       body = function body(value) {
@@ -891,7 +890,7 @@ function addProperties(model, Class, classId) {
                 propertyValue = addStructure('', propertyName, model, this.id());
                 break;
               default:
-                propertyValue = component[propertyName];
+                propertyValue = component[propertyName]; // TODO case of object
                 break;
             }
             return propertyValue;
@@ -903,7 +902,7 @@ function addProperties(model, Class, classId) {
             $log.readOnlyProperty(this.id(), this.constructor.name, propertyName);
           } else {
             if ($metamodel.isValidType(value, propertyType)) {
-              search = $db[classId].find({ "_id": this.id() });
+              search = $db[classId].find({ '_id': this.id() });
               if (search.length) {
                 component = search[0];
 
@@ -936,15 +935,15 @@ function addProperties(model, Class, classId) {
                   });
                 }
 
-                // case of RuntimeBehavior
-                if (classId === 'RuntimeBehavior') {
+                // case of _Behavior
+                if (classId === '_Behavior') {
                   $behavior.removeFromMemory(this.id());
                 }
 
                 $workflow.state({
-                  "component": this.id(),
-                  "state": propertyName,
-                  "data": [value]
+                  'component': this.id(),
+                  'state': propertyName,
+                  'data': [value]
                 });
               }
             } else {
@@ -954,7 +953,7 @@ function addProperties(model, Class, classId) {
         }
       };
       /* jshint -W054 */
-      Class.prototype[propertyName] = new Function("body", "return function " + propertyName + " (value) { return body.call(this,value) };")(body);
+      Class.prototype[propertyName] = new Function('body', 'return function ' + propertyName + ' (value) { return body.call(this,value) };')(body);
       /* jshint +W054 */
     }
   });
@@ -1029,7 +1028,7 @@ function addStructure(path, name, model, id) {
           $log.readOnlyProperty(id, model, fullPath);
         } else {
           if ($metamodel.isValidType(value, propertyType)) {
-            search = $db[model].find({ "_id": id });
+            search = $db[model].find({ '_id': id });
             if (search.length) {
               component = search[0];
 
@@ -1054,15 +1053,15 @@ function addStructure(path, name, model, id) {
                 });
               }
 
-              // case of RuntimeBehavior
-              if (model === 'RuntimeBehavior') {
+              // case of _Behavior
+              if (model === '_Behavior') {
                 $behavior.removeFromMemory(id);
               }
 
               $workflow.state({
-                "component": id,
-                "state": fullPath,
-                "data": [value]
+                'component': id,
+                'state': fullPath,
+                'data': [value]
               });
             }
           } else {
@@ -1073,7 +1072,7 @@ function addStructure(path, name, model, id) {
     };
 
     /* jshint -W054 */
-    sructure[propertyName] = new Function("body", "return function " + propertyName + " (value) { return body.call(this,value) };")(body);
+    sructure[propertyName] = new Function('body', 'return function ' + propertyName + ' (value) { return body.call(this,value) };')(body);
     /* jshint +W054 */
   });
 
@@ -1099,20 +1098,20 @@ function addMethods(model, Class, classId) {
         var result = null;
 
         result = $workflow.state({
-          "component": this.id(),
-          "state": methodName,
-          "data": arguments
+          'component': this.id(),
+          'state': methodName,
+          'data': arguments
         });
 
         return result;
       };
     if (params) {
       /* jshint -W054 */
-      Class.prototype[methodName] = new Function("body", "return function " + methodName + " (" + params + ") { return body.call(this," + params + ") };")(body);
+      Class.prototype[methodName] = new Function('body', 'return function ' + methodName + ' (' + params + ') { return body.call(this,' + params + ') };')(body);
       /* jshint +W054 */
     } else {
       /* jshint -W054 */
-      Class.prototype[methodName] = new Function("body", "return function " + methodName + " () { return body.call(this) };")(body);
+      Class.prototype[methodName] = new Function('body', 'return function ' + methodName + ' () { return body.call(this) };')(body);
       /* jshint +W054 */
     }
   });
@@ -1141,8 +1140,8 @@ function addEvents(model, Class, classId) {
           length = -1,
           message = {};
 
-        if (classId === 'RuntimeChannel') {
-          systems = $db.RuntimeSystem.find({
+        if (classId === '_Channel') {
+          systems = $db._System.find({
             'master': true
           });
           if (systems.length) {
@@ -1157,32 +1156,32 @@ function addEvents(model, Class, classId) {
           message.data = data;
           message.event = methodName;
 
-          $db.RuntimeMessage.insert(message);
+          $db._Message.insert(message);
 
           $workflow.state({
-            "component": this.id(),
-            "state": "send",
-            "data": [{
-              "event": message.event,
-              "from": message.from,
-              "data": message.data
+            'component': this.id(),
+            'state': 'send',
+            'data': [{
+              'event': message.event,
+              'from': message.from,
+              'data': message.data
             }]
           });
         } else {
           $workflow.state({
-            "component": this.id(),
-            "state": methodName,
-            "data": arguments
+            'component': this.id(),
+            'state': methodName,
+            'data': arguments
           });
         }
       };
     if (params) {
       /* jshint -W054 */
-      Class.prototype[methodName] = new Function("body", "return function " + methodName + " (" + params + ") { return body.call(this," + params + ") };")(body);
+      Class.prototype[methodName] = new Function('body', 'return function ' + methodName + ' (' + params + ') { return body.call(this,' + params + ') };')(body);
       /* jshint +W054 */
     } else {
       /* jshint -W054 */
-      Class.prototype[methodName] = new Function("body", "return function " + methodName + " () { return body.call(this) };")(body);
+      Class.prototype[methodName] = new Function('body', 'return function ' + methodName + ' () { return body.call(this) };')(body);
       /* jshint +W054 */
     }
   });
@@ -1202,9 +1201,9 @@ function addOn(Class, classId) {
       currentState = '';
 
     if ($workflow.checkParams({
-      "component": this,
-      "methodName": "on",
-      "args": arguments
+      'component': this,
+      'methodName': 'on',
+      'args': arguments
     })) {
       if ($metamodel.isValidState(state, classId)) {
         if (
@@ -1212,9 +1211,9 @@ function addOn(Class, classId) {
           !$metamodel.isProperty(state, classId) &&
           !$metamodel.isLink(state, classId) &&
           !$metamodel.isCollection(state, classId) &&
-          $db.RuntimeBehavior.find({
-            "component": this.id(),
-            "state": state
+          $db._Behavior.find({
+            'component': this.id(),
+            'state': state
           }).length >= 1) {
           $log.behaviorNotUnique(classId, state);
         } else {
@@ -1237,7 +1236,7 @@ function addOn(Class, classId) {
     return behaviorId;
   };
   /* jshint -W054 */
-  Class.prototype.on = new Function("body", "return function on (state,handler,useCoreAPI,isCore) { return body.call(this,state,handler,useCoreAPI,isCore) };")(body);
+  Class.prototype.on = new Function('body', 'return function on (state,handler,useCoreAPI,isCore) { return body.call(this,state,handler,useCoreAPI,isCore) };')(body);
   /* jshint +W054 */
 }
 
@@ -1255,9 +1254,9 @@ function addOnClass(Class, classId) {
       currentState = '';
 
     if ($workflow.checkParams({
-      "component": this,
-      "methodName": "on",
-      "args": arguments
+      'component': this,
+      'methodName': 'on',
+      'args': arguments
     })) {
       if ($metamodel.isValidState(state, classId)) {
         if (
@@ -1265,9 +1264,9 @@ function addOnClass(Class, classId) {
           !$metamodel.isProperty(state, classId) &&
           !$metamodel.isLink(state, classId) &&
           !$metamodel.isCollection(state, classId) &&
-          $db.RuntimeBehavior.find({
-            "component": this.id(),
-            "state": state
+          $db._Behavior.find({
+            'component': this.id(),
+            'state': state
           }).length >= 1) {
           $log.behaviorNotUnique(classId, state);
         } else {
@@ -1290,7 +1289,7 @@ function addOnClass(Class, classId) {
     return behaviorId;
   };
   /* jshint -W054 */
-  Class.on = new Function("body", "return function on (state,handler,useCoreAPI,isCore) { return body.call(this, state, handler, useCoreAPI,isCore) };")(body);
+  Class.on = new Function('body', 'return function on (state,handler,useCoreAPI,isCore) { return body.call(this, state, handler, useCoreAPI,isCore) };')(body);
   /* jshint -W054 */
 }
 
@@ -1305,15 +1304,15 @@ function addOnClass(Class, classId) {
 function addOffClass(Class, classId) {
   var body = function (state, behaviorId) {
     if ($workflow.checkParams({
-      "component": this,
-      "methodName": "off",
-      "args": arguments
+      'component': this,
+      'methodName': 'off',
+      'args': arguments
     })) {
       if ($metamodel.isValidState(state, classId)) {
         $behavior.remove({
-          "behaviorId": behaviorId,
-          "componentId": classId,
-          "state": state
+          'behaviorId': behaviorId,
+          'componentId': classId,
+          'state': state
         });
       } else {
         $log.InvalidStateOff(classId, state);
@@ -1321,7 +1320,7 @@ function addOffClass(Class, classId) {
     }
   };
   /* jshint -W054 */
-  Class.off = new Function("body", "return function off (state, behaviorId) { return body.call(this, state, behaviorId) };")(body);
+  Class.off = new Function('body', 'return function off (state, behaviorId) { return body.call(this, state, behaviorId) };')(body);
   /* jshint +W054 */
 }
 
@@ -1360,12 +1359,12 @@ function addDestroyClass(Class) {
     }
 
     $workflow.state({
-      "component": id,
-      "state": "destroy"
+      'component': id,
+      'state': 'destroy'
     });
   };
   /* jshint -W054 */
-  Class.destroy = new Function("body", "return function destroy () { return body.call(this) };")(body);
+  Class.destroy = new Function('body', 'return function destroy () { return body.call(this) };')(body);
   /* jshint +W054 */
 }
 
@@ -1381,7 +1380,7 @@ function addClassInfoClass(Class) {
     return get(this.id() + 'Info');
   };
   /* jshint -W054 */
-  Class.classInfo = new Function("body", "return function classInfo () { return body.call(this) };")(body);
+  Class.classInfo = new Function('body', 'return function classInfo () { return body.call(this) };')(body);
   /* jshint +W054 */
 }
 
@@ -1416,8 +1415,8 @@ function factory(config) {
   addEvents(config.model, Class, classId);
 
   // add default properties/methods only if the component
-  // inherit from RuntimeComponent
-  if ($metamodel.inheritFrom(classId, 'RuntimeComponent')) {
+  // inherit from _Component
+  if ($metamodel.inheritFrom(classId, '_Component')) {
     addOn(Class, classId);
     addOnClass(Class, classId);
     addOffClass(Class, classId);
@@ -1470,7 +1469,7 @@ function destroy(id) {
     delete store[id];
     classId = component.constructor.name;
     $db[classId].remove({
-      "_id": id
+      '_id': id
     });
 
     // remove behaviors
@@ -1479,7 +1478,7 @@ function destroy(id) {
     });
 
     // case of Behavior
-    if (classId === 'RuntimeBehavior') {
+    if (classId === '_Behavior') {
       $behavior.removeFromMemory(id);
     }
   }
@@ -1512,15 +1511,14 @@ function clear() {
  * This module manages the components. 
  * It is the factory of all the components that are created by Runtime.
  * 
- * @module runtime
- * @submodule runtime-component
- * @requires runtime-workflow
- * @requires runtime-db
- * @requires runtime-metamodel
- * @requires runtime-behavior
- * @requires runtime-helper
- * @requires runtime-log
- * @class runtime-component
+ * @module component
+ * @requires workflow
+ * @requires db
+ * @requires metamodel
+ * @requires behavior
+ * @requires helper
+ * @requires log
+ * @class component
  * @static 
  */
 

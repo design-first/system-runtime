@@ -6,16 +6,7 @@
   "description": "",
   "schemas": {},
   "models": {},
-  "behaviors": {
-    "p1fb6018b381a085": {
-      "_id": "p1fb6018b381a085",
-      "component": "w1eecb1e8e816cda",
-      "state": "start",
-      "action": "function start() { \n\t\n}",
-      "useCoreAPI": false,
-      "core": false
-    }
-  },
+  "behaviors": {},
   "types": {
     "collection": {
       "name": "collection",

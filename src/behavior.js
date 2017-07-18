@@ -23,12 +23,11 @@
  * A behavior is a mecanism that allow users to add actions that will be executed 
  * when a specific state of a component will change.
  * 
- * @module runtime
- * @submodule runtime-behavior
- * @requires runtime-db
- * @requires runtime-helper
- * @requires runtime-channel
- * @class runtime-behavior
+ * @module behavior
+ * @requires db
+ * @requires helper
+ * @requires channel
+ * @class behavior
  * @static
  */
 
@@ -103,11 +102,11 @@ function createFunction(name, func, core, useCoreAPI) {
 
   if (params[0] !== '') {
     /* jshint -W054 */
-    action = new Function("body", "return function " + funcName + " (" + params.join(',') + ") { return new Function('" + params.join("','") + "', body).apply(this, arguments) };")(funcBody);
+    action = new Function('body', "return function " + funcName + " (" + params.join(',') + ") { return new Function('" + params.join("','") + "', body).apply(this, arguments) };")(funcBody);
     /* jshint +W054 */
   } else {
     /* jshint -W054 */
-    action = new Function("body", "return function " + funcName + " () { return new Function(body).apply(this, arguments) };")(funcBody);
+    action = new Function('body', "return function " + funcName + " () { return new Function(body).apply(this, arguments) };")(funcBody);
     /* jshint +W054 */
   }
 
@@ -143,13 +142,13 @@ function add(id, state, action, useCoreAPI, core) {
 
   store[behaviorId] = action;
 
-  $db.RuntimeBehavior.insert({
-    "_id": behaviorId,
-    "component": id,
-    "state": state,
-    "action": strAction,
-    "useCoreAPI": useCoreAPI,
-    "core": core
+  $db._Behavior.insert({
+    '_id': behaviorId,
+    'component': id,
+    'state': state,
+    'action': strAction,
+    'useCoreAPI': useCoreAPI,
+    'core': core
   });
 
   return behaviorId;
@@ -175,21 +174,21 @@ function remove(params) {
 
   if (params.componentId) {
     if (params.behaviorId) {
-      $db.RuntimeBehavior.remove({
-        "_id": params.behaviorId,
-        "component": params.componentId,
-        "state": params.state
+      $db._Behavior.remove({
+        '_id': params.behaviorId,
+        'component': params.componentId,
+        'state': params.state
       });
       delete store[params.behaviorId];
     } else {
       if (params.state) {
-        result = $db.RuntimeBehavior.remove({
-          "component": params.componentId,
-          "state": params.state
+        result = $db._Behavior.remove({
+          'component': params.componentId,
+          'state': params.state
         });
       } else {
-        result = $db.RuntimeBehavior.remove({
-          "component": params.componentId
+        result = $db._Behavior.remove({
+          'component': params.componentId
         });
       }
       result.forEach(function (id) {
@@ -222,9 +221,9 @@ function getActions(id, state) {
     dbResult = [],
     action = null;
 
-  dbResult = $db.RuntimeBehavior.find({
-    "component": id,
-    "state": state
+  dbResult = $db._Behavior.find({
+    'component': id,
+    'state': state
   });
 
   dbResult.forEach(function (behavior) {
@@ -234,8 +233,8 @@ function getActions(id, state) {
       store[behavior._id] = action;
     }
     result.push({
-      "useCoreAPI": behavior.useCoreAPI,
-      "action": action
+      'useCoreAPI': behavior.useCoreAPI,
+      'action': action
     });
   });
 
@@ -270,12 +269,11 @@ function get(id) {
  * This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed 
  * when a specific state of a component will change.
  * 
- * @module runtime
- * @submodule runtime-behavior
- * @requires runtime-db
- * @requires runtime-helper
- * @requires runtime-channel
- * @class runtime-behavior
+ * @module behavior
+ * @requires db
+ * @requires helper
+ * @requires channel
+ * @class behavior
  * @static
  */
 

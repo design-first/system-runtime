@@ -1,14 +1,14 @@
 {
   "_id": "f1567a1294c12182",
   "name": "class-runtime-message",
-  "description": "Runtime message",
+  "description": "Message",
   "version": "1.0.0",
   "behaviors": {},
   "schemas": {
     "14caa1c46414ee1": {
-      "_name": "RuntimeMessage",
+      "_name": "_Message",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ],
       "_core": true,
       "event": "property",
@@ -19,7 +19,7 @@
   },
   "models": {
     "1d9b6139411aa91": {
-      "_name": "RuntimeMessage",
+      "_name": "_Message",
       "_core": true,
       "event": {
         "type": "string",

@@ -20,15 +20,14 @@
 
 /**
  * This module manages Runtime metamodel. <br>
- * Runtime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.
+ * Runtime metamodel loads schemas and types, analyzes them and creates the component classes and related DatabaseCollections.
  * 
- * @module runtime
- * @submodule runtime-metamodel
- * @requires runtime-db
- * @requires runtime-log
- * @requires runtime-component
- * @requires runtime-workflow
- * @class runtime-metamodel
+ * @module metamodel
+ * @requires db
+ * @requires log
+ * @requires component
+ * @requires workflow
+ * @class metamodel
  * @static
  */
 
@@ -103,7 +102,7 @@ function generateModels() {
 
     // set model internal properties
     model = {
-      "_name": schema._name,
+      '_name': schema._name,
     };
 
     // set _core
@@ -131,57 +130,53 @@ function generateModels() {
       switch (true) {
         case schema[att] === 'property':
           model[att] = {
-            "type": "any",
-            "readOnly": false,
-            "mandatory": false,
-            "default": "",
-            "description": att,
-            "label": att
+            'type': 'any',
+            'readOnly': false,
+            'mandatory': false,
+            'default': '',
+            'description': att,
+            'label': att
           };
           break;
         case schema[att] === 'link':
           model[att] = {
-            "type": "@RuntimeComponent",
-            "readOnly": false,
-            "mandatory": false,
-            "default": "",
-            "description": att,
-            "label": att
+            'type': '@_Component',
+            'readOnly': false,
+            'mandatory': false,
+            'default': '',
+            'description': att,
+            'label': att
           };
           break;
         case schema[att] === 'method':
           model[att] = {
-            "params": [
-              {
-                "name": "param",
-                "type": "any",
-                "mandatory": false
-              }
-            ],
-            "result": "any",
-            "description": att
+            'params': [{
+              'name': 'param',
+              'type': 'any',
+              'mandatory': false
+            }],
+            'result': 'any',
+            'description': att
           };
           break;
         case schema[att] === 'event':
           model[att] = {
-            "params": [
-              {
-                "name": "param",
-                "type": "any",
-                "mandatory": false
-              }
-            ],
-            "description": att
+            'params': [{
+              'name': 'param',
+              'type': 'any',
+              'mandatory': false
+            }],
+            'description': att
           };
           break;
         case schema[att] === 'collection':
           model[att] = {
-            "type": ["@RuntimeComponent"],
-            "readOnly": false,
-            "mandatory": false,
-            "default": [],
-            "description": att,
-            "label": att
+            'type': ['@_Component'],
+            'readOnly': false,
+            'mandatory': false,
+            'default': [],
+            'description': att,
+            'label': att
           };
           break;
         default:
@@ -243,7 +238,7 @@ function generateModels() {
   // save 
   for (modelName in store.generatedModels) {
     modelDef = store.generatedModels[modelName];
-    $db.RuntimeGeneratedModel.insert(modelDef);
+    $db._GeneratedModel.insert(modelDef);
 
     if (!modelDef._core) {
       $log.generateModel(modelName);
@@ -280,7 +275,7 @@ function loadInMemory() {
   store.type = {};
 
   // load schemas
-  schemas = $db.RuntimeSchema.find({});
+  schemas = $db._Schema.find({});
 
   length = schemas.length;
   for (i = 0; i < length; i++) {
@@ -300,7 +295,7 @@ function loadInMemory() {
   }
 
   // load models
-  models = $db.RuntimeModel.find({});
+  models = $db._Model.find({});
 
   length = models.length;
   for (i = 0; i < length; i++) {
@@ -315,7 +310,7 @@ function loadInMemory() {
   }
 
   // load types
-  types = $db.RuntimeType.find({});
+  types = $db._Type.find({});
 
   length = types.length;
   for (i = 0; i < length; i++) {
@@ -763,22 +758,22 @@ function checkCustomSchema(value, typeName) {
  * @private
  */
 function initDbStructure() {
-  $db.collection('RuntimeLogger');
-  $db.collection('RuntimeSchema');
-  $db.collection('RuntimeModel');
-  $db.collection('RuntimeGeneratedModel');
-  $db.collection('RuntimeClassInfo');
-  $db.collection('RuntimeBehavior');
-  $db.collection('RuntimeState');
-  $db.collection('RuntimeType');
-  $db.collection('RuntimeMessage');
-  $db.collection('RuntimeChannel');
-  $db.collection('RuntimeLog');
+  $db.collection('_Logger');
+  $db.collection('_Schema');
+  $db.collection('_Model');
+  $db.collection('_GeneratedModel');
+  $db.collection('_ClassInfo');
+  $db.collection('_Behavior');
+  $db.collection('_State');
+  $db.collection('_Type');
+  $db.collection('_Message');
+  $db.collection('_Channel');
+  $db.collection('_Log');
 }
 
 
 /*
- * Create the Database structure (i.e. RuntimeDatabaseCollection).
+ * Create the Database structure (i.e. DatabaseCollection).
  * @method createDbStructure
  * @private
  */
@@ -813,7 +808,7 @@ function createClass() {
     modelDef = store.generatedModels[modelName];
     if (modelDef[CLASS] !== false) {
       $component.create({
-        "model": modelName
+        'model': modelName
       });
       if (!modelDef._core) {
         $log.createClass(modelName);
@@ -839,21 +834,21 @@ function createClassInfo() {
 
     if (
       modelDef[CLASS] !== false &&
-      inheritFrom(modelDef[NAME], 'RuntimeComponent')
+      inheritFrom(modelDef[NAME], '_Component')
     ) {
       if (!$component.get(name)) {
-        $db.RuntimeClassInfo.insert({
-          "_id": name,
-          "schema": store.compiledSchemas[modelName],
-          "model": modelDef
+        $db._ClassInfo.insert({
+          '_id': name,
+          'schema': store.compiledSchemas[modelName],
+          'model': modelDef
         });
       } else {
-        $db.RuntimeClassInfo.update({
-          "_id": name
+        $db._ClassInfo.update({
+          '_id': name
         }, {
-            "_id": name,
-            "schema": store.compiledSchemas[modelName],
-            "model": modelDef
+            '_id': name,
+            'schema': store.compiledSchemas[modelName],
+            'model': modelDef
           });
       }
     }
@@ -1058,7 +1053,7 @@ function schema(importedSchema) {
     schema[ID] = $helper.generateId();
   }
   if (typeof schema[INHERITS] === 'undefined') {
-    schema[INHERITS] = ['RuntimeComponent'];
+    schema[INHERITS] = ['_Component'];
   }
 
   function _removeDuplicate(inherits) {
@@ -1079,13 +1074,13 @@ function schema(importedSchema) {
 
   // check if schema is compliant with the meta meta model
   if (isValidObject(schema, store.metadef.schema, false)) {
-    schemas = $db.RuntimeSchema.find({ '_name': name });
+    schemas = $db._Schema.find({ '_name': name });
     if (schemas.length) {
       mergedSchema = merge(schema, schemas[0]);
-      $db.RuntimeSchema.update({ '_name': name }, mergedSchema);
+      $db._Schema.update({ '_name': name }, mergedSchema);
       id = schemas[0]._id;
     } else {
-      result = $db.RuntimeSchema.insert(schema);
+      result = $db._Schema.insert(schema);
       id = result[0];
     }
   } else {
@@ -1119,13 +1114,13 @@ function model(importedModel) {
 
   // check if model is compliant with the meta meta model
   if (isValidObject(model, store.metadef.model, false)) {
-    models = $db.RuntimeModel.find({ '_name': name });
+    models = $db._Model.find({ '_name': name });
     if (models.length) {
       mergedModel = merge(model, models[0]);
-      $db.RuntimeModel.update({ '_name': name }, mergedModel);
+      $db._Model.update({ '_name': name }, mergedModel);
       id = models[0]._id;
     } else {
-      result = $db.RuntimeModel.insert(model);
+      result = $db._Model.insert(model);
       id = result[0];
     }
   } else {
@@ -1147,7 +1142,7 @@ function type(importedType) {
 
   // check if type is compliant with the meta meta model
   if (isValidObject(importedType, store.metadef.type)) {
-    result = $db.RuntimeType.insert(importedType);
+    result = $db._Type.insert(importedType);
     id = result[0];
   } else {
     $log.invalidTypeDefinition(name);
@@ -1165,86 +1160,86 @@ function init() {
   clear();
   store.metadef = {
     schema: {
-      "_id": {
-        "type": "string",
-        "mandatory": true
+      '_id': {
+        'type': 'string',
+        'mandatory': true
       },
-      "_name": {
-        "type": "string",
-        "mandatory": true
+      '_name': {
+        'type': 'string',
+        'mandatory': true
       },
-      "_inherit": {
-        "type": ["string"],
-        "mandatory": false,
-        "default": ["RuntimeComponent"]
+      '_inherit': {
+        'type': ['string'],
+        'mandatory': false,
+        'default': ['_Component']
       },
-      "_class": {
-        "type": "boolean",
-        "mandatory": false
+      '_class': {
+        'type': 'boolean',
+        'mandatory': false
       },
-      "_core": {
-        "type": "boolean",
-        "mandatory": false
+      '_core': {
+        'type': 'boolean',
+        'mandatory': false
       },
-      "_description": {
-        "type": "string",
-        "mandatory": false
+      '_description': {
+        'type': 'string',
+        'mandatory': false
       }
     },
     model: {
-      "_id": {
-        "type": "string",
-        "mandatory": true
+      '_id': {
+        'type': 'string',
+        'mandatory': true
       },
-      "_name": {
-        "type": "string",
-        "mandatory": true
+      '_name': {
+        'type': 'string',
+        'mandatory': true
       },
-      "_inherit": {
-        "type": ["string"],
-        "mandatory": false
+      '_inherit': {
+        'type': ['string'],
+        'mandatory': false
       },
-      "_class": {
-        "type": "boolean",
-        "mandatory": false
+      '_class': {
+        'type': 'boolean',
+        'mandatory': false
       },
-      "_core": {
-        "type": "boolean",
-        "mandatory": false
+      '_core': {
+        'type': 'boolean',
+        'mandatory': false
       },
-      "_description": {
-        "type": "string",
-        "mandatory": false
+      '_description': {
+        'type': 'string',
+        'mandatory': false
       }
     },
     type: {
-      "_id": {
-        "type": "string",
-        "mandatory": false
+      '_id': {
+        'type': 'string',
+        'mandatory': false
       },
-      "name": {
-        "type": "string",
-        "mandatory": true
+      'name': {
+        'type': 'string',
+        'mandatory': true
       },
-      "type": {
-        "type": "string",
-        "mandatory": true
+      'type': {
+        'type': 'string',
+        'mandatory': true
       },
-      "schema": {
-        "type": "object",
-        "mandatory": false
+      'schema': {
+        'type': 'object',
+        'mandatory': false
       },
-      "value": {
-        "type": ["any"],
-        "mandatory": false
+      'value': {
+        'type': ['any'],
+        'mandatory': false
       },
-      "core": {
-        "type": "boolean",
-        "mandatory": false
+      'core': {
+        'type': 'boolean',
+        'mandatory': false
       },
-      "_description": {
-        "type": "string",
-        "mandatory": false
+      '_description': {
+        'type': 'string',
+        'mandatory': false
       }
     }
 
@@ -2127,13 +2122,12 @@ function inheritFrom(name, parentName) {
  * This module manages Runtime metamodel. <br>
  * Runtime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.
  * 
- * @module runtime
- * @submodule runtime-metamodel
- * @requires runtime-db
- * @requires runtime-log
- * @requires runtime-component
- * @requires runtime-workflow
- * @class runtime-metamodel
+ * @module metamodel
+ * @requires db
+ * @requires log
+ * @requires component
+ * @requires workflow
+ * @class metamodel
  * @static
  */
 

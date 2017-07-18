@@ -6,15 +6,14 @@
 /**
  * This module contains Runtime core system.
  *
- * @module runtime
- * @submodule runtime-system
- * @class runtime-system
+ * @module system
+ * @class system
  * @static 
  */
 
 
 /**
  * Runtime core system
- * @property {RuntimeSystem} system
+ * @property {_System} system
  */
 exports.system = system;

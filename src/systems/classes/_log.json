@@ -1,15 +1,15 @@
 {
   "_id": "m1a4651bb8511b92",
   "name": "class-runtime-log",
-  "description": "Runtime Log",
+  "description": "Log",
   "version": "1.0.0",
   "behaviors": {},
   "schemas": {
     "f1a10d1067d1b23a": {
       "_id": "f1a10d1067d1b23a",
-      "_name": "RuntimeLog",
+      "_name": "_Log",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ],
       "_core": true,
       "action": "property",
@@ -23,7 +23,7 @@
   "models": {
     "o1e1e01e6b41cec3": {
       "_id": "o1e1e01e6b41cec3",
-      "_name": "RuntimeLog",
+      "_name": "_Log",
       "action": {
         "type": "dbAction",
         "readOnly": false,

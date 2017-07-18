@@ -28,17 +28,16 @@
  * If an error occurs, the workflow will call the error state of the component and runtime. <br>
  * If the error can break the consistency of the current system, the worklow will stop.
  * 
- * @module runtime
- * @submodule runtime-workflow
- * @requires runtime-metamodel
- * @requires runtime-component
- * @requires runtime-behavior
- * @requires runtime-channel
- * @requires runtime-state
- * @requires runtime-helper
- * @requires runtime-log
- * @requires runtime-db
- * @class runtime-workflow 
+ * @module workflow
+ * @requires metamodel
+ * @requires component
+ * @requires behavior
+ * @requires channel
+ * @requires state
+ * @requires helper
+ * @requires log
+ * @requires db
+ * @class workflow 
  * @static
  */
 
@@ -64,7 +63,7 @@ var $db = require('./db.js');
  */
 function RuntimeError(message) {
   this.message = message;
-  this.name = "RuntimeError";
+  this.name = 'RuntimeError';
 }
 RuntimeError.prototype = new Error();
 RuntimeError.prototype.constructor = RuntimeError;
@@ -402,14 +401,14 @@ function callAction(component, state, action, params, isEvent) {
       } else {
         if (component && component.error) {
           component.error({
-            "message": "error when trying to call the method '" + state + "' on component '" + component.id() + "'",
+            'message': "error when trying to call the method '" + state + "' on component '" + component.id() + "'",
             "error": e
           });
         }
         if ($helper.getRuntime()) {
           $helper.getRuntime().error({
             "message": "error when trying to call the method '" + state + "' on component '" + component.id() + "'",
-            "error": e
+            'error': e
           });
         }
         $log.actionInvokeError(state, component.id(), component.constructor.name, e.message);
@@ -591,8 +590,8 @@ function action(behaviorId, params) {
     componentClassName = '',
     actionFromMemory = null;
 
-  behaviors = $db.RuntimeBehavior.find({
-    "_id": behaviorId
+  behaviors = $db._Behavior.find({
+    '_id': behaviorId
   });
 
   actionFromMemory = $behavior.get(behaviorId);
@@ -616,8 +615,8 @@ function action(behaviorId, params) {
 
       if (isEvent || isProperty || isCollection || isLink) {
         callAction(component, behavior.state, {
-          "useCoreAPI": behavior.useCoreAPI,
-          "action": actionFromMemory
+          'useCoreAPI': behavior.useCoreAPI,
+          'action': actionFromMemory
         }, params, true);
       }
     }
@@ -690,9 +689,9 @@ function state(params) {
   if (actions.length) {
 
     if (checkParams({
-      "component": component,
-      "methodName": params.state,
-      "args": params.data
+      'component': component,
+      'methodName': params.state,
+      'args': params.data
     })) {
 
       if (!isEvent &&
@@ -703,9 +702,9 @@ function state(params) {
         result = callAction(component, params.state, action, params.data, false);
 
         checkResult({
-          "component": component,
-          "methodName": params.state,
-          "methodResult": result
+          'component': component,
+          'methodName': params.state,
+          'methodResult': result
         });
 
       } else {
@@ -785,17 +784,16 @@ function restart() {
  * If an error occurs, the workflow will call the error state of the component and of Runtime instance. <br>
  * If the error can break the consistency of the current system, the worklow will stop.
  * 
- * @module runtime
- * @submodule runtime-workflow
- * @requires runtime-metamodel
- * @requires runtime-component
- * @requires runtime-behavior
- * @requires runtime-channel
- * @requires runtime-state
- * @requires runtime-helper
- * @requires runtime-log
- * @requires runtime-db
- * @class runtime-workflow 
+ * @module workflow
+ * @requires metamodel
+ * @requires component
+ * @requires behavior
+ * @requires channel
+ * @requires state
+ * @requires helper
+ * @requires log
+ * @requires db
+ * @class workflow 
  * @static
  */
 

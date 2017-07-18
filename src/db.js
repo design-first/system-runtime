@@ -29,12 +29,11 @@
  * - insert operation automatically creates a component and <br>
  * - remove operation automatically destroy a component.
  *  
- * @module runtime
- * @submodule runtime-db
- * @requires runtime-component
- * @requires runtime-helper
- * @requires runtime-log
- * @class runtime-db
+ * @module db
+ * @requires component
+ * @requires helper
+ * @requires log
+ * @class db
  * @static
  */
 
@@ -55,30 +54,30 @@ var $workflow = require('./workflow.js');
 var store = {},
   collections = [],
   internalDB = [
-    'Runtime',
-    'RuntimeSchema',
-    'RuntimeModel',
-    'RuntimeGeneratedModel',
-    'RuntimeBehavior',
-    'RuntimeState',
-    'RuntimeType',
-    'RuntimeMetamodel',
-    'RuntimeDatabase',
-    'RuntimeSystem',
-    'RuntimeClassInfo',
-    'RuntimeMessage',
-    'RuntimeChannel',
-    'RuntimeLogger',
-    'RuntimeLog'
+    '_Runtime',
+    '_Schema',
+    '_Model',
+    '_GeneratedModel',
+    '_Behavior',
+    '_State',
+    '_Type',
+    '_Metamodel',
+    '_Database',
+    '_System',
+    '_ClassInfo',
+    '_Message',
+    '_Channel',
+    '_Logger',
+    '_Log'
   ],
   coreDb = [
-    'RuntimeLog',
-    'RuntimeSchema',
-    'RuntimeLogger',
-    'RuntimeModel',
-    'RuntimeGeneratedModel',
-    'RuntimeState',
-    'RuntimeType'
+    '_Log',
+    '_Schema',
+    '_Logger',
+    '_Model',
+    '_GeneratedModel',
+    '_State',
+    '_Type'
   ],
   logOrder = 0;
 
@@ -123,9 +122,9 @@ function dump() {
 
   // schemas
   dbDump.schemas = {};
-  if (exports.RuntimeSchema.count()) {
-    for (schemaId in store.RuntimeSchema) {
-      schema = JSON.parse(JSON.stringify(store.RuntimeSchema[schemaId]));
+  if (exports._Schema.count()) {
+    for (schemaId in store._Schema) {
+      schema = JSON.parse(JSON.stringify(store._Schema[schemaId]));
       if (!schema._core) {
         dbDump.schemas[schemaId] = schema;
       }
@@ -134,9 +133,9 @@ function dump() {
 
   // models
   dbDump.models = {};
-  if (exports.RuntimeModel.count()) {
-    for (modelId in store.RuntimeModel) {
-      model = JSON.parse(JSON.stringify(store.RuntimeModel[modelId]));
+  if (exports._Model.count()) {
+    for (modelId in store._Model) {
+      model = JSON.parse(JSON.stringify(store._Model[modelId]));
       if (!model._core) {
         dbDump.models[modelId] = model;
       }
@@ -145,9 +144,9 @@ function dump() {
 
   // types
   dbDump.types = {};
-  if (exports.RuntimeType.count()) {
-    for (typeId in store.RuntimeType) {
-      type = JSON.parse(JSON.stringify(store.RuntimeType[typeId]));
+  if (exports._Type.count()) {
+    for (typeId in store._Type) {
+      type = JSON.parse(JSON.stringify(store._Type[typeId]));
       if (!type.core) {
         dbDump.types[type.name] = type;
       }
@@ -156,8 +155,8 @@ function dump() {
 
   // behaviors
   dbDump.behaviors = {};
-  for (behaviorId in store.RuntimeBehavior) {
-    behavior = JSON.parse(JSON.stringify(store.RuntimeBehavior[behaviorId]));
+  for (behaviorId in store._Behavior) {
+    behavior = JSON.parse(JSON.stringify(store._Behavior[behaviorId]));
     delete behavior.classInfo;
 
     if (!behavior.core) {
@@ -245,17 +244,264 @@ function contains(source, target) {
   return result;
 }
 
+/*
+ * Import system into the database
+ * @method impSystem
+ * @param {JSON} importedSystem a Runtime system to import
+ * @return {String} the id of the imported Runtime system
+ * @private
+ */
+function impSystem(importedSystem) {
+  var result = '',
+    collectionName = '',
+    componentId = '',
+    typeName = '',
+    schemaName = '',
+    modelName = '',
+    behaviorId = '',
+    systems = [],
+    id = null;
+
+  if (importedSystem) {
+
+    // add types
+    for (typeName in importedSystem.types) {
+      $metamodel.type(importedSystem.types[typeName]);
+    }
+
+    // add schemas
+    for (schemaName in importedSystem.schemas) {
+      $metamodel.schema(importedSystem.schemas[schemaName]);
+    }
+
+    // add models
+    for (modelName in importedSystem.models) {
+      $metamodel.model(importedSystem.models[modelName]);
+    }
+
+    $metamodel.create();
+
+    //add behaviors
+    for (behaviorId in importedSystem.behaviors) {
+      exports._Behavior.insert(importedSystem.behaviors[behaviorId]);
+    }
+
+    // add components
+    for (collectionName in importedSystem.components) {
+      for (componentId in importedSystem.components[collectionName]) {
+        exports[collectionName].insert(importedSystem.components[collectionName][componentId]);
+      }
+    }
+
+    // reset info if already a master system
+    systems = exports._System.find({
+      'master': true
+    });
+    if (systems.length) {
+      if (systems[0]._id === importedSystem._id) {
+        importedSystem.master = true;
+      } else {
+        importedSystem.master = true;
+        systems[0].master = false;
+      }
+    }
+
+    // insert the system in DB
+    exports._System.insert(importedSystem);
+
+    result = importedSystem._id;
+
+  }
+
+  return result;
+}
+
+/*
+ * Export a system from the database
+ * @method expSystem
+ * @return {String} a stringified system
+ * @private
+ */
+function expSystem() {
+  var result = '',
+    collectionName = '',
+    behaviorId = '',
+    systems = [],
+    id = null,
+    dbDump = null,
+    mastersystem = null,
+    behavior = null,
+    exportedSystem = {};
+
+
+  // get id of the master system
+  systems = exports._System.find({
+    'master': true
+  });
+
+  if (systems.length) {
+
+    mastersystem = systems[0];
+    id = mastersystem._id;
+
+    // prop
+    exportedSystem._id = id;
+    exportedSystem.name = mastersystem.name;
+    exportedSystem.description = mastersystem.description;
+    exportedSystem.version = mastersystem.version;
+    exportedSystem.master = true;
+    exportedSystem.subsystem = false;
+
+    // dump
+    dbDump = dump();
+    for (collectionName in dbDump) {
+      if (dbDump.hasOwnProperty(collectionName)) {
+        exportedSystem[collectionName] = dbDump[collectionName];
+      }
+    }
+
+    for (behaviorId in exportedSystem.behaviors) {
+      behavior = exportedSystem.behaviors[behaviorId];
+      if (behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') {
+        behavior.component = id;
+      }
+    }
+
+    result = JSON.stringify(exportedSystem);
+  } else {
+    result = '{}';
+    $log.masterSystemNotFound();
+  }
+
+  return result;
+}
+
+
+/*
+ * Export a sub-system.
+ * @method exportSubsystem
+ * @param {JSON} params parameters
+ * @return {String} a stringified sub-system
+ * @private
+ * 
+ */
+function expSubsystem(params) {
+  var system = {},
+    result = [],
+    defaultName = '',
+    i = 0,
+    length = 0,
+    schema = null,
+    type = null,
+    model = null,
+    behavior = null,
+    component = null,
+    className = '';
+
+  // default values
+  result = exports._System.find({
+    'master': true
+  });
+  if (result.length) {
+    defaultName = result[0].name;
+  }
+
+  system.name = params.name || 'sub_' + defaultName;
+  system.version = params.version || '0.0.1';
+  system.description = params.description || '';
+
+  system.subsystem = true;
+
+  // schemas
+  system.schemas = {};
+  if (params.schemas) {
+    result = exports._Schema.find(params.schema);
+
+    length = result.length;
+    for (i = 0; i < length; i++) {
+      schema = result[i];
+      if (!schema._core) {
+        system.schemas[schema._id] = schema;
+      }
+    }
+  }
+
+  // models
+  system.models = {};
+  if (params.models) {
+    result = exports._Model.find(params.models);
+
+    length = result.length;
+    for (i = 0; i < length; i++) {
+      model = result[i];
+      if (!model._core) {
+        system.models[model._id] = model;
+      }
+    }
+  }
+
+  // types
+  system.types = {};
+  if (params.types) {
+    result = exports._Type.find(params.types);
+
+    length = result.length;
+    for (i = 0; i < length; i++) {
+      type = result[i];
+      if (!type._core) {
+        system.types[type._id] = type;
+      }
+    }
+  }
+
+  // behaviors
+  system.behaviors = {};
+  if (params.behaviors) {
+    behavior = exports._Behavior.find(params.behaviors);
+
+    length = result.length;
+    for (i = 0; i < length; i++) {
+      behavior = result[i];
+      if (!behavior.core) {
+        system.behaviors[behavior._id] = behavior;
+      }
+    }
+  }
+
+  // components
+  system.components = {};
+  if (params.components) {
+    for (className in params.components) {
+      if (exports[className]) {
+        system.components[className] = {};
+
+        result = exports[className].find(params.components[className]);
+        length = result.length;
+        for (i = 0; i < length; i++) {
+          component = result[i];
+          system.components[className][component._id] = component;
+        }
+      }
+    }
+  }
+
+  return JSON.stringify(system);
+}
+
+
+/* Public methods */
+
 
 /** 
  * A collection of documents managed by Runtime. <br>
  * Internal collections manage core objects of Runtime (schema, type, ...). <br>
  * Public collections manage components of the same class. <br>
  * 
- * @class RuntimeDatabaseCollection
+ * @class DatabaseCollection
  * @constructor
  * @param {String} name name of the new collection
  */
-var RuntimeDatabaseCollection = function (name) {
+var DatabaseCollection = function (name) {
   if ($metamodel.getSchema(name) || internalDB.indexOf(name) !== -1) {
     store[name] = {};
     this.name = name;
@@ -275,11 +521,11 @@ var RuntimeDatabaseCollection = function (name) {
  * @return {Array} Array of documents that map the query
  * 
  * @example 
- * $db.Person.find({"name": "laure"}); <br>
- * $db.Person.find({"name": "laure", "age" : 24}); <br>
- * $db.Person.find([{"name": "rene"}, {"name": "robert"}]);
+ * $db.Person.find({'name': 'laure'}); <br>
+ * $db.Person.find({'name': 'laure', 'age' : 24}); <br>
+ * $db.Person.find([{'name': 'rene'}, {'name': 'robert'}]);
  */
-RuntimeDatabaseCollection.prototype.find = function (query) {
+DatabaseCollection.prototype.find = function (query) {
   var result = [],
     resultId = {},
     id = '',
@@ -330,12 +576,12 @@ RuntimeDatabaseCollection.prototype.find = function (query) {
  * 
  * @example 
  * $db.Person.insert({<br>
- *      "name": "bob", <br>
- *      "firstName": "Saint-Clar", <br>
- *      "age": 43 <br>
+ *      'name': 'bob', <br>
+ *      'firstName': 'Saint-Clar', <br>
+ *      'age': 43 <br>
  * }); <br>
  */
-RuntimeDatabaseCollection.prototype.insert = function (document) {
+DatabaseCollection.prototype.insert = function (document) {
   var doc = [],
     Component = null,
     result = [];
@@ -353,11 +599,11 @@ RuntimeDatabaseCollection.prototype.insert = function (document) {
       systems = [];
 
     switch (true) {
-      case this.name === 'RuntimeSchema':
-      case this.name === 'RuntimeLogger':
-      case this.name === 'RuntimeModel':
-      case this.name === 'RuntimeType':
-      case this.name === 'RuntimeGeneratedModel':
+      case this.name === '_Schema':
+      case this.name === '_Logger':
+      case this.name === '_Model':
+      case this.name === '_Type':
+      case this.name === '_GeneratedModel':
       case $metamodel.isValidObject(obj, $metamodel.getModel(this.name)):
 
         if (typeof obj._id === 'undefined') {
@@ -383,16 +629,16 @@ RuntimeDatabaseCollection.prototype.insert = function (document) {
           }
         }
 
-        if (this.name === 'RuntimeMessage') {
+        if (this.name === '_Message') {
           if ($helper.isRuntime()) {
-            channels = exports.RuntimeChannel.find({});
+            channels = exports._Channel.find({});
             var length = channels.length;
             for (var i = 0; i < length; i++) {
               channel = $helper.getRuntime().require(channels[i]._id);
               $workflow.state({
-                "component": channels[i]._id,
-                "state": obj.event,
-                "data": obj.data
+                'component': channels[i]._id,
+                'state': obj.event,
+                'data': obj.data
               });
             }
           }
@@ -419,11 +665,11 @@ RuntimeDatabaseCollection.prototype.insert = function (document) {
  * @return {Number} Number of documents updated
  * 
  * @example 
- * $db.Cars.update({"code": "AZD-71"}, {"price": "10000$"}); <br>
- * $db.Cars.update([{"code": "AZD-71"}, {"code": "AZD-65"}], {"price": "10000$"}); <br>
- * $db.Cars.update({"code": "AZD-71"}, {"price": "10000$"}, {"upsert": true}); <br>
+ * $db.Cars.update({'code': 'AZD-71'}, {'price': '10000$'}); <br>
+ * $db.Cars.update([{'code': 'AZD-71'}, {'code': 'AZD-65'}], {'price': '10000$'}); <br>
+ * $db.Cars.update({'code': 'AZD-71'}, {'price': '10000$'}, {'upsert': true}); <br>
  */
-RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
+DatabaseCollection.prototype.update = function (query, update, options) {
   var docs = this.find(query),
     updated = 0,
     i = 0,
@@ -456,7 +702,7 @@ RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
 
       for (attributeName in update) {
         if (typeof docs[i][attributeName] !== 'undefined') {
-          if (this.name !== 'RuntimeSchema' && this.name !== 'RuntimeModel' && this.name !== 'RuntimeGeneratedModel') {
+          if (this.name !== '_Schema' && this.name !== '_Model' && this.name !== '_GeneratedModel') {
             // check type
             type = '';
             if (attributeName.indexOf('_') !== 0) {
@@ -482,9 +728,9 @@ RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
                   });
                 }
                 $workflow.state({
-                  "component": docs[i]._id,
-                  "state": attributeName,
-                  "data": [update[attributeName]]
+                  'component': docs[i]._id,
+                  'state': attributeName,
+                  'data': [update[attributeName]]
                 });
               } else {
                 $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName].type);
@@ -525,10 +771,10 @@ RuntimeDatabaseCollection.prototype.update = function (query, update, options) {
  * @return {Array} list of documents id removed
  * 
  * @example 
- * $db.Cars.remove({"code": "AZD-71"}); <br>
- * $db.Cars.remove([{"code": "AZD-71"}, {"code": "AZD-65"}]); <br>
+ * $db.Cars.remove({'code': 'AZD-71'}); <br>
+ * $db.Cars.remove([{'code': 'AZD-71'}, {'code': 'AZD-65'}]); <br>
  */
-RuntimeDatabaseCollection.prototype.remove = function (query) {
+DatabaseCollection.prototype.remove = function (query) {
   var result = [],
     id = '',
     component = null,
@@ -616,7 +862,7 @@ RuntimeDatabaseCollection.prototype.remove = function (query) {
  * @method count
  * @return {Number} number of documents in the collection
  */
-RuntimeDatabaseCollection.prototype.count = function () {
+DatabaseCollection.prototype.count = function () {
   var result = 0,
     objectId = '';
   for (objectId in store[this.name]) {
@@ -647,11 +893,11 @@ function createLog(action, collection, id, field, value) {
   value = value || '';
 
   // clean log every 1000 logs
-  if (Object.keys(store.RuntimeLog).length > 1000) {
-    store.RuntimeLog = {};
+  if (Object.keys(store._Log).length > 1000) {
+    store._Log = {};
   }
 
-  store.RuntimeLog[logId] = {
+  store._Log[logId] = {
     _id: logId,
     action: action,
     collection: collection,
@@ -664,243 +910,48 @@ function createLog(action, collection, id, field, value) {
 
 
 /*
- * Create a new {{#crossLink "RuntimeDatabaseCollection"}}{{/crossLink}}.
+ * Create a new {{#crossLink "DatabaseCollection"}}{{/crossLink}}.
  * @method collection
  * @param {String} name of the collection
  */
 function collection(name) {
-  exports[name] = new RuntimeDatabaseCollection(name);
+  exports[name] = new DatabaseCollection(name);
 }
 
 
 /*
- * Import/Export a Runtime system into/from the database
- * @method system
+ * Import a system into the database
+ * @method importSystem
  * @param {JSON} importedSystem a Runtime system to import
- * @return {String} the id of the imported Runtime system or the if of the current Runtime system
+ * @return {String} the id of the imported Runtime system
  */
-function system(importedSystem) {
-  var result = '',
-    collectionName = '',
-    componentId = '',
-    typeName = '',
-    schemaName = '',
-    modelName = '',
-    behaviorId = '',
-    systems = [],
-    id = null,
-    dbDump = null,
-    mastersystem = null,
-    behavior = null,
-    exportedSystem = {};
-
-  if (importedSystem) { // import
-
-    // add types
-    for (typeName in importedSystem.types) {
-      $metamodel.type(importedSystem.types[typeName]);
-    }
-
-    // add schemas
-    for (schemaName in importedSystem.schemas) {
-      $metamodel.schema(importedSystem.schemas[schemaName]);
-    }
-
-    // add models
-    for (modelName in importedSystem.models) {
-      $metamodel.model(importedSystem.models[modelName]);
-    }
-
-    $metamodel.create();
-
-    //add behaviors
-    for (behaviorId in importedSystem.behaviors) {
-      exports.RuntimeBehavior.insert(importedSystem.behaviors[behaviorId]);
-    }
-
-    // add components
-    for (collectionName in importedSystem.components) {
-      for (componentId in importedSystem.components[collectionName]) {
-        exports[collectionName].insert(importedSystem.components[collectionName][componentId]);
-      }
-    }
-
-    // reset info if already a master system
-    systems = exports.RuntimeSystem.find({
-      'master': true
-    });
-    if (systems.length) {
-      if (systems[0]._id === importedSystem._id) {
-        importedSystem.master = true;
-      } else {
-        importedSystem.master = true;
-        systems[0].master = false;
-      }
-    }
-
-    // insert the system in DB
-    exports.RuntimeSystem.insert(importedSystem);
-
-    result = importedSystem._id;
-
-  } else { // export
-    // get id of the master system
-    systems = exports.RuntimeSystem.find({
-      'master': true
-    });
-
-    if (systems.length) {
-
-      mastersystem = systems[0];
-      id = mastersystem._id;
-
-      // prop
-      exportedSystem._id = id;
-      exportedSystem.name = mastersystem.name;
-      exportedSystem.description = mastersystem.description;
-      exportedSystem.version = mastersystem.version;
-      exportedSystem.master = true;
-      exportedSystem.subsystem = false;
-
-      // dump
-      dbDump = dump();
-      for (collectionName in dbDump) {
-        if (dbDump.hasOwnProperty(collectionName)) {
-          exportedSystem[collectionName] = dbDump[collectionName];
-        }
-      }
-
-      for (behaviorId in exportedSystem.behaviors) {
-        behavior = exportedSystem.behaviors[behaviorId];
-        if (behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') {
-          behavior.component = id;
-        }
-      }
-
-      result = JSON.stringify(exportedSystem);
-    } else {
-      result = "{}";
-      $log.masterSystemNotFound();
-    }
-  }
-  return result;
+function importSystem(importedSystem) {
+  return impSystem(importedSystem);
 }
 
 
 /*
- * Export a Runtime sub-system.
- * @method subsystem
+ * Export a system.
+ * @method exportSystem
  * @param {JSON} params parameters
- * @return {String} a stringified Runtime sub-system
+ * @return {String} a stringified system
  * 
  * @example
- * $db.subsystem({"schemas":{"name":"Person"}}); // filter export on schemas <br>
- * $db.subsystem({"types":{"name":"address"}}); // filter export on types <br>
- * $db.subsystem({"behaviors":{"component":"laure"}}); // filter export on behaviors <br>
- * $db.subsystem({"components":{"Person": {"country": "France"}}}); // filter export on components <br>
- * $db.subsystem({"schemas":{"name":"Person"},"components":{"Person": {"country": "France"}}}); // combine filters
+ * $db.exportSystem(); // export all the system <br>
+ * $db.exportSystem({'schemas':{'name':'Person'}}); // filter export on schemas <br>
+ * $db.exportSystem({'types':{'name':'address'}}); // filter export on types <br>
+ * $db.exportSystem({'behaviors':{'component':'laure'}}); // filter export on behaviors <br>
+ * $db.exportSystem({'components':{'Person': {'country': 'France'}}}); // filter export on components <br>
+ * $db.exportSystem({'schemas':{'name':'Person'},'components':{'Person': {'country': 'France'}}}); // combine filters
  */
-function subsystem(params) {
-  var system = {},
-    result = [],
-    defaultName = '',
-    i = 0,
-    length = 0,
-    schema = null,
-    type = null,
-    model = null,
-    behavior = null,
-    component = null,
-    className = '';
-
-  // default values
-  result = exports.RuntimeSystem.find({
-    'master': true
-  });
-  if (result.length) {
-    defaultName = result[0].name;
+function exportSystem(params) {
+  var result = '';
+  if (params) {
+    result = expSubsystem(params);
+  } else {
+    result = expSystem();
   }
-
-  system.name = params.name || 'sub_' + defaultName;
-  system.version = params.version || '0.0.1';
-  system.description = params.description || '';
-
-  system.subsystem = true;
-
-  // schemas
-  system.schemas = {};
-  if (params.schemas) {
-    result = exports.RuntimeSchema.find(params.schema);
-
-    length = result.length;
-    for (i = 0; i < length; i++) {
-      schema = result[i];
-      if (!schema._core) {
-        system.schemas[schema._id] = schema;
-      }
-    }
-  }
-
-  // models
-  system.models = {};
-  if (params.models) {
-    result = exports.RuntimeModel.find(params.models);
-
-    length = result.length;
-    for (i = 0; i < length; i++) {
-      model = result[i];
-      if (!model._core) {
-        system.models[model._id] = model;
-      }
-    }
-  }
-
-  // types
-  system.types = {};
-  if (params.types) {
-    result = exports.RuntimeType.find(params.types);
-
-    length = result.length;
-    for (i = 0; i < length; i++) {
-      type = result[i];
-      if (!type._core) {
-        system.types[type._id] = type;
-      }
-    }
-  }
-
-  // behaviors
-  system.behaviors = {};
-  if (params.behaviors) {
-    behavior = exports.RuntimeBehavior.find(params.behaviors);
-
-    length = result.length;
-    for (i = 0; i < length; i++) {
-      behavior = result[i];
-      if (!behavior.core) {
-        system.behaviors[behavior._id] = behavior;
-      }
-    }
-  }
-
-  // components
-  system.components = {};
-  if (params.components) {
-    for (className in params.components) {
-      if (exports[className]) {
-        system.components[className] = {};
-
-        result = exports[className].find(params.components[className]);
-        length = result.length;
-        for (i = 0; i < length; i++) {
-          component = result[i];
-          system.components[className][component._id] = component;
-        }
-      }
-    }
-  }
-
-  return JSON.stringify(system);
+  return result;
 }
 
 
@@ -937,7 +988,7 @@ function init() {
   var runtimeSystemId = '',
     runtimeSystem = null;
 
-  runtimeSystem = exports.RuntimeSystem.find({
+  runtimeSystem = exports._System.find({
     '_id': 'e89c617b6b15d24'
   })[0];
 
@@ -952,8 +1003,8 @@ function init() {
   $metamodel.init();
 
   // reimport Runtime core system
-  runtimeSystemId = exports.system(runtimeSystem);
-  $component.get(runtimeSystemId).main();
+  runtimeSystemId = exports.importSystem(runtimeSystem);
+  $component.get(runtimeSystemId).start();
 }
 
 
@@ -971,12 +1022,11 @@ function init() {
  * - insert operation automatically creates a component and <br>
  * - remove operation automatically destroy a component.
  *   
- * @module runtime
- * @submodule runtime-db
- * @requires runtime-component
- * @requires runtime-helper
- * @requires runtime-log
- * @class runtime-db
+ * @module db
+ * @requires component
+ * @requires helper
+ * @requires log
+ * @class db
  * @static
  */
 
@@ -993,7 +1043,7 @@ function init() {
 exports.createLog = createLog;
 
 /**
- * Create a new {{#crossLink "RuntimeDatabaseCollection"}}{{/crossLink}}.
+ * Create a new {{#crossLink "DatabaseCollection"}}{{/crossLink}}.
  * @method collection
  * @param {String} name of the collection
  */
@@ -1008,28 +1058,29 @@ exports.store = store;
 
 
 /**
- * Import/Export a Runtime system into/from the database.
- * @method system
+ * Import a system into the database
+ * @method importSystem
  * @param {JSON} importedSystem a Runtime system to import
- * @return {String} the id of the imported Runtime system or the current Runtime system  
+ * @return {String} the id of the imported Runtime system
  */
-exports.system = system;
+exports.importSystem = importSystem;
 
 
 /**
- * Export a Runtime sub-system.
- * @method subsystem
+ * Export a system.
+ * @method exportSystem
  * @param {JSON} params parameters
- * @return {String} a stringified Runtime sub-system
+ * @return {String} a stringified system
  * 
  * @example
- * $db.subsystem({"schemas":{"name":"Person"}}); // filter export on schemas <br>
- * $db.subsystem({"types":{"name":"address"}}); // filter export on types <br>
- * $db.subsystem({"behaviors":{"component":"laure"}}); // filter export on behaviors <br>
- * $db.subsystem({"components":{"Person": {"country": "France"}}}); // filter export on components <br>
- * $db.subsystem({"schemas":{"name":"Person"},"components":{"Person": {"country": "France"}}}); // combine filters
+ * $db.exportSystem(); // export all the system <br>
+ * $db.exportSystem({'schemas':{'name':'Person'}}); // filter export on schemas <br>
+ * $db.exportSystem({'types':{'name':'address'}}); // filter export on types <br>
+ * $db.exportSystem({'behaviors':{'component':'laure'}}); // filter export on behaviors <br>
+ * $db.exportSystem({'components':{'Person': {'country': 'France'}}}); // filter export on components <br>
+ * $db.exportSystem({'schemas':{'name':'Person'},'components':{'Person': {'country': 'France'}}}); // combine filters
  */
-exports.subsystem = subsystem;
+exports.exportSystem = exportSystem;
 
 
 /**

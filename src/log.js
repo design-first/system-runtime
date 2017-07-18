@@ -21,10 +21,9 @@
 /**
  * This module contains all the functions that write a log.
  * 
- * @module runtime
- * @submodule runtime-log
- * @requires runtime-helper
- * @class runtime-log
+ * @module log
+ * @requires helper
+ * @class log
  * @static
  */
 
@@ -73,9 +72,9 @@ var ID = '_id',
   };
 
 /*
- * Get the RuntimeLogger instance.
+ * Get the _Logger instance.
  * @method getLogger
- * @return {RuntimeLogger} RuntimeLogger instance
+ * @return {_Logger} _Logger instance
  * @private
  */
 function getLogger() {
@@ -83,10 +82,10 @@ function getLogger() {
     loggers = [],
     result = null;
 
-  if (!$metamodel.getModel('RuntimeLogger')) {
+  if (!$metamodel.getModel('_Logger')) {
     result = fakeLoggerRef;
   } else {
-    loggers = $db.RuntimeLogger.find();
+    loggers = $db._Logger.find();
     if (loggers.length) {
       loggerId = loggers[0][ID];
 
@@ -324,7 +323,7 @@ function unknownMethod(classId, methodName) {
 
 
 /*
- * Try to create an invalid RuntimeDatabaseCollection.
+ * Try to create an invalid DatabaseCollection.
  * @method invalidCollectionName
  * @param {String} name name of the collection
  */
@@ -790,10 +789,9 @@ function invalidPropertyFormat(obj) {
 /**
  * This module contains all the functions that write a log.
  * 
- * @module runtime
- * @submodule runtime-log
- * @requires runtime-helper
- * @class runtime-log
+ * @module log
+ * @requires helper
+ * @class log
  * @static
  */
 
@@ -948,7 +946,7 @@ exports.unknownMethod = unknownMethod;
 
 
 /**
- * Try to create an invalid RuntimeDatabaseCollection.
+ * Try to create an invalid DatabaseCollection.
  * @method invalidCollectionName
  * @param {String} name name of the collection
  */

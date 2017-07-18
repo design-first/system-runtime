@@ -46,11 +46,6 @@ describe('a system', function () {
     expect(system.components()).toBeDefined();
   });
 
-  it('can sync', function () {
-    system.sync();
-    expect(system).toBeDefined();
-  });
-
   it('can get its bundle', function () {
     var bundle = system.bundle();
     expect(bundle).toBeDefined();
