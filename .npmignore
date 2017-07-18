@@ -1,11 +1,11 @@
 /addons/
 /doc/
 /test/
+/tasks/
 /coverage/
-/build/runtime.json
-/src/addons/
-/src/system/
-/src/template/
+/build/system-runtime.json
+/src/systems/
+/src/banners/
 bower.json
 Gruntfile.js
 karma.conf.js

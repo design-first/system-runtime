@@ -1,6 +1,6 @@
 {
   "_id": "f1567a1294c12182",
-  "name": "class-runtime-message",
+  "name": "class_message",
   "description": "Message",
   "version": "1.0.0",
   "behaviors": {},

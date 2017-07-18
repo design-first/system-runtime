@@ -1,6 +1,6 @@
 {
   "_id": "a15c391b38613309",
-  "name": "class-runtime-database",
+  "name": "class_database",
   "description": "Database",
   "version": "1.0.0",
   "behaviors": {

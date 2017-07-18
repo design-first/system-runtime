@@ -1,6 +1,6 @@
 {
   "_id": "z16d3d1f9e814b7b",
-  "name": "class-runtime-state",
+  "name": "class_state",
   "description": "State",
   "version": "1.0.0",
   "behaviors": {},

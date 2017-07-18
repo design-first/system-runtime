@@ -19,41 +19,41 @@
  */
 
 module.exports = function (config) {
-    // browers
-    var browsers = ['Firefox'];
-    
-    // reporters
-    var reporters = ['progress', 'coverage'];
-    if (process.env.TRAVIS) {
-       reporters = ['progress', 'coverage', 'dots']
-    }
+  // browers
+  var browsers = ['Firefox'];
 
-    config.set({
-        basePath: './',
-        frameworks: ['jasmine'],
-        files: [
-            "dist/system-runtime.min.js",
-            "test/runtime/runtime-spec.js",
-            "test/runtime/component-spec.js",
-            "test/runtime/metamodel-spec.js",
-            "test/runtime/database-spec.js",
-            "test/runtime/classInfo-spec.js",
-            "test/runtime/system-spec.js",
-            "test/runtime/mson-spec.js"
-        ],
-        reporters: reporters,
-        preprocessors: {
-            'dist/system-runtime.min.js': ['coverage']
-        },
-        colors: true,
-        autoWatch: true,
-        plugins: [
-            'karma-coverage',
-            'karma-script-launcher',
-            'karma-firefox-launcher',
-            'karma-jasmine'
-        ],
-        singleRun: true,
-        browsers: browsers
-    });
+  // reporters
+  var reporters = ['progress', 'coverage'];
+  if (process.env.TRAVIS) {
+    reporters = ['progress', 'coverage', 'dots']
+  }
+
+  config.set({
+    basePath: './',
+    frameworks: ['jasmine'],
+    files: [
+      "dist/system-runtime.min.js",
+      "test/runtime/runtime-spec.js",
+      "test/runtime/component-spec.js",
+      "test/runtime/metamodel-spec.js",
+      "test/runtime/database-spec.js",
+      "test/runtime/classInfo-spec.js",
+      "test/runtime/system-spec.js",
+      "test/runtime/mson-spec.js"
+    ],
+    reporters: reporters,
+    preprocessors: {
+      'dist/system-runtime.min.js': ['coverage']
+    },
+    colors: true,
+    autoWatch: true,
+    plugins: [
+      'karma-coverage',
+      'karma-script-launcher',
+      'karma-firefox-launcher',
+      'karma-jasmine'
+    ],
+    singleRun: true,
+    browsers: browsers
+  });
 };

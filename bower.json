@@ -35,6 +35,7 @@
         "addons",
         "build",
         "doc",
+        "tasks",
         "node_modules",
         "test",
         "src",
