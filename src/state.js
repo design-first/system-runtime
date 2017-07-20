@@ -47,20 +47,16 @@ var store = {};
  * @method set
  * @param {String} id component id on which change the state
  * @param {String} state the new state of the component
- * @param {Object} parameters parameters
+ * @param {Object} value value of the state
  */
-function set(id, state, parameters) {
+function set(id, state, value) {
   store[id] = {
-    'name': state,
-    'parameters': {
-      'data': parameters
-    }
+    'state': state,
+    'value': value
   };
   $db.store._State[id] = {
-    'name': state,
-    'parameters': {
-      'data': parameters
-    }
+    'state': state,
+    'value': value
   };
 }
 

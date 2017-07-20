@@ -3,24 +3,7 @@
   "name": "class_system_osgi",
   "description": "OSGi-like system",
   "version": "1.0.0",
-  "behaviors": {
-    "182c51edc31ad97": {
-      "_id": "182c51edc31ad97",
-      "component": "_SystemOSGi",
-      "state": "uninstall",
-      "action": "function uninstall() { \n  this.require('runtime').uninstall(this.id());\n}",
-      "useCoreAPI": false,
-      "core": true
-    },
-    "14b77144911ce48": {
-      "_id": "14b77144911ce48",
-      "component": "_SystemOSGi",
-      "state": "bundle",
-      "action": "function bundle() {\n  var result = '',\n    system = [];\n\n  systems = $db._System.find({\n    '_id': this.id()\n  });\n\n  if (systems.length) {\n    result = JSON.stringify(systems[0]);\n  }\n\n  return result;\n}",
-      "useCoreAPI": true,
-      "core": true
-    }
-  },
+  "behaviors": {},
   "schemas": {
     "145fe10c7514298": {
       "_id": "145fe10c7514298",
@@ -32,9 +15,7 @@
       "state": "property",
       "location": "property",
       "start": "method",
-      "stop": "method",
-      "uninstall": "method",
-      "bundle": "method"
+      "stop": "method"
     }
   },
   "models": {
@@ -55,10 +36,6 @@
         "readOnly": false,
         "mandatory": false,
         "default": ""
-      },
-      "uninstall": {},
-      "bundle": {
-        "result": "string"
       }
     }
   },

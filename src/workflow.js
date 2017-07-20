@@ -667,7 +667,7 @@ function state(params) {
 
   currentState = $state.get(params.component);
 
-  if (currentState === 'destroy') {
+  if (currentState && currentState.state === 'destroy') {
     $log.invalidUseOfComponent(params.component);
   }
 

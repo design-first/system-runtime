@@ -1221,8 +1221,8 @@ function addOn(Class, classId) {
             behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI, isCore);
 
             currentState = $state.get(this.id());
-            if (currentState && state === currentState.name) {
-              $workflow.action(behaviorId, currentState.parameters.data);
+            if (currentState && currentState.state === state) {
+              $workflow.action(behaviorId, currentState.value);
             }
 
           } else {
@@ -1274,8 +1274,8 @@ function addOnClass(Class, classId) {
             behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI, isCore);
 
             currentState = $state.get(this.id());
-            if (currentState && state === currentState.name) {
-              $workflow.action(behaviorId, currentState.parameters.data);
+            if (currentState && currentState.state === state) {
+              $workflow.action(behaviorId, currentState.value);
             }
 
           } else {

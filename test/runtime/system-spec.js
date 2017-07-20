@@ -46,11 +46,6 @@ describe('a system', function () {
     expect(system.components()).toBeDefined();
   });
 
-  it('can get its bundle', function () {
-    var bundle = system.bundle();
-    expect(bundle).toBeDefined();
-  });
-
   it('can get its location', function () {
     var location = system.location();
     expect(location).toBeDefined();

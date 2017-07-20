@@ -10,8 +10,8 @@
       "_inherit": [],
       "_core": true,
       "_class": false,
-      "name": "property",
-      "parameters": "property",
+      "state": "property",
+      "value": "property",
       "_id": "158711d6f215e4b"
     }
   },
@@ -19,17 +19,17 @@
     "177ac136891629f": {
       "_name": "_State",
       "_core": true,
-      "name": {
+      "state": {
         "type": "string",
         "readOnly": false,
         "mandatory": true,
         "default": ""
       },
-      "parameters": {
-        "type": "object",
+      "value": {
+        "type": "any",
         "readOnly": false,
         "mandatory": false,
-        "default": {}
+        "default": null
       },
       "_id": "177ac136891629f"
     }
