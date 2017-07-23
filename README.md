@@ -64,6 +64,27 @@ It will return this JSON:
 }
 ```
 
+#### Install the bundle in HTML
+
+Just add a link tag in your HTML to install and start your bundle:
+
+```html
+<!-- install your bundle -->
+<link rel="system" type="application/json" href="app.json">
+```
+
+#### Install the bundle in Node.js
+
+Like in [OSGi](https://www.osgi.org), just call *install* API to install and start your bundle:
+
+```js
+// require System Runtime
+let runtime = require('system-runtime');
+
+// install your bundle 
+runtime.install('app.json');
+```
+
 ## What contains System Runtime ?
 
 #### A metamodel
