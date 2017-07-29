@@ -1,0 +1,22 @@
+{
+  "name": "dev-mode",
+  "master": false,
+  "subsystem": false,
+  "version": "1.0.0",
+  "description": "Development mode",
+  "schemas": {},
+  "models": {},
+  "behaviors": {
+    "y1c59d1de591d81e": {
+      "_id": "y1c59d1de591d81e",
+      "component": "z1f9151698514d13",
+      "state": "start",
+      "action": "function start() {\n  if (typeof document !== 'undefined') {\n    document.addEventListener('dragenter', function dragenter(e) {\n      e.stopPropagation();\n      e.preventDefault();\n    }, false);\n\n    document.addEventListener('dragover', function dragover(e) {\n      e.stopPropagation();\n      e.preventDefault();\n    }, false);\n\n    document.addEventListener('drop', function drop(e) {\n      e.stopPropagation();\n      e.preventDefault();\n      var files = e.dataTransfer.files;\n      var reader = new FileReader();\n      var json = '';\n      reader.onload = function onload(event) {\n        json += event.target.result;\n      };\n      reader.onloadend = function onloadend() {\n        var sys = JSON.parse(json);\n        runtime.install(sys);\n      };\n      reader.readAsText(files[0], 'UTF-8');\n    });\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {},
+  "_id": "z1f9151698514d13"
+}
