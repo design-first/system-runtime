@@ -14,7 +14,7 @@ Give the following informations related to your problem:
 - [ ] You OS version (ex: *macOS 10.12.6*)
 - [ ] Steps to reproduce the problem
 
-## For contributing to System Designer codebase
+## For contributing to System Runtime codebase
 
 Follow these steps:
 
