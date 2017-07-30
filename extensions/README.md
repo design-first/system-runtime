@@ -1,8 +1,8 @@
 ## System Runtime Extensions
 
-You can extend System Runtime core system by composing other systems at runtime. In that case, these systems are called extensions.
+You can extend System Runtime core system by composing other systems at runtime. In that case, these systems are called **extensions**.
 
-To extend a system with System Runtime core system: just install one of these systems at runtime.
+To add an extension, just install it at runtime.
 
 #### Install an extension client-side
 
