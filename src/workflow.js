@@ -258,6 +258,7 @@ function checkResult(params) {
   var component = params.component || null,
     methodName = params.methodName || '',
     methodResult = null,
+    typeofMethodResult = '',
     componentClassName = '',
     returnType = null,
     result = true;
@@ -284,6 +285,22 @@ function checkResult(params) {
         if (!Array.isArray(methodResult)) {
           result = false;
           $log.invalidResultType(component.id(), component.constructor.name, methodName, returnType, null);
+        }
+        break;
+      case returnType.indexOf('@') !== -1:
+        if (methodResult.constructor) {
+          if (methodResult.constructor.name === 'Function') {
+            typeofMethodResult = methodResult.name;
+          } else {
+            typeofMethodResult = methodResult.constructor.name;
+          }
+          if (typeofMethodResult !== returnType.replace('@', '')) {
+            result = false;
+            $log.invalidResultType(component.id(), component.constructor.name, methodName, returnType, typeofMethodResult);
+          }
+        } else {
+          result = false;
+          $log.invalidResultType(component.id(), component.constructor.name, methodName, returnType, typeof methodResult);
         }
         break;
       default:

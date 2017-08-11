@@ -22,10 +22,6 @@ describe('a system', function () {
     expect(system.version()).toBeDefined();
   });
 
-  it('can tell if it is a subsystem', function () {
-    expect(system.subsystem()).toBe(false);
-  });
-
   it('has schemas', function () {
     expect(system.schemas()).toBeDefined();
   });

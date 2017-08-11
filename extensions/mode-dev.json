@@ -1,7 +1,6 @@
 {
   "name": "mode-dev",
   "master": false,
-  "subsystem": false,
   "version": "1.0.0",
   "description": "Development mode",
   "schemas": {},

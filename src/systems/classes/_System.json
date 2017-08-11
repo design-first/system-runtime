@@ -14,7 +14,6 @@
       "_core": true,
       "name": "property",
       "master": "property",
-      "subsystem": "property",
       "version": "property",
       "description": "property",
       "schemas": "property",
@@ -35,12 +34,6 @@
         "default": ""
       },
       "master": {
-        "type": "boolean",
-        "readOnly": false,
-        "mandatory": false,
-        "default": false
-      },
-      "subsystem": {
         "type": "boolean",
         "readOnly": false,
         "mandatory": false,
@@ -93,6 +86,5 @@
   },
   "types": {},
   "components": {},
-  "master": false,
-  "subsystem": false
+  "master": false
 }

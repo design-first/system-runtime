@@ -410,7 +410,14 @@
           }
         ]
       },
-      "send": {}
+      "send": {
+        "params": [
+          {
+            "name": "message",
+            "type": "message"
+          }
+        ]
+      }
     }
   },
   "schemas": {
@@ -726,6 +733,5 @@
   "version": "1.0.0",
   "description": "Enable connection to System Designer",
   "_id": "18ed81de331252c",
-  "master": false,
-  "subsystem": false
+  "master": false
 }

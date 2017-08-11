@@ -264,6 +264,9 @@ function impSystem(importedSystem) {
 
   if (importedSystem) {
 
+    // remove deprecated property
+    delete importedSystem.subsystem;
+
     // add types
     for (typeName in importedSystem.types) {
       $metamodel.type(importedSystem.types[typeName]);
@@ -350,7 +353,6 @@ function expSystem() {
     exportedSystem.description = mastersystem.description;
     exportedSystem.version = mastersystem.version;
     exportedSystem.master = true;
-    exportedSystem.subsystem = false;
 
     // dump
     dbDump = dump();
@@ -409,8 +411,6 @@ function expSubsystem(params) {
   system.name = params.name || 'sub_' + defaultName;
   system.version = params.version || '0.0.1';
   system.description = params.description || '';
-
-  system.subsystem = true;
 
   // schemas
   system.schemas = {};

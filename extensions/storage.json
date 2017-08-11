@@ -1,7 +1,6 @@
 {
   "name": "storage",
   "master": false,
-  "subsystem": false,
   "version": "1.0.0",
   "description": "Storage",
   "schemas": {
