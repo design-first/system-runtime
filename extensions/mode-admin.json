@@ -3,9 +3,6 @@
     "18a51169d7112d4": {
       "_name": "_Database",
       "_core": true,
-      "collections": {
-        "result": "object"
-      },
       "insert": {
         "params": [
           {
@@ -427,7 +424,6 @@
         "_Component"
       ],
       "_core": true,
-      "collections": "method",
       "insert": "event",
       "update": "event",
       "remove": "event",
