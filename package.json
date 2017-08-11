@@ -1,6 +1,6 @@
 {
   "name": "system-runtime",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-alpha.4",
   "description": "A JavaScript library that runs systems",
   "homepage": "https://designfirst.io/systemruntime/",
   "keywords": [
