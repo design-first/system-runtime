@@ -630,7 +630,7 @@ function createClass(classId) {
       return config._id;
     };
     /* jshint -W054 */
-    this.id = new Function('body', 'return function id () { return body.call(this) };')(body);
+    this.id = new Function('__body', 'return function id () { return __body.call(this) };')(body);
     /* jshint +W054 */
 
     // classInfo
@@ -657,7 +657,7 @@ function createClass(classId) {
     }
   };
   /* jshint -W054 */
-  return new Function('body', 'return function ' + classId + ' (config) { body.call(this,config) };')(body);
+  return new Function('__body', 'return function ' + classId + ' (config) { __body.call(this,config) };')(body);
   /* jshint +W054 */
 }
 
@@ -674,7 +674,7 @@ function addId(Class, classId) {
     return classId;
   };
   /* jshint -W054 */
-  Class.id = new Function('body', 'return function id (prop, val) { return body.call(this, prop, val) };')(body);
+  Class.id = new Function('__body', 'return function id (prop, val) { return __body.call(this, prop, val) };')(body);
   /* jshint +W054 */
 }
 
@@ -868,7 +868,7 @@ function addProperties(model, Class, classId) {
         }
       };
       /* jshint -W054 */
-      Class.prototype[propertyName] = new Function('body', 'return function ' + propertyName + ' (position,value) { return body.call(this, position, value) };')(body);
+      Class.prototype[propertyName] = new Function('__body', 'return function ' + propertyName + ' (position,value) { return __body.call(this, position, value) };')(body);
       /* jshint +W054 */
     } else {
       body = function body(value) {
@@ -963,7 +963,7 @@ function addProperties(model, Class, classId) {
         }
       };
       /* jshint -W054 */
-      Class.prototype[propertyName] = new Function('body', 'return function ' + propertyName + ' (value) { return body.call(this,value) };')(body);
+      Class.prototype[propertyName] = new Function('__body', 'return function ' + propertyName + ' (value) { return __body.call(this,value) };')(body);
       /* jshint +W054 */
     }
   });
@@ -1082,7 +1082,7 @@ function addStructure(path, name, model, id) {
     };
 
     /* jshint -W054 */
-    sructure[propertyName] = new Function('body', 'return function ' + propertyName + ' (value) { return body.call(this,value) };')(body);
+    sructure[propertyName] = new Function('__body', 'return function ' + propertyName + ' (value) { return __body.call(this,value) };')(body);
     /* jshint +W054 */
   });
 
@@ -1117,11 +1117,11 @@ function addMethods(model, Class, classId) {
       };
     if (params) {
       /* jshint -W054 */
-      Class.prototype[methodName] = new Function('body', 'return function ' + methodName + ' (' + params + ') { return body.call(this,' + params + ') };')(body);
+      Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' (' + params + ') { return __body.call(this,' + params + ') };')(body);
       /* jshint +W054 */
     } else {
       /* jshint -W054 */
-      Class.prototype[methodName] = new Function('body', 'return function ' + methodName + ' () { return body.call(this) };')(body);
+      Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' () { return __body.call(this) };')(body);
       /* jshint +W054 */
     }
   });
@@ -1187,11 +1187,11 @@ function addEvents(model, Class, classId) {
       };
     if (params) {
       /* jshint -W054 */
-      Class.prototype[methodName] = new Function('body', 'return function ' + methodName + ' (' + params + ') { return body.call(this,' + params + ') };')(body);
+      Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' (' + params + ') { return __body.call(this,' + params + ') };')(body);
       /* jshint +W054 */
     } else {
       /* jshint -W054 */
-      Class.prototype[methodName] = new Function('body', 'return function ' + methodName + ' () { return body.call(this) };')(body);
+      Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' () { return __body.call(this) };')(body);
       /* jshint +W054 */
     }
   });
@@ -1246,7 +1246,7 @@ function addOn(Class, classId) {
     return behaviorId;
   };
   /* jshint -W054 */
-  Class.prototype.on = new Function('body', 'return function on (state,handler,useCoreAPI,isCore) { return body.call(this,state,handler,useCoreAPI,isCore) };')(body);
+  Class.prototype.on = new Function('__body', 'return function on (state,handler,useCoreAPI,isCore) { return __body.call(this,state,handler,useCoreAPI,isCore) };')(body);
   /* jshint +W054 */
 }
 
@@ -1299,7 +1299,7 @@ function addOnClass(Class, classId) {
     return behaviorId;
   };
   /* jshint -W054 */
-  Class.on = new Function('body', 'return function on (state,handler,useCoreAPI,isCore) { return body.call(this, state, handler, useCoreAPI,isCore) };')(body);
+  Class.on = new Function('__body', 'return function on (state,handler,useCoreAPI,isCore) { return __body.call(this, state, handler, useCoreAPI,isCore) };')(body);
   /* jshint -W054 */
 }
 
@@ -1330,7 +1330,7 @@ function addOffClass(Class, classId) {
     }
   };
   /* jshint -W054 */
-  Class.off = new Function('body', 'return function off (state, behaviorId) { return body.call(this, state, behaviorId) };')(body);
+  Class.off = new Function('__body', 'return function off (state, behaviorId) { return __body.call(this, state, behaviorId) };')(body);
   /* jshint +W054 */
 }
 
@@ -1374,7 +1374,7 @@ function addDestroyClass(Class) {
     });
   };
   /* jshint -W054 */
-  Class.destroy = new Function('body', 'return function destroy () { return body.call(this) };')(body);
+  Class.destroy = new Function('__body', 'return function destroy () { return __body.call(this) };')(body);
   /* jshint +W054 */
 }
 
@@ -1390,7 +1390,7 @@ function addClassInfoClass(Class) {
     return get(this.id() + 'Info');
   };
   /* jshint -W054 */
-  Class.classInfo = new Function('body', 'return function classInfo () { return body.call(this) };')(body);
+  Class.classInfo = new Function('__body', 'return function classInfo () { return __body.call(this) };')(body);
   /* jshint +W054 */
 }
 

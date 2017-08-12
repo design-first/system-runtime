@@ -102,11 +102,11 @@ function createFunction(name, func, core, useCoreAPI) {
 
   if (params[0] !== '') {
     /* jshint -W054 */
-    action = new Function('body', "return function " + funcName + " (" + params.join(',') + ") { return new Function('" + params.join("','") + "', body).apply(this, arguments) };")(funcBody);
+    action = new Function('__body', "return function " + funcName + " (" + params.join(',') + ") { return new Function('" + params.join("','") + "', __body).apply(this, arguments) };")(funcBody);
     /* jshint +W054 */
   } else {
     /* jshint -W054 */
-    action = new Function('body', "return function " + funcName + " () { return new Function(body).apply(this, arguments) };")(funcBody);
+    action = new Function('__body', "return function " + funcName + " () { return new Function(__body).apply(this, arguments) };")(funcBody);
     /* jshint +W054 */
   }
 
