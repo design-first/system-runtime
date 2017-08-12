@@ -886,6 +886,16 @@ function addProperties(model, Class, classId) {
               case propertyType === 'date':
                 propertyValue = new Date(component[propertyName]);
                 break;
+              case propertyType === 'array':
+                propertyValue = new _Array({
+                  'id': this.id(),
+                  'propertyName': propertyName,
+                  'readOnly': propertyReadOnly,
+                  'classId': classId,
+                  'type': 'any',
+                  'arr': $db.store[classId][this.id()][propertyName]
+                });
+                break;
               case $metamodel.isStructure(propertyName, classId):
                 propertyValue = addStructure('', propertyName, model, this.id());
                 break;
