@@ -2,7 +2,7 @@
   "_id": "e89c617b6b15d24",
   "name": "system-runtime",
   "description": "System Runtime",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.5",
   "behaviors": {
     "1cb9d103d41dd97": {
       "_id": "1cb9d103d41dd97",
