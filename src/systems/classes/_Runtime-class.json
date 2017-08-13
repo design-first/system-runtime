@@ -1,6 +1,6 @@
 {
   "_id": "y1ce601b9af14c0a",
-  "name": "class_runtime",
+  "name": "_Runtime-class",
   "description": "Runtime",
   "version": "1.0.0",
   "behaviors": {

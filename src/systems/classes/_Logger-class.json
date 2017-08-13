@@ -1,6 +1,6 @@
 {
   "_id": "v1916b1e0ee1e1f0",
-  "name": "class_logger",
+  "name": "_Logger-class",
   "description": "Logger",
   "version": "1.0.0",
   "behaviors": {

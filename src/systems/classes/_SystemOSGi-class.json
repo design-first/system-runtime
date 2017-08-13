@@ -1,6 +1,6 @@
 {
   "_id": "m1d0f21f41e1af88",
-  "name": "class_system_osgi",
+  "name": "_SystemOSGi-class",
   "description": "OSGi-like system",
   "version": "1.0.0",
   "behaviors": {},

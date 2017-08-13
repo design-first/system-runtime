@@ -1,9 +1,8 @@
 {
-  "_id": "k157f01869d1e145",
-  "name": "class_behavior",
-  "description": "Behavior",
+  "name": "_Behavior-class",
+  "master": false,
   "version": "1.0.0",
-  "behaviors": {},
+  "description": "Behavior",
   "schemas": {
     "1ac07185641fa9f": {
       "_name": "_Behavior",
@@ -56,7 +55,8 @@
       "_id": "166971fd9d107fd"
     }
   },
+  "behaviors": {},
   "types": {},
   "components": {},
-  "master": false
+  "_id": "k157f01869d1e145"
 }
