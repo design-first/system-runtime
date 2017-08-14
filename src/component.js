@@ -20,7 +20,7 @@
 
 /**
  * This module manages the components. 
- * It is the factory of all the components that are created by Runtime.
+ * It is the factory of all the components that are created by System Runtime.
  * 
  * @module component
  * @requires workflow
@@ -1519,7 +1519,7 @@ function clear() {
 
 /**
  * This module manages the components. 
- * It is the factory of all the components that are created by Runtime.
+ * It is the factory of all the components that are created by System Runtime.
  * 
  * @module component
  * @requires workflow

@@ -45,9 +45,9 @@ var runtimeRef = null;
 
 
 /*
- * Check if a Runtime instance exists.
+ * Check if a System Runtime instance exists.
  * @method isRuntime
- * @return {Boolean} true if a Runtime instance exist
+ * @return {Boolean} true if a System Runtime instance exist
  */
 function isRuntime() {
   var result = false;
@@ -61,9 +61,9 @@ function isRuntime() {
 
 
 /*
- * Get the Runtime instance.
+ * Get the System Runtime instance.
  * @method getRuntime
- * @return {_Runtime} Runtime instance
+ * @return {_Runtime} System Runtime instance
  */
 function getRuntime() {
   var runtimeId = '',
@@ -132,17 +132,17 @@ function polyfill() {
 
 
 /**
- * Get Runtime instance.
+ * Get System Runtime instance.
  * @method getRuntime
- * @return {_Runtime} Runtime instance
+ * @return {_Runtime} System Runtime instance
  */
 exports.getRuntime = getRuntime;
 
 
 /**
- * Check if a Runtime instance exists.
+ * Check if a System Runtime instance exists.
  * @method isRuntime
- * @return {Boolean} true if a Runtime instance exist
+ * @return {Boolean} true if a System Runtime instance exist
  */
 exports.isRuntime = isRuntime;
 

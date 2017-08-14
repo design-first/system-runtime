@@ -19,13 +19,13 @@
  */
 
 /**
- * This module manages Runtime database. <br>
- * Runtime database is a micro NoSQL Database that contains: <br>
+ * This module manages System Runtime database. <br>
+ * System Runtime database is a micro NoSQL Database that contains: <br>
  * - collections to store documents (schemas, types, components, ...) and <br>
  * - APIs to import or export documents. <br>
  * 
- * Runtime Database is closely linked to Runtime metamodel and Runtime components because: <br>
- * - all operations done by Runtime database must be compliant with the model before being finished, <br>
+ * System Runtime Database is closely linked to System Runtime metamodel and System Runtime components because: <br>
+ * - all operations done by System Runtime database must be compliant with the model before being finished, <br>
  * - insert operation automatically creates a component and <br>
  * - remove operation automatically destroy a component.
  *  
@@ -247,8 +247,8 @@ function contains(source, target) {
 /*
  * Import system into the database
  * @method impSystem
- * @param {JSON} importedSystem a Runtime system to import
- * @return {String} the id of the imported Runtime system
+ * @param {JSON} importedSystem a System Runtime system to import
+ * @return {String} the id of the imported System Runtime system
  * @private
  */
 function impSystem(importedSystem) {
@@ -493,8 +493,8 @@ function expSubsystem(params) {
 
 
 /** 
- * A collection of documents managed by Runtime. <br>
- * Internal collections manage core objects of Runtime (schema, type, ...). <br>
+ * A collection of documents managed by System Runtime. <br>
+ * Internal collections manage core objects of System Runtime (schema, type, ...). <br>
  * Public collections manage components of the same class. <br>
  * 
  * @class DatabaseCollection
@@ -567,7 +567,7 @@ DatabaseCollection.prototype.find = function (query) {
 
 /**
  * Insert an new document into the collection. <br>
- * Before inserting the document, Runtime checks that the document is compliant
+ * Before inserting the document, System Runtime checks that the document is compliant
  * with its class definition. <br> 
  * Then, after inserting it, we create the component.
  * @method insert
@@ -922,8 +922,8 @@ function collection(name) {
 /*
  * Import a system into the database
  * @method importSystem
- * @param {JSON} importedSystem a Runtime system to import
- * @return {String} the id of the imported Runtime system
+ * @param {JSON} importedSystem a System Runtime system to import
+ * @return {String} the id of the imported System Runtime system
  */
 function importSystem(importedSystem) {
   return impSystem(importedSystem);
@@ -1002,7 +1002,7 @@ function init() {
   // init metamodel
   $metamodel.init();
 
-  // reimport Runtime core system
+  // reimport System Runtime core system
   runtimeSystemId = exports.importSystem(runtimeSystem);
   $component.get(runtimeSystemId).start();
 }
@@ -1012,13 +1012,13 @@ function init() {
 
 
 /**
- * This module manages Runtime database. <br>
- * Runtime database is a micro NoSQL Database that contains: <br>
+ * This module manages System Runtime database. <br>
+ * System Runtime database is a micro NoSQL Database that contains: <br>
  * - collections to store documents (schemas, types, components, ...) and <br>
  * - APIs to import or export documents. <br>
  * 
- * Runtime database is closely linked to Runtime metamodel because: <br>
- * - all operations done by Runtime database must be compliant with the model before being finished, <br>
+ * System Runtime database is closely linked to System Runtime metamodel because: <br>
+ * - all operations done by System Runtime database must be compliant with the model before being finished, <br>
  * - insert operation automatically creates a component and <br>
  * - remove operation automatically destroy a component.
  *   
@@ -1051,7 +1051,7 @@ exports.collection = collection;
 
 
 /**
- * Runtime database store that lists all the collections.
+ * System Runtime database store that lists all the collections.
  * @property {JSON} store
  */
 exports.store = store;
@@ -1060,8 +1060,8 @@ exports.store = store;
 /**
  * Import a system into the database
  * @method importSystem
- * @param {JSON} importedSystem a Runtime system to import
- * @return {String} the id of the imported Runtime system
+ * @param {JSON} importedSystem a System Runtime system to import
+ * @return {String} the id of the imported System Runtime system
  */
 exports.importSystem = importSystem;
 

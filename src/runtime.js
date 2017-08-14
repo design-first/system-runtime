@@ -19,8 +19,8 @@
  */
 
 /**
- * This module is the main module of Runtime. <br>
- * It inits Runtime metamodel and loads Runtime core system.
+ * This module is the main module of System Runtime. <br>
+ * It inits System Runtime metamodel and loads System Runtime core system.
  * 
  * @module runtime
  * @requires component
@@ -86,8 +86,8 @@ system.state('active');
 
 
 /**
- * This module is the main module of Runtime. <br>
- * It inits Runtime metamodel and loads Runtime core system.
+ * This module is the main module of System Runtime. <br>
+ * It inits System Runtime metamodel and loads System Runtime core system.
  * 
  * @module runtime
  * @requires component

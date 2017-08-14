@@ -19,7 +19,7 @@
  */
 
 /**
- * This module manages the workflow of Runtime. It behaves like a workflow engine. <br>
+ * This module manages the workflow of System Runtime. It behaves like a workflow engine. <br>
  * It checks if the change of status of a component is valid to be executed. By valid, it means that:<br>
  * - the state is valid for the component, <br>
  * - the input (i.e. parameters) of all actions for the state are compliants with the model and <br>
@@ -319,7 +319,7 @@ function checkResult(params) {
 /*
  * Get the actions of the specified state
  * @method getActions
- * @param {Object} component a Runtime component
+ * @param {Object} component a System Runtime component
  * @param {String} name name of the state
  * @param {Boolean} isEvent true if the state is an event
  * @return {Array} list of the actions
@@ -792,13 +792,13 @@ function restart() {
 
 
 /**
- * This module manages the workflow of Runtime. It behaves like a workflow engine. <br>
+ * This module manages the workflow of System Runtime. It behaves like a workflow engine. <br>
  * It checks if the change of status of a component is valid to be executed. By valid, it means that:<br>
  * - the state is valid for the component, <br>
  * - the input (i.e. parameters) of all actions for the state are compliants with the model and <br>
  * - the output of all actions are compliants with the model. <br>
  * 
- * If an error occurs, the workflow will call the error state of the component and of Runtime instance. <br>
+ * If an error occurs, the workflow will call the error state of the component and of System Runtime instance. <br>
  * If the error can break the consistency of the current system, the worklow will stop.
  * 
  * @module workflow

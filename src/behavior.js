@@ -55,9 +55,9 @@ var store = {};
  * @method createFunction
  * @param {String} name default name of the function 
  * @param {String} func a stringified function
- * @param {Boolean} core if true, the behavior will be treated as a Runtime core behavior.
+ * @param {Boolean} core if true, the behavior will be treated as a System Runtime core behavior.
  * In that case, the behavior can not be exported in a system (default false)
- * @param {Boolean} useCoreAPI if true, Runtime core modules will be injected as parameters of the function (default false)
+ * @param {Boolean} useCoreAPI if true, System Runtime core modules will be injected as parameters of the function (default false)
  * @return {Function} the created function
  * @private
  */
@@ -118,14 +118,14 @@ function createFunction(name, func, core, useCoreAPI) {
 
 
 /*
- * Add a behavior that will be stored in Runtime database.
+ * Add a behavior that will be stored in System Runtime database.
  * @method add
  * @param {String} id id of the component
  * @param {Object} state the state on which the action will be executed 
  * @param {Object} action the action to execute when the component will have a specific state 
- * @param {Boolean} useCoreAPI if true, Runtime core modules will be injected as parameters of the action (default false)
+ * @param {Boolean} useCoreAPI if true, System Runtime core modules will be injected as parameters of the action (default false)
  * @param {Boolean} core if true, behavior can not be exported
- * @return {String} id of the behavior created in Runtime database
+ * @return {String} id of the behavior created in System Runtime database
  */
 function add(id, state, action, useCoreAPI, core) {
   var behaviorId = $helper.generateId(),
@@ -279,14 +279,14 @@ function get(id) {
 
 
 /**
- * Add a behavior that will be stored in Runtime database.
+ * Add a behavior that will be stored in System Runtime database.
  * @method add
  * @param {String} id id of the component
  * @param {Object} state the state on which the action will be executed 
  * @param {Object} action the action to execute when the component will have a specific state 
- * @param {Boolean} useCoreAPI if true, Runtime core modules will be injected as parameters of the action (default false)
+ * @param {Boolean} useCoreAPI if true, System Runtime core modules will be injected as parameters of the action (default false)
  * @param {Boolean} core if true, behavior can not be exported
- * @return {String} id of the behavior created in Runtime database
+ * @return {String} id of the behavior created in System Runtime database
  */
 exports.add = add;
 

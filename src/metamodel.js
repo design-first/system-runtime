@@ -19,8 +19,8 @@
  */
 
 /**
- * This module manages Runtime metamodel. <br>
- * Runtime metamodel loads schemas and types, analyzes them and creates the component classes and related DatabaseCollections.
+ * This module manages System Runtime metamodel. <br>
+ * System Runtime metamodel loads schemas and types, analyzes them and creates the component classes and related DatabaseCollections.
  * 
  * @module metamodel
  * @requires db
@@ -2119,8 +2119,8 @@ function inheritFrom(name, parentName) {
 
 
 /**
- * This module manages Runtime metamodel. <br>
- * Runtime metamodel loads schemas and types, analyzes them and creates the component classes and related RuntimeDatabaseCollections.
+ * This module manages System Runtime metamodel. <br>
+ * System Runtime metamodel loads schemas and types, analyzes them and creates the component classes and related DatabaseCollections.
  * 
  * @module metamodel
  * @requires db

@@ -276,7 +276,7 @@ function readOnlyProperty(id, className, propertyName) {
 
 
 /*
- * Invalid document on a Runtime database insert operation.
+ * Invalid document on a System Runtime database insert operation.
  * @method invalidDocumentOnDbInsert
  * @param {String} doc a document
  * @param {String} collectionName the name of the colllection
@@ -287,7 +287,7 @@ function invalidDocumentOnDbInsert(doc, collectionName) {
 
 
 /*
- * Invalid property on a Runtime database update operation.
+ * Invalid property on a System Runtime database update operation.
  * @method invalidPropertyTypeOnDbUpdate
  * @param {String} collectionName the name of the colllection
  * @param {String} id id of the component
@@ -300,7 +300,7 @@ function invalidPropertyTypeOnDbUpdate(collectionName, id, propertyName, propert
 }
 
 /*
- * Unkonw property on a Runtime database update operation.
+ * Unkonw property on a System Runtime database update operation.
  * @method unknownPropertyOnDbUpdate
  * @param {String} collectionName the name of the colllection
  * @param {String} propertyName name of the property
@@ -368,7 +368,7 @@ function unknownComponent(className, componentId) {
 
 
 /*
- * The Runtime workflow has been restarted.
+ * The System Runtime workflow has been restarted.
  * @method workflowRestarted
  */
 function workflowRestarted() {
@@ -916,7 +916,7 @@ exports.readOnlyProperty = readOnlyProperty;
 
 
 /**
- * Invalid document on a Runtime database insert operation.
+ * Invalid document on a System Runtime database insert operation.
  * @method invalidDocumentOnDbInsert
  * @param {String} doc a document
  * @param {String} collectionName the name of the colllection
@@ -925,7 +925,7 @@ exports.invalidDocumentOnDbInsert = invalidDocumentOnDbInsert;
 
 
 /**
- * Invalid property on a Runtime database update operation.
+ * Invalid property on a System Runtime database update operation.
  * @method invalidPropertyTypeOnDbUpdate
  * @param {String} collectionName the name of the colllection
  * @param {String} id id of the component
@@ -975,7 +975,7 @@ exports.unknownComponent = unknownComponent;
 
 
 /**
- * The Runtime workflow has been restarted.
+ * The System Runtime workflow has been restarted.
  * @method workflowRestarted
  */
 exports.workflowRestarted = workflowRestarted;
@@ -1094,7 +1094,7 @@ exports.updateUuid = updateUuid;
 
 
 /**
- * Unkonw property on a Runtime database update operation.
+ * Unkonw property on a System Runtime database update operation.
  * @method unknownPropertyOnDbUpdate
  * @param {String} collectionName the name of the colllection
  * @param {String} propertyName name of the property
