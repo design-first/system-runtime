@@ -1,4 +1,70 @@
 {
+  "name": "mode-admin",
+  "master": false,
+  "version": "1.0.0",
+  "description": "Enable connection to System Designer",
+  "schemas": {
+    "1723516a30132ac": {
+      "_name": "_Database",
+      "_inherit": [
+        "_Component"
+      ],
+      "_core": true,
+      "insert": "event",
+      "update": "event",
+      "remove": "event",
+      "_id": "1723516a30132ac"
+    },
+    "10374180581a41f": {
+      "_id": "10374180581a41f",
+      "_name": "_Admin",
+      "_inherit": [
+        "_Component"
+      ],
+      "_core": true,
+      "designerWindow": "property"
+    },
+    "104ad1f48518376": {
+      "_id": "104ad1f48518376",
+      "_name": "_Channel",
+      "_core": true,
+      "$editorUpdateSystem": "event",
+      "$editorUpdateSchema": "event",
+      "$editorUpdateSchemaId": "event",
+      "$editorUpdateSchemaName": "event",
+      "$editorUpdateModel": "event",
+      "$editorUpdateModelId": "event",
+      "$editorUpdateType": "event",
+      "$editorDeleteType": "event",
+      "$editorUpdateBehavior": "event",
+      "$editorDeleteBehavior": "event",
+      "$editorUpdateComponent": "event",
+      "$editorDeleteComponent": "event",
+      "$appLogDebug": "event",
+      "$appLogInfo": "event",
+      "$appLogWarn": "event",
+      "$appLogError": "event",
+      "$appLoadSystem": "event",
+      "$designerSync": "event",
+      "$designerCreateBehavior": "event",
+      "$designerCreateComponent": "event",
+      "$designerCreateType": "event",
+      "$designerCreateSchema": "event",
+      "$designerCreateModel": "event",
+      "$designerDeleteSchema": "event",
+      "$designerDeleteModel": "event",
+      "$designerDeleteType": "event",
+      "$designerDeleteBehavior": "event",
+      "$designerDeleteComponent": "event",
+      "$designerUpdateComponent": "event",
+      "$designerUpdateModel": "event",
+      "$designerUpdateBehavior": "event",
+      "$runtimeCreateComponent": "event",
+      "$runtimeDeleteComponent": "event",
+      "$runtimeUpdateComponent": "event",
+      "send": "event"
+    }
+  },
   "models": {
     "18a51169d7112d4": {
       "_name": "_Database",
@@ -417,75 +483,12 @@
       }
     }
   },
-  "schemas": {
-    "1723516a30132ac": {
-      "_name": "_Database",
-      "_inherit": [
-        "_Component"
-      ],
-      "_core": true,
-      "insert": "event",
-      "update": "event",
-      "remove": "event",
-      "_id": "1723516a30132ac"
-    },
-    "10374180581a41f": {
-      "_id": "10374180581a41f",
-      "_name": "_Admin",
-      "_inherit": [
-        "_Component"
-      ],
-      "_core": true,
-      "designerWindow": "property"
-    },
-    "104ad1f48518376": {
-      "_id": "104ad1f48518376",
-      "_name": "_Channel",
-      "_core": true,
-      "$editorUpdateSystem": "event",
-      "$editorUpdateSchema": "event",
-      "$editorUpdateSchemaId": "event",
-      "$editorUpdateSchemaName": "event",
-      "$editorUpdateModel": "event",
-      "$editorUpdateModelId": "event",
-      "$editorUpdateType": "event",
-      "$editorDeleteType": "event",
-      "$editorUpdateBehavior": "event",
-      "$editorDeleteBehavior": "event",
-      "$editorUpdateComponent": "event",
-      "$editorDeleteComponent": "event",
-      "$appLogDebug": "event",
-      "$appLogInfo": "event",
-      "$appLogWarn": "event",
-      "$appLogError": "event",
-      "$appLoadSystem": "event",
-      "$designerSync": "event",
-      "$designerCreateBehavior": "event",
-      "$designerCreateComponent": "event",
-      "$designerCreateType": "event",
-      "$designerCreateSchema": "event",
-      "$designerCreateModel": "event",
-      "$designerDeleteSchema": "event",
-      "$designerDeleteModel": "event",
-      "$designerDeleteType": "event",
-      "$designerDeleteBehavior": "event",
-      "$designerDeleteComponent": "event",
-      "$designerUpdateComponent": "event",
-      "$designerUpdateModel": "event",
-      "$designerUpdateBehavior": "event",
-      "$runtimeCreateComponent": "event",
-      "$runtimeDeleteComponent": "event",
-      "$runtimeUpdateComponent": "event",
-      "send": "event"
-    }
-  },
-  "types": {},
   "behaviors": {
     "g198c91f8601d02f": {
       "_id": "g198c91f8601d02f",
       "component": "channel",
       "state": "send",
-      "action": "function send() { \n  if (this.require('admin').designerWindow()) {\n    this.require('admin').designerWindow().postMessage(JSON.stringify(message), '*');\n  }\n}",
+      "action": "function send(message) { \n  if (this.require('admin').designerWindow()) {\n    this.require('admin').designerWindow().postMessage(JSON.stringify(message), '*');\n  }\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -706,6 +709,7 @@
       "core": true
     }
   },
+  "types": {},
   "components": {
     "_Admin": {
       "admin": {
@@ -725,9 +729,5 @@
       }
     }
   },
-  "name": "mode-admin",
-  "version": "1.0.0",
-  "description": "Enable connection to System Designer",
-  "_id": "18ed81de331252c",
-  "master": false
+  "_id": "18ed81de331252c"
 }
