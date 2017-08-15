@@ -63,6 +63,16 @@
       "$runtimeDeleteComponent": "event",
       "$runtimeUpdateComponent": "event",
       "send": "event"
+    },
+    "1268f1dddd1fea7": {
+      "_name": "_Logger",
+      "_core": true,
+      "level": "property",
+      "debug": "method",
+      "info": "method",
+      "warn": "method",
+      "error": "method",
+      "_id": "1268f1dddd1fea7"
     }
   },
   "models": {
@@ -481,6 +491,49 @@
           }
         ]
       }
+    },
+    "16b9d1ac2216ffe": {
+      "_id": "16b9d1ac2216ffe",
+      "_name": "_Logger",
+      "_core": true,
+      "level": {
+        "type": "log",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "warn"
+      },
+      "debug": {
+        "params": [
+          {
+            "name": "message",
+            "type": "any"
+          }
+        ]
+      },
+      "info": {
+        "params": [
+          {
+            "name": "message",
+            "type": "any"
+          }
+        ]
+      },
+      "warn": {
+        "params": [
+          {
+            "name": "message",
+            "type": "any"
+          }
+        ]
+      },
+      "error": {
+        "params": [
+          {
+            "name": "message",
+            "type": "any"
+          }
+        ]
+      }
     }
   },
   "behaviors": {
@@ -707,6 +760,38 @@
       "action": "function init(conf) { \n  // for jquery compatibility in electron\n  if (typeof global !== 'undefined' && typeof window !== 'undefined') {\n    delete module;\n  }\t\n}",
       "useCoreAPI": false,
       "core": true
+    },
+    "i139a61d4aa1bea7": {
+      "_id": "i139a61d4aa1bea7",
+      "component": "logger",
+      "state": "info",
+      "action": "function info(message) { \n  if (this.level() === 'info' || this.level() === 'debug') {\n    this.require('channel').$appLogInfo('[info] ' + message);\n  }\t\n}",
+      "useCoreAPI": false,
+      "core": true
+    },
+    "r1c1841a98e1bc15": {
+      "_id": "r1c1841a98e1bc15",
+      "component": "logger",
+      "state": "debug",
+      "action": "function debug(message) { \n  if (this.level() === 'debug') {\n    this.require('channel').$appLogDebug('[debug] ' + message);\n  }\t\n}",
+      "useCoreAPI": false,
+      "core": true
+    },
+    "m1d30414ed912a2a": {
+      "_id": "m1d30414ed912a2a",
+      "component": "logger",
+      "state": "error",
+      "action": "function error(message) { \n  this.require('channel').$appLogError('[error] ' + message);\n}",
+      "useCoreAPI": false,
+      "core": true
+    },
+    "d1d19f1ae9a12118": {
+      "_id": "d1d19f1ae9a12118",
+      "component": "logger",
+      "state": "warn",
+      "action": "function warn(message) { \n  if (this.level() === 'info' || this.level() === 'warn' || this.level() === 'debug') {\n    this.require('channel').$appLogWarn('[warn] ' + message);\n  }\n}",
+      "useCoreAPI": false,
+      "core": true
     }
   },
   "types": {},
@@ -726,6 +811,12 @@
     "_Database": {
       "db": {
         "_id": "db"
+      }
+    },
+    "_Logger": {
+      "logger": {
+        "_id": "logger",
+        "level": "warn"
       }
     }
   },
