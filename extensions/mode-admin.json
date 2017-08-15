@@ -59,6 +59,7 @@
       "$designerUpdateComponent": "event",
       "$designerUpdateModel": "event",
       "$designerUpdateBehavior": "event",
+      "$designerSetSystem": "event",
       "$runtimeCreateComponent": "event",
       "$runtimeDeleteComponent": "event",
       "$runtimeUpdateComponent": "event",
@@ -490,6 +491,16 @@
             "type": "message"
           }
         ]
+      },
+      "$designerSetSystem": {
+        "params": [
+          {
+            "name": "system",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
       }
     },
     "16b9d1ac2216ffe": {
@@ -629,7 +640,7 @@
       "_id": "k18a311f76f1ff2a",
       "component": "channel",
       "state": "$designerDeleteType",
-      "action": "function $designerDeleteType() { \n  this.require('logger').level('warn');\n  $db._Type.remove({ 'name': id });\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n}",
+      "action": "function $designerDeleteType(param) { \n  this.require('logger').level('warn');\n  $db._Type.remove({ 'name': id });\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -757,7 +768,7 @@
       "_id": "e10ba11978d122c5",
       "component": "admin",
       "state": "init",
-      "action": "function init(conf) { \n  // for jquery compatibility in electron\n  if (typeof global !== 'undefined' && typeof window !== 'undefined') {\n    delete module;\n  }\t\n}",
+      "action": "function init(conf) { \n  // for jquery compatibility in electron\n  if (typeof global !== 'undefined' && typeof window !== 'undefined') {\n    delete module;\n  }\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -792,6 +803,14 @@
       "action": "function warn(message) { \n  if (this.level() === 'info' || this.level() === 'warn' || this.level() === 'debug') {\n    this.require('channel').$appLogWarn('[warn] ' + message);\n  }\n}",
       "useCoreAPI": false,
       "core": true
+    },
+    "a172ce13a3e1e8ff": {
+      "_id": "a172ce13a3e1e8ff",
+      "component": "channel",
+      "state": "$designerSetSystem",
+      "action": "function $designerSetSystem(system) { \n  this.require('logger').level('info');\n\tthis.require('runtime').install(system);\n}",
+      "useCoreAPI": false,
+      "core": false
     }
   },
   "types": {},
