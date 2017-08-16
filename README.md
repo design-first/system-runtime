@@ -125,6 +125,10 @@ With System Runtime your components really behave the way you designed them.
 * [Code of Conduct](CODE_OF_CONDUCT.md)
 * [Contributing Guidelines](CONTRIBUTING.md)
 
+**Do not use System Runtime if you do not believe in Equality and Diversity.**
+
+**System Runtime is not for people of hate.**
+
 ## License
 
 Copyright 2017 Erwan Carriou
