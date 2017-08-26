@@ -1,6 +1,6 @@
 {
   "name": "system-runtime",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0-beta.3",
   "description": "A JavaScript library that runs systems",
   "homepage": "https://designfirst.io/systemruntime/",
   "keywords": [
@@ -43,7 +43,7 @@
   "devDependencies": {
     "coveralls": "^2.13.1",
     "grunt": "^1.0.1",
-    "grunt-browserify": "^5.0.0",
+    "grunt-browserify": "^5.2.0",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-concat": "^1.0.1",
