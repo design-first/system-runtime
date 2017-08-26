@@ -864,7 +864,7 @@ function createClassInfo() {
  * @private
  */
 function getReference(value) {
-  return value.replace('@', '');
+  return value.replace('@', '').trim();
 }
 
 
@@ -1061,9 +1061,10 @@ function schema(importedSchema) {
       list = {};
 
     inherits.forEach(function (name) {
-      if (typeof list[name] === 'undefined') {
-        list[name] = name;
-        filteredList.push(name);
+      var cleanName = name.trim();
+      if (typeof list[cleanName] === 'undefined') {
+        list[cleanName] = cleanName;
+        filteredList.push(cleanName);
       }
     });
 
