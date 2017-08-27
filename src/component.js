@@ -1019,6 +1019,16 @@ function addStructure(path, name, model, id) {
             case propertyType === 'date':
               propertyValue = new Date(getStructureValue(model, id, fullPath));
               break;
+            case propertyType === 'array':
+              propertyValue = new _Array({
+                'id': id,
+                'propertyName': fullPath,
+                'readOnly': propertyReadOnly,
+                'classId': model,
+                'type': 'any',
+                'arr': getStructureValue(model, id, fullPath)
+              });
+              break;
             case $metamodel.isStructure(propertyName, model):
               propertyValue = addStructure(parentPath, propertyName, model, id);
               break;

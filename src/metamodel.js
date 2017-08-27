@@ -897,13 +897,13 @@ function isReference(value) {
 
 
 /*
- * Is the value a path.
- * @method isPath
+ * Is the value a model path.
+ * @method isModelPath
  * @param {String} value
  * @return {Boolean}
  * @private
  */
-function isPath(value) {
+function isModelPath(value) {
   return value.indexOf('.') !== -1;
 }
 
@@ -1396,7 +1396,7 @@ function isValidState(name, id) {
     componentSchema = store.generatedModels[id],
     state = {};
 
-  if (isPath(name)) {
+  if (isModelPath(name)) {
     result = isValidModelPath(id, name);
   } else {
     if (componentSchema && componentSchema[NAME]) {

@@ -70,6 +70,18 @@ RuntimeError.prototype.constructor = RuntimeError;
 
 
 /*
+ * Is the value a model path.
+ * @method isModelPath
+ * @param {String} value
+ * @return {Boolean}
+ * @private
+ */
+function isModelPath(value) {
+  return value.indexOf('.') !== -1;
+}
+
+
+/*
  * Get all the names of the parameter of a method.
  * @method getParamNames
  * @param {String} id id of the class
@@ -99,7 +111,9 @@ function getParamNames(id, methodName) {
       }
     }
   } else {
-    $log.unknownMethod(id, methodName);
+    if (!isModelPath(methodName)) {
+      $log.unknownMethod(id, methodName);
+    }
   }
   return result;
 }
@@ -546,7 +560,7 @@ function checkParams(params) {
       paramsNumber = [2, 2];
       break;
     case isProperty:
-      if (methodName.indexOf('.') !== -1) {
+      if (isModelPath(methodName)) {
         paramsType = [$metamodel.getModelPathType(componentClassName, methodName)];
       } else {
         paramsType = [$metamodel.getModel(componentClassName)[methodName].type];
