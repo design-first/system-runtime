@@ -897,6 +897,18 @@ function isReference(value) {
 
 
 /*
+ * Is the value a path.
+ * @method isPath
+ * @param {String} value
+ * @return {Boolean}
+ * @private
+ */
+function isPath(value) {
+  return value.indexOf('.') !== -1;
+}
+
+
+/*
  * Get the real type of a value.
  * @method getRealType
  * @param {type} value
@@ -985,7 +997,7 @@ function hasType(value, type) {
 
 /*
  * Check if an attribute of the schema has a specific type.
- * @method isCollection
+ * @method checkType
  * @param {String} name
  * @param {String} id component id
  * @param {String} type type to check
@@ -1001,7 +1013,7 @@ function checkType(name, id, type) {
   }
 
   if (componentSchema) {
-    attributeType = componentSchema[name];
+    attributeType = componentSchema[name.split('.')[0]];
     if (attributeType === type) {
       result = true;
     }
@@ -1384,13 +1396,17 @@ function isValidState(name, id) {
     componentSchema = store.generatedModels[id],
     state = {};
 
-  if (componentSchema && componentSchema[NAME]) {
-    componentSchema = store.generatedModels[componentSchema[NAME]];
-  }
-  state = store.states[componentSchema[NAME]];
+  if (isPath(name)) {
+    result = isValidModelPath(id, name);
+  } else {
+    if (componentSchema && componentSchema[NAME]) {
+      componentSchema = store.generatedModels[componentSchema[NAME]];
+    }
+    state = store.states[componentSchema[NAME]];
 
-  if (Array.isArray(state)) {
-    result = state.indexOf(name) !== -1;
+    if (Array.isArray(state)) {
+      result = state.indexOf(name) !== -1;
+    }
   }
 
   return result;
@@ -2020,6 +2036,85 @@ function getType(name) {
 
 
 /*
+ * Get the type of a model path.
+ * @method getModelPathType
+ * @param {String} model name of the model
+ * @param {String} path path of the structure
+ * @return {Object} the type
+ */
+function getModelPathType(model, path) {
+  var result = null,
+    subpaths = [],
+    subpath = '',
+    i = 0,
+    length = 0,
+    structure = '';
+
+  subpaths = path.split('.');
+  length = subpaths.length;
+
+  for (i = 0; i < length; i++) {
+    subpath = subpaths[i];
+    if (i === 0) {
+      result = getModel(model)[subpath].type;
+    } else {
+      if (isCustomType(result)) {
+        structure = getType(result);
+        if (structure.schema) {
+          result = structure.schema[subpath].type;
+        } else {
+          $log.invalidState(model, path);
+        }
+      } else {
+        $log.invalidState(model, path);
+      }
+    }
+  }
+  return result;
+}
+
+
+/**
+ * Check if a path is valid model path.
+ * @method isValidModelPath
+ * @param {String} model name of the model
+ * @param {String} path path of the model
+ * @return {Boolean} true if the path is valid for the model
+ */
+function isValidModelPath(model, path) {
+  var result = true,
+    type = null,
+    subpaths = [],
+    subpath = '',
+    i = 0,
+    length = 0,
+    structure = '';
+
+  subpaths = path.split('.');
+  length = subpaths.length;
+
+  for (i = 0; i < length; i++) {
+    subpath = subpaths[i];
+    if (i === 0) {
+      type = getModel(model)[subpath].type;
+    } else {
+      if (isCustomType(type)) {
+        structure = getType(type);
+        if (structure.schema && structure.schema[subpath]) {
+          type = structure.schema[subpath].type;
+        } else {
+          result = false;
+        }
+      } else {
+        result = false;
+      }
+    }
+  }
+  return result;
+}
+
+
+/*
  * Get the definition of the metamodel.
  * @method getMetaDef
  * @return {Object} the metadefinition of the metamodel
@@ -2329,7 +2424,7 @@ exports.isMethod = isMethod;
 /**
  * Check if an attribute of the schema is a structure.
  * @method isStructure
- * @param {String} name name of the propertys
+ * @param {String} name name of the property
  * @param {String} id component id
  * @return {Boolean} true if the property is a structure
  */
@@ -2343,3 +2438,23 @@ exports.isStructure = isStructure;
  * @return {Object} the type
  */
 exports.getType = getType;
+
+
+/**
+ * Get the type of a model path.
+ * @method getModelPathType
+ * @param {String} model name of the model
+ * @param {String} path path of the model
+ * @return {Object} the type
+ */
+exports.getModelPathType = getModelPathType;
+
+
+/**
+ * Check if a path is valid model path.
+ * @method isValidModelPath
+ * @param {String} model name of the model
+ * @param {String} path path of the model
+ * @return {Boolean} true if the path is valid for the model
+ */
+exports.isValidModelPath = isValidModelPath;

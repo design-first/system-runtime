@@ -546,7 +546,11 @@ function checkParams(params) {
       paramsNumber = [2, 2];
       break;
     case isProperty:
-      paramsType = [$metamodel.getModel(componentClassName)[methodName].type];
+      if (methodName.indexOf('.') !== -1) {
+        paramsType = [$metamodel.getModelPathType(componentClassName, methodName)];
+      } else {
+        paramsType = [$metamodel.getModel(componentClassName)[methodName].type];
+      }
       paramsNumber = [1, 1];
       break;
     case isLink:

@@ -250,7 +250,7 @@ describe('a component', function () {
     expect(yoda.lastName()).toBe('Master');
   });
 
-  it('can add a link to anoter components', function () {
+  it('can add a link to another components', function () {
     var Person = runtime.require('Person');
 
     var anakin = new Person({
@@ -268,7 +268,7 @@ describe('a component', function () {
     expect(leia.father().firstName()).toBe('Anakin');
   });
 
-  it('can remove a link to anoter components', function () {
+  it('can remove a link to another components', function () {
     var Person = runtime.require('Person');
 
     var anakin = new Person({

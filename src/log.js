@@ -783,6 +783,17 @@ function invalidPropertyFormat(obj) {
 }
 
 
+/*
+ * Invalid state
+ * @method invalidState
+ * @param {String} model name of the model
+ * @param {String} state invalid state
+ */
+function invalidState(model, state) {
+  getLogger().warn("invalid state '" + state + "' for the model '" + model + "'");
+}
+
+
 /* exports */
 
 
@@ -1291,3 +1302,12 @@ exports.invalidSchemaProperty = invalidSchemaProperty;
  * @param {String} obj definition of a property
  */
 exports.invalidPropertyFormat = invalidPropertyFormat;
+
+
+/**
+ * Invalid state
+ * @method invalidState
+ * @param {String} model name of the model
+ * @param {String} state invalid state
+ */
+exports.invalidState = invalidState;
