@@ -496,7 +496,11 @@ function validParamNumbers(className, state, action) {
       modelNumberParam = [2, 2];
       break;
     case isProperty:
-      modelNumberParam = [1, 1];
+      if ($metamodel.getModelPathType(className, state) === 'array') {
+        modelNumberParam = [2, 2];
+      } else {
+        modelNumberParam = [1, 1];
+      }
       break;
     case isLink:
       modelNumberParam = [1, 1];
@@ -565,7 +569,16 @@ function checkParams(params) {
       } else {
         paramsType = [$metamodel.getModel(componentClassName)[methodName].type];
       }
-      paramsNumber = [1, 1];
+      if ($metamodel.getModelPathType(componentClassName, methodName) === 'array') { 
+        if (args && args[1] && args[1] === 'reset') {
+          paramsType = [['any'], 'string'];
+        } else {
+          paramsType = ['any', 'string'];
+        }
+        paramsNumber = [2, 2];
+      } else {
+        paramsNumber = [1, 1];
+      }
       break;
     case isLink:
       paramsType = [$metamodel.getModel(componentClassName)[methodName].type];

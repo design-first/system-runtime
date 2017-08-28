@@ -744,7 +744,7 @@ function addProperties(model, Class, classId) {
       return result;
     }
 
-    if (Array.isArray(propertyType)) { // in case of array, return a sub array
+    if (Array.isArray(propertyType) || propertyType === 'array') { // in case of array, return a sub array
       body = function body(position, value) {
         var search = [],
           component = null,
@@ -762,7 +762,7 @@ function addProperties(model, Class, classId) {
               'propertyName': propertyName,
               'readOnly': propertyReadOnly,
               'classId': classId,
-              'type': propertyType[0],
+              'type': propertyType === 'array' ? 'any' : propertyType[0],
               'arr': $db.store[classId][this.id()][propertyName]
             });
 
