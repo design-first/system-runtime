@@ -995,105 +995,220 @@ function addStructure(path, name, model, id) {
     propertyType = prop.type;
     propertyReadOnly = prop.readOnly;
 
-    body = function body(value) {
-      var search = [],
-        component = null,
-        propertyValue = null,
-        parentPath = '',
-        fullPath = '';
+    if (propertyType === 'array') { // in case of array, return a sub array
+      body = function body(position, value) {
+        var search = [],
+          component = null,
+          runtimeArr = null,
+          val = null,
+          realVal = null,
+          i = 0,
+          length = 0,
+          parentPath = '',
+          fullPath = '';
 
-      if (path) {
-        parentPath = parentPath + '.' + name;
-      } else {
-        parentPath = name;
-      }
-      fullPath = parentPath + '.' + propertyName;
+        function _isValidCollection(coll, type) {
 
-      if (typeof value === 'undefined') {
-        component = $db.store[model][id];
-        if (component) {
-          switch (true) {
-            case propertyType.indexOf('@') !== -1:
-              propertyValue = get(getStructureValue(model, id, fullPath));
-              break;
-            case propertyType === 'date':
-              propertyValue = new Date(getStructureValue(model, id, fullPath));
-              break;
-            case propertyType === 'array':
-              propertyValue = new _Array({
-                'id': id,
-                'propertyName': fullPath,
-                'readOnly': propertyReadOnly,
-                'classId': model,
-                'type': 'any',
-                'arr': getStructureValue(model, id, fullPath)
-              });
-              break;
-            case $metamodel.isStructure(propertyName, model):
-              propertyValue = addStructure(parentPath, propertyName, model, id);
-              break;
-            default:
-              propertyValue = getStructureValue(model, id, fullPath);
-              break;
-          }
-          if (propertyValue === undefined && prop.default !== undefined) {
-            propertyValue = prop.default;
-          }
-          return propertyValue;
-        } else {
-          $log.destroyedComponentCall(fullPath, id);
+          var result = true;
+          coll.forEach(function (val) {
+            if (!$metamodel.isValidType(val, type)) {
+              result = result && false;
+            }
+          });
+
+          return true;
         }
-      } else {
-        if (propertyReadOnly) {
-          $log.readOnlyProperty(id, model, fullPath);
+
+        if (path) {
+          parentPath = parentPath + '.' + name;
         } else {
-          if ($metamodel.isValidType(value, propertyType)) {
-            search = $db[model].find({ '_id': id });
-            if (search.length) {
-              component = search[0];
+          parentPath = name;
+        }
+        fullPath = parentPath + '.' + propertyName;
 
-              switch (true) {
-                case propertyType.indexOf('@') !== -1:
-                  setStructureValue(model, id, fullPath, value.id());
-                  break;
-                case propertyType === 'date':
-                  setStructureValue(model, id, fullPath, value.toISOString());
-                  break;
-                default:
-                  setStructureValue(model, id, fullPath, value);
-                  break;
+        if (typeof value === 'undefined') {
+          if (typeof position === 'undefined') {
+
+            runtimeArr = new _Array({
+              'id': id,
+              'propertyName': fullPath,
+              'readOnly': propertyReadOnly,
+              'classId': model,
+              'type': 'any',
+              'arr': getStructureValue(model, id, fullPath)
+            });
+
+            return runtimeArr;
+          } else {
+            if (Array.isArray(position)) { // we replace the collection
+              if (_isValidCollection(position, 'any')) {
+                search = $db[model].find({
+                  '_id': id
+                });
+                if (search.length) {
+
+                  setStructureValue(model, id, fullPath, position);
+
+                  $workflow.state({
+                    'component': id,
+                    'state': fullPath,
+                    'data': [position, 'reset']
+                  });
+
+                  if ($helper.isRuntime()) {
+                    $helper.getRuntime().require('db').update({
+                      'collection': model,
+                      'id': id,
+                      'field': fullPath,
+                      'value': position
+                    });
+                  }
+                }
+              } else {
+                $log.invalidPropertyName(id, this.constructor.name, propertyName, position, propertyType);
               }
+            } else {
+              if (typeof position === 'number') {
+                val = getStructureValue(model, id, fullPath)[position];
+                return val;
+              } else {
+                $log.invalidPropertyName(id, this.constructor.name, propertyName, position, 'number');
+              }
+            }
+          }
+        } else {
+          if (propertyReadOnly) {
+            $log.readOnlyProperty(id, this.constructor.name, propertyName);
+          } else {
+            if ($metamodel.isValidType(value, 'any')) {
+              search = $db[model].find({
+                '_id': id
+              });
+              if (search.length) {
 
-              if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                $helper.getRuntime().require('db').update({
-                  'collection': model,
-                  'id': id,
-                  'field': fullPath,
-                  'value': value
+                var arr = getStructureValue(model, id, fullPath);
+                if (typeof arr === 'undefined') {
+                  arr = [];
+                }
+                arr[position] = value;
+                setStructureValue(model, id, fullPath, arr);
+
+                if ($helper.isRuntime()) {
+                  $helper.getRuntime().require('db').update({
+                    'collection': model,
+                    'id': id,
+                    'field': fullPath,
+                    'value': arr
+                  });
+                }
+
+                $workflow.state({
+                  'component': id,
+                  'state': fullPath,
+                  'data': [arr, 'add']
                 });
               }
-
-              // case of _Behavior
-              if (model === '_Behavior') {
-                $behavior.removeFromMemory(id);
-              }
-
-              $workflow.state({
-                'component': id,
-                'state': fullPath,
-                'data': [value]
-              });
+            } else {
+              $log.invalidPropertyName(id, this.constructor.name, propertyName, value, propertyType);
             }
-          } else {
-            $log.invalidPropertyName(id, model, fullPath, value, propertyType);
           }
         }
-      }
-    };
+      };
 
-    /* jshint -W054 */
-    sructure[propertyName] = new Function('__body', 'return function ' + propertyName + ' (value) { return __body.call(this,value) };')(body);
-    /* jshint +W054 */
+      /* jshint -W054 */
+      sructure[propertyName] = new Function('__body', 'return function ' + propertyName + ' (position,value) { return __body.call(this, position, value) };')(body);
+      /* jshint +W054 */
+    } else {
+      body = function body(value) {
+        var search = [],
+          component = null,
+          propertyValue = null,
+          parentPath = '',
+          fullPath = '';
+
+        if (path) {
+          parentPath = parentPath + '.' + name;
+        } else {
+          parentPath = name;
+        }
+        fullPath = parentPath + '.' + propertyName;
+
+        if (typeof value === 'undefined') {
+          component = $db.store[model][id];
+          if (component) {
+            switch (true) {
+              case propertyType.indexOf('@') !== -1:
+                propertyValue = get(getStructureValue(model, id, fullPath));
+                break;
+              case propertyType === 'date':
+                propertyValue = new Date(getStructureValue(model, id, fullPath));
+                break;
+              case $metamodel.isStructure(propertyName, model):
+                propertyValue = addStructure(parentPath, propertyName, model, id);
+                break;
+              default:
+                propertyValue = getStructureValue(model, id, fullPath);
+                break;
+            }
+            if (propertyValue === undefined && prop.default !== undefined) {
+              propertyValue = prop.default;
+            }
+            return propertyValue;
+          } else {
+            $log.destroyedComponentCall(fullPath, id);
+          }
+        } else {
+          if (propertyReadOnly) {
+            $log.readOnlyProperty(id, model, fullPath);
+          } else {
+            if ($metamodel.isValidType(value, propertyType)) {
+              search = $db[model].find({ '_id': id });
+              if (search.length) {
+                component = search[0];
+
+                switch (true) {
+                  case propertyType.indexOf('@') !== -1:
+                    setStructureValue(model, id, fullPath, value.id());
+                    break;
+                  case propertyType === 'date':
+                    setStructureValue(model, id, fullPath, value.toISOString());
+                    break;
+                  default:
+                    setStructureValue(model, id, fullPath, value);
+                    break;
+                }
+
+                if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
+                  $helper.getRuntime().require('db').update({
+                    'collection': model,
+                    'id': id,
+                    'field': fullPath,
+                    'value': value
+                  });
+                }
+
+                // case of _Behavior
+                if (model === '_Behavior') {
+                  $behavior.removeFromMemory(id);
+                }
+
+                $workflow.state({
+                  'component': id,
+                  'state': fullPath,
+                  'data': [value]
+                });
+              }
+            } else {
+              $log.invalidPropertyName(id, model, fullPath, value, propertyType);
+            }
+          }
+        }
+      };
+      
+      /* jshint -W054 */
+      sructure[propertyName] = new Function('__body', 'return function ' + propertyName + ' (value) { return __body.call(this,value) };')(body);
+      /* jshint +W054 */
+    }
   });
 
   return sructure;
