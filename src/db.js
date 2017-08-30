@@ -701,12 +701,16 @@ DatabaseCollection.prototype.update = function (query, update, options) {
       }
 
       for (attributeName in update) {
-        if (typeof docs[i][attributeName] !== 'undefined') {
+        if (typeof docs[i][attributeName.split('.')[0]] !== 'undefined') {
           if (this.name !== '_Schema' && this.name !== '_Model' && this.name !== '_GeneratedModel') {
             // check type
             type = '';
             if (attributeName.indexOf('_') !== 0) {
-              type = schema[attributeName].type;
+              if (attributeName.indexOf('.') !== -1) {
+                type = $metamodel.getModelPathType(this.name, attributeName);
+              } else {
+                type = schema[attributeName].type;
+              }
             } else {
               if ($metamodel.getMetaDef()[attributeName]) {
                 type = $metamodel.getMetaDef()[attributeName].type;
@@ -727,13 +731,21 @@ DatabaseCollection.prototype.update = function (query, update, options) {
                     'value': update[attributeName]
                   });
                 }
-                $workflow.state({
-                  'component': docs[i]._id,
-                  'state': attributeName,
-                  'data': [update[attributeName]]
-                });
+                if (type === 'array') {
+                  $workflow.state({
+                    'component': docs[i]._id,
+                    'state': attributeName,
+                    'data': [update[attributeName], 'reset']
+                  });
+                } else {
+                  $workflow.state({
+                    'component': docs[i]._id,
+                    'state': attributeName,
+                    'data': [update[attributeName]]
+                  });
+                }
               } else {
-                $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], schema[attributeName].type);
+                $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], type);
               }
             } else {
               $log.unknownPropertyOnDbUpdate(this.name, attributeName, docs[i]._id);

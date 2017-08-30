@@ -886,6 +886,9 @@ function addProperties(model, Class, classId) {
               case propertyType === 'date':
                 propertyValue = new Date(component[propertyName]);
                 break;
+              case propertyType === 'json':
+                propertyValue = JSON.parse(JSON.stringify(component[propertyName]));
+                break;
               case propertyType === 'array':
                 propertyValue = new _Array({
                   'id': this.id(),
@@ -1143,6 +1146,9 @@ function addStructure(path, name, model, id) {
               case propertyType === 'date':
                 propertyValue = new Date(getStructureValue(model, id, fullPath));
                 break;
+              case propertyType === 'json':
+                propertyValue = JSON.parse(JSON.stringify(getStructureValue(model, id, fullPath)));
+                break;
               case $metamodel.isStructure(propertyName, model):
                 propertyValue = addStructure(parentPath, propertyName, model, id);
                 break;
@@ -1204,7 +1210,7 @@ function addStructure(path, name, model, id) {
           }
         }
       };
-      
+
       /* jshint -W054 */
       sructure[propertyName] = new Function('__body', 'return function ' + propertyName + ' (value) { return __body.call(this,value) };')(body);
       /* jshint +W054 */
