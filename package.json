@@ -1,6 +1,6 @@
 {
   "name": "system-runtime",
-  "version": "2.0.0-rc.2",
+  "version": "2.0.0-rc.3",
   "description": "A JavaScript library that runs systems",
   "homepage": "https://designfirst.io/systemruntime/",
   "keywords": [
@@ -56,7 +56,7 @@
     "grunt-json-merge": "^0.2.2",
     "grunt-karma": "^2.0.0",
     "istanbul": "^0.4.5",
-    "karma": "^1.7.0",
+    "karma": "^1.7.1",
     "karma-coverage": "^1.1.1",
     "karma-firefox-launcher": "^1.0.1",
     "karma-jasmine": "^1.1.0",
