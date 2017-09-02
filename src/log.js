@@ -794,6 +794,17 @@ function invalidState(model, state) {
 }
 
 
+/*
+ * Invoke a method class without a context
+ * @method unknownContext
+ * @param {String} className name of the class
+ * @param {String} methodName name of the method
+ */
+function unknownContext(className, methodName) {
+  getLogger().warn("invoke the behavior '" + methodName + "' on the class '" + className + "' without a valid context");
+}
+
+
 /* exports */
 
 
@@ -1311,3 +1322,11 @@ exports.invalidPropertyFormat = invalidPropertyFormat;
  * @param {String} state invalid state
  */
 exports.invalidState = invalidState;
+
+/**
+* Invoke a method class without a context
+* @method unknownContext
+* @param {String} className name of the class
+* @param {String} methodName name of the method
+*/
+exports.unknownContext = unknownContext;

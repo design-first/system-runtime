@@ -699,6 +699,7 @@ function state(params) {
   params.component = params.component || '';
   params.state = params.state || '';
   params.data = params.data || [];
+  params.context = params.context || null;
 
   var component = null,
     currentState = '',
@@ -747,7 +748,7 @@ function state(params) {
         !isLink &&
         !isCollection) {
         action = actions[0];
-        result = callAction(component, params.state, action, params.data, false);
+        result = callAction(params.context || component, params.state, action, params.data, false);
 
         checkResult({
           'component': component,
@@ -760,7 +761,7 @@ function state(params) {
         length = actions.length;
         for (i = 0; i < length; i++) {
           action = actions[i];
-          callAction(component, params.state, action, params.data, true);
+          callAction(params.context || component, params.state, action, params.data, true);
         }
 
         $state.set(component.id(), params.state, params.data);

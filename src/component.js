@@ -868,7 +868,7 @@ function addProperties(model, Class, classId) {
         }
       };
       /* jshint -W054 */
-      Class.prototype[propertyName] = new Function('__body', 'return function ' + propertyName + ' (position,value) { return __body.call(this, position, value) };')(body);
+      Class.prototype[propertyName] = new Function('__body', 'return function ' + propertyName + ' (position, value) { return __body.call(this, position, value) };')(body);
       /* jshint +W054 */
     } else {
       body = function body(value) {
@@ -1119,7 +1119,7 @@ function addStructure(path, name, model, id) {
       };
 
       /* jshint -W054 */
-      sructure[propertyName] = new Function('__body', 'return function ' + propertyName + ' (position,value) { return __body.call(this, position, value) };')(body);
+      sructure[propertyName] = new Function('__body', 'return function ' + propertyName + ' (position, value) { return __body.call(this, position, value) };')(body);
       /* jshint +W054 */
     } else {
       body = function body(value) {
@@ -1235,6 +1235,7 @@ function addMethods(model, Class, classId) {
   methods.forEach(function method(methodName) {
     var paramsName = getParamNames(classId, methodName),
       params = paramsName.join(','),
+      paramsWithContext = '',
       body = function () {
         var result = null;
 
@@ -1245,14 +1246,39 @@ function addMethods(model, Class, classId) {
         });
 
         return result;
+      },
+      bodyWithContext = function () {
+        var result = null,
+          data = Array.prototype.slice.call(arguments);
+
+        data.shift();
+
+        if (arguments[0]) {
+          result = $workflow.state({
+            'component': this.id(),
+            'state': methodName,
+            'data': data,
+            'context': arguments[0]
+          });
+        } else {
+          $log.unknownContext(classId, methodName);
+        }
+
+        return result;
       };
+
     if (params) {
+      paramsName.unshift('context');
+      paramsWithContext = paramsName.join('');
+
       /* jshint -W054 */
       Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' (' + params + ') { return __body.call(this,' + params + ') };')(body);
+      Class[methodName] = new Function('__body', 'return function ' + methodName + ' (' + paramsWithContext + ') { return __body.call(this,' + paramsWithContext + ') };')(bodyWithContext);
       /* jshint +W054 */
     } else {
       /* jshint -W054 */
       Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' () { return __body.call(this) };')(body);
+      Class[methodName] = new Function('__body', 'return function ' + methodName + ' (context) { return __body.call(this, context) };')(bodyWithContext);
       /* jshint +W054 */
     }
   });
@@ -1377,7 +1403,7 @@ function addOn(Class, classId) {
     return behaviorId;
   };
   /* jshint -W054 */
-  Class.prototype.on = new Function('__body', 'return function on (state,handler,useCoreAPI,isCore) { return __body.call(this,state,handler,useCoreAPI,isCore) };')(body);
+  Class.prototype.on = new Function('__body', 'return function on (state, handler, useCoreAPI, isCore) { return __body.call(this,state,handler,useCoreAPI,isCore) };')(body);
   /* jshint +W054 */
 }
 
@@ -1430,7 +1456,7 @@ function addOnClass(Class, classId) {
     return behaviorId;
   };
   /* jshint -W054 */
-  Class.on = new Function('__body', 'return function on (state,handler,useCoreAPI,isCore) { return __body.call(this, state, handler, useCoreAPI,isCore) };')(body);
+  Class.on = new Function('__body', 'return function on (state, handler, useCoreAPI, isCore) { return __body.call(this, state, handler, useCoreAPI,isCore) };')(body);
   /* jshint -W054 */
 }
 
