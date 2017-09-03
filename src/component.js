@@ -1273,12 +1273,16 @@ function addMethods(model, Class, classId) {
 
       /* jshint -W054 */
       Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' (' + params + ') { return __body.call(this,' + params + ') };')(body);
-      Class[methodName] = new Function('__body', 'return function ' + methodName + ' (' + paramsWithContext + ') { return __body.call(this,' + paramsWithContext + ') };')(bodyWithContext);
+      if (methodName !== 'name') {
+        Class[methodName] = new Function('__body', 'return function ' + methodName + ' (' + paramsWithContext + ') { return __body.call(this,' + paramsWithContext + ') };')(bodyWithContext);
+      }
       /* jshint +W054 */
     } else {
       /* jshint -W054 */
       Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' () { return __body.call(this) };')(body);
-      Class[methodName] = new Function('__body', 'return function ' + methodName + ' (context) { return __body.call(this, context) };')(bodyWithContext);
+      if (methodName !== 'name') {
+        Class[methodName] = new Function('__body', 'return function ' + methodName + ' (context) { return __body.call(this, context) };')(bodyWithContext);
+      }
       /* jshint +W054 */
     }
   });
