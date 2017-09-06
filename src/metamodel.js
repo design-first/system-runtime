@@ -1737,7 +1737,7 @@ function isValidObject(object, schema, strict, cleanRef) {
   }
 
   if (hasType(cleanRef, 'undefined')) {
-    strict = false;
+    cleanRef = false;
   }
 
   /*
@@ -1753,7 +1753,7 @@ function isValidObject(object, schema, strict, cleanRef) {
     if (realType) {
       switch (true) {
         case !hasType(realType.schema, 'undefined'):
-          isValid = isValidObject(field, realType.schema);
+          isValid = isValidObject(field, realType.schema, strict, cleanRef);
           break;
         case !hasType(realType.value, 'undefined'):
           isValid = isValidEnum(field, realType);
@@ -1826,7 +1826,7 @@ function isValidObject(object, schema, strict, cleanRef) {
         break;
       case 'string':
         if (isCustomType(realType)) {
-          isValid = isValidObject(field, typeSchema);
+          isValid = isValidObject(field, typeSchema, strict, cleanRef);
         } else {
           if (typeSchema === 'array') {
             if (getRealType(field) !== 'array') {
@@ -1907,6 +1907,11 @@ function isValidObject(object, schema, strict, cleanRef) {
     return isValid;
   }
 
+  // check if object
+  if (!hasType(object, 'object')) {
+    result = false;
+    $log.invalidType(object, 'object');
+  }
 
   // type
   for (fieldName in object) {
@@ -1952,7 +1957,7 @@ function isValidObject(object, schema, strict, cleanRef) {
   for (fieldName in schema) {
     field = schema[fieldName];
     mandatory = field.mandatory;
-    if (hasType(object[fieldName], 'undefined')) {
+    if (object && hasType(object[fieldName], 'undefined')) {
       if (mandatory === true) {
         $log.missingProperty(fieldName);
         result = false;
