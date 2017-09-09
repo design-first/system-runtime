@@ -640,7 +640,7 @@ function cyclicDependency(name) {
  * @param {String} type typeName of the type
  */
 function invalidEnumType(value, typeName, type) {
-  if (type !== typeof value) {
+  if (typeof type !== 'undefined' && type !== typeof value) {
     getLogger().warn("invalid type for enumerated type '" + typeName + "': expected type '" + type + "' instead of type '" + typeof value + "'");
   } else {
     getLogger().warn("invalid type for enumerated type '" + typeName + "'");

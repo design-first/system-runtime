@@ -769,15 +769,15 @@ function addProperties(model, Class, classId) {
             return runtimeArr;
           } else {
             if (Array.isArray(position)) { // we replace the collection
-              if (_isValidCollection(position, propertyType[0])) {
+              if (_isValidCollection(position, propertyType === 'array' ? 'any' : propertyType[0])) {
                 search = $db[classId].find({
                   '_id': this.id()
                 });
                 if (search.length) {
 
                   component = search[0];
-                  realVal = _getRealCollection(position, propertyType[0]);
-                 
+                  realVal = _getRealCollection(position, propertyType === 'array' ? 'any' : propertyType[0]);
+
                   $workflow.state({
                     'component': this.id(),
                     'state': propertyName,
@@ -802,7 +802,7 @@ function addProperties(model, Class, classId) {
               if (typeof position === 'number') {
                 val = $db.store[classId][this.id()][propertyName][position];
                 if (val) {
-                  if ($metamodel.isClassName(propertyType[0])) {
+                  if ($metamodel.isClassName(propertyType === 'array' ? 'array' : propertyType[0])) {
                     realVal = $helper.getRuntime().require(val);
                   } else {
                     realVal = val;
@@ -819,15 +819,15 @@ function addProperties(model, Class, classId) {
             $log.readOnlyProperty(this.id(), this.constructor.name, propertyName);
           } else {
             if (
-              $metamodel.isValidType(value, propertyType[0]) ||
-              ($metamodel.inheritFrom(value.constructor.name, propertyType[0].replace('@', '')) && $metamodel.isClassName(propertyType[0]))
+              $metamodel.isValidType(value, propertyType === 'array' ? 'any' : propertyType[0]) ||
+              ($metamodel.inheritFrom(value.constructor.name, propertyType === 'array' ? 'array' : propertyType[0].replace('@', '')) && $metamodel.isClassName(propertyType === 'array' ? 'array' : propertyType[0]))
             ) {
               search = $db[classId].find({
                 '_id': this.id()
               });
               if (search.length) {
 
-                if ($metamodel.isClassName(propertyType[0])) {
+                if ($metamodel.isClassName(propertyType === 'array' ? 'array' : propertyType[0])) {
                   switch (true) {
                     case typeof value === 'string':
                       realVal = value;

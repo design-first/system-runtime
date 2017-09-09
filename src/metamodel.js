@@ -1514,7 +1514,11 @@ function isValidType(value, typeName) {
       result = checkCustomSchema(value, typeName);
 
       if (!result) {
-        $log.invalidEnumType(value, typeName, store.type[typeName].type);
+        if (store.type[typeName]) {
+          $log.invalidEnumType(value, typeName, store.type[typeName].type);
+        } else {
+          $log.invalidEnumType(value, typeName);
+        }
       }
 
       if (result) {
