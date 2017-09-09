@@ -140,7 +140,7 @@ function generateModels() {
           break;
         case schema[att] === 'link':
           model[att] = {
-            'type': '@_Component',
+            'type': '_Component',
             'readOnly': false,
             'mandatory': false,
             'default': '',
@@ -171,7 +171,7 @@ function generateModels() {
           break;
         case schema[att] === 'collection':
           model[att] = {
-            'type': ['@_Component'],
+            'type': ['_Component'],
             'readOnly': false,
             'mandatory': false,
             'default': [],
@@ -857,14 +857,26 @@ function createClassInfo() {
 
 
 /* 
- * Get the real name of the reference object / type.
- * @method getReference
+ * Get the real name of the referenced class.
+ * @method getRealClassName
  * @param {String} value
  * @return {String} real name
  * @private
  */
-function getReference(value) {
+function getRealClassName(value) {
   return value.replace('@', '').trim();
+}
+
+
+/* 
+ * Get the real name of the referenced type.
+ * @method getRealTypeName
+ * @param {String} value
+ * @return {String} real name
+ * @private
+ */
+function getRealTypeName(value) {
+  return value.replace('{', '').replace('}', '').trim();
 }
 
 
@@ -878,21 +890,20 @@ function getReference(value) {
 function isCustomType(value) {
   var result = hasType(value, 'string') &&
     defaultTypes.indexOf(value) === -1 &&
-    !isReference(value);
+    !isClassName(value);
 
   return result;
 }
 
 
 /*
- * Is the value a reference.
- * @method isReference
+ * Is the value reference a type value.
+ * @method isTypeReference
  * @param {String} value
  * @return {Boolean}
- * @private
  */
-function isReference(value) {
-  return value.indexOf('@') !== -1;
+function isTypeReference(value) {
+  return value.indexOf('{') !== -1;
 }
 
 
@@ -1438,9 +1449,14 @@ function isValidType(value, typeName) {
     return result;
   }
 
-  function _checkReference(value, typeName) {
+  /*
+  * Check if an object is compliant with a class.
+  * @return {Boolean} the object is compliant with the type
+  * @private
+  */
+  function _checkClassName(value, typeName) {
     var isValid = true;
-    var typeRef = getReference(typeName);
+    var typeRef = getRealClassName(typeName);
     var component = value;
 
     if (value !== '' && value !== null) {
@@ -1478,8 +1494,8 @@ function isValidType(value, typeName) {
             case isCustomType(typeName[0]):
               isValid = checkCustomSchema(value[i], typeName[0]);
               break;
-            case isReference(typeName[0]):
-              isValid = _checkReference(value[i], typeName[0]);
+            case isClassName(typeName[0]):
+              isValid = _checkClassName(value[i], typeName[0]);
               break;
             default:
               isValid = hasType(value[i], typeName[0]);
@@ -1505,8 +1521,8 @@ function isValidType(value, typeName) {
         result = _isValidCustomType(value, typeName);
       }
       break;
-    case isReference(typeName):
-      result = _checkReference(value, typeName);
+    case isClassName(typeName):
+      result = _checkClassName(value, typeName);
       break;
     default:
       result = _isValidType(value, typeName);
@@ -1541,8 +1557,8 @@ function isValidEnum(value, schema) {
     return result;
   }
 
-  if (isReference(schema.type)) {
-    result = _isInstanceOf($component.get(value), getReference(schema.type)) && schema.value.indexOf(value) !== -1;
+  if (isClassName(schema.type)) {
+    result = _isInstanceOf($component.get(value), getRealClassName(schema.type)) && schema.value.indexOf(value) !== -1;
     if (!result) {
       $log.invalidEnumValue(value, schema.type);
     }
@@ -1579,15 +1595,15 @@ function isValidSchema(object, schema) {
     i = 0;
 
   /*
-   * Check if a field is compliant with the type of the reference.
-   * @return {Boolean} the field is compliant with the type of the reference
+   * Check if a field is compliant with the type of the class name.
+   * @return {Boolean} the field is compliant with the type of the class
    * @private
    */
-  function _isValidReference() {
+  function _isValidClassName() {
     var isValid = true,
       enumValue = [];
 
-    typeRef = getReference(typeSchema);
+    typeRef = getClassName(typeSchema);
     typeRef = object[typeRef];
     if (isCustomType(typeRef)) {
       if (store.type[typeRef]) {
@@ -1610,7 +1626,53 @@ function isValidSchema(object, schema) {
       if (typeRef === 'array') {
         isValid = Array.isArray(field);
       } else {
-        if (isReference(typeRef)) {
+        if (isClassName(typeRef)) {
+          isValid = hasType(field, 'object') || hasType(field, 'string');
+          // TODO maybe have a more strict validation than just a type checking
+        } else {
+          isValid = hasType(field, typeRef);
+        }
+      }
+    }
+    if (!isValid) {
+      $log.invalidPropertyType(fieldName, typeRef, field);
+    }
+    return isValid;
+  }
+
+  /*
+   * Check if a field is compliant with the type of the references type.
+   * @return {Boolean} the field is compliant with the type of the references type
+   * @private
+   */
+  function _isValidTypeReference() {
+    var isValid = true,
+      enumValue = [];
+
+    typeRef = getRealTypeName(typeSchema);
+    typeRef = object[typeRef];
+    if (isCustomType(typeRef)) {
+      if (store.type[typeRef]) {
+        if (store.type[typeRef].schema) {
+          isValid = isValidSchema(field, store.type[typeRef].schema);
+        } else {
+          // check type
+          isValid = hasType(field, store.type[typeRef].type);
+
+          // check value
+          enumValue = store.type[typeRef].value;
+          if (enumValue) {
+            isValid = isValidEnumValue(field, enumValue);
+          }
+        }
+      } else {
+        isValid = false;
+      }
+    } else {
+      if (typeRef === 'array') {
+        isValid = Array.isArray(field);
+      } else {
+        if (isClassName(typeRef)) {
           isValid = hasType(field, 'object') || hasType(field, 'string');
           // TODO maybe have a more strict validation than just a type checking
         } else {
@@ -1679,8 +1741,11 @@ function isValidSchema(object, schema) {
       }
 
       switch (true) {
-        case isReference(typeSchema):
-          result = _isValidReference();
+        case isClassName(typeSchema):
+          result = _isValidClassName();
+          break;
+        case isTypeReference(typeSchema):
+          result = _isValidTypeReference();
           break;
         default:
           result = _isValidType();
@@ -1769,16 +1834,16 @@ function isValidObject(object, schema, strict, cleanRef) {
   }
 
   /*
-   * Check if a field is compliant with the type of the reference.
-   * @return {Boolean} the field is compliant with the type of the reference
+   * Check if a field is compliant with the type of the class name.
+   * @return {Boolean} the field is compliant with the type of the class name
    * @private
    */
-  function _isValidReference(field, typeSchema) {
+  function _isValidClassName(field, typeSchema) {
     var isValid = true,
       comp = null,
       isComponent = false;
 
-    typeRef = getReference(typeSchema);
+    typeRef = getRealClassName(typeSchema);
     if (field && field.id) {
       comp = field;
       isComponent = true;
@@ -1860,7 +1925,7 @@ function isValidObject(object, schema, strict, cleanRef) {
             if (isCustomType(typeArray)) {
               isValid = _isValidCustomType(field[i], typeArray);
             } else {
-              if (!isReference(typeArray)) {
+              if (!isClassName(typeArray)) {
                 if (getRealType(field[i]) !== typeArray && typeArray !== 'any') {
                   $log.invalidPropertyType(field[i], typeArray, field[i]);
                   isValid = false;
@@ -1870,19 +1935,19 @@ function isValidObject(object, schema, strict, cleanRef) {
                 if (getRealType(field[i]) === 'string') {
                   // Case of an import of a system
                   if ($component.get(field[i])) {
-                    if (!inheritFrom(getClassName($component.get(field[i])), getReference(typeArray))) {
-                      $log.invalidClassName(JSON.stringify(field[i]), getReference(typeArray), getClassName($component.get(field[i])));
+                    if (!inheritFrom(getClassName($component.get(field[i])), getRealClassName(typeArray))) {
+                      $log.invalidClassName(JSON.stringify(field[i]), getRealClassName(typeArray), getClassName($component.get(field[i])));
                       isValid = false;
                       break;
                     }
                   } else {
                     if (field[i] !== '') {
-                      $log.canNotYetValidate(field[i], getReference(typeArray));
+                      $log.canNotYetValidate(field[i], getRealClassName(typeArray));
                     }
                   }
                 } else {
-                  if (!inheritFrom(getClassName(field[i]), getReference(typeArray))) {
-                    $log.invalidClassName(JSON.stringify(field[i]), getReference(typeArray), getClassName(field[i]));
+                  if (!inheritFrom(getClassName(field[i]), getRealClassName(typeArray))) {
+                    $log.invalidClassName(JSON.stringify(field[i]), getRealClassName(typeArray), getClassName(field[i]));
                     isValid = false;
                     break;
                   } else {
@@ -1944,8 +2009,8 @@ function isValidObject(object, schema, strict, cleanRef) {
       case isCustomType(typeSchema):
         result = _isValidCustomType(field, typeSchema);
         break;
-      case isReference(typeSchema):
-        result = _isValidReference(field, typeSchema);
+      case isClassName(typeSchema):
+        result = _isValidClassName(field, typeSchema);
         break;
       default:
         result = _isValidType(field, typeSchema);
@@ -2215,6 +2280,28 @@ function inheritFrom(name, parentName) {
   return result;
 }
 
+/*
+ * Is the value a class name.
+ * @method isClassName
+ * @param {String} value
+ * @return {Boolean} true if the name is a class name
+ */
+function isClassName(value) {
+  var name = '',
+    result = hasType(value, 'string');
+
+  if (result) {
+    if (Object.keys(store.generatedModels).length > 0) {
+      name = value.replace('@', '');
+      result = typeof store.generatedModels[name] !== 'undefined';
+    } else {
+      result = false;
+    }
+  }
+
+  return result;
+}
+
 
 /* exports */
 
@@ -2463,3 +2550,12 @@ exports.getModelPathType = getModelPathType;
  * @return {Boolean} true if the path is valid for the model
  */
 exports.isValidModelPath = isValidModelPath;
+
+
+/**
+ * Is the value a class name.
+ * @method isClassName
+ * @param {String} value
+ * @return {Boolean} true if tne name is a class name
+ */
+exports.isClassName = isClassName;

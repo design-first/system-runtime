@@ -24,7 +24,7 @@ describe('a component', function () {
       '_name': 'Person',
       '_inherit': ['_Component'],
       'children': {
-        'type': ['@Person'],
+        'type': ['Person'],
         'readOnly': false,
         'mandatory': false,
         'default': []
@@ -42,7 +42,7 @@ describe('a component', function () {
         'default': ''
       },
       'father': {
-        'type': '@Person',
+        'type': 'Person',
         'readOnly': false,
         'mandatory': false,
         'default': {}

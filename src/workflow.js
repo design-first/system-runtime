@@ -301,7 +301,7 @@ function checkResult(params) {
           $log.invalidResultType(component.id(), component.constructor.name, methodName, returnType, null);
         }
         break;
-      case returnType.indexOf('@') !== -1:
+      case $metamodel.isClassName(returnType):
         if (methodResult.constructor) {
           if (methodResult.constructor.name === 'Function') {
             typeofMethodResult = methodResult.name;
@@ -736,7 +736,7 @@ function state(params) {
   }
 
   if (actions.length) {
-
+    
     if (checkParams({
       'component': component,
       'methodName': params.state,

@@ -198,7 +198,7 @@
           "mandatory": true
         },
         "default": {
-          "type": "@type",
+          "type": "{type}",
           "mandatory": true
         },
         "description": {
@@ -299,7 +299,7 @@
           "mandatory": false
         },
         "default": {
-          "type": "@type",
+          "type": "{type}",
           "mandatory": false
         }
       },
@@ -323,7 +323,7 @@
           "mandatory": true
         },
         "default": {
-          "type": "@type",
+          "type": "{type}",
           "mandatory": true
         },
         "description": {

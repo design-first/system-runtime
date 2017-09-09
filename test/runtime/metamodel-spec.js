@@ -149,7 +149,7 @@ describe('a metamodel instance', function () {
         }
       },
       'father': {
-        'type': '@Person',
+        'type': 'Person',
         'readOnly': false,
         'mandatory': false,
         'default': {}
@@ -201,7 +201,7 @@ describe('a metamodel instance', function () {
         'default': 'male'
       },
       'children': {
-        'type': ['@Person'],
+        'type': ['Person'],
         'readOnly': true,
         'mandatory': false,
         'default': []
@@ -227,7 +227,7 @@ describe('a metamodel instance', function () {
         }
       },
       'father': {
-        'type': '@Person',
+        'type': 'Person',
         'readOnly': false,
         'mandatory': false,
         'default': {}
@@ -286,7 +286,7 @@ describe('a metamodel instance', function () {
         'default': 'male'
       },
       'children': {
-        'type': ['@Person'],
+        'type': ['Person'],
         'readOnly': true,
         'mandatory': false,
         'default': []
@@ -304,7 +304,7 @@ describe('a metamodel instance', function () {
         'default': ''
       },
       'father': {
-        'type': '@Person',
+        'type': 'Person',
         'readOnly': false,
         'mandatory': false,
         'default': {}
@@ -318,7 +318,7 @@ describe('a metamodel instance', function () {
         }
       },
       'son': {
-        'type': '@Person',
+        'type': 'Person',
         'readOnly': false,
         'mandatory': false,
         'default': {}

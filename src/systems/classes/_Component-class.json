@@ -99,7 +99,7 @@
         "params": []
       },
       "classInfo": {
-        "type": "@_ClassInfo",
+        "type": "_ClassInfo",
         "readOnly": false,
         "mandatory": false,
         "default": {}

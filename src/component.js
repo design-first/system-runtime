@@ -91,7 +91,7 @@ function _Array(conf) {
 
   // init
   arrDb.forEach(function (val) {
-    if (type.indexOf('@') !== -1) {
+    if ($metamodel.isClassName(type)) {
       arr.push($helper.getRuntime().require(val));
     } else {
       arr.push(val);
@@ -106,7 +106,7 @@ function _Array(conf) {
 
     if (!isReadOnly) {
 
-      isClass = type.indexOf('@') !== -1;
+      isClass = $metamodel.isClassName(type);
 
       if (isClass) {
         if (val && $metamodel.inheritFrom(val.constructor.name, type.replace('@', ''))) {
@@ -222,7 +222,7 @@ function _Array(conf) {
           });
         }
 
-        isClass = type.indexOf('@') !== -1;
+        isClass = $metamodel.isClassName(type);
 
         if (isClass) {
           result = store[val];
@@ -360,7 +360,7 @@ function _Array(conf) {
       length = result.length;
       for (i = 0; i < length; i++) {
 
-        isClass = type.indexOf('@') !== -1;
+        isClass = $metamodel.isClassName(type);
         if (isClass) {
           data = store[result[i]];
         } else {
@@ -711,7 +711,7 @@ function addProperties(model, Class, classId) {
         if (
           !(
             $metamodel.isValidType(val, type) &&
-            ($metamodel.inheritFrom(val.constructor.name, type.replace('@', '')) && (type.indexOf('@') !== -1)))
+            ($metamodel.inheritFrom(val.constructor.name, type.replace('@', '')) && $metamodel.isClassName(type)))
         ) {
           result = result && false;
         }
@@ -724,7 +724,7 @@ function addProperties(model, Class, classId) {
       var result = [];
 
       coll.forEach(function (val) {
-        if (type[0].indexOf('@') !== -1) {
+        if ($metamodel.isClassName(type)) {
           switch (true) {
             case typeof val === 'string':
               result.push(val);
@@ -777,7 +777,7 @@ function addProperties(model, Class, classId) {
 
                   component = search[0];
                   realVal = _getRealCollection(position, propertyType[0]);
-
+                 
                   $workflow.state({
                     'component': this.id(),
                     'state': propertyName,
@@ -802,7 +802,7 @@ function addProperties(model, Class, classId) {
               if (typeof position === 'number') {
                 val = $db.store[classId][this.id()][propertyName][position];
                 if (val) {
-                  if (propertyType[0].indexOf('@') !== -1) {
+                  if ($metamodel.isClassName(propertyType[0])) {
                     realVal = $helper.getRuntime().require(val);
                   } else {
                     realVal = val;
@@ -820,14 +820,14 @@ function addProperties(model, Class, classId) {
           } else {
             if (
               $metamodel.isValidType(value, propertyType[0]) ||
-              ($metamodel.inheritFrom(value.constructor.name, propertyType[0].replace('@', '')) && (propertyType[0].indexOf('@') !== -1))
+              ($metamodel.inheritFrom(value.constructor.name, propertyType[0].replace('@', '')) && $metamodel.isClassName(propertyType[0]))
             ) {
               search = $db[classId].find({
                 '_id': this.id()
               });
               if (search.length) {
 
-                if (propertyType[0].indexOf('@') !== -1) {
+                if ($metamodel.isClassName(propertyType[0])) {
                   switch (true) {
                     case typeof value === 'string':
                       realVal = value;
@@ -880,7 +880,7 @@ function addProperties(model, Class, classId) {
           component = $db.store[classId][this.id()];
           if (component) {
             switch (true) {
-              case propertyType.indexOf('@') !== -1:
+              case $metamodel.isClassName(propertyType):
                 propertyValue = get(component[propertyName]);
                 break;
               case propertyType === 'date':
@@ -920,7 +920,7 @@ function addProperties(model, Class, classId) {
                 component = search[0];
 
                 switch (true) {
-                  case propertyType.indexOf('@') !== -1:
+                  case $metamodel.isClassName(propertyType):
                     if (value === null) {
                       component[propertyName] = value;
                     } else {
@@ -1140,7 +1140,7 @@ function addStructure(path, name, model, id) {
           component = $db.store[model][id];
           if (component) {
             switch (true) {
-              case propertyType.indexOf('@') !== -1:
+              case $metamodel.isClassName(propertyType):
                 propertyValue = get(getStructureValue(model, id, fullPath));
                 break;
               case propertyType === 'date':
@@ -1173,7 +1173,7 @@ function addStructure(path, name, model, id) {
                 component = search[0];
 
                 switch (true) {
-                  case propertyType.indexOf('@') !== -1:
+                  case $metamodel.isClassName(propertyType):
                     setStructureValue(model, id, fullPath, value.id());
                     break;
                   case propertyType === 'date':
