@@ -53,6 +53,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'clean',
     'json_merge',
     'concat:systemModule',
     'jsbeautifier',

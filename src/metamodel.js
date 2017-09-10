@@ -1609,6 +1609,7 @@ function isValidSchema(object, schema) {
 
     typeRef = getClassName(typeSchema);
     typeRef = object[typeRef];
+    typeRef = typeRef.replace('@', ''); // backward compatibility
     if (isCustomType(typeRef)) {
       if (store.type[typeRef]) {
         if (store.type[typeRef].schema) {
@@ -1655,6 +1656,7 @@ function isValidSchema(object, schema) {
 
     typeRef = getRealTypeName(typeSchema);
     typeRef = object[typeRef];
+    typeRef = typeRef.replace('@', ''); // backward compatibility
     if (isCustomType(typeRef)) {
       if (store.type[typeRef]) {
         if (store.type[typeRef].schema) {
