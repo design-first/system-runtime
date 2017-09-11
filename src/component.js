@@ -98,6 +98,26 @@ function _Array(conf) {
     }
   });
 
+  function _copy() {
+    var i = 0,
+      j = 0,
+      length = arr.length;
+
+    arrDb.forEach(function (val) {
+      if ($metamodel.isClassName(type)) {
+        arr[i] = $helper.getRuntime().require(val);
+      } else {
+        arr[i] = val;
+      }
+      i = i + 1;
+    });
+
+    for (j = i; j < length; j++) {
+      delete arr[j];
+    }
+    arr.length = arrDb.length;
+  }
+
   function _add(val, action, start, deleteCount) {
     var isClass = false,
       i = 0,
@@ -248,7 +268,10 @@ function _Array(conf) {
    * @param {_Component|Object} val
    */
   arr.push = function push(val) {
-    return _add(val, 'push');
+    var result = _add(val, 'push');
+    _copy();
+
+    return result;
   };
 
   /* Override unshift method.
@@ -256,7 +279,10 @@ function _Array(conf) {
    * @param {_Component|Object} val
    */
   arr.unshift = function unshift(val) {
-    return _add(val, 'unshift');
+    var result = _add(val, 'unshift');
+    _copy();
+
+    return result;
   };
 
   /* Override concat method.
@@ -265,7 +291,8 @@ function _Array(conf) {
    */
   arr.concat = function concat(arr) {
     var i = 0,
-      length = 0;
+      length = 0,
+      result = null;
 
     if (Array.isArray(arr)) {
       length = arr.length;
@@ -275,7 +302,11 @@ function _Array(conf) {
     }
 
     conf.arr = arrDb;
-    return new _Array(conf);
+
+    result = new _Array(conf);
+    _copy();
+
+    return result;
   };
 
   /* Override pop method.
@@ -283,7 +314,10 @@ function _Array(conf) {
    * @return {_Component|Object} value
    */
   arr.pop = function pop() {
-    return _remove('pop');
+    var result = _remove('pop');
+    _copy();
+
+    return result;
   };
 
   /* Override shift method.
@@ -291,7 +325,10 @@ function _Array(conf) {
    * @return {_Component|Object} value
    */
   arr.shift = function shift() {
-    return _remove('shift');
+    var result = _remove('shift');
+    _copy();
+
+    return result;
   };
 
   /* Override sort method.
@@ -300,6 +337,8 @@ function _Array(conf) {
    * @return {_Array} the current _Array
    */
   arr.sort = function sort(funct) {
+    var result = null;
+
     arrDb.sort(funct);
 
     if ($helper.isRuntime()) {
@@ -311,7 +350,10 @@ function _Array(conf) {
       });
     }
 
-    return arr;
+    result = arr;
+    _copy();
+
+    return result;
   };
 
   /* Override reverse method.
@@ -329,6 +371,9 @@ function _Array(conf) {
         'value': arrDb
       });
     }
+
+    _copy();
+    
     return arr;
   };
 
@@ -374,6 +419,9 @@ function _Array(conf) {
         });
       }
     }
+
+    _copy();
+
     return result;
   };
 
@@ -383,6 +431,8 @@ function _Array(conf) {
    */
   arr.slice = function slice(begin, end) {
     var result = arrDb.slice(begin, end);
+    _copy();
+
     return result;
   };
 
