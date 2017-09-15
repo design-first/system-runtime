@@ -25,9 +25,7 @@ Use System Runtime APIs to create your application:
 let app = runtime.system('app');
 
 // add code in the start method
-app.on('start', function start() {
-    console.log('Hello world !');
-});
+app.on('start', () => console.log('Hello world !'));
 
 // run the app
 app.start();
@@ -55,7 +53,7 @@ It will return this JSON:
       "_id": "1ea9c1d5f811ae1",
       "component": "154cd18d0210516",
       "state": "start",
-      "action": "function start() {\n    console.log('Hello world !');\n}",
+      "action": "() => console.log('Hello world !')",
       "useCoreAPI": false,
       "core": false
     }
