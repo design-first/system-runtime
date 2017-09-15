@@ -70,11 +70,11 @@ function createFunction(name, func, core, useCoreAPI) {
     funcBody = '',
     header = '',
     action = null,
-    isArrowFunction = false,
+    isArrowFunction = true,
     isOneLine = false;
 
-  if (func.indexOf('function' === 0) && func.indexOf('=>') !== -1) {
-    isArrowFunction = true;
+  if (func.trim().indexOf('function') === 0) {
+    isArrowFunction = false;
   }
 
   if (isArrowFunction) {
