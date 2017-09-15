@@ -69,23 +69,63 @@ function createFunction(name, func, core, useCoreAPI) {
     paramsClean = [],
     funcBody = '',
     header = '',
-    action = null;
+    action = null,
+    isArrowFunction = false,
+    isOneLine = false;
 
-  beginBody = func.indexOf('{');
-  header = func.substring(0, beginBody);
+  if (func.indexOf('function' === 0) && func.indexOf('=>') !== -1) {
+    isArrowFunction = true;
+  }
 
-  funcName = header.split('(')[0].replace('function', '').trim();
-  funcParams = header.split('(')[1].replace(')', '').trim();
+  if (isArrowFunction) {
+    beginBody = func.indexOf('=>');
 
-  params = funcParams.split(',');
-  params.forEach(function (param) {
-    paramsClean.push(param.trim());
-  });
+    header = func.substring(0, beginBody);
+    header = header.replace('=>', '');
 
-  funcBody = func.substring(beginBody + 1);
-  funcBody = funcBody.substring(0, funcBody.lastIndexOf('}')).trim();
+    if (header.indexOf('(') !== -1) {
+      funcParams = header.split('(')[1].replace(')', '').trim();
+    } else {
+      funcParams = header.trim();
+    }
 
-  funcName = funcName || name;
+    params = funcParams.split(',');
+    params.forEach(function (param) {
+      paramsClean.push(param.trim());
+    });
+
+    funcBody = func.substring(beginBody + 2, func.length).trim();
+
+    if (func.indexOf('{') === 0) {
+      funcBody = funcBody.substring(0, funcBody.lastIndexOf('}')).trim();
+    }
+
+    if (funcBody.indexOf('\n') === -1) {
+      isOneLine = true;
+    }
+
+    if (isArrowFunction && isOneLine && funcBody.indexOf('return ') === -1) {
+      funcBody = 'return ' + funcBody;
+    }
+
+    funcName = name;
+  } else {
+    beginBody = func.indexOf('{');
+    header = func.substring(0, beginBody);
+
+    funcName = header.split('(')[0].replace('function', '').trim();
+    funcParams = header.split('(')[1].replace(')', '').trim();
+
+    params = funcParams.split(',');
+    params.forEach(function (param) {
+      paramsClean.push(param.trim());
+    });
+
+    funcBody = func.substring(beginBody + 1);
+    funcBody = funcBody.substring(0, funcBody.lastIndexOf('}')).trim();
+
+    funcName = funcName || name;
+  }
 
   if (params[0] === '') {
     params = [];

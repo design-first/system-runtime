@@ -27,9 +27,7 @@ describe('a MSON schema', function () {
 
     Person.off('getFullName');
 
-    Person.on('getFullName', function () {
-      return this.firstName() + ' ' + this.lastName();
-    });
+    Person.on('getFullName', () => this.firstName() + ' ' + this.lastName() );
 
     var Teacher = runtime.require('Teacher_test');
 
@@ -110,7 +108,7 @@ describe('a MSON schema', function () {
     metamodel.create();
 
     var Test_result = runtime.require('Test_result');
-    Test_result.on('getParent', function () {
+    Test_result.on('getParent', () => {
       return $metamodel.getParents('Z');
     }, true);
 

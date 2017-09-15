@@ -8,7 +8,7 @@
       "_id": "11fc715e2f1a31e",
       "component": "_Metamodel",
       "state": "create",
-      "action": "function create() {\n  $metamodel.create();\n}",
+      "action": "() => {\n  $metamodel.create();\n};",
       "core": true,
       "useCoreAPI": true
     },
@@ -16,7 +16,7 @@
       "_id": "1232f1f107142cf",
       "component": "_Metamodel",
       "state": "model",
-      "action": "function model(model) {\n  return $metamodel.model(model);\n}",
+      "action": "(model) => {\n  return $metamodel.model(model);\n};",
       "core": true,
       "useCoreAPI": true
     },
@@ -24,7 +24,7 @@
       "_id": "1365412f69153d2",
       "component": "_Metamodel",
       "state": "schema",
-      "action": "function schema(schema) {\n  return $metamodel.schema(schema);\n}",
+      "action": "(schema) => {\n  return $metamodel.schema(schema);\n};",
       "core": true,
       "useCoreAPI": true
     },
@@ -32,7 +32,7 @@
       "_id": "194db147fe161a2",
       "component": "_Metamodel",
       "state": "type",
-      "action": "function type(type) {\n  return $metamodel.type(type);\n}",
+      "action": "(type) => {\n  return $metamodel.type(type);\n};",
       "core": true,
       "useCoreAPI": true
     }

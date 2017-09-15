@@ -479,7 +479,14 @@ function validParamNumbers(className, state, action) {
   func = action.toString();
   beginBody = func.indexOf('{');
   header = func.substring(0, beginBody);
-  funcParams = header.split('(')[1].replace(')', '').trim();
+  header = header.replace('=>', '');
+
+  if (header.indexOf('(') !== -1) {
+    funcParams = header.split('(')[1].replace(')', '').trim();
+  } else {
+    funcParams = header.trim();
+  }
+
   params = funcParams.split(',');
   if (params[0] === '') {
     params = [];
@@ -569,7 +576,7 @@ function checkParams(params) {
       } else {
         paramsType = [$metamodel.getModel(componentClassName)[methodName].type];
       }
-      if ($metamodel.getModelPathType(componentClassName, methodName) === 'array') { 
+      if ($metamodel.getModelPathType(componentClassName, methodName) === 'array') {
         if (args && args[1] && args[1] === 'reset') {
           paramsType = [['any'], 'string'];
         } else {
@@ -736,7 +743,7 @@ function state(params) {
   }
 
   if (actions.length) {
-    
+
     if (checkParams({
       'component': component,
       'methodName': params.state,
