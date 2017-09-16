@@ -121,7 +121,7 @@ Clone the repository:
 # Clone the repository
 $ git clone https://github.com/design-first/system-runtime.git
 # Go to the repository
-$ cd system-designer
+$ cd system-runtime
 ```
 
 Once you have cloned the repository:
