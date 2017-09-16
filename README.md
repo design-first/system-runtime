@@ -111,12 +111,39 @@ System Runtime checks at runtime if the signatures of invoked methods are compli
 
 With System Runtime your components really behave the way you designed them.
 
-## Documentation
+## Build
 
-* [Quick Start](https://system-runtime.readme.io/docs/quick-start)
-* [Guide](https://system-runtime.readme.io/docs/installation)
-* [Examples](https://system-runtime.readme.io/docs/a-basic-hello-world)
-* [Build System Runtime](https://system-runtime.readme.io/docs/extend-runtime)
+#### Installation
+
+Clone the repository:
+
+```sh
+# Clone the repository
+$ git clone https://github.com/design-first/system-runtime.git
+# Go to the repository
+$ cd system-designer
+```
+
+Once you have cloned the repository:
+
+```sh
+# install dependencies
+$ npm install
+```	 	
+
+#### Tasks
+
+```sh
+# run tests
+$ npm run test
+# clean
+$ npm run clean
+# build System Runtime (on /dist/)
+# it will generate System Runtime core system (from /src/system/) 
+# and package System Runtime client library
+# it will also run jshint and server/client tests
+$ npm run build
+```	 
 
 ## Community
 
