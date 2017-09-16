@@ -8,7 +8,7 @@
       "_id": "13010167f313f87",
       "component": "_Runtime",
       "state": "system",
-      "action": "(params) => {\n  var RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n\n  if (params) {\n    if (typeof params === 'string') {\n      conf.master = true;\n      conf.name = params;\n    } else {\n      conf = params;\n      conf.master = true;\n    }\n    RuntimeSystem = this.require('_System');\n    system = new RuntimeSystem(conf);\n    system.state('active');\n  } else {\n    result = $db._System.find({\n      'master': true\n    });\n    if (result.length) {\n      systemId = result[0]._id;\n      system = $component.get(systemId);\n    }\n  }\n  return system;\n};",
+      "action": "function system(params) {\n  var RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n\n  if (params) {\n    if (typeof params === 'string') {\n      conf.master = true;\n      conf.name = params;\n    } else {\n      conf = params;\n      conf.master = true;\n    }\n    RuntimeSystem = this.require('_System');\n    system = new RuntimeSystem(conf);\n    system.state('active');\n  } else {\n    result = $db._System.find({\n      'master': true\n    });\n    if (result.length) {\n      systemId = result[0]._id;\n      system = $component.get(systemId);\n    }\n  }\n  return system;\n}",
       "core": true,
       "useCoreAPI": true
     },
@@ -16,7 +16,7 @@
       "_id": "1cfa4145f614da8",
       "component": "_Runtime",
       "state": "message",
-      "action": "(msg) => { \n  $db._Message.insert(msg);\n};",
+      "action": "function message(msg) { \n  $db._Message.insert(msg);\n}",
       "useCoreAPI": true,
       "core": true
     }

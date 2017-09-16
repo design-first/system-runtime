@@ -503,7 +503,7 @@
       "_id": "h1b3891699319be4",
       "component": "channel",
       "state": "$designerCreateSchema",
-      "action": "(id, schema) => { \n  this.require('logger').level('warn');\n  this.require('metamodel').schema(schema);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n};",
+      "action": "function $designerCreateSchema(id, schema) { \n  this.require('logger').level('warn');\n  this.require('metamodel').schema(schema);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -511,7 +511,7 @@
       "_id": "w161ae196d51f585",
       "component": "channel",
       "state": "$editorUpdateSchema",
-      "action": "(id, schema) => { \n  this.require('logger').level('warn');\n  this.require('metamodel').schema(schema);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n};",
+      "action": "function $editorUpdateSchema(id, schema) { \n  this.require('logger').level('warn');\n  this.require('metamodel').schema(schema);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -519,7 +519,7 @@
       "_id": "x12449136a811be2",
       "component": "channel",
       "state": "$designerDeleteSchema",
-      "action": "(id) => { \n  this.require('logger').level('warn');\n  var search = $db._Schema.find({ '_id': id }),\n    modelName = '',\n    modelId = '';\n  \n  if (search.length) {\n    modelName = search[0]._name;\n    $db._Schema.remove({ '_id': id });\n  \n    search = $db._Model.find({ '_name': modelName });\n    if (search.length) {\n      modelId = search[0]._id;\n      $db._Model.remove({ '_id': modelId });\n      $component.removeFromMemory(modelName);\n    }\n  \n    search = $db._GeneratedModel.find({ '_name': modelName });\n    if (search.length) {\n      modelId = search[0]._id;\n      $db._GeneratedModel.remove({ '_id': modelId });\n      $component.removeFromMemory(modelName);\n    }\n    this.require('metamodel').create();\n  }\n  this.require('logger').level('debug');\t\n};",
+      "action": "function $designerDeleteSchema(id) { \n  this.require('logger').level('warn');\n  var search = $db._Schema.find({ '_id': id }),\n    modelName = '',\n    modelId = '';\n  \n  if (search.length) {\n    modelName = search[0]._name;\n    $db._Schema.remove({ '_id': id });\n  \n    search = $db._Model.find({ '_name': modelName });\n    if (search.length) {\n      modelId = search[0]._id;\n      $db._Model.remove({ '_id': modelId });\n      $component.removeFromMemory(modelName);\n    }\n  \n    search = $db._GeneratedModel.find({ '_name': modelName });\n    if (search.length) {\n      modelId = search[0]._id;\n      $db._GeneratedModel.remove({ '_id': modelId });\n      $component.removeFromMemory(modelName);\n    }\n    this.require('metamodel').create();\n  }\n  this.require('logger').level('debug');\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -527,7 +527,7 @@
       "_id": "h103b01d9591bbb4",
       "component": "channel",
       "state": "$designerCreateModel",
-      "action": "(id, model) => { \n  this.require('logger').level('warn');\n  this.require('metamodel').model(model);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n};",
+      "action": "function $designerCreateModel(id, model) { \n  this.require('logger').level('warn');\n  this.require('metamodel').model(model);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -535,7 +535,7 @@
       "_id": "r12c4e1d6cf1cf0e",
       "component": "channel",
       "state": "$editorUpdateModel",
-      "action": "(id, model) => { \n  this.require('logger').level('warn');\n  this.require('metamodel').model(model);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n};",
+      "action": "function $editorUpdateModel(id, model) { \n  this.require('logger').level('warn');\n  this.require('metamodel').model(model);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -543,7 +543,7 @@
       "_id": "x1eb4c1d03b1ee34",
       "component": "channel",
       "state": "$designerUpdateModel",
-      "action": "(id, model) => { \n  this.require('logger').level('warn');\n  this.require('metamodel').model(model);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n};",
+      "action": "function $designerUpdateModel(id, model) { \n  this.require('logger').level('warn');\n  this.require('metamodel').model(model);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -551,7 +551,7 @@
       "_id": "w1c68e1c7aa19326",
       "component": "channel",
       "state": "$designerDeleteModel",
-      "action": "(id) => { \n  this.require('logger').level('warn');\n  var search = $db._Model.find({ '_id': id }),\n    modelName = '',\n    modelId = '';\n  \n  if (search.length) {\n    modelName = search[0]._name;\n    $db._Model.remove({ '_id': id });\n    $component.removeFromMemory(modelName);\n  }\n  \n  search = $db._GeneratedModel.find({ '_name': modelName });\n  if (search.length) {\n    modelId = search[0]._id;\n    $db._GeneratedModel.remove({ '_id': modelId });\n    $component.removeFromMemory(modelName);\n  }\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n};",
+      "action": "function $designerDeleteModel(id) { \n  this.require('logger').level('warn');\n  var search = $db._Model.find({ '_id': id }),\n    modelName = '',\n    modelId = '';\n  \n  if (search.length) {\n    modelName = search[0]._name;\n    $db._Model.remove({ '_id': id });\n    $component.removeFromMemory(modelName);\n  }\n  \n  search = $db._GeneratedModel.find({ '_name': modelName });\n  if (search.length) {\n    modelId = search[0]._id;\n    $db._GeneratedModel.remove({ '_id': modelId });\n    $component.removeFromMemory(modelName);\n  }\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -559,7 +559,7 @@
       "_id": "x1f6bc11b3816de0",
       "component": "channel",
       "state": "$designerCreateType",
-      "action": "(id, type) => { \n  this.require('logger').level('warn');\n  this.require('metamodel').type(type);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n};",
+      "action": "function $designerCreateType(id, type) { \n  this.require('logger').level('warn');\n  this.require('metamodel').type(type);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -567,7 +567,7 @@
       "_id": "m1ff4f11d19164c0",
       "component": "channel",
       "state": "$editorUpdateType",
-      "action": "(id, type) => { \n  this.require('logger').level('warn');\n  this.require('metamodel').type(type);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n};",
+      "action": "function $editorUpdateType(id, type) { \n  this.require('logger').level('warn');\n  this.require('metamodel').type(type);\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -575,7 +575,7 @@
       "_id": "u1e8bd17bdc15d6a",
       "component": "channel",
       "state": "$editorDeleteType",
-      "action": "(id) => { \n  this.require('logger').level('warn');\n  $db._Type.remove({ 'name': id });\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n};",
+      "action": "function $editorDeleteType(id) { \n  this.require('logger').level('warn');\n  $db._Type.remove({ 'name': id });\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -583,7 +583,7 @@
       "_id": "k18a311f76f1ff2a",
       "component": "channel",
       "state": "$designerDeleteType",
-      "action": "() => { \n  this.require('logger').level('warn');\n  $db._Type.remove({ 'name': id });\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n};",
+      "action": "function $designerDeleteType() { \n  this.require('logger').level('warn');\n  $db._Type.remove({ 'name': id });\n  this.require('metamodel').create();\n  this.require('logger').level('debug');\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -591,7 +591,7 @@
       "_id": "i1fe2e1f8fe1f3b7",
       "component": "channel",
       "state": "$designerCreateComponent",
-      "action": "(collection, component) => { \n  $db[collection].insert(component);\t\n};",
+      "action": "function $designerCreateComponent(collection, component) { \n  $db[collection].insert(component);\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -599,7 +599,7 @@
       "_id": "e1cc381f58818dd4",
       "component": "channel",
       "state": "$editorUpdateComponent",
-      "action": "(id, collection, component) => { \n  $db[collection].update({ '_id': id }, component, { 'upsert': true });\t\n};",
+      "action": "function $editorUpdateComponent(id, collection, component) { \n  $db[collection].update({ '_id': id }, component, { 'upsert': true });\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -607,7 +607,7 @@
       "_id": "r18f80173fe19997",
       "component": "channel",
       "state": "$editorUpdateComponent",
-      "action": "(id, collection, component) => { \n  $db[collection].update({ '_id': id }, component, { 'upsert': true });\t\n};",
+      "action": "function $editorUpdateComponent(id, collection, component) { \n  $db[collection].update({ '_id': id }, component, { 'upsert': true });\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -615,7 +615,7 @@
       "_id": "o1ed5a1768c181b2",
       "component": "channel",
       "state": "$editorDeleteComponent",
-      "action": "(id, collection) => { \n  $db[collection].remove({ '_id': id });\t\n};",
+      "action": "function $editorDeleteComponent(id, collection) { \n  $db[collection].remove({ '_id': id });\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -623,7 +623,7 @@
       "_id": "t18fe213b0718b38",
       "component": "channel",
       "state": "$designerDeleteComponent",
-      "action": "(id, collection) => { \n  $db[collection].remove({ '_id': id });\t\n};",
+      "action": "function $designerDeleteComponent(id, collection) { \n  $db[collection].remove({ '_id': id });\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -631,7 +631,7 @@
       "_id": "p1524e1d2c414a17",
       "component": "channel",
       "state": "$designerCreateBehavior",
-      "action": "(behavior) => { \n  $db._Behavior.insert(component);\t\n};",
+      "action": "function $designerCreateBehavior(behavior) { \n  $db._Behavior.insert(component);\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -639,7 +639,7 @@
       "_id": "m154451abb8103f1",
       "component": "channel",
       "state": "$editorUpdateBehavior",
-      "action": "(id, behavior) => { \n  if (this.require(id)) {\n    this.require(id).action(behavior.action);\n    if (behavior.state === 'start') {\n      this.require(behavior.component).start();\n    }\n  }\n};",
+      "action": "function $editorUpdateBehavior(id, behavior) { \n  if (this.require(id)) {\n    this.require(id).action(behavior.action);\n    if (behavior.state === 'start') {\n      this.require(behavior.component).start();\n    }\n  }\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -647,7 +647,7 @@
       "_id": "q131b819d531053f",
       "component": "channel",
       "state": "$editorDeleteBehavior",
-      "action": "(id) => { \n  $db._Behavior.remove({ '_id': id });\t\n};",
+      "action": "function $editorDeleteBehavior(id) { \n  $db._Behavior.remove({ '_id': id });\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -655,7 +655,7 @@
       "_id": "h1214316cb61ea28",
       "component": "channel",
       "state": "$designerDeleteBehavior",
-      "action": "(id) => { \n  $db._Behavior.remove({ '_id': id });\t\n};",
+      "action": "function $designerDeleteBehavior(id) { \n  $db._Behavior.remove({ '_id': id });\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -663,7 +663,7 @@
       "_id": "h109eb1b4ed148fd",
       "component": "channel",
       "state": "$designerSync",
-      "action": "(req) => { \n  req.end(this.require('runtime').bundle());\t\n};",
+      "action": "function $designerSync(req) { \n  req.end(this.require('runtime').bundle());\t\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -671,7 +671,7 @@
       "_id": "w1a9961205712671",
       "component": "db",
       "state": "insert",
-      "action": "(event) => { \n if (event.collection.indexOf('_') !== 0) {\n    this.require('channel').$runtimeCreateComponent(event.collection, event.document);\n  }\t\n};",
+      "action": "function insert(event) { \n if (event.collection.indexOf('_') !== 0) {\n    this.require('channel').$runtimeCreateComponent(event.collection, event.document);\n  }\t\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -679,7 +679,7 @@
       "_id": "j122701697c19935",
       "component": "db",
       "state": "remove",
-      "action": "(event) => { \n if (event.collection.indexOf('_') !== 0) {\n    this.require('channel').$runtimeDeleteComponent(event.id, event.collection);\n  }\t\n};",
+      "action": "function remove(event) { \n if (event.collection.indexOf('_') !== 0) {\n    this.require('channel').$runtimeDeleteComponent(event.id, event.collection);\n  }\t\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -687,7 +687,7 @@
       "_id": "t118f61f6d0127e4",
       "component": "db",
       "state": "update",
-      "action": "(event) => { \n  if (event.collection.indexOf('_') !== 0) {\n    this.require('channel').$runtimeUpdateComponent(event.id, event.collection, event.field, event.value);\n  }\t\n};",
+      "action": "function update(event) { \n  if (event.collection.indexOf('_') !== 0) {\n    this.require('channel').$runtimeUpdateComponent(event.id, event.collection, event.field, event.value);\n  }\t\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -695,7 +695,7 @@
       "_id": "e10ba11978d122c5",
       "component": "admin",
       "state": "init",
-      "action": "(conf) => {\n  var require = global.require,\n    http = require('http'),\n    qs = require('querystring'),\n    runtime = require('system-runtime');\n\n  // Create server\n  http.createServer(function (req, res) {\n    var message = null;\n\n    // POST\n    if (req.method == 'POST') {\n      var body = '';\n      req.on('data', function (data) {\n        body = body + data;\n        if (body.length > 1e6) {\n          req.connection.destroy();\n        }\n      });\n      req.on('end', function () {\n        var post = qs.parse(body),\n          message = {};\n\n        function _postToMessage(url, post) {\n          var message = {\n            'from': '',\n            'event': '',\n            'data': []\n          },\n            event = '',\n            data = [],\n            params = [],\n            i = 0,\n            length = 0;\n\n          params = url.replace('/', '').split('/');\n          length = params.length;\n          for (i = 0; i < length; i++) {\n            if (i === 0) {\n              event = params[0];\n            }\n          }\n\n          message.event = event;\n          message.data = JSON.parse(decodeURIComponent(Object.keys(post)[0]));\n\n          return message;\n        }\n\n        message = _postToMessage(req.url, post);\n        runtime.message(message);\n      });\n    }\n\n    // GET\n    if (req.method == 'GET') {\n      function _getToMessage(url, res) {\n        var message = {\n          'from': '',\n          'event': '',\n          'data': []\n        },\n          event = '',\n          data = [],\n          params = [],\n          i = 0,\n          length = 0;\n\n        if (url.indexOf('favicon.ico') !== -1) {\n          message = null;\n        } else {\n          params = url.replace('/', '').split('/');\n          length = params.length;\n          for (i = 0; i < length; i++) {\n            if (i === 0) {\n              event = params[0];\n            } else {\n              data.push(params[i]);\n            }\n          }\n          data.push(res);\n\n          message.event = event;\n          message.data = data;\n\n          if (event === '') {\n            message = null;\n          }\n        }\n        return message;\n      }\n\n      res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });\n      message = _getToMessage(req.url, res);\n\n      if (message) {\n        runtime.message(message);\n      } else {\n        res.end('');\n      }\n    }\n  }).listen(8888, '127.0.0.1');\n\n  console.log('System Runtime Admin is started on http://127.0.0.1:8888');\n};",
+      "action": "function init(conf) {\n  var require = global.require,\n    http = require('http'),\n    qs = require('querystring'),\n    runtime = require('system-runtime');\n\n  // Create server\n  http.createServer(function (req, res) {\n    var message = null;\n\n    // POST\n    if (req.method == 'POST') {\n      var body = '';\n      req.on('data', function (data) {\n        body = body + data;\n        if (body.length > 1e6) {\n          req.connection.destroy();\n        }\n      });\n      req.on('end', function () {\n        var post = qs.parse(body),\n          message = {};\n\n        function _postToMessage(url, post) {\n          var message = {\n            'from': '',\n            'event': '',\n            'data': []\n          },\n            event = '',\n            data = [],\n            params = [],\n            i = 0,\n            length = 0;\n\n          params = url.replace('/', '').split('/');\n          length = params.length;\n          for (i = 0; i < length; i++) {\n            if (i === 0) {\n              event = params[0];\n            }\n          }\n\n          message.event = event;\n          message.data = JSON.parse(decodeURIComponent(Object.keys(post)[0]));\n\n          return message;\n        }\n\n        message = _postToMessage(req.url, post);\n        runtime.message(message);\n      });\n    }\n\n    // GET\n    if (req.method == 'GET') {\n      function _getToMessage(url, res) {\n        var message = {\n          'from': '',\n          'event': '',\n          'data': []\n        },\n          event = '',\n          data = [],\n          params = [],\n          i = 0,\n          length = 0;\n\n        if (url.indexOf('favicon.ico') !== -1) {\n          message = null;\n        } else {\n          params = url.replace('/', '').split('/');\n          length = params.length;\n          for (i = 0; i < length; i++) {\n            if (i === 0) {\n              event = params[0];\n            } else {\n              data.push(params[i]);\n            }\n          }\n          data.push(res);\n\n          message.event = event;\n          message.data = data;\n\n          if (event === '') {\n            message = null;\n          }\n        }\n        return message;\n      }\n\n      res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });\n      message = _getToMessage(req.url, res);\n\n      if (message) {\n        runtime.message(message);\n      } else {\n        res.end('');\n      }\n    }\n  }).listen(8888, '127.0.0.1');\n\n  console.log('System Runtime Admin is started on http://127.0.0.1:8888');\n}",
       "useCoreAPI": true,
       "core": true
     }

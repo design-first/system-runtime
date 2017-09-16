@@ -8,7 +8,7 @@
       "_id": "1a5111d17a1800c",
       "component": "_Database",
       "state": "collections",
-      "action": "() => {\n  var result = {},\n    collectionName = '';\n\n  for (collectionName in $db.store) {\n    if ($db.store.hasOwnProperty(collectionName) && collectionName.indexOf('_') !== 0) {\n      result[collectionName] = $db[collectionName];\n    }\n  }\n  return result;\n};",
+      "action": "function collections() {\n  var result = {},\n    collectionName = '';\n\n  for (collectionName in $db.store) {\n    if ($db.store.hasOwnProperty(collectionName) && collectionName.indexOf('_') !== 0) {\n      result[collectionName] = $db[collectionName];\n    }\n  }\n  return result;\n}",
       "core": true,
       "useCoreAPI": true
     }

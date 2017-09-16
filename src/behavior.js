@@ -62,8 +62,7 @@ var store = {};
  * @private
  */
 function createFunction(name, func, core, useCoreAPI) {
-  var funcName = '',
-    beginBody = -1,
+  var beginBody = -1,
     funcParams = '',
     params = [],
     paramsClean = [],
@@ -107,13 +106,10 @@ function createFunction(name, func, core, useCoreAPI) {
     if (isArrowFunction && isOneLine && funcBody.indexOf('return ') === -1) {
       funcBody = 'return ' + funcBody;
     }
-
-    funcName = name;
   } else {
     beginBody = func.indexOf('{');
     header = func.substring(0, beginBody);
 
-    funcName = header.split('(')[0].replace('function', '').trim();
     funcParams = header.split('(')[1].replace(')', '').trim();
 
     params = funcParams.split(',');
@@ -123,8 +119,6 @@ function createFunction(name, func, core, useCoreAPI) {
 
     funcBody = func.substring(beginBody + 1);
     funcBody = funcBody.substring(0, funcBody.lastIndexOf('}')).trim();
-
-    funcName = funcName || name;
   }
 
   if (params[0] === '') {
@@ -142,11 +136,11 @@ function createFunction(name, func, core, useCoreAPI) {
 
   if (params[0] !== '') {
     /* jshint -W054 */
-    action = new Function('__body', "return function " + funcName + " (" + params.join(',') + ") { return new Function('" + params.join("','") + "', __body).apply(this, arguments) };")(funcBody);
+    action = new Function('__body', "return function " + name + " (" + params.join(',') + ") { return new Function('" + params.join("','") + "', __body).apply(this, arguments) };")(funcBody);
     /* jshint +W054 */
   } else {
     /* jshint -W054 */
-    action = new Function('__body', "return function " + funcName + " () { return new Function(__body).apply(this, arguments) };")(funcBody);
+    action = new Function('__body', "return function " + name + " () { return new Function(__body).apply(this, arguments) };")(funcBody);
     /* jshint +W054 */
   }
 

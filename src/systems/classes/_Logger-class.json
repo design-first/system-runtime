@@ -8,28 +8,28 @@
       "_id": "1d993108fa18ef2",
       "component": "_Logger",
       "state": "debug",
-      "action": "(message) => {\n  if (this.level() === 'debug') {\n    console.log('runtime: ' + message);\n  }\n};",
+      "action": "function debug(message) {\n  if (this.level() === 'debug') {\n    console.log('runtime: ' + message);\n  }\n}",
       "core": true
     },
     "1a37a188e11fe73": {
       "_id": "1a37a188e11fe73",
       "component": "_Logger",
       "state": "error",
-      "action": "(message) => {\n  console.error('runtime: ' + message);\n};",
+      "action": "function error(message) {\n  console.error('runtime: ' + message);\n}",
       "core": true
     },
     "1edd21e12a16534": {
       "_id": "1edd21e12a16534",
       "component": "_Logger",
       "state": "info",
-      "action": "(message) => {\n  if (this.level() === 'info' || this.level() === 'debug') {\n    console.info('runtime: ' + message);\n  }\n};",
+      "action": "function info(message) {\n  if (this.level() === 'info' || this.level() === 'debug') {\n    console.info('runtime: ' + message);\n  }\n}",
       "core": true
     },
     "141f2143d3122a4": {
       "_id": "141f2143d3122a4",
       "component": "_Logger",
       "state": "level",
-      "action": "(val) => {\n  $log.level(val);\n}",
+      "action": "function level(val) {\n  $log.level(val);\n}",
       "core": true,
       "useCoreAPI": true
     },
@@ -37,7 +37,7 @@
       "_id": "192401bab21304e",
       "component": "_Logger",
       "state": "warn",
-      "action": "function warn(message) {\n  if (this.level() === 'info' || this.level() === 'warn' || this.level() === 'debug') {\n    console.warn('runtime: ' + message);\n  }\n};",
+      "action": "function warn(message) {\n  if (this.level() === 'info' || this.level() === 'warn' || this.level() === 'debug') {\n    console.warn('runtime: ' + message);\n  }\n}",
       "core": true
     }
   },
