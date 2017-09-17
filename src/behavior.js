@@ -95,8 +95,8 @@ function createFunction(name, func, core, useCoreAPI) {
 
     funcBody = func.substring(beginBody + 2, func.length).trim();
 
-    if (func.indexOf('{') === 0) {
-      funcBody = funcBody.substring(0, funcBody.lastIndexOf('}')).trim();
+    if (funcBody.indexOf('{') === 0) {
+      funcBody = funcBody.substring(1, funcBody.lastIndexOf('}')).trim();
     }
 
     if (funcBody.indexOf('\n') === -1) {

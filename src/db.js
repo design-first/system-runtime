@@ -304,8 +304,9 @@ function impSystem(importedSystem) {
       if (systems[0]._id === importedSystem._id) {
         importedSystem.master = true;
       } else {
-        importedSystem.master = true;
-        systems[0].master = false;
+        if (importedSystem.master) {
+          systems[0].master = false;
+        }
       }
     }
 
@@ -359,13 +360,6 @@ function expSystem() {
     for (collectionName in dbDump) {
       if (dbDump.hasOwnProperty(collectionName)) {
         exportedSystem[collectionName] = dbDump[collectionName];
-      }
-    }
-
-    for (behaviorId in exportedSystem.behaviors) {
-      behavior = exportedSystem.behaviors[behaviorId];
-      if (behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') {
-        behavior.component = id;
       }
     }
 
