@@ -6,19 +6,22 @@
 
 ## What is System Runtime ?
 
-#### OSGi for JavaScript
+#### a System Runtime Environment
 
-System Runtime can bundle the model, components and methods of your application into a [JSON](http://json.org) object. This bundle can be then installed and started in a client or server application.
+When you code, you do not create an application, you create in fact a [system](https://en.wikipedia.org/wiki/System):
+> A system is a set of interacting or interdependent **components** forming an integrated whole.
 
-In fact, System Runtime can create, install and start bundles like in [OSGi](https://www.osgi.org). 
+> A system has **structure**, it contains parts (or components) that are directly or indirectly related to each other.
+
+> A system has **behavior**, it exhibits processes that fulfill its function or purpose.
+
+System Runtime give you the APIs to create the model, components and behaviors of your system.
 
 ## How works System Runtime ?
 
-System Runtime executes your bundles client and server side.
+#### Create a system
 
-#### Create a bundle
-
-Use System Runtime APIs to create your application:
+Use System Runtime APIs to create your system:
 
 ```js
 // create an app
@@ -31,7 +34,7 @@ app.on('start', () => console.log('Hello world !'));
 app.start();
 ```
 
-Now you can bundle your application into a JSON object:
+Now you can bundle your system into a JSON object:
 
 ```js
 // create a bundle
@@ -73,7 +76,7 @@ Just add a link tag in your HTML to install and start your bundle:
 
 #### Install the bundle in Node.js
 
-Like in [OSGi](https://www.osgi.org), just call *install* API to install and start your bundle:
+Just call *install* API to install and start your bundle:
 
 ```js
 // require System Runtime
