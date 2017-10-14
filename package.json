@@ -41,7 +41,7 @@
     "build": "grunt build"
   },
   "devDependencies": {
-    "coveralls": "^2.13.1",
+    "coveralls": "^3.0.0",
     "grunt": "^1.0.1",
     "grunt-browserify": "^5.2.0",
     "grunt-cli": "^1.2.0",
