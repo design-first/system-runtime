@@ -7,10 +7,9 @@
 ## What is System Runtime ?
 
 When you code, you do not create an application, you create in fact a [system](https://en.wikipedia.org/wiki/System).
+System Runtime gives you the APIs to create the model, components and behaviors of your system.
 
 ## What is a system ?
-
-With System Designer you create a **system** and not an application. But what is a system ?
 
 A system:
 
@@ -19,8 +18,6 @@ A system:
 * reacts to events with behaviors.
 
 ![Image Alt](https://designfirst.io/img/system.png)
-
-System Runtime give you the APIs to create the model, components and behaviors of your system.
 
 ## How works System Runtime ?
 
