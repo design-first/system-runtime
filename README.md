@@ -138,17 +138,17 @@ $ npm i
 
 #### Tasks
 
+To build System Runtime:
+
 ```sh
-# run tests
-$ npm run test
-# clean
-$ npm run clean
-# build System Runtime (on /dist/)
-# it will generate System Runtime core systems (from /src/system/) 
-# and package System Runtime client library
-# it will also run jshint and server/client tests
 $ npm run build
 ```	 
+
+It will:
+*  generate System Runtime core system in **/build** directory,
+*  generate System Runtime core module for the server library,
+*  build System Runtime client library on **/dist** directory,
+*  run jshint and server/client tests.
 
 ## Development
 
