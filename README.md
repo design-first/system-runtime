@@ -6,14 +6,19 @@
 
 ## What is System Runtime ?
 
-#### a System Runtime Environment
+When you code, you do not create an application, you create in fact a [system](https://en.wikipedia.org/wiki/System).
 
-When you code, you do not create an application, you create in fact a [system](https://en.wikipedia.org/wiki/System):
-> A system is a set of interacting or interdependent **components** forming an integrated whole.
+## What is a system ?
 
-> A system has **structure**, it contains parts (or components) that are directly or indirectly related to each other.
+With System Designer you create a **system** and not an application. But what is a system ?
 
-> A system has **behavior**, it exhibits processes that fulfill its function or purpose.
+A system:
+
+* is defined by a model,
+* is composed by components and
+* reacts to events with behaviors.
+
+![Image Alt](https://designfirst.io/img/system.png)
 
 System Runtime give you the APIs to create the model, components and behaviors of your system.
 
@@ -24,14 +29,14 @@ System Runtime give you the APIs to create the model, components and behaviors o
 Use System Runtime APIs to create your system:
 
 ```js
-// create an app
-let app = runtime.system('app');
+// create a system
+let system = runtime.system('system');
 
-// add code in the start method
-app.on('start', () => console.log('Hello world !'));
+// add some business logic in the start method
+system.on('start', () => console.log('Hello world !'));
 
-// run the app
-app.start();
+// run the system
+system.start();
 ```
 
 Now you can bundle your system into a JSON object:
@@ -45,7 +50,7 @@ It will return this JSON:
 ```json
 {
   "_id": "154cd18d0210516",
-  "name": "app",
+  "name": "system",
   "description": "",
   "version": "0.0.1",
   "schemas": {},
@@ -71,7 +76,7 @@ Just add a link tag in your HTML to install and start your bundle:
 
 ```html
 <!-- install your bundle -->
-<link rel="system" type="application/json" href="app.json">
+<link rel="system" type="application/json" href="system.json">
 ```
 
 #### Install the bundle in Node.js
@@ -83,7 +88,7 @@ Just call *install* API to install and start your bundle:
 let runtime = require('system-runtime');
 
 // install your bundle 
-runtime.install('app.json');
+runtime.install('system.json');
 ```
 
 ## What contains System Runtime ?
@@ -106,7 +111,7 @@ System Runtime acts as an ODM (Object-Document Mapper) to manage your components
 
 System Runtime has a micro NoSQL Database that stores your components and you can export/import them into another System Runtime NoSQL Database. 
 
-Thanks to System Runtime NoSQL Database, you can compose your model with an another one.
+Thanks to System Runtime NoSQL Database, you can compose your system with an another system.
 
 #### A workflow engine
 
@@ -131,7 +136,7 @@ Once you have cloned the repository:
 
 ```sh
 # install dependencies
-$ npm install
+$ npm i
 ```	 	
 
 #### Tasks
@@ -142,7 +147,7 @@ $ npm run test
 # clean
 $ npm run clean
 # build System Runtime (on /dist/)
-# it will generate System Runtime core system (from /src/system/) 
+# it will generate System Runtime core systems (from /src/system/) 
 # and package System Runtime client library
 # it will also run jshint and server/client tests
 $ npm run build
