@@ -150,6 +150,16 @@ $ npm run clean
 $ npm run build
 ```	 
 
+## Development
+
+To start System Runtime in development mode:
+
+```sh
+$ npm run dev
+```
+
+All the modifications to the source code of System Runtime will rebuild the project.
+
 ## Documentation
 
 * [Quick Start](https://system-runtime.readme.io/docs/quick-start)

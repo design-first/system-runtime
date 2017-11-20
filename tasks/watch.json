@@ -1,14 +1,17 @@
 {
   "scripts": {
     "files": [
-      "src/*.js"
+      "src/*.js",
+      "src/systems/**/*.json"
     ],
     "tasks": [
+      "json_merge",
+      "concat:systemModule",
       "jshint",
-      "test"
+      "jasmine_nodejs:modules"
     ],
     "options": {
-      "spawn": false
+      "spawn": true
     }
   }
 }

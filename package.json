@@ -35,7 +35,7 @@
     "url": "https://github.com/design-first/system-runtime/issues"
   },
   "scripts": {
-    "watch": "grunt watch",
+    "dev": "grunt dev",
     "test": "grunt test",
     "clean": "grunt clean",
     "build": "grunt build"

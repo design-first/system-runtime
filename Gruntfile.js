@@ -46,6 +46,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-yuidoc');
   grunt.loadNpmTasks('grunt-karma');
 
+  grunt.registerTask('dev', [
+    'watch',
+  ]);
+
   grunt.registerTask('test', [
     'json_merge',
     'concat:systemModule',
