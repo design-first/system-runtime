@@ -136,7 +136,7 @@ Once you have cloned the repository:
 $ npm i
 ```	 	
 
-#### Tasks
+#### Build
 
 To build System Runtime:
 
