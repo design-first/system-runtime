@@ -90,6 +90,8 @@ runtime.install('system.json');
 
 ## What contains System Runtime ?
 
+![Image Alt](https://designfirst.io/img/archi.png)
+
 #### A metamodel
 
 System Runtime contains a metamodel to help you to design your model. The definition of the model is made on a JSON format called [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson), no code is needed. 
