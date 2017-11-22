@@ -12,11 +12,12 @@ describe('a component', function () {
     metamodel.schema({
       '_name': 'Person',
       '_inherit': ['_Component'],
-      'children': 'collection',
       'firstName': 'property',
       'lastName': 'property',
+      'address': 'property',
+      'likes': 'property',
+      'children': 'collection',
       'father': 'link',
-      'adress': 'property',
       'moving': 'event'
     });
 
@@ -41,13 +42,19 @@ describe('a component', function () {
         'mandatory': true,
         'default': ''
       },
+      'likes': {
+        'type': 'array',
+        'readOnly': false,
+        'mandatory': false,
+        'default': []
+      },
       'father': {
         'type': 'Person',
         'readOnly': false,
         'mandatory': false,
         'default': {}
       },
-      'adress': {
+      'address': {
         'type': 'string',
         'readOnly': false,
         'mandatory': false,
@@ -79,16 +86,17 @@ describe('a component', function () {
     var Person = runtime.require('Person');
     var yoda = new Person({
       'firstName': 'Yoda',
-      'lastName': 'Master'
+      'lastName': 'Master',
+      'likes': ['teaching']
     });
 
     yoda.on('moving', function () {
-      this.adress('Dagobah');
+      this.address('Dagobah');
     });
     yoda.moving();
 
     setTimeout(function () {
-      expect(yoda.adress()).toBe('Dagobah');
+      expect(yoda.address()).toBe('Dagobah');
       done();
     }, 1);
   });
@@ -101,14 +109,14 @@ describe('a component', function () {
     });
 
     yoda.on('moving', function () {
-      this.adress('Dagobah');
+      this.address('Dagobah');
     });
     yoda.off('moving');
 
     yoda.moving();
 
     setTimeout(function () {
-      expect(yoda.adress()).toBe('');
+      expect(yoda.address()).toBe('');
       done();
     }, 1);
   });
@@ -121,14 +129,14 @@ describe('a component', function () {
     });
 
     yoda2.on('moving', function () {
-      this.adress('Dagobah');
+      this.address('Dagobah');
     });
     yoda2.off();
 
     yoda2.moving();
 
     setTimeout(function () {
-      expect(yoda2.adress()).toBe('');
+      expect(yoda2.address()).toBe('');
       done();
     }, 1);
   });
@@ -141,7 +149,7 @@ describe('a component', function () {
     });
 
     var behaviorId = yoda3.on('moving', function () {
-      this.adress('Dagobah');
+      this.address('Dagobah');
     });
 
     yoda3.require(behaviorId).destroy();
@@ -149,7 +157,7 @@ describe('a component', function () {
     yoda3.moving();
 
     setTimeout(function () {
-      expect(yoda3.adress()).toBe('');
+      expect(yoda3.address()).toBe('');
       done();
     }, 1);
   });
@@ -162,13 +170,13 @@ describe('a component', function () {
     })
 
     yoda.on('lastName', function (val) {
-      this.adress('Dagobah');
+      this.address('Dagobah');
     });
 
     yoda.lastName('Grand Jedi Master');
 
     setTimeout(function () {
-      expect(yoda.adress()).toBe('Dagobah');
+      expect(yoda.address()).toBe('Dagobah');
       done();
     }, 1);
   });
@@ -181,7 +189,7 @@ describe('a component', function () {
     })
 
     yoda.on('lastName', function (val) {
-      this.adress('Dagobah');
+      this.address('Dagobah');
     });
 
     yoda.off('lastName');
@@ -189,7 +197,7 @@ describe('a component', function () {
     yoda.lastName('Grand Jedi Master');
 
     setTimeout(function () {
-      expect(yoda.adress()).toBe('');
+      expect(yoda.address()).toBe('');
       done();
     }, 1);
   });
@@ -357,7 +365,21 @@ describe('a component', function () {
     expect(anakin.children().pop().id()).toBe(luke.id());
   });
 
-  it('can add a item of a collection with push', function () {
+  it('can remove an item of an array property with pop', function () {
+    var Person = runtime.require('Person');
+
+    var luke = new Person({
+      'firstName': 'Luke',
+      'lastName': 'Skywalker',
+      'likes': ['saying noooooo!']
+    });
+
+    luke.likes().pop();
+
+    expect(luke.likes().length).toBe(0);
+  });
+
+  it('can add an item of a collection with push', function () {
     var Person = runtime.require('Person');
 
     var luke = new Person({
@@ -373,6 +395,19 @@ describe('a component', function () {
     anakin.children().push(luke);
 
     expect(anakin.children(0).id()).toBe(luke.id());
+  });
+
+  it('can add an item of an array property with push', function () {
+    var Person = runtime.require('Person');
+
+    var luke = new Person({
+      'firstName': 'Luke',
+      'lastName': 'Skywalker'
+    });
+
+    luke.likes().push('saying nooooooo!');
+
+    expect(luke.likes().length).toBe(1);
   });
 
   it('can clear a collection with api', function () {

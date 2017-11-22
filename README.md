@@ -125,22 +125,18 @@ With System Runtime your components really behave the way you designed them.
 Clone the repository:
 
 ```sh
-# Clone the repository
 $ git clone https://github.com/design-first/system-runtime.git
-# Go to the repository
-$ cd system-runtime
 ```
 
-Once you have cloned the repository:
+Once you have cloned the repository, install the dependencies:
 
 ```sh
-# install dependencies
 $ npm i
 ```	 	
 
 #### Build
 
-To build System Runtime:
+Then build System Runtime:
 
 ```sh
 $ npm run build

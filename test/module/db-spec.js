@@ -82,6 +82,23 @@ describe('a db module', function () {
     expect(result1.length + result2.length).toBe(0);
   });
 
+  it('can export the database', function () {
+    var result = null;
+
+    result = db.exportSystem();
+
+    expect(result).toBeDefined();
+  });
+
+
+  it('can apply a filter on the export', function () {
+    var result = null;
+
+    result = db.exportSystem({ 'schemas': { 'name': 'Person' } })
+
+    expect(result).toBeDefined();
+  });
+
   it('can init the database', function () {
     var result = null;
 
