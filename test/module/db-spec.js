@@ -1,6 +1,9 @@
 describe('a db module', function () {
 
   var db = require('../../src/db.js');
+  var runtime = require('../../src/runtime.js');
+
+  runtime.system('test');
 
   it('can find all document of a collection', function () {
     var result = db._Runtime.find();
@@ -86,10 +89,8 @@ describe('a db module', function () {
     var result = null;
 
     result = db.exportSystem();
-
     expect(result).toBeDefined();
   });
-
 
   it('can apply a filter on the export', function () {
     var result = null;
@@ -97,6 +98,25 @@ describe('a db module', function () {
     result = db.exportSystem({ 'schemas': { 'name': 'Person' } })
 
     expect(result).toBeDefined();
+  });
+
+  it('can import a system', function () {
+    var result = null;
+
+    result = db.importSystem({
+      "_id": "u195cc1c1dd16c47",
+      "name": "test2",
+      "description": "",
+      "version": "0.0.1",
+      "master": true,
+      "schemas": {},
+      "models": {},
+      "types": {},
+      "behaviors": {},
+      "components": {}
+    });
+
+    expect(result).not.toBe('');
   });
 
   it('can init the database', function () {
