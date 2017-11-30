@@ -169,10 +169,6 @@ All the modifications to the source code of System Runtime will rebuild the proj
 * [Code of Conduct](CODE_OF_CONDUCT.md)
 * [Contributing Guidelines](CONTRIBUTING.md)
 
-**Do not use System Runtime if you do not believe in Equality and Diversity.**
-
-**System Runtime is not for people of hate.**
-
 ## License
 
 Copyright 2017 Erwan Carriou
@@ -188,3 +184,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. 
+
+**Do not use System Runtime if you do not believe in Equality and Diversity.**
+
+**System Runtime is not for people of hate.**
