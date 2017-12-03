@@ -1,40 +1,40 @@
 {
-  "_id": "z16d3d1f9e814b7b",
-  "name": "_State-class",
-  "description": "State",
-  "version": "1.0.0",
-  "behaviors": {},
-  "schemas": {
-    "158711d6f215e4b": {
-      "_name": "_State",
-      "_inherit": [],
-      "_core": true,
-      "_class": false,
-      "state": "property",
-      "value": "property",
-      "_id": "158711d6f215e4b"
-    }
-  },
-  "models": {
-    "177ac136891629f": {
-      "_name": "_State",
-      "_core": true,
-      "state": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": true,
-        "default": ""
-      },
-      "value": {
-        "type": "any",
-        "readOnly": false,
-        "mandatory": false,
-        "default": null
-      },
-      "_id": "177ac136891629f"
-    }
-  },
-  "types": {},
-  "components": {},
-  "master": false
+    "_id": "z16d3d1f9e814b7b",
+    "name": "_State-class",
+    "description": "State",
+    "version": "1.0.0",
+    "behaviors": {},
+    "schemas": {
+        "158711d6f215e4b": {
+            "_name": "_State",
+            "_inherit": [],
+            "_core": true,
+            "_class": false,
+            "state": "property",
+            "value": "property",
+            "_id": "158711d6f215e4b"
+        }
+    },
+    "models": {
+        "177ac136891629f": {
+            "_name": "_State",
+            "_core": true,
+            "state": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": true,
+                "default": ""
+            },
+            "value": {
+                "type": "any",
+                "readOnly": false,
+                "mandatory": false,
+                "default": null
+            },
+            "_id": "177ac136891629f"
+        }
+    },
+    "types": {},
+    "components": {},
+    "master": false
 }

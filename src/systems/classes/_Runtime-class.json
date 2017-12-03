@@ -1,81 +1,77 @@
 {
-  "_id": "y1ce601b9af14c0a",
-  "name": "_Runtime-class",
-  "description": "Runtime",
-  "version": "1.0.0",
-  "behaviors": {
-    "13010167f313f87": {
-      "_id": "13010167f313f87",
-      "component": "_Runtime",
-      "state": "system",
-      "action": "function system(params) {\n  var RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n\n  if (params) {\n    if (typeof params === 'string') {\n      conf.master = true;\n      conf.name = params;\n    } else {\n      conf = params;\n      conf.master = true;\n    }\n    RuntimeSystem = this.require('_System');\n    system = new RuntimeSystem(conf);\n    system.state('active');\n  } else {\n    result = $db._System.find({\n      'master': true\n    });\n    if (result.length) {\n      systemId = result[0]._id;\n      system = $component.get(systemId);\n    }\n  }\n  return system;\n}",
-      "core": true,
-      "useCoreAPI": true
+    "_id": "y1ce601b9af14c0a",
+    "name": "_Runtime-class",
+    "description": "Runtime",
+    "version": "1.0.0",
+    "behaviors": {
+        "13010167f313f87": {
+            "_id": "13010167f313f87",
+            "component": "_Runtime",
+            "state": "system",
+            "action": "function system(params) {\n  var RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n\n  if (params) {\n    if (typeof params === 'string') {\n      conf.master = true;\n      conf.name = params;\n    } else {\n      conf = params;\n      conf.master = true;\n    }\n    RuntimeSystem = this.require('_System');\n    system = new RuntimeSystem(conf);\n    system.state('active');\n  } else {\n    result = $db._System.find({\n      'master': true\n    });\n    if (result.length) {\n      systemId = result[0]._id;\n      system = $component.get(systemId);\n    }\n  }\n  return system;\n}",
+            "core": true,
+            "useCoreAPI": true
+        },
+        "1cfa4145f614da8": {
+            "_id": "1cfa4145f614da8",
+            "component": "_Runtime",
+            "state": "message",
+            "action": "function message(msg) { \n  $db._Message.insert(msg);\n}",
+            "useCoreAPI": true,
+            "core": true
+        }
     },
-    "1cfa4145f614da8": {
-      "_id": "1cfa4145f614da8",
-      "component": "_Runtime",
-      "state": "message",
-      "action": "function message(msg) { \n  $db._Message.insert(msg);\n}",
-      "useCoreAPI": true,
-      "core": true
-    }
-  },
-  "schemas": {
-    "12e211d4cd120a6": {
-      "_id": "12e211d4cd120a6",
-      "_name": "_Runtime",
-      "_inherit": [
-        "_OSGi"
-      ],
-      "_core": true,
-      "version": "property",
-      "system": "method",
-      "message": "method",
-      "ready": "event"
-    }
-  },
-  "models": {
-    "14c7c105b31a160": {
-      "_id": "14c7c105b31a160",
-      "_name": "_Runtime",
-      "_core": true,
-      "version": {
-        "type": "string",
-        "readOnly": true,
-        "mandatory": true,
-        "default": "0.0.0"
-      },
-      "system": {
-        "params": [
-          {
-            "name": "params",
-            "type": "any",
-            "mandatory": false
-          }
-        ],
-        "result": "object"
-      },
-      "message": {
-        "params": [
-          {
-            "name": "msg",
-            "type": "message",
-            "mandatory": true
-          }
-        ]
-      },
-      "ready": {}
-    }
-  },
-  "types": {},
-  "components": {
-    "_Runtime": {
-      "runtime": {
-        "_id": "runtime",
-        "version": "2.1.0"
-      }
-    }
-  },
-  "master": false
+    "schemas": {
+        "12e211d4cd120a6": {
+            "_id": "12e211d4cd120a6",
+            "_name": "_Runtime",
+            "_inherit": [
+                "_OSGi"
+            ],
+            "_core": true,
+            "version": "property",
+            "system": "method",
+            "message": "method",
+            "ready": "event"
+        }
+    },
+    "models": {
+        "14c7c105b31a160": {
+            "_id": "14c7c105b31a160",
+            "_name": "_Runtime",
+            "_core": true,
+            "version": {
+                "type": "string",
+                "readOnly": true,
+                "mandatory": true,
+                "default": "0.0.0"
+            },
+            "system": {
+                "params": [{
+                    "name": "params",
+                    "type": "any",
+                    "mandatory": false
+                }],
+                "result": "object"
+            },
+            "message": {
+                "params": [{
+                    "name": "msg",
+                    "type": "message",
+                    "mandatory": true
+                }]
+            },
+            "ready": {}
+        }
+    },
+    "types": {},
+    "components": {
+        "_Runtime": {
+            "runtime": {
+                "_id": "runtime",
+                "version": "2.1.0"
+            }
+        }
+    },
+    "master": false
 }
