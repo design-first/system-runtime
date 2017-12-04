@@ -1,8 +1,8 @@
 language: node_js
 node_js:
-    -  "7"
+    -  "8"
 before_script:
   - npm install jasmine-node -g
 script:
-    - npm test
+    - npm build
     - istanbul cover jasmine-node -x 'src/log.js' --captureExceptions test/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage

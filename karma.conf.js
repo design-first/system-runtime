@@ -20,7 +20,7 @@
 
 module.exports = function (config) {
   // browers
-  var browsers = ['Firefox'];
+  var browsers = ['ChromeHeadless'];
 
   // reporters
   var reporters = ['progress', 'coverage'];
@@ -50,7 +50,7 @@ module.exports = function (config) {
     plugins: [
       'karma-coverage',
       'karma-script-launcher',
-      'karma-firefox-launcher',
+      'karma-chrome-launcher',
       'karma-jasmine'
     ],
     singleRun: true,

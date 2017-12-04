@@ -57,8 +57,8 @@
     "grunt-karma": "^2.0.0",
     "istanbul": "^0.4.5",
     "karma": "^1.7.1",
-    "karma-coverage": "^1.1.1",
-    "karma-firefox-launcher": "^1.0.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1", 
     "karma-jasmine": "^1.1.1",
     "karma-script-launcher": "^1.0.0",
     "yuidoc-lucid-theme": "^0.1.2"
