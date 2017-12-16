@@ -3,6 +3,11 @@
     "src": [
       "test/module",
       "test/runtime"
-    ]
+    ],
+    "options": {
+      "reporter": "spec",
+      "coverage": true,
+      "coverageFolder": "coverage"
+    }
   }
 }
