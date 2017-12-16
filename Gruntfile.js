@@ -39,6 +39,15 @@ module.exports = grunt => {
     json_merge: grunt.file.readJSON('tasks/json_merge.json')
   });
 
+  grunt.event.on('coverage', (lcov, done) => {
+    require('coveralls').handleInput(lcov, (err) => {
+      if (err) {
+        return done(err);
+      }
+      done();
+    });
+  });
+
   // dev
   grunt.registerTask('dev', [
     'watch',
