@@ -3,6 +3,12 @@
     "src": [
       "test/module",
       "test/runtime"
+    ]
+  },
+  "coveralls": {
+    "src": [
+      "test/module",
+      "test/runtime"
     ],
     "options": {
       "reporter": "spec",

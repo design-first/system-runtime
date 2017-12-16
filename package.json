@@ -38,7 +38,8 @@
     "dev": "grunt dev",
     "test": "grunt test",
     "clean": "grunt clean",
-    "build": "grunt build"
+    "build": "grunt build",
+    "coveralls": "grunt coveralls"
   },
   "devDependencies": {
     "chai": "^4.1.2",

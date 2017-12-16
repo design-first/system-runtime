@@ -39,15 +39,6 @@ module.exports = grunt => {
     json_merge: grunt.file.readJSON('tasks/json_merge.json')
   });
 
-  grunt.event.on('coverage', (lcov, done) => {
-    require('coveralls').handleInput(lcov, (err) => {
-      if (err) {
-        return done(err);
-      }
-      done();
-    });
-  });
-
   // dev
   grunt.registerTask('dev', [
     'watch',
@@ -57,7 +48,7 @@ module.exports = grunt => {
   grunt.registerTask('test', [
     'json_merge',
     'concat:systemModule',
-    'mocha_istanbul'
+    'mocha_istanbul:coverage'
   ]);
 
   // build
@@ -75,4 +66,22 @@ module.exports = grunt => {
     'karma:release',
     'yuidoc'
   ]);
+
+  // coveralls
+  grunt.registerTask('coveralls', [
+    'json_merge',
+    'concat:systemModule',
+    'mocha_istanbul:coveralls'
+  ]);
+
+  if (process.env.TRAVIS) {
+    grunt.event.on('coverage', (lcov, done) => {
+      require('coveralls').handleInput(lcov, (err) => {
+        if (err) {
+          return done(err);
+        }
+        done();
+      });
+    });
+  }
 };
