@@ -18,15 +18,20 @@
  * limitations under the License.
  */
 
-module.exports = function (grunt) {
+module.exports = grunt => {
+
+  // load tasks
+  require('load-grunt-tasks')(grunt);
+
+  // init configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     watch: grunt.file.readJSON('tasks/watch.json'),
     clean: grunt.file.readJSON('tasks/clean.json'),
-    jshint: grunt.file.readJSON('tasks/jshint.json'),
+    eslint: grunt.file.readJSON('tasks/eslint.json'),
     jsbeautifier: grunt.file.readJSON('tasks/jsbeautifier.json'),
     yuidoc: grunt.file.readJSON('tasks/yuidoc.json'),
-    jasmine_nodejs: grunt.file.readJSON('tasks/jasmine_nodejs.json'),
+    mocha_istanbul: grunt.file.readJSON('tasks/mocha_istanbul.json'),
     karma: grunt.file.readJSON('tasks/karma.json'),
     browserify: grunt.file.readJSON('tasks/browserify.json'),
     uglify: grunt.file.readJSON('tasks/uglify.json'),
@@ -34,35 +39,26 @@ module.exports = function (grunt) {
     json_merge: grunt.file.readJSON('tasks/json_merge.json')
   });
 
-  grunt.loadNpmTasks('grunt-browserify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-jsbeautifier');
-  grunt.loadNpmTasks('grunt-jasmine-nodejs');
-  grunt.loadNpmTasks('grunt-json-merge');
-  grunt.loadNpmTasks('grunt-contrib-yuidoc');
-  grunt.loadNpmTasks('grunt-karma');
-
+  // dev
   grunt.registerTask('dev', [
     'watch',
   ]);
 
+  // test
   grunt.registerTask('test', [
     'json_merge',
     'concat:systemModule',
-    'jasmine_nodejs:modules'
+    'mocha_istanbul'
   ]);
 
+  // build
   grunt.registerTask('build', [
     'clean',
     'json_merge',
     'concat:systemModule',
     'jsbeautifier',
-    'jshint',
-    'jasmine_nodejs:modules',
+    'eslint',
+    'mocha_istanbul',
     'browserify:debug',
     'browserify:release',
     'uglify:release',

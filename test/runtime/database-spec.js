@@ -1,13 +1,14 @@
-describe('a database instance', function () {
+describe('System Runtime metamodel component', () => {
 
   // init
   if (typeof window === 'undefined') {
     runtime = require('../../src/runtime.js');
+    expect = require('chai').expect;
   }
 
-  it('exists', function () {
-    var db = runtime.require('db');
-    expect(db).toBeDefined();
-  });
+  it('exists', () => {
+    const db = runtime.require('db');
 
+    expect(db).to.not.be.undefined;
+  });
 });

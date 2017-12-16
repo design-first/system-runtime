@@ -1,50 +1,51 @@
-describe('a system', function () {
+describe('a system', () => {
 
-  var system = null;
+  let system = null;
 
   // init
-  beforeEach(function () {
+  beforeEach(() => {
     if (typeof window === 'undefined') {
       runtime = require('../../src/runtime.js');
+      expect = require('chai').expect;
     }
     system = runtime.system('test5');
   });
 
-  it('has a name', function () {
-    expect(system.name()).toBe('test5');
+  it('has a name', () => {
+    expect(system.name()).equal('test5');
   });
 
-  it('has a description', function () {
-    expect(typeof system.description()).toBe('string');
+  it('has a description', () => {
+    expect(typeof system.description()).equal('string');
   });
 
-  it('has a version', function () {
-    expect(system.version()).toBeDefined();
+  it('has a version', () => {
+    expect(system.version()).to.not.be.undefined;
   });
 
-  it('has schemas', function () {
-    expect(system.schemas()).toBeDefined();
+  it('has schemas', () => {
+    expect(system.schemas()).to.not.be.undefined;
   });
 
-  it('has models', function () {
-    expect(system.models()).toBeDefined();
+  it('has models', () => {
+    expect(system.models()).to.not.be.undefined;
   });
 
-  it('has behaviors', function () {
-    expect(system.behaviors()).toBeDefined();
+  it('has behaviors', () => {
+    expect(system.behaviors()).to.not.be.undefined;
   });
 
-  it('has types', function () {
-    expect(system.types()).toBeDefined();
+  it('has types', () => {
+    expect(system.types()).to.not.be.undefined;
   });
 
-  it('has components', function () {
-    expect(system.components()).toBeDefined();
+  it('has components', () => {
+    expect(system.components()).to.not.be.undefined;
   });
 
-  it('can get its location', function () {
-    var location = system.location();
-    expect(location).toBeDefined();
-  });
+  it('can get its location', () => {
+    const location = system.location();
 
+    expect(location).to.not.be.undefined;
+  });
 });

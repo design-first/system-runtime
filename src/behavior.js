@@ -61,7 +61,7 @@ var store = {};
  * @return {Function} the created function
  * @private
  */
-function createFunction(name, func, core, useCoreAPI) {
+function createFunction (name, func, core, useCoreAPI) {
   var beginBody = -1,
     funcParams = '',
     params = [],
@@ -135,13 +135,9 @@ function createFunction(name, func, core, useCoreAPI) {
   }
 
   if (params[0] !== '') {
-    /* jshint -W054 */
     action = new Function('__body', "return function " + name + " (" + params.join(',') + ") { return new Function('" + params.join("','") + "', __body).apply(this, arguments) };")(funcBody);
-    /* jshint +W054 */
   } else {
-    /* jshint -W054 */
     action = new Function('__body', "return function " + name + " () { return new Function(__body).apply(this, arguments) };")(funcBody);
-    /* jshint +W054 */
   }
 
   return action;
@@ -161,7 +157,7 @@ function createFunction(name, func, core, useCoreAPI) {
  * @param {Boolean} core if true, behavior can not be exported
  * @return {String} id of the behavior created in System Runtime database
  */
-function add(id, state, action, useCoreAPI, core) {
+function add (id, state, action, useCoreAPI, core) {
   var behaviorId = $helper.generateId(),
     strAction = action.toString();
 
@@ -198,7 +194,7 @@ function add(id, state, action, useCoreAPI, core) {
  * {String} state state of the component <br>
  * {String} behaviorId id of the behavior (optional)) <br>
  */
-function remove(params) {
+function remove (params) {
   var result = [];
 
   params = params || {};
@@ -238,7 +234,7 @@ function remove(params) {
  * @method removeFromMemory
  * @param {String} id id of the component
  */
-function removeFromMemory(id) {
+function removeFromMemory (id) {
   delete store[id];
 }
 
@@ -250,7 +246,7 @@ function removeFromMemory(id) {
  * @param {String} state name of the state
  * @return {Array} all the actions that have to be executed for a specific component and state
  */
-function getActions(id, state) {
+function getActions (id, state) {
   var result = [],
     dbResult = [],
     action = null;
@@ -280,7 +276,7 @@ function getActions(id, state) {
  * Remove all the behaviors stored in memory.
  * @method clear
  */
-function clear() {
+function clear () {
   store = {};
 }
 
@@ -291,7 +287,7 @@ function clear() {
  * @param {String} id id of the behavior
  * @return {Behavior} the behavior
  */
-function get(id) {
+function get (id) {
   return store[id];
 }
 

@@ -1,17 +1,19 @@
-describe('a metamodel instance', function () {
+describe('System Runtime metamodel component', () => {
 
   // init
   if (typeof window === 'undefined') {
     runtime = require('../../src/runtime.js');
+    expect = require('chai').expect;
   }
 
-  it('exists', function () {
-    var metamodel = runtime.require('metamodel');
-    expect(metamodel).toBeDefined();
+  it('exists', () => {
+    const metamodel = runtime.require('metamodel');
+
+    expect(metamodel).to.not.be.undefined;
   });
 
-  it('can add a schema', function () {
-    var metamodel = runtime.require('metamodel');
+  it('can add a schema', () => {
+    const metamodel = runtime.require('metamodel');
     metamodel.schema({
       '_name': 'PersonTest',
       '_inherit': ['_Component'],
@@ -30,11 +32,12 @@ describe('a metamodel instance', function () {
     });
 
     metamodel.create();
-    expect(metamodel.require('PersonTest')).toBeDefined();
+
+    expect(metamodel.require('PersonTest')).to.not.be.undefined;
   });
 
-  it('can add a type', function () {
-    var metamodel = runtime.require('metamodel');
+  it('can add a type', () => {
+    const metamodel = runtime.require('metamodel');
 
     metamodel.type({
       'name': 'address',
@@ -92,9 +95,9 @@ describe('a metamodel instance', function () {
 
     metamodel.create();
 
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var yoda = new Person({
+    const yoda = new Person({
       'sex': 'male',
       'firstName': 'Yoda',
       'lastName': 'Master',
@@ -103,11 +106,11 @@ describe('a metamodel instance', function () {
       }
     });
 
-    expect(yoda.address().planet()).toBe('Dagobah');
+    expect(yoda.address().planet()).equal('Dagobah');
   });
 
-  it('can create a one to one relationship', function () {
-    var metamodel = runtime.require('metamodel');
+  it('can create a one to one relationship', () => {
+    const metamodel = runtime.require('metamodel');
 
     metamodel.schema({
       '_name': 'Person',
@@ -158,27 +161,27 @@ describe('a metamodel instance', function () {
 
     metamodel.create();
 
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var anakin = new Person({
+    const anakin = new Person({
       'sex': 'male',
       'firstName': 'Anakin',
       'lastName': 'Skywalker'
     });
 
-    var luke = new Person({
+    const luke = new Person({
       'sex': 'male',
       'firstName': 'Luke',
       'lastName': 'Skywalkers',
       'father': anakin
     });
 
-    expect(luke.father().firstName()).toBe('Anakin');
+    expect(luke.father().firstName()).equal('Anakin');
   });
 
 
-  it('can can create a one to many relationship', function () {
-    var metamodel = runtime.require('metamodel');
+  it('can can create a one to many relationship', () => {
+    const metamodel = runtime.require('metamodel');
 
     metamodel.schema({
       '_name': 'Person',
@@ -236,33 +239,33 @@ describe('a metamodel instance', function () {
 
     metamodel.create();
 
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var leia = new Person({
+    const leia = new Person({
       'sex': 'female',
       'firstName': 'Leia Amidala',
       'lastName': 'Skywalker'
     });
 
-    var luke = new Person({
+    const luke = new Person({
       'sex': 'male',
       'firstName': 'Luke',
       'lastName': 'Skywalker'
     });
 
-    var padme = new Person({
+    const padme = new Person({
       'sex': 'female',
       'firstName': 'Padme',
       'lastName': 'Amidala',
       'children': [luke, leia]
     });
 
-    expect(padme.children(1).firstName()).toBe('Leia Amidala');
+    expect(padme.children(1).firstName()).equal('Leia Amidala');
   });
 
 
-  it('can create navigation threw model', function () {
-    var metamodel = runtime.require('metamodel');
+  it('can create navigation threw model', () => {
+    const metamodel = runtime.require('metamodel');
 
     metamodel.schema({
       '_name': 'Person',
@@ -327,28 +330,28 @@ describe('a metamodel instance', function () {
 
     metamodel.create();
 
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var luke = new Person({
+    const luke = new Person({
       'sex': 'male',
       'firstName': 'Luke',
       'lastName': 'Skywalker'
     });
 
-    var anakin = new Person({
+    const anakin = new Person({
       'sex': 'male',
       'firstName': 'Anakin',
       'lastName': 'Skywalker',
       'son': luke
     });
 
-    var leia = new Person({
+    const leia = new Person({
       'sex': 'female',
       'firstName': 'Leia Amidala',
       'lastName': 'Skywalker',
       'father': anakin
     });
 
-    expect(leia.father().son().firstName()).toBe('Luke');
+    expect(leia.father().son().firstName()).equal('Luke');
   });
 });

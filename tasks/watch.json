@@ -7,7 +7,7 @@
     "tasks": [
       "json_merge",
       "concat:systemModule",
-      "jshint",
+      "eslint",
       "jasmine_nodejs:modules"
     ],
     "options": {

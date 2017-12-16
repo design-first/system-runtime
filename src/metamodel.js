@@ -102,7 +102,7 @@ function generateModels() {
 
     // set model internal properties
     model = {
-      '_name': schema._name,
+      '_name': schema._name
     };
 
     // set _core
@@ -876,7 +876,8 @@ function getRealClassName(value) {
  * @private
  */
 function getRealTypeName(value) {
-  return value.replace('{', '').replace('}', '').trim();
+  return value.replace('{', '').replace('}', '')
+    .trim();
 }
 
 
@@ -1098,10 +1099,14 @@ function schema(importedSchema) {
 
   // check if schema is compliant with the meta meta model
   if (isValidObject(schema, store.metadef.schema, false)) {
-    schemas = $db._Schema.find({ '_name': name });
+    schemas = $db._Schema.find({
+      '_name': name
+    });
     if (schemas.length) {
       mergedSchema = merge(schema, schemas[0]);
-      $db._Schema.update({ '_name': name }, mergedSchema);
+      $db._Schema.update({
+        '_name': name
+      }, mergedSchema);
       id = schemas[0]._id;
     } else {
       result = $db._Schema.insert(schema);
@@ -1138,10 +1143,14 @@ function model(importedModel) {
 
   // check if model is compliant with the meta meta model
   if (isValidObject(model, store.metadef.model, false)) {
-    models = $db._Model.find({ '_name': name });
+    models = $db._Model.find({
+      '_name': name
+    });
     if (models.length) {
       mergedModel = merge(model, models[0]);
-      $db._Model.update({ '_name': name }, mergedModel);
+      $db._Model.update({
+        '_name': name
+      }, mergedModel);
       id = models[0]._id;
     } else {
       result = $db._Model.insert(model);
@@ -1859,7 +1868,7 @@ function isValidObject(object, schema, strict, cleanRef) {
 
     if (!hasType(comp, 'undefined')) {
       if (!inheritFrom(comp.constructor.name, typeRef)) {
-        //if (getClassName(comp) !== typeRef) { uncomment this line for a strict mode
+        // if (getClassName(comp) !== typeRef) { uncomment this line for a strict mode
         isValid = false;
         $log.invalidType(field, typeRef);
       } else {

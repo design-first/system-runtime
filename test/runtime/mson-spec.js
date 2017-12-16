@@ -1,12 +1,13 @@
-describe('a MSON schema', function () {
+describe('a MSON schema', () => {
 
   // init
   if (typeof window === 'undefined') {
     runtime = require('../../src/runtime.js');
+    expect = require('chai').expect;
   }
 
-  it('can make inheritance at schema level', function () {
-    var metamodel = runtime.require('metamodel');
+  it('can make inheritance at schema level', () => {
+    const metamodel = runtime.require('metamodel');
 
     metamodel.schema({
       '_name': 'Person_test',
@@ -23,24 +24,24 @@ describe('a MSON schema', function () {
 
     metamodel.create();
 
-    var Person = runtime.require('Person_test');
+    const Person = runtime.require('Person_test');
 
     Person.off('getFullName');
 
     Person.on('getFullName', () => this.firstName() + ' ' + this.lastName() );
 
-    var Teacher = runtime.require('Teacher_test');
+    const Teacher = runtime.require('Teacher_test');
 
-    var eikichi = new Teacher({
+    const eikichi = new Teacher({
       'firstName': 'Eikichi',
       'lastName': 'Onizuka'
     });
 
-    expect(eikichi.getFullName()).toBe('Eikichi Onizuka');
+    expect(eikichi.getFullName()).equal('Eikichi Onizuka');
   });
 
-  it('implements C3 superclass linearization algorithm', function () {
-    var metamodel = runtime.require('metamodel');
+  it('implements C3 superclass linearization algorithm', () => {
+    const metamodel = runtime.require('metamodel');
 
     metamodel.schema({
       '_name': 'Test_result',
@@ -107,13 +108,13 @@ describe('a MSON schema', function () {
 
     metamodel.create();
 
-    var Test_result = runtime.require('Test_result');
+    const Test_result = runtime.require('Test_result');
     Test_result.on('getParent', () => {
       return $metamodel.getParents('Z');
     }, true);
 
-    var test = new Test_result();
+    const test = new Test_result();
 
-    expect(test.getParent().join('_')).toBe(['K1', 'K2', 'K3', 'D', 'A', 'B', 'C', 'E', 'O'].join('_'));
+    expect(test.getParent().join('_')).equal(['K1', 'K2', 'K3', 'D', 'A', 'B', 'C', 'E', 'O'].join('_'));
   });
 });

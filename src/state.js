@@ -49,7 +49,7 @@ var store = {};
  * @param {String} state the new state of the component
  * @param {Object} value value of the state
  */
-function set(id, state, value) {
+function set (id, state, value) {
   store[id] = {
     'state': state,
     'value': value
@@ -67,7 +67,7 @@ function set(id, state, value) {
  * @param {String} id id of the component
  * @return {String} state of the component
  */
-function get(id) {
+function get (id) {
   return store[id];
 }
 
@@ -76,7 +76,7 @@ function get(id) {
  * Remove all the states of the components from the memory.
  * @method clear
  */
-function clear() {
+function clear () {
   store = {};
 }
 

@@ -154,7 +154,8 @@ function _Array(conf) {
           }
 
           if ($helper.isRuntime()) {
-            $helper.getRuntime().require('db').update({
+            $helper.getRuntime().require('db')
+              .update({
               'collection': classId,
               'id': id,
               'field': propertyName,
@@ -191,7 +192,8 @@ function _Array(conf) {
           }
 
           if ($helper.isRuntime()) {
-            $helper.getRuntime().require('db').update({
+            $helper.getRuntime().require('db')
+.update({
               'collection': classId,
               'id': id,
               'field': propertyName,
@@ -234,7 +236,8 @@ function _Array(conf) {
         }
 
         if ($helper.isRuntime()) {
-          $helper.getRuntime().require('db').update({
+          $helper.getRuntime().require('db')
+.update({
             'collection': classId,
             'id': id,
             'field': propertyName,
@@ -342,7 +345,8 @@ function _Array(conf) {
     arrDb.sort(funct);
 
     if ($helper.isRuntime()) {
-      $helper.getRuntime().require('db').update({
+      $helper.getRuntime().require('db')
+.update({
         'collection': classId,
         'id': id,
         'field': propertyName,
@@ -364,7 +368,8 @@ function _Array(conf) {
     arrDb.reverse();
 
     if ($helper.isRuntime()) {
-      $helper.getRuntime().require('db').update({
+      $helper.getRuntime().require('db')
+.update({
         'collection': classId,
         'id': id,
         'field': propertyName,
@@ -373,7 +378,7 @@ function _Array(conf) {
     }
 
     _copy();
-    
+
     return arr;
   };
 
@@ -394,7 +399,8 @@ function _Array(conf) {
       result = arrDb.splice(start, deleteCount);
 
       if ($helper.isRuntime()) {
-        $helper.getRuntime().require('db').update({
+        $helper.getRuntime().require('db')
+.update({
           'collection': classId,
           'id': id,
           'field': propertyName,
@@ -439,9 +445,7 @@ function _Array(conf) {
   return arr;
 }
 
-/* jshint -W058 */
-_Array.prototype = new Array;
-/* jshint +W058 */
+_Array.prototype = [];
 
 
 /*
@@ -679,9 +683,7 @@ function createClass(classId) {
     body = function () {
       return config._id;
     };
-    /* jshint -W054 */
     this.id = new Function('__body', 'return function id () { return __body.call(this) };')(body);
-    /* jshint +W054 */
 
     // classInfo
     if ($metamodel.inheritFrom(classId, '_Component')) {
@@ -694,7 +696,8 @@ function createClass(classId) {
     $db.createLog('insert', classId, config._id, '', config);
 
     if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-      $helper.getRuntime().require('db').insert({
+      $helper.getRuntime().require('db')
+.insert({
         collection: classId,
         document: config
       });
@@ -706,9 +709,7 @@ function createClass(classId) {
       this.init(config);
     }
   };
-  /* jshint -W054 */
   return new Function('__body', 'return function ' + classId + ' (config) { __body.call(this,config) };')(body);
-  /* jshint +W054 */
 }
 
 
@@ -723,9 +724,7 @@ function addId(Class, classId) {
   var body = function () {
     return classId;
   };
-  /* jshint -W054 */
   Class.id = new Function('__body', 'return function id (prop, val) { return __body.call(this, prop, val) };')(body);
-  /* jshint +W054 */
 }
 
 
@@ -837,7 +836,8 @@ function addProperties(model, Class, classId) {
                   component[propertyName] = realVal;
 
                   if ($helper.isRuntime()) {
-                    $helper.getRuntime().require('db').update({
+                    $helper.getRuntime().require('db')
+.update({
                       'collection': classId,
                       'id': this.id(),
                       'field': propertyName,
@@ -897,7 +897,8 @@ function addProperties(model, Class, classId) {
                 component[propertyName][position] = realVal;
 
                 if ($helper.isRuntime()) {
-                  $helper.getRuntime().require('db').update({
+                  $helper.getRuntime().require('db')
+.update({
                     'collection': classId,
                     'id': this.id(),
                     'field': propertyName,
@@ -917,9 +918,7 @@ function addProperties(model, Class, classId) {
           }
         }
       };
-      /* jshint -W054 */
       Class.prototype[propertyName] = new Function('__body', 'return function ' + propertyName + ' (position, value) { return __body.call(this, position, value) };')(body);
-      /* jshint +W054 */
     } else {
       body = function body(value) {
         var search = [],
@@ -965,7 +964,9 @@ function addProperties(model, Class, classId) {
             $log.readOnlyProperty(this.id(), this.constructor.name, propertyName);
           } else {
             if ($metamodel.isValidType(value, propertyType)) {
-              search = $db[classId].find({ '_id': this.id() });
+              search = $db[classId].find({
+                '_id': this.id()
+              });
               if (search.length) {
                 component = search[0];
 
@@ -990,7 +991,8 @@ function addProperties(model, Class, classId) {
                 }
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                  $helper.getRuntime().require('db').update({
+                  $helper.getRuntime().require('db')
+.update({
                     'collection': classId,
                     'id': this.id(),
                     'field': propertyName,
@@ -1015,9 +1017,7 @@ function addProperties(model, Class, classId) {
           }
         }
       };
-      /* jshint -W054 */
       Class.prototype[propertyName] = new Function('__body', 'return function ' + propertyName + ' (value) { return __body.call(this,value) };')(body);
-      /* jshint +W054 */
     }
   });
 }
@@ -1109,7 +1109,8 @@ function addStructure(path, name, model, id) {
                   });
 
                   if ($helper.isRuntime()) {
-                    $helper.getRuntime().require('db').update({
+                    $helper.getRuntime().require('db')
+.update({
                       'collection': model,
                       'id': id,
                       'field': fullPath,
@@ -1147,7 +1148,8 @@ function addStructure(path, name, model, id) {
                 setStructureValue(model, id, fullPath, arr);
 
                 if ($helper.isRuntime()) {
-                  $helper.getRuntime().require('db').update({
+                  $helper.getRuntime().require('db')
+.update({
                     'collection': model,
                     'id': id,
                     'field': fullPath,
@@ -1168,9 +1170,7 @@ function addStructure(path, name, model, id) {
         }
       };
 
-      /* jshint -W054 */
       sructure[propertyName] = new Function('__body', 'return function ' + propertyName + ' (position, value) { return __body.call(this, position, value) };')(body);
-      /* jshint +W054 */
     } else {
       body = function body(value) {
         var search = [],
@@ -1218,7 +1218,9 @@ function addStructure(path, name, model, id) {
             $log.readOnlyProperty(id, model, fullPath);
           } else {
             if ($metamodel.isValidType(value, propertyType)) {
-              search = $db[model].find({ '_id': id });
+              search = $db[model].find({
+                '_id': id
+              });
               if (search.length) {
                 component = search[0];
 
@@ -1235,7 +1237,8 @@ function addStructure(path, name, model, id) {
                 }
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                  $helper.getRuntime().require('db').update({
+                  $helper.getRuntime().require('db')
+.update({
                     'collection': model,
                     'id': id,
                     'field': fullPath,
@@ -1261,9 +1264,7 @@ function addStructure(path, name, model, id) {
         }
       };
 
-      /* jshint -W054 */
       sructure[propertyName] = new Function('__body', 'return function ' + propertyName + ' (value) { return __body.call(this,value) };')(body);
-      /* jshint +W054 */
     }
   });
 
@@ -1321,19 +1322,15 @@ function addMethods(model, Class, classId) {
       paramsName.unshift('context');
       paramsWithContext = paramsName.join('');
 
-      /* jshint -W054 */
       Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' (' + params + ') { return __body.call(this,' + params + ') };')(body);
       if (methodName !== 'name') {
         Class[methodName] = new Function('__body', 'return function ' + methodName + ' (' + paramsWithContext + ') { return __body.call(this,' + paramsWithContext + ') };')(bodyWithContext);
       }
-      /* jshint +W054 */
     } else {
-      /* jshint -W054 */
       Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' () { return __body.call(this) };')(body);
       if (methodName !== 'name') {
         Class[methodName] = new Function('__body', 'return function ' + methodName + ' (context) { return __body.call(this, context) };')(bodyWithContext);
       }
-      /* jshint +W054 */
     }
   });
 }
@@ -1397,13 +1394,9 @@ function addEvents(model, Class, classId) {
         }
       };
     if (params) {
-      /* jshint -W054 */
       Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' (' + params + ') { return __body.call(this,' + params + ') };')(body);
-      /* jshint +W054 */
     } else {
-      /* jshint -W054 */
       Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' () { return __body.call(this) };')(body);
-      /* jshint +W054 */
     }
   });
 }
@@ -1456,9 +1449,7 @@ function addOn(Class, classId) {
     }
     return behaviorId;
   };
-  /* jshint -W054 */
   Class.prototype.on = new Function('__body', 'return function on (state, handler, useCoreAPI, isCore) { return __body.call(this,state,handler,useCoreAPI,isCore) };')(body);
-  /* jshint +W054 */
 }
 
 
@@ -1509,9 +1500,7 @@ function addOnClass(Class, classId) {
     }
     return behaviorId;
   };
-  /* jshint -W054 */
   Class.on = new Function('__body', 'return function on (state, handler, useCoreAPI, isCore) { return __body.call(this, state, handler, useCoreAPI,isCore) };')(body);
-  /* jshint -W054 */
 }
 
 
@@ -1536,13 +1525,11 @@ function addOffClass(Class, classId) {
           'state': state
         });
       } else {
-        $log.InvalidStateOff(classId, state);
+        $log.invalidStateOff(classId, state);
       }
     }
   };
-  /* jshint -W054 */
   Class.off = new Function('__body', 'return function off (state, behaviorId) { return __body.call(this, state, behaviorId) };')(body);
-  /* jshint +W054 */
 }
 
 
@@ -1584,9 +1571,7 @@ function addDestroyClass(Class) {
       'state': 'destroy'
     });
   };
-  /* jshint -W054 */
   Class.destroy = new Function('__body', 'return function destroy () { return __body.call(this) };')(body);
-  /* jshint +W054 */
 }
 
 
@@ -1600,9 +1585,7 @@ function addClassInfoClass(Class) {
   var body = function () {
     return get(this.id() + 'Info');
   };
-  /* jshint -W054 */
   Class.classInfo = new Function('__body', 'return function classInfo () { return __body.call(this) };')(body);
-  /* jshint +W054 */
 }
 
 

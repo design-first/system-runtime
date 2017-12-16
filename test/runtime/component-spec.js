@@ -1,8 +1,9 @@
-describe('a component', function () {
+describe('a System Runtime component', function () {
 
   // init
   if (typeof window === 'undefined') {
     runtime = require('../../src/runtime.js');
+    expect = require('chai').expect;
   }
 
   beforeEach(function () {
@@ -63,23 +64,25 @@ describe('a component', function () {
       'moving': {}
     });
     metamodel.create();
-
   });
 
   it('can show its id', function () {
     var id = runtime.id();
-    expect(id).toBe('runtime');
+
+    expect(id).equal('runtime');
   });
 
   it('can require a component', function () {
     var db = runtime.require('db');
-    expect(db).toBeDefined();
+
+    expect(db).to.not.be.undefined;
   });
 
   it('can show its classInfo', function () {
     var db = runtime.require('db');
     var classInfo = db.classInfo();
-    expect(classInfo).toBeDefined();
+
+    expect(classInfo).to.not.be.undefined;
   });
 
   it('can add an event', function (done) {
@@ -96,7 +99,7 @@ describe('a component', function () {
     yoda.moving();
 
     setTimeout(function () {
-      expect(yoda.address()).toBe('Dagobah');
+      expect(yoda.address()).equal('Dagobah');
       done();
     }, 1);
   });
@@ -116,7 +119,7 @@ describe('a component', function () {
     yoda.moving();
 
     setTimeout(function () {
-      expect(yoda.address()).toBe('');
+      expect(yoda.address()).equal('');
       done();
     }, 1);
   });
@@ -136,7 +139,7 @@ describe('a component', function () {
     yoda2.moving();
 
     setTimeout(function () {
-      expect(yoda2.address()).toBe('');
+      expect(yoda2.address()).equal('');
       done();
     }, 1);
   });
@@ -157,7 +160,7 @@ describe('a component', function () {
     yoda3.moving();
 
     setTimeout(function () {
-      expect(yoda3.address()).toBe('');
+      expect(yoda3.address()).equal('');
       done();
     }, 1);
   });
@@ -176,7 +179,7 @@ describe('a component', function () {
     yoda.lastName('Grand Jedi Master');
 
     setTimeout(function () {
-      expect(yoda.address()).toBe('Dagobah');
+      expect(yoda.address()).equal('Dagobah');
       done();
     }, 1);
   });
@@ -197,7 +200,7 @@ describe('a component', function () {
     yoda.lastName('Grand Jedi Master');
 
     setTimeout(function () {
-      expect(yoda.address()).toBe('');
+      expect(yoda.address()).equal('');
       done();
     }, 1);
   });
@@ -224,7 +227,7 @@ describe('a component', function () {
 
     leia.father(anakin);
 
-    expect(leia.father().children(0).firstName()).toBe('Luke');
+    expect(leia.father().children(0).firstName()).equal('Luke');
   });
 
   it('can get a property', function () {
@@ -233,7 +236,8 @@ describe('a component', function () {
       'firstName': 'Yoda',
       'lastName': 'Master'
     });
-    expect(yoda.firstName()).toBe('Yoda');
+    
+    expect(yoda.firstName()).equal('Yoda');
   });
 
   it('can set a property', function () {
@@ -244,7 +248,7 @@ describe('a component', function () {
     });
     yoda.lastName('Grand Jedi Master');
 
-    expect(yoda.lastName()).toBe('Grand Jedi Master');
+    expect(yoda.lastName()).equal('Grand Jedi Master');
   });
 
   it('can not set an invalid value', function () {
@@ -255,7 +259,7 @@ describe('a component', function () {
     });
     yoda.lastName(42);
 
-    expect(yoda.lastName()).toBe('Master');
+    expect(yoda.lastName()).equal('Master');
   });
 
   it('can add a link to another components', function () {
@@ -273,7 +277,7 @@ describe('a component', function () {
 
     leia.father(anakin);
 
-    expect(leia.father().firstName()).toBe('Anakin');
+    expect(leia.father().firstName()).equal('Anakin');
   });
 
   it('can remove a link to another components', function () {
@@ -292,7 +296,7 @@ describe('a component', function () {
     leia.father(anakin);
     leia.father(null);
 
-    expect(leia.father()).toBe(undefined);
+    expect(leia.father()).equal(undefined);
   });
 
   it('can add an item in a collection in the config', function () {
@@ -309,7 +313,7 @@ describe('a component', function () {
       'children': [luke]
     });
 
-    expect(anakin.children(0).id()).toBe(luke.id());
+    expect(anakin.children(0).id()).equal(luke.id());
   });
 
   it('can add an item in a collection with api', function () {
@@ -327,7 +331,7 @@ describe('a component', function () {
 
     anakin.children(0, luke);
 
-    expect(anakin.children(0).id()).toBe(luke.id());
+    expect(anakin.children(0).id()).equal(luke.id());
   });
 
   it('can add items in a collection with api', function () {
@@ -345,7 +349,7 @@ describe('a component', function () {
 
     anakin.children([luke, anakin]);
 
-    expect(anakin.children().length).toBe(2);
+    expect(anakin.children().length).equal(2);
   });
 
   it('can remove an item of a collection with pop', function () {
@@ -362,7 +366,7 @@ describe('a component', function () {
       'children': [luke]
     });
 
-    expect(anakin.children().pop().id()).toBe(luke.id());
+    expect(anakin.children().pop().id()).equal(luke.id());
   });
 
   it('can remove an item of an array property with pop', function () {
@@ -376,7 +380,7 @@ describe('a component', function () {
 
     luke.likes().pop();
 
-    expect(luke.likes().length).toBe(0);
+    expect(luke.likes().length).equal(0);
   });
 
   it('can add an item of a collection with push', function () {
@@ -394,7 +398,7 @@ describe('a component', function () {
 
     anakin.children().push(luke);
 
-    expect(anakin.children(0).id()).toBe(luke.id());
+    expect(anakin.children(0).id()).equal(luke.id());
   });
 
   it('can add an item of an array property with push', function () {
@@ -407,7 +411,7 @@ describe('a component', function () {
 
     luke.likes().push('saying nooooooo!');
 
-    expect(luke.likes().length).toBe(1);
+    expect(luke.likes().length).equal(1);
   });
 
   it('can clear a collection with api', function () {
@@ -426,7 +430,7 @@ describe('a component', function () {
     anakin.children([luke, anakin]);
     anakin.children([]);
 
-    expect(anakin.children().length).toBe(0);
+    expect(anakin.children().length).equal(0);
   });
 
   it('can destroy itself', function () {
@@ -438,7 +442,7 @@ describe('a component', function () {
     var id = yoda.id();
     yoda.destroy();
 
-    expect(runtime.require(id)).toBe(undefined);
+    expect(runtime.require(id)).equal(undefined);
   });
 
   it('can destroy a class', function () {
@@ -446,7 +450,7 @@ describe('a component', function () {
     Person.destroy();
 
     var result = runtime.require('Person');
-    expect(result).toBe(undefined);
+    expect(result).equal(undefined);
   });
 
 
@@ -458,7 +462,7 @@ describe('a component', function () {
       '_core': true
     });
 
-    expect(runtime.bundle().indexOf('Shadow')).toBe(-1);
+    expect(runtime.bundle().indexOf('Shadow')).equal(-1);
   });
 
 });

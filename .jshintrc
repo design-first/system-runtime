@@ -1,7 +1,0 @@
-{
-  "globals": {
-    "runtime": true
-  },
-  "node": true,
-  "supernew": true
-}

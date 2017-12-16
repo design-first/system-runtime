@@ -30,7 +30,7 @@ module.exports = function (config) {
 
   config.set({
     basePath: './',
-    frameworks: ['jasmine'],
+    frameworks: ['mocha', 'chai'],
     files: [
       "dist/system-runtime.min.js",
       "test/runtime/runtime-spec.js",
@@ -51,7 +51,8 @@ module.exports = function (config) {
       'karma-coverage',
       'karma-script-launcher',
       'karma-chrome-launcher',
-      'karma-jasmine'
+      'karma-mocha',
+      'karma-chai',
     ],
     singleRun: true,
     browsers: browsers
