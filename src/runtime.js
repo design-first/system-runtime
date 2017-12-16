@@ -82,21 +82,7 @@ system.start();
 system.state('active');
 
 
-/* exports */
-
-
-/**
- * This module is the main module of System Runtime. <br>
- * It inits System Runtime metamodel and loads System Runtime core system.
- * 
- * @module runtime
- * @requires component
- * @requires metamodel
- * @requires system
- * @main runtime
- * @class runtime
- * @static
- */
+/* Public property */
 
 
 /**

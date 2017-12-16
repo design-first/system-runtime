@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-/**
+/*
  * This module manages the behaviors of all components. 
  * A behavior is a mecanism that allow users to add actions that will be executed 
  * when a specific state of a component will change.
@@ -61,7 +61,7 @@ var store = {};
  * @return {Function} the created function
  * @private
  */
-function createFunction (name, func, core, useCoreAPI) {
+function createFunction(name, func, core, useCoreAPI) {
   var beginBody = -1,
     funcParams = '',
     params = [],
@@ -147,7 +147,7 @@ function createFunction (name, func, core, useCoreAPI) {
 /* Public methods */
 
 
-/*
+/**
  * Add a behavior that will be stored in System Runtime database.
  * @method add
  * @param {String} id id of the component
@@ -157,7 +157,7 @@ function createFunction (name, func, core, useCoreAPI) {
  * @param {Boolean} core if true, behavior can not be exported
  * @return {String} id of the behavior created in System Runtime database
  */
-function add (id, state, action, useCoreAPI, core) {
+exports.add = function add(id, state, action, useCoreAPI, core) {
   var behaviorId = $helper.generateId(),
     strAction = action.toString();
 
@@ -182,10 +182,10 @@ function add (id, state, action, useCoreAPI, core) {
   });
 
   return behaviorId;
-}
+};
 
 
-/*
+/**
  * Remove a behavior with its id or remove all the behaviors for a specific state
  * of the component.
  * @method remove
@@ -194,7 +194,7 @@ function add (id, state, action, useCoreAPI, core) {
  * {String} state state of the component <br>
  * {String} behaviorId id of the behavior (optional)) <br>
  */
-function remove (params) {
+exports.remove = function remove(params) {
   var result = [];
 
   params = params || {};
@@ -226,27 +226,27 @@ function remove (params) {
       });
     }
   }
-}
+};
 
 
-/*
+/**
  * Remove a behavior with its id from the memory.
  * @method removeFromMemory
  * @param {String} id id of the component
  */
-function removeFromMemory (id) {
+exports.removeFromMemory = function removeFromMemory(id) {
   delete store[id];
-}
+};
 
 
-/*
+/**
  * Get all the actions of a behavior for a component.
  * @method getActions
  * @param {String} id id of the component
  * @param {String} state name of the state
  * @return {Array} all the actions that have to be executed for a specific component and state
  */
-function getActions (id, state) {
+exports.getActions = function getActions(id, state) {
   var result = [],
     dbResult = [],
     action = null;
@@ -269,99 +269,24 @@ function getActions (id, state) {
   });
 
   return result;
-}
+};
 
 
-/*
+/**
  * Remove all the behaviors stored in memory.
  * @method clear
  */
-function clear () {
+exports.clear = function clear() {
   store = {};
-}
+};
 
 
-/*
+/**
  * Get a behavior by its id.
  * @method get
  * @param {String} id id of the behavior
  * @return {Behavior} the behavior
  */
-function get (id) {
+exports.get = function get(id) {
   return store[id];
-}
-
-
-/* exports */
-
-
-/**
- * This module manages the behaviors of all components. A behavior is a mecanism that allow users to add action that will be executed 
- * when a specific state of a component will change.
- * 
- * @module behavior
- * @requires db
- * @requires helper
- * @requires channel
- * @class behavior
- * @static
- */
-
-
-/**
- * Add a behavior that will be stored in System Runtime database.
- * @method add
- * @param {String} id id of the component
- * @param {Object} state the state on which the action will be executed 
- * @param {Object} action the action to execute when the component will have a specific state 
- * @param {Boolean} useCoreAPI if true, System Runtime core modules will be injected as parameters of the action (default false)
- * @param {Boolean} core if true, behavior can not be exported
- * @return {String} id of the behavior created in System Runtime database
- */
-exports.add = add;
-
-
-/**
- * Get a behavior by its id.
- * @method get
- * @param {String} id id of the behavior
- * @return {Behavior} the behavior
- */
-exports.get = get;
-
-
-/**
- * Remove a behavior with its id or remove all the behaviors for a specific state
- * of the component.
- * @method remove
- * @param {Object} params <br>
- * {String} componentId id of the component <br>
- * {String} state state of the component <br>
- * {String} behaviorId id of the behavior (optional)) <br>
- */
-exports.remove = remove;
-
-
-/**
- * Get all the actions of a behavior for a component.
- * @method getActions
- * @param {String} id id of the component
- * @param {String} state name of the state
- * @return {Array} all the actions that have to be executed for a specific component and state
- */
-exports.getActions = getActions;
-
-
-/**
- * Remove all the behaviors stored in memory.
- * @method clear
- */
-exports.clear = clear;
-
-
-/**
- * Remove a behavior with its id from the memory.
- * @method removeFromMemory
- * @param {String} id id of the component
- */
-exports.removeFromMemory = removeFromMemory;
+};

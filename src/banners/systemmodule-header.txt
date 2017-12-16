@@ -32,8 +32,8 @@
 /* Public properties */
 
 
-/*
+/**
  * Runtime core system
  * @property {_System} system
  */
-var system = 
+exports.system = 

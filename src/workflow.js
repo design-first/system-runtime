@@ -452,7 +452,7 @@ function callAction (component, state, action, params, isEvent) {
 /* Public methods */
 
 
-/*
+/**
  * Check if an action has the valid number of parameter.
  * @method validParamNumbers
  * @param {String} className name the class
@@ -460,7 +460,7 @@ function callAction (component, state, action, params, isEvent) {
  * @param {Function} action action
  * @return {Boolean} true if the action is the valid number of parameters
  */
-function validParamNumbers (className, state, action) {
+exports.validParamNumbers = function validParamNumbers (className, state, action) {
   var func = '',
     beginBody = -1,
     header = '',
@@ -521,16 +521,16 @@ function validParamNumbers (className, state, action) {
   }
 
   return result;
-}
+};
 
 
-/*
+/**
  * Check if conditions on input are compliant with the model before calling the action.
  * @method checkParams
  * @param {Object} params
  * @return {Boolean} true if condition on input are compliant with the model
  */
-function checkParams (params) {
+exports.checkParams = function checkParams (params) {
   params = params || {};
 
   var component = params.component || null,
@@ -623,16 +623,16 @@ function checkParams (params) {
   }
 
   return result;
-}
+};
 
 
-/*
+/**
  * Call an action that comes from an event.
  * @method action
  * @param {String} behaviorId id of the behavior
  * @param {Array} params parameters
  */
-function action (behaviorId, params) {
+exports.action = function action (behaviorId, params) {
   var isEvent = false,
     isProperty = false,
     isLink = false,
@@ -674,10 +674,10 @@ function action (behaviorId, params) {
       }
     }
   }
-}
+};
 
 
-/*
+/**
  * Change the state of a component.
  * 
  * Worklow:<br>
@@ -698,7 +698,7 @@ function action (behaviorId, params) {
  * {String} state state of the component <br>
  * {Array} data parameters to send to the action
  */
-function state (params) {
+exports.state = function state (params) {
 
   params = params || {};
   params.component = params.component || '';
@@ -742,7 +742,7 @@ function state (params) {
 
   if (actions.length) {
 
-    if (checkParams({
+    if (exports.checkParams({
       'component': component,
       'methodName': params.state,
       'args': params.data
@@ -778,17 +778,17 @@ function state (params) {
       $state.set(component.id(), params.state, params.data);
     }
   }
-}
+};
 
 
-/*
+/**
  * Stop the workflow engine.
  * @method stop
  * @param {Object} params parameters <br>
  * {Boolean} error true if the stop of the workflow is due to an error (default false) <br>
  * {String} message error message to log (default '')
  */
-function stop (params) {
+exports.stop = function stop (params) {
   params = params || {};
 
   if (typeof params.error === 'undefined') {
@@ -812,111 +812,4 @@ function stop (params) {
       console.error('runtime: runtime has been stopped');
     }
   }
-}
-
-
-/*
- * Restart the workflow engine from the last state.
- * @method restart
- */
-function restart () {
-  exports.state = state;
-  $log.workflowRestarted();
-}
-
-
-/* exports */
-
-
-/**
- * This module manages the workflow of System Runtime. It behaves like a workflow engine. <br>
- * It checks if the change of status of a component is valid to be executed. By valid, it means that:<br>
- * - the state is valid for the component, <br>
- * - the input (i.e. parameters) of all actions for the state are compliants with the model and <br>
- * - the output of all actions are compliants with the model. <br>
- * 
- * If an error occurs, the workflow will call the error state of the component and of System Runtime instance. <br>
- * If the error can break the consistency of the current system, the worklow will stop.
- * 
- * @module workflow
- * @requires metamodel
- * @requires component
- * @requires behavior
- * @requires channel
- * @requires state
- * @requires helper
- * @requires log
- * @requires db
- * @class workflow 
- * @static
- */
-
-
-/**
- * Change the state of a component.
- * 
- * Worklow:<br>
- * <br>
- * 0. Check if the component has not been destroyed <br>
- * 1. Check if the state is a method or an event <br>
- * 2. Search if there is a behavior with an action for the new state <br>
- * 3. If so, get the action(s) <br>
- * 4. Check if the conditons on input are compliant with the metamodel <br>
- * 5. Call the action(s) <br>
- * 6. If not an of event, check if the conditons on input are compliant with the metamodel <br>
- * 7. If all is ok, the state of the component is updated <br>
- * 8. Return the result <br>
- * 
- * @method state
- * @param {Object} params params to change the state <br>
- * {String} component id of the component <br>
- * {String} state state of the component <br>
- * {Array} data parameters to send to the action
- */
-exports.state = state;
-
-
-/**
- * Stop the workflow engine.
- * @method stop
- * @param {Object} params parameters <br>
- * {Boolean} error true if the stop of the workflow is due to an error (default false) <br>
- * {String} message error message to log (default '')
- */
-exports.stop = stop;
-
-
-/**
- * Restart the workflow engine from the last state.
- * @method restart
- */
-exports.restart = restart;
-
-
-/**
- * Check if conditions on input are compliant with the model before calling the action.
- * @method checkParams
- * @param {Object} params
- * @return {Boolean} true if condition on input are compliant with the model
- */
-exports.checkParams = checkParams;
-
-
-/**
- * Check if an action has the valid number of parameter.
- * @method validParamNumbers
- * @param {String} className name the class
- * @param {String} state state on which the action applied
- * @param {Function} action action
- * @return {Boolean} true if the action is the valid number of parameters
- */
-exports.validParamNumbers = validParamNumbers;
-
-
-/**
- * Call an action that comes from an event.
- * @method action
- * @param {String} behaviorId id of the behavior
- * @param {Array} params parameters
- */
-exports.action = action;
+};

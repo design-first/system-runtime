@@ -30,7 +30,6 @@ module.exports = grunt => {
     clean: grunt.file.readJSON('tasks/clean.json'),
     eslint: grunt.file.readJSON('tasks/eslint.json'),
     jsbeautifier: grunt.file.readJSON('tasks/jsbeautifier.json'),
-    yuidoc: grunt.file.readJSON('tasks/yuidoc.json'),
     mocha_istanbul: grunt.file.readJSON('tasks/mocha_istanbul.json'),
     karma: grunt.file.readJSON('tasks/karma.json'),
     browserify: grunt.file.readJSON('tasks/browserify.json'),
@@ -47,7 +46,7 @@ module.exports = grunt => {
   // test
   grunt.registerTask('test', [
     'json_merge',
-    'concat:systemModule',
+    'concat:system',
     'mocha_istanbul:coverage'
   ]);
 
@@ -55,7 +54,7 @@ module.exports = grunt => {
   grunt.registerTask('build', [
     'clean',
     'json_merge',
-    'concat:systemModule',
+    'concat:system',
     'jsbeautifier',
     'eslint',
     'mocha_istanbul:coverage',
@@ -63,14 +62,13 @@ module.exports = grunt => {
     'browserify:release',
     'uglify:release',
     'concat:license',
-    'karma:release',
-    'yuidoc'
+    'karma:release'
   ]);
 
   // coveralls
   grunt.registerTask('coveralls', [
     'json_merge',
-    'concat:systemModule',
+    'concat:system',
     'mocha_istanbul:coveralls'
   ]);
 

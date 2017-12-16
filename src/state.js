@@ -42,14 +42,14 @@ var store = {};
 /* Public methods */
 
 
-/*
+/**
  * Set the state of a component.
  * @method set
  * @param {String} id component id on which change the state
  * @param {String} state the new state of the component
  * @param {Object} value value of the state
  */
-function set (id, state, value) {
+exports.set = function set (id, state, value) {
   store[id] = {
     'state': state,
     'value': value
@@ -58,62 +58,24 @@ function set (id, state, value) {
     'state': state,
     'value': value
   };
-}
+};
 
 
-/*
+/**
  * Get the state of a component.
  * @method get 
  * @param {String} id id of the component
  * @return {String} state of the component
  */
-function get (id) {
+exports.get = function get (id) {
   return store[id];
-}
+};
 
 
-/*
+/**
  * Remove all the states of the components from the memory.
  * @method clear
  */
-function clear () {
+exports.clear = function clear () {
   store = {};
-}
-
-
-/* exports */
-
-
-/**
- * This module manages the states of all the components.
- * 
- * @module state
- * @requires db
- * @class state
- * @static
- */
-
-
-/**
- * Set the state of a component.
- * @method set
- * @param {String} id component id on which change the state
- * @param {String} state the new state of the component
- */
-exports.set = set;
-
-
-/**
- * Get the state of a component.
- * @method get 
- * @param {String} id id of the component
- * @return {String} the state of the component.
- */
-exports.get = get;
-
-
-/**
- * Remove all the states of the components from the memory.
- * @method clear
- */
-exports.clear = clear;
+};

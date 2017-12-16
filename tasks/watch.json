@@ -6,9 +6,9 @@
     ],
     "tasks": [
       "json_merge",
-      "concat:systemModule",
+      "concat:system",
       "eslint",
-      "jasmine_nodejs:modules"
+      "mocha_istanbul:coverage"
     ],
     "options": {
       "spawn": true

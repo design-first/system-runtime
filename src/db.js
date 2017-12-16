@@ -50,9 +50,7 @@ var $workflow = require('./workflow.js');
 
 /* Private properties */
 
-
-var store = {},
-  collections = [],
+var collections = [],
   internalDB = [
     '_Runtime',
     '_Schema',
@@ -123,8 +121,8 @@ function dump() {
   // schemas
   dbDump.schemas = {};
   if (exports._Schema.count()) {
-    for (schemaId in store._Schema) {
-      schema = JSON.parse(JSON.stringify(store._Schema[schemaId]));
+    for (schemaId in exports.store._Schema) {
+      schema = JSON.parse(JSON.stringify(exports.store._Schema[schemaId]));
       if (!schema._core) {
         dbDump.schemas[schemaId] = schema;
       }
@@ -134,8 +132,8 @@ function dump() {
   // models
   dbDump.models = {};
   if (exports._Model.count()) {
-    for (modelId in store._Model) {
-      model = JSON.parse(JSON.stringify(store._Model[modelId]));
+    for (modelId in exports.store._Model) {
+      model = JSON.parse(JSON.stringify(exports.store._Model[modelId]));
       if (!model._core) {
         dbDump.models[modelId] = model;
       }
@@ -145,8 +143,8 @@ function dump() {
   // types
   dbDump.types = {};
   if (exports._Type.count()) {
-    for (typeId in store._Type) {
-      type = JSON.parse(JSON.stringify(store._Type[typeId]));
+    for (typeId in exports.store._Type) {
+      type = JSON.parse(JSON.stringify(exports.store._Type[typeId]));
       if (!type.core) {
         dbDump.types[type.name] = type;
       }
@@ -155,8 +153,8 @@ function dump() {
 
   // behaviors
   dbDump.behaviors = {};
-  for (behaviorId in store._Behavior) {
-    behavior = JSON.parse(JSON.stringify(store._Behavior[behaviorId]));
+  for (behaviorId in exports.store._Behavior) {
+    behavior = JSON.parse(JSON.stringify(exports.store._Behavior[behaviorId]));
     delete behavior.classInfo;
 
     if (!behavior.core) {
@@ -170,7 +168,7 @@ function dump() {
   for (i = 0; i < length; i++) {
     collectionName = collections[i];
     if (exports[collectionName].count()) {
-      collection = JSON.parse(JSON.stringify(store[collectionName]));
+      collection = JSON.parse(JSON.stringify(exports.store[collectionName]));
 
       for (id in collection) {
         delete collection[id].classInfo;
@@ -483,6 +481,17 @@ function expSubsystem(params) {
 }
 
 
+
+/* Public properties */
+
+
+/**
+ * System Runtime database store that lists all the collections.
+ * @property {JSON} store
+ */
+exports.store = {};
+
+
 /* Public methods */
 
 
@@ -497,7 +506,7 @@ function expSubsystem(params) {
  */
 var DatabaseCollection = function (name) {
   if ($metamodel.getSchema(name) || internalDB.indexOf(name) !== -1) {
-    store[name] = {};
+    exports.store[name] = {};
     this.name = name;
     if (internalDB.indexOf(name) === -1) {
       collections.push(name);
@@ -530,8 +539,8 @@ DatabaseCollection.prototype.find = function (query) {
   if (query && Object.keys(query).length) {
     if (Array.isArray(query)) {
       query.forEach(function multiSearch(criteria) {
-        for (id in store[this.name]) {
-          object = store[this.name][id];
+        for (id in exports.store[this.name]) {
+          object = exports.store[this.name][id];
           if (contains(criteria, object)) {
             if (typeof resultId[id] === 'undefined') {
               result.push(object);
@@ -541,16 +550,16 @@ DatabaseCollection.prototype.find = function (query) {
         }
       }.bind(this));
     } else {
-      for (id in store[this.name]) {
-        object = store[this.name][id];
+      for (id in exports.store[this.name]) {
+        object = exports.store[this.name][id];
         if (contains(query, object)) {
           result.push(object);
         }
       }
     }
   } else {
-    for (id in store[this.name]) {
-      object = store[this.name][id];
+    for (id in exports.store[this.name]) {
+      object = exports.store[this.name][id];
       result.push(object);
     }
   }
@@ -606,14 +615,14 @@ DatabaseCollection.prototype.insert = function (document) {
 
         $metamodel.prepareObject(obj, $metamodel.getModel(this.name));
 
-        store[this.name][obj._id] = obj;
+        exports.store[this.name][obj._id] = obj;
 
         Component = $component.get(this.name);
         if (Component) {
           component = new Component(obj);
           result.push(component.id());
         } else {
-          createLog('insert', this.name, obj._id, '', obj);
+          exports.createLog('insert', this.name, obj._id, '', obj);
 
           if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
             $helper.getRuntime().require('db')
@@ -716,7 +725,7 @@ DatabaseCollection.prototype.update = function (query, update, options) {
                 docs[i][attributeName] = update[attributeName];
                 updated = updated + 1;
 
-                createLog('update', this.name, docs[i]._id, attributeName, update[attributeName]);
+                exports.createLog('update', this.name, docs[i]._id, attributeName, update[attributeName]);
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                   $helper.getRuntime().require('db')
@@ -750,7 +759,7 @@ DatabaseCollection.prototype.update = function (query, update, options) {
             // TODO more check in case of schema update
             docs[i][attributeName] = update[attributeName];
 
-            createLog('update', this.name, docs[i]._id, attributeName, update[attributeName]);
+            exports.createLog('update', this.name, docs[i]._id, attributeName, update[attributeName]);
 
             updated = updated + 1;
             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
@@ -795,13 +804,13 @@ DatabaseCollection.prototype.remove = function (query) {
 
     if (Array.isArray(query)) {
       query.forEach(function multiRemove(criteria) {
-        for (id in store[this.name]) {
-          object = store[this.name][id];
+        for (id in exports.store[this.name]) {
+          object = exports.store[this.name][id];
 
           if (contains(criteria, object)) {
-            delete store[this.name][id];
+            delete exports.store[this.name][id];
 
-            createLog('remove', this.name, id, '', '');
+            exports.createLog('remove', this.name, id, '', '');
 
             component = $component.get(id);
             if (component) {
@@ -819,13 +828,13 @@ DatabaseCollection.prototype.remove = function (query) {
         }
       }.bind(this));
     } else {
-      for (id in store[this.name]) {
-        object = store[this.name][id];
+      for (id in exports.store[this.name]) {
+        object = exports.store[this.name][id];
 
         if (contains(query, object)) {
-          delete store[this.name][id];
+          delete exports.store[this.name][id];
 
-          createLog('remove', this.name, id, '', '');
+          exports.createLog('remove', this.name, id, '', '');
 
           component = $component.get(id);
           if (component) {
@@ -843,10 +852,10 @@ DatabaseCollection.prototype.remove = function (query) {
       }
     }
   } else {
-    for (id in store[this.name]) {
-      delete store[this.name][id];
+    for (id in exports.store[this.name]) {
+      delete exports.store[this.name][id];
 
-      createLog('remove', this.name, id, '', '');
+      exports.createLog('remove', this.name, id, '', '');
 
       if (coreDb.indexOf(this.name) === -1) {
         component = $component.get(id);
@@ -877,7 +886,7 @@ DatabaseCollection.prototype.remove = function (query) {
 DatabaseCollection.prototype.count = function () {
   var result = 0,
     objectId = '';
-  for (objectId in store[this.name]) {
+  for (objectId in exports.store[this.name]) {
     result++;
   }
   return result;
@@ -887,7 +896,7 @@ DatabaseCollection.prototype.count = function () {
 /* Public methods */
 
 
-/*
+/**
  * Create a Log
  * @method createLog
  * @param {String} action CRUD action that happenned
@@ -896,7 +905,7 @@ DatabaseCollection.prototype.count = function () {
  * @param {String} field field of the component
  * @param {String} value value of the field of the component
  */
-function createLog(action, collection, id, field, value) {
+exports.createLog = function createLog(action, collection, id, field, value) {
   var logId = $helper.generateId();
 
   collection = collection || '';
@@ -905,11 +914,11 @@ function createLog(action, collection, id, field, value) {
   value = value || '';
 
   // clean log every 1000 logs
-  if (Object.keys(store._Log).length > 1000) {
-    store._Log = {};
+  if (Object.keys(exports.store._Log).length > 1000) {
+    exports.store._Log = {};
   }
 
-  store._Log[logId] = {
+  exports.store._Log[logId] = {
     _id: logId,
     action: action,
     collection: collection,
@@ -918,31 +927,31 @@ function createLog(action, collection, id, field, value) {
     value: value,
     order: incLogOrder()
   };
-}
+};
 
 
-/*
+/**
  * Create a new {{#crossLink "DatabaseCollection"}}{{/crossLink}}.
  * @method collection
  * @param {String} name of the collection
  */
-function collection(name) {
+exports.collection = function collection(name) {
   exports[name] = new DatabaseCollection(name);
-}
+};
 
 
-/*
+/**
  * Import a system into the database
  * @method importSystem
  * @param {JSON} importedSystem a System Runtime system to import
  * @return {String} the id of the imported System Runtime system
  */
-function importSystem(importedSystem) {
+exports.importSystem = function importSystem(importedSystem) {
   return impSystem(importedSystem);
-}
+};
 
 
-/*
+/**
  * Export a system.
  * @method exportSystem
  * @param {JSON} params parameters
@@ -956,7 +965,7 @@ function importSystem(importedSystem) {
  * $db.exportSystem({'components':{'Person': {'country': 'France'}}}); // filter export on components <br>
  * $db.exportSystem({'schemas':{'name':'Person'},'components':{'Person': {'country': 'France'}}}); // combine filters
  */
-function exportSystem(params) {
+exports.exportSystem = function exportSystem(params) {
   var result = '';
   if (params) {
     result = expSubsystem(params);
@@ -964,14 +973,14 @@ function exportSystem(params) {
     result = expSystem();
   }
   return result;
-}
+};
 
 
-/*
+/**
  * Clear the database.
  * @method clear
  */
-function clear() {
+exports.clear = function clear() {
   var length = 0,
     i = 0,
     collectionName = '';
@@ -989,14 +998,14 @@ function clear() {
     collectionName = internalDB[i];
     exports[collectionName].remove();
   }
-}
+};
 
 
-/*
+/**
  * Init the database.
  * @method init
  */
-function init() {
+exports.init = function init() {
   var runtimeSystemId = '',
     runtimeSystem = null;
 
@@ -1017,93 +1026,4 @@ function init() {
   // reimport System Runtime core system
   runtimeSystemId = exports.importSystem(runtimeSystem);
   $component.get(runtimeSystemId).start();
-}
-
-
-/* exports */
-
-
-/**
- * This module manages System Runtime database. <br>
- * System Runtime database is a micro NoSQL Database that contains: <br>
- * - collections to store documents (schemas, types, components, ...) and <br>
- * - APIs to import or export documents. <br>
- * 
- * System Runtime database is closely linked to System Runtime metamodel because: <br>
- * - all operations done by System Runtime database must be compliant with the model before being finished, <br>
- * - insert operation automatically creates a component and <br>
- * - remove operation automatically destroy a component.
- *   
- * @module db
- * @requires component
- * @requires helper
- * @requires log
- * @class db
- * @static
- */
-
-
-/**
- * Create a Log
- * @method createLog
- * @param {String} action CRUD action that happenned
- * @param {String} collection collection of the 
- * @param {String} id id of the component
- * @param {String} field field of the component
- * @param {String} value value of the field of the component
- */
-exports.createLog = createLog;
-
-/**
- * Create a new {{#crossLink "DatabaseCollection"}}{{/crossLink}}.
- * @method collection
- * @param {String} name of the collection
- */
-exports.collection = collection;
-
-
-/**
- * System Runtime database store that lists all the collections.
- * @property {JSON} store
- */
-exports.store = store;
-
-
-/**
- * Import a system into the database
- * @method importSystem
- * @param {JSON} importedSystem a System Runtime system to import
- * @return {String} the id of the imported System Runtime system
- */
-exports.importSystem = importSystem;
-
-
-/**
- * Export a system.
- * @method exportSystem
- * @param {JSON} params parameters
- * @return {String} a stringified system
- * 
- * @example
- * $db.exportSystem(); // export all the system <br>
- * $db.exportSystem({'schemas':{'name':'Person'}}); // filter export on schemas <br>
- * $db.exportSystem({'types':{'name':'address'}}); // filter export on types <br>
- * $db.exportSystem({'behaviors':{'component':'laure'}}); // filter export on behaviors <br>
- * $db.exportSystem({'components':{'Person': {'country': 'France'}}}); // filter export on components <br>
- * $db.exportSystem({'schemas':{'name':'Person'},'components':{'Person': {'country': 'France'}}}); // combine filters
- */
-exports.exportSystem = exportSystem;
-
-
-/**
- * Clear the database.
- * @method clear
- */
-exports.clear = clear;
-
-
-/**
- * Init the database.
- * @method init
- */
-exports.init = init;
+};

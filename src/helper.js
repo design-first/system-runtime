@@ -44,12 +44,12 @@ var runtimeRef = null;
 /* Public method */
 
 
-/*
+/**
  * Check if a System Runtime instance exists.
  * @method isRuntime
  * @return {Boolean} true if a System Runtime instance exist
  */
-function isRuntime () {
+exports.isRuntime = function isRuntime () {
   var result = false;
 
   if ($db._Runtime && $db._Runtime.find().length) {
@@ -57,15 +57,15 @@ function isRuntime () {
   }
 
   return result;
-}
+};
 
 
-/*
+/**
  * Get the System Runtime instance.
  * @method getRuntime
  * @return {_Runtime} System Runtime instance
  */
-function getRuntime () {
+exports.getRuntime = function getRuntime () {
   var runtimeId = '',
     result = null;
 
@@ -75,15 +75,15 @@ function getRuntime () {
   }
 
   return runtimeRef;
-}
+};
 
 
-/*
+/**
  * Generate a uuid.
  * @method generateId
  * @return {String} a uuid
  */
-function generateId () {
+exports.generateId = function generateId () {
   function gen () {
     return Math.floor((1 + Math.random()) * 0x10000).toString(16);
   }
@@ -93,14 +93,14 @@ function generateId () {
   }
 
   return getPrefix() + gen() + gen() + gen();
-}
+};
 
 
-/*
+/**
  * Add Polyfill
  * @method polyfill
  */
-function polyfill () {
+exports.polyfill = function polyfill () {
 
   // fixing constructor.name property in IE
   // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer
@@ -114,49 +114,4 @@ function polyfill () {
       set: function (value) { }
     });
   }
-}
-
-
-/* exports */
-
-
-/**
- * This module contains all the functions used by all the modules.
- * 
- * @module helper
- * @requires db
- * @requires component
- * @class helper
- * @static
- */
-
-
-/**
- * Get System Runtime instance.
- * @method getRuntime
- * @return {_Runtime} System Runtime instance
- */
-exports.getRuntime = getRuntime;
-
-
-/**
- * Check if a System Runtime instance exists.
- * @method isRuntime
- * @return {Boolean} true if a System Runtime instance exist
- */
-exports.isRuntime = isRuntime;
-
-
-/**
- * Generate a uuid.
- * @method generateId
- * @return {String} a uuid
- */
-exports.generateId = generateId;
-
-
-/**
- * Add Polyfill
- * @method polyfill
- */
-exports.polyfill = polyfill;
+};

@@ -1,19 +1,1 @@
 ;
-
-/* exports  */
-
-
-/**
- * This module contains Runtime core system.
- *
- * @module system
- * @class system
- * @static 
- */
-
-
-/**
- * Runtime core system
- * @property {_System} system
- */
-exports.system = system;

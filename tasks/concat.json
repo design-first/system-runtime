@@ -1,5 +1,5 @@
 {
-  "systemModule": {
+  "system": {
     "files": {
       "build/system/system.js": [
         "src/banners/systemmodule-header.txt",

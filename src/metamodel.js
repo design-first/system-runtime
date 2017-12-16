@@ -210,7 +210,7 @@ function generateModels() {
     model = store.generatedModels[modelName];
 
     if (model) {
-      parents = getParents(modelName);
+      parents = exports.getParents(modelName);
       parents.reverse();
 
       var modelToMerge = JSON.parse(JSON.stringify(model));
@@ -726,9 +726,9 @@ function checkCustomSchema(value, typeName) {
         length = value.length;
         for (i = 0; i < length; i++) {
           if (!hasType(typeDef.schema, 'undefined')) {
-            result = isValidSchema(value[i], typeDef.schema);
+            result = exports.isValidSchema(value[i], typeDef.schema);
           } else {
-            result = isValidType(value[i], typeDef.type);
+            result = exports.isValidType(value[i], typeDef.type);
           }
           if (result === false) {
             break;
@@ -736,9 +736,9 @@ function checkCustomSchema(value, typeName) {
         }
       } else {
         if (!hasType(typeDef.schema, 'undefined')) {
-          result = isValidSchema(value, typeDef.schema);
+          result = exports.isValidSchema(value, typeDef.schema);
         } else {
-          result = isValidType(value, typeDef.type);
+          result = exports.isValidType(value, typeDef.type);
         }
       }
     } else {
@@ -834,7 +834,7 @@ function createClassInfo() {
 
     if (
       modelDef[CLASS] !== false &&
-      inheritFrom(modelDef[NAME], '_Component')
+      exports.inheritFrom(modelDef[NAME], '_Component')
     ) {
       if (!$component.get(name)) {
         $db._ClassInfo.insert({
@@ -891,7 +891,7 @@ function getRealTypeName(value) {
 function isCustomType(value) {
   var result = hasType(value, 'string') &&
     defaultTypes.indexOf(value) === -1 &&
-    !isClassName(value);
+    !exports.isClassName(value);
 
   return result;
 }
@@ -1057,12 +1057,12 @@ function merge(source, target, all) {
 /* Public methods */
 
 
-/*
+/**
  * Add a new schema.
  * @method schema
  * @param {JSON} importedSchema schema to add
  */
-function schema(importedSchema) {
+exports.schema = function schema(importedSchema) {
   var id = null,
     result = [],
     schema = null,
@@ -1098,7 +1098,7 @@ function schema(importedSchema) {
   schema[INHERITS] = _removeDuplicate(schema[INHERITS]);
 
   // check if schema is compliant with the meta meta model
-  if (isValidObject(schema, store.metadef.schema, false)) {
+  if (exports.isValidObject(schema, store.metadef.schema, false)) {
     schemas = $db._Schema.find({
       '_name': name
     });
@@ -1117,15 +1117,15 @@ function schema(importedSchema) {
   }
 
   return id;
-}
+};
 
 
-/*
+/**
  * Add a new model.
  * @method model
  * @param {JSON} importedModel model to add
  */
-function model(importedModel) {
+exports.model = function model(importedModel) {
   var model = null,
     id = null,
     result = [],
@@ -1142,7 +1142,7 @@ function model(importedModel) {
   }
 
   // check if model is compliant with the meta meta model
-  if (isValidObject(model, store.metadef.model, false)) {
+  if (exports.isValidObject(model, store.metadef.model, false)) {
     models = $db._Model.find({
       '_name': name
     });
@@ -1161,20 +1161,20 @@ function model(importedModel) {
   }
 
   return id;
-}
+};
 
-/*
+/**
  * Add a new type.
  * @method type
  * @param {JSON} importedType type to add
  */
-function type(importedType) {
+exports.type = function type(importedType) {
   var id = null,
     result = [],
     name = importedType.name;
 
   // check if type is compliant with the meta meta model
-  if (isValidObject(importedType, store.metadef.type)) {
+  if (exports.isValidObject(importedType, store.metadef.type)) {
     result = $db._Type.insert(importedType);
     id = result[0];
   } else {
@@ -1182,15 +1182,15 @@ function type(importedType) {
   }
 
   return id;
-}
+};
 
 
-/*
+/**
  * Init the metamodel.
  * @method init
  */
-function init() {
-  clear();
+exports.init = function init() {
+  exports.clear();
   store.metadef = {
     schema: {
       '_id': {
@@ -1278,14 +1278,14 @@ function init() {
 
   };
   initDbStructure();
-}
+};
 
 
-/*
+/**
  * Remove the data of the metamodel from the memory.
  * @method clear
  */
-function clear() {
+exports.clear = function clear() {
   store = {
     metadef: {},
     inheritance: {},
@@ -1297,14 +1297,14 @@ function clear() {
     states: {},
     type: {}
   };
-}
+};
 
 
-/*
+/**
  * Create the metamodel.
  * @method create
  */
-function create() {
+exports.create = function create() {
   $log.modelCreationBegin();
   loadInMemory();
   createInheritanceTree();
@@ -1316,77 +1316,77 @@ function create() {
   createClass();
   createClassInfo();
   $log.modelCreationEnd();
-}
+};
 
 
-/*
+/**
  * Check if an attribute of the schema is an event.
  * @method isEvent
  * @param {String} name
  * @param {String} id component id
  * @return {Boolean} true if the attribute is an event
  */
-function isEvent(name, id) {
+exports.isEvent = function isEvent(name, id) {
   return checkType(name, id, EVENT_TYPE);
-}
+};
 
 
-/*
+/**
  * Check if an attribute of the schema is a property.
  * @method isProperty
  * @param {String} name name of the property
  * @param {String} id component id
  * @return {Boolean} true if the attribute is a property
  */
-function isProperty(name, id) {
+exports.isProperty = function isProperty(name, id) {
   return checkType(name, id, PROPERTY_TYPE);
-}
+};
 
 
-/*
+/**
  * Check if an attribute of the schema is a link.
  * @method isLink
  * @param {String} name name of the property
  * @param {String} id component id
  * @return {Boolean} true if the attribute is a link
  */
-function isLink(name, id) {
+exports.isLink = function isLink(name, id) {
   return checkType(name, id, LINK_TYPE);
-}
+};
 
 
-/*
+/**
  * Check if an attribute of the schema is a collection.
  * @method isCollection
  * @param {String} name name of the collection
  * @param {String} id component id
  * @return {Boolean} true if the attribute is a collection
  */
-function isCollection(name, id) {
+exports.isCollection = function isCollection(name, id) {
   return checkType(name, id, COLLECTION_TYPE);
-}
+};
 
 
-/*
+/**
  * Check if an attribute of the schema is a method.
  * @method isMethod
  * @param {String} name name of the method
  * @param {String} id component id
  * @return {Boolean} true if the attribute is a method
  */
-function isMethod(name, id) {
+exports.isMethod = function isMethod(name, id) {
   return checkType(name, id, METHOD_TYPE);
-}
+};
 
 
-/*
+/**
  * Check if an attribute of the schema is a structure.
  * @method isStructure
  * @param {String} name name of the propertys
  * @param {String} id component id
  * @return {Boolean} true if the property is a structure
  */
-function isStructure(name, id) {
+exports.isStructure = function isStructure(name, id) {
   var result = false,
     model = store.generatedModels[id],
     attributeType = '',
@@ -1401,23 +1401,23 @@ function isStructure(name, id) {
   }
 
   return result;
-}
+};
 
 
-/*
+/**
  * Check if the name is a correct state for the component.
  * @method isValidState
  * @param {String} name name of the state
  * @param {String} id component id
  * @return {Boolean} true if the name is a correct state for the component
  */
-function isValidState(name, id) {
+exports.isValidState = function isValidState(name, id) {
   var result = false,
     componentSchema = store.generatedModels[id],
     state = {};
 
   if (isModelPath(name)) {
-    result = isValidModelPath(id, name);
+    result = exports.isValidModelPath(id, name);
   } else {
     if (componentSchema && componentSchema[NAME]) {
       componentSchema = store.generatedModels[componentSchema[NAME]];
@@ -1430,19 +1430,18 @@ function isValidState(name, id) {
   }
 
   return result;
-}
+};
 
 
-/*
+/**
  * Check if a value is compliant with a type.
  * @method isValidType
  * @param {Object} object object to validate
  * @param {String} type type to use for validation
  * @return {Boolean} true if the object is compliant with the type
  */
-function isValidType(value, typeName) {
+exports.isValidType = function isValidType(value, typeName) {
   var result = true;
-
 
   function _isValidCustomType(value, typeName) {
     var typeDef = store.type[typeName],
@@ -1458,7 +1457,7 @@ function isValidType(value, typeName) {
     return result;
   }
 
-  /*
+  /**
   * Check if an object is compliant with a class.
   * @return {Boolean} the object is compliant with the type
   * @private
@@ -1480,7 +1479,7 @@ function isValidType(value, typeName) {
     return isValid;
   }
 
-  /*
+  /**
   * Check if an object is compliant with a type.
   * @return {Boolean} the object is compliant with the type
   * @private
@@ -1503,7 +1502,7 @@ function isValidType(value, typeName) {
             case isCustomType(typeName[0]):
               isValid = checkCustomSchema(value[i], typeName[0]);
               break;
-            case isClassName(typeName[0]):
+            case exports.isClassName(typeName[0]):
               isValid = _checkClassName(value[i], typeName[0]);
               break;
             default:
@@ -1534,7 +1533,7 @@ function isValidType(value, typeName) {
         result = _isValidCustomType(value, typeName);
       }
       break;
-    case isClassName(typeName):
+    case exports.isClassName(typeName):
       result = _checkClassName(value, typeName);
       break;
     default:
@@ -1543,17 +1542,17 @@ function isValidType(value, typeName) {
   }
 
   return result;
-}
+};
 
 
-/*
+/**
  * Check if a value is compliant with a type enum.
  * @method isValidEnum
  * @param {String|Object} value value to validate
  * @param {Schema} schema schema to use for validation
  * @return {Boolean} true if the object is compliant with the enum
  */
-function isValidEnum(value, schema) {
+exports.isValidEnum = function isValidEnum(value, schema) {
   var result = true;
 
   function _isInstanceOf(component, className) {
@@ -1570,7 +1569,7 @@ function isValidEnum(value, schema) {
     return result;
   }
 
-  if (isClassName(schema.type)) {
+  if (exports.isClassName(schema.type)) {
     result = _isInstanceOf($component.get(value), getRealClassName(schema.type)) && schema.value.indexOf(value) !== -1;
     if (!result) {
       $log.invalidEnumValue(value, schema.type);
@@ -1583,10 +1582,10 @@ function isValidEnum(value, schema) {
   }
 
   return result;
-}
+};
 
 
-/*
+/**
  * Check if the object is compliant with the schema.
  * Use it to test if a schema is compliant with a schema
  * it is supposed to validate.
@@ -1596,7 +1595,7 @@ function isValidEnum(value, schema) {
  * @return {Boolean}
  * @private
  */
-function isValidSchema(object, schema) {
+exports.isValidSchema = function isValidSchema(object, schema) {
   var fieldName = '',
     field = null,
     result = true,
@@ -1607,7 +1606,7 @@ function isValidSchema(object, schema) {
     length = 0,
     i = 0;
 
-  /*
+  /**
    * Check if a field is compliant with the type of the class name.
    * @return {Boolean} the field is compliant with the type of the class
    * @private
@@ -1640,7 +1639,7 @@ function isValidSchema(object, schema) {
       if (typeRef === 'array') {
         isValid = Array.isArray(field);
       } else {
-        if (isClassName(typeRef)) {
+        if (exports.isClassName(typeRef)) {
           isValid = hasType(field, 'object') || hasType(field, 'string');
           // TODO maybe have a more strict validation than just a type checking
         } else {
@@ -1654,7 +1653,7 @@ function isValidSchema(object, schema) {
     return isValid;
   }
 
-  /*
+  /**
    * Check if a field is compliant with the type of the references type.
    * @return {Boolean} the field is compliant with the type of the references type
    * @private
@@ -1687,7 +1686,7 @@ function isValidSchema(object, schema) {
       if (typeRef === 'array') {
         isValid = Array.isArray(field);
       } else {
-        if (isClassName(typeRef)) {
+        if (exports.isClassName(typeRef)) {
           isValid = hasType(field, 'object') || hasType(field, 'string');
           // TODO maybe have a more strict validation than just a type checking
         } else {
@@ -1701,7 +1700,7 @@ function isValidSchema(object, schema) {
     return isValid;
   }
 
-  /*
+  /**
    * Check if a field is compliant with a type.
    * @return {Boolean} the field is compliant with the type
    * @private
@@ -1756,7 +1755,7 @@ function isValidSchema(object, schema) {
       }
 
       switch (true) {
-        case isClassName(typeSchema):
+        case exports.isClassName(typeSchema):
           result = _isValidClassName();
           break;
         case isTypeReference(typeSchema):
@@ -1787,10 +1786,10 @@ function isValidSchema(object, schema) {
   }
 
   return result;
-}
+};
 
 
-/*
+/**
  * Check if the object is compliant with the schema.
  * Use it to test if the constructor of an object is compliant
  * with the definition of the class.
@@ -1801,7 +1800,7 @@ function isValidSchema(object, schema) {
  * @param {Boolean} cleanRef true if we remove the reference to the object
  * @return {Boolean} true is the object is compliant with the schema
  */
-function isValidObject(object, schema, strict, cleanRef) {
+exports.isValidObject = function isValidObject(object, schema, strict, cleanRef) {
   var fieldName = '',
     field = null,
     result = true,
@@ -1820,7 +1819,7 @@ function isValidObject(object, schema, strict, cleanRef) {
     cleanRef = false;
   }
 
-  /*
+  /**
    * Check if a field is compliant with a custom type.
    * @return {Boolean} the field is compliant with the custom type
    * @private
@@ -1836,10 +1835,10 @@ function isValidObject(object, schema, strict, cleanRef) {
           isValid = isValidObject(field, realType.schema, strict, cleanRef);
           break;
         case !hasType(realType.value, 'undefined'):
-          isValid = isValidEnum(field, realType);
+          isValid = exports.isValidEnum(field, realType);
           break;
         default:
-          isValid = isValidType(field, realType.type);
+          isValid = exports.isValidType(field, realType.type);
           break;
       }
     } else {
@@ -1848,7 +1847,7 @@ function isValidObject(object, schema, strict, cleanRef) {
     return isValid;
   }
 
-  /*
+  /**
    * Check if a field is compliant with the type of the class name.
    * @return {Boolean} the field is compliant with the type of the class name
    * @private
@@ -1867,7 +1866,7 @@ function isValidObject(object, schema, strict, cleanRef) {
     }
 
     if (!hasType(comp, 'undefined')) {
-      if (!inheritFrom(comp.constructor.name, typeRef)) {
+      if (!exports.inheritFrom(comp.constructor.name, typeRef)) {
         // if (getClassName(comp) !== typeRef) { uncomment this line for a strict mode
         isValid = false;
         $log.invalidType(field, typeRef);
@@ -1890,7 +1889,7 @@ function isValidObject(object, schema, strict, cleanRef) {
     return isValid;
   }
 
-  /*
+  /**
    * Check if a field is compliant with a type.
    * @return {Boolean} the field is compliant with the type
    * @private
@@ -1940,7 +1939,7 @@ function isValidObject(object, schema, strict, cleanRef) {
             if (isCustomType(typeArray)) {
               isValid = _isValidCustomType(field[i], typeArray);
             } else {
-              if (!isClassName(typeArray)) {
+              if (!exports.isClassName(typeArray)) {
                 if (getRealType(field[i]) !== typeArray && typeArray !== 'any') {
                   $log.invalidPropertyType(field[i], typeArray, field[i]);
                   isValid = false;
@@ -1950,7 +1949,7 @@ function isValidObject(object, schema, strict, cleanRef) {
                 if (getRealType(field[i]) === 'string') {
                   // Case of an import of a system
                   if ($component.get(field[i])) {
-                    if (!inheritFrom(getClassName($component.get(field[i])), getRealClassName(typeArray))) {
+                    if (!exports.inheritFrom(getClassName($component.get(field[i])), getRealClassName(typeArray))) {
                       $log.invalidClassName(JSON.stringify(field[i]), getRealClassName(typeArray), getClassName($component.get(field[i])));
                       isValid = false;
                       break;
@@ -1961,7 +1960,7 @@ function isValidObject(object, schema, strict, cleanRef) {
                     }
                   }
                 } else {
-                  if (!inheritFrom(getClassName(field[i]), getRealClassName(typeArray))) {
+                  if (!exports.inheritFrom(getClassName(field[i]), getRealClassName(typeArray))) {
                     $log.invalidClassName(JSON.stringify(field[i]), getRealClassName(typeArray), getClassName(field[i]));
                     isValid = false;
                     break;
@@ -2024,7 +2023,7 @@ function isValidObject(object, schema, strict, cleanRef) {
       case isCustomType(typeSchema):
         result = _isValidCustomType(field, typeSchema);
         break;
-      case isClassName(typeSchema):
+      case exports.isClassName(typeSchema):
         result = _isValidClassName(field, typeSchema);
         break;
       default:
@@ -2046,16 +2045,16 @@ function isValidObject(object, schema, strict, cleanRef) {
   }
 
   return result;
-}
+};
 
 
-/*
+/**
  * Prepare the object in order to be compliant with the schema.
  * @method prepareObject
  * @param {Object} object object to prepate
  * @param {Object} schema schema that validates the object
  */
-function prepareObject(object, schema) {
+exports.prepareObject = function prepareObject(object, schema) {
   var fieldName = '',
     field = null,
     mandatory = true,
@@ -2072,62 +2071,62 @@ function prepareObject(object, schema) {
       }
     }
   }
-}
+};
 
 
-/*
+/**
  * Get a schema.
  * @method getSchema
  * @param {String} name of the schema
  * @return {Object} the schema
  */
-function getSchema(name) {
+exports.getSchema = function getSchema(name) {
   var result = null;
   if (store.compiledSchemas[name]) {
     result = store.compiledSchemas[name];
   }
   return result;
-}
+};
 
 
-/*
+/**
  * Get a model.
  * @method getModel
  * @param {String} name of the model
  * @return {Object} the model
  */
-function getModel(name) {
+exports.getModel = function getModel(name) {
   var result = null;
   if (store.generatedModels[name]) {
     result = store.generatedModels[name];
   }
   return result;
-}
+};
 
 
-/*
+/**
  * Get a type.
  * @method getType
  * @param {String} name of the type
  * @return {Object} the type
  */
-function getType(name) {
+exports.getType = function getType(name) {
   var result = null;
   if (store.type[name] && store.type[name]) {
     result = JSON.parse(JSON.stringify(store.type[name]));
   }
   return result;
-}
+};
 
 
-/*
+/**
  * Get the type of a model path.
  * @method getModelPathType
  * @param {String} model name of the model
  * @param {String} path path of the structure
  * @return {Object} the type
  */
-function getModelPathType(model, path) {
+exports.getModelPathType = function getModelPathType(model, path) {
   var result = null,
     subpaths = [],
     subpath = '',
@@ -2141,10 +2140,10 @@ function getModelPathType(model, path) {
   for (i = 0; i < length; i++) {
     subpath = subpaths[i];
     if (i === 0) {
-      result = getModel(model)[subpath].type;
+      result = exports.getModel(model)[subpath].type;
     } else {
       if (isCustomType(result)) {
-        structure = getType(result);
+        structure = exports.getType(result);
         if (structure.schema) {
           result = structure.schema[subpath].type;
         } else {
@@ -2156,7 +2155,7 @@ function getModelPathType(model, path) {
     }
   }
   return result;
-}
+};
 
 
 /**
@@ -2166,7 +2165,7 @@ function getModelPathType(model, path) {
  * @param {String} path path of the model
  * @return {Boolean} true if the path is valid for the model
  */
-function isValidModelPath(model, path) {
+exports.isValidModelPath = function isValidModelPath(model, path) {
   var result = true,
     type = null,
     subpaths = [],
@@ -2181,10 +2180,10 @@ function isValidModelPath(model, path) {
   for (i = 0; i < length; i++) {
     subpath = subpaths[i];
     if (i === 0) {
-      type = getModel(model)[subpath].type;
+      type = exports.getModel(model)[subpath].type;
     } else {
       if (isCustomType(type)) {
-        structure = getType(type);
+        structure = exports.getType(type);
         if (structure.schema && structure.schema[subpath]) {
           type = structure.schema[subpath].type;
         } else {
@@ -2196,27 +2195,27 @@ function isValidModelPath(model, path) {
     }
   }
   return result;
-}
+};
 
 
-/*
+/**
  * Get the definition of the metamodel.
  * @method getMetaDef
  * @return {Object} the metadefinition of the metamodel
  */
-function getMetaDef() {
+exports.getMetaDef = function getMetaDef() {
   var result = store.metadef.schema;
   return result;
-}
+};
 
 
-/*
+/**
  * Get parents of a schema if any.
  * @method get
  * @param {String} id id of the schema
  * @return {Array} id id of the parents
  */
-function getParents(id) {
+exports.getParents = function getParents(id) {
   var result = [];
 
   if (!store.inheritanceTree[id]) {
@@ -2226,22 +2225,23 @@ function getParents(id) {
   }
 
   return result;
-}
+};
 
-/*
+
+/**
  * Check if a class inherits from another one
  * @method inheritFrom
  * @param {String} name name of the class
  * @param {String} parentName name of the parent
  * @return {Boolean} true if the component inherit from the specific class name
  */
-function inheritFrom(name, parentName) {
+exports.inheritFrom = function inheritFrom(name, parentName) {
   var result = false,
     parents = [],
     i = 0,
     length = 0;
 
-  /*
+  /**
    * 
    * Check if a class inherits from another one
    * @method _searchParent
@@ -2256,7 +2256,7 @@ function inheritFrom(name, parentName) {
       i = 0,
       length = 0;
 
-    parents = getParents(className);
+    parents = exports.getParents(className);
     if (parents.length !== 0) {
       if (parents.indexOf(ancestorName) !== -1) {
         isAncestor = true;
@@ -2273,7 +2273,7 @@ function inheritFrom(name, parentName) {
   }
 
   if (name !== parentName) {
-    parents = getParents(name);
+    parents = exports.getParents(name);
     length = parents.length;
 
     if (parents.length !== 0) {
@@ -2293,15 +2293,15 @@ function inheritFrom(name, parentName) {
   }
 
   return result;
-}
+};
 
-/*
+/**
  * Is the value a class name.
  * @method isClassName
  * @param {String} value
  * @return {Boolean} true if the name is a class name
  */
-function isClassName(value) {
+exports.isClassName = function isClassName(value) {
   var name = '',
     result = hasType(value, 'string');
 
@@ -2315,262 +2315,4 @@ function isClassName(value) {
   }
 
   return result;
-}
-
-
-/* exports */
-
-
-/**
- * This module manages System Runtime metamodel. <br>
- * System Runtime metamodel loads schemas and types, analyzes them and creates the component classes and related DatabaseCollections.
- * 
- * @module metamodel
- * @requires db
- * @requires log
- * @requires component
- * @requires workflow
- * @class metamodel
- * @static
- */
-
-
-/**
- * Init the metamodel.
- * @method init
- */
-exports.init = init;
-
-
-/**
- * Remove the data of the metamodel from the memory.
- * @method clear
- */
-exports.clear = clear;
-
-
-/**
- * Add a new schema.
- * @method schema
- * @param {JSON} importedSchema a schema to add
- */
-exports.schema = schema;
-
-
-/**
- * Add a new model.
- * @method model
- * @param {JSON} importedModel a mode to add
- */
-exports.model = model;
-
-
-/**
- * Add a new type.
- * @method type
- * @param {JSON} importedType type to add
- */
-exports.type = type;
-
-
-/**
- * Create the metamodel.
- * @method create
- */
-exports.create = create;
-
-
-/**
- * Get a schema.
- * @method getSchema
- * @param {String} name name of the schema
- * @return {Object} the schema
- */
-exports.getSchema = getSchema;
-
-
-/**
- * Get a model.
- * @method getModel
- * @param {String} name name of the model
- * @return {Object} the model
- */
-exports.getModel = getModel;
-
-
-/**
- * Get the definition of the metamodel.
- * @method getMetaDef
- * @return {Object} the metadefinition of the metamodel
- */
-exports.getMetaDef = getMetaDef;
-
-
-/**
- * Get parents of a shema if any.
- * @method getParents
- * @param {String} id id of the schema
- * @return {Array} id id of the parents
- */
-exports.getParents = getParents;
-
-
-/**
- * Check if a class inherits from another one
- * @method inheritFrom
- * @param {String} name name of the class
- * @param {String} parentName name of the parent
- * @return {Boolean} true if the component inherit from the specific class name
- */
-exports.inheritFrom = inheritFrom;
-
-
-/**
- * Check if the object is compliant with the schema.
- * Use it to test if the constructor of an object is compliant
- * with the definition of the class.
- * @method isValidObject
- * @param {Object} object object to validate
- * @param {Object} schema schema that validates the object
- * @param {Boolean} strict true if validation is strict
- * @param {Boolean} cleanRef true if we remove the reference to the object
- * @return {Boolean} true is the object is compliant with the schema
- */
-exports.isValidObject = isValidObject;
-
-
-/**
- * Prepare the object in order to be compliant with the schema.
- * @method prepareObject
- * @param {Object} object object to prepare
- * @param {Object} schema schema that validates the object
- */
-exports.prepareObject = prepareObject;
-
-
-/**
- * Check if a value is compliant with a type.
- * @method isValidType
- * @param {Object} object object to validate
- * @param {String} type type to use for validation
- * @return {Boolean} true if the object is compliant with the type
- */
-exports.isValidType = isValidType;
-
-
-/**
- * Check if a value is compliant with a type enum.
- * @method isValidEnum
- * @param {String|Object} value value to validate
- * @param {Schema} schema schema to use for validation
- * @return {Boolean} true if the object is compliant with the enum
- */
-exports.isValidEnum = isValidEnum;
-
-
-/**
- * Check if the name is a correct state for the component.
- * @method isValidState
- * @param {String} name name of the state
- * @param {String} id component id
- * @return {Boolean} true if the name is a correct state for the component
- */
-exports.isValidState = isValidState;
-
-
-/**
- * Check if an attribute of the schema is an event.
- * @method isEvent
- * @param {String} name name of the attribute
- * @param {String} id component id
- * @return {Boolean} true if the attribute is an event
- */
-exports.isEvent = isEvent;
-
-
-/**
- * Check if an attribute of the schema is a property.
- * @method isProperty
- * @param {String} name name of the property
- * @param {String} id component id
- * @return {Boolean} true if the attribute is a property
- */
-exports.isProperty = isProperty;
-
-
-/**
- * Check if an attribute of the schema is a link.
- * @method isLink
- * @param {String} name name of the property
- * @param {String} id component id
- * @return {Boolean} true if the attribute is a link
- */
-exports.isLink = isLink;
-
-
-/**
- * Check if an attribute of the schema is a collection.
- * @method isCollection
- * @param {String} name name of the collection
- * @param {String} id component id
- * @return {Boolean} true if the attribute is a collection
- */
-exports.isCollection = isCollection;
-
-
-/**
- * Check if an attribute of the schema is a method.
- * @method isMethod
- * @param {String} name name of the method
- * @param {String} id component id
- * @return {Boolean} true if the attribute is a method
- */
-exports.isMethod = isMethod;
-
-
-/**
- * Check if an attribute of the schema is a structure.
- * @method isStructure
- * @param {String} name name of the property
- * @param {String} id component id
- * @return {Boolean} true if the property is a structure
- */
-exports.isStructure = isStructure;
-
-
-/**
- * Get a type.
- * @method getType
- * @param {String} name of the type
- * @return {Object} the type
- */
-exports.getType = getType;
-
-
-/**
- * Get the type of a model path.
- * @method getModelPathType
- * @param {String} model name of the model
- * @param {String} path path of the model
- * @return {Object} the type
- */
-exports.getModelPathType = getModelPathType;
-
-
-/**
- * Check if a path is valid model path.
- * @method isValidModelPath
- * @param {String} model name of the model
- * @param {String} path path of the model
- * @return {Boolean} true if the path is valid for the model
- */
-exports.isValidModelPath = isValidModelPath;
-
-
-/**
- * Is the value a class name.
- * @method isClassName
- * @param {String} value
- * @return {Boolean} true if tne name is a class name
- */
-exports.isClassName = isClassName;
+};

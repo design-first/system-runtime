@@ -156,11 +156,11 @@ function _Array(conf) {
           if ($helper.isRuntime()) {
             $helper.getRuntime().require('db')
               .update({
-              'collection': classId,
-              'id': id,
-              'field': propertyName,
-              'value': arrDb
-            });
+                'collection': classId,
+                'id': id,
+                'field': propertyName,
+                'value': arrDb
+              });
           }
 
           $workflow.state({
@@ -193,12 +193,12 @@ function _Array(conf) {
 
           if ($helper.isRuntime()) {
             $helper.getRuntime().require('db')
-.update({
-              'collection': classId,
-              'id': id,
-              'field': propertyName,
-              'value': arrDb
-            });
+              .update({
+                'collection': classId,
+                'id': id,
+                'field': propertyName,
+                'value': arrDb
+              });
           }
 
           $workflow.state({
@@ -237,12 +237,12 @@ function _Array(conf) {
 
         if ($helper.isRuntime()) {
           $helper.getRuntime().require('db')
-.update({
-            'collection': classId,
-            'id': id,
-            'field': propertyName,
-            'value': arrDb
-          });
+            .update({
+              'collection': classId,
+              'id': id,
+              'field': propertyName,
+              'value': arrDb
+            });
         }
 
         isClass = $metamodel.isClassName(type);
@@ -346,12 +346,12 @@ function _Array(conf) {
 
     if ($helper.isRuntime()) {
       $helper.getRuntime().require('db')
-.update({
-        'collection': classId,
-        'id': id,
-        'field': propertyName,
-        'value': arrDb
-      });
+        .update({
+          'collection': classId,
+          'id': id,
+          'field': propertyName,
+          'value': arrDb
+        });
     }
 
     result = arr;
@@ -369,12 +369,12 @@ function _Array(conf) {
 
     if ($helper.isRuntime()) {
       $helper.getRuntime().require('db')
-.update({
-        'collection': classId,
-        'id': id,
-        'field': propertyName,
-        'value': arrDb
-      });
+        .update({
+          'collection': classId,
+          'id': id,
+          'field': propertyName,
+          'value': arrDb
+        });
     }
 
     _copy();
@@ -400,12 +400,12 @@ function _Array(conf) {
 
       if ($helper.isRuntime()) {
         $helper.getRuntime().require('db')
-.update({
-          'collection': classId,
-          'id': id,
-          'field': propertyName,
-          'value': arrDb
-        });
+          .update({
+            'collection': classId,
+            'id': id,
+            'field': propertyName,
+            'value': arrDb
+          });
       }
 
       length = result.length;
@@ -697,10 +697,10 @@ function createClass(classId) {
 
     if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
       $helper.getRuntime().require('db')
-.insert({
-        collection: classId,
-        document: config
-      });
+        .insert({
+          collection: classId,
+          document: config
+        });
     }
 
     Object.freeze(this);
@@ -837,12 +837,12 @@ function addProperties(model, Class, classId) {
 
                   if ($helper.isRuntime()) {
                     $helper.getRuntime().require('db')
-.update({
-                      'collection': classId,
-                      'id': this.id(),
-                      'field': propertyName,
-                      'value': component[propertyName]
-                    });
+                      .update({
+                        'collection': classId,
+                        'id': this.id(),
+                        'field': propertyName,
+                        'value': component[propertyName]
+                      });
                   }
                 }
               } else {
@@ -898,12 +898,12 @@ function addProperties(model, Class, classId) {
 
                 if ($helper.isRuntime()) {
                   $helper.getRuntime().require('db')
-.update({
-                    'collection': classId,
-                    'id': this.id(),
-                    'field': propertyName,
-                    'value': component[propertyName]
-                  });
+                    .update({
+                      'collection': classId,
+                      'id': this.id(),
+                      'field': propertyName,
+                      'value': component[propertyName]
+                    });
                 }
 
                 $workflow.state({
@@ -930,7 +930,7 @@ function addProperties(model, Class, classId) {
           if (component) {
             switch (true) {
               case $metamodel.isClassName(propertyType):
-                propertyValue = get(component[propertyName]);
+                propertyValue = exports.get(component[propertyName]);
                 break;
               case propertyType === 'date':
                 propertyValue = new Date(component[propertyName]);
@@ -992,12 +992,12 @@ function addProperties(model, Class, classId) {
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                   $helper.getRuntime().require('db')
-.update({
-                    'collection': classId,
-                    'id': this.id(),
-                    'field': propertyName,
-                    'value': value
-                  });
+                    .update({
+                      'collection': classId,
+                      'id': this.id(),
+                      'field': propertyName,
+                      'value': value
+                    });
                 }
 
                 // case of _Behavior
@@ -1110,12 +1110,12 @@ function addStructure(path, name, model, id) {
 
                   if ($helper.isRuntime()) {
                     $helper.getRuntime().require('db')
-.update({
-                      'collection': model,
-                      'id': id,
-                      'field': fullPath,
-                      'value': position
-                    });
+                      .update({
+                        'collection': model,
+                        'id': id,
+                        'field': fullPath,
+                        'value': position
+                      });
                   }
                 }
               } else {
@@ -1149,12 +1149,12 @@ function addStructure(path, name, model, id) {
 
                 if ($helper.isRuntime()) {
                   $helper.getRuntime().require('db')
-.update({
-                    'collection': model,
-                    'id': id,
-                    'field': fullPath,
-                    'value': arr
-                  });
+                    .update({
+                      'collection': model,
+                      'id': id,
+                      'field': fullPath,
+                      'value': arr
+                    });
                 }
 
                 $workflow.state({
@@ -1191,7 +1191,7 @@ function addStructure(path, name, model, id) {
           if (component) {
             switch (true) {
               case $metamodel.isClassName(propertyType):
-                propertyValue = get(getStructureValue(model, id, fullPath));
+                propertyValue = exports.get(getStructureValue(model, id, fullPath));
                 break;
               case propertyType === 'date':
                 propertyValue = new Date(getStructureValue(model, id, fullPath));
@@ -1238,12 +1238,12 @@ function addStructure(path, name, model, id) {
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                   $helper.getRuntime().require('db')
-.update({
-                    'collection': model,
-                    'id': id,
-                    'field': fullPath,
-                    'value': value
-                  });
+                    .update({
+                      'collection': model,
+                      'id': id,
+                      'field': fullPath,
+                      'value': value
+                    });
                 }
 
                 // case of _Behavior
@@ -1583,7 +1583,7 @@ function addDestroyClass(Class) {
  */
 function addClassInfoClass(Class) {
   var body = function () {
-    return get(this.id() + 'Info');
+    return exports.get(this.id() + 'Info');
   };
   Class.classInfo = new Function('__body', 'return function classInfo () { return __body.call(this) };')(body);
 }
@@ -1637,35 +1637,35 @@ function factory(config) {
 /* Public methods */
 
 
-/*
+/**
  * Get a component by its id.
  * @method get
  * @param {String} id of the component
  * @return {Component} component
  */
-function get(id) {
+exports.get = function get(id) {
   return store[id];
-}
+};
 
 
-/*
+/**
  * Create a component from its configuration.
  * @method create
  * @param {Object} config <br>
  * {String} model model name <br>
  * @return {Component}
  */
-function create(config) {
+exports.create = function create(config) {
   return factory(config);
-}
+};
 
 
-/*
+/**
  * Destroy a component from its id.
  * @method destroy
  * @param {String} id id of the component to destroy
  */
-function destroy(id) {
+exports.destroy = function destroy(id) {
   var component = store[id],
     classId = '';
 
@@ -1686,85 +1686,23 @@ function destroy(id) {
       $behavior.removeFromMemory(id);
     }
   }
-}
+};
 
 
-/*
+/**
  * Remove a component with its id from the memory.
  * @method removeFromMemory
  * @param {String} id id of the component
  */
-function removeFromMemory(id) {
+exports.removeFromMemory = function removeFromMemory(id) {
   delete store[id];
-}
+};
 
 
-/*
+/**
  * Remove all the components store in the memory.
  * @method clear
  */
-function clear() {
+exports.clear = function clear() {
   store = {};
-}
-
-
-/* exports */
-
-
-/**
- * This module manages the components. 
- * It is the factory of all the components that are created by System Runtime.
- * 
- * @module component
- * @requires workflow
- * @requires db
- * @requires metamodel
- * @requires behavior
- * @requires helper
- * @requires log
- * @class component
- * @static 
- */
-
-
-/**
- * Create a component from its configuration.
- * @method create
- * @param {Object} config <br>
- * {String} model model name <br>
- * @return {Component} component
- */
-exports.create = create;
-
-
-/**
- * Get a component by its id.
- * @method get
- * @param {String} id id of the component
- * @return {Component} component
- */
-exports.get = get;
-
-
-/**
- * Remove a component with its id from the memory.
- * @method removeFromMemory
- * @param {String} id id of the component
- */
-exports.removeFromMemory = removeFromMemory;
-
-
-/**
- * Remove all the components store in memory.
- * @method clear
- */
-exports.clear = clear;
-
-
-/**
- * Destroy a component from its id.
- * @method destroy
- * @param {String} id id of the component to destroy
- * @return {Boolean} if the component has been destroyed
- */
-exports.destroy = destroy;
+};
