@@ -58,7 +58,7 @@ module.exports = grunt => {
     'concat:systemModule',
     'jsbeautifier',
     'eslint',
-    'mocha_istanbul',
+    'mocha_istanbul:coverage',
     'browserify:debug',
     'browserify:release',
     'uglify:release',
