@@ -49,7 +49,7 @@ var store = {};
  * @param {String} state the new state of the component
  * @param {Object} value value of the state
  */
-exports.set = function set (id, state, value) {
+exports.set = function set(id, state, value) {
   store[id] = {
     'state': state,
     'value': value
@@ -67,7 +67,7 @@ exports.set = function set (id, state, value) {
  * @param {String} id id of the component
  * @return {String} state of the component
  */
-exports.get = function get (id) {
+exports.get = function get(id) {
   return store[id];
 };
 
@@ -76,6 +76,6 @@ exports.get = function get (id) {
  * Remove all the states of the components from the memory.
  * @method clear
  */
-exports.clear = function clear () {
+exports.clear = function clear() {
   store = {};
 };

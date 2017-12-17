@@ -14,63 +14,111 @@ describe('System Runtime db component', () => {
   });
 
   it('can find a document with a criteria', () => {
-    const result = db._Runtime.find({ '_id': 'runtime' });
+    const result = db._Runtime.find({
+      '_id': 'runtime'
+    });
 
     expect(result.length).equal(1);
   });
 
   it('can find a document with multi criteria', () => {
-    const result = db._Runtime.find([{ '_id': 'runtime' }]);
+    const result = db._Runtime.find([{
+      '_id': 'runtime'
+    }]);
 
     expect(result.length).equal(1);
   });
 
   it('can find a document with regex criteria', () => {
-    const result = db._Runtime.find({ '_id': /runtime/ });
+    const result = db._Runtime.find({
+      '_id': /runtime/
+    });
 
     expect(result.length).equal(1);
   });
 
   it('can add a document', () => {
-    db._Runtime.insert({ '_id': 'runtime1', 'version': '0.0.0' });
-    const result = db._Runtime.find({ '_id': 'runtime1' });
+    db._Runtime.insert({
+      '_id': 'runtime1',
+      'version': '0.0.0'
+    });
+    const result = db._Runtime.find({
+      '_id': 'runtime1'
+    });
 
     expect(result.length).equal(1);
   });
 
   it('can add many documents', () => {
-    db._Runtime.insert([{ '_id': 'runtime2', 'version': '0.0.0' }, { '_id': 'runtime3', 'version': '0.0.0' }]);
-    const result = db._Runtime.find({ '_id': 'runtime2' });
-    
+    db._Runtime.insert([{
+      '_id': 'runtime2',
+      'version': '0.0.0'
+    }, {
+      '_id': 'runtime3',
+      'version': '0.0.0'
+    }]);
+    const result = db._Runtime.find({
+      '_id': 'runtime2'
+    });
+
     expect(result.length).equal(1);
   });
 
   it('can update a document', () => {
-    db._Runtime.update({ '_id': 'runtime1' }, { 'version': '0.0.4' });
-    const result = db._Runtime.find({ '_id': 'runtime1' })[0];
+    db._Runtime.update({
+      '_id': 'runtime1'
+    }, {
+        'version': '0.0.4'
+      });
+    const result = db._Runtime.find({
+      '_id': 'runtime1'
+    })[0];
 
     expect(result.version).equal('0.0.4');
   });
 
   it('can update many documents', () => {
-    db._Runtime.update([{ '_id': 'runtime2' }, { '_id': 'runtime3' }], { 'version': '0.0.4' });
-    const result = db._Runtime.find({ '_id': 'runtime3' })[0];
+    db._Runtime.update([{
+      '_id': 'runtime2'
+    }, {
+      '_id': 'runtime3'
+    }], {
+        'version': '0.0.4'
+      });
+    const result = db._Runtime.find({
+      '_id': 'runtime3'
+    })[0];
 
     expect(result.version).equal('0.0.4');
   });
 
   it('can update a document that does not exist', () => {
-    db._Runtime.update({ '_id': 'runtime5' }, { 'version': '0.0.1' }, { 'upsert': true });
-    const result = db._Runtime.find({ '_id': 'runtime5' });
+    db._Runtime.update({
+      '_id': 'runtime5'
+    }, {
+        'version': '0.0.1'
+      }, {
+        'upsert': true
+      });
+    const result = db._Runtime.find({
+      '_id': 'runtime5'
+    });
 
     expect(result.length).equal(1);
   });
 
   it('can remove a document', () => {
     const runtimeid = 'runtime' + Math.round(Math.random() * 1000000);
-    db._Runtime.insert({ '_id': runtimeid, 'version': '0.0.0' });
-    db._Runtime.remove({ '_id': runtimeid });
-    const result = db._Runtime.find({ '_id': runtimeid });
+    db._Runtime.insert({
+      '_id': runtimeid,
+      'version': '0.0.0'
+    });
+    db._Runtime.remove({
+      '_id': runtimeid
+    });
+    const result = db._Runtime.find({
+      '_id': runtimeid
+    });
 
     expect(result.length).equal(0);
   });
@@ -78,10 +126,25 @@ describe('System Runtime db component', () => {
   it('can remove many documents', () => {
     const runtimeid1 = 'runtime' + Math.round(Math.random() * 1000000);
     const runtimeid2 = 'runtime' + Math.round(Math.random() * 1000000);
-    db._Runtime.insert([{ '_id': runtimeid1, 'version': '0.0.0' }, { '_id': runtimeid2, 'version': '0.0.0' }]);
-    db._Runtime.remove([{ '_id': runtimeid1 }, { '_id': runtimeid2 }]);
-    const result1 = db._Runtime.find({ '_id': runtimeid1 });
-    const result2 = db._Runtime.find({ '_id': runtimeid2 });
+    
+    db._Runtime.insert([{
+      '_id': runtimeid1,
+      'version': '0.0.0'
+    }, {
+      '_id': runtimeid2,
+      'version': '0.0.0'
+    }]);
+    db._Runtime.remove([{
+      '_id': runtimeid1
+    }, {
+      '_id': runtimeid2
+    }]);
+    const result1 = db._Runtime.find({
+      '_id': runtimeid1
+    });
+    const result2 = db._Runtime.find({
+      '_id': runtimeid2
+    });
 
     expect(result1.length + result2.length).equal(0);
   });
@@ -93,7 +156,11 @@ describe('System Runtime db component', () => {
   });
 
   it('can apply a filter on the export', () => {
-    const result = db.exportSystem({ 'schemas': { 'name': 'Person' } })
+    const result = db.exportSystem({
+      'schemas': {
+        'name': 'Person'
+      }
+    });
 
     expect(result).to.not.be.undefined;
   });
@@ -117,7 +184,9 @@ describe('System Runtime db component', () => {
 
   it('can init the database', () => {
     db.init();
-    const result = db._Runtime.find({ '_id': 'runtime' });
+    const result = db._Runtime.find({
+      '_id': 'runtime'
+    });
 
     expect(result.length).equal(1);
   });

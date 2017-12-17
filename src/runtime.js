@@ -48,23 +48,18 @@ var $helper = require('./helper.js');
 
 /* Private Property */
 
+
 var sytemId = '',
   system = '',
   channel = null;
-
 
 /* Polyfill */
 $helper.polyfill();
 
 /* Init Metamodel */
-
-
 $metamodel.init();
 
-
 /* Init runtime from a system */
-
-
 sytemId = $db.importSystem($system.system);
 
 system = $component.get(sytemId);

@@ -46,7 +46,7 @@ var store = {};
 /* Private methods */
 
 
-/*
+/**
  * Create a function from a string.
  * The created function:
  * - will be a named function,

@@ -61,7 +61,7 @@ var $db = require('./db.js');
  * @constructor
  * @param {String} message message of the error
  */
-function RuntimeError (message) {
+function RuntimeError(message) {
   this.message = message;
   this.name = 'RuntimeError';
 }
@@ -69,19 +69,19 @@ RuntimeError.prototype = new Error();
 RuntimeError.prototype.constructor = RuntimeError;
 
 
-/*
+/**
  * Is the value a model path.
  * @method isModelPath
  * @param {String} value
  * @return {Boolean}
  * @private
  */
-function isModelPath (value) {
+function isModelPath(value) {
   return value.indexOf('.') !== -1;
 }
 
 
-/*
+/**
  * Get all the names of the parameter of a method.
  * @method getParamNames
  * @param {String} id id of the class
@@ -89,7 +89,7 @@ function isModelPath (value) {
  * @return {Array} the names of all parameters of the method for the class
  * @private
  */
-function getParamNames (id, methodName) {
+function getParamNames(id, methodName) {
   var method = null,
     params = [],
     result = [],
@@ -119,7 +119,7 @@ function getParamNames (id, methodName) {
 }
 
 
-/* 
+/** 
  * Get the number of parameters of a method.
  * @method getParamNumber
  * @param {String} id id of the class
@@ -127,7 +127,7 @@ function getParamNames (id, methodName) {
  * @return {Array} number of parameters min and max for the method
  * @private
  */
-function getParamNumber (id, methodName) {
+function getParamNumber(id, methodName) {
   var method = null,
     params = [],
     result = [],
@@ -162,7 +162,7 @@ function getParamNumber (id, methodName) {
 }
 
 
-/* 
+/** 
  * Set the default value of the non mandatory parameters of a method.
  * @method setDefaultValue
  * @param {String} id id of the class
@@ -171,7 +171,7 @@ function getParamNumber (id, methodName) {
  * @return {Array} arguments with default values
  * @private
  */
-function setDefaultValue (id, methodName, args) {
+function setDefaultValue(id, methodName, args) {
   var method = null,
     params = [],
     result = [],
@@ -198,7 +198,7 @@ function setDefaultValue (id, methodName, args) {
 }
 
 
-/*
+/**
  * Get the type returned by a method.
  * @method getReturnType
  * @param {String} id id of the class
@@ -206,7 +206,7 @@ function setDefaultValue (id, methodName, args) {
  * @return {String} the type returned by the method
  * @private
  */
-function getReturnType (id, methodName) {
+function getReturnType(id, methodName) {
   var resultType = null,
     result = null;
 
@@ -223,7 +223,7 @@ function getReturnType (id, methodName) {
 }
 
 
-/*
+/**
  * Get all the type of the parameters of a method
  * @method getParamTypes
  * @param {String} id id of the class
@@ -231,7 +231,7 @@ function getReturnType (id, methodName) {
  * @return {Array} the types of the parameters of a method
  * @private
  */
-function getParamTypes (id, methodName) {
+function getParamTypes(id, methodName) {
   var method = null,
     params = [],
     result = [],
@@ -259,14 +259,14 @@ function getParamTypes (id, methodName) {
 }
 
 
-/*
+/**
  * Check if conditions on output are compliant with the metamodel
  * @method checkResult
  * @param {Object} params
  * @return {Boolean} true if conditions on ouput are compliant with the metamodel
  * @private
  */
-function checkResult (params) {
+function checkResult(params) {
   params = params || {};
 
   var component = params.component || null,
@@ -330,7 +330,7 @@ function checkResult (params) {
 }
 
 
-/*
+/**
  * Get the actions of the specified state
  * @method getActions
  * @param {Object} component a System Runtime component
@@ -339,7 +339,7 @@ function checkResult (params) {
  * @return {Array} list of the actions
  * @private
  */
-function getActions (component, name, isEvent) {
+function getActions(component, name, isEvent) {
   var action = $behavior.getActions(component.id(), name),
     parents = [],
     length = 0,
@@ -374,7 +374,7 @@ function getActions (component, name, isEvent) {
 }
 
 
-/*
+/**
  * Call an action and make some Dependency Injection if it is a core action
  * @method callAction
  * @param {Component} component
@@ -384,7 +384,7 @@ function getActions (component, name, isEvent) {
  * @param {Boolean} isEvent is the action a callback of an event
  * @return {Boolean} result of the action
  */
-function callAction (component, state, action, params, isEvent) {
+function callAction(component, state, action, params, isEvent) {
   var result = null,
     injectedParams = [],
     componentClassName = '',
@@ -460,7 +460,7 @@ function callAction (component, state, action, params, isEvent) {
  * @param {Function} action action
  * @return {Boolean} true if the action is the valid number of parameters
  */
-exports.validParamNumbers = function validParamNumbers (className, state, action) {
+exports.validParamNumbers = function validParamNumbers(className, state, action) {
   var func = '',
     beginBody = -1,
     header = '',
@@ -530,7 +530,7 @@ exports.validParamNumbers = function validParamNumbers (className, state, action
  * @param {Object} params
  * @return {Boolean} true if condition on input are compliant with the model
  */
-exports.checkParams = function checkParams (params) {
+exports.checkParams = function checkParams(params) {
   params = params || {};
 
   var component = params.component || null,
@@ -632,7 +632,7 @@ exports.checkParams = function checkParams (params) {
  * @param {String} behaviorId id of the behavior
  * @param {Array} params parameters
  */
-exports.action = function action (behaviorId, params) {
+exports.action = function action(behaviorId, params) {
   var isEvent = false,
     isProperty = false,
     isLink = false,
@@ -698,7 +698,7 @@ exports.action = function action (behaviorId, params) {
  * {String} state state of the component <br>
  * {Array} data parameters to send to the action
  */
-exports.state = function state (params) {
+exports.state = function state(params) {
 
   params = params || {};
   params.component = params.component || '';
@@ -788,7 +788,7 @@ exports.state = function state (params) {
  * {Boolean} error true if the stop of the workflow is due to an error (default false) <br>
  * {String} message error message to log (default '')
  */
-exports.stop = function stop (params) {
+exports.stop = function stop(params) {
   params = params || {};
 
   if (typeof params.error === 'undefined') {

@@ -8,7 +8,7 @@ describe('a System Runtime component', function () {
 
   beforeEach(function () {
     runtime.system('component-spec');
-    var metamodel = runtime.require('metamodel');
+    const metamodel = runtime.require('metamodel');
 
     metamodel.schema({
       '_name': 'Person',
@@ -67,27 +67,27 @@ describe('a System Runtime component', function () {
   });
 
   it('can show its id', function () {
-    var id = runtime.id();
+    const id = runtime.id();
 
     expect(id).equal('runtime');
   });
 
   it('can require a component', function () {
-    var db = runtime.require('db');
+    const db = runtime.require('db');
 
     expect(db).to.not.be.undefined;
   });
 
   it('can show its classInfo', function () {
-    var db = runtime.require('db');
-    var classInfo = db.classInfo();
+    const db = runtime.require('db');
+    const classInfo = db.classInfo();
 
     expect(classInfo).to.not.be.undefined;
   });
 
   it('can add an event', function (done) {
-    var Person = runtime.require('Person');
-    var yoda = new Person({
+    const Person = runtime.require('Person');
+    const yoda = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master',
       'likes': ['teaching']
@@ -105,8 +105,8 @@ describe('a System Runtime component', function () {
   });
 
   it('can remove an event', function (done) {
-    var Person = runtime.require('Person');
-    var yoda = new Person({
+    const Person = runtime.require('Person');
+    const yoda = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master'
     });
@@ -125,8 +125,8 @@ describe('a System Runtime component', function () {
   });
 
   it('can remove all event', function (done) {
-    var Person = runtime.require('Person');
-    var yoda2 = new Person({
+    const Person = runtime.require('Person');
+    const yoda2 = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master'
     });
@@ -145,13 +145,13 @@ describe('a System Runtime component', function () {
   });
 
   it('can remove an event with its id', function (done) {
-    var Person = runtime.require('Person');
-    var yoda3 = new Person({
+    const Person = runtime.require('Person');
+    const yoda3 = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master'
     });
 
-    var behaviorId = yoda3.on('moving', function () {
+    const behaviorId = yoda3.on('moving', function () {
       this.address('Dagobah');
     });
 
@@ -166,8 +166,8 @@ describe('a System Runtime component', function () {
   });
 
   it('can add an event on a property change', function (done) {
-    var Person = runtime.require('Person');
-    var yoda = new Person({
+    const Person = runtime.require('Person');
+    const yoda = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master'
     })
@@ -185,8 +185,8 @@ describe('a System Runtime component', function () {
   });
 
   it('can remove an event on a property change', function (done) {
-    var Person = runtime.require('Person');
-    var yoda = new Person({
+    const Person = runtime.require('Person');
+    const yoda = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master'
     })
@@ -206,21 +206,21 @@ describe('a System Runtime component', function () {
   });
 
   it('can navigate threw relationships bewteen components', function () {
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var luke = new Person({
+    const luke = new Person({
       'firstName': 'Luke',
       'lastName': 'Skywalker'
     });
 
-    var anakin = new Person({
+    const anakin = new Person({
       'firstName': 'Anakin',
       'lastName': 'Skywalker'
     });
 
     anakin.children().push(luke);
 
-    var leia = new Person({
+    const leia = new Person({
       'firstName': 'Leia Amidala',
       'lastName': 'Skywalker'
     });
@@ -231,8 +231,8 @@ describe('a System Runtime component', function () {
   });
 
   it('can get a property', function () {
-    var Person = runtime.require('Person');
-    var yoda = new Person({
+    const Person = runtime.require('Person');
+    const yoda = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master'
     });
@@ -241,8 +241,8 @@ describe('a System Runtime component', function () {
   });
 
   it('can set a property', function () {
-    var Person = runtime.require('Person');
-    var yoda = new Person({
+    const Person = runtime.require('Person');
+    const yoda = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master'
     });
@@ -252,8 +252,8 @@ describe('a System Runtime component', function () {
   });
 
   it('can not set an invalid value', function () {
-    var Person = runtime.require('Person');
-    var yoda = new Person({
+    const Person = runtime.require('Person');
+    const yoda = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master'
     });
@@ -263,14 +263,14 @@ describe('a System Runtime component', function () {
   });
 
   it('can add a link to another components', function () {
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var anakin = new Person({
+    const anakin = new Person({
       'firstName': 'Anakin',
       'lastName': 'Skywalker'
     });
 
-    var leia = new Person({
+    const leia = new Person({
       'firstName': 'Leia Amidala',
       'lastName': 'Skywalker'
     });
@@ -281,14 +281,14 @@ describe('a System Runtime component', function () {
   });
 
   it('can remove a link to another components', function () {
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var anakin = new Person({
+    const anakin = new Person({
       'firstName': 'Anakin',
       'lastName': 'Skywalker'
     });
 
-    var leia = new Person({
+    const leia = new Person({
       'firstName': 'Leia Amidala',
       'lastName': 'Skywalker'
     });
@@ -300,14 +300,14 @@ describe('a System Runtime component', function () {
   });
 
   it('can add an item in a collection in the config', function () {
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var luke = new Person({
+    const luke = new Person({
       'firstName': 'Luke',
       'lastName': 'Skywalker'
     });
 
-    var anakin = new Person({
+    const anakin = new Person({
       'firstName': 'Anakin',
       'lastName': 'Skywalker',
       'children': [luke]
@@ -317,14 +317,14 @@ describe('a System Runtime component', function () {
   });
 
   it('can add an item in a collection with api', function () {
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var luke = new Person({
+    const luke = new Person({
       'firstName': 'Luke',
       'lastName': 'Skywalker'
     });
 
-    var anakin = new Person({
+    const anakin = new Person({
       'firstName': 'Anakin',
       'lastName': 'Skywalker'
     });
@@ -335,14 +335,14 @@ describe('a System Runtime component', function () {
   });
 
   it('can add items in a collection with api', function () {
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var luke = new Person({
+    const luke = new Person({
       'firstName': 'Luke',
       'lastName': 'Skywalker'
     });
 
-    var anakin = new Person({
+    const anakin = new Person({
       'firstName': 'Anakin',
       'lastName': 'Skywalker'
     });
@@ -353,14 +353,14 @@ describe('a System Runtime component', function () {
   });
 
   it('can remove an item of a collection with pop', function () {
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var luke = new Person({
+    const luke = new Person({
       'firstName': 'Luke',
       'lastName': 'Skywalker'
     });
 
-    var anakin = new Person({
+    const anakin = new Person({
       'firstName': 'Anakin',
       'lastName': 'Skywalker',
       'children': [luke]
@@ -370,9 +370,9 @@ describe('a System Runtime component', function () {
   });
 
   it('can remove an item of an array property with pop', function () {
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var luke = new Person({
+    const luke = new Person({
       'firstName': 'Luke',
       'lastName': 'Skywalker',
       'likes': ['saying noooooo!']
@@ -384,14 +384,14 @@ describe('a System Runtime component', function () {
   });
 
   it('can add an item of a collection with push', function () {
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var luke = new Person({
+    const luke = new Person({
       'firstName': 'Luke',
       'lastName': 'Skywalker'
     });
 
-    var anakin = new Person({
+    const anakin = new Person({
       'firstName': 'Anakin',
       'lastName': 'Skywalker'
     });
@@ -402,9 +402,9 @@ describe('a System Runtime component', function () {
   });
 
   it('can add an item of an array property with push', function () {
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var luke = new Person({
+    const luke = new Person({
       'firstName': 'Luke',
       'lastName': 'Skywalker'
     });
@@ -415,14 +415,14 @@ describe('a System Runtime component', function () {
   });
 
   it('can clear a collection with api', function () {
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
 
-    var luke = new Person({
+    const luke = new Person({
       'firstName': 'Luke',
       'lastName': 'Skywalker'
     });
 
-    var anakin = new Person({
+    const anakin = new Person({
       'firstName': 'Anakin',
       'lastName': 'Skywalker'
     });
@@ -434,29 +434,29 @@ describe('a System Runtime component', function () {
   });
 
   it('can destroy itself', function () {
-    var Person = runtime.require('Person');
-    var yoda = new Person({
+    const Person = runtime.require('Person');
+    const yoda = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master'
     });
-    var id = yoda.id();
+    const id = yoda.id();
     yoda.destroy();
 
     expect(runtime.require(id)).equal(undefined);
   });
 
   it('can destroy a class', function () {
-    var Person = runtime.require('Person');
+    const Person = runtime.require('Person');
     Person.destroy();
 
-    var result = runtime.require('Person');
+    const result = runtime.require('Person');
     expect(result).equal(undefined);
   });
 
 
   it('can create a core object', function () {
-    var Person = runtime.require('Person');
-    var shadow = new Person({
+    const Person = runtime.require('Person');
+    const shadow = new Person({
       'firstName': 'Shadow',
       'lastName': 'Object',
       '_core': true

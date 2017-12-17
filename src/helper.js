@@ -49,7 +49,7 @@ var runtimeRef = null;
  * @method isRuntime
  * @return {Boolean} true if a System Runtime instance exist
  */
-exports.isRuntime = function isRuntime () {
+exports.isRuntime = function isRuntime() {
   var result = false;
 
   if ($db._Runtime && $db._Runtime.find().length) {
@@ -65,7 +65,7 @@ exports.isRuntime = function isRuntime () {
  * @method getRuntime
  * @return {_Runtime} System Runtime instance
  */
-exports.getRuntime = function getRuntime () {
+exports.getRuntime = function getRuntime() {
   var runtimeId = '',
     result = null;
 
@@ -83,11 +83,11 @@ exports.getRuntime = function getRuntime () {
  * @method generateId
  * @return {String} a uuid
  */
-exports.generateId = function generateId () {
-  function gen () {
+exports.generateId = function generateId() {
+  function gen() {
     return Math.floor((1 + Math.random()) * 0x10000).toString(16);
   }
-  function getPrefix () {
+  function getPrefix() {
     var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
     return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
   }
@@ -100,7 +100,7 @@ exports.generateId = function generateId () {
  * Add Polyfill
  * @method polyfill
  */
-exports.polyfill = function polyfill () {
+exports.polyfill = function polyfill() {
 
   // fixing constructor.name property in IE
   // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer

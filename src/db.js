@@ -83,7 +83,7 @@ var collections = [],
 /* Private methods */
 
 
-/*
+/**
  * Increment Log
  * @method incLogOrder
  */
@@ -92,7 +92,7 @@ function incLogOrder() {
 }
 
 
-/*
+/**
  * Dump the database.
  * @method dump
  * @return {Object} the dump of the database. The dump is an object that contains: <br>
@@ -188,7 +188,7 @@ function dump() {
 }
 
 
-/*
+/**
  * Test if an object contains another one.
  * @method contains
  * @param {Object} source source object 
@@ -242,7 +242,8 @@ function contains(source, target) {
   return result;
 }
 
-/*
+
+/**
  * Import system into the database
  * @method impSystem
  * @param {JSON} importedSystem a System Runtime system to import
@@ -318,7 +319,8 @@ function impSystem(importedSystem) {
   return result;
 }
 
-/*
+
+/**
  * Export a system from the database
  * @method expSystem
  * @return {String} a stringified system
@@ -371,7 +373,7 @@ function expSystem() {
 }
 
 
-/*
+/**
  * Export a sub-system.
  * @method exportSubsystem
  * @param {JSON} params parameters

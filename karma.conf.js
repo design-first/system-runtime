@@ -18,28 +18,28 @@
  * limitations under the License.
  */
 
-module.exports = function (config) {
+module.exports = config => {
   // browers
-  var browsers = ['ChromeHeadless'];
+  const browsers = ['ChromeHeadless'];
 
   // reporters
-  var reporters = ['progress', 'coverage'];
+  const reporters = ['progress', 'coverage'];
   if (process.env.TRAVIS) {
-    reporters = ['progress', 'coverage', 'dots']
+    reporters = ['progress', 'coverage', 'dots'];
   }
 
   config.set({
     basePath: './',
     frameworks: ['mocha', 'chai'],
     files: [
-      "dist/system-runtime.min.js",
-      "test/runtime/runtime-spec.js",
-      "test/runtime/component-spec.js",
-      "test/runtime/metamodel-spec.js",
-      "test/runtime/database-spec.js",
-      "test/runtime/classInfo-spec.js",
-      "test/runtime/system-spec.js",
-      "test/runtime/mson-spec.js"
+      'dist/system-runtime.min.js',
+      'test/runtime/runtime-spec.js',
+      'test/runtime/component-spec.js',
+      'test/runtime/metamodel-spec.js',
+      'test/runtime/database-spec.js',
+      'test/runtime/classInfo-spec.js',
+      'test/runtime/system-spec.js',
+      'test/runtime/mson-spec.js'
     ],
     reporters: reporters,
     preprocessors: {
@@ -52,7 +52,7 @@ module.exports = function (config) {
       'karma-script-launcher',
       'karma-chrome-launcher',
       'karma-mocha',
-      'karma-chai',
+      'karma-chai'
     ],
     singleRun: true,
     browsers: browsers

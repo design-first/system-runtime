@@ -72,7 +72,7 @@ var ID = '_id',
     }
   };
 
-/*
+/**
  * Get the _Logger instance.
  * @method getLogger
  * @return {_Logger} _Logger instance

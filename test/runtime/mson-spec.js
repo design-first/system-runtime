@@ -28,7 +28,7 @@ describe('a MSON schema', () => {
 
     Person.off('getFullName');
 
-    Person.on('getFullName', () => this.firstName() + ' ' + this.lastName() );
+    Person.on('getFullName', () => this.firstName() + ' ' + this.lastName());
 
     const Teacher = runtime.require('Teacher_test');
 
@@ -44,15 +44,15 @@ describe('a MSON schema', () => {
     const metamodel = runtime.require('metamodel');
 
     metamodel.schema({
-      '_name': 'Test_result',
+      '_name': 'TestResult',
       'getParent': 'method'
     });
 
     metamodel.model({
-      '_name': 'Test_result',
+      '_name': 'TestResult',
       'getParent': {
-        "params": [],
-        "result": "array"
+        'params': [],
+        'result': 'array'
       }
     });
 
@@ -108,12 +108,12 @@ describe('a MSON schema', () => {
 
     metamodel.create();
 
-    const Test_result = runtime.require('Test_result');
-    Test_result.on('getParent', () => {
+    const TestResult = runtime.require('TestResult');
+    TestResult.on('getParent', () => {
       return $metamodel.getParents('Z');
     }, true);
 
-    const test = new Test_result();
+    const test = new TestResult();
 
     expect(test.getParent().join('_')).equal(['K1', 'K2', 'K3', 'D', 'A', 'B', 'C', 'E', 'O'].join('_'));
   });

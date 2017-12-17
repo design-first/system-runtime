@@ -60,7 +60,7 @@ var PROPERTY_TYPE = 'property',
 /* Private methods */
 
 
-/*
+/**
  * Sub class to override push and pop method of Array Class.
  * @class _Array
  * @param {Object} conf
@@ -266,8 +266,9 @@ function _Array(conf) {
     return result;
   }
 
-  /* Override push method.
-   * @push
+  /**
+   * Override push method.
+   * @method push
    * @param {_Component|Object} val
    */
   arr.push = function push(val) {
@@ -277,8 +278,9 @@ function _Array(conf) {
     return result;
   };
 
-  /* Override unshift method.
-   * @unshift
+  /** 
+   * Override unshift method.
+   * @method unshift
    * @param {_Component|Object} val
    */
   arr.unshift = function unshift(val) {
@@ -288,8 +290,9 @@ function _Array(conf) {
     return result;
   };
 
-  /* Override concat method.
-   * @push
+  /** 
+   * Override concat method.
+   * @method push
    * @param {_Component|Object} arr
    */
   arr.concat = function concat(arr) {
@@ -312,8 +315,9 @@ function _Array(conf) {
     return result;
   };
 
-  /* Override pop method.
-   * @pop
+  /** 
+   * Override pop method.
+   * @method pop
    * @return {_Component|Object} value
    */
   arr.pop = function pop() {
@@ -323,8 +327,9 @@ function _Array(conf) {
     return result;
   };
 
-  /* Override shift method.
-   * @shift
+  /** 
+   * Override shift method.
+   * @method shift
    * @return {_Component|Object} value
    */
   arr.shift = function shift() {
@@ -334,8 +339,9 @@ function _Array(conf) {
     return result;
   };
 
-  /* Override sort method.
-   * @sort
+  /** 
+   * Override sort method.
+   * @method sort
    * @param {Function} funct the sort function
    * @return {_Array} the current _Array
    */
@@ -360,8 +366,9 @@ function _Array(conf) {
     return result;
   };
 
-  /* Override reverse method.
-   * @reverse
+  /** 
+   * Override reverse method.
+   * @method reverse
    * @return {_Array} the reversed _Array
    */
   arr.reverse = function reverse() {
@@ -382,8 +389,9 @@ function _Array(conf) {
     return arr;
   };
 
-  /* Override splice method.
-   * @splice
+  /** 
+   * Override splice method.
+   * @method splice
    * @return {_Array} the spliced _Array
    */
   arr.splice = function splice(start, deleteCount, val) {
@@ -431,8 +439,9 @@ function _Array(conf) {
     return result;
   };
 
-  /* Override slice method.
-   * @slice
+  /** 
+   * Override slice method.
+   * @method slice
    * @return {_Array} the sliced _Array
    */
   arr.slice = function slice(begin, end) {
@@ -448,7 +457,7 @@ function _Array(conf) {
 _Array.prototype = [];
 
 
-/*
+/**
  * Get all the names of method parameters.
  * @method getParamNames
  * @param {String} id id of the class
@@ -473,7 +482,7 @@ function getParamNames(id, methodName) {
 }
 
 
-/*
+/**
  * Get all the property of a class.
  * @method getProperties
  * @param {String} id id of the class
@@ -508,7 +517,7 @@ function getProperties(id) {
 }
 
 
-/*
+/**
  * Get all the method of a class.
  * @method getMethods
  * @param {String} id id of the class
@@ -570,7 +579,7 @@ function getStructureProperties(propertyName, model) {
 }
 
 
-/*
+/**
  * Get all the event of a class.
  * @method getEvents
  * @param {String} id id of the class
@@ -600,7 +609,8 @@ function getEvents(id) {
   return result;
 }
 
-/*
+
+/**
  * Get the value of a structure.
  * @method getStructureValue
  * @param {String} model name of the model
@@ -625,7 +635,7 @@ function getStructureValue(model, id, path) {
 }
 
 
-/*
+/**
  * Set the value of a structure.
  * @method getStructureValue
  * @param {String} model name of the model
@@ -650,7 +660,7 @@ function setStructureValue(model, id, path, value) {
 }
 
 
-/*
+/**
  * Create a new class from a class definition.
  * @method createClasss
  * @param {String} classId name of the class
@@ -713,7 +723,7 @@ function createClass(classId) {
 }
 
 
-/*
+/**
  * Add an id method to a class that will return its id.
  * @method addId
  * @param {Function} Class a class
@@ -728,7 +738,7 @@ function addId(Class, classId) {
 }
 
 
-/*
+/**
  * Add properties to a component. All these properties will be accessed by a method with the same name.
  * Some checks can be done in order to see if the set of properties is compliant with the model.
  * @example
@@ -1023,7 +1033,7 @@ function addProperties(model, Class, classId) {
 }
 
 
-/*
+/**
  * Add structure properties to a component. All these properties will be accessed by a method with the same name.
  * Some checks can be done in order to see if the set of properties is compliant with the model.
  * @method addStructure
@@ -1271,7 +1281,8 @@ function addStructure(path, name, model, id) {
   return sructure;
 }
 
-/*
+
+/**
  * Add methods to a component.
  * The call to these methods will invoke the workflow in order to check that inpouts / outputs are compliant with the model.
  * @method addMethods
@@ -1336,7 +1347,7 @@ function addMethods(model, Class, classId) {
 }
 
 
-/*
+/**
  * Add events to a component.
  * The call to these methods will invoke the workflow in order to check that inpouts are compliant with the model.
  * @method addEvents
@@ -1402,7 +1413,7 @@ function addEvents(model, Class, classId) {
 }
 
 
-/*
+/**
  * Add a on method to a component to add behaviors to the component.
  * @method addOn
  * @param {Function} Class Class
@@ -1453,7 +1464,7 @@ function addOn(Class, classId) {
 }
 
 
-/*
+/**
  * Add a on method to a class component to add behaviors to the class.
  * @method addOnClass
  * @param {Function} Class Class
@@ -1504,7 +1515,7 @@ function addOnClass(Class, classId) {
 }
 
 
-/*
+/**
  * Add a off method to a class component to remove behaviors from the class.
  * @method addOffClass
  * @param {Object} Class Class
@@ -1533,7 +1544,7 @@ function addOffClass(Class, classId) {
 }
 
 
-/*
+/**
  * Add a destroy method to a class component to detroy the class and all the components of the same class.
  * @method addDestroyClass
  * @param {Object} Class Class
@@ -1575,7 +1586,7 @@ function addDestroyClass(Class) {
 }
 
 
-/*
+/**
  * Add the addClassInfo method on a class.
  * @method addClassInfoClass
  * @param {Object} Class Class
@@ -1589,7 +1600,7 @@ function addClassInfoClass(Class) {
 }
 
 
-/*
+/**
  * Create a component from its configuration.
  * @method factory
  * @param {JSON} config configuration of the component

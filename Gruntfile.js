@@ -19,7 +19,6 @@
  */
 
 module.exports = grunt => {
-
   // load tasks
   require('load-grunt-tasks')(grunt);
 

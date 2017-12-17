@@ -72,7 +72,7 @@ var ID = '_id',
 /* Private methods */
 
 
-/*
+/**
  * Generate the models.
  * @method generateModels
  * @private
@@ -246,7 +246,8 @@ function generateModels() {
   }
 }
 
-/*
+
+/**
  * Load schemas and types in memory.
  * @method loadInMemory
  * @private
@@ -324,7 +325,7 @@ function loadInMemory() {
 }
 
 
-/*
+/**
  * Create the inheritance tree.
  * @method createInheritanceTree
  * @private
@@ -334,7 +335,7 @@ function createInheritanceTree() {
     c3linerization = [],
     ancestors = [];
 
-  /*
+  /**
    * Check if we have finisehd to linerize.
    * @param {Array} elts array of elts
    * @return {Boolean} true if all the arrays are empty
@@ -354,7 +355,7 @@ function createInheritanceTree() {
     return result;
   }
 
-  /*
+  /**
    * Remove an elt from all the arrays.
    * @param {String} elt element to remove
    * @param {Array} elts array of elts
@@ -377,7 +378,7 @@ function createInheritanceTree() {
     }
   }
 
-  /*
+  /**
    * Check the element is a good candidate.
    * @param {String} elt element to remove
    * @param {Array} elts array of elts
@@ -399,7 +400,7 @@ function createInheritanceTree() {
     return result;
   }
 
-  /*
+  /**
    * Find a candidate and return it.
    * @param {Array} elts array of elts
    * @return {Array} array containing the candidate
@@ -421,7 +422,7 @@ function createInheritanceTree() {
     return result;
   }
 
-  /*
+  /**
    * Merge the arrays.
    * @param {Array} elts array of elts
    * @return {Array} list of candidates returned by the merge
@@ -443,7 +444,7 @@ function createInheritanceTree() {
     return result;
   }
 
-  /*
+  /**
    * Start the linerieation from an element.
    * @param {String} name name of the element
    * @return {Array} list of candidates
@@ -455,7 +456,7 @@ function createInheritanceTree() {
       i = 0,
       length = 0;
 
-    /*
+    /**
      * Check if there is a cyclic dependency. 
      * @param {String} name
      * @param {String} item
@@ -505,7 +506,7 @@ function createInheritanceTree() {
 }
 
 
-/*
+/**
  * Extend a schema with the properties of its parent.
  * @method extend
  * @param {String} name name of the schema to extend
@@ -540,7 +541,7 @@ function extend(name) {
 }
 
 
-/*
+/**
  * Get sorted InheritanceTree structure.
  * @method sortInheritanceTree
  * @return {Array} sorted InheritanceTree structure
@@ -572,7 +573,7 @@ function sortInheritanceTree() {
 }
 
 
-/*
+/**
  * Add the models.
  * @method compileSchemas
  * @private
@@ -589,7 +590,7 @@ function compileSchemas() {
 }
 
 
-/*
+/**
  * Test if all the models are compliants with their schemas.
  * @method checkModels
  * @private
@@ -616,7 +617,7 @@ function checkModels() {
 }
 
 
-/*
+/**
  * Get all the states of a schema.
  * @method getStates
  * @private
@@ -644,7 +645,7 @@ function getStates() {
 }
 
 
-/*
+/**
  * Test if a schema is compliant with its schema.
  * @method checkImp
  * @param {JSON} classDef schema to test 
@@ -687,7 +688,7 @@ function checkImp(classDef, classImp) {
 }
 
 
-/*
+/**
  * Test if a value has the correct type.
  * @method checkSchema
  * @param {Object} value value to test
@@ -706,7 +707,7 @@ function checkSchema(value, type) {
 }
 
 
-/*
+/**
  * Test if a value has correct custom type.
  * @method checkCustomSchema
  * @param {type} value value to test
@@ -752,7 +753,7 @@ function checkCustomSchema(value, typeName) {
 }
 
 
-/*
+/**
  * Init the Database stucture.
  * @method initDbStructure
  * @private
@@ -772,7 +773,7 @@ function initDbStructure() {
 }
 
 
-/*
+/**
  * Create the Database structure (i.e. DatabaseCollection).
  * @method createDbStructure
  * @private
@@ -795,7 +796,7 @@ function createDbStructure() {
 }
 
 
-/*
+/**
  * Create all the classes of the model.
  * @method createClass
  * @private
@@ -818,7 +819,7 @@ function createClass() {
 }
 
 
-/*
+/**
  * Create all the ClassInfo of the model.
  * @method createClassInfo
  * @private
@@ -856,7 +857,7 @@ function createClassInfo() {
 }
 
 
-/* 
+/** 
  * Get the real name of the referenced class.
  * @method getRealClassName
  * @param {String} value
@@ -868,7 +869,7 @@ function getRealClassName(value) {
 }
 
 
-/* 
+/**
  * Get the real name of the referenced type.
  * @method getRealTypeName
  * @param {String} value
@@ -881,7 +882,7 @@ function getRealTypeName(value) {
 }
 
 
-/*
+/**
  * Is the value a custom type.
  * @method isCustomType
  * @param {String} value
@@ -897,7 +898,7 @@ function isCustomType(value) {
 }
 
 
-/*
+/**
  * Is the value reference a type value.
  * @method isTypeReference
  * @param {String} value
@@ -908,7 +909,7 @@ function isTypeReference(value) {
 }
 
 
-/*
+/**
  * Is the value a model path.
  * @method isModelPath
  * @param {String} value
@@ -920,7 +921,7 @@ function isModelPath(value) {
 }
 
 
-/*
+/**
  * Get the real type of a value.
  * @method getRealType
  * @param {type} value
@@ -943,7 +944,7 @@ function getRealType(value) {
 }
 
 
-/*
+/**
  * Get the class name of an object.
  * @method getClassName
  * @param {type} obj object
@@ -960,7 +961,7 @@ function getClassName(obj) {
 }
 
 
-/*
+/**
  * Check if the value is a valid enum value.
  * @method isValidEnumValue
  * @param {String} value
@@ -973,7 +974,7 @@ function isValidEnumValue(value, enumValue) {
 }
 
 
-/*
+/**
  * Check if a value has the specified type.
  * @param {type} value
  * @param {type} type
@@ -1007,7 +1008,7 @@ function hasType(value, type) {
 }
 
 
-/*
+/**
  * Check if an attribute of the schema has a specific type.
  * @method checkType
  * @param {String} name
@@ -1034,7 +1035,7 @@ function checkType(name, id, type) {
   return result;
 }
 
-/*
+/**
  * Merge two schemas.
  * @method merge
  * @param {Object} source source schema
@@ -2242,7 +2243,6 @@ exports.inheritFrom = function inheritFrom(name, parentName) {
     length = 0;
 
   /**
-   * 
    * Check if a class inherits from another one
    * @method _searchParent
    * @param {String} className name of the class
@@ -2294,6 +2294,7 @@ exports.inheritFrom = function inheritFrom(name, parentName) {
 
   return result;
 };
+
 
 /**
  * Is the value a class name.

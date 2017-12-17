@@ -33,7 +33,7 @@
 
 
 /**
- * Runtime core system
+ * System Runtime core system
  * @property {_System} system
  */
 exports.system = 
