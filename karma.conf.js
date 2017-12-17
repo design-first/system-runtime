@@ -23,7 +23,7 @@ module.exports = config => {
   const browsers = ['ChromeHeadless'];
 
   // reporters
-  const reporters = ['progress', 'coverage'];
+  let reporters = ['progress', 'coverage'];
   if (process.env.TRAVIS) {
     reporters = ['progress', 'coverage', 'dots'];
   }
