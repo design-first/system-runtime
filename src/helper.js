@@ -19,13 +19,10 @@
  */
 
 /**
- * This module contains all the functions used by all the modules.
- * 
  * @module helper
  * @requires db
  * @requires component
- * @class helper
- * @static
+ * @description This module contains all the functions used by all the modules
  */
 
 
@@ -44,10 +41,10 @@ var runtimeRef = null;
 /* Public method */
 
 
-/**
- * Check if a System Runtime instance exists.
+/** 
  * @method isRuntime
- * @return {Boolean} true if a System Runtime instance exist
+ * @returns {Boolean} true if a System Runtime instance exist
+ * @description Check if a System Runtime instance exists
  */
 exports.isRuntime = function isRuntime() {
   var result = false;
@@ -61,13 +58,13 @@ exports.isRuntime = function isRuntime() {
 
 
 /**
- * Get the System Runtime instance.
  * @method getRuntime
- * @return {_Runtime} System Runtime instance
+ * @returns {_Runtime} System Runtime instance
+ * @description Get the System Runtime instance
  */
 exports.getRuntime = function getRuntime() {
-  var runtimeId = '',
-    result = null;
+  var runtimeId = '';
+  var result = null;
 
   if (!runtimeRef) {
     runtimeId = $db._Runtime.find()[0]._id;
@@ -79,9 +76,9 @@ exports.getRuntime = function getRuntime() {
 
 
 /**
- * Generate a uuid.
  * @method generateId
- * @return {String} a uuid
+ * @returns {String} a uuid
+ * @description Generate a uuid
  */
 exports.generateId = function generateId() {
   function gen() {
@@ -97,11 +94,10 @@ exports.generateId = function generateId() {
 
 
 /**
- * Add Polyfill
  * @method polyfill
+ * @description Add Polyfill
  */
 exports.polyfill = function polyfill() {
-
   // fixing constructor.name property in IE
   // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer
   if (Function.prototype.name === undefined && Object.defineProperty !== undefined) {

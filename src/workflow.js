@@ -19,15 +19,6 @@
  */
 
 /**
- * This module manages the workflow of System Runtime. It behaves like a workflow engine. <br>
- * It checks if the change of status of a component is valid to be executed. By valid, it means that:<br>
- * - the state is valid for the component, <br>
- * - the input (i.e. parameters) of all actions for the state are compliants with the model and <br>
- * - the output of all actions are compliants with the model. <br>
- * 
- * If an error occurs, the workflow will call the error state of the component and runtime. <br>
- * If the error can break the consistency of the current system, the worklow will stop.
- * 
  * @module workflow
  * @requires metamodel
  * @requires component
@@ -37,8 +28,16 @@
  * @requires helper
  * @requires log
  * @requires db
- * @class workflow 
- * @static
+ * @description This module manages the workflow of System Runtime. 
+ * It behaves like a workflow engine.
+ * It checks if the change of status of a component is valid to be executed. By valid, it means that:
+ * - the state is valid for the component,
+ * - the input (i.e. parameters) of all actions for the state are compliants with the model and
+ * - the output of all actions are compliants with the model.
+ * 
+ * If an error occurs, the workflow will call the error state of the component and runtime.
+ * If the error can break the consistency of the current system, the worklow will stop.
+ * 
  */
 
 'use strict';
@@ -56,10 +55,10 @@ var $db = require('./db.js');
 
 
 /**
- * The RuntimeError class.
  * @class RuntimeError
  * @constructor
  * @param {String} message message of the error
+ * @description The RuntimeError class
  */
 function RuntimeError(message) {
   this.message = message;
@@ -70,11 +69,11 @@ RuntimeError.prototype.constructor = RuntimeError;
 
 
 /**
- * Is the value a model path.
  * @method isModelPath
  * @param {String} value
- * @return {Boolean}
+ * @returns {Boolean}
  * @private
+ * @description Is the value a model path
  */
 function isModelPath(value) {
   return value.indexOf('.') !== -1;
@@ -82,19 +81,19 @@ function isModelPath(value) {
 
 
 /**
- * Get all the names of the parameter of a method.
  * @method getParamNames
  * @param {String} id id of the class
  * @param {String} methodName name of the method
- * @return {Array} the names of all parameters of the method for the class
+ * @returns {Array} the names of all parameters of the method for the class
  * @private
+ * @description Get all the names of the parameter of a method
  */
 function getParamNames(id, methodName) {
-  var method = null,
-    params = [],
-    result = [],
-    length = 0,
-    i = 0;
+  var method = null;
+  var params = [];
+  var result = [];
+  var length = 0;
+  var i = 0;
 
   if ($metamodel.getModel(id)) {
     method = $metamodel.getModel(id)[methodName];
@@ -120,21 +119,21 @@ function getParamNames(id, methodName) {
 
 
 /** 
- * Get the number of parameters of a method.
  * @method getParamNumber
  * @param {String} id id of the class
  * @param {String} methodName name of the method
- * @return {Array} number of parameters min and max for the method
+ * @returns {Array} number of parameters min and max for the method
  * @private
+ * @description Get the number of parameters of a method
  */
 function getParamNumber(id, methodName) {
-  var method = null,
-    params = [],
-    result = [],
-    length = 0,
-    i = 0,
-    min = 0,
-    max = 0;
+  var method = null;
+  var params = [];
+  var result = [];
+  var length = 0;
+  var i = 0;
+  var min = 0;
+  var max = 0;
 
   if ($metamodel.getModel(id)) {
     method = $metamodel.getModel(id)[methodName];
@@ -163,20 +162,20 @@ function getParamNumber(id, methodName) {
 
 
 /** 
- * Set the default value of the non mandatory parameters of a method.
  * @method setDefaultValue
  * @param {String} id id of the class
  * @param {String} methodName name of the method
  * @param {Array} args arguments
- * @return {Array} arguments with default values
+ * @returns {Array} arguments with default values
  * @private
+ * @description Set the default value of the non mandatory parameters of a method
  */
 function setDefaultValue(id, methodName, args) {
-  var method = null,
-    params = [],
-    result = [],
-    length = 0,
-    i = 0;
+  var method = null;
+  var params = [];
+  var result = [];
+  var length = 0;
+  var i = 0;
 
   method = $metamodel.getModel(id)[methodName];
   if (method) {
@@ -199,16 +198,16 @@ function setDefaultValue(id, methodName, args) {
 
 
 /**
- * Get the type returned by a method.
  * @method getReturnType
  * @param {String} id id of the class
  * @param {String} methodName name of the method
- * @return {String} the type returned by the method
+ * @returns {String} the type returned by the method
  * @private
+ * @description Get the type returned by a method
  */
 function getReturnType(id, methodName) {
-  var resultType = null,
-    result = null;
+  var resultType = null;
+  var result = null;
 
   if ($metamodel.getModel(id)) {
     resultType = $metamodel.getModel(id)[methodName].result;
@@ -224,19 +223,19 @@ function getReturnType(id, methodName) {
 
 
 /**
- * Get all the type of the parameters of a method
  * @method getParamTypes
  * @param {String} id id of the class
  * @param {String} methodName name of the method
- * @return {Array} the types of the parameters of a method
+ * @returns {Array} the types of the parameters of a method
  * @private
+ * @description Get all the type of the parameters of a method
  */
 function getParamTypes(id, methodName) {
-  var method = null,
-    params = [],
-    result = [],
-    length = 0,
-    i = 0;
+  var method = null;
+  var params = [];
+  var result = [];
+  var length = 0;
+  var i = 0;
 
   if ($metamodel.getModel(id)) {
     method = $metamodel.getModel(id)[methodName];
@@ -260,22 +259,22 @@ function getParamTypes(id, methodName) {
 
 
 /**
- * Check if conditions on output are compliant with the metamodel
  * @method checkResult
  * @param {Object} params
- * @return {Boolean} true if conditions on ouput are compliant with the metamodel
+ * @returns {Boolean} true if conditions on ouput are compliant with the metamodel
  * @private
+ * @description Check if conditions on output are compliant with the metamodel
  */
 function checkResult(params) {
   params = params || {};
 
-  var component = params.component || null,
-    methodName = params.methodName || '',
-    methodResult = null,
-    typeofMethodResult = '',
-    componentClassName = '',
-    returnType = null,
-    result = true;
+  var component = params.component || null;
+  var methodName = params.methodName || '';
+  var methodResult = null;
+  var typeofMethodResult = '';
+  var componentClassName = '';
+  var returnType = null;
+  var result = true;
 
   if (typeof params.methodResult !== 'undefined') {
     methodResult = params.methodResult;
@@ -331,20 +330,20 @@ function checkResult(params) {
 
 
 /**
- * Get the actions of the specified state
  * @method getActions
  * @param {Object} component a System Runtime component
  * @param {String} name name of the state
  * @param {Boolean} isEvent true if the state is an event
- * @return {Array} list of the actions
+ * @returns {Array} list of the actions
  * @private
+ * @description Get the actions of the specified state
  */
 function getActions(component, name, isEvent) {
-  var action = $behavior.getActions(component.id(), name),
-    parents = [],
-    length = 0,
-    i = 0,
-    parent = null;
+  var action = $behavior.getActions(component.id(), name);
+  var parents = [];
+  var length = 0;
+  var i = 0;
+  var parent = null;
 
   if (!action.length || isEvent) {
     if (component.constructor.name !== 'Function') {
@@ -375,21 +374,21 @@ function getActions(component, name, isEvent) {
 
 
 /**
- * Call an action and make some Dependency Injection if it is a core action
  * @method callAction
  * @param {Component} component
  * @param {String} state name of the state
  * @param {Object} action action
  * @param {Array} params parameters of the action
  * @param {Boolean} isEvent is the action a callback of an event
- * @return {Boolean} result of the action
+ * @returns {Boolean} result of the action
+ * @description Call an action and make some Dependency Injection if it is a core action
  */
 function callAction(component, state, action, params, isEvent) {
-  var result = null,
-    injectedParams = [],
-    componentClassName = '',
-    i = 0,
-    length = 0;
+  var result = null;
+  var injectedParams = [];
+  var componentClassName = '';
+  var i = 0;
+  var length = 0;
 
   if (component.constructor.name === 'Function') {
     componentClassName = component.name;
@@ -453,25 +452,25 @@ function callAction(component, state, action, params, isEvent) {
 
 
 /**
- * Check if an action has the valid number of parameter.
  * @method validParamNumbers
  * @param {String} className name the class
  * @param {String} state state on which the action applied
  * @param {Function} action action
- * @return {Boolean} true if the action is the valid number of parameters
+ * @returns {Boolean} true if the action is the valid number of parameters
+ * @description Check if an action has the valid number of parameter
  */
 exports.validParamNumbers = function validParamNumbers(className, state, action) {
-  var func = '',
-    beginBody = -1,
-    header = '',
-    funcParams = '',
-    params = [],
-    paramNumber = 0,
-    modelNumberParam = [],
-    isProperty = false,
-    isLink = false,
-    isCollection = false,
-    result = false;
+  var func = '';
+  var beginBody = -1;
+  var header = '';
+  var funcParams = '';
+  var params = [];
+  var paramNumber = 0;
+  var modelNumberParam = [];
+  var isProperty = false;
+  var isLink = false;
+  var isCollection = false;
+  var result = false;
 
   // check number of parameters of the action
   func = action.toString();
@@ -525,28 +524,28 @@ exports.validParamNumbers = function validParamNumbers(className, state, action)
 
 
 /**
- * Check if conditions on input are compliant with the model before calling the action.
  * @method checkParams
  * @param {Object} params
- * @return {Boolean} true if condition on input are compliant with the model
+ * @returns {Boolean} true if condition on input are compliant with the model
+ * @description Check if conditions on input are compliant with the model before calling the action
  */
 exports.checkParams = function checkParams(params) {
   params = params || {};
 
-  var component = params.component || null,
-    methodName = params.methodName || '',
-    args = params.args || '',
-    paramsName = [],
-    paramsType = [],
-    paramsNumber = [],
-    componentClassName = '',
-    length = args.length,
-    i = 0,
-    param = null,
-    result = true,
-    isProperty = false,
-    isLink = false,
-    isCollection = false;
+  var component = params.component || null;
+  var methodName = params.methodName || '';
+  var args = params.args || '';
+  var paramsName = [];
+  var paramsType = [];
+  var paramsNumber = [];
+  var componentClassName = '';
+  var length = args.length;
+  var i = 0;
+  var param = null;
+  var result = true;
+  var isProperty = false;
+  var isLink = false;
+  var isCollection = false;
 
   if (component.constructor.name === 'Function') {
     componentClassName = component.name;
@@ -627,21 +626,21 @@ exports.checkParams = function checkParams(params) {
 
 
 /**
- * Call an action that comes from an event.
  * @method action
  * @param {String} behaviorId id of the behavior
  * @param {Array} params parameters
+ * @description Call an action that comes from an event
  */
 exports.action = function action(behaviorId, params) {
-  var isEvent = false,
-    isProperty = false,
-    isLink = false,
-    isCollection = false,
-    behaviors = [],
-    behavior = null,
-    component = null,
-    componentClassName = '',
-    actionFromMemory = null;
+  var isEvent = false;
+  var isProperty = false;
+  var isLink = false;
+  var isCollection = false;
+  var behaviors = [];
+  var behavior = null;
+  var component = null;
+  var componentClassName = '';
+  var actionFromMemory = null;
 
   behaviors = $db._Behavior.find({
     '_id': behaviorId
@@ -678,25 +677,23 @@ exports.action = function action(behaviorId, params) {
 
 
 /**
- * Change the state of a component.
- * 
- * Worklow:<br>
- * <br>
- * 0. Check if the component has not been destroyed <br>
- * 1. Check if the state is a method, a property or an event <br>
- * 2. Search if there is a behavior with actions for the new state <br>
- * 3. If so, get the action(s) <br>
- * 4. Check if the inputs are compliants with the metamodel <br>
- * 5. Call the action(s) <br>
- * 6. If a method, check if the output are compliants with the metamodel <br>
- * 7. If all is ok, the state of the component is updated <br>
- * 8. Return the result <br>
- * 
  * @method state
- * @param {Object} params params to change the state <br>
- * {String} component id of the component <br>
- * {String} state state of the component <br>
+ * @param {Object} params params to change the state
+ * {String} component id of the component
+ * {String} state state of the component
  * {Array} data parameters to send to the action
+ * @description Change the state of a component.
+ * Worklow:
+ * 
+ * 0. Check if the component has not been destroyed
+ * 1. Check if the state is a method, a property or an event
+ * 2. Search if there is a behavior with actions for the new state
+ * 3. If so, get the action(s)
+ * 4. Check if the inputs are compliants with the metamodel
+ * 5. Call the action(s)
+ * 6. If a method, check if the output are compliants with the metamodel
+ * 7. If all is ok, the state of the component is updated
+ * 8. Return the result
  */
 exports.state = function state(params) {
 
@@ -706,18 +703,18 @@ exports.state = function state(params) {
   params.data = params.data || [];
   params.context = params.context || null;
 
-  var component = null,
-    currentState = '',
-    actions = [],
-    action = null,
-    result = null,
-    i = 0,
-    length = 0,
-    componentClassName = false,
-    isProperty = false,
-    isLink = false,
-    isCollection = false,
-    isEvent = false;
+  var component = null;
+  var currentState = '';
+  var actions = [];
+  var action = null;
+  var result = null;
+  var i = 0;
+  var length = 0;
+  var componentClassName = false;
+  var isProperty = false;
+  var isLink = false;
+  var isCollection = false;
+  var isEvent = false;
 
   currentState = $state.get(params.component);
 
@@ -782,11 +779,11 @@ exports.state = function state(params) {
 
 
 /**
- * Stop the workflow engine.
  * @method stop
- * @param {Object} params parameters <br>
- * {Boolean} error true if the stop of the workflow is due to an error (default false) <br>
+ * @param {Object} params parameters
+ * {Boolean} error true if the stop of the workflow is due to an error (default false)
  * {String} message error message to log (default '')
+ * @description Stop the workflow engine
  */
 exports.stop = function stop(params) {
   params = params || {};

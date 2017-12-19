@@ -1,4 +1,4 @@
-describe('System Runtime metamodel component', () => {
+describe('System Runtime db component', () => {
 
   // init
   if (typeof window === 'undefined') {

@@ -19,9 +19,6 @@
  */
 
 /**
- * This module manages the components. 
- * It is the factory of all the components that are created by System Runtime.
- * 
  * @module component
  * @requires workflow
  * @requires db
@@ -29,8 +26,8 @@
  * @requires behavior
  * @requires helper
  * @requires log
- * @class component
- * @static 
+ * @description This module manages the components. 
+ * It is the factory of all the components that are created by System Runtime.
  */
 
 'use strict';
@@ -48,35 +45,35 @@ var $state = require('./state.js');
 /* Private properties */
 
 
-var PROPERTY_TYPE = 'property',
-  LINK_TYPE = 'link',
-  COLLECTION_TYPE = 'collection',
-  METHOD_TYPE = 'method',
-  EVENT_TYPE = 'event',
-  NAME = '_name',
-  store = {};
+var PROPERTY_TYPE = 'property';
+var LINK_TYPE = 'link';
+var COLLECTION_TYPE = 'collection';
+var METHOD_TYPE = 'method';
+var EVENT_TYPE = 'event';
+var NAME = '_name';
+var store = {};
 
 
 /* Private methods */
 
 
 /**
- * Sub class to override push and pop method of Array Class.
  * @class _Array
  * @param {Object} conf
  * {String} classId name of the class
  * {String} type type of the array
  * {Array} arr array
  * @private
+ * @description Sub class to override push and pop method of Array Class
  */
 function _Array(conf) {
-  var arr = [],
-    arrDb = [],
-    type = '',
-    id = '',
-    classId = '',
-    propertyName = '',
-    isReadOnly = false;
+  var arr = [];
+  var arrDb = [];
+  var type = '';
+  var id = '';
+  var classId = '';
+  var propertyName = '';
+  var isReadOnly = false;
 
   conf = conf || {};
   type = conf.type || '';
@@ -99,9 +96,9 @@ function _Array(conf) {
   });
 
   function _copy() {
-    var i = 0,
-      j = 0,
-      length = arr.length;
+    var i = 0;
+    var j = 0;
+    var length = arr.length;
 
     arrDb.forEach(function (val) {
       if ($metamodel.isClassName(type)) {
@@ -119,10 +116,10 @@ function _Array(conf) {
   }
 
   function _add(val, action, start, deleteCount) {
-    var isClass = false,
-      i = 0,
-      length = 0,
-      del = [];
+    var isClass = false;
+    var i = 0;
+    var length = 0;
+    var del = [];
 
     if (!isReadOnly) {
 
@@ -217,9 +214,9 @@ function _Array(conf) {
   }
 
   function _remove(action) {
-    var result,
-      val = null,
-      isClass = false;
+    var result;
+    var val = null;
+    var isClass = false;
 
     if (!isReadOnly) {
       if (arrDb.length !== 0) {
@@ -267,9 +264,9 @@ function _Array(conf) {
   }
 
   /**
-   * Override push method.
    * @method push
    * @param {_Component|Object} val
+   * @description Override push method
    */
   arr.push = function push(val) {
     var result = _add(val, 'push');
@@ -279,9 +276,9 @@ function _Array(conf) {
   };
 
   /** 
-   * Override unshift method.
    * @method unshift
    * @param {_Component|Object} val
+   * @description Override unshift method
    */
   arr.unshift = function unshift(val) {
     var result = _add(val, 'unshift');
@@ -291,14 +288,14 @@ function _Array(conf) {
   };
 
   /** 
-   * Override concat method.
    * @method push
    * @param {_Component|Object} arr
+   * @description Override concat method
    */
   arr.concat = function concat(arr) {
-    var i = 0,
-      length = 0,
-      result = null;
+    var i = 0;
+    var length = 0;
+    var result = null;
 
     if (Array.isArray(arr)) {
       length = arr.length;
@@ -316,9 +313,9 @@ function _Array(conf) {
   };
 
   /** 
-   * Override pop method.
    * @method pop
-   * @return {_Component|Object} value
+   * @returns {_Component|Object} value
+   * @description Override pop method
    */
   arr.pop = function pop() {
     var result = _remove('pop');
@@ -328,9 +325,9 @@ function _Array(conf) {
   };
 
   /** 
-   * Override shift method.
    * @method shift
-   * @return {_Component|Object} value
+   * @returns {_Component|Object} value
+   * @description Override shift method
    */
   arr.shift = function shift() {
     var result = _remove('shift');
@@ -340,10 +337,10 @@ function _Array(conf) {
   };
 
   /** 
-   * Override sort method.
    * @method sort
    * @param {Function} funct the sort function
-   * @return {_Array} the current _Array
+   * @returns {_Array} the current _Array
+   * @description Override sort method
    */
   arr.sort = function sort(funct) {
     var result = null;
@@ -366,10 +363,10 @@ function _Array(conf) {
     return result;
   };
 
-  /** 
-   * Override reverse method.
+  /**  
    * @method reverse
-   * @return {_Array} the reversed _Array
+   * @returns {_Array} the reversed _Array
+   * @description Override reverse method
    */
   arr.reverse = function reverse() {
     arrDb.reverse();
@@ -390,16 +387,16 @@ function _Array(conf) {
   };
 
   /** 
-   * Override splice method.
    * @method splice
-   * @return {_Array} the spliced _Array
+   * @returns {_Array} the spliced _Array
+   * @description Override splice method
    */
   arr.splice = function splice(start, deleteCount, val) {
-    var result = [],
-      i = 0,
-      length = 0,
-      isClass = false,
-      data = null;
+    var result = [];
+    var i = 0;
+    var length = 0;
+    var isClass = false;
+    var data = null;
 
     if (typeof val !== 'undefined') {
       _add(val, 'splice', start, deleteCount);
@@ -439,10 +436,10 @@ function _Array(conf) {
     return result;
   };
 
-  /** 
-   * Override slice method.
+  /**
    * @method slice
-   * @return {_Array} the sliced _Array
+   * @returns {_Array} the sliced _Array
+   * @description Override slice method
    */
   arr.slice = function slice(begin, end) {
     var result = arrDb.slice(begin, end);
@@ -458,18 +455,18 @@ _Array.prototype = [];
 
 
 /**
- * Get all the names of method parameters.
  * @method getParamNames
  * @param {String} id id of the class
  * @param {String} methodName name of the method
- * @return {Array} all the names of method parameters of the class
+ * @returns {Array} all the names of method parameters of the class
  * @private
+ * @description Get all the names of method parameters
  */
 function getParamNames(id, methodName) {
-  var params = [],
-    result = [],
-    length = 0,
-    i = 0;
+  var params = [];
+  var result = [];
+  var length = 0;
+  var i = 0;
 
   params = $metamodel.getModel(id)[methodName].params;
   if (params) {
@@ -483,19 +480,19 @@ function getParamNames(id, methodName) {
 
 
 /**
- * Get all the property of a class.
  * @method getProperties
  * @param {String} id id of the class
- * @return {Array} all the properties of the class
+ * @returns {Array} all the properties of the class
  * @private
+ * @description Get all the property of a class
  */
 function getProperties(id) {
-  var model = null,
-    schema = null,
-    propNames = [],
-    length = 0,
-    i = 0,
-    result = [];
+  var model = null;
+  var schema = null;
+  var propNames = [];
+  var length = 0;
+  var i = 0;
+  var result = [];
 
   model = $metamodel.getModel(id);
   schema = $metamodel.getSchema(model[NAME]);
@@ -518,19 +515,19 @@ function getProperties(id) {
 
 
 /**
- * Get all the method of a class.
  * @method getMethods
  * @param {String} id id of the class
- * @return {Array} all the methods of the class
+ * @returns {Array} all the methods of the class
  * @private
+ * @description Get all the method of a class
  */
 function getMethods(id) {
-  var model = null,
-    schema = null,
-    propNames = [],
-    length = 0,
-    i = 0,
-    result = [];
+  var model = null;
+  var schema = null;
+  var propNames = [];
+  var length = 0;
+  var i = 0;
+  var result = [];
 
   model = $metamodel.getModel(id);
   schema = $metamodel.getSchema(model[NAME]);
@@ -548,20 +545,20 @@ function getMethods(id) {
 }
 
 
-/*
- * Get the schema of a structure.
+/**
  * @method getStructureProperties
  * @param {String} name of the property
  * @param {String} name of the model
- * @return {Array} list of property schema of the structure type
+ * @returns {Array} list of property schema of the structure type
  * @private
+ * @description Get the schema of a structure
  */
 function getStructureProperties(propertyName, model) {
-  var modelDef = null,
-    type = null,
-    structure = null,
-    result = [],
-    propNames = [];
+  var modelDef = null;
+  var type = null;
+  var structure = null;
+  var result = [];
+  var propNames = [];
 
   modelDef = $metamodel.getModel(model);
   type = modelDef[propertyName].type;
@@ -580,19 +577,19 @@ function getStructureProperties(propertyName, model) {
 
 
 /**
- * Get all the event of a class.
  * @method getEvents
  * @param {String} id id of the class
- * @return {Array} all the events of the class
+ * @returns {Array} all the events of the class
  * @private
+ * @description Get all the event of a class
  */
 function getEvents(id) {
-  var model = null,
-    schema = null,
-    propNames = [],
-    length = 0,
-    i = 0,
-    result = [];
+  var model = null;
+  var schema = null;
+  var propNames = [];
+  var length = 0;
+  var i = 0;
+  var result = [];
 
   model = $metamodel.getModel(id);
   schema = $metamodel.getSchema(model[NAME]);
@@ -611,20 +608,20 @@ function getEvents(id) {
 
 
 /**
- * Get the value of a structure.
  * @method getStructureValue
  * @param {String} model name of the model
  * @param {String} id name of the component
  * @param {String} path 
- * @return {Object} the value
+ * @returns {Object} the value
  * @private
+ * @description Get the value of a structure
  */
 function getStructureValue(model, id, path) {
-  var result = null,
-    doc = $db.store[model][id],
-    subPath = path.split('.'),
-    length = subPath.length,
-    i = 0;
+  var result = null;
+  var doc = $db.store[model][id];
+  var subPath = path.split('.');
+  var length = subPath.length;
+  var i = 0;
 
   result = doc;
 
@@ -636,20 +633,20 @@ function getStructureValue(model, id, path) {
 
 
 /**
- * Set the value of a structure.
  * @method getStructureValue
  * @param {String} model name of the model
  * @param {String} id name of the component
  * @param {String} path 
  * @param {String} value the value to set 
  * @private
+ * @description Set the value of a structure
  */
 function setStructureValue(model, id, path, value) {
-  var result = null,
-    doc = $db.store[model][id],
-    subPath = path.split('.'),
-    length = subPath.length,
-    i = 0;
+  var result = null;
+  var doc = $db.store[model][id];
+  var subPath = path.split('.');
+  var length = subPath.length;
+  var i = 0;
 
   result = doc;
 
@@ -661,11 +658,11 @@ function setStructureValue(model, id, path, value) {
 
 
 /**
- * Create a new class from a class definition.
  * @method createClasss
  * @param {String} classId name of the class
- * @return {Function} the class
+ * @returns {Function} the class
  * @private
+ * @description Create a new class from a class definition
  */
 function createClass(classId) {
   var body = function (config) {
@@ -724,11 +721,11 @@ function createClass(classId) {
 
 
 /**
- * Add an id method to a class that will return its id.
  * @method addId
  * @param {Function} Class a class
  * @param {String} classId name of the class
  * @private
+ * @description Add an id method to a class that will return its id
  */
 function addId(Class, classId) {
   var body = function () {
@@ -739,25 +736,27 @@ function addId(Class, classId) {
 
 
 /**
- * Add properties to a component. All these properties will be accessed by a method with the same name.
- * Some checks can be done in order to see if the set of properties is compliant with the model.
- * @example
- * laure.age(); // get the age of a person
- * laure.age(22); // set the age of a person
  * @method addProperties
  * @param {String} model model name
  * @param {Function} Class Class
  * @param {String} classId name of the class
  * @private
+ * @description Add properties to a component. 
+ * All these properties will be accessed by a method with the same name.
+ * Some checks can be done in order to see if the set of properties is compliant with the model.
+ * 
+ * @example
+ * laure.age(); // get the age of a person
+ * laure.age(22); // set the age of a person
  */
 function addProperties(model, Class, classId) {
   var properties = getProperties(model);
 
   properties.forEach(function property(prop) {
-    var body = {},
-      propertyName = '',
-      propertyType = '',
-      propertyReadOnly = '';
+    var body = {};
+    var propertyName = '';
+    var propertyType = '';
+    var propertyReadOnly = '';
 
     propertyName = prop.name;
     propertyType = prop.type;
@@ -805,13 +804,13 @@ function addProperties(model, Class, classId) {
 
     if (Array.isArray(propertyType) || propertyType === 'array') { // in case of array, return a sub array
       body = function body(position, value) {
-        var search = [],
-          component = null,
-          runtimeArr = null,
-          val = null,
-          realVal = null,
-          i = 0,
-          length = 0;
+        var search = [];
+        var component = null;
+        var runtimeArr = null;
+        var val = null;
+        var realVal = null;
+        var i = 0;
+        var length = 0;
 
         if (typeof value === 'undefined') {
           if (typeof position === 'undefined') {
@@ -931,9 +930,9 @@ function addProperties(model, Class, classId) {
       Class.prototype[propertyName] = new Function('__body', 'return function ' + propertyName + ' (position, value) { return __body.call(this, position, value) };')(body);
     } else {
       body = function body(value) {
-        var search = [],
-          component = null,
-          propertyValue = null;
+        var search = [];
+        var component = null;
+        var propertyValue = null;
 
         if (typeof value === 'undefined') {
           component = $db.store[classId][this.id()];
@@ -1034,25 +1033,26 @@ function addProperties(model, Class, classId) {
 
 
 /**
- * Add structure properties to a component. All these properties will be accessed by a method with the same name.
- * Some checks can be done in order to see if the set of properties is compliant with the model.
  * @method addStructure
  * @param {String} path parent path
  * @param {String} name property name
  * @param {String} model model name
  * @param {String} id id of the component
- * @return {Object} object that cointains methods to access the structure 
+ * @returns {Object} object that cointains methods to access the structure 
  * @private
+ * @description Add structure properties to a component. 
+ * All these properties will be accessed by a method with the same name.
+ * Some checks can be done in order to see if the set of properties is compliant with the model.
  */
 function addStructure(path, name, model, id) {
-  var properties = getStructureProperties(name, model),
-    sructure = {};
+  var properties = getStructureProperties(name, model);
+  var sructure = {};
 
   properties.forEach(function property(prop) {
-    var body = {},
-      propertyName = '',
-      propertyType = '',
-      propertyReadOnly = '';
+    var body = {};
+    var propertyName = '';
+    var propertyType = '';
+    var propertyReadOnly = '';
 
     propertyName = prop.name;
     propertyType = prop.type;
@@ -1060,19 +1060,19 @@ function addStructure(path, name, model, id) {
 
     if (propertyType === 'array') { // in case of array, return a sub array
       body = function body(position, value) {
-        var search = [],
-          component = null,
-          runtimeArr = null,
-          val = null,
-          realVal = null,
-          i = 0,
-          length = 0,
-          parentPath = '',
-          fullPath = '';
+        var search = [];
+        var component = null;
+        var runtimeArr = null;
+        var val = null;
+        var realVal = null;
+        var i = 0;
+        var length = 0;
+        var parentPath = '';
+        var fullPath = '';
 
         function _isValidCollection(coll, type) {
-
           var result = true;
+
           coll.forEach(function (val) {
             if (!$metamodel.isValidType(val, type)) {
               result = result && false;
@@ -1183,11 +1183,11 @@ function addStructure(path, name, model, id) {
       sructure[propertyName] = new Function('__body', 'return function ' + propertyName + ' (position, value) { return __body.call(this, position, value) };')(body);
     } else {
       body = function body(value) {
-        var search = [],
-          component = null,
-          propertyValue = null,
-          parentPath = '',
-          fullPath = '';
+        var search = [];
+        var component = null;
+        var propertyValue = null;
+        var parentPath = '';
+        var fullPath = '';
 
         if (path) {
           parentPath = parentPath + '.' + name;
@@ -1283,51 +1283,53 @@ function addStructure(path, name, model, id) {
 
 
 /**
- * Add methods to a component.
- * The call to these methods will invoke the workflow in order to check that inpouts / outputs are compliant with the model.
  * @method addMethods
  * @param {String} model model name
  * @param {Function} Class Class
  * @param {String} classId name of the class
  * @private
+ * @description  * Add methods to a component.
+ * The call to these methods will invoke the workflow in order to check that inpouts / outputs are compliant with the model.
  */
 function addMethods(model, Class, classId) {
   var methods = getMethods(model);
 
   methods.forEach(function method(methodName) {
-    var paramsName = getParamNames(classId, methodName),
-      params = paramsName.join(','),
-      paramsWithContext = '',
-      body = function () {
-        var result = null;
+    var paramsName = getParamNames(classId, methodName);
+    var params = paramsName.join(',');
+    var paramsWithContext = '';
 
+    var body = function () {
+      var result = null;
+
+      result = $workflow.state({
+        'component': this.id(),
+        'state': methodName,
+        'data': arguments
+      });
+
+      return result;
+    };
+
+    var bodyWithContext = function () {
+      var result = null;
+      var data = Array.prototype.slice.call(arguments);
+
+      data.shift();
+
+      if (arguments[0]) {
         result = $workflow.state({
           'component': this.id(),
           'state': methodName,
-          'data': arguments
+          'data': data,
+          'context': arguments[0]
         });
+      } else {
+        $log.unknownContext(classId, methodName);
+      }
 
-        return result;
-      },
-      bodyWithContext = function () {
-        var result = null,
-          data = Array.prototype.slice.call(arguments);
-
-        data.shift();
-
-        if (arguments[0]) {
-          result = $workflow.state({
-            'component': this.id(),
-            'state': methodName,
-            'data': data,
-            'context': arguments[0]
-          });
-        } else {
-          $log.unknownContext(classId, methodName);
-        }
-
-        return result;
-      };
+      return result;
+    };
 
     if (params) {
       paramsName.unshift('context');
@@ -1348,62 +1350,63 @@ function addMethods(model, Class, classId) {
 
 
 /**
- * Add events to a component.
- * The call to these methods will invoke the workflow in order to check that inpouts are compliant with the model.
  * @method addEvents
  * @param {String} model model name
  * @param {Function} Class Class
  * @param {String} classId name of the class
  * @private
+ * @description Add events to a component.
+ * The call to these methods will invoke the workflow in order to check that inpouts are compliant with the model.
  */
 function addEvents(model, Class, classId) {
   var events = getEvents(model);
   events.forEach(function event(methodName) {
-    var paramsName = getParamNames(classId, methodName),
-      params = paramsName.join(','),
-      body = function () {
-        var systems = [],
-          systemId = 'e89c617b6b15d24',
-          data = [],
-          i = 0,
-          length = -1,
-          message = {};
+    var paramsName = getParamNames(classId, methodName);
+    var params = paramsName.join(',');
 
-        if (classId === '_Channel') {
-          systems = $db._System.find({
-            'master': true
-          });
-          if (systems.length) {
-            systemId = systems[0]._id;
-          }
+    var body = function () {
+      var systems = [];
+      var systemId = 'e89c617b6b15d24';
+      var data = [];
+      var i = 0;
+      var length = -1;
+      var message = {};
 
-          message.from = systemId;
-          length = arguments.length;
-          for (i = 0; i < length; i++) {
-            data.push(arguments[i]);
-          }
-          message.data = data;
-          message.event = methodName;
-
-          $db._Message.insert(message);
-
-          $workflow.state({
-            'component': this.id(),
-            'state': 'send',
-            'data': [{
-              'event': message.event,
-              'from': message.from,
-              'data': message.data
-            }]
-          });
-        } else {
-          $workflow.state({
-            'component': this.id(),
-            'state': methodName,
-            'data': arguments
-          });
+      if (classId === '_Channel') {
+        systems = $db._System.find({
+          'master': true
+        });
+        if (systems.length) {
+          systemId = systems[0]._id;
         }
-      };
+
+        message.from = systemId;
+        length = arguments.length;
+        for (i = 0; i < length; i++) {
+          data.push(arguments[i]);
+        }
+        message.data = data;
+        message.event = methodName;
+
+        $db._Message.insert(message);
+
+        $workflow.state({
+          'component': this.id(),
+          'state': 'send',
+          'data': [{
+            'event': message.event,
+            'from': message.from,
+            'data': message.data
+          }]
+        });
+      } else {
+        $workflow.state({
+          'component': this.id(),
+          'state': methodName,
+          'data': arguments
+        });
+      }
+    };
     if (params) {
       Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' (' + params + ') { return __body.call(this,' + params + ') };')(body);
     } else {
@@ -1414,16 +1417,16 @@ function addEvents(model, Class, classId) {
 
 
 /**
- * Add a on method to a component to add behaviors to the component.
  * @method addOn
  * @param {Function} Class Class
  * @param {String} classId name of the class
  * @private
+ * @description Add a on method to a component to add behaviors to the component
  */
 function addOn(Class, classId) {
   var body = function (state, handler, useCoreAPI, isCore) {
-    var behaviorId = '',
-      currentState = '';
+    var behaviorId = '';
+    var currentState = '';
 
     if ($workflow.checkParams({
       'component': this,
@@ -1465,16 +1468,16 @@ function addOn(Class, classId) {
 
 
 /**
- * Add a on method to a class component to add behaviors to the class.
  * @method addOnClass
  * @param {Function} Class Class
  * @param {String} classId name of the class
  * @private
+ * @description Add a on method to a class component to add behaviors to the class
  */
 function addOnClass(Class, classId) {
   var body = function (state, handler, useCoreAPI, isCore) {
-    var behaviorId = '',
-      currentState = '';
+    var behaviorId = '';
+    var currentState = '';
 
     if ($workflow.checkParams({
       'component': this,
@@ -1516,11 +1519,11 @@ function addOnClass(Class, classId) {
 
 
 /**
- * Add a off method to a class component to remove behaviors from the class.
  * @method addOffClass
  * @param {Object} Class Class
  * @param {String} classId name of the class
  * @private
+ * @description Add a off method to a class component to remove behaviors from the class
  */
 function addOffClass(Class, classId) {
   var body = function (state, behaviorId) {
@@ -1545,17 +1548,17 @@ function addOffClass(Class, classId) {
 
 
 /**
- * Add a destroy method to a class component to detroy the class and all the components of the same class.
  * @method addDestroyClass
  * @param {Object} Class Class
  * @private
+ * @description Add a destroy method to a class component to detroy the class and all the components of the same class
  */
 function addDestroyClass(Class) {
   var body = function () {
-    var id = this.id(),
-      result = [],
-      i = 0,
-      length = 0;
+    var id = this.id();
+    var result = [];
+    var i = 0;
+    var length = 0;
 
     // if not virtual component
     if ($db[id]) {
@@ -1587,10 +1590,10 @@ function addDestroyClass(Class) {
 
 
 /**
- * Add the addClassInfo method on a class.
  * @method addClassInfoClass
  * @param {Object} Class Class
  * @private
+ * @description Add the addClassInfo method on a class
  */
 function addClassInfoClass(Class) {
   var body = function () {
@@ -1601,17 +1604,17 @@ function addClassInfoClass(Class) {
 
 
 /**
- * Create a component from its configuration.
  * @method factory
  * @param {JSON} config configuration of the component
- * @return {Component} the created component
+ * @returns {Component} the created component
  * @private
+ * @description Create a component from its configuration
  */
 function factory(config) {
   config = config || {};
 
-  var Class = {},
-    classId = '';
+  var Class = {};
+  var classId = '';
 
   if (typeof config.model === 'undefined') {
     classId = $helper.generateId();
@@ -1649,10 +1652,10 @@ function factory(config) {
 
 
 /**
- * Get a component by its id.
  * @method get
  * @param {String} id of the component
- * @return {Component} component
+ * @returns {Component} component
+ * @description Get a component by its id
  */
 exports.get = function get(id) {
   return store[id];
@@ -1660,11 +1663,11 @@ exports.get = function get(id) {
 
 
 /**
- * Create a component from its configuration.
  * @method create
  * @param {Object} config <br>
  * {String} model model name <br>
- * @return {Component}
+ * @returns {Component}
+ * @description Create a component from its configuration
  */
 exports.create = function create(config) {
   return factory(config);
@@ -1672,13 +1675,13 @@ exports.create = function create(config) {
 
 
 /**
- * Destroy a component from its id.
  * @method destroy
  * @param {String} id id of the component to destroy
+ * @description Destroy a component from its id
  */
 exports.destroy = function destroy(id) {
-  var component = store[id],
-    classId = '';
+  var component = store[id];
+  var classId = '';
 
   if (component) {
     delete store[id];
@@ -1701,9 +1704,9 @@ exports.destroy = function destroy(id) {
 
 
 /**
- * Remove a component with its id from the memory.
  * @method removeFromMemory
  * @param {String} id id of the component
+ * @description Remove a component with its id from the memory
  */
 exports.removeFromMemory = function removeFromMemory(id) {
   delete store[id];
@@ -1711,8 +1714,8 @@ exports.removeFromMemory = function removeFromMemory(id) {
 
 
 /**
- * Remove all the components store in the memory.
  * @method clear
+ * @description Remove all the components store in the memory
  */
 exports.clear = function clear() {
   store = {};

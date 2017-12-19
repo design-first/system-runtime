@@ -18,23 +18,20 @@
  * limitations under the License.
  */
 
-/**
- * This module manages System Runtime database. <br>
- * System Runtime database is a micro NoSQL Database that contains: <br>
- * - collections to store documents (schemas, types, components, ...) and <br>
- * - APIs to import or export documents. <br>
- * 
- * System Runtime Database is closely linked to System Runtime metamodel and System Runtime components because: <br>
- * - all operations done by System Runtime database must be compliant with the model before being finished, <br>
- * - insert operation automatically creates a component and <br>
- * - remove operation automatically destroy a component.
- *  
+/** 
  * @module db
  * @requires component
  * @requires helper
  * @requires log
- * @class db
- * @static
+ * @description This module manages System Runtime database.
+ * System Runtime database is a micro NoSQL Database that contains:
+ * - collections to store documents (schemas, types, components, ...) and
+ * - APIs to import or export documents.
+ * 
+ * System Runtime Database is closely linked to System Runtime metamodel and System Runtime components because:
+ * - all operations done by System Runtime database must be compliant with the model before being finished,
+ * - insert operation automatically creates a component and
+ * - remove operation automatically destroy a component.
  */
 
 'use strict';
@@ -50,42 +47,42 @@ var $workflow = require('./workflow.js');
 
 /* Private properties */
 
-var collections = [],
-  internalDB = [
-    '_Runtime',
-    '_Schema',
-    '_Model',
-    '_GeneratedModel',
-    '_Behavior',
-    '_State',
-    '_Type',
-    '_Metamodel',
-    '_Database',
-    '_System',
-    '_ClassInfo',
-    '_Message',
-    '_Channel',
-    '_Logger',
-    '_Log'
-  ],
-  coreDb = [
-    '_Log',
-    '_Schema',
-    '_Logger',
-    '_Model',
-    '_GeneratedModel',
-    '_State',
-    '_Type'
-  ],
-  logOrder = 0;
+var collections = [];
+var internalDB = [
+  '_Runtime',
+  '_Schema',
+  '_Model',
+  '_GeneratedModel',
+  '_Behavior',
+  '_State',
+  '_Type',
+  '_Metamodel',
+  '_Database',
+  '_System',
+  '_ClassInfo',
+  '_Message',
+  '_Channel',
+  '_Logger',
+  '_Log'
+];
+var coreDb = [
+  '_Log',
+  '_Schema',
+  '_Logger',
+  '_Model',
+  '_GeneratedModel',
+  '_State',
+  '_Type'
+];
+var logOrder = 0;
 
 
 /* Private methods */
 
 
 /**
- * Increment Log
  * @method incLogOrder
+ * @description Increment Log
  */
 function incLogOrder() {
   return logOrder++;
@@ -93,30 +90,30 @@ function incLogOrder() {
 
 
 /**
- * Dump the database.
  * @method dump
- * @return {Object} the dump of the database. The dump is an object that contains: <br>
+ * @returns {Object} the dump of the database. The dump is an object that contains: <br>
  * {Object} schemas the schemas store in the database <br>
  * {Object} types the types store in the database <br>
  * {Object} behaviors the behaviors store in the database <br>
  * {Object} components the components store in the database
  * @private
+ * @description Dump the database
  */
 function dump() {
-  var dbDump = {},
-    collectionName = '',
-    behaviorId = '',
-    typeId = '',
-    type = null,
-    behavior = null,
-    schema = null,
-    model = null,
-    collection = null,
-    schemaId = '',
-    modelId = '',
-    length = 0,
-    i = 0,
-    id = '';
+  var dbDump = {};
+  var collectionName = '';
+  var behaviorId = '';
+  var typeId = '';
+  var type = null;
+  var behavior = null;
+  var schema = null;
+  var model = null;
+  var collection = null;
+  var schemaId = '';
+  var modelId = '';
+  var length = 0;
+  var i = 0;
+  var id = '';
 
   // schemas
   dbDump.schemas = {};
@@ -189,19 +186,19 @@ function dump() {
 
 
 /**
- * Test if an object contains another one.
  * @method contains
  * @param {Object} source source object 
  * @param {Object} target target object 
- * @return {Boolean} true if the source object contains the target object
+ * @returns {Boolean} true if the source object contains the target object
  * @private
+ * @description Test if an object contains another one
  */
 function contains(source, target) {
-  var result = true,
-    findInArray = false,
-    property = '',
-    i = 0,
-    length = 0;
+  var result = true;
+  var findInArray = false;
+  var property = '';
+  var i = 0;
+  var length = 0;
 
   for (property in source) {
     if (typeof target[property] !== 'undefined') {
@@ -244,22 +241,22 @@ function contains(source, target) {
 
 
 /**
- * Import system into the database
  * @method impSystem
  * @param {JSON} importedSystem a System Runtime system to import
- * @return {String} the id of the imported System Runtime system
+ * @returns {String} the id of the imported System Runtime system
  * @private
+ * @description Import system into the database
  */
 function impSystem(importedSystem) {
-  var result = '',
-    collectionName = '',
-    componentId = '',
-    typeName = '',
-    schemaName = '',
-    modelName = '',
-    behaviorId = '',
-    systems = [],
-    id = null;
+  var result = '';
+  var collectionName = '';
+  var componentId = '';
+  var typeName = '';
+  var schemaName = '';
+  var modelName = '';
+  var behaviorId = '';
+  var systems = [];
+  var id = null;
 
   if (importedSystem) {
 
@@ -321,22 +318,21 @@ function impSystem(importedSystem) {
 
 
 /**
- * Export a system from the database
  * @method expSystem
- * @return {String} a stringified system
+ * @returns {String} a stringified system
  * @private
+ * @description Export a system from the database
  */
 function expSystem() {
-  var result = '',
-    collectionName = '',
-    behaviorId = '',
-    systems = [],
-    id = null,
-    dbDump = null,
-    mastersystem = null,
-    behavior = null,
-    exportedSystem = {};
-
+  var result = '';
+  var collectionName = '';
+  var behaviorId = '';
+  var systems = [];
+  var id = null;
+  var dbDump = null;
+  var mastersystem = null;
+  var behavior = null;
+  var exportedSystem = {};
 
   // get id of the master system
   systems = exports._System.find({
@@ -374,25 +370,24 @@ function expSystem() {
 
 
 /**
- * Export a sub-system.
  * @method exportSubsystem
  * @param {JSON} params parameters
- * @return {String} a stringified sub-system
+ * @returns {String} a stringified sub-system
  * @private
- * 
+ * @description Export a sub-system
  */
 function expSubsystem(params) {
-  var system = {},
-    result = [],
-    defaultName = '',
-    i = 0,
-    length = 0,
-    schema = null,
-    type = null,
-    model = null,
-    behavior = null,
-    component = null,
-    className = '';
+  var system = {};
+  var result = [];
+  var defaultName = '';
+  var i = 0;
+  var length = 0;
+  var schema = null;
+  var type = null;
+  var model = null;
+  var behavior = null;
+  var component = null;
+  var className = '';
 
   // default values
   result = exports._System.find({
@@ -488,8 +483,8 @@ function expSubsystem(params) {
 
 
 /**
- * System Runtime database store that lists all the collections.
  * @property {JSON} store
+ * @description System Runtime database store that lists all the collections
  */
 exports.store = {};
 
@@ -498,13 +493,12 @@ exports.store = {};
 
 
 /** 
- * A collection of documents managed by System Runtime. <br>
- * Internal collections manage core objects of System Runtime (schema, type, ...). <br>
- * Public collections manage components of the same class. <br>
- * 
  * @class DatabaseCollection
  * @constructor
  * @param {String} name name of the new collection
+ * @@description A collection of documents managed by System Runtime.
+ * Internal collections manage core objects of System Runtime (schema, type, ...).
+ * Public collections manage components of the same class.
  */
 var DatabaseCollection = function (name) {
   if ($metamodel.getSchema(name) || internalDB.indexOf(name) !== -1) {
@@ -520,21 +514,21 @@ var DatabaseCollection = function (name) {
 
 
 /**
- * Find a document into the collection.
  * @method find
  * @param {Object|Array} query
- * @return {Array} Array of documents that map the query
+ * @returns {Array} Array of documents that map the query
+ * @description Find a document into the collection
  * 
  * @example 
- * $db.Person.find({'name': 'laure'}); <br>
- * $db.Person.find({'name': 'laure', 'age' : 24}); <br>
+ * $db.Person.find({'name': 'laure'});
+ * $db.Person.find({'name': 'laure', 'age' : 24});
  * $db.Person.find([{'name': 'rene'}, {'name': 'robert'}]);
  */
 DatabaseCollection.prototype.find = function (query) {
-  var result = [],
-    resultId = {},
-    id = '',
-    object = {};
+  var result = [];
+  var resultId = {};
+  var id = '';
+  var object = {};
 
   query = query || null;
 
@@ -571,25 +565,25 @@ DatabaseCollection.prototype.find = function (query) {
 
 
 /**
- * Insert an new document into the collection. <br>
- * Before inserting the document, System Runtime checks that the document is compliant
- * with its class definition. <br> 
- * Then, after inserting it, we create the component.
  * @method insert
  * @param {Object|Array} document a new object to add
- * @return {Array} array of id created
+ * @returns {Array} array of id created
+ * @description Insert an new document into the collection.
+ * Before inserting the document, System Runtime checks that the document is compliant
+ * with its class definition.
+ * Then, after inserting it, we create the component.
  * 
  * @example 
- * $db.Person.insert({<br>
- *      'name': 'bob', <br>
- *      'firstName': 'Saint-Clar', <br>
- *      'age': 43 <br>
- * }); <br>
+ * $db.Person.insert({
+ *      'name': 'bob',
+ *      'firstName': 'Saint-Clar',
+ *      'age': 43
+ * });
  */
 DatabaseCollection.prototype.insert = function (document) {
-  var doc = [],
-    Component = null,
-    result = [];
+  var doc = [];
+  var Component = null;
+  var result = [];
 
   if (Array.isArray(document)) {
     doc = document;
@@ -598,10 +592,10 @@ DatabaseCollection.prototype.insert = function (document) {
   }
 
   doc.forEach(function multiInsert(obj) {
-    var component = null,
-      channels = [],
-      channel = null,
-      systems = [];
+    var component = null;
+    var channels = [];
+    var channel = null;
+    var systems = [];
 
     switch (true) {
       case this.name === '_Schema':
@@ -662,18 +656,18 @@ DatabaseCollection.prototype.insert = function (document) {
 
 
 /**
- * Update documents into a collection.
  * @method update
  * @param {Object|Array} query query to find the documents to update
  * @param {Object} update update to make
  * @param {Object} options 
  * {Boolean} upsert true if we create a document when no document is found by the query
- * @return {Number} Number of documents updated
+ * @returns {Number} Number of documents updated
+ * @description Update documents into a collection
  * 
  * @example 
- * $db.Cars.update({'code': 'AZD-71'}, {'price': '10000$'}); <br>
- * $db.Cars.update([{'code': 'AZD-71'}, {'code': 'AZD-65'}], {'price': '10000$'}); <br>
- * $db.Cars.update({'code': 'AZD-71'}, {'price': '10000$'}, {'upsert': true}); <br>
+ * $db.Cars.update({'code': 'AZD-71'}, {'price': '10000$'});
+ * $db.Cars.update([{'code': 'AZD-71'}, {'code': 'AZD-65'}], {'price': '10000$'});
+ * $db.Cars.update({'code': 'AZD-71'}, {'price': '10000$'}, {'upsert': true});
  */
 DatabaseCollection.prototype.update = function (query, update, options) {
   var docs = this.find(query),
@@ -784,21 +778,21 @@ DatabaseCollection.prototype.update = function (query, update, options) {
 
 
 /**
- * Remove a document from the colllection. <br>
- * When a document is removed, the component is destroyed.
  * @method remove
  * @param {Object|Array} query query to find the documents to remove
- * @return {Array} list of documents id removed
+ * @returns {Array} list of documents id removed
+ * @description Remove a document from the colllection.
+ * When a document is removed, the component is destroyed.
  * 
  * @example 
- * $db.Cars.remove({'code': 'AZD-71'}); <br>
- * $db.Cars.remove([{'code': 'AZD-71'}, {'code': 'AZD-65'}]); <br>
+ * $db.Cars.remove({'code': 'AZD-71'});
+ * $db.Cars.remove([{'code': 'AZD-71'}, {'code': 'AZD-65'}]);
  */
 DatabaseCollection.prototype.remove = function (query) {
-  var result = [],
-    id = '',
-    component = null,
-    object = {};
+  var result = [];
+  var id = '';
+  var component = null;
+  var object = {};
 
   query = query || null;
 
@@ -881,13 +875,14 @@ DatabaseCollection.prototype.remove = function (query) {
 
 
 /**
- * Count the number of documents in the collection.
  * @method count
- * @return {Number} number of documents in the collection
+ * @returns {Number} number of documents in the collection
+ * @description Count the number of documents in the collection
  */
 DatabaseCollection.prototype.count = function () {
-  var result = 0,
-    objectId = '';
+  var result = 0;
+  var objectId = '';
+
   for (objectId in exports.store[this.name]) {
     result++;
   }
@@ -899,13 +894,13 @@ DatabaseCollection.prototype.count = function () {
 
 
 /**
- * Create a Log
  * @method createLog
  * @param {String} action CRUD action that happenned
  * @param {String} collection collection of the 
  * @param {String} id id of the component
  * @param {String} field field of the component
  * @param {String} value value of the field of the component
+ * @description Create a Log
  */
 exports.createLog = function createLog(action, collection, id, field, value) {
   var logId = $helper.generateId();
@@ -933,9 +928,9 @@ exports.createLog = function createLog(action, collection, id, field, value) {
 
 
 /**
- * Create a new {{#crossLink "DatabaseCollection"}}{{/crossLink}}.
  * @method collection
  * @param {String} name of the collection
+ * @description Create a new DatabaseCollection
  */
 exports.collection = function collection(name) {
   exports[name] = new DatabaseCollection(name);
@@ -943,10 +938,10 @@ exports.collection = function collection(name) {
 
 
 /**
- * Import a system into the database
  * @method importSystem
  * @param {JSON} importedSystem a System Runtime system to import
- * @return {String} the id of the imported System Runtime system
+ * @returns {String} the id of the imported System Runtime system
+ * @description Import a system into the database
  */
 exports.importSystem = function importSystem(importedSystem) {
   return impSystem(importedSystem);
@@ -954,21 +949,22 @@ exports.importSystem = function importSystem(importedSystem) {
 
 
 /**
- * Export a system.
  * @method exportSystem
  * @param {JSON} params parameters
- * @return {String} a stringified system
+ * @returns {String} a stringified system
+ * @description Export a system
  * 
  * @example
- * $db.exportSystem(); // export all the system <br>
- * $db.exportSystem({'schemas':{'name':'Person'}}); // filter export on schemas <br>
- * $db.exportSystem({'types':{'name':'address'}}); // filter export on types <br>
- * $db.exportSystem({'behaviors':{'component':'laure'}}); // filter export on behaviors <br>
- * $db.exportSystem({'components':{'Person': {'country': 'France'}}}); // filter export on components <br>
+ * $db.exportSystem(); // export all the system
+ * $db.exportSystem({'schemas':{'name':'Person'}}); // filter export on schemas
+ * $db.exportSystem({'types':{'name':'address'}}); // filter export on types
+ * $db.exportSystem({'behaviors':{'component':'laure'}}); // filter export on behaviors
+ * $db.exportSystem({'components':{'Person': {'country': 'France'}}}); // filter export on components
  * $db.exportSystem({'schemas':{'name':'Person'},'components':{'Person': {'country': 'France'}}}); // combine filters
  */
 exports.exportSystem = function exportSystem(params) {
   var result = '';
+
   if (params) {
     result = expSubsystem(params);
   } else {
@@ -979,13 +975,13 @@ exports.exportSystem = function exportSystem(params) {
 
 
 /**
- * Clear the database.
  * @method clear
+ * @description Clear the database
  */
 exports.clear = function clear() {
-  var length = 0,
-    i = 0,
-    collectionName = '';
+  var length = 0;
+  var i = 0;
+  var collectionName = '';
 
   // remove collections
   length = collections.length;
@@ -1004,12 +1000,12 @@ exports.clear = function clear() {
 
 
 /**
- * Init the database.
  * @method init
+ * @description Init the database
  */
 exports.init = function init() {
-  var runtimeSystemId = '',
-    runtimeSystem = null;
+  var runtimeSystemId = '';
+  var runtimeSystem = null;
 
   runtimeSystem = exports._System.find({
     '_id': 'e89c617b6b15d24'

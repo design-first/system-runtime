@@ -20,12 +20,9 @@
 
 
 /**
- * This module manages the states of all thecomponents.
- * 
  * @module state
  * @requires db
- * @class state
- * @static
+ * @description This module manages the states of all thecomponents
  */
 
 'use strict';
@@ -43,11 +40,11 @@ var store = {};
 
 
 /**
- * Set the state of a component.
  * @method set
  * @param {String} id component id on which change the state
  * @param {String} state the new state of the component
  * @param {Object} value value of the state
+ * @description Set the state of a component
  */
 exports.set = function set(id, state, value) {
   store[id] = {
@@ -62,10 +59,10 @@ exports.set = function set(id, state, value) {
 
 
 /**
- * Get the state of a component.
  * @method get 
  * @param {String} id id of the component
- * @return {String} state of the component
+ * @returns {String} state of the component
+ * @description Get the state of a component
  */
 exports.get = function get(id) {
   return store[id];
@@ -73,8 +70,8 @@ exports.get = function get(id) {
 
 
 /**
- * Remove all the states of the components from the memory.
  * @method clear
+ * @description Remove all the states of the components from the memory
  */
 exports.clear = function clear() {
   store = {};

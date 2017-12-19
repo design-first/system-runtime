@@ -18,18 +18,14 @@
  * limitations under the License.
  */
 
-/**
- * This module is the main module of System Runtime. <br>
- * It inits System Runtime metamodel and loads System Runtime core system.
- * 
+/** 
  * @module runtime
  * @requires component
  * @requires metamodel
  * @requires system
  * @requires helper
- * @main runtime
- * @class runtime
- * @static
+ * @description This module is the main module of System Runtime.
+ * It inits System Runtime metamodel and loads System Runtime core system.
  */
 
 'use strict';
@@ -49,17 +45,17 @@ var $helper = require('./helper.js');
 /* Private Property */
 
 
-var sytemId = '',
-  system = '',
-  channel = null;
+var sytemId = '';
+var system = '';
+var channel = null;
 
-/* Polyfill */
+// polyfill
 $helper.polyfill();
 
-/* Init Metamodel */
+// init Metamodel
 $metamodel.init();
 
-/* Init runtime from a system */
+// init runtime from a system
 sytemId = $db.importSystem($system.system);
 
 system = $component.get(sytemId);
@@ -81,8 +77,8 @@ system.state('active');
 
 
 /**
- * _Runtime instance.
  * @property runtime
  * @type _Runtime
+ * @description _Runtime instance
  */
 module.exports = $component.get('runtime');

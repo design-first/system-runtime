@@ -18,17 +18,14 @@
  * limitations under the License.
  */
 
-/*
- * This module manages the behaviors of all components. 
- * A behavior is a mecanism that allow users to add actions that will be executed 
- * when a specific state of a component will change.
- * 
+/** 
  * @module behavior
  * @requires db
  * @requires helper
  * @requires channel
- * @class behavior
- * @static
+ * @description This module manages the behaviors of all components. 
+ * A behavior is a mecanism that allow users to add actions that will be executed 
+ * when a specific state of a component will change.
  */
 
 'use strict';
@@ -47,30 +44,30 @@ var store = {};
 
 
 /**
- * Create a function from a string.
- * The created function:
- * - will be a named function,
- * - has the context of the component and
- * - can have some core modules injected as parameters.
  * @method createFunction
  * @param {String} name default name of the function 
  * @param {String} func a stringified function
  * @param {Boolean} core if true, the behavior will be treated as a System Runtime core behavior.
  * In that case, the behavior can not be exported in a system (default false)
  * @param {Boolean} useCoreAPI if true, System Runtime core modules will be injected as parameters of the function (default false)
- * @return {Function} the created function
+ * @returns {Function} the created function
  * @private
+ * @description Create a function from a string.
+ * The created function:
+ * - will be a named function,
+ * - has the context of the component and
+ * - can have some core modules injected as parameters
  */
 function createFunction(name, func, core, useCoreAPI) {
-  var beginBody = -1,
-    funcParams = '',
-    params = [],
-    paramsClean = [],
-    funcBody = '',
-    header = '',
-    action = null,
-    isArrowFunction = true,
-    isOneLine = false;
+  var beginBody = -1;
+  var funcParams = '';
+  var params = [];
+  var paramsClean = [];
+  var funcBody = '';
+  var header = '';
+  var action = null;
+  var isArrowFunction = true;
+  var isOneLine = false;
 
   if (func.trim().indexOf('function') === 0) {
     isArrowFunction = false;
@@ -148,18 +145,18 @@ function createFunction(name, func, core, useCoreAPI) {
 
 
 /**
- * Add a behavior that will be stored in System Runtime database.
  * @method add
  * @param {String} id id of the component
  * @param {Object} state the state on which the action will be executed 
  * @param {Object} action the action to execute when the component will have a specific state 
  * @param {Boolean} useCoreAPI if true, System Runtime core modules will be injected as parameters of the action (default false)
  * @param {Boolean} core if true, behavior can not be exported
- * @return {String} id of the behavior created in System Runtime database
+ * @returns {String} id of the behavior created in System Runtime database
+ * @description Add a behavior that will be stored in System Runtime database
  */
 exports.add = function add(id, state, action, useCoreAPI, core) {
-  var behaviorId = $helper.generateId(),
-    strAction = action.toString();
+  var behaviorId = $helper.generateId();
+  var strAction = action.toString();
 
   if (typeof core === 'undefined') {
     core = false;
@@ -186,13 +183,13 @@ exports.add = function add(id, state, action, useCoreAPI, core) {
 
 
 /**
- * Remove a behavior with its id or remove all the behaviors for a specific state
- * of the component.
  * @method remove
- * @param {Object} params <br>
- * {String} componentId id of the component <br>
- * {String} state state of the component <br>
- * {String} behaviorId id of the behavior (optional)) <br>
+ * @param {Object} params
+ * {String} componentId id of the component
+ * {String} state state of the component
+ * {String} behaviorId id of the behavior (optional))
+ * @description Remove a behavior with its id or remove all the behaviors for a specific state
+ * of the component
  */
 exports.remove = function remove(params) {
   var result = [];
@@ -230,9 +227,9 @@ exports.remove = function remove(params) {
 
 
 /**
- * Remove a behavior with its id from the memory.
  * @method removeFromMemory
  * @param {String} id id of the component
+ * @description Remove a behavior with its id from the memory
  */
 exports.removeFromMemory = function removeFromMemory(id) {
   delete store[id];
@@ -240,16 +237,16 @@ exports.removeFromMemory = function removeFromMemory(id) {
 
 
 /**
- * Get all the actions of a behavior for a component.
  * @method getActions
  * @param {String} id id of the component
  * @param {String} state name of the state
- * @return {Array} all the actions that have to be executed for a specific component and state
+ * @returns {Array} all the actions that have to be executed for a specific component and state
+ * @description Get all the actions of a behavior for a component
  */
 exports.getActions = function getActions(id, state) {
-  var result = [],
-    dbResult = [],
-    action = null;
+  var result = [];
+  var dbResult = [];
+  var action = null;
 
   dbResult = $db._Behavior.find({
     'component': id,
@@ -273,8 +270,8 @@ exports.getActions = function getActions(id, state) {
 
 
 /**
- * Remove all the behaviors stored in memory.
  * @method clear
+ * @description Remove all the behaviors stored in memory
  */
 exports.clear = function clear() {
   store = {};
@@ -282,10 +279,10 @@ exports.clear = function clear() {
 
 
 /**
- * Get a behavior by its id.
  * @method get
  * @param {String} id id of the behavior
- * @return {Behavior} the behavior
+ * @returns {Behavior} the behavior
+ * @description Get a behavior by its id
  */
 exports.get = function get(id) {
   return store[id];
