@@ -43,6 +43,7 @@ var store = {};
 /* Private methods */
 
 
+
 /**
  * @method createFunction
  * @param {String} name default name of the function 
@@ -59,85 +60,85 @@ var store = {};
  * - can have some core modules injected as parameters
  */
 function createFunction(name, func, core, useCoreAPI) {
-  var beginBody = -1;
-  var funcParams = '';
-  var params = [];
-  var paramsClean = [];
-  var funcBody = '';
-  var header = '';
-  var action = null;
-  var isArrowFunction = true;
-  var isOneLine = false;
+    var beginBody = -1;
+    var funcParams = '';
+    var params = [];
+    var paramsClean = [];
+    var funcBody = '';
+    var header = '';
+    var action = null;
+    var isArrowFunction = true;
+    var isOneLine = false;
 
-  if (func.trim().indexOf('function') === 0) {
-    isArrowFunction = false;
-  }
+    if (func.trim().indexOf('function') === 0) {
+        isArrowFunction = false;
+    }
 
-  if (isArrowFunction) {
-    beginBody = func.indexOf('=>');
+    if (isArrowFunction) {
+        beginBody = func.indexOf('=>');
 
-    header = func.substring(0, beginBody);
-    header = header.replace('=>', '');
+        header = func.substring(0, beginBody);
+        header = header.replace('=>', '');
 
-    if (header.indexOf('(') !== -1) {
-      funcParams = header.split('(')[1].replace(')', '').trim();
+        if (header.indexOf('(') !== -1) {
+            funcParams = header.split('(')[1].replace(')', '').trim();
+        } else {
+            funcParams = header.trim();
+        }
+
+        params = funcParams.split(',');
+        params.forEach(function(param) {
+            paramsClean.push(param.trim());
+        });
+
+        funcBody = func.substring(beginBody + 2, func.length).trim();
+
+        if (funcBody.indexOf('{') === 0) {
+            funcBody = funcBody.substring(1, funcBody.lastIndexOf('}')).trim();
+        }
+
+        if (funcBody.indexOf('\n') === -1) {
+            isOneLine = true;
+        }
+
+        if (isArrowFunction && isOneLine && funcBody.indexOf('return ') === -1) {
+            funcBody = 'return ' + funcBody;
+        }
     } else {
-      funcParams = header.trim();
+        beginBody = func.indexOf('{');
+        header = func.substring(0, beginBody);
+
+        funcParams = header.split('(')[1].replace(')', '').trim();
+
+        params = funcParams.split(',');
+        params.forEach(function(param) {
+            paramsClean.push(param.trim());
+        });
+
+        funcBody = func.substring(beginBody + 1);
+        funcBody = funcBody.substring(0, funcBody.lastIndexOf('}')).trim();
     }
 
-    params = funcParams.split(',');
-    params.forEach(function (param) {
-      paramsClean.push(param.trim());
-    });
-
-    funcBody = func.substring(beginBody + 2, func.length).trim();
-
-    if (funcBody.indexOf('{') === 0) {
-      funcBody = funcBody.substring(1, funcBody.lastIndexOf('}')).trim();
+    if (params[0] === '') {
+        params = [];
+    }
+    if (useCoreAPI) {
+        params.push('$component');
+        params.push('$db');
+        params.push('$metamodel');
+        params.push('$workflow');
+        params.push('$behavior');
+        params.push('$state');
+        params.push('$log');
     }
 
-    if (funcBody.indexOf('\n') === -1) {
-      isOneLine = true;
+    if (params[0] !== '') {
+        action = new Function('__body', "return function " + name + " (" + params.join(',') + ") { return new Function('" + params.join("','") + "', __body).apply(this, arguments) };")(funcBody);
+    } else {
+        action = new Function('__body', "return function " + name + " () { return new Function(__body).apply(this, arguments) };")(funcBody);
     }
 
-    if (isArrowFunction && isOneLine && funcBody.indexOf('return ') === -1) {
-      funcBody = 'return ' + funcBody;
-    }
-  } else {
-    beginBody = func.indexOf('{');
-    header = func.substring(0, beginBody);
-
-    funcParams = header.split('(')[1].replace(')', '').trim();
-
-    params = funcParams.split(',');
-    params.forEach(function (param) {
-      paramsClean.push(param.trim());
-    });
-
-    funcBody = func.substring(beginBody + 1);
-    funcBody = funcBody.substring(0, funcBody.lastIndexOf('}')).trim();
-  }
-
-  if (params[0] === '') {
-    params = [];
-  }
-  if (useCoreAPI) {
-    params.push('$component');
-    params.push('$db');
-    params.push('$metamodel');
-    params.push('$workflow');
-    params.push('$behavior');
-    params.push('$state');
-    params.push('$log');
-  }
-
-  if (params[0] !== '') {
-    action = new Function('__body', "return function " + name + " (" + params.join(',') + ") { return new Function('" + params.join("','") + "', __body).apply(this, arguments) };")(funcBody);
-  } else {
-    action = new Function('__body', "return function " + name + " () { return new Function(__body).apply(this, arguments) };")(funcBody);
-  }
-
-  return action;
+    return action;
 }
 
 
@@ -155,30 +156,30 @@ function createFunction(name, func, core, useCoreAPI) {
  * @description Add a behavior that will be stored in System Runtime database
  */
 exports.add = function add(id, state, action, useCoreAPI, core) {
-  var behaviorId = $helper.generateId();
-  var strAction = action.toString();
+    var behaviorId = $helper.generateId();
+    var strAction = action.toString();
 
-  if (typeof core === 'undefined') {
-    core = false;
-  }
-  if (typeof useCoreAPI === 'undefined') {
-    useCoreAPI = false;
-  }
+    if (typeof core === 'undefined') {
+        core = false;
+    }
+    if (typeof useCoreAPI === 'undefined') {
+        useCoreAPI = false;
+    }
 
-  action = createFunction(state, strAction, core, useCoreAPI);
+    action = createFunction(state, strAction, core, useCoreAPI);
 
-  store[behaviorId] = action;
+    store[behaviorId] = action;
 
-  $db._Behavior.insert({
-    '_id': behaviorId,
-    'component': id,
-    'state': state,
-    'action': strAction,
-    'useCoreAPI': useCoreAPI,
-    'core': core
-  });
+    $db._Behavior.insert({
+        '_id': behaviorId,
+        'component': id,
+        'state': state,
+        'action': strAction,
+        'useCoreAPI': useCoreAPI,
+        'core': core
+    });
 
-  return behaviorId;
+    return behaviorId;
 };
 
 
@@ -192,37 +193,37 @@ exports.add = function add(id, state, action, useCoreAPI, core) {
  * of the component
  */
 exports.remove = function remove(params) {
-  var result = [];
+    var result = [];
 
-  params = params || {};
-  params.behaviorId = params.behaviorId || '';
-  params.componentId = params.componentId || '';
-  params.state = params.state || '';
+    params = params || {};
+    params.behaviorId = params.behaviorId || '';
+    params.componentId = params.componentId || '';
+    params.state = params.state || '';
 
-  if (params.componentId) {
-    if (params.behaviorId) {
-      $db._Behavior.remove({
-        '_id': params.behaviorId,
-        'component': params.componentId,
-        'state': params.state
-      });
-      delete store[params.behaviorId];
-    } else {
-      if (params.state) {
-        result = $db._Behavior.remove({
-          'component': params.componentId,
-          'state': params.state
-        });
-      } else {
-        result = $db._Behavior.remove({
-          'component': params.componentId
-        });
-      }
-      result.forEach(function (id) {
-        delete store[id];
-      });
+    if (params.componentId) {
+        if (params.behaviorId) {
+            $db._Behavior.remove({
+                '_id': params.behaviorId,
+                'component': params.componentId,
+                'state': params.state
+            });
+            delete store[params.behaviorId];
+        } else {
+            if (params.state) {
+                result = $db._Behavior.remove({
+                    'component': params.componentId,
+                    'state': params.state
+                });
+            } else {
+                result = $db._Behavior.remove({
+                    'component': params.componentId
+                });
+            }
+            result.forEach(function(id) {
+                delete store[id];
+            });
+        }
     }
-  }
 };
 
 
@@ -232,7 +233,7 @@ exports.remove = function remove(params) {
  * @description Remove a behavior with its id from the memory
  */
 exports.removeFromMemory = function removeFromMemory(id) {
-  delete store[id];
+    delete store[id];
 };
 
 
@@ -244,28 +245,28 @@ exports.removeFromMemory = function removeFromMemory(id) {
  * @description Get all the actions of a behavior for a component
  */
 exports.getActions = function getActions(id, state) {
-  var result = [];
-  var dbResult = [];
-  var action = null;
+    var result = [];
+    var dbResult = [];
+    var action = null;
 
-  dbResult = $db._Behavior.find({
-    'component': id,
-    'state': state
-  });
-
-  dbResult.forEach(function (behavior) {
-    action = store[behavior._id];
-    if (typeof action === 'undefined') {
-      action = createFunction(behavior.state, behavior.action, behavior.core, behavior.useCoreAPI);
-      store[behavior._id] = action;
-    }
-    result.push({
-      'useCoreAPI': behavior.useCoreAPI,
-      'action': action
+    dbResult = $db._Behavior.find({
+        'component': id,
+        'state': state
     });
-  });
 
-  return result;
+    dbResult.forEach(function(behavior) {
+        action = store[behavior._id];
+        if (typeof action === 'undefined') {
+            action = createFunction(behavior.state, behavior.action, behavior.core, behavior.useCoreAPI);
+            store[behavior._id] = action;
+        }
+        result.push({
+            'useCoreAPI': behavior.useCoreAPI,
+            'action': action
+        });
+    });
+
+    return result;
 };
 
 
@@ -274,7 +275,7 @@ exports.getActions = function getActions(id, state) {
  * @description Remove all the behaviors stored in memory
  */
 exports.clear = function clear() {
-  store = {};
+    store = {};
 };
 
 
@@ -285,5 +286,5 @@ exports.clear = function clear() {
  * @description Get a behavior by its id
  */
 exports.get = function get(id) {
-  return store[id];
+    return store[id];
 };

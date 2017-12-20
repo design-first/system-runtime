@@ -47,14 +47,14 @@ var store = {};
  * @description Set the state of a component
  */
 exports.set = function set(id, state, value) {
-  store[id] = {
-    'state': state,
-    'value': value
-  };
-  $db.store._State[id] = {
-    'state': state,
-    'value': value
-  };
+    store[id] = {
+        'state': state,
+        'value': value
+    };
+    $db.store._State[id] = {
+        'state': state,
+        'value': value
+    };
 };
 
 
@@ -65,7 +65,7 @@ exports.set = function set(id, state, value) {
  * @description Get the state of a component
  */
 exports.get = function get(id) {
-  return store[id];
+    return store[id];
 };
 
 
@@ -74,5 +74,5 @@ exports.get = function get(id) {
  * @description Remove all the states of the components from the memory
  */
 exports.clear = function clear() {
-  store = {};
+    store = {};
 };

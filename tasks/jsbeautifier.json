@@ -1,6 +1,7 @@
 {
   "files": [
     "src/systems/**/*.json",
+    "src/*.js",
     "build/system/*.js",
     "build/system/*.json"
   ]

@@ -47,13 +47,13 @@ var runtimeRef = null;
  * @description Check if a System Runtime instance exists
  */
 exports.isRuntime = function isRuntime() {
-  var result = false;
+    var result = false;
 
-  if ($db._Runtime && $db._Runtime.find().length) {
-    result = true;
-  }
+    if ($db._Runtime && $db._Runtime.find().length) {
+        result = true;
+    }
 
-  return result;
+    return result;
 };
 
 
@@ -63,15 +63,15 @@ exports.isRuntime = function isRuntime() {
  * @description Get the System Runtime instance
  */
 exports.getRuntime = function getRuntime() {
-  var runtimeId = '';
-  var result = null;
+    var runtimeId = '';
+    var result = null;
 
-  if (!runtimeRef) {
-    runtimeId = $db._Runtime.find()[0]._id;
-    runtimeRef = $component.get(runtimeId);
-  }
+    if (!runtimeRef) {
+        runtimeId = $db._Runtime.find()[0]._id;
+        runtimeRef = $component.get(runtimeId);
+    }
 
-  return runtimeRef;
+    return runtimeRef;
 };
 
 
@@ -81,15 +81,16 @@ exports.getRuntime = function getRuntime() {
  * @description Generate a uuid
  */
 exports.generateId = function generateId() {
-  function gen() {
-    return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-  }
-  function getPrefix() {
-    var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
-    return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
-  }
+    function gen() {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+    }
 
-  return getPrefix() + gen() + gen() + gen();
+    function getPrefix() {
+        var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
+        return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
+    }
+
+    return getPrefix() + gen() + gen() + gen();
 };
 
 
@@ -98,16 +99,16 @@ exports.generateId = function generateId() {
  * @description Add Polyfill
  */
 exports.polyfill = function polyfill() {
-  // fixing constructor.name property in IE
-  // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer
-  if (Function.prototype.name === undefined && Object.defineProperty !== undefined) {
-    Object.defineProperty(Function.prototype, 'name', {
-      get: function get() {
-        var funcNameRegex = /function\s([^(]{1,})\(/;
-        var results = (funcNameRegex).exec((this).toString());
-        return (results && results.length > 1) ? results[1].trim() : '';
-      },
-      set: function set(value) { }
-    });
-  }
+    // fixing constructor.name property in IE
+    // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer
+    if (Function.prototype.name === undefined && Object.defineProperty !== undefined) {
+        Object.defineProperty(Function.prototype, 'name', {
+            get: function get() {
+                var funcNameRegex = /function\s([^(]{1,})\(/;
+                var results = (funcNameRegex).exec((this).toString());
+                return (results && results.length > 1) ? results[1].trim() : '';
+            },
+            set: function set(value) {}
+        });
+    }
 };

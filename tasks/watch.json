@@ -5,6 +5,7 @@
       "src/systems/**/*.json"
     ],
     "tasks": [
+      "jsbeautifier",
       "json_merge",
       "concat:system",
       "eslint",
