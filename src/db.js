@@ -500,7 +500,7 @@ exports.store = {};
  * Internal collections manage core objects of System Runtime (schema, type, ...).
  * Public collections manage components of the same class.
  */
-var DatabaseCollection = function (name) {
+var DatabaseCollection = function DatabaseCollection(name) {
   if ($metamodel.getSchema(name) || internalDB.indexOf(name) !== -1) {
     exports.store[name] = {};
     this.name = name;
@@ -524,7 +524,7 @@ var DatabaseCollection = function (name) {
  * $db.Person.find({'name': 'laure', 'age' : 24});
  * $db.Person.find([{'name': 'rene'}, {'name': 'robert'}]);
  */
-DatabaseCollection.prototype.find = function (query) {
+DatabaseCollection.prototype.find = function find(query) {
   var result = [];
   var resultId = {};
   var id = '';
@@ -580,7 +580,7 @@ DatabaseCollection.prototype.find = function (query) {
  *      'age': 43
  * });
  */
-DatabaseCollection.prototype.insert = function (document) {
+DatabaseCollection.prototype.insert = function insert(document) {
   var doc = [];
   var Component = null;
   var result = [];
@@ -669,7 +669,7 @@ DatabaseCollection.prototype.insert = function (document) {
  * $db.Cars.update([{'code': 'AZD-71'}, {'code': 'AZD-65'}], {'price': '10000$'});
  * $db.Cars.update({'code': 'AZD-71'}, {'price': '10000$'}, {'upsert': true});
  */
-DatabaseCollection.prototype.update = function (query, update, options) {
+DatabaseCollection.prototype.update = function update(query, update, options) {
   var docs = this.find(query),
     updated = 0,
     i = 0,
@@ -788,7 +788,7 @@ DatabaseCollection.prototype.update = function (query, update, options) {
  * $db.Cars.remove({'code': 'AZD-71'});
  * $db.Cars.remove([{'code': 'AZD-71'}, {'code': 'AZD-65'}]);
  */
-DatabaseCollection.prototype.remove = function (query) {
+DatabaseCollection.prototype.remove = function remove(query) {
   var result = [];
   var id = '';
   var component = null;
@@ -879,7 +879,7 @@ DatabaseCollection.prototype.remove = function (query) {
  * @returns {Number} number of documents in the collection
  * @description Count the number of documents in the collection
  */
-DatabaseCollection.prototype.count = function () {
+DatabaseCollection.prototype.count = function count() {
   var result = 0;
   var objectId = '';
 

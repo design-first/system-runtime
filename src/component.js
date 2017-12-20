@@ -95,6 +95,11 @@ function _Array(conf) {
     }
   });
 
+  /**
+   * @method _copy
+   * @private
+   * @description copy the array
+   */
   function _copy() {
     var i = 0;
     var j = 0;
@@ -115,6 +120,15 @@ function _Array(conf) {
     arr.length = arrDb.length;
   }
 
+  /**
+   * @method _add
+   * @param {String} val value to add
+   * @param {String} action type of action
+   * @param {Number} start 
+   * @param {String} deleteCount
+   * @private
+   * @description add an item in the array
+   */
   function _add(val, action, start, deleteCount) {
     var isClass = false;
     var i = 0;
@@ -213,6 +227,12 @@ function _Array(conf) {
     return arrDb.length;
   }
 
+  /**
+   * @method _remove
+   * @param {String} action
+   * @private
+   * @description remove an item from the array
+   */
   function _remove(action) {
     var result;
     var val = null;
@@ -665,7 +685,7 @@ function setStructureValue(model, id, path, value) {
  * @description Create a new class from a class definition
  */
 function createClass(classId) {
-  var body = function (config) {
+  var body = function body (config) {
     config = config || {};
     var body = {};
 
@@ -687,7 +707,7 @@ function createClass(classId) {
     store[config._id] = this;
 
     // id
-    body = function () {
+    body = function body() {
       return config._id;
     };
     this.id = new Function('__body', 'return function id () { return __body.call(this) };')(body);
@@ -728,7 +748,7 @@ function createClass(classId) {
  * @description Add an id method to a class that will return its id
  */
 function addId(Class, classId) {
-  var body = function () {
+  var body = function body() {
     return classId;
   };
   Class.id = new Function('__body', 'return function id (prop, val) { return __body.call(this, prop, val) };')(body);
@@ -1299,7 +1319,7 @@ function addMethods(model, Class, classId) {
     var params = paramsName.join(',');
     var paramsWithContext = '';
 
-    var body = function () {
+    var body = function body() {
       var result = null;
 
       result = $workflow.state({
@@ -1311,7 +1331,7 @@ function addMethods(model, Class, classId) {
       return result;
     };
 
-    var bodyWithContext = function () {
+    var bodyWithContext = function body() {
       var result = null;
       var data = Array.prototype.slice.call(arguments);
 
@@ -1364,7 +1384,7 @@ function addEvents(model, Class, classId) {
     var paramsName = getParamNames(classId, methodName);
     var params = paramsName.join(',');
 
-    var body = function () {
+    var body = function body() {
       var systems = [];
       var systemId = 'e89c617b6b15d24';
       var data = [];
@@ -1424,7 +1444,7 @@ function addEvents(model, Class, classId) {
  * @description Add a on method to a component to add behaviors to the component
  */
 function addOn(Class, classId) {
-  var body = function (state, handler, useCoreAPI, isCore) {
+  var body = function body(state, handler, useCoreAPI, isCore) {
     var behaviorId = '';
     var currentState = '';
 
@@ -1475,7 +1495,7 @@ function addOn(Class, classId) {
  * @description Add a on method to a class component to add behaviors to the class
  */
 function addOnClass(Class, classId) {
-  var body = function (state, handler, useCoreAPI, isCore) {
+  var body = function body(state, handler, useCoreAPI, isCore) {
     var behaviorId = '';
     var currentState = '';
 
@@ -1526,7 +1546,7 @@ function addOnClass(Class, classId) {
  * @description Add a off method to a class component to remove behaviors from the class
  */
 function addOffClass(Class, classId) {
-  var body = function (state, behaviorId) {
+  var body = function body(state, behaviorId) {
     if ($workflow.checkParams({
       'component': this,
       'methodName': 'off',
@@ -1554,7 +1574,7 @@ function addOffClass(Class, classId) {
  * @description Add a destroy method to a class component to detroy the class and all the components of the same class
  */
 function addDestroyClass(Class) {
-  var body = function () {
+  var body = function body() {
     var id = this.id();
     var result = [];
     var i = 0;
@@ -1596,7 +1616,7 @@ function addDestroyClass(Class) {
  * @description Add the addClassInfo method on a class
  */
 function addClassInfoClass(Class) {
-  var body = function () {
+  var body = function body() {
     return exports.get(this.id() + 'Info');
   };
   Class.classInfo = new Function('__body', 'return function classInfo () { return __body.call(this) };')(body);

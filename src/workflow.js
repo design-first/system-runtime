@@ -793,7 +793,7 @@ exports.stop = function stop(params) {
   }
   params.message = params.message || '';
 
-  exports.state = function () {
+  exports.state = function state() {
   };
 
   if (params.error) {
