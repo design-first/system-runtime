@@ -1,124 +1,124 @@
 {
-    "name": "_OSGi-class",
-    "master": false,
-    "version": "1.0.0",
-    "description": "OSGI",
-    "schemas": {
-        "157931f7a31b61d": {
-            "_id": "157931f7a31b61d",
-            "_name": "_OSGi",
-            "_inherit": ["_Component"],
-            "_core": true,
-            "install": "method",
-            "uninstall": "method",
-            "start": "method",
-            "stop": "method",
-            "status": "method",
-            "bundle": "method"
-        }
+  "name": "_OSGi-class",
+  "master": false,
+  "version": "1.0.0",
+  "description": "OSGI",
+  "schemas": {
+    "157931f7a31b61d": {
+      "_id": "157931f7a31b61d",
+      "_name": "_OSGi",
+      "_inherit": ["_Component"],
+      "_core": true,
+      "install": "method",
+      "uninstall": "method",
+      "start": "method",
+      "stop": "method",
+      "status": "method",
+      "bundle": "method"
+    }
+  },
+  "models": {
+    "100b91ed2211b15": {
+      "_id": "100b91ed2211b15",
+      "_name": "_OSGi",
+      "install": {
+        "params": [{
+          "name": "url",
+          "type": "any",
+          "mandatory": true,
+          "default": ""
+        }, {
+          "name": "async",
+          "type": "boolean",
+          "mandatory": false,
+          "default": true
+        }],
+        "result": "string"
+      },
+      "uninstall": {
+        "params": [{
+          "name": "id",
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        }]
+      },
+      "start": {
+        "params": [{
+          "name": "id",
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        }]
+      },
+      "stop": {
+        "params": [{
+          "name": "id",
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        }]
+      },
+      "status": {
+        "result": "object"
+      },
+      "_core": true,
+      "bundle": {
+        "result": "string"
+      }
+    }
+  },
+  "behaviors": {
+    "1ef951f1411b895": {
+      "_id": "1ef951f1411b895",
+      "component": "_OSGi",
+      "state": "install",
+      "action": "function install(url, async) {\n  var importedSystem = null,\n    system = {},\n    systemId = '',\n    callbackLoad = null,\n    xhr = null,\n    result = '',\n    channel = $component.get('channel');\n\n  if (typeof url === 'object') {\n    importedSystem = url;\n  } else {\n    if (url.indexOf('{') === 0) {\n      importedSystem = JSON.parse(url);\n    }\n  }\n\n  if (importedSystem) {\n    systemId = $db.importSystem(importedSystem);\n    if (systemId) {\n      system = this.require(systemId);\n\n      if (typeof url === 'string') {\n        system.location(url);\n      }\n      system.state('installed');\n      channel.$systemInstalled(systemId);\n      system.state('resolved');\n      channel.$systemResolved(systemId);\n\n      result = systemId;\n    }\n  } else {\n    if (typeof global !== 'undefined' && typeof window === 'undefined') {\n      if (url.indexOf('.json') !== -1) {\n        system = global.require(global.process.env.PWD + '/' + url);\n      } else {\n        system = global.require(url);\n      }\n      systemId = $db.importSystem(system);\n      system = this.require(systemId);\n\n      if (typeof url === 'string') {\n        system.location(url);\n      }\n      system.state('installed');\n      channel.$systemInstalled(systemId);\n      system.state('resolved');\n      channel.$systemResolved(systemId);\n\n      result = systemId;\n    } else {\n      xhr = new XMLHttpRequest();\n      callbackLoad = function callbackLoad(system, url) {\n        var sysId = $db.importSystem(system),\n          sys = $component.get(sysId),\n          channel = $component.get('channel');\n\n        if (typeof url === 'string') {\n          sys.location(url);\n        }\n        sys.state('installed');\n        channel.$systemInstalled(sysId);\n        sys.state('resolved');\n        channel.$systemResolved(sysId);\n\n        result = sysId;\n      };\n\n      if (async) {\n        xhr.open('GET', url, true);\n        xhr.onreadystatechange = function () {\n          if (xhr.readyState === 4) {\n            if (xhr.status === 200 || xhr.status === 0) {\n              callbackLoad(JSON.parse(xhr.response), url);\n            }\n          }\n        };\n        xhr.send(null);\n      } else {\n        xhr.open('GET', url, false);\n        xhr.send(null);\n        if (xhr.status === 200 || xhr.status === 0) {\n          callbackLoad(JSON.parse(xhr.response), url);\n        }\n      }\n    }\n  }\n  return result;\n}",
+      "useCoreAPI": true,
+      "core": true
     },
-    "models": {
-        "100b91ed2211b15": {
-            "_id": "100b91ed2211b15",
-            "_name": "_OSGi",
-            "install": {
-                "params": [{
-                    "name": "url",
-                    "type": "any",
-                    "mandatory": true,
-                    "default": ""
-                }, {
-                    "name": "async",
-                    "type": "boolean",
-                    "mandatory": false,
-                    "default": true
-                }],
-                "result": "string"
-            },
-            "uninstall": {
-                "params": [{
-                    "name": "id",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }]
-            },
-            "start": {
-                "params": [{
-                    "name": "id",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }]
-            },
-            "stop": {
-                "params": [{
-                    "name": "id",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }]
-            },
-            "status": {
-                "result": "object"
-            },
-            "_core": true,
-            "bundle": {
-                "result": "string"
-            }
-        }
+    "14c1517b711cb78": {
+      "_id": "14c1517b711cb78",
+      "component": "_OSGi",
+      "state": "uninstall",
+      "action": "function uninstall(id) {\n  var search = {},\n    system = null,\n    behaviorId = '',\n    collection = '',\n    componentId = '',\n    length = 0,\n    i = 0,\n    coreComponents = ['admin', 'channel', 'db', 'logger', 'metamodel', 'runtime'];\n\n  search = $db._System.find({\n    '_id': id\n  });\n\n  if (search.length) {\n    system = search[0];\n    // remove behaviors\n    if (system.behaviors) {\n      for (behaviorId in system.behaviors) {\n        $db._Behavior.remove({\n          '_id': system.behaviors[behaviorId]._id\n        });\n      }\n    }\n    // remove components\n    if (system.components) {\n      for (collection in system.components) {\n        for (componentId in system.components[collection]) {\n          if (coreComponents.indexOf(componentId) === -1) {\n            $db[collection].remove({\n              '_id': componentId\n            });\n          }\n        }\n      }\n    }\n  }\n  if (this.require(id) && this.require(id).state) {\n    this.require(id).state('uninstalled');\n    channel.$systemUninstalled(id);\n  }\n}",
+      "useCoreAPI": true,
+      "core": true
     },
-    "behaviors": {
-        "1ef951f1411b895": {
-            "_id": "1ef951f1411b895",
-            "component": "_OSGi",
-            "state": "install",
-            "action": "function install(url, async) {\n  var importedSystem = null,\n    system = {},\n    systemId = '',\n    callbackLoad = null,\n    xhr = null,\n    result = '',\n    channel = $component.get('channel');\n\n  if (typeof url === 'object') {\n    importedSystem = url;\n  } else {\n    if (url.indexOf('{') === 0) {\n      importedSystem = JSON.parse(url);\n    }\n  }\n\n  if (importedSystem) {\n    systemId = $db.importSystem(importedSystem);\n    if (systemId) {\n      system = this.require(systemId);\n\n      if (typeof url === 'string') {\n        system.location(url);\n      }\n      system.state('installed');\n      channel.$systemInstalled(systemId);\n      system.state('resolved');\n      channel.$systemResolved(systemId);\n\n      result = systemId;\n    }\n  } else {\n    if (typeof global !== 'undefined' && typeof window === 'undefined') {\n      if (url.indexOf('.json') !== -1) {\n        system = global.require(global.process.env.PWD + '/' + url);\n      } else {\n        system = global.require(url);\n      }\n      systemId = $db.importSystem(system);\n      system = this.require(systemId);\n\n      if (typeof url === 'string') {\n        system.location(url);\n      }\n      system.state('installed');\n      channel.$systemInstalled(systemId);\n      system.state('resolved');\n      channel.$systemResolved(systemId);\n\n      result = systemId;\n    } else {\n      xhr = new XMLHttpRequest();\n      callbackLoad = function callbackLoad(system, url) {\n        var sysId = $db.importSystem(system),\n          sys = $component.get(sysId),\n          channel = $component.get('channel');\n\n        if (typeof url === 'string') {\n          sys.location(url);\n        }\n        sys.state('installed');\n        channel.$systemInstalled(sysId);\n        sys.state('resolved');\n        channel.$systemResolved(sysId);\n\n        result = sysId;\n      };\n\n      if (async) {\n        xhr.open('GET', url, true);\n        xhr.onreadystatechange = function () {\n          if (xhr.readyState === 4) {\n            if (xhr.status === 200 || xhr.status === 0) {\n              callbackLoad(JSON.parse(xhr.response), url);\n            }\n          }\n        };\n        xhr.send(null);\n      } else {\n        xhr.open('GET', url, false);\n        xhr.send(null);\n        if (xhr.status === 200 || xhr.status === 0) {\n          callbackLoad(JSON.parse(xhr.response), url);\n        }\n      }\n    }\n  }\n  return result;\n}",
-            "useCoreAPI": true,
-            "core": true
-        },
-        "14c1517b711cb78": {
-            "_id": "14c1517b711cb78",
-            "component": "_OSGi",
-            "state": "uninstall",
-            "action": "function uninstall(id) {\n  var search = {},\n    system = null,\n    behaviorId = '',\n    collection = '',\n    componentId = '',\n    length = 0,\n    i = 0,\n    coreComponents = ['admin', 'channel', 'db', 'logger', 'metamodel', 'runtime'];\n\n  search = $db._System.find({\n    '_id': id\n  });\n\n  if (search.length) {\n    system = search[0];\n    // remove behaviors\n    if (system.behaviors) {\n      for (behaviorId in system.behaviors) {\n        $db._Behavior.remove({\n          '_id': system.behaviors[behaviorId]._id\n        });\n      }\n    }\n    // remove components\n    if (system.components) {\n      for (collection in system.components) {\n        for (componentId in system.components[collection]) {\n          if (coreComponents.indexOf(componentId) === -1) {\n            $db[collection].remove({\n              '_id': componentId\n            });\n          }\n        }\n      }\n    }\n  }\n  if (this.require(id) && this.require(id).state) {\n    this.require(id).state('uninstalled');\n    channel.$systemUninstalled(id);\n  }\n}",
-            "useCoreAPI": true,
-            "core": true
-        },
-        "105f219c6813643": {
-            "_id": "105f219c6813643",
-            "component": "_OSGi",
-            "state": "start",
-            "action": "function start(id) {\n  var system = this.require(id),\n    channel = this.require('channel');\n\n  if (system.state() === 'resolved' || system.state() === 'installed') {\n    system.state('starting');\n    if (system.start) {\n      system.start();\n    }\n    channel.$systemStarted(id);\n    system.state('active');\n  }\n}",
-            "useCoreAPI": false,
-            "core": true
-        },
-        "1a81a1f00d17269": {
-            "_id": "1a81a1f00d17269",
-            "component": "_OSGi",
-            "state": "stop",
-            "action": "function stop(id) {\n  var system = this.require(id),\n    channel = this.require('channel');\n\n  if (system.state() === 'active') {\n    system.state('stopping');\n    if (system.stop) {\n      system.stop();\n    }\n    channel.$systemStopped(id);\n    system.state('resolved');\n    channel.$systemResolved(id);\n  }\n}",
-            "useCoreAPI": false,
-            "core": true
-        },
-        "116851b602128d1": {
-            "_id": "116851b602128d1",
-            "component": "_OSGi",
-            "state": "status",
-            "action": "function status() {\n  var result = {},\n    system = null,\n    length = 0,\n    i = 0;\n\n  systems = $db._System.find({});\n\n  length = systems.length;\n  for (i = 0; i < length; i++) {\n    system = systems[i];\n    result[system.name] = {\n      'id': system._id,\n      'state': system.state,\n      'name': system.name,\n      'version': system.version,\n      'location': system.location,\n      'master': system.master\n    };\n  }\n\n  return result;\n}",
-            "useCoreAPI": true,
-            "core": true
-        },
-        "19cf317d7217331": {
-            "_id": "19cf317d7217331",
-            "component": "_OSGi",
-            "state": "bundle",
-            "action": "function bundle() { \n\tvar result = $db.exportSystem();\n\treturn result;\n}",
-            "useCoreAPI": true,
-            "core": true
-        }
+    "105f219c6813643": {
+      "_id": "105f219c6813643",
+      "component": "_OSGi",
+      "state": "start",
+      "action": "function start(id) {\n  var system = this.require(id),\n    channel = this.require('channel');\n\n  if (system.state() === 'resolved' || system.state() === 'installed') {\n    system.state('starting');\n    if (system.start) {\n      system.start();\n    }\n    channel.$systemStarted(id);\n    system.state('active');\n  }\n}",
+      "useCoreAPI": false,
+      "core": true
     },
-    "types": {},
-    "components": {},
-    "_id": "o10d691259c128c9"
+    "1a81a1f00d17269": {
+      "_id": "1a81a1f00d17269",
+      "component": "_OSGi",
+      "state": "stop",
+      "action": "function stop(id) {\n  var system = this.require(id),\n    channel = this.require('channel');\n\n  if (system.state() === 'active') {\n    system.state('stopping');\n    if (system.stop) {\n      system.stop();\n    }\n    channel.$systemStopped(id);\n    system.state('resolved');\n    channel.$systemResolved(id);\n  }\n}",
+      "useCoreAPI": false,
+      "core": true
+    },
+    "116851b602128d1": {
+      "_id": "116851b602128d1",
+      "component": "_OSGi",
+      "state": "status",
+      "action": "function status() {\n  var result = {},\n    system = null,\n    length = 0,\n    i = 0;\n\n  systems = $db._System.find({});\n\n  length = systems.length;\n  for (i = 0; i < length; i++) {\n    system = systems[i];\n    result[system.name] = {\n      'id': system._id,\n      'state': system.state,\n      'name': system.name,\n      'version': system.version,\n      'location': system.location,\n      'master': system.master\n    };\n  }\n\n  return result;\n}",
+      "useCoreAPI": true,
+      "core": true
+    },
+    "19cf317d7217331": {
+      "_id": "19cf317d7217331",
+      "component": "_OSGi",
+      "state": "bundle",
+      "action": "function bundle() { \n\tvar result = $db.exportSystem();\n\treturn result;\n}",
+      "useCoreAPI": true,
+      "core": true
+    }
+  },
+  "types": {},
+  "components": {},
+  "_id": "o10d691259c128c9"
 }

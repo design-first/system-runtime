@@ -1,45 +1,45 @@
 {
-    "_id": "m1d0f21f41e1af88",
-    "name": "_SystemOSGi-class",
-    "description": "OSGi-like system",
-    "version": "1.0.0",
-    "behaviors": {},
-    "schemas": {
-        "145fe10c7514298": {
-            "_id": "145fe10c7514298",
-            "_name": "_SystemOSGi",
-            "_inherit": [
-                "_Component"
-            ],
-            "_core": true,
-            "state": "property",
-            "location": "property",
-            "start": "method",
-            "stop": "method"
-        }
-    },
-    "models": {
-        "1b2811b092143f5": {
-            "_id": "1b2811b092143f5",
-            "_name": "_SystemOSGi",
-            "start": {},
-            "stop": {},
-            "_core": true,
-            "state": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "none"
-            },
-            "location": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            }
-        }
-    },
-    "types": {},
-    "components": {},
-    "master": false
+  "_id": "m1d0f21f41e1af88",
+  "name": "_SystemOSGi-class",
+  "description": "OSGi-like system",
+  "version": "1.0.0",
+  "behaviors": {},
+  "schemas": {
+    "145fe10c7514298": {
+      "_id": "145fe10c7514298",
+      "_name": "_SystemOSGi",
+      "_inherit": [
+        "_Component"
+      ],
+      "_core": true,
+      "state": "property",
+      "location": "property",
+      "start": "method",
+      "stop": "method"
+    }
+  },
+  "models": {
+    "1b2811b092143f5": {
+      "_id": "1b2811b092143f5",
+      "_name": "_SystemOSGi",
+      "start": {},
+      "stop": {},
+      "_core": true,
+      "state": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "none"
+      },
+      "location": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      }
+    }
+  },
+  "types": {},
+  "components": {},
+  "master": false
 }

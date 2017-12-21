@@ -4,5 +4,10 @@
     "src/*.js",
     "build/system/*.js",
     "build/system/*.json"
-  ]
+  ],
+  "options": {
+    "js": {
+      "indentSize": 2
+    }
+  }
 }

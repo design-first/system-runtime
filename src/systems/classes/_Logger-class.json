@@ -1,103 +1,103 @@
 {
-    "_id": "v1916b1e0ee1e1f0",
-    "name": "_Logger-class",
-    "description": "Logger",
-    "version": "1.0.0",
-    "behaviors": {
-        "1d993108fa18ef2": {
-            "_id": "1d993108fa18ef2",
-            "component": "_Logger",
-            "state": "debug",
-            "action": "function debug(message) {\n  if (this.level() === 'debug') {\n    console.log('runtime: ' + message);\n  }\n}",
-            "core": true
-        },
-        "1a37a188e11fe73": {
-            "_id": "1a37a188e11fe73",
-            "component": "_Logger",
-            "state": "error",
-            "action": "function error(message) {\n  console.error('runtime: ' + message);\n}",
-            "core": true
-        },
-        "1edd21e12a16534": {
-            "_id": "1edd21e12a16534",
-            "component": "_Logger",
-            "state": "info",
-            "action": "function info(message) {\n  if (this.level() === 'info' || this.level() === 'debug') {\n    console.info('runtime: ' + message);\n  }\n}",
-            "core": true
-        },
-        "141f2143d3122a4": {
-            "_id": "141f2143d3122a4",
-            "component": "_Logger",
-            "state": "level",
-            "action": "function level(val) {\n  $log.level(val);\n}",
-            "core": true,
-            "useCoreAPI": true
-        },
-        "192401bab21304e": {
-            "_id": "192401bab21304e",
-            "component": "_Logger",
-            "state": "warn",
-            "action": "function warn(message) {\n  if (this.level() === 'info' || this.level() === 'warn' || this.level() === 'debug') {\n    console.warn('runtime: ' + message);\n  }\n}",
-            "core": true
-        }
+  "_id": "v1916b1e0ee1e1f0",
+  "name": "_Logger-class",
+  "description": "Logger",
+  "version": "1.0.0",
+  "behaviors": {
+    "1d993108fa18ef2": {
+      "_id": "1d993108fa18ef2",
+      "component": "_Logger",
+      "state": "debug",
+      "action": "function debug(message) {\n  if (this.level() === 'debug') {\n    console.log('runtime: ' + message);\n  }\n}",
+      "core": true
     },
-    "schemas": {
-        "1268f1dddd1fea7": {
-            "_name": "_Logger",
-            "_core": true,
-            "level": "property",
-            "debug": "method",
-            "info": "method",
-            "warn": "method",
-            "error": "method",
-            "_id": "1268f1dddd1fea7"
-        }
+    "1a37a188e11fe73": {
+      "_id": "1a37a188e11fe73",
+      "component": "_Logger",
+      "state": "error",
+      "action": "function error(message) {\n  console.error('runtime: ' + message);\n}",
+      "core": true
     },
-    "models": {
-        "16b9d1ac2216ffe": {
-            "_id": "16b9d1ac2216ffe",
-            "_name": "_Logger",
-            "_core": true,
-            "level": {
-                "type": "log",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "warn"
-            },
-            "debug": {
-                "params": [{
-                    "name": "message",
-                    "type": "any"
-                }]
-            },
-            "info": {
-                "params": [{
-                    "name": "message",
-                    "type": "any"
-                }]
-            },
-            "warn": {
-                "params": [{
-                    "name": "message",
-                    "type": "any"
-                }]
-            },
-            "error": {
-                "params": [{
-                    "name": "message",
-                    "type": "any"
-                }]
-            }
-        }
+    "1edd21e12a16534": {
+      "_id": "1edd21e12a16534",
+      "component": "_Logger",
+      "state": "info",
+      "action": "function info(message) {\n  if (this.level() === 'info' || this.level() === 'debug') {\n    console.info('runtime: ' + message);\n  }\n}",
+      "core": true
     },
-    "types": {},
-    "components": {
-        "_Logger": {
-            "logger": {
-                "_id": "logger",
-                "level": "warn"
-            }
-        }
+    "141f2143d3122a4": {
+      "_id": "141f2143d3122a4",
+      "component": "_Logger",
+      "state": "level",
+      "action": "function level(val) {\n  $log.level(val);\n}",
+      "core": true,
+      "useCoreAPI": true
     },
-    "master": false
+    "192401bab21304e": {
+      "_id": "192401bab21304e",
+      "component": "_Logger",
+      "state": "warn",
+      "action": "function warn(message) {\n  if (this.level() === 'info' || this.level() === 'warn' || this.level() === 'debug') {\n    console.warn('runtime: ' + message);\n  }\n}",
+      "core": true
+    }
+  },
+  "schemas": {
+    "1268f1dddd1fea7": {
+      "_name": "_Logger",
+      "_core": true,
+      "level": "property",
+      "debug": "method",
+      "info": "method",
+      "warn": "method",
+      "error": "method",
+      "_id": "1268f1dddd1fea7"
+    }
+  },
+  "models": {
+    "16b9d1ac2216ffe": {
+      "_id": "16b9d1ac2216ffe",
+      "_name": "_Logger",
+      "_core": true,
+      "level": {
+        "type": "log",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "warn"
+      },
+      "debug": {
+        "params": [{
+          "name": "message",
+          "type": "any"
+        }]
+      },
+      "info": {
+        "params": [{
+          "name": "message",
+          "type": "any"
+        }]
+      },
+      "warn": {
+        "params": [{
+          "name": "message",
+          "type": "any"
+        }]
+      },
+      "error": {
+        "params": [{
+          "name": "message",
+          "type": "any"
+        }]
+      }
+    }
+  },
+  "types": {},
+  "components": {
+    "_Logger": {
+      "logger": {
+        "_id": "logger",
+        "level": "warn"
+      }
+    }
+  },
+  "master": false
 }

@@ -11,6 +11,7 @@
     "no-array-constructor": 1,
     "array-callback-return": 1,
     "no-eval": 1,
+    "one-var": ["warn", "never"],
     "wrap-iife": 1,
     "no-loop-func": 1,
     "no-duplicate-imports": 1,

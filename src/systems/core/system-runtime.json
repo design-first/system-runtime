@@ -1,21 +1,21 @@
 {
-    "name": "system-runtime",
-    "master": false,
-    "version": "2.1.2",
-    "description": "System Runtime",
-    "schemas": {},
-    "models": {},
-    "behaviors": {
-        "1cb9d103d41dd97": {
-            "_id": "1cb9d103d41dd97",
-            "component": "e89c617b6b15d24",
-            "state": "start",
-            "action": "function start() {\n  if (typeof document !== 'undefined') {\n    document.addEventListener('DOMContentLoaded', function DOMContentLoaded(e) {\n      var systems = [],\n        system = null,\n        scripts = [],\n        script = null,\n        logLevel = 'warn',\n        i = 0,\n        length = 0;\n    \n      systems = document.querySelectorAll('link[rel=system]');\n      length = systems.length;\n  \n      // logger\n      scripts = document.querySelectorAll('script[log]');\n      if (scripts.length) {\n        logLevel = scripts[0].getAttribute('log');\n        this.require('logger').level(logLevel);\n      }\n  \n      // systems\n      for (i = 0; i < length; i++) {\n        system = systems[i];\n  \n        if (system.getAttribute('async') === 'false') {\n          this.require('runtime').install(system.href, false);\n        } else {\n          this.require('runtime').install(system.href, true);\n        }\n      }\n  \n      // ready event\n      if (length === 0) {\n        this.require('runtime').ready();\n      }\n  }.bind(this));\n  }\n}",
-            "useCoreAPI": true,
-            "core": true
-        }
-    },
-    "types": {},
-    "components": {},
-    "_id": "e89c617b6b15d24"
+  "name": "system-runtime",
+  "master": false,
+  "version": "2.1.2",
+  "description": "System Runtime",
+  "schemas": {},
+  "models": {},
+  "behaviors": {
+    "1cb9d103d41dd97": {
+      "_id": "1cb9d103d41dd97",
+      "component": "e89c617b6b15d24",
+      "state": "start",
+      "action": "function start() {\n  if (typeof document !== 'undefined') {\n    document.addEventListener('DOMContentLoaded', function DOMContentLoaded(e) {\n      var systems = [],\n        system = null,\n        scripts = [],\n        script = null,\n        logLevel = 'warn',\n        i = 0,\n        length = 0;\n    \n      systems = document.querySelectorAll('link[rel=system]');\n      length = systems.length;\n  \n      // logger\n      scripts = document.querySelectorAll('script[log]');\n      if (scripts.length) {\n        logLevel = scripts[0].getAttribute('log');\n        this.require('logger').level(logLevel);\n      }\n  \n      // systems\n      for (i = 0; i < length; i++) {\n        system = systems[i];\n  \n        if (system.getAttribute('async') === 'false') {\n          this.require('runtime').install(system.href, false);\n        } else {\n          this.require('runtime').install(system.href, true);\n        }\n      }\n  \n      // ready event\n      if (length === 0) {\n        this.require('runtime').ready();\n      }\n  }.bind(this));\n  }\n}",
+      "useCoreAPI": true,
+      "core": true
+    }
+  },
+  "types": {},
+  "components": {},
+  "_id": "e89c617b6b15d24"
 }
