@@ -200,7 +200,7 @@ exports.add = function add(id, state, action, useCoreAPI, core) {
  * @param {Object} params
  * {String} componentId id of the component
  * {String} state state of the component
- * {String} behaviorId id of the behavior (optional))
+ * {String} behaviorId id of the behavior (optional)
  * @description Remove a behavior with its id or remove all the behaviors for a specific state
  * of the component
  */
