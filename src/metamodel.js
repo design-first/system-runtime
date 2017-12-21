@@ -24,7 +24,7 @@
  * @requires log
  * @requires component
  * @requires workflow
- * @description  * This module manages System Runtime metamodel.
+ * @description This module manages System Runtime metamodel.
  * System Runtime metamodel loads schemas and types, analyzes them and
  * creates the component classes and related DatabaseCollections.
  */
