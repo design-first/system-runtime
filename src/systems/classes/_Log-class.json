@@ -8,9 +8,7 @@
     "f1a10d1067d1b23a": {
       "_id": "f1a10d1067d1b23a",
       "_name": "_Log",
-      "_inherit": [
-        "_Component"
-      ],
+      "_inherit": ["_Component"],
       "_core": true,
       "action": "property",
       "collection": "property",

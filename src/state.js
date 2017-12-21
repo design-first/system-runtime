@@ -18,7 +18,6 @@
  * limitations under the License.
  */
 
-
 /**
  * @module state
  * @requires db
@@ -29,15 +28,11 @@
 
 var $db = require('./db.js');
 
-
 /* Private properties */
-
 
 var store = {};
 
-
 /* Public methods */
-
 
 /**
  * @method set
@@ -48,18 +43,17 @@ var store = {};
  */
 exports.set = function set(id, state, value) {
   store[id] = {
-    'state': state,
-    'value': value
+    state: state,
+    value: value
   };
   $db.store._State[id] = {
-    'state': state,
-    'value': value
+    state: state,
+    value: value
   };
 };
 
-
 /**
- * @method get 
+ * @method get
  * @param {String} id id of the component
  * @returns {String} state of the component
  * @description Get the state of a component
@@ -67,7 +61,6 @@ exports.set = function set(id, state, value) {
 exports.get = function get(id) {
   return store[id];
 };
-
 
 /**
  * @method clear

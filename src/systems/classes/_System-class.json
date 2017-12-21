@@ -8,9 +8,7 @@
     "1cb761fa4510dca": {
       "_id": "1cb761fa4510dca",
       "_name": "_System",
-      "_inherit": [
-        "_SystemOSGi"
-      ],
+      "_inherit": ["_SystemOSGi"],
       "_core": true,
       "name": "property",
       "master": "property",

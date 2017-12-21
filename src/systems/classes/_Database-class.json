@@ -8,7 +8,8 @@
       "_id": "1a5111d17a1800c",
       "component": "_Database",
       "state": "collections",
-      "action": "function collections() {\n  var result = {},\n    collectionName = '';\n\n  for (collectionName in $db.store) {\n    if ($db.store.hasOwnProperty(collectionName) && collectionName.indexOf('_') !== 0) {\n      result[collectionName] = $db[collectionName];\n    }\n  }\n  return result;\n}",
+      "action":
+        "function collections() {\n  var result = {},\n    collectionName = '';\n\n  for (collectionName in $db.store) {\n    if ($db.store.hasOwnProperty(collectionName) && collectionName.indexOf('_') !== 0) {\n      result[collectionName] = $db[collectionName];\n    }\n  }\n  return result;\n}",
       "core": true,
       "useCoreAPI": true
     }
@@ -16,9 +17,7 @@
   "schemas": {
     "1723516a30132ac": {
       "_name": "_Database",
-      "_inherit": [
-        "_Component"
-      ],
+      "_inherit": ["_Component"],
       "_core": true,
       "collections": "method",
       "insert": "event",
@@ -35,22 +34,28 @@
         "result": "object"
       },
       "insert": {
-        "params": [{
-          "name": "event",
-          "type": "dbInsertEvent"
-        }]
+        "params": [
+          {
+            "name": "event",
+            "type": "dbInsertEvent"
+          }
+        ]
       },
       "update": {
-        "params": [{
-          "name": "event",
-          "type": "dbUpdateEvent"
-        }]
+        "params": [
+          {
+            "name": "event",
+            "type": "dbUpdateEvent"
+          }
+        ]
       },
       "remove": {
-        "params": [{
-          "name": "event",
-          "type": "dbRemoveEvent"
-        }]
+        "params": [
+          {
+            "name": "event",
+            "type": "dbRemoveEvent"
+          }
+        ]
       },
       "_id": "18a51169d7112d4"
     }

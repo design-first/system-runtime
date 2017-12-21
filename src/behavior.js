@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-/** 
+/**
  * @module behavior
  * @requires db
  * @requires helper
  * @requires channel
- * @description This module manages the behaviors of all components. 
- * A behavior is a mecanism that allow users to add actions that will be executed 
+ * @description This module manages the behaviors of all components.
+ * A behavior is a mecanism that allow users to add actions that will be executed
  * when a specific state of a component will change.
  */
 
@@ -33,20 +33,15 @@
 var $db = require('./db.js');
 var $helper = require('./helper.js');
 
-
 /* Private properties */
-
 
 var store = {};
 
-
 /* Private methods */
-
-
 
 /**
  * @method createFunction
- * @param {String} name default name of the function 
+ * @param {String} name default name of the function
  * @param {String} func a stringified function
  * @param {Boolean} core if true, the behavior will be treated as a System Runtime core behavior.
  * In that case, the behavior can not be exported in a system (default false)
@@ -81,7 +76,10 @@ function createFunction(name, func, core, useCoreAPI) {
     header = header.replace('=>', '');
 
     if (header.indexOf('(') !== -1) {
-      funcParams = header.split('(')[1].replace(')', '').trim();
+      funcParams = header
+        .split('(')[1]
+        .replace(')', '')
+        .trim();
     } else {
       funcParams = header.trim();
     }
@@ -108,7 +106,10 @@ function createFunction(name, func, core, useCoreAPI) {
     beginBody = func.indexOf('{');
     header = func.substring(0, beginBody);
 
-    funcParams = header.split('(')[1].replace(')', '').trim();
+    funcParams = header
+      .split('(')[1]
+      .replace(')', '')
+      .trim();
 
     params = funcParams.split(',');
     params.forEach(function(param) {
@@ -133,23 +134,35 @@ function createFunction(name, func, core, useCoreAPI) {
   }
 
   if (params[0] !== '') {
-    action = new Function('__body', "return function " + name + " (" + params.join(',') + ") { return new Function('" + params.join("','") + "', __body).apply(this, arguments) };")(funcBody);
+    action = new Function(
+      '__body',
+      'return function ' +
+        name +
+        ' (' +
+        params.join(',') +
+        ") { return new Function('" +
+        params.join("','") +
+        "', __body).apply(this, arguments) };"
+    )(funcBody);
   } else {
-    action = new Function('__body', "return function " + name + " () { return new Function(__body).apply(this, arguments) };")(funcBody);
+    action = new Function(
+      '__body',
+      'return function ' +
+        name +
+        ' () { return new Function(__body).apply(this, arguments) };'
+    )(funcBody);
   }
 
   return action;
 }
 
-
 /* Public methods */
-
 
 /**
  * @method add
  * @param {String} id id of the component
- * @param {Object} state the state on which the action will be executed 
- * @param {Object} action the action to execute when the component will have a specific state 
+ * @param {Object} state the state on which the action will be executed
+ * @param {Object} action the action to execute when the component will have a specific state
  * @param {Boolean} useCoreAPI if true, System Runtime core modules will be injected as parameters of the action (default false)
  * @param {Boolean} core if true, behavior can not be exported
  * @returns {String} id of the behavior created in System Runtime database
@@ -171,17 +184,16 @@ exports.add = function add(id, state, action, useCoreAPI, core) {
   store[behaviorId] = action;
 
   $db._Behavior.insert({
-    '_id': behaviorId,
-    'component': id,
-    'state': state,
-    'action': strAction,
-    'useCoreAPI': useCoreAPI,
-    'core': core
+    _id: behaviorId,
+    component: id,
+    state: state,
+    action: strAction,
+    useCoreAPI: useCoreAPI,
+    core: core
   });
 
   return behaviorId;
 };
-
 
 /**
  * @method remove
@@ -203,20 +215,20 @@ exports.remove = function remove(params) {
   if (params.componentId) {
     if (params.behaviorId) {
       $db._Behavior.remove({
-        '_id': params.behaviorId,
-        'component': params.componentId,
-        'state': params.state
+        _id: params.behaviorId,
+        component: params.componentId,
+        state: params.state
       });
       delete store[params.behaviorId];
     } else {
       if (params.state) {
         result = $db._Behavior.remove({
-          'component': params.componentId,
-          'state': params.state
+          component: params.componentId,
+          state: params.state
         });
       } else {
         result = $db._Behavior.remove({
-          'component': params.componentId
+          component: params.componentId
         });
       }
       result.forEach(function(id) {
@@ -226,7 +238,6 @@ exports.remove = function remove(params) {
   }
 };
 
-
 /**
  * @method removeFromMemory
  * @param {String} id id of the component
@@ -235,7 +246,6 @@ exports.remove = function remove(params) {
 exports.removeFromMemory = function removeFromMemory(id) {
   delete store[id];
 };
-
 
 /**
  * @method getActions
@@ -250,25 +260,29 @@ exports.getActions = function getActions(id, state) {
   var action = null;
 
   dbResult = $db._Behavior.find({
-    'component': id,
-    'state': state
+    component: id,
+    state: state
   });
 
   dbResult.forEach(function(behavior) {
     action = store[behavior._id];
     if (typeof action === 'undefined') {
-      action = createFunction(behavior.state, behavior.action, behavior.core, behavior.useCoreAPI);
+      action = createFunction(
+        behavior.state,
+        behavior.action,
+        behavior.core,
+        behavior.useCoreAPI
+      );
       store[behavior._id] = action;
     }
     result.push({
-      'useCoreAPI': behavior.useCoreAPI,
-      'action': action
+      useCoreAPI: behavior.useCoreAPI,
+      action: action
     });
   });
 
   return result;
 };
-
 
 /**
  * @method clear
@@ -277,7 +291,6 @@ exports.getActions = function getActions(id, state) {
 exports.clear = function clear() {
   store = {};
 };
-
 
 /**
  * @method get

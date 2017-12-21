@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-/** 
+/**
  * @module db
  * @requires component
  * @requires helper
@@ -27,7 +27,7 @@
  * System Runtime database is a micro NoSQL Database that contains:
  * - collections to store documents (schemas, types, components, ...) and
  * - APIs to import or export documents.
- * 
+ *
  * System Runtime Database is closely linked to System Runtime metamodel and System Runtime components because:
  * - all operations done by System Runtime database must be compliant with the model before being finished,
  * - insert operation automatically creates a component and
@@ -43,7 +43,6 @@ var $log = require('./log.js');
 var $behavior = require('./behavior.js');
 var $state = require('./state.js');
 var $workflow = require('./workflow.js');
-
 
 /* Private properties */
 
@@ -76,9 +75,7 @@ var coreDb = [
 ];
 var logOrder = 0;
 
-
 /* Private methods */
-
 
 /**
  * @method incLogOrder
@@ -87,7 +84,6 @@ var logOrder = 0;
 function incLogOrder() {
   return logOrder++;
 }
-
 
 /**
  * @method dump
@@ -184,11 +180,10 @@ function dump() {
   return dbDump;
 }
 
-
 /**
  * @method contains
- * @param {Object} source source object 
- * @param {Object} target target object 
+ * @param {Object} source source object
+ * @param {Object} target target object
  * @returns {Boolean} true if the source object contains the target object
  * @private
  * @description Test if an object contains another one
@@ -203,10 +198,15 @@ function contains(source, target) {
   for (property in source) {
     if (typeof target[property] !== 'undefined') {
       if (source[property] instanceof RegExp) {
-        if (Array.isArray(target[property]) && !Array.isArray(source[property])) {
+        if (
+          Array.isArray(target[property]) &&
+          !Array.isArray(source[property])
+        ) {
           length = target[property].length;
           for (i = 0; i < length; i++) {
-            if (target[property][i].toString().match(source[property]) !== null) {
+            if (
+              target[property][i].toString().match(source[property]) !== null
+            ) {
               findInArray = true;
               break;
             }
@@ -219,7 +219,10 @@ function contains(source, target) {
           }
         }
       } else {
-        if (Array.isArray(target[property]) && !Array.isArray(source[property])) {
+        if (
+          Array.isArray(target[property]) &&
+          !Array.isArray(source[property])
+        ) {
           if (target[property].indexOf(source[property]) === -1) {
             result = false;
             break;
@@ -238,7 +241,6 @@ function contains(source, target) {
   }
   return result;
 }
-
 
 /**
  * @method impSystem
@@ -259,7 +261,6 @@ function impSystem(importedSystem) {
   var id = null;
 
   if (importedSystem) {
-
     // remove deprecated property
     delete importedSystem.subsystem;
 
@@ -288,13 +289,15 @@ function impSystem(importedSystem) {
     // add components
     for (collectionName in importedSystem.components) {
       for (componentId in importedSystem.components[collectionName]) {
-        exports[collectionName].insert(importedSystem.components[collectionName][componentId]);
+        exports[collectionName].insert(
+          importedSystem.components[collectionName][componentId]
+        );
       }
     }
 
     // reset info if already a master system
     systems = exports._System.find({
-      'master': true
+      master: true
     });
     if (systems.length) {
       if (systems[0]._id === importedSystem._id) {
@@ -310,12 +313,10 @@ function impSystem(importedSystem) {
     exports._System.insert(importedSystem);
 
     result = importedSystem._id;
-
   }
 
   return result;
 }
-
 
 /**
  * @method expSystem
@@ -336,11 +337,10 @@ function expSystem() {
 
   // get id of the master system
   systems = exports._System.find({
-    'master': true
+    master: true
   });
 
   if (systems.length) {
-
     mastersystem = systems[0];
     id = mastersystem._id;
 
@@ -368,7 +368,6 @@ function expSystem() {
   return result;
 }
 
-
 /**
  * @method exportSubsystem
  * @param {JSON} params parameters
@@ -391,7 +390,7 @@ function expSubsystem(params) {
 
   // default values
   result = exports._System.find({
-    'master': true
+    master: true
   });
   if (result.length) {
     defaultName = result[0].name;
@@ -477,10 +476,7 @@ function expSubsystem(params) {
   return JSON.stringify(system);
 }
 
-
-
 /* Public properties */
-
 
 /**
  * @property {JSON} store
@@ -488,11 +484,9 @@ function expSubsystem(params) {
  */
 exports.store = {};
 
-
 /* Public methods */
 
-
-/** 
+/**
  * @class DatabaseCollection
  * @constructor
  * @param {String} name name of the new collection
@@ -512,14 +506,13 @@ var DatabaseCollection = function DatabaseCollection(name) {
   }
 };
 
-
 /**
  * @method find
  * @param {Object|Array} query
  * @returns {Array} Array of documents that map the query
  * @description Find a document into the collection
- * 
- * @example 
+ *
+ * @example
  * $db.Person.find({'name': 'laure'});
  * $db.Person.find({'name': 'laure', 'age' : 24});
  * $db.Person.find([{'name': 'rene'}, {'name': 'robert'}]);
@@ -534,17 +527,19 @@ DatabaseCollection.prototype.find = function find(query) {
 
   if (query && Object.keys(query).length) {
     if (Array.isArray(query)) {
-      query.forEach(function multiSearch(criteria) {
-        for (id in exports.store[this.name]) {
-          object = exports.store[this.name][id];
-          if (contains(criteria, object)) {
-            if (typeof resultId[id] === 'undefined') {
-              result.push(object);
-              resultId[id] = true;
+      query.forEach(
+        function multiSearch(criteria) {
+          for (id in exports.store[this.name]) {
+            object = exports.store[this.name][id];
+            if (contains(criteria, object)) {
+              if (typeof resultId[id] === 'undefined') {
+                result.push(object);
+                resultId[id] = true;
+              }
             }
           }
-        }
-      }.bind(this));
+        }.bind(this)
+      );
     } else {
       for (id in exports.store[this.name]) {
         object = exports.store[this.name][id];
@@ -563,7 +558,6 @@ DatabaseCollection.prototype.find = function find(query) {
   return result;
 };
 
-
 /**
  * @method insert
  * @param {Object|Array} document a new object to add
@@ -572,8 +566,8 @@ DatabaseCollection.prototype.find = function find(query) {
  * Before inserting the document, System Runtime checks that the document is compliant
  * with its class definition.
  * Then, after inserting it, we create the component.
- * 
- * @example 
+ *
+ * @example
  * $db.Person.insert({
  *      'name': 'bob',
  *      'firstName': 'Saint-Clar',
@@ -591,80 +585,82 @@ DatabaseCollection.prototype.insert = function insert(document) {
     doc.push(document);
   }
 
-  doc.forEach(function multiInsert(obj) {
-    var component = null;
-    var channels = [];
-    var channel = null;
-    var systems = [];
+  doc.forEach(
+    function multiInsert(obj) {
+      var component = null;
+      var channels = [];
+      var channel = null;
+      var systems = [];
 
-    switch (true) {
-      case this.name === '_Schema':
-      case this.name === '_Logger':
-      case this.name === '_Model':
-      case this.name === '_Type':
-      case this.name === '_GeneratedModel':
-      case $metamodel.isValidObject(obj, $metamodel.getModel(this.name)):
-
-        if (typeof obj._id === 'undefined') {
-          obj._id = $helper.generateId();
-        }
-
-        $metamodel.prepareObject(obj, $metamodel.getModel(this.name));
-
-        exports.store[this.name][obj._id] = obj;
-
-        Component = $component.get(this.name);
-        if (Component) {
-          component = new Component(obj);
-          result.push(component.id());
-        } else {
-          exports.createLog('insert', this.name, obj._id, '', obj);
-
-          if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-            $helper.getRuntime().require('db')
-              .insert({
-                collection: this.name,
-                document: obj
-              });
+      switch (true) {
+        case this.name === '_Schema':
+        case this.name === '_Logger':
+        case this.name === '_Model':
+        case this.name === '_Type':
+        case this.name === '_GeneratedModel':
+        case $metamodel.isValidObject(obj, $metamodel.getModel(this.name)):
+          if (typeof obj._id === 'undefined') {
+            obj._id = $helper.generateId();
           }
-        }
 
-        if (this.name === '_Message') {
-          if ($helper.isRuntime()) {
-            channels = exports._Channel.find({});
-            var length = channels.length;
-            for (var i = 0; i < length; i++) {
-              channel = $helper.getRuntime().require(channels[i]._id);
-              $workflow.state({
-                'component': channels[i]._id,
-                'state': obj.event,
-                'data': obj.data
-              });
+          $metamodel.prepareObject(obj, $metamodel.getModel(this.name));
+
+          exports.store[this.name][obj._id] = obj;
+
+          Component = $component.get(this.name);
+          if (Component) {
+            component = new Component(obj);
+            result.push(component.id());
+          } else {
+            exports.createLog('insert', this.name, obj._id, '', obj);
+
+            if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
+              $helper
+                .getRuntime()
+                .require('db')
+                .insert({
+                  collection: this.name,
+                  document: obj
+                });
             }
           }
-        }
 
-        break;
-      default:
-        $log.invalidDocumentOnDbInsert(obj, this.name);
-        break;
-    }
-  }.bind(this));
+          if (this.name === '_Message') {
+            if ($helper.isRuntime()) {
+              channels = exports._Channel.find({});
+              var length = channels.length;
+              for (var i = 0; i < length; i++) {
+                channel = $helper.getRuntime().require(channels[i]._id);
+                $workflow.state({
+                  component: channels[i]._id,
+                  state: obj.event,
+                  data: obj.data
+                });
+              }
+            }
+          }
+
+          break;
+        default:
+          $log.invalidDocumentOnDbInsert(obj, this.name);
+          break;
+      }
+    }.bind(this)
+  );
 
   return result;
 };
-
 
 /**
  * @method update
  * @param {Object|Array} query query to find the documents to update
  * @param {Object} update update to make
- * @param {Object} options 
+ * @param {Object} options
  * {Boolean} upsert true if we create a document when no document is found by the query
  * @returns {Number} Number of documents updated
  * @description Update documents into a collection
- * 
- * @example 
+ *
+ * @example
  * $db.Cars.update({'code': 'AZD-71'}, {'price': '10000$'});
  * $db.Cars.update([{'code': 'AZD-71'}, {'code': 'AZD-65'}], {'price': '10000$'});
  * $db.Cars.update({'code': 'AZD-71'}, {'price': '10000$'}, {'upsert': true});
@@ -684,7 +680,6 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
   }
 
   if (update) {
-
     // upsert case
     if (length === 0 && options.upsert) {
       if (query._id) {
@@ -697,12 +692,20 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
     for (i = 0; i < length; i++) {
       // case of update of _id
       if (typeof update._id !== 'undefined' && update._id !== docs[i]._id) {
-        $log.updateUuid(docs[i]._id, update._id, typeof $component.get(update._id) !== 'undefined');
+        $log.updateUuid(
+          docs[i]._id,
+          update._id,
+          typeof $component.get(update._id) !== 'undefined'
+        );
       }
 
       for (attributeName in update) {
         if (typeof docs[i][attributeName.split('.')[0]] !== 'undefined') {
-          if (this.name !== '_Schema' && this.name !== '_Model' && this.name !== '_GeneratedModel') {
+          if (
+            this.name !== '_Schema' &&
+            this.name !== '_Model' &&
+            this.name !== '_GeneratedModel'
+          ) {
             // check type
             type = '';
             if (attributeName.indexOf('_') !== 0) {
@@ -721,50 +724,76 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                 docs[i][attributeName] = update[attributeName];
                 updated = updated + 1;
 
-                exports.createLog('update', this.name, docs[i]._id, attributeName, update[attributeName]);
+                exports.createLog(
+                  'update',
+                  this.name,
+                  docs[i]._id,
+                  attributeName,
+                  update[attributeName]
+                );
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                  $helper.getRuntime().require('db')
+                  $helper
+                    .getRuntime()
+                    .require('db')
                     .update({
-                      'collection': this.name,
-                      'id': docs[i]._id,
-                      'field': attributeName,
-                      'value': update[attributeName]
+                      collection: this.name,
+                      id: docs[i]._id,
+                      field: attributeName,
+                      value: update[attributeName]
                     });
                 }
                 if (type === 'array') {
                   $workflow.state({
-                    'component': docs[i]._id,
-                    'state': attributeName,
-                    'data': [update[attributeName], 'reset']
+                    component: docs[i]._id,
+                    state: attributeName,
+                    data: [update[attributeName], 'reset']
                   });
                 } else {
                   $workflow.state({
-                    'component': docs[i]._id,
-                    'state': attributeName,
-                    'data': [update[attributeName]]
+                    component: docs[i]._id,
+                    state: attributeName,
+                    data: [update[attributeName]]
                   });
                 }
               } else {
-                $log.invalidPropertyTypeOnDbUpdate(this.name, docs[i]._id, attributeName, update[attributeName], type);
+                $log.invalidPropertyTypeOnDbUpdate(
+                  this.name,
+                  docs[i]._id,
+                  attributeName,
+                  update[attributeName],
+                  type
+                );
               }
             } else {
-              $log.unknownPropertyOnDbUpdate(this.name, attributeName, docs[i]._id);
+              $log.unknownPropertyOnDbUpdate(
+                this.name,
+                attributeName,
+                docs[i]._id
+              );
             }
           } else {
             // TODO more check in case of schema update
             docs[i][attributeName] = update[attributeName];
 
-            exports.createLog('update', this.name, docs[i]._id, attributeName, update[attributeName]);
+            exports.createLog(
+              'update',
+              this.name,
+              docs[i]._id,
+              attributeName,
+              update[attributeName]
+            );
 
             updated = updated + 1;
             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-              $helper.getRuntime().require('db')
+              $helper
+                .getRuntime()
+                .require('db')
                 .update({
-                  'collection': this.name,
-                  'id': docs[i]._id,
-                  'field': attributeName,
-                  'value': update[attributeName]
+                  collection: this.name,
+                  id: docs[i]._id,
+                  field: attributeName,
+                  value: update[attributeName]
                 });
             }
           }
@@ -776,15 +805,14 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
   return updated;
 };
 
-
 /**
  * @method remove
  * @param {Object|Array} query query to find the documents to remove
  * @returns {Array} list of documents id removed
  * @description Remove a document from the colllection.
  * When a document is removed, the component is destroyed.
- * 
- * @example 
+ *
+ * @example
  * $db.Cars.remove({'code': 'AZD-71'});
  * $db.Cars.remove([{'code': 'AZD-71'}, {'code': 'AZD-65'}]);
  */
@@ -797,32 +825,35 @@ DatabaseCollection.prototype.remove = function remove(query) {
   query = query || null;
 
   if (query && Object.keys(query).length) {
-
     if (Array.isArray(query)) {
-      query.forEach(function multiRemove(criteria) {
-        for (id in exports.store[this.name]) {
-          object = exports.store[this.name][id];
+      query.forEach(
+        function multiRemove(criteria) {
+          for (id in exports.store[this.name]) {
+            object = exports.store[this.name][id];
 
-          if (contains(criteria, object)) {
-            delete exports.store[this.name][id];
+            if (contains(criteria, object)) {
+              delete exports.store[this.name][id];
 
-            exports.createLog('remove', this.name, id, '', '');
+              exports.createLog('remove', this.name, id, '', '');
 
-            component = $component.get(id);
-            if (component) {
-              component.destroy();
+              component = $component.get(id);
+              if (component) {
+                component.destroy();
+              }
+              if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
+                $helper
+                  .getRuntime()
+                  .require('db')
+                  .remove({
+                    collection: this.name,
+                    id: id
+                  });
+              }
+              result.push(id);
             }
-            if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-              $helper.getRuntime().require('db')
-                .remove({
-                  'collection': this.name,
-                  'id': id
-                });
-            }
-            result.push(id);
           }
-        }
-      }.bind(this));
+        }.bind(this)
+      );
     } else {
       for (id in exports.store[this.name]) {
         object = exports.store[this.name][id];
@@ -837,10 +868,12 @@ DatabaseCollection.prototype.remove = function remove(query) {
             component.destroy();
           }
           if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-            $helper.getRuntime().require('db')
+            $helper
+              .getRuntime()
+              .require('db')
               .remove({
-                'collection': this.name,
-                'id': id
+                collection: this.name,
+                id: id
               });
           }
           result.push(id);
@@ -860,10 +893,12 @@ DatabaseCollection.prototype.remove = function remove(query) {
         }
       }
       if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-        $helper.getRuntime().require('db')
+        $helper
+          .getRuntime()
+          .require('db')
           .remove({
-            'collection': this.name,
-            'id': id
+            collection: this.name,
+            id: id
           });
       }
       result.push(id);
@@ -872,7 +907,6 @@ DatabaseCollection.prototype.remove = function remove(query) {
 
   return result;
 };
-
 
 /**
  * @method count
@@ -889,14 +923,12 @@ DatabaseCollection.prototype.count = function count() {
   return result;
 };
 
-
 /* Public methods */
-
 
 /**
  * @method createLog
  * @param {String} action CRUD action that happenned
- * @param {String} collection collection of the 
+ * @param {String} collection collection of the
  * @param {String} id id of the component
  * @param {String} field field of the component
  * @param {String} value value of the field of the component
@@ -926,7 +958,6 @@ exports.createLog = function createLog(action, collection, id, field, value) {
   };
 };
 
-
 /**
  * @method collection
  * @param {String} name of the collection
@@ -935,7 +966,6 @@ exports.createLog = function createLog(action, collection, id, field, value) {
 exports.collection = function collection(name) {
   exports[name] = new DatabaseCollection(name);
 };
-
 
 /**
  * @method importSystem
@@ -947,13 +977,12 @@ exports.importSystem = function importSystem(importedSystem) {
   return impSystem(importedSystem);
 };
 
-
 /**
  * @method exportSystem
  * @param {JSON} params parameters
  * @returns {String} a stringified system
  * @description Export a system
- * 
+ *
  * @example
  * $db.exportSystem(); // export all the system
  * $db.exportSystem({'schemas':{'name':'Person'}}); // filter export on schemas
@@ -972,7 +1001,6 @@ exports.exportSystem = function exportSystem(params) {
   }
   return result;
 };
-
 
 /**
  * @method clear
@@ -998,7 +1026,6 @@ exports.clear = function clear() {
   }
 };
 
-
 /**
  * @method init
  * @description Init the database
@@ -1008,7 +1035,7 @@ exports.init = function init() {
   var runtimeSystem = null;
 
   runtimeSystem = exports._System.find({
-    '_id': 'e89c617b6b15d24'
+    _id: 'e89c617b6b15d24'
   })[0];
 
   // clear all the data in memory

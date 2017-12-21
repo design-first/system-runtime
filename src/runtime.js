@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-/** 
+/**
  * @module runtime
  * @requires component
  * @requires metamodel
@@ -41,9 +41,7 @@ var $metamodel = require('./metamodel.js');
 var $system = require('../build/system/system.js');
 var $helper = require('./helper.js');
 
-
 /* Private Property */
-
 
 var sytemId = '';
 var system = '';
@@ -72,9 +70,7 @@ system.start();
 
 system.state('active');
 
-
 /* Public property */
-
 
 /**
  * @property runtime

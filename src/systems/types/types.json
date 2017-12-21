@@ -94,11 +94,7 @@
       "core": true,
       "name": "dbAction",
       "type": "string",
-      "value": [
-        "insert",
-        "update",
-        "remove"
-      ]
+      "value": ["insert", "update", "remove"]
     },
     "collection": {
       "_id": "d1c0d0130c616199",
@@ -106,9 +102,7 @@
       "type": "object",
       "schema": {
         "type": {
-          "type": [
-            "string"
-          ],
+          "type": ["string"],
           "mandatory": true
         },
         "readOnly": {
@@ -156,9 +150,7 @@
       "type": "object",
       "schema": {
         "params": {
-          "type": [
-            "parameter"
-          ],
+          "type": ["parameter"],
           "mandatory": false
         },
         "description": {
@@ -216,12 +208,7 @@
       "_id": "d1fd161a4a4149fc",
       "name": "log",
       "type": "string",
-      "value": [
-        "debug",
-        "info",
-        "warn",
-        "error"
-      ],
+      "value": ["debug", "info", "warn", "error"],
       "core": true
     },
     "message": {
@@ -254,9 +241,7 @@
           "mandatory": false
         },
         "params": {
-          "type": [
-            "parameter"
-          ],
+          "type": ["parameter"],
           "mandatory": false
         },
         "description": {

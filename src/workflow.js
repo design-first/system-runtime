@@ -28,16 +28,16 @@
  * @requires helper
  * @requires log
  * @requires db
- * @description This module manages the workflow of System Runtime. 
+ * @description This module manages the workflow of System Runtime.
  * It behaves like a workflow engine.
  * It checks if the change of status of a component is valid to be executed. By valid, it means that:
  * - the state is valid for the component,
  * - the input (i.e. parameters) of all actions for the state are compliants with the model and
  * - the output of all actions are compliants with the model.
- * 
+ *
  * If an error occurs, the workflow will call the error state of the component and runtime.
  * If the error can break the consistency of the current system, the worklow will stop.
- * 
+ *
  */
 
 'use strict';
@@ -50,9 +50,7 @@ var $helper = require('./helper.js');
 var $log = require('./log.js');
 var $db = require('./db.js');
 
-
 /* Private methods */
-
 
 /**
  * @class RuntimeError
@@ -67,7 +65,6 @@ function RuntimeError(message) {
 RuntimeError.prototype = new Error();
 RuntimeError.prototype.constructor = RuntimeError;
 
-
 /**
  * @method isModelPath
  * @param {String} value
@@ -78,7 +75,6 @@ RuntimeError.prototype.constructor = RuntimeError;
 function isModelPath(value) {
   return value.indexOf('.') !== -1;
 }
-
 
 /**
  * @method getParamNames
@@ -117,8 +113,7 @@ function getParamNames(id, methodName) {
   return result;
 }
 
-
-/** 
+/**
  * @method getParamNumber
  * @param {String} id id of the class
  * @param {String} methodName name of the method
@@ -146,7 +141,10 @@ function getParamNumber(id, methodName) {
     if (params) {
       length = params.length;
       for (i = 0; i < length; i++) {
-        if (typeof params[i].mandatory === 'undefined' || params[i].mandatory === true) {
+        if (
+          typeof params[i].mandatory === 'undefined' ||
+          params[i].mandatory === true
+        ) {
           min = min + 1;
         }
         max = max + 1;
@@ -160,8 +158,7 @@ function getParamNumber(id, methodName) {
   return result;
 }
 
-
-/** 
+/**
  * @method setDefaultValue
  * @param {String} id id of the class
  * @param {String} methodName name of the method
@@ -196,7 +193,6 @@ function setDefaultValue(id, methodName, args) {
   return result;
 }
 
-
 /**
  * @method getReturnType
  * @param {String} id id of the class
@@ -220,7 +216,6 @@ function getReturnType(id, methodName) {
   }
   return result;
 }
-
 
 /**
  * @method getParamTypes
@@ -256,7 +251,6 @@ function getParamTypes(id, methodName) {
   }
   return result;
 }
-
 
 /**
  * @method checkResult
@@ -297,7 +291,13 @@ function checkResult(params) {
       case returnType === 'array':
         if (!Array.isArray(methodResult)) {
           result = false;
-          $log.invalidResultType(component.id(), component.constructor.name, methodName, returnType, null);
+          $log.invalidResultType(
+            component.id(),
+            component.constructor.name,
+            methodName,
+            returnType,
+            null
+          );
         }
         break;
       case $metamodel.isClassName(returnType):
@@ -309,17 +309,35 @@ function checkResult(params) {
           }
           if (typeofMethodResult !== returnType.replace('@', '')) {
             result = false;
-            $log.invalidResultType(component.id(), component.constructor.name, methodName, returnType, typeofMethodResult);
+            $log.invalidResultType(
+              component.id(),
+              component.constructor.name,
+              methodName,
+              returnType,
+              typeofMethodResult
+            );
           }
         } else {
           result = false;
-          $log.invalidResultType(component.id(), component.constructor.name, methodName, returnType, typeof methodResult);
+          $log.invalidResultType(
+            component.id(),
+            component.constructor.name,
+            methodName,
+            returnType,
+            typeof methodResult
+          );
         }
         break;
       default:
         if (typeof methodResult !== returnType) {
           result = false;
-          $log.invalidResultType(component.id(), component.constructor.name, methodName, returnType, typeof methodResult);
+          $log.invalidResultType(
+            component.id(),
+            component.constructor.name,
+            methodName,
+            returnType,
+            typeof methodResult
+          );
         }
         break;
     }
@@ -327,7 +345,6 @@ function checkResult(params) {
 
   return result;
 }
-
 
 /**
  * @method getActions
@@ -347,7 +364,9 @@ function getActions(component, name, isEvent) {
 
   if (!action.length || isEvent) {
     if (component.constructor.name !== 'Function') {
-      action = action.concat(getActions($component.get(component.constructor.name), name, isEvent));
+      action = action.concat(
+        getActions($component.get(component.constructor.name), name, isEvent)
+      );
     } else {
       parents = $metamodel.getParents(component.name);
       length = parents.length;
@@ -372,7 +391,6 @@ function getActions(component, name, isEvent) {
   return action;
 }
 
-
 /**
  * @method callAction
  * @param {Component} component
@@ -396,7 +414,11 @@ function callAction(component, state, action, params, isEvent) {
     componentClassName = component.constructor.name;
   }
 
-  if (!$metamodel.isProperty(state, componentClassName) && !$metamodel.isLink(state, componentClassName) && !$metamodel.isCollection(state, componentClassName)) {
+  if (
+    !$metamodel.isProperty(state, componentClassName) &&
+    !$metamodel.isLink(state, componentClassName) &&
+    !$metamodel.isCollection(state, componentClassName)
+  ) {
     params = setDefaultValue(componentClassName, state, params);
   }
 
@@ -416,7 +438,13 @@ function callAction(component, state, action, params, isEvent) {
     }
 
     if (isEvent) {
-      setTimeout(action.action.bind.apply(action.action, [component].concat(injectedParams)), 0);
+      setTimeout(
+        action.action.bind.apply(
+          action.action,
+          [component].concat(injectedParams)
+        ),
+        0
+      );
     } else {
       result = action.action.apply(component, injectedParams);
     }
@@ -425,21 +453,38 @@ function callAction(component, state, action, params, isEvent) {
       throw e;
     } else {
       if (new Function() === undefined) {
-        console.error('runtime: can not execute new Function() instruction in the current context.');
+        console.error(
+          'runtime: can not execute new Function() instruction in the current context.'
+        );
       } else {
         if (component && component.error) {
           component.error({
-            'message': "error when trying to call the method '" + state + "' on component '" + component.id() + "'",
-            "error": e
+            message:
+              "error when trying to call the method '" +
+              state +
+              "' on component '" +
+              component.id() +
+              "'",
+            error: e
           });
         }
         if ($helper.getRuntime()) {
           $helper.getRuntime().error({
-            "message": "error when trying to call the method '" + state + "' on component '" + component.id() + "'",
-            'error': e
+            message:
+              "error when trying to call the method '" +
+              state +
+              "' on component '" +
+              component.id() +
+              "'",
+            error: e
           });
         }
-        $log.actionInvokeError(state, component.id(), component.constructor.name, e.message);
+        $log.actionInvokeError(
+          state,
+          component.id(),
+          component.constructor.name,
+          e.message
+        );
       }
     }
   }
@@ -447,9 +492,7 @@ function callAction(component, state, action, params, isEvent) {
   return result;
 }
 
-
 /* Public methods */
-
 
 /**
  * @method validParamNumbers
@@ -459,7 +502,11 @@ function callAction(component, state, action, params, isEvent) {
  * @returns {Boolean} true if the action is the valid number of parameters
  * @description Check if an action has the valid number of parameter
  */
-exports.validParamNumbers = function validParamNumbers(className, state, action) {
+exports.validParamNumbers = function validParamNumbers(
+  className,
+  state,
+  action
+) {
   var func = '';
   var beginBody = -1;
   var header = '';
@@ -479,7 +526,10 @@ exports.validParamNumbers = function validParamNumbers(className, state, action)
   header = header.replace('=>', '');
 
   if (header.indexOf('(') !== -1) {
-    funcParams = header.split('(')[1].replace(')', '').trim();
+    funcParams = header
+      .split('(')[1]
+      .replace(')', '')
+      .trim();
   } else {
     funcParams = header.trim();
   }
@@ -515,13 +565,15 @@ exports.validParamNumbers = function validParamNumbers(className, state, action)
   }
 
   // compare
-  if (modelNumberParam[0] <= paramNumber && paramNumber <= modelNumberParam[1]) {
+  if (
+    modelNumberParam[0] <= paramNumber &&
+    paramNumber <= modelNumberParam[1]
+  ) {
     result = true;
   }
 
   return result;
 };
-
 
 /**
  * @method checkParams
@@ -562,24 +614,30 @@ exports.checkParams = function checkParams(params) {
     case isCollection:
       if (args && args[1] && args[1] === 'reset') {
         paramsType = [
-          [$metamodel.getModel(componentClassName)[methodName].type[0]], 'string'
+          [$metamodel.getModel(componentClassName)[methodName].type[0]],
+          'string'
         ];
       } else {
-        paramsType = [$metamodel.getModel(componentClassName)[methodName].type[0], 'string'];
+        paramsType = [
+          $metamodel.getModel(componentClassName)[methodName].type[0],
+          'string'
+        ];
       }
       paramsNumber = [2, 2];
       break;
     case isProperty:
       if (isModelPath(methodName)) {
-        paramsType = [$metamodel.getModelPathType(componentClassName, methodName)];
+        paramsType = [
+          $metamodel.getModelPathType(componentClassName, methodName)
+        ];
       } else {
         paramsType = [$metamodel.getModel(componentClassName)[methodName].type];
       }
-      if ($metamodel.getModelPathType(componentClassName, methodName) === 'array') {
+      if (
+        $metamodel.getModelPathType(componentClassName, methodName) === 'array'
+      ) {
         if (args && args[1] && args[1] === 'reset') {
-          paramsType = [
-            ['any'], 'string'
-          ];
+          paramsType = [['any'], 'string'];
         } else {
           paramsType = ['any', 'string'];
         }
@@ -605,7 +663,11 @@ exports.checkParams = function checkParams(params) {
 
   if (length < paramsNumber[0] || paramsNumber[1] < length) {
     result = false;
-    $log.invalidParamNumber(component.id(), component.constructor.name, methodName);
+    $log.invalidParamNumber(
+      component.id(),
+      component.constructor.name,
+      methodName
+    );
   }
 
   for (i = 0; i < length; i++) {
@@ -613,21 +675,29 @@ exports.checkParams = function checkParams(params) {
     if (typeof param === 'undefined') {
       if (i < paramsNumber[0]) {
         result = false;
-        $log.invalidParamNumber(component.id(), component.constructor.name, methodName);
+        $log.invalidParamNumber(
+          component.id(),
+          component.constructor.name,
+          methodName
+        );
       } else {
         continue;
       }
     } else {
       if (!$metamodel.isValidType(param, paramsType[i])) {
         result = false;
-        $log.invalidParamType(component.id(), component.constructor.name, methodName, paramsName[i]);
+        $log.invalidParamType(
+          component.id(),
+          component.constructor.name,
+          methodName,
+          paramsName[i]
+        );
       }
     }
   }
 
   return result;
 };
-
 
 /**
  * @method action
@@ -647,7 +717,7 @@ exports.action = function action(behaviorId, params) {
   var actionFromMemory = null;
 
   behaviors = $db._Behavior.find({
-    '_id': behaviorId
+    _id: behaviorId
   });
 
   actionFromMemory = $behavior.get(behaviorId);
@@ -657,7 +727,6 @@ exports.action = function action(behaviorId, params) {
 
     component = $component.get(behavior.component);
     if (component) {
-
       if (component.constructor.name === 'Function') {
         componentClassName = component.name;
       } else {
@@ -667,18 +736,26 @@ exports.action = function action(behaviorId, params) {
       isEvent = $metamodel.isEvent(behavior.state, componentClassName);
       isProperty = $metamodel.isProperty(behavior.state, componentClassName);
       isLink = $metamodel.isLink(behavior.state, componentClassName);
-      isCollection = $metamodel.isCollection(behavior.state, componentClassName);
+      isCollection = $metamodel.isCollection(
+        behavior.state,
+        componentClassName
+      );
 
       if (isEvent || isProperty || isCollection || isLink) {
-        callAction(component, behavior.state, {
-          'useCoreAPI': behavior.useCoreAPI,
-          'action': actionFromMemory
-        }, params, true);
+        callAction(
+          component,
+          behavior.state,
+          {
+            useCoreAPI: behavior.useCoreAPI,
+            action: actionFromMemory
+          },
+          params,
+          true
+        );
       }
     }
   }
 };
-
 
 /**
  * @method state
@@ -688,7 +765,7 @@ exports.action = function action(behaviorId, params) {
  * {Array} data parameters to send to the action
  * @description Change the state of a component.
  * Worklow:
- * 
+ *
  * 0. Check if the component has not been destroyed
  * 1. Check if the state is a method, a property or an event
  * 2. Search if there is a behavior with actions for the new state
@@ -700,7 +777,6 @@ exports.action = function action(behaviorId, params) {
  * 8. Return the result
  */
 exports.state = function state(params) {
-
   params = params || {};
   params.component = params.component || '';
   params.state = params.state || '';
@@ -728,7 +804,6 @@ exports.state = function state(params) {
 
   component = $component.get(params.component);
   if (component) {
-
     if (component.constructor.name === 'Function') {
       componentClassName = component.name;
     } else {
@@ -742,31 +817,39 @@ exports.state = function state(params) {
   }
 
   if (actions.length) {
-
-    if (exports.checkParams({
-        'component': component,
-        'methodName': params.state,
-        'args': params.data
-      })) {
-      if (!isEvent &&
-        !isProperty &&
-        !isLink &&
-        !isCollection) {
+    if (
+      exports.checkParams({
+        component: component,
+        methodName: params.state,
+        args: params.data
+      })
+    ) {
+      if (!isEvent && !isProperty && !isLink && !isCollection) {
         action = actions[0];
-        result = callAction(params.context || component, params.state, action, params.data, false);
+        result = callAction(
+          params.context || component,
+          params.state,
+          action,
+          params.data,
+          false
+        );
 
         checkResult({
-          'component': component,
-          'methodName': params.state,
-          'methodResult': result
+          component: component,
+          methodName: params.state,
+          methodResult: result
         });
-
       } else {
-
         length = actions.length;
         for (i = 0; i < length; i++) {
           action = actions[i];
-          callAction(params.context || component, params.state, action, params.data, true);
+          callAction(
+            params.context || component,
+            params.state,
+            action,
+            params.data,
+            true
+          );
         }
 
         $state.set(component.id(), params.state, params.data);
@@ -779,7 +862,6 @@ exports.state = function state(params) {
     }
   }
 };
-
 
 /**
  * @method stop
@@ -800,13 +882,19 @@ exports.stop = function stop(params) {
 
   if (params.error) {
     if (params.message) {
-      throw new RuntimeError('runtime has been stopped because ' + params.message);
+      throw new RuntimeError(
+        'runtime has been stopped because ' + params.message
+      );
     } else {
-      throw new RuntimeError('runtime has been stopped because of an unknown error');
+      throw new RuntimeError(
+        'runtime has been stopped because of an unknown error'
+      );
     }
   } else {
     if (params.message) {
-      console.error('runtime: runtime has been stopped because ' + params.message);
+      console.error(
+        'runtime: runtime has been stopped because ' + params.message
+      );
     } else {
       console.error('runtime: runtime has been stopped');
     }

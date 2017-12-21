@@ -24,7 +24,8 @@
       "_id": "1365412f69153d2",
       "component": "_Metamodel",
       "state": "schema",
-      "action": "function schema(schema) {\n  return $metamodel.schema(schema);\n}",
+      "action":
+        "function schema(schema) {\n  return $metamodel.schema(schema);\n}",
       "core": true,
       "useCoreAPI": true
     },
@@ -40,9 +41,7 @@
   "schemas": {
     "193f1166eb16609": {
       "_name": "_Metamodel",
-      "_inherit": [
-        "_Component"
-      ],
+      "_inherit": ["_Component"],
       "_core": true,
       "schema": "method",
       "model": "method",
@@ -56,24 +55,30 @@
       "_name": "_Metamodel",
       "_core": true,
       "schema": {
-        "params": [{
-          "name": "schema",
-          "type": "object"
-        }],
+        "params": [
+          {
+            "name": "schema",
+            "type": "object"
+          }
+        ],
         "result": "any"
       },
       "model": {
-        "params": [{
-          "name": "model",
-          "type": "object"
-        }],
+        "params": [
+          {
+            "name": "model",
+            "type": "object"
+          }
+        ],
         "result": "any"
       },
       "type": {
-        "params": [{
-          "name": "type",
-          "type": "object"
-        }],
+        "params": [
+          {
+            "name": "type",
+            "type": "object"
+          }
+        ],
         "result": "any"
       },
       "create": {

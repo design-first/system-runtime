@@ -25,7 +25,7 @@
  * @requires component
  * @requires workflow
  * @description  * This module manages System Runtime metamodel.
- * System Runtime metamodel loads schemas and types, analyzes them and 
+ * System Runtime metamodel loads schemas and types, analyzes them and
  * creates the component classes and related DatabaseCollections.
  */
 
@@ -37,9 +37,7 @@ var $component = require('./component.js');
 var $workflow = require('./workflow.js');
 var $helper = require('./helper.js');
 
-
 /* Private properties */
-
 
 var ID = '_id';
 var NAME = '_name';
@@ -52,13 +50,7 @@ var EVENT_TYPE = 'event';
 var PROPERTY_TYPE = 'property';
 var LINK_TYPE = 'link';
 var COLLECTION_TYPE = 'collection';
-var internalTypes = [
-  'property',
-  'collection',
-  'link',
-  'method',
-  'event'
-];
+var internalTypes = ['property', 'collection', 'link', 'method', 'event'];
 var defaultTypes = [
   'boolean',
   'string',
@@ -81,9 +73,7 @@ var store = {
   type: {}
 };
 
-
 /* Private methods */
-
 
 /**
  * @method generateModels
@@ -115,7 +105,7 @@ function generateModels() {
 
     // set model internal properties
     model = {
-      '_name': schema._name
+      _name: schema._name
     };
 
     // set _core
@@ -133,7 +123,7 @@ function generateModels() {
       model._class = schema._class;
     }
 
-    // set description 
+    // set description
     if (typeof schema._description !== 'undefined') {
       model._description = schema._description;
     }
@@ -143,53 +133,57 @@ function generateModels() {
       switch (true) {
         case schema[att] === 'property':
           model[att] = {
-            'type': 'any',
-            'readOnly': false,
-            'mandatory': false,
-            'default': '',
-            'description': att,
-            'label': att
+            type: 'any',
+            readOnly: false,
+            mandatory: false,
+            default: '',
+            description: att,
+            label: att
           };
           break;
         case schema[att] === 'link':
           model[att] = {
-            'type': '_Component',
-            'readOnly': false,
-            'mandatory': false,
-            'default': '',
-            'description': att,
-            'label': att
+            type: '_Component',
+            readOnly: false,
+            mandatory: false,
+            default: '',
+            description: att,
+            label: att
           };
           break;
         case schema[att] === 'method':
           model[att] = {
-            'params': [{
-              'name': 'param',
-              'type': 'any',
-              'mandatory': false
-            }],
-            'result': 'any',
-            'description': att
+            params: [
+              {
+                name: 'param',
+                type: 'any',
+                mandatory: false
+              }
+            ],
+            result: 'any',
+            description: att
           };
           break;
         case schema[att] === 'event':
           model[att] = {
-            'params': [{
-              'name': 'param',
-              'type': 'any',
-              'mandatory': false
-            }],
-            'description': att
+            params: [
+              {
+                name: 'param',
+                type: 'any',
+                mandatory: false
+              }
+            ],
+            description: att
           };
           break;
         case schema[att] === 'collection':
           model[att] = {
-            'type': ['_Component'],
-            'readOnly': false,
-            'mandatory': false,
-            'default': [],
-            'description': att,
-            'label': att
+            type: ['_Component'],
+            readOnly: false,
+            mandatory: false,
+            default: [],
+            description: att,
+            label: att
           };
           break;
         default:
@@ -238,7 +232,7 @@ function generateModels() {
         }
       }
 
-      // last inherit 
+      // last inherit
       // is the overriden model
       modelExt = store.models[modelName];
       if (modelExt) {
@@ -248,7 +242,7 @@ function generateModels() {
     }
   }
 
-  // save 
+  // save
   for (modelName in store.generatedModels) {
     modelDef = store.generatedModels[modelName];
     $db._GeneratedModel.insert(modelDef);
@@ -258,7 +252,6 @@ function generateModels() {
     }
   }
 }
-
 
 /**
  * @method loadInMemory
@@ -337,7 +330,6 @@ function loadInMemory() {
   }
 }
 
-
 /**
  * @method createInheritanceTree
  * @private
@@ -349,7 +341,7 @@ function createInheritanceTree() {
   var ancestors = [];
 
   /**
-   * 
+   *
    * @param {Array} elts array of elts
    * @returns {Boolean} true if all the arrays are empty
    * @private
@@ -485,7 +477,10 @@ function createInheritanceTree() {
     function _checkCyclicDep(name, item) {
       var isCyclicDeb = false;
 
-      if (Array.isArray(store.inheritance[item]) && store.inheritance[item].indexOf(name) !== -1) {
+      if (
+        Array.isArray(store.inheritance[item]) &&
+        store.inheritance[item].indexOf(name) !== -1
+      ) {
         $log.cyclicDependency(name);
         isCyclicDeb = true;
       }
@@ -524,7 +519,6 @@ function createInheritanceTree() {
   }
 }
 
-
 /**
  * @method extend
  * @param {String} name name of the schema to extend
@@ -559,7 +553,6 @@ function extend(name) {
   return sonExtend;
 }
 
-
 /**
  * @method sortInheritanceTree
  * @returns {Array} sorted InheritanceTree structure
@@ -591,7 +584,6 @@ function sortInheritanceTree() {
   return result;
 }
 
-
 /**
  * @method compileSchemas
  * @private
@@ -608,7 +600,6 @@ function compileSchemas() {
     store.compiledSchemas[name] = extend(name);
   }
 }
-
 
 /**
  * @method checkModels
@@ -636,7 +627,6 @@ function checkModels() {
   }
 }
 
-
 /**
  * @method getStates
  * @private
@@ -655,7 +645,10 @@ function getStates() {
     if (schema) {
       for (attribute in schema) {
         type = schema[attribute];
-        if (attribute.indexOf('_') !== 0 && internalTypes.indexOf(type) !== -1) {
+        if (
+          attribute.indexOf('_') !== 0 &&
+          internalTypes.indexOf(type) !== -1
+        ) {
           states.push(attribute);
         }
       }
@@ -664,10 +657,9 @@ function getStates() {
   }
 }
 
-
 /**
  * @method checkImp
- * @param {JSON} classDef schema to test 
+ * @param {JSON} classDef schema to test
  * @param {JSON} classImp schema to validate
  * @private
  * @description Test if a schema is compliant with its schema
@@ -677,12 +669,14 @@ function checkImp(classDef, classImp) {
   var value = null;
 
   for (property in classImp) {
-    if (property !== ID &&
+    if (
+      property !== ID &&
       property !== NAME &&
       property !== DESCRIPTION &&
       property !== INHERITS &&
       property !== CLASS &&
-      property !== CORE) {
+      property !== CORE
+    ) {
       if (typeof classDef[property] !== 'undefined') {
         value = classDef[property];
         if (!checkSchema(value, classImp[property])) {
@@ -695,19 +689,20 @@ function checkImp(classDef, classImp) {
   }
   // check if all properties are there
   for (property in classDef) {
-    if (property !== ID &&
+    if (
+      property !== ID &&
       property !== NAME &&
       property !== DESCRIPTION &&
       property !== INHERITS &&
       property !== CLASS &&
-      property !== CORE) {
+      property !== CORE
+    ) {
       if (typeof classImp[property] === 'undefined') {
         $log.unknownPropertyImp(property, classDef[NAME]);
       }
     }
   }
 }
-
 
 /**
  * @method checkSchema
@@ -727,7 +722,6 @@ function checkSchema(value, type) {
   }
   return result;
 }
-
 
 /**
  * @method checkCustomSchema
@@ -774,7 +768,6 @@ function checkCustomSchema(value, typeName) {
   return result;
 }
 
-
 /**
  * @method initDbStructure
  * @private
@@ -794,7 +787,6 @@ function initDbStructure() {
   $db.collection('_Log');
 }
 
-
 /**
  * @method createDbStructure
  * @private
@@ -806,8 +798,10 @@ function createDbStructure() {
 
   for (modelName in store.generatedModels) {
     modelDef = store.generatedModels[modelName];
-    if (typeof $db[modelDef[NAME]] === 'undefined' &&
-      modelDef[CLASS] !== false) {
+    if (
+      typeof $db[modelDef[NAME]] === 'undefined' &&
+      modelDef[CLASS] !== false
+    ) {
       $db.collection(modelDef[NAME]);
 
       if (!modelDef._core) {
@@ -816,7 +810,6 @@ function createDbStructure() {
     }
   }
 }
-
 
 /**
  * @method createClass
@@ -831,7 +824,7 @@ function createClass() {
     modelDef = store.generatedModels[modelName];
     if (modelDef[CLASS] !== false) {
       $component.create({
-        'model': modelName
+        model: modelName
       });
       if (!modelDef._core) {
         $log.createClass(modelName);
@@ -839,7 +832,6 @@ function createClass() {
     }
   }
 }
-
 
 /**
  * @method createClassInfo
@@ -861,25 +853,27 @@ function createClassInfo() {
     ) {
       if (!$component.get(name)) {
         $db._ClassInfo.insert({
-          '_id': name,
-          'schema': store.compiledSchemas[modelName],
-          'model': modelDef
+          _id: name,
+          schema: store.compiledSchemas[modelName],
+          model: modelDef
         });
       } else {
-        $db._ClassInfo.update({
-          '_id': name
-        }, {
-          '_id': name,
-          'schema': store.compiledSchemas[modelName],
-          'model': modelDef
-        });
+        $db._ClassInfo.update(
+          {
+            _id: name
+          },
+          {
+            _id: name,
+            schema: store.compiledSchemas[modelName],
+            model: modelDef
+          }
+        );
       }
     }
   }
 }
 
-
-/** 
+/**
  * @method getRealClassName
  * @param {String} value
  * @returns {String} real name
@@ -890,7 +884,6 @@ function getRealClassName(value) {
   return value.replace('@', '').trim();
 }
 
-
 /**
  * @method getRealTypeName
  * @param {String} value
@@ -899,10 +892,11 @@ function getRealClassName(value) {
  * @description Get the real name of the referenced type
  */
 function getRealTypeName(value) {
-  return value.replace('{', '').replace('}', '')
+  return value
+    .replace('{', '')
+    .replace('}', '')
     .trim();
 }
-
 
 /**
  * @method isCustomType
@@ -912,13 +906,13 @@ function getRealTypeName(value) {
  * @description Is the value a custom type
  */
 function isCustomType(value) {
-  var result = hasType(value, 'string') &&
+  var result =
+    hasType(value, 'string') &&
     defaultTypes.indexOf(value) === -1 &&
     !exports.isClassName(value);
 
   return result;
 }
-
 
 /**
  * @method isTypeReference
@@ -930,7 +924,6 @@ function isTypeReference(value) {
   return value.indexOf('{') !== -1;
 }
 
-
 /**
  * @method isModelPath
  * @param {String} value
@@ -941,7 +934,6 @@ function isTypeReference(value) {
 function isModelPath(value) {
   return value.indexOf('.') !== -1;
 }
-
 
 /**
  * @method getRealType
@@ -965,7 +957,6 @@ function getRealType(value) {
   return type;
 }
 
-
 /**
  * @method getClassName
  * @param {type} obj object
@@ -982,7 +973,6 @@ function getClassName(obj) {
   return result;
 }
 
-
 /**
  * @method isValidEnumValue
  * @param {String} value
@@ -994,7 +984,6 @@ function getClassName(obj) {
 function isValidEnumValue(value, enumValue) {
   return enumValue.indexOf(value) !== -1;
 }
-
 
 /**
  * @param {type} value
@@ -1022,13 +1011,12 @@ function hasType(value, type) {
       result = true;
       break;
     default:
-      result = (type === typeof value);
+      result = type === typeof value;
       break;
   }
 
   return result;
 }
-
 
 /**
  * @method checkType
@@ -1077,9 +1065,7 @@ function merge(source, target, all) {
   return result;
 }
 
-
 /* Public methods */
-
 
 /**
  * @method schema
@@ -1130,13 +1116,16 @@ exports.schema = function schema(importedSchema) {
   // check if schema is compliant with the meta meta model
   if (exports.isValidObject(schema, store.metadef.schema, false)) {
     schemas = $db._Schema.find({
-      '_name': name
+      _name: name
     });
     if (schemas.length) {
       mergedSchema = merge(schema, schemas[0]);
-      $db._Schema.update({
-        '_name': name
-      }, mergedSchema);
+      $db._Schema.update(
+        {
+          _name: name
+        },
+        mergedSchema
+      );
       id = schemas[0]._id;
     } else {
       result = $db._Schema.insert(schema);
@@ -1148,7 +1137,6 @@ exports.schema = function schema(importedSchema) {
 
   return id;
 };
-
 
 /**
  * @method model
@@ -1174,13 +1162,16 @@ exports.model = function model(importedModel) {
   // check if model is compliant with the meta meta model
   if (exports.isValidObject(model, store.metadef.model, false)) {
     models = $db._Model.find({
-      '_name': name
+      _name: name
     });
     if (models.length) {
       mergedModel = merge(model, models[0]);
-      $db._Model.update({
-        '_name': name
-      }, mergedModel);
+      $db._Model.update(
+        {
+          _name: name
+        },
+        mergedModel
+      );
       id = models[0]._id;
     } else {
       result = $db._Model.insert(model);
@@ -1192,7 +1183,6 @@ exports.model = function model(importedModel) {
 
   return id;
 };
-
 
 /**
  * @method type
@@ -1215,7 +1205,6 @@ exports.type = function type(importedType) {
   return id;
 };
 
-
 /**
  * @method init
  * @description Init the metamodel
@@ -1224,93 +1213,91 @@ exports.init = function init() {
   exports.clear();
   store.metadef = {
     schema: {
-      '_id': {
-        'type': 'string',
-        'mandatory': true
+      _id: {
+        type: 'string',
+        mandatory: true
       },
-      '_name': {
-        'type': 'string',
-        'mandatory': true
+      _name: {
+        type: 'string',
+        mandatory: true
       },
-      '_inherit': {
-        'type': ['string'],
-        'mandatory': false,
-        'default': ['_Component']
+      _inherit: {
+        type: ['string'],
+        mandatory: false,
+        default: ['_Component']
       },
-      '_class': {
-        'type': 'boolean',
-        'mandatory': false
+      _class: {
+        type: 'boolean',
+        mandatory: false
       },
-      '_core': {
-        'type': 'boolean',
-        'mandatory': false
+      _core: {
+        type: 'boolean',
+        mandatory: false
       },
-      '_description': {
-        'type': 'string',
-        'mandatory': false
+      _description: {
+        type: 'string',
+        mandatory: false
       }
     },
     model: {
-      '_id': {
-        'type': 'string',
-        'mandatory': true
+      _id: {
+        type: 'string',
+        mandatory: true
       },
-      '_name': {
-        'type': 'string',
-        'mandatory': true
+      _name: {
+        type: 'string',
+        mandatory: true
       },
-      '_inherit': {
-        'type': ['string'],
-        'mandatory': false
+      _inherit: {
+        type: ['string'],
+        mandatory: false
       },
-      '_class': {
-        'type': 'boolean',
-        'mandatory': false
+      _class: {
+        type: 'boolean',
+        mandatory: false
       },
-      '_core': {
-        'type': 'boolean',
-        'mandatory': false
+      _core: {
+        type: 'boolean',
+        mandatory: false
       },
-      '_description': {
-        'type': 'string',
-        'mandatory': false
+      _description: {
+        type: 'string',
+        mandatory: false
       }
     },
     type: {
-      '_id': {
-        'type': 'string',
-        'mandatory': false
+      _id: {
+        type: 'string',
+        mandatory: false
       },
-      'name': {
-        'type': 'string',
-        'mandatory': true
+      name: {
+        type: 'string',
+        mandatory: true
       },
-      'type': {
-        'type': 'string',
-        'mandatory': true
+      type: {
+        type: 'string',
+        mandatory: true
       },
-      'schema': {
-        'type': 'object',
-        'mandatory': false
+      schema: {
+        type: 'object',
+        mandatory: false
       },
-      'value': {
-        'type': ['any'],
-        'mandatory': false
+      value: {
+        type: ['any'],
+        mandatory: false
       },
-      'core': {
-        'type': 'boolean',
-        'mandatory': false
+      core: {
+        type: 'boolean',
+        mandatory: false
       },
-      '_description': {
-        'type': 'string',
-        'mandatory': false
+      _description: {
+        type: 'string',
+        mandatory: false
       }
     }
-
   };
   initDbStructure();
 };
-
 
 /**
  * @method clear
@@ -1330,7 +1317,6 @@ exports.clear = function clear() {
   };
 };
 
-
 /**
  * @method create
  * @description Create the metamodel
@@ -1349,7 +1335,6 @@ exports.create = function create() {
   $log.modelCreationEnd();
 };
 
-
 /**
  * @method isEvent
  * @param {String} name
@@ -1360,7 +1345,6 @@ exports.create = function create() {
 exports.isEvent = function isEvent(name, id) {
   return checkType(name, id, EVENT_TYPE);
 };
-
 
 /**
  * @method isProperty
@@ -1373,7 +1357,6 @@ exports.isProperty = function isProperty(name, id) {
   return checkType(name, id, PROPERTY_TYPE);
 };
 
-
 /**
  * @method isLink
  * @param {String} name name of the property
@@ -1384,7 +1367,6 @@ exports.isProperty = function isProperty(name, id) {
 exports.isLink = function isLink(name, id) {
   return checkType(name, id, LINK_TYPE);
 };
-
 
 /**
  * @method isCollection
@@ -1397,8 +1379,7 @@ exports.isCollection = function isCollection(name, id) {
   return checkType(name, id, COLLECTION_TYPE);
 };
 
-
-/** 
+/**
  * @method isMethod
  * @param {String} name name of the method
  * @param {String} id component id
@@ -1408,7 +1389,6 @@ exports.isCollection = function isCollection(name, id) {
 exports.isMethod = function isMethod(name, id) {
   return checkType(name, id, METHOD_TYPE);
 };
-
 
 /**
  * @method isStructure
@@ -1433,7 +1413,6 @@ exports.isStructure = function isStructure(name, id) {
 
   return result;
 };
-
 
 /**
  * @method isValidState
@@ -1463,7 +1442,6 @@ exports.isValidState = function isValidState(name, id) {
   return result;
 };
 
-
 /**
  * @method isValidType
  * @param {Object} object object to validate
@@ -1476,8 +1454,8 @@ exports.isValidType = function isValidType(value, typeName) {
 
   /**
    * @method _isValidCustomType
-   * @param {String} value 
-   * @param {String} typeName 
+   * @param {String} value
+   * @param {String} typeName
    * @private
    * @description Check if a value has the correct type
    */
@@ -1512,7 +1490,10 @@ exports.isValidType = function isValidType(value, typeName) {
       if (hasType(value, 'string')) {
         component = $component.get(value);
       }
-      if (getClassName(component) !== typeRef && JSON.stringify(component) !== '{}') {
+      if (
+        getClassName(component) !== typeRef &&
+        JSON.stringify(component) !== '{}'
+      ) {
         isValid = false;
         $log.invalidType(value, typeName.replace('@', ''));
       }
@@ -1522,7 +1503,7 @@ exports.isValidType = function isValidType(value, typeName) {
 
   /**
    * @method _isValidType
-   * @param {String} value 
+   * @param {String} value
    * @param {String} typeName
    * @returns {Boolean} the object is compliant with the type
    * @private
@@ -1588,7 +1569,6 @@ exports.isValidType = function isValidType(value, typeName) {
   return result;
 };
 
-
 /**
  * @method isValidEnum
  * @param {String|Object} value value to validate
@@ -1601,7 +1581,7 @@ exports.isValidEnum = function isValidEnum(value, schema) {
 
   /**
    * @method _isInstanceOf
-   * @param {String} component 
+   * @param {String} component
    * @param {String} className
    * @private Check if the component has for class name className
    */
@@ -1620,12 +1600,14 @@ exports.isValidEnum = function isValidEnum(value, schema) {
   }
 
   if (exports.isClassName(schema.type)) {
-    result = _isInstanceOf($component.get(value), getRealClassName(schema.type)) && schema.value.indexOf(value) !== -1;
+    result =
+      _isInstanceOf($component.get(value), getRealClassName(schema.type)) &&
+      schema.value.indexOf(value) !== -1;
     if (!result) {
       $log.invalidEnumValue(value, schema.type);
     }
   } else {
-    result = (hasType(value, schema.type)) && schema.value.indexOf(value) !== -1;
+    result = hasType(value, schema.type) && schema.value.indexOf(value) !== -1;
     if (!result) {
       $log.invalidEnumValue(value, schema.name);
     }
@@ -1633,7 +1615,6 @@ exports.isValidEnum = function isValidEnum(value, schema) {
 
   return result;
 };
-
 
 /**
  * @method isValidSchema
@@ -1825,7 +1806,11 @@ exports.isValidSchema = function isValidSchema(object, schema) {
     for (fieldName in schema) {
       field = schema[fieldName];
       mandatory = field.mandatory;
-      if (mandatory === true && (hasType(object[fieldName], 'undefined') && object[fieldName] !== undefined)) {
+      if (
+        mandatory === true &&
+        (hasType(object[fieldName], 'undefined') &&
+          object[fieldName] !== undefined)
+      ) {
         $log.missingProperty(fieldName);
         result = false;
         break;
@@ -1839,7 +1824,6 @@ exports.isValidSchema = function isValidSchema(object, schema) {
   return result;
 };
 
-
 /**
  * @method isValidObject
  * @param {Object} object object to validate
@@ -1851,7 +1835,12 @@ exports.isValidSchema = function isValidSchema(object, schema) {
  * Use it to test if the constructor of an object is compliant
  * with the definition of the class.
  */
-exports.isValidObject = function isValidObject(object, schema, strict, cleanRef) {
+exports.isValidObject = function isValidObject(
+  object,
+  schema,
+  strict,
+  cleanRef
+) {
   var fieldName = '';
   var field = null;
   var result = true;
@@ -1929,13 +1918,15 @@ exports.isValidObject = function isValidObject(object, schema, strict, cleanRef)
         $log.invalidType(field, typeRef);
       } else {
         if (isComponent && cleanRef) {
-          object[fieldName] = comp.id(); // store the id instead the full object 
+          object[fieldName] = comp.id(); // store the id instead the full object
         }
       }
     } else {
       // check for default value of an object ({} or null)
       switch (true) {
-        case (hasType(field, 'object') && field !== null && Object.keys(field).length > 0):
+        case hasType(field, 'object') &&
+          field !== null &&
+          Object.keys(field).length > 0:
         case hasType(field, 'string') && field !== '':
           $log.canNotYetValidate(field, typeRef);
           break;
@@ -1982,7 +1973,10 @@ exports.isValidObject = function isValidObject(object, schema, strict, cleanRef)
                 break;
               }
             } else {
-              if (getRealType(field) !== typeSchema && getRealType(field) !== 'any') {
+              if (
+                getRealType(field) !== typeSchema &&
+                getRealType(field) !== 'any'
+              ) {
                 $log.invalidPropertyType(fieldName, typeSchema, field);
                 isValid = false;
                 break;
@@ -2000,7 +1994,10 @@ exports.isValidObject = function isValidObject(object, schema, strict, cleanRef)
               isValid = _isValidCustomType(field[i], typeArray);
             } else {
               if (!exports.isClassName(typeArray)) {
-                if (getRealType(field[i]) !== typeArray && typeArray !== 'any') {
+                if (
+                  getRealType(field[i]) !== typeArray &&
+                  typeArray !== 'any'
+                ) {
                   $log.invalidPropertyType(field[i], typeArray, field[i]);
                   isValid = false;
                   break;
@@ -2009,19 +2006,40 @@ exports.isValidObject = function isValidObject(object, schema, strict, cleanRef)
                 if (getRealType(field[i]) === 'string') {
                   // Case of an import of a system
                   if ($component.get(field[i])) {
-                    if (!exports.inheritFrom(getClassName($component.get(field[i])), getRealClassName(typeArray))) {
-                      $log.invalidClassName(JSON.stringify(field[i]), getRealClassName(typeArray), getClassName($component.get(field[i])));
+                    if (
+                      !exports.inheritFrom(
+                        getClassName($component.get(field[i])),
+                        getRealClassName(typeArray)
+                      )
+                    ) {
+                      $log.invalidClassName(
+                        JSON.stringify(field[i]),
+                        getRealClassName(typeArray),
+                        getClassName($component.get(field[i]))
+                      );
                       isValid = false;
                       break;
                     }
                   } else {
                     if (field[i] !== '') {
-                      $log.canNotYetValidate(field[i], getRealClassName(typeArray));
+                      $log.canNotYetValidate(
+                        field[i],
+                        getRealClassName(typeArray)
+                      );
                     }
                   }
                 } else {
-                  if (!exports.inheritFrom(getClassName(field[i]), getRealClassName(typeArray))) {
-                    $log.invalidClassName(JSON.stringify(field[i]), getRealClassName(typeArray), getClassName(field[i]));
+                  if (
+                    !exports.inheritFrom(
+                      getClassName(field[i]),
+                      getRealClassName(typeArray)
+                    )
+                  ) {
+                    $log.invalidClassName(
+                      JSON.stringify(field[i]),
+                      getRealClassName(typeArray),
+                      getClassName(field[i])
+                    );
                     isValid = false;
                     break;
                   } else {
@@ -2057,7 +2075,6 @@ exports.isValidObject = function isValidObject(object, schema, strict, cleanRef)
     field = object[fieldName];
 
     if (!hasType(schema[fieldName], 'undefined') || fieldName === '_core') {
-
       // case of _core
       if (fieldName !== '_core') {
         typeSchema = schema[fieldName].type;
@@ -2069,7 +2086,6 @@ exports.isValidObject = function isValidObject(object, schema, strict, cleanRef)
       if (fieldName === '_id') {
         typeSchema = 'string';
       }
-
     } else {
       if (strict) {
         $log.unknownProperty(fieldName, schema);
@@ -2107,7 +2123,6 @@ exports.isValidObject = function isValidObject(object, schema, strict, cleanRef)
   return result;
 };
 
-
 /**
  * Prepare the object in order to be compliant with the schema.
  * @method prepareObject
@@ -2133,7 +2148,6 @@ exports.prepareObject = function prepareObject(object, schema) {
   }
 };
 
-
 /**
  * @method getSchema
  * @param {String} name of the schema
@@ -2148,7 +2162,6 @@ exports.getSchema = function getSchema(name) {
   }
   return result;
 };
-
 
 /**
  * @method getModel
@@ -2165,7 +2178,6 @@ exports.getModel = function getModel(name) {
   return result;
 };
 
-
 /**
  * @method getType
  * @param {String} name of the type
@@ -2180,7 +2192,6 @@ exports.getType = function getType(name) {
   }
   return result;
 };
-
 
 /**
  * @method getModelPathType
@@ -2219,7 +2230,6 @@ exports.getModelPathType = function getModelPathType(model, path) {
   }
   return result;
 };
-
 
 /**
  * @method isValidModelPath
@@ -2260,7 +2270,6 @@ exports.isValidModelPath = function isValidModelPath(model, path) {
   return result;
 };
 
-
 /**
  * @method getMetaDef
  * @returns {Object} the metadefinition of the metamodel
@@ -2271,7 +2280,6 @@ exports.getMetaDef = function getMetaDef() {
 
   return result;
 };
-
 
 /**
  * @method get
@@ -2290,7 +2298,6 @@ exports.getParents = function getParents(id) {
 
   return result;
 };
-
 
 /**
  * @method inheritFrom
@@ -2357,7 +2364,6 @@ exports.inheritFrom = function inheritFrom(name, parentName) {
 
   return result;
 };
-
 
 /**
  * @method isClassName

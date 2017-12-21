@@ -6,9 +6,7 @@
   "schemas": {
     "1ac07185641fa9f": {
       "_name": "_Behavior",
-      "_inherit": [
-        "_Component"
-      ],
+      "_inherit": ["_Component"],
       "_core": true,
       "core": "property",
       "component": "property",

@@ -8,9 +8,7 @@
     "145fe10c7514298": {
       "_id": "145fe10c7514298",
       "_name": "_SystemOSGi",
-      "_inherit": [
-        "_Component"
-      ],
+      "_inherit": ["_Component"],
       "_core": true,
       "state": "property",
       "location": "property",

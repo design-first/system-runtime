@@ -8,7 +8,8 @@
       "_id": "13010167f313f87",
       "component": "_Runtime",
       "state": "system",
-      "action": "function system(params) {\n  var RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n\n  if (params) {\n    if (typeof params === 'string') {\n      conf.master = true;\n      conf.name = params;\n    } else {\n      conf = params;\n      conf.master = true;\n    }\n    RuntimeSystem = this.require('_System');\n    system = new RuntimeSystem(conf);\n    system.state('active');\n  } else {\n    result = $db._System.find({\n      'master': true\n    });\n    if (result.length) {\n      systemId = result[0]._id;\n      system = $component.get(systemId);\n    }\n  }\n  return system;\n}",
+      "action":
+        "function system(params) {\n  var RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n\n  if (params) {\n    if (typeof params === 'string') {\n      conf.master = true;\n      conf.name = params;\n    } else {\n      conf = params;\n      conf.master = true;\n    }\n    RuntimeSystem = this.require('_System');\n    system = new RuntimeSystem(conf);\n    system.state('active');\n  } else {\n    result = $db._System.find({\n      'master': true\n    });\n    if (result.length) {\n      systemId = result[0]._id;\n      system = $component.get(systemId);\n    }\n  }\n  return system;\n}",
       "core": true,
       "useCoreAPI": true
     },
@@ -25,9 +26,7 @@
     "12e211d4cd120a6": {
       "_id": "12e211d4cd120a6",
       "_name": "_Runtime",
-      "_inherit": [
-        "_OSGi"
-      ],
+      "_inherit": ["_OSGi"],
       "_core": true,
       "version": "property",
       "system": "method",
@@ -47,19 +46,23 @@
         "default": "0.0.0"
       },
       "system": {
-        "params": [{
-          "name": "params",
-          "type": "any",
-          "mandatory": false
-        }],
+        "params": [
+          {
+            "name": "params",
+            "type": "any",
+            "mandatory": false
+          }
+        ],
         "result": "object"
       },
       "message": {
-        "params": [{
-          "name": "msg",
-          "type": "message",
-          "mandatory": true
-        }]
+        "params": [
+          {
+            "name": "msg",
+            "type": "message",
+            "mandatory": true
+          }
+        ]
       },
       "ready": {}
     }

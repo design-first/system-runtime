@@ -25,23 +25,18 @@
  * @description This module contains all the functions used by all the modules
  */
 
-
 'use strict';
 
 var $db = require('./db.js');
 var $component = require('./component.js');
 
-
 /* Private property */
-
 
 var runtimeRef = null;
 
-
 /* Public method */
 
-
-/** 
+/**
  * @method isRuntime
  * @returns {Boolean} true if a System Runtime instance exist
  * @description Check if a System Runtime instance exists
@@ -55,7 +50,6 @@ exports.isRuntime = function isRuntime() {
 
   return result;
 };
-
 
 /**
  * @method getRuntime
@@ -73,7 +67,6 @@ exports.getRuntime = function getRuntime() {
 
   return runtimeRef;
 };
-
 
 /**
  * @method generateId
@@ -93,7 +86,6 @@ exports.generateId = function generateId() {
   return getPrefix() + gen() + gen() + gen();
 };
 
-
 /**
  * @method polyfill
  * @description Add Polyfill
@@ -101,12 +93,15 @@ exports.generateId = function generateId() {
 exports.polyfill = function polyfill() {
   // fixing constructor.name property in IE
   // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer
-  if (Function.prototype.name === undefined && Object.defineProperty !== undefined) {
+  if (
+    Function.prototype.name === undefined &&
+    Object.defineProperty !== undefined
+  ) {
     Object.defineProperty(Function.prototype, 'name', {
       get: function get() {
         var funcNameRegex = /function\s([^(]{1,})\(/;
-        var results = (funcNameRegex).exec((this).toString());
-        return (results && results.length > 1) ? results[1].trim() : '';
+        var results = funcNameRegex.exec(this.toString());
+        return results && results.length > 1 ? results[1].trim() : '';
       },
       set: function set(value) {}
     });

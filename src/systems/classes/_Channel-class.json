@@ -7,9 +7,7 @@
     "104ad1f48518376": {
       "_id": "104ad1f48518376",
       "_name": "_Channel",
-      "_inherit": [
-        "_Component"
-      ],
+      "_inherit": ["_Component"],
       "_core": true,
       "send": "event",
       "$systemInstalled": "event",
@@ -25,50 +23,62 @@
       "_name": "_Channel",
       "_core": true,
       "send": {
-        "params": [{
-          "name": "message",
-          "type": "message"
-        }]
+        "params": [
+          {
+            "name": "message",
+            "type": "message"
+          }
+        ]
       },
       "$systemInstalled": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          }
+        ]
       },
       "$systemResolved": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          }
+        ]
       },
       "$systemUninstalled": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          }
+        ]
       },
       "$systemStarted": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          }
+        ]
       },
       "$systemStopped": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          }
+        ]
       }
     }
   },
@@ -77,7 +87,8 @@
       "_id": "12e491859c13918",
       "component": "_Channel",
       "state": "$systemStarted",
-      "action": "function $systemStarted(id) { \n  var systems = null;\n    \n  if (id !== 'e89c617b6b15d24') {\n    if (typeof document !== 'undefined') {\n      systems = document.querySelectorAll('link[rel=system]');\n         \n      if ($state.get('runtime') && $state.get('runtime').state === 'ready') {    \n      } else {\n        if (systems.length + 1 === $db._System.count()) {\n          $component.get('runtime').ready();\n        }\n      }\n    }\n  }\n}",
+      "action":
+        "function $systemStarted(id) { \n  var systems = null;\n    \n  if (id !== 'e89c617b6b15d24') {\n    if (typeof document !== 'undefined') {\n      systems = document.querySelectorAll('link[rel=system]');\n         \n      if ($state.get('runtime') && $state.get('runtime').state === 'ready') {    \n      } else {\n        if (systems.length + 1 === $db._System.count()) {\n          $component.get('runtime').ready();\n        }\n      }\n    }\n  }\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -85,7 +96,8 @@
       "_id": "1e9021bd4e1bc6e",
       "component": "_Channel",
       "state": "$systemInstalled",
-      "action": "function $systemInstalled(id) {\n  var systems = null,\n    dependencies = [],\n    master = [],\n    canStart = true;\n\n  if (id !== 'e89c617b6b15d24') {\n    // if all systems are installed\n    systems = $db._System.find({});\n\n    systems.forEach(function (system) {\n      var sys = this.require(system._id);\n      if (sys && sys.state && sys.state() === 'none') {\n        canStart = false;\n      }\n    }.bind(this));\n\n    // start all the systems\n    if (canStart) {\n      dependencies = $db._System.find({\n        'master': false\n      });\n\n      dependencies.forEach(function (dep) {\n        var system = this.require(dep._id);\n        channel = this.require('channel');\n\n        if (system.state() === 'resolved') {\n          system.state('starting');\n          system.start();\n          channel.$systemStarted(dep._id);\n          system.state('active');\n        }\n      }.bind(this));\n\n      master = $db._System.find({\n        'master': true\n      });\n\n      master.forEach(function (dep) {\n        var system = this.require(dep._id);\n        channel = this.require('channel');\n\n        if (system && system.state && system.state() === 'resolved') {\n          system.state('starting');\n          system.start();\n          channel.$systemStarted(dep._id);\n          system.state('active');\n        }\n      }.bind(this));\n    }\n  }\n}",
+      "action":
+        "function $systemInstalled(id) {\n  var systems = null,\n    dependencies = [],\n    master = [],\n    canStart = true;\n\n  if (id !== 'e89c617b6b15d24') {\n    // if all systems are installed\n    systems = $db._System.find({});\n\n    systems.forEach(function (system) {\n      var sys = this.require(system._id);\n      if (sys && sys.state && sys.state() === 'none') {\n        canStart = false;\n      }\n    }.bind(this));\n\n    // start all the systems\n    if (canStart) {\n      dependencies = $db._System.find({\n        'master': false\n      });\n\n      dependencies.forEach(function (dep) {\n        var system = this.require(dep._id);\n        channel = this.require('channel');\n\n        if (system.state() === 'resolved') {\n          system.state('starting');\n          system.start();\n          channel.$systemStarted(dep._id);\n          system.state('active');\n        }\n      }.bind(this));\n\n      master = $db._System.find({\n        'master': true\n      });\n\n      master.forEach(function (dep) {\n        var system = this.require(dep._id);\n        channel = this.require('channel');\n\n        if (system && system.state && system.state() === 'resolved') {\n          system.state('starting');\n          system.start();\n          channel.$systemStarted(dep._id);\n          system.state('active');\n        }\n      }.bind(this));\n    }\n  }\n}",
       "useCoreAPI": true,
       "core": true
     }

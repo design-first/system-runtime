@@ -26,7 +26,7 @@
  * @requires behavior
  * @requires helper
  * @requires log
- * @description This module manages the components. 
+ * @description This module manages the components.
  * It is the factory of all the components that are created by System Runtime.
  */
 
@@ -41,9 +41,7 @@ var $log = require('./log.js');
 var $worklow = require('./workflow.js');
 var $state = require('./state.js');
 
-
 /* Private properties */
-
 
 var PROPERTY_TYPE = 'property';
 var LINK_TYPE = 'link';
@@ -53,9 +51,7 @@ var EVENT_TYPE = 'event';
 var NAME = '_name';
 var store = {};
 
-
 /* Private methods */
-
 
 /**
  * @class _Array
@@ -124,7 +120,7 @@ function _Array(conf) {
    * @method _add
    * @param {String} val value to add
    * @param {String} action type of action
-   * @param {Number} start 
+   * @param {Number} start
    * @param {String} deleteCount
    * @private
    * @description add an item in the array
@@ -136,11 +132,13 @@ function _Array(conf) {
     var del = [];
 
     if (!isReadOnly) {
-
       isClass = $metamodel.isClassName(type);
 
       if (isClass) {
-        if (val && $metamodel.inheritFrom(val.constructor.name, type.replace('@', ''))) {
+        if (
+          val &&
+          $metamodel.inheritFrom(val.constructor.name, type.replace('@', ''))
+        ) {
           switch (true) {
             case action === 'push':
               arrDb.push(val.id());
@@ -154,9 +152,9 @@ function _Array(conf) {
               length = del.length;
               for (i = 0; i < length; i++) {
                 $workflow.state({
-                  'component': id,
-                  'state': propertyName,
-                  'data': [store[del[i]], 'remove']
+                  component: id,
+                  state: propertyName,
+                  data: [store[del[i]], 'remove']
                 });
               }
               break;
@@ -165,19 +163,21 @@ function _Array(conf) {
           }
 
           if ($helper.isRuntime()) {
-            $helper.getRuntime().require('db')
+            $helper
+              .getRuntime()
+              .require('db')
               .update({
-                'collection': classId,
-                'id': id,
-                'field': propertyName,
-                'value': arrDb
+                collection: classId,
+                id: id,
+                field: propertyName,
+                value: arrDb
               });
           }
 
           $workflow.state({
-            'component': id,
-            'state': propertyName,
-            'data': [val, 'add']
+            component: id,
+            state: propertyName,
+            data: [val, 'add']
           });
         } else {
           if (typeof val.id !== 'undefined') {
@@ -203,19 +203,21 @@ function _Array(conf) {
           }
 
           if ($helper.isRuntime()) {
-            $helper.getRuntime().require('db')
+            $helper
+              .getRuntime()
+              .require('db')
               .update({
-                'collection': classId,
-                'id': id,
-                'field': propertyName,
-                'value': arrDb
+                collection: classId,
+                id: id,
+                field: propertyName,
+                value: arrDb
               });
           }
 
           $workflow.state({
-            'component': id,
-            'state': propertyName,
-            'data': [val, 'add']
+            component: id,
+            state: propertyName,
+            data: [val, 'add']
           });
         } else {
           $log.invalidPropertyName(id, classId, propertyName, val, type);
@@ -240,7 +242,6 @@ function _Array(conf) {
 
     if (!isReadOnly) {
       if (arrDb.length !== 0) {
-
         switch (true) {
           case action === 'pop':
             val = arrDb.pop();
@@ -253,12 +254,14 @@ function _Array(conf) {
         }
 
         if ($helper.isRuntime()) {
-          $helper.getRuntime().require('db')
+          $helper
+            .getRuntime()
+            .require('db')
             .update({
-              'collection': classId,
-              'id': id,
-              'field': propertyName,
-              'value': arrDb
+              collection: classId,
+              id: id,
+              field: propertyName,
+              value: arrDb
             });
         }
 
@@ -271,11 +274,10 @@ function _Array(conf) {
         }
 
         $workflow.state({
-          'component': id,
-          'state': propertyName,
-          'data': [result, 'remove']
+          component: id,
+          state: propertyName,
+          data: [result, 'remove']
         });
-
       }
     } else {
       $log.readOnlyProperty(id, classId, propertyName);
@@ -295,7 +297,7 @@ function _Array(conf) {
     return result;
   };
 
-  /** 
+  /**
    * @method unshift
    * @param {_Component|Object} val
    * @description Override unshift method
@@ -307,7 +309,7 @@ function _Array(conf) {
     return result;
   };
 
-  /** 
+  /**
    * @method push
    * @param {_Component|Object} arr
    * @description Override concat method
@@ -332,7 +334,7 @@ function _Array(conf) {
     return result;
   };
 
-  /** 
+  /**
    * @method pop
    * @returns {_Component|Object} value
    * @description Override pop method
@@ -344,7 +346,7 @@ function _Array(conf) {
     return result;
   };
 
-  /** 
+  /**
    * @method shift
    * @returns {_Component|Object} value
    * @description Override shift method
@@ -356,7 +358,7 @@ function _Array(conf) {
     return result;
   };
 
-  /** 
+  /**
    * @method sort
    * @param {Function} funct the sort function
    * @returns {_Array} the current _Array
@@ -368,12 +370,14 @@ function _Array(conf) {
     arrDb.sort(funct);
 
     if ($helper.isRuntime()) {
-      $helper.getRuntime().require('db')
+      $helper
+        .getRuntime()
+        .require('db')
         .update({
-          'collection': classId,
-          'id': id,
-          'field': propertyName,
-          'value': arrDb
+          collection: classId,
+          id: id,
+          field: propertyName,
+          value: arrDb
         });
     }
 
@@ -383,7 +387,7 @@ function _Array(conf) {
     return result;
   };
 
-  /**  
+  /**
    * @method reverse
    * @returns {_Array} the reversed _Array
    * @description Override reverse method
@@ -392,12 +396,14 @@ function _Array(conf) {
     arrDb.reverse();
 
     if ($helper.isRuntime()) {
-      $helper.getRuntime().require('db')
+      $helper
+        .getRuntime()
+        .require('db')
         .update({
-          'collection': classId,
-          'id': id,
-          'field': propertyName,
-          'value': arrDb
+          collection: classId,
+          id: id,
+          field: propertyName,
+          value: arrDb
         });
     }
 
@@ -406,7 +412,7 @@ function _Array(conf) {
     return arr;
   };
 
-  /** 
+  /**
    * @method splice
    * @returns {_Array} the spliced _Array
    * @description Override splice method
@@ -424,18 +430,19 @@ function _Array(conf) {
       result = arrDb.splice(start, deleteCount);
 
       if ($helper.isRuntime()) {
-        $helper.getRuntime().require('db')
+        $helper
+          .getRuntime()
+          .require('db')
           .update({
-            'collection': classId,
-            'id': id,
-            'field': propertyName,
-            'value': arrDb
+            collection: classId,
+            id: id,
+            field: propertyName,
+            value: arrDb
           });
       }
 
       length = result.length;
       for (i = 0; i < length; i++) {
-
         isClass = $metamodel.isClassName(type);
         if (isClass) {
           data = store[result[i]];
@@ -444,9 +451,9 @@ function _Array(conf) {
         }
 
         $workflow.state({
-          'component': id,
-          'state': propertyName,
-          'data': [data, 'remove']
+          component: id,
+          state: propertyName,
+          data: [data, 'remove']
         });
       }
     }
@@ -473,7 +480,6 @@ function _Array(conf) {
 
 _Array.prototype = [];
 
-
 /**
  * @method getParamNames
  * @param {String} id id of the class
@@ -498,7 +504,6 @@ function getParamNames(id, methodName) {
   return result;
 }
 
-
 /**
  * @method getProperties
  * @param {String} id id of the class
@@ -521,18 +526,21 @@ function getProperties(id) {
 
   length = propNames.length;
   for (i = 0; i < length; i++) {
-    if (schema[propNames[i]] === LINK_TYPE || schema[propNames[i]] === PROPERTY_TYPE || schema[propNames[i]] === COLLECTION_TYPE) {
+    if (
+      schema[propNames[i]] === LINK_TYPE ||
+      schema[propNames[i]] === PROPERTY_TYPE ||
+      schema[propNames[i]] === COLLECTION_TYPE
+    ) {
       result.push({
-        'name': propNames[i],
-        'type': model[propNames[i]].type,
-        'readOnly': model[propNames[i]].readOnly
+        name: propNames[i],
+        type: model[propNames[i]].type,
+        readOnly: model[propNames[i]].readOnly
       });
     }
   }
 
   return result;
 }
-
 
 /**
  * @method getMethods
@@ -564,7 +572,6 @@ function getMethods(id) {
   return result;
 }
 
-
 /**
  * @method getStructureProperties
  * @param {String} name of the property
@@ -594,7 +601,6 @@ function getStructureProperties(propertyName, model) {
 
   return result;
 }
-
 
 /**
  * @method getEvents
@@ -626,12 +632,11 @@ function getEvents(id) {
   return result;
 }
 
-
 /**
  * @method getStructureValue
  * @param {String} model name of the model
  * @param {String} id name of the component
- * @param {String} path 
+ * @param {String} path
  * @returns {Object} the value
  * @private
  * @description Get the value of a structure
@@ -651,13 +656,12 @@ function getStructureValue(model, id, path) {
   return result;
 }
 
-
 /**
  * @method getStructureValue
  * @param {String} model name of the model
  * @param {String} id name of the component
- * @param {String} path 
- * @param {String} value the value to set 
+ * @param {String} path
+ * @param {String} value the value to set
  * @private
  * @description Set the value of a structure
  */
@@ -676,7 +680,6 @@ function setStructureValue(model, id, path, value) {
   result[subPath[i]] = value;
 }
 
-
 /**
  * @method createClasss
  * @param {String} classId name of the class
@@ -694,7 +697,14 @@ function createClass(classId) {
       config = {};
     }
 
-    if (!$metamodel.isValidObject(config, $metamodel.getModel(classId), true, true)) {
+    if (
+      !$metamodel.isValidObject(
+        config,
+        $metamodel.getModel(classId),
+        true,
+        true
+      )
+    ) {
       $log.invalidParameters(classId);
     }
 
@@ -710,7 +720,10 @@ function createClass(classId) {
     body = function body() {
       return config._id;
     };
-    this.id = new Function('__body', 'return function id () { return __body.call(this) };')(body);
+    this.id = new Function(
+      '__body',
+      'return function id () { return __body.call(this) };'
+    )(body);
 
     // classInfo
     if ($metamodel.inheritFrom(classId, '_Component')) {
@@ -723,7 +736,9 @@ function createClass(classId) {
     $db.createLog('insert', classId, config._id, '', config);
 
     if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-      $helper.getRuntime().require('db')
+      $helper
+        .getRuntime()
+        .require('db')
         .insert({
           collection: classId,
           document: config
@@ -736,9 +751,11 @@ function createClass(classId) {
       this.init(config);
     }
   };
-  return new Function('__body', 'return function ' + classId + ' (config) { __body.call(this,config) };')(body);
+  return new Function(
+    '__body',
+    'return function ' + classId + ' (config) { __body.call(this,config) };'
+  )(body);
 }
-
 
 /**
  * @method addId
@@ -751,9 +768,11 @@ function addId(Class, classId) {
   var body = function body() {
     return classId;
   };
-  Class.id = new Function('__body', 'return function id (prop, val) { return __body.call(this, prop, val) };')(body);
+  Class.id = new Function(
+    '__body',
+    'return function id (prop, val) { return __body.call(this, prop, val) };'
+  )(body);
 }
-
 
 /**
  * @method addProperties
@@ -761,10 +780,10 @@ function addId(Class, classId) {
  * @param {Function} Class Class
  * @param {String} classId name of the class
  * @private
- * @description Add properties to a component. 
+ * @description Add properties to a component.
  * All these properties will be accessed by a method with the same name.
  * Some checks can be done in order to see if the set of properties is compliant with the model.
- * 
+ *
  * @example
  * laure.age(); // get the age of a person
  * laure.age(22); // set the age of a person
@@ -786,8 +805,16 @@ function addProperties(model, Class, classId) {
       var result = true;
 
       coll.forEach(function(val) {
-        if (!($metamodel.isValidType(val, type) &&
-            ($metamodel.inheritFrom(val.constructor.name, type.replace('@', '')) && $metamodel.isClassName(type)))) {
+        if (
+          !(
+            $metamodel.isValidType(val, type) &&
+            ($metamodel.inheritFrom(
+              val.constructor.name,
+              type.replace('@', '')
+            ) &&
+              $metamodel.isClassName(type))
+          )
+        ) {
           result = result && false;
         }
       });
@@ -819,7 +846,8 @@ function addProperties(model, Class, classId) {
       return result;
     }
 
-    if (Array.isArray(propertyType) || propertyType === 'array') { // in case of array, return a sub array
+    if (Array.isArray(propertyType) || propertyType === 'array') {
+      // in case of array, return a sub array
       body = function body(position, value) {
         var search = [];
         var component = null;
@@ -831,54 +859,73 @@ function addProperties(model, Class, classId) {
 
         if (typeof value === 'undefined') {
           if (typeof position === 'undefined') {
-
             runtimeArr = new _Array({
-              'id': this.id(),
-              'propertyName': propertyName,
-              'readOnly': propertyReadOnly,
-              'classId': classId,
-              'type': propertyType === 'array' ? 'any' : propertyType[0],
-              'arr': $db.store[classId][this.id()][propertyName]
+              id: this.id(),
+              propertyName: propertyName,
+              readOnly: propertyReadOnly,
+              classId: classId,
+              type: propertyType === 'array' ? 'any' : propertyType[0],
+              arr: $db.store[classId][this.id()][propertyName]
             });
 
             return runtimeArr;
           } else {
-            if (Array.isArray(position)) { // we replace the collection
-              if (_isValidCollection(position, propertyType === 'array' ? 'any' : propertyType[0])) {
+            if (Array.isArray(position)) {
+              // we replace the collection
+              if (
+                _isValidCollection(
+                  position,
+                  propertyType === 'array' ? 'any' : propertyType[0]
+                )
+              ) {
                 search = $db[classId].find({
-                  '_id': this.id()
+                  _id: this.id()
                 });
                 if (search.length) {
-
                   component = search[0];
-                  realVal = _getRealCollection(position, propertyType === 'array' ? 'any' : propertyType[0]);
+                  realVal = _getRealCollection(
+                    position,
+                    propertyType === 'array' ? 'any' : propertyType[0]
+                  );
 
                   $workflow.state({
-                    'component': this.id(),
-                    'state': propertyName,
-                    'data': [position, 'reset']
+                    component: this.id(),
+                    state: propertyName,
+                    data: [position, 'reset']
                   });
 
                   component[propertyName] = realVal;
 
                   if ($helper.isRuntime()) {
-                    $helper.getRuntime().require('db')
+                    $helper
+                      .getRuntime()
+                      .require('db')
                       .update({
-                        'collection': classId,
-                        'id': this.id(),
-                        'field': propertyName,
-                        'value': component[propertyName]
+                        collection: classId,
+                        id: this.id(),
+                        field: propertyName,
+                        value: component[propertyName]
                       });
                   }
                 }
               } else {
-                $log.invalidPropertyName(this.id(), this.constructor.name, propertyName, position, propertyType);
+                $log.invalidPropertyName(
+                  this.id(),
+                  this.constructor.name,
+                  propertyName,
+                  position,
+                  propertyType
+                );
               }
             } else {
               if (typeof position === 'number') {
                 val = $db.store[classId][this.id()][propertyName][position];
                 if (val) {
-                  if ($metamodel.isClassName(propertyType === 'array' ? 'array' : propertyType[0])) {
+                  if (
+                    $metamodel.isClassName(
+                      propertyType === 'array' ? 'array' : propertyType[0]
+                    )
+                  ) {
                     realVal = $helper.getRuntime().require(val);
                   } else {
                     realVal = val;
@@ -886,24 +933,48 @@ function addProperties(model, Class, classId) {
                   return realVal;
                 }
               } else {
-                $log.invalidPropertyName(this.id(), this.constructor.name, propertyName, position, 'number');
+                $log.invalidPropertyName(
+                  this.id(),
+                  this.constructor.name,
+                  propertyName,
+                  position,
+                  'number'
+                );
               }
             }
           }
         } else {
           if (propertyReadOnly) {
-            $log.readOnlyProperty(this.id(), this.constructor.name, propertyName);
+            $log.readOnlyProperty(
+              this.id(),
+              this.constructor.name,
+              propertyName
+            );
           } else {
             if (
-              $metamodel.isValidType(value, propertyType === 'array' ? 'any' : propertyType[0]) ||
-              ($metamodel.inheritFrom(value.constructor.name, propertyType === 'array' ? 'array' : propertyType[0].replace('@', '')) && $metamodel.isClassName(propertyType === 'array' ? 'array' : propertyType[0]))
+              $metamodel.isValidType(
+                value,
+                propertyType === 'array' ? 'any' : propertyType[0]
+              ) ||
+              ($metamodel.inheritFrom(
+                value.constructor.name,
+                propertyType === 'array'
+                  ? 'array'
+                  : propertyType[0].replace('@', '')
+              ) &&
+                $metamodel.isClassName(
+                  propertyType === 'array' ? 'array' : propertyType[0]
+                ))
             ) {
               search = $db[classId].find({
-                '_id': this.id()
+                _id: this.id()
               });
               if (search.length) {
-
-                if ($metamodel.isClassName(propertyType === 'array' ? 'array' : propertyType[0])) {
+                if (
+                  $metamodel.isClassName(
+                    propertyType === 'array' ? 'array' : propertyType[0]
+                  )
+                ) {
                   switch (true) {
                     case typeof value === 'string':
                       realVal = value;
@@ -923,28 +994,41 @@ function addProperties(model, Class, classId) {
                 component[propertyName][position] = realVal;
 
                 if ($helper.isRuntime()) {
-                  $helper.getRuntime().require('db')
+                  $helper
+                    .getRuntime()
+                    .require('db')
                     .update({
-                      'collection': classId,
-                      'id': this.id(),
-                      'field': propertyName,
-                      'value': component[propertyName]
+                      collection: classId,
+                      id: this.id(),
+                      field: propertyName,
+                      value: component[propertyName]
                     });
                 }
 
                 $workflow.state({
-                  'component': this.id(),
-                  'state': propertyName,
-                  'data': [value, 'add']
+                  component: this.id(),
+                  state: propertyName,
+                  data: [value, 'add']
                 });
               }
             } else {
-              $log.invalidPropertyName(this.id(), this.constructor.name, propertyName, value, propertyType);
+              $log.invalidPropertyName(
+                this.id(),
+                this.constructor.name,
+                propertyName,
+                value,
+                propertyType
+              );
             }
           }
         }
       };
-      Class.prototype[propertyName] = new Function('__body', 'return function ' + propertyName + ' (position, value) { return __body.call(this, position, value) };')(body);
+      Class.prototype[propertyName] = new Function(
+        '__body',
+        'return function ' +
+          propertyName +
+          ' (position, value) { return __body.call(this, position, value) };'
+      )(body);
     } else {
       body = function body(value) {
         var search = [];
@@ -962,20 +1046,27 @@ function addProperties(model, Class, classId) {
                 propertyValue = new Date(component[propertyName]);
                 break;
               case propertyType === 'json':
-                propertyValue = JSON.parse(JSON.stringify(component[propertyName]));
+                propertyValue = JSON.parse(
+                  JSON.stringify(component[propertyName])
+                );
                 break;
               case propertyType === 'array':
                 propertyValue = new _Array({
-                  'id': this.id(),
-                  'propertyName': propertyName,
-                  'readOnly': propertyReadOnly,
-                  'classId': classId,
-                  'type': 'any',
-                  'arr': $db.store[classId][this.id()][propertyName]
+                  id: this.id(),
+                  propertyName: propertyName,
+                  readOnly: propertyReadOnly,
+                  classId: classId,
+                  type: 'any',
+                  arr: $db.store[classId][this.id()][propertyName]
                 });
                 break;
               case $metamodel.isStructure(propertyName, classId):
-                propertyValue = addStructure('', propertyName, model, this.id());
+                propertyValue = addStructure(
+                  '',
+                  propertyName,
+                  model,
+                  this.id()
+                );
                 break;
               default:
                 propertyValue = component[propertyName]; // TODO case of object
@@ -987,11 +1078,15 @@ function addProperties(model, Class, classId) {
           }
         } else {
           if (propertyReadOnly) {
-            $log.readOnlyProperty(this.id(), this.constructor.name, propertyName);
+            $log.readOnlyProperty(
+              this.id(),
+              this.constructor.name,
+              propertyName
+            );
           } else {
             if ($metamodel.isValidType(value, propertyType)) {
               search = $db[classId].find({
-                '_id': this.id()
+                _id: this.id()
               });
               if (search.length) {
                 component = search[0];
@@ -1017,12 +1112,14 @@ function addProperties(model, Class, classId) {
                 }
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                  $helper.getRuntime().require('db')
+                  $helper
+                    .getRuntime()
+                    .require('db')
                     .update({
-                      'collection': classId,
-                      'id': this.id(),
-                      'field': propertyName,
-                      'value': value
+                      collection: classId,
+                      id: this.id(),
+                      field: propertyName,
+                      value: value
                     });
                 }
 
@@ -1032,22 +1129,32 @@ function addProperties(model, Class, classId) {
                 }
 
                 $workflow.state({
-                  'component': this.id(),
-                  'state': propertyName,
-                  'data': [value]
+                  component: this.id(),
+                  state: propertyName,
+                  data: [value]
                 });
               }
             } else {
-              $log.invalidPropertyName(this.id(), this.constructor.name, propertyName, value, propertyType);
+              $log.invalidPropertyName(
+                this.id(),
+                this.constructor.name,
+                propertyName,
+                value,
+                propertyType
+              );
             }
           }
         }
       };
-      Class.prototype[propertyName] = new Function('__body', 'return function ' + propertyName + ' (value) { return __body.call(this,value) };')(body);
+      Class.prototype[propertyName] = new Function(
+        '__body',
+        'return function ' +
+          propertyName +
+          ' (value) { return __body.call(this,value) };'
+      )(body);
     }
   });
 }
-
 
 /**
  * @method addStructure
@@ -1055,9 +1162,9 @@ function addProperties(model, Class, classId) {
  * @param {String} name property name
  * @param {String} model model name
  * @param {String} id id of the component
- * @returns {Object} object that cointains methods to access the structure 
+ * @returns {Object} object that cointains methods to access the structure
  * @private
- * @description Add structure properties to a component. 
+ * @description Add structure properties to a component.
  * All these properties will be accessed by a method with the same name.
  * Some checks can be done in order to see if the set of properties is compliant with the model.
  */
@@ -1075,7 +1182,8 @@ function addStructure(path, name, model, id) {
     propertyType = prop.type;
     propertyReadOnly = prop.readOnly;
 
-    if (propertyType === 'array') { // in case of array, return a sub array
+    if (propertyType === 'array') {
+      // in case of array, return a sub array
       body = function body(position, value) {
         var search = [];
         var component = null;
@@ -1108,52 +1216,65 @@ function addStructure(path, name, model, id) {
 
         if (typeof value === 'undefined') {
           if (typeof position === 'undefined') {
-
             runtimeArr = new _Array({
-              'id': id,
-              'propertyName': fullPath,
-              'readOnly': propertyReadOnly,
-              'classId': model,
-              'type': 'any',
-              'arr': getStructureValue(model, id, fullPath)
+              id: id,
+              propertyName: fullPath,
+              readOnly: propertyReadOnly,
+              classId: model,
+              type: 'any',
+              arr: getStructureValue(model, id, fullPath)
             });
 
             return runtimeArr;
           } else {
-            if (Array.isArray(position)) { // we replace the collection
+            if (Array.isArray(position)) {
+              // we replace the collection
               if (_isValidCollection(position, 'any')) {
                 search = $db[model].find({
-                  '_id': id
+                  _id: id
                 });
                 if (search.length) {
-
                   setStructureValue(model, id, fullPath, position);
 
                   $workflow.state({
-                    'component': id,
-                    'state': fullPath,
-                    'data': [position, 'reset']
+                    component: id,
+                    state: fullPath,
+                    data: [position, 'reset']
                   });
 
                   if ($helper.isRuntime()) {
-                    $helper.getRuntime().require('db')
+                    $helper
+                      .getRuntime()
+                      .require('db')
                       .update({
-                        'collection': model,
-                        'id': id,
-                        'field': fullPath,
-                        'value': position
+                        collection: model,
+                        id: id,
+                        field: fullPath,
+                        value: position
                       });
                   }
                 }
               } else {
-                $log.invalidPropertyName(id, this.constructor.name, propertyName, position, propertyType);
+                $log.invalidPropertyName(
+                  id,
+                  this.constructor.name,
+                  propertyName,
+                  position,
+                  propertyType
+                );
               }
             } else {
               if (typeof position === 'number') {
                 val = getStructureValue(model, id, fullPath)[position];
                 return val;
               } else {
-                $log.invalidPropertyName(id, this.constructor.name, propertyName, position, 'number');
+                $log.invalidPropertyName(
+                  id,
+                  this.constructor.name,
+                  propertyName,
+                  position,
+                  'number'
+                );
               }
             }
           }
@@ -1163,10 +1284,9 @@ function addStructure(path, name, model, id) {
           } else {
             if ($metamodel.isValidType(value, 'any')) {
               search = $db[model].find({
-                '_id': id
+                _id: id
               });
               if (search.length) {
-
                 var arr = getStructureValue(model, id, fullPath);
                 if (typeof arr === 'undefined') {
                   arr = [];
@@ -1175,29 +1295,42 @@ function addStructure(path, name, model, id) {
                 setStructureValue(model, id, fullPath, arr);
 
                 if ($helper.isRuntime()) {
-                  $helper.getRuntime().require('db')
+                  $helper
+                    .getRuntime()
+                    .require('db')
                     .update({
-                      'collection': model,
-                      'id': id,
-                      'field': fullPath,
-                      'value': arr
+                      collection: model,
+                      id: id,
+                      field: fullPath,
+                      value: arr
                     });
                 }
 
                 $workflow.state({
-                  'component': id,
-                  'state': fullPath,
-                  'data': [arr, 'add']
+                  component: id,
+                  state: fullPath,
+                  data: [arr, 'add']
                 });
               }
             } else {
-              $log.invalidPropertyName(id, this.constructor.name, propertyName, value, propertyType);
+              $log.invalidPropertyName(
+                id,
+                this.constructor.name,
+                propertyName,
+                value,
+                propertyType
+              );
             }
           }
         }
       };
 
-      sructure[propertyName] = new Function('__body', 'return function ' + propertyName + ' (position, value) { return __body.call(this, position, value) };')(body);
+      sructure[propertyName] = new Function(
+        '__body',
+        'return function ' +
+          propertyName +
+          ' (position, value) { return __body.call(this, position, value) };'
+      )(body);
     } else {
       body = function body(value) {
         var search = [];
@@ -1218,16 +1351,27 @@ function addStructure(path, name, model, id) {
           if (component) {
             switch (true) {
               case $metamodel.isClassName(propertyType):
-                propertyValue = exports.get(getStructureValue(model, id, fullPath));
+                propertyValue = exports.get(
+                  getStructureValue(model, id, fullPath)
+                );
                 break;
               case propertyType === 'date':
-                propertyValue = new Date(getStructureValue(model, id, fullPath));
+                propertyValue = new Date(
+                  getStructureValue(model, id, fullPath)
+                );
                 break;
               case propertyType === 'json':
-                propertyValue = JSON.parse(JSON.stringify(getStructureValue(model, id, fullPath)));
+                propertyValue = JSON.parse(
+                  JSON.stringify(getStructureValue(model, id, fullPath))
+                );
                 break;
               case $metamodel.isStructure(propertyName, model):
-                propertyValue = addStructure(parentPath, propertyName, model, id);
+                propertyValue = addStructure(
+                  parentPath,
+                  propertyName,
+                  model,
+                  id
+                );
                 break;
               default:
                 propertyValue = getStructureValue(model, id, fullPath);
@@ -1246,7 +1390,7 @@ function addStructure(path, name, model, id) {
           } else {
             if ($metamodel.isValidType(value, propertyType)) {
               search = $db[model].find({
-                '_id': id
+                _id: id
               });
               if (search.length) {
                 component = search[0];
@@ -1264,12 +1408,14 @@ function addStructure(path, name, model, id) {
                 }
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                  $helper.getRuntime().require('db')
+                  $helper
+                    .getRuntime()
+                    .require('db')
                     .update({
-                      'collection': model,
-                      'id': id,
-                      'field': fullPath,
-                      'value': value
+                      collection: model,
+                      id: id,
+                      field: fullPath,
+                      value: value
                     });
                 }
 
@@ -1279,25 +1425,35 @@ function addStructure(path, name, model, id) {
                 }
 
                 $workflow.state({
-                  'component': id,
-                  'state': fullPath,
-                  'data': [value]
+                  component: id,
+                  state: fullPath,
+                  data: [value]
                 });
               }
             } else {
-              $log.invalidPropertyName(id, model, fullPath, value, propertyType);
+              $log.invalidPropertyName(
+                id,
+                model,
+                fullPath,
+                value,
+                propertyType
+              );
             }
           }
         }
       };
 
-      sructure[propertyName] = new Function('__body', 'return function ' + propertyName + ' (value) { return __body.call(this,value) };')(body);
+      sructure[propertyName] = new Function(
+        '__body',
+        'return function ' +
+          propertyName +
+          ' (value) { return __body.call(this,value) };'
+      )(body);
     }
   });
 
   return sructure;
 }
-
 
 /**
  * @method addMethods
@@ -1320,9 +1476,9 @@ function addMethods(model, Class, classId) {
       var result = null;
 
       result = $workflow.state({
-        'component': this.id(),
-        'state': methodName,
-        'data': arguments
+        component: this.id(),
+        state: methodName,
+        data: arguments
       });
 
       return result;
@@ -1336,10 +1492,10 @@ function addMethods(model, Class, classId) {
 
       if (arguments[0]) {
         result = $workflow.state({
-          'component': this.id(),
-          'state': methodName,
-          'data': data,
-          'context': arguments[0]
+          component: this.id(),
+          state: methodName,
+          data: data,
+          context: arguments[0]
         });
       } else {
         $log.unknownContext(classId, methodName);
@@ -1352,19 +1508,44 @@ function addMethods(model, Class, classId) {
       paramsName.unshift('context');
       paramsWithContext = paramsName.join('');
 
-      Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' (' + params + ') { return __body.call(this,' + params + ') };')(body);
+      Class.prototype[methodName] = new Function(
+        '__body',
+        'return function ' +
+          methodName +
+          ' (' +
+          params +
+          ') { return __body.call(this,' +
+          params +
+          ') };'
+      )(body);
       if (methodName !== 'name') {
-        Class[methodName] = new Function('__body', 'return function ' + methodName + ' (' + paramsWithContext + ') { return __body.call(this,' + paramsWithContext + ') };')(bodyWithContext);
+        Class[methodName] = new Function(
+          '__body',
+          'return function ' +
+            methodName +
+            ' (' +
+            paramsWithContext +
+            ') { return __body.call(this,' +
+            paramsWithContext +
+            ') };'
+        )(bodyWithContext);
       }
     } else {
-      Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' () { return __body.call(this) };')(body);
+      Class.prototype[methodName] = new Function(
+        '__body',
+        'return function ' + methodName + ' () { return __body.call(this) };'
+      )(body);
       if (methodName !== 'name') {
-        Class[methodName] = new Function('__body', 'return function ' + methodName + ' (context) { return __body.call(this, context) };')(bodyWithContext);
+        Class[methodName] = new Function(
+          '__body',
+          'return function ' +
+            methodName +
+            ' (context) { return __body.call(this, context) };'
+        )(bodyWithContext);
       }
     }
   });
 }
-
 
 /**
  * @method addEvents
@@ -1391,7 +1572,7 @@ function addEvents(model, Class, classId) {
 
       if (classId === '_Channel') {
         systems = $db._System.find({
-          'master': true
+          master: true
         });
         if (systems.length) {
           systemId = systems[0]._id;
@@ -1408,30 +1589,43 @@ function addEvents(model, Class, classId) {
         $db._Message.insert(message);
 
         $workflow.state({
-          'component': this.id(),
-          'state': 'send',
-          'data': [{
-            'event': message.event,
-            'from': message.from,
-            'data': message.data
-          }]
+          component: this.id(),
+          state: 'send',
+          data: [
+            {
+              event: message.event,
+              from: message.from,
+              data: message.data
+            }
+          ]
         });
       } else {
         $workflow.state({
-          'component': this.id(),
-          'state': methodName,
-          'data': arguments
+          component: this.id(),
+          state: methodName,
+          data: arguments
         });
       }
     };
     if (params) {
-      Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' (' + params + ') { return __body.call(this,' + params + ') };')(body);
+      Class.prototype[methodName] = new Function(
+        '__body',
+        'return function ' +
+          methodName +
+          ' (' +
+          params +
+          ') { return __body.call(this,' +
+          params +
+          ') };'
+      )(body);
     } else {
-      Class.prototype[methodName] = new Function('__body', 'return function ' + methodName + ' () { return __body.call(this) };')(body);
+      Class.prototype[methodName] = new Function(
+        '__body',
+        'return function ' + methodName + ' () { return __body.call(this) };'
+      )(body);
     }
   });
 }
-
 
 /**
  * @method addOn
@@ -1445,32 +1639,45 @@ function addOn(Class, classId) {
     var behaviorId = '';
     var currentState = '';
 
-    if ($workflow.checkParams({
-        'component': this,
-        'methodName': 'on',
-        'args': arguments
-      })) {
+    if (
+      $workflow.checkParams({
+        component: this,
+        methodName: 'on',
+        args: arguments
+      })
+    ) {
       if ($metamodel.isValidState(state, classId)) {
-        if (!$metamodel.isEvent(state, classId) &&
+        if (
+          !$metamodel.isEvent(state, classId) &&
           !$metamodel.isProperty(state, classId) &&
           !$metamodel.isLink(state, classId) &&
           !$metamodel.isCollection(state, classId) &&
           $db._Behavior.find({
-            'component': this.id(),
-            'state': state
-          }).length >= 1) {
+            component: this.id(),
+            state: state
+          }).length >= 1
+        ) {
           $log.behaviorNotUnique(classId, state);
         } else {
           if ($worklow.validParamNumbers(classId, state, handler)) {
-            behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI, isCore);
+            behaviorId = $behavior.add(
+              this.id(),
+              state,
+              handler,
+              useCoreAPI,
+              isCore
+            );
 
             currentState = $state.get(this.id());
             if (currentState && currentState.state === state) {
               $workflow.action(behaviorId, currentState.value);
             }
-
           } else {
-            $log.invalidParamNumberMethodOn(this.id(), this.constructor.name, state);
+            $log.invalidParamNumberMethodOn(
+              this.id(),
+              this.constructor.name,
+              state
+            );
           }
         }
       } else {
@@ -1479,9 +1686,11 @@ function addOn(Class, classId) {
     }
     return behaviorId;
   };
-  Class.prototype.on = new Function('__body', 'return function on (state, handler, useCoreAPI, isCore) { return __body.call(this,state,handler,useCoreAPI,isCore) };')(body);
+  Class.prototype.on = new Function(
+    '__body',
+    'return function on (state, handler, useCoreAPI, isCore) { return __body.call(this,state,handler,useCoreAPI,isCore) };'
+  )(body);
 }
-
 
 /**
  * @method addOnClass
@@ -1495,32 +1704,45 @@ function addOnClass(Class, classId) {
     var behaviorId = '';
     var currentState = '';
 
-    if ($workflow.checkParams({
-        'component': this,
-        'methodName': 'on',
-        'args': arguments
-      })) {
+    if (
+      $workflow.checkParams({
+        component: this,
+        methodName: 'on',
+        args: arguments
+      })
+    ) {
       if ($metamodel.isValidState(state, classId)) {
-        if (!$metamodel.isEvent(state, classId) &&
+        if (
+          !$metamodel.isEvent(state, classId) &&
           !$metamodel.isProperty(state, classId) &&
           !$metamodel.isLink(state, classId) &&
           !$metamodel.isCollection(state, classId) &&
           $db._Behavior.find({
-            'component': this.id(),
-            'state': state
-          }).length >= 1) {
+            component: this.id(),
+            state: state
+          }).length >= 1
+        ) {
           $log.behaviorNotUnique(classId, state);
         } else {
           if ($worklow.validParamNumbers(classId, state, handler)) {
-            behaviorId = $behavior.add(this.id(), state, handler, useCoreAPI, isCore);
+            behaviorId = $behavior.add(
+              this.id(),
+              state,
+              handler,
+              useCoreAPI,
+              isCore
+            );
 
             currentState = $state.get(this.id());
             if (currentState && currentState.state === state) {
               $workflow.action(behaviorId, currentState.value);
             }
-
           } else {
-            $log.invalidParamNumberMethodOn(this.id(), this.constructor.name, state);
+            $log.invalidParamNumberMethodOn(
+              this.id(),
+              this.constructor.name,
+              state
+            );
           }
         }
       } else {
@@ -1529,9 +1751,11 @@ function addOnClass(Class, classId) {
     }
     return behaviorId;
   };
-  Class.on = new Function('__body', 'return function on (state, handler, useCoreAPI, isCore) { return __body.call(this, state, handler, useCoreAPI,isCore) };')(body);
+  Class.on = new Function(
+    '__body',
+    'return function on (state, handler, useCoreAPI, isCore) { return __body.call(this, state, handler, useCoreAPI,isCore) };'
+  )(body);
 }
-
 
 /**
  * @method addOffClass
@@ -1542,25 +1766,29 @@ function addOnClass(Class, classId) {
  */
 function addOffClass(Class, classId) {
   var body = function body(state, behaviorId) {
-    if ($workflow.checkParams({
-        'component': this,
-        'methodName': 'off',
-        'args': arguments
-      })) {
+    if (
+      $workflow.checkParams({
+        component: this,
+        methodName: 'off',
+        args: arguments
+      })
+    ) {
       if ($metamodel.isValidState(state, classId)) {
         $behavior.remove({
-          'behaviorId': behaviorId,
-          'componentId': classId,
-          'state': state
+          behaviorId: behaviorId,
+          componentId: classId,
+          state: state
         });
       } else {
         $log.invalidStateOff(classId, state);
       }
     }
   };
-  Class.off = new Function('__body', 'return function off (state, behaviorId) { return __body.call(this, state, behaviorId) };')(body);
+  Class.off = new Function(
+    '__body',
+    'return function off (state, behaviorId) { return __body.call(this, state, behaviorId) };'
+  )(body);
 }
-
 
 /**
  * @method addDestroyClass
@@ -1584,25 +1812,27 @@ function addDestroyClass(Class) {
 
     // remove behaviors
     $behavior.remove({
-      'componentId': id
+      componentId: id
     });
 
     length = result.length;
     for (i = 0; i < length; i++) {
       // remove behaviors
       $behavior.remove({
-        'componentId': result[i]
+        componentId: result[i]
       });
     }
 
     $workflow.state({
-      'component': id,
-      'state': 'destroy'
+      component: id,
+      state: 'destroy'
     });
   };
-  Class.destroy = new Function('__body', 'return function destroy () { return __body.call(this) };')(body);
+  Class.destroy = new Function(
+    '__body',
+    'return function destroy () { return __body.call(this) };'
+  )(body);
 }
-
 
 /**
  * @method addClassInfoClass
@@ -1614,9 +1844,11 @@ function addClassInfoClass(Class) {
   var body = function body() {
     return exports.get(this.id() + 'Info');
   };
-  Class.classInfo = new Function('__body', 'return function classInfo () { return __body.call(this) };')(body);
+  Class.classInfo = new Function(
+    '__body',
+    'return function classInfo () { return __body.call(this) };'
+  )(body);
 }
-
 
 /**
  * @method factory
@@ -1662,9 +1894,7 @@ function factory(config) {
   return Class;
 }
 
-
 /* Public methods */
-
 
 /**
  * @method get
@@ -1676,7 +1906,6 @@ exports.get = function get(id) {
   return store[id];
 };
 
-
 /**
  * @method create
  * @param {Object} config <br>
@@ -1687,7 +1916,6 @@ exports.get = function get(id) {
 exports.create = function create(config) {
   return factory(config);
 };
-
 
 /**
  * @method destroy
@@ -1702,12 +1930,12 @@ exports.destroy = function destroy(id) {
     delete store[id];
     classId = component.constructor.name;
     $db[classId].remove({
-      '_id': id
+      _id: id
     });
 
     // remove behaviors
     $behavior.remove({
-      'componentId': id
+      componentId: id
     });
 
     // case of Behavior
@@ -1717,7 +1945,6 @@ exports.destroy = function destroy(id) {
   }
 };
 
-
 /**
  * @method removeFromMemory
  * @param {String} id id of the component
@@ -1726,7 +1953,6 @@ exports.destroy = function destroy(id) {
 exports.removeFromMemory = function removeFromMemory(id) {
   delete store[id];
 };
-
 
 /**
  * @method clear
