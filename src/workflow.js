@@ -23,7 +23,6 @@
  * @requires metamodel
  * @requires component
  * @requires behavior
- * @requires channel
  * @requires state
  * @requires helper
  * @requires log

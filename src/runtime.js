@@ -20,6 +20,7 @@
 
 /**
  * @module runtime
+ * @requires db
  * @requires component
  * @requires metamodel
  * @requires system

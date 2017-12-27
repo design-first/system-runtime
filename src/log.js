@@ -20,14 +20,14 @@
 
 /**
  * @module log
- * @requires helper
+ * @requires metamodel
+ * @requires db
+ * @requires component
  * @description This module contains all the functions that write a log
  */
 
 'use strict';
 
-var $helper = require('./helper.js');
-var $workflow = require('./workflow.js');
 var $metamodel = require('./metamodel.js');
 var $db = require('./db.js');
 var $component = require('./component.js');

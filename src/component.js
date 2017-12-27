@@ -26,6 +26,7 @@
  * @requires behavior
  * @requires helper
  * @requires log
+ * @requires state
  * @description This module manages the components.
  * It is the factory of all the components that are created by System Runtime.
  */
@@ -38,7 +39,6 @@ var $metamodel = require('./metamodel.js');
 var $behavior = require('./behavior.js');
 var $helper = require('./helper.js');
 var $log = require('./log.js');
-var $worklow = require('./workflow.js');
 var $state = require('./state.js');
 
 /* Private properties */
@@ -1659,7 +1659,7 @@ function addOn(Class, classId) {
         ) {
           $log.behaviorNotUnique(classId, state);
         } else {
-          if ($worklow.validParamNumbers(classId, state, handler)) {
+          if ($workflow.validParamNumbers(classId, state, handler)) {
             behaviorId = $behavior.add(
               this.id(),
               state,
@@ -1724,7 +1724,7 @@ function addOnClass(Class, classId) {
         ) {
           $log.behaviorNotUnique(classId, state);
         } else {
-          if ($worklow.validParamNumbers(classId, state, handler)) {
+          if ($workflow.validParamNumbers(classId, state, handler)) {
             behaviorId = $behavior.add(
               this.id(),
               state,

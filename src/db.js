@@ -21,8 +21,12 @@
 /**
  * @module db
  * @requires component
+ * @requires metamodel
  * @requires helper
  * @requires log
+ * @requires behavior
+ * @requires state
+ * @requires workflow
  * @description This module manages System Runtime database.
  * System Runtime database is a micro NoSQL Database that contains:
  * - collections to store documents (schemas, types, components, ...) and

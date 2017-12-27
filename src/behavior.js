@@ -22,7 +22,6 @@
  * @module behavior
  * @requires db
  * @requires helper
- * @requires channel
  * @description This module manages the behaviors of all components.
  * A behavior is a mecanism that allow users to add actions that will be executed
  * when a specific state of a component will change.
