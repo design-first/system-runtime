@@ -3,7 +3,7 @@
  *
  * https://designfirst.io/systemruntime/
  * 
- * Copyright 2017 Erwan Carriou
+ * Copyright 2018 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,18 +19,28 @@
  */
 
 module.exports = config => {
-  // browers
-  const browsers = ['ChromeHeadless'];
-
-  // reporters
-  let reporters = ['progress', 'coverage'];
+  const browsers = [
+    'ChromeHeadless'
+  ];
+  let reporters = [
+    'progress',
+    'coverage'
+  ];
+  
   if (process.env.TRAVIS) {
-    reporters = ['progress', 'coverage', 'dots'];
+    reporters = [
+      'progress',
+      'coverage',
+      'dots'
+    ];
   }
 
   config.set({
     basePath: './',
-    frameworks: ['mocha', 'chai'],
+    frameworks: [
+      'mocha',
+      'chai'
+    ],
     files: [
       'dist/system-runtime.min.js',
       'test/runtime/runtime-spec.js',
@@ -43,7 +53,9 @@ module.exports = config => {
     ],
     reporters: reporters,
     preprocessors: {
-      'dist/system-runtime.min.js': ['coverage']
+      'dist/system-runtime.min.js': [
+        'coverage'
+      ]
     },
     colors: true,
     autoWatch: true,
