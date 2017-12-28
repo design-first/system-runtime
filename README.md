@@ -147,7 +147,7 @@ It will:
 *  generate System Runtime core system in **/build** directory,
 *  generate System Runtime core module for the server library,
 *  build System Runtime client library on **/dist** directory,
-*  run jshint and server/client tests.
+*  run eshint checks and server/client tests.
 
 ## Development
 
