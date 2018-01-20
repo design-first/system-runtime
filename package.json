@@ -64,6 +64,6 @@
     "karma-mocha": "^1.3.0",
     "karma-script-launcher": "^1.0.0",
     "load-grunt-tasks": "^3.5.2",
-    "mocha": "^4.1.0"
+    "mocha": "^5.0.0"
   }
 }
