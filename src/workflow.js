@@ -426,6 +426,7 @@ function callAction(component, state, action, params, isEvent) {
     for (i = 0; i < length; i++) {
       injectedParams.push(params[i]);
     }
+
     if (action.useCoreAPI) {
       injectedParams.push($component);
       injectedParams.push($db);
@@ -434,6 +435,11 @@ function callAction(component, state, action, params, isEvent) {
       injectedParams.push($behavior);
       injectedParams.push($state);
       injectedParams.push($log);
+      injectedParams.push($helper);
+    }
+
+    if ($helper.isOnNode()) {
+      injectedParams.push($helper.getRequire());
     }
 
     if (isEvent) {

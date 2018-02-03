@@ -119,9 +119,13 @@ function createFunction(name, func, core, useCoreAPI) {
     funcBody = funcBody.substring(0, funcBody.lastIndexOf('}')).trim();
   }
 
+  // kludge for Babel
+  funcBody = funcBody.replace(/_this/g, 'this');
+
   if (params[0] === '') {
     params = [];
   }
+
   if (useCoreAPI) {
     params.push('$component');
     params.push('$db');
@@ -130,6 +134,11 @@ function createFunction(name, func, core, useCoreAPI) {
     params.push('$behavior');
     params.push('$state');
     params.push('$log');
+    params.push('$helper');
+  }
+
+  if ($helper.isOnNode()) {
+    params.push('require');
   }
 
   if (params[0] !== '') {

@@ -10,7 +10,6 @@
     "no-new-object": 1,
     "no-array-constructor": 1,
     "array-callback-return": 1,
-    "no-eval": 1,
     "one-var": ["warn", "never"],
     "indent": ["warn", 2, { "SwitchCase": 1 }],
     "wrap-iife": 1,

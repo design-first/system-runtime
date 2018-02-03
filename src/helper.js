@@ -33,6 +33,7 @@ var $component = require('./component.js');
 /* Private property */
 
 var runtimeRef = null;
+var requireRef = null;
 
 /* Public method */
 
@@ -66,6 +67,35 @@ exports.getRuntime = function getRuntime() {
   }
 
   return runtimeRef;
+};
+
+/**
+ * @method isOnNode
+ * @returns {Boolean} true if a System Runtime is running on node
+ * @description Check if a System Runtime is running on node
+ */
+exports.isOnNode = function isOnNode() {
+  var result = false;
+
+  if (typeof window === 'undefined' && typeof global !== 'undefined') {
+    result = true;
+  }
+
+  return result;
+};
+
+/**
+ * @method getRequire
+ * @returns {Object} the require object
+ * @description Get the require object
+ */
+exports.getRequire = function getRequire() {
+  if (!requireRef) {
+    // kludge for webpack
+    requireRef = eval('require');
+  }
+
+  return requireRef;
 };
 
 /**

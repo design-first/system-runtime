@@ -31,11 +31,6 @@
 
 'use strict';
 
-// add require at global level
-if (typeof window === 'undefined' && typeof global !== 'undefined') {
-  global.require = require;
-}
-
 var $db = require('./db.js');
 var $component = require('./component.js');
 var $metamodel = require('./metamodel.js');
