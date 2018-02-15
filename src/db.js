@@ -119,8 +119,8 @@ function dump() {
   dbDump.schemas = {};
   if (exports._Schema.count()) {
     for (schemaId in exports.store._Schema) {
-      schema = JSON.parse(JSON.stringify(exports.store._Schema[schemaId]));
-      if (!schema._core) {
+      if (!exports.store._Schema[schemaId]._core) {
+        schema = JSON.parse(JSON.stringify(exports.store._Schema[schemaId]));
         dbDump.schemas[schemaId] = schema;
       }
     }
@@ -130,8 +130,8 @@ function dump() {
   dbDump.models = {};
   if (exports._Model.count()) {
     for (modelId in exports.store._Model) {
-      model = JSON.parse(JSON.stringify(exports.store._Model[modelId]));
-      if (!model._core) {
+      if (!exports.store._Model[modelId]._core) {
+        model = JSON.parse(JSON.stringify(exports.store._Model[modelId]));
         dbDump.models[modelId] = model;
       }
     }
@@ -141,8 +141,8 @@ function dump() {
   dbDump.types = {};
   if (exports._Type.count()) {
     for (typeId in exports.store._Type) {
-      type = JSON.parse(JSON.stringify(exports.store._Type[typeId]));
-      if (!type.core) {
+      if (!exports.store._Type[typeId].core) {
+        type = JSON.parse(JSON.stringify(exports.store._Type[typeId]));
         dbDump.types[type.name] = type;
       }
     }
@@ -151,10 +151,11 @@ function dump() {
   // behaviors
   dbDump.behaviors = {};
   for (behaviorId in exports.store._Behavior) {
-    behavior = JSON.parse(JSON.stringify(exports.store._Behavior[behaviorId]));
-    delete behavior.classInfo;
-
-    if (!behavior.core) {
+    if (!exports.store._Behavior[behaviorId].core) {
+      behavior = JSON.parse(
+        JSON.stringify(exports.store._Behavior[behaviorId])
+      );
+      delete behavior.classInfo;
       dbDump.behaviors[behaviorId] = behavior;
     }
   }

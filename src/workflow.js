@@ -443,15 +443,29 @@ function callAction(component, state, action, params, isEvent) {
     }
 
     if (isEvent) {
-      setTimeout(
-        action.action.bind.apply(
-          action.action,
-          [component].concat(injectedParams)
-        ),
-        0
-      );
+      if (action.context) {
+        setTimeout(
+          action.action.bind.apply(
+            action.action,
+            [action.context].concat(injectedParams)
+          ),
+          0
+        );
+      } else {
+        setTimeout(
+          action.action.bind.apply(
+            action.action,
+            [component].concat(injectedParams)
+          ),
+          0
+        );
+      }
     } else {
-      result = action.action.apply(component, injectedParams);
+      if (action.context) {
+        result = action.action.apply(action.context, injectedParams);
+      } else {
+        result = action.action.apply(component, injectedParams);
+      }
     }
   } catch (e) {
     if (e instanceof RuntimeError) {
@@ -752,6 +766,7 @@ exports.action = function action(behaviorId, params) {
           behavior.state,
           {
             useCoreAPI: behavior.useCoreAPI,
+            context: behavior.context,
             action: actionFromMemory
           },
           params,

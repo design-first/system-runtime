@@ -13,6 +13,7 @@
       "action": "property",
       "state": "property",
       "useCoreAPI": "property",
+      "context": "property",
       "_id": "1ac07185641fa9f"
     }
   },
@@ -20,6 +21,12 @@
     "166971fd9d107fd": {
       "_name": "_Behavior",
       "_core": true,
+      "context": {
+        "type": "any",
+        "readOnly": false,
+        "mandatory": false,
+        "default": null
+      },
       "core": {
         "type": "boolean",
         "readOnly": false,

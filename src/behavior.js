@@ -173,10 +173,11 @@ function createFunction(name, func, core, useCoreAPI) {
  * @param {Object} action the action to execute when the component will have a specific state
  * @param {Boolean} useCoreAPI if true, System Runtime core modules will be injected as parameters of the action (default false)
  * @param {Boolean} core if true, behavior can not be exported
+ * @param {Object} context new context of the behavior
  * @returns {String} id of the behavior created in System Runtime database
  * @description Add a behavior that will be stored in System Runtime database
  */
-exports.add = function add(id, state, action, useCoreAPI, core) {
+exports.add = function add(id, state, action, useCoreAPI, core, context) {
   var behaviorId = $helper.generateId();
   var strAction = action.toString();
 
@@ -197,7 +198,8 @@ exports.add = function add(id, state, action, useCoreAPI, core) {
     state: state,
     action: strAction,
     useCoreAPI: useCoreAPI,
-    core: core
+    core: core,
+    context: context
   });
 
   return behaviorId;
@@ -285,6 +287,7 @@ exports.getActions = function getActions(id, state) {
     }
     result.push({
       useCoreAPI: behavior.useCoreAPI,
+      context: behavior.context,
       action: action
     });
   });

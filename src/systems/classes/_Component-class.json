@@ -38,6 +38,12 @@
             "type": "boolean",
             "mandatory": false,
             "default": false
+          },
+          {
+            "name": "context",
+            "type": "any",
+            "mandatory": false,
+            "default": null
           }
         ]
       },

@@ -1635,7 +1635,7 @@ function addEvents(model, Class, classId) {
  * @description Add a on method to a component to add behaviors to the component
  */
 function addOn(Class, classId) {
-  var body = function body(state, handler, useCoreAPI, isCore) {
+  var body = function body(state, handler, useCoreAPI, isCore, context) {
     var behaviorId = '';
     var currentState = '';
 
@@ -1665,7 +1665,8 @@ function addOn(Class, classId) {
               state,
               handler,
               useCoreAPI,
-              isCore
+              isCore,
+              context
             );
 
             currentState = $state.get(this.id());
@@ -1688,7 +1689,7 @@ function addOn(Class, classId) {
   };
   Class.prototype.on = new Function(
     '__body',
-    'return function on (state, handler, useCoreAPI, isCore) { return __body.call(this,state,handler,useCoreAPI,isCore) };'
+    'return function on (state, handler, useCoreAPI, isCore, context) { return __body.call(this, state, handler, useCoreAPI, isCore, context) };'
   )(body);
 }
 
@@ -1700,7 +1701,7 @@ function addOn(Class, classId) {
  * @description Add a on method to a class component to add behaviors to the class
  */
 function addOnClass(Class, classId) {
-  var body = function body(state, handler, useCoreAPI, isCore) {
+  var body = function body(state, handler, useCoreAPI, isCore, context) {
     var behaviorId = '';
     var currentState = '';
 
@@ -1730,7 +1731,8 @@ function addOnClass(Class, classId) {
               state,
               handler,
               useCoreAPI,
-              isCore
+              isCore,
+              context
             );
 
             currentState = $state.get(this.id());
@@ -1753,7 +1755,7 @@ function addOnClass(Class, classId) {
   };
   Class.on = new Function(
     '__body',
-    'return function on (state, handler, useCoreAPI, isCore) { return __body.call(this, state, handler, useCoreAPI,isCore) };'
+    'return function on (state, handler, useCoreAPI, isCore, context) { return __body.call(this, state, handler, useCoreAPI, isCore, context) };'
   )(body);
 }
 
