@@ -344,7 +344,7 @@ exports.readOnlyProperty = function readOnlyProperty(
 /**
  * @method invalidDocumentOnDbInsert
  * @param {String} doc a document
- * @param {String} collectionName the name of the colllection
+ * @param {String} collectionName the name of the collection
  * @description Invalid document on a System Runtime database insert operation
  */
 exports.invalidDocumentOnDbInsert = function invalidDocumentOnDbInsert(
@@ -362,7 +362,7 @@ exports.invalidDocumentOnDbInsert = function invalidDocumentOnDbInsert(
 
 /**
  * @method invalidPropertyTypeOnDbUpdate
- * @param {String} collectionName the name of the colllection
+ * @param {String} collectionName the name of the collection
  * @param {String} id id of the component
  * @param {String} propertyName name of the property
  * @param {String} propertyValue value of the property
@@ -393,7 +393,7 @@ exports.invalidPropertyTypeOnDbUpdate = function invalidPropertyTypeOnDbUpdate(
 
 /**
  * @method unknownPropertyOnDbUpdate
- * @param {String} collectionName the name of the colllection
+ * @param {String} collectionName the name of the collection
  * @param {String} propertyName name of the property
  * @param {String} id id of the component
  * @description Unkonw property on a System Runtime database update operation

@@ -941,7 +941,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
  * @method remove
  * @param {Object|Array} query query to find the documents to remove
  * @returns {Array} list of documents id removed
- * @description Remove a document from the colllection.
+ * @description Remove a document from the collection.
  * When a document is removed, the component is destroyed.
  *
  * @example
