@@ -37,6 +37,107 @@ describe('System Runtime db component', () => {
     expect(result.length).equal(1);
   });
 
+  it('can find a document with a $eq operator', () => {
+    const result = db._Runtime.find({
+      '_id': {
+        '$eq': 'runtime'
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can find a document with a $gt operator', () => {
+    const result = db._Runtime.find({
+      'version': {
+        '$gt': '1.0.0'
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can find a document with a $gte operator', () => {
+    const result = db._Runtime.find({
+      'version': {
+        '$gte': '1.0.0'
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can find a document with a $lt operator', () => {
+    const result = db._Runtime.find({
+      'version': {
+        '$lt': '9.0.0'
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can find a document with a $lte operator', () => {
+    const result = db._Runtime.find({
+      'version': {
+        '$lte': '9.0.0'
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can find a document with a $ne operator', () => {
+    const result = db._Runtime.find({
+      'version': {
+        '$ne': '1.0.0'
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can find a document with a $in operator', () => {
+    const result = db._Runtime.find({
+      '_id': {
+        '$in': [42, false, 'runtime']
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can find a document with a $nin operator', () => {
+    const result = db._Runtime.find({
+      '_id': {
+        '$nin': [42, false]
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can find a document with multiple query operator', () => {
+    const result = db._Runtime.find({
+      '_id': {
+        '$nin': [''],
+        '$eq': 'runtime'
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can sort the result of a find', () => {
+    const result = db._Runtime.find({
+      '_id': 'runtime'
+    }).sort({
+      '_id': -1
+    });
+
+    expect(result.length).equal(1);
+  });
+
   it('can add a document', () => {
     db._Runtime.insert({
       '_id': 'runtime1',
@@ -126,7 +227,7 @@ describe('System Runtime db component', () => {
   it('can remove many documents', () => {
     const runtimeid1 = 'runtime' + Math.round(Math.random() * 1000000);
     const runtimeid2 = 'runtime' + Math.round(Math.random() * 1000000);
-    
+
     db._Runtime.insert([{
       '_id': runtimeid1,
       'version': '0.0.0'

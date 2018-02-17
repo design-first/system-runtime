@@ -186,58 +186,185 @@ function dump() {
 }
 
 /**
- * @method contains
- * @param {Object} source source object
- * @param {Object} target target object
- * @returns {Boolean} true if the source object contains the target object
+ * @class _Array
  * @private
- * @description Test if an object contains another one
+ * @description Sub class to override sort method of Array Class
  */
-function contains(source, target) {
+function _Array() {
+  var arr = [];
+
+  /**
+   * @method sort
+   * @param {Function|Object} param the sort function or the sort query
+   * @returns {Array} the sorted array
+   * @description Override sort method
+   */
+  arr.sort = function sort(param) {
+    var result = null;
+    var field = '';
+    var arrCopy = [];
+
+    // copy
+    arr.forEach(function(val) {
+      arrCopy.push(val);
+    });
+
+    if (param instanceof Function) {
+      arrCopy.sort(param);
+    } else {
+      field = Object.keys(param)[0];
+      arrCopy.sort(function(docA, docB) {
+        if (docA[field] < docB[field]) {
+          return param[field] === 1 ? -1 : 1;
+        }
+        if (docA[field] > docB[field]) {
+          return param[field] === 1 ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+
+    return arrCopy;
+  };
+
+  return arr;
+}
+
+_Array.prototype = [];
+
+/**
+ * @method isValidWithSelectors
+ * @param {Object} field field on which made the search
+ * @param {Object} query query object
+ * @param {Object} document document object
+ * @returns {Boolean} true if the query  used for the search is valid with the document
+ * @private
+ * @description Test if the query used for the search is valid with the document
+ */
+function isValidWithSelectors(field, query, document) {
+  var result = true;
+  var selector = '';
+
+  search: for (selector in query) {
+    switch (true) {
+      case selector === '$eq':
+        if (document[field] !== query[selector]) {
+          result = false;
+          break search;
+        }
+        break;
+      case selector === '$gt':
+        if (document[field] <= query[selector]) {
+          result = false;
+          break search;
+        }
+        break;
+      case selector === '$gte':
+        if (document[field] < query[selector]) {
+          result = false;
+          break search;
+        }
+        break;
+      case selector === '$lt':
+        if (document[field] >= query[selector]) {
+          result = false;
+          break search;
+        }
+        break;
+      case selector === '$lte':
+        if (document[field] > query[selector]) {
+          result = false;
+          break search;
+        }
+        break;
+      case selector === '$ne':
+        if (document[field] === query[selector]) {
+          result = false;
+          break search;
+        }
+        break;
+      case selector === '$in':
+        if (
+          Array.isArray(query[selector]) &&
+          query[selector].indexOf(document[field]) === -1
+        ) {
+          result = false;
+          break search;
+        }
+        break;
+      case selector === '$nin':
+        if (
+          Array.isArray(query[selector]) &&
+          query[selector].indexOf(document[field]) !== -1
+        ) {
+          result = false;
+          break search;
+        }
+        break;
+      default:
+        break;
+    }
+  }
+  return result;
+}
+
+/**
+ * @method isValid
+ * @param {Object} query query object
+ * @param {Object} document document object
+ * @returns {Boolean} true if the query of search is valid with the document
+ * @private
+ * @description Test if the query of search is valid with the document
+ */
+function isValid(query, document) {
   var result = true;
   var findInArray = false;
-  var property = '';
+  var field = '';
   var i = 0;
   var length = 0;
 
-  for (property in source) {
-    if (typeof target[property] !== 'undefined') {
-      if (source[property] instanceof RegExp) {
-        if (
-          Array.isArray(target[property]) &&
-          !Array.isArray(source[property])
-        ) {
-          length = target[property].length;
-          for (i = 0; i < length; i++) {
-            if (
-              target[property][i].toString().match(source[property]) !== null
-            ) {
-              findInArray = true;
-              break;
+  search: for (field in query) {
+    if (typeof document[field] !== 'undefined') {
+      switch (true) {
+        // regular expression
+        case query[field] instanceof RegExp:
+          if (Array.isArray(document[field]) && !Array.isArray(query[field])) {
+            length = document[field].length;
+            for (i = 0; i < length; i++) {
+              if (document[field][i].toString().match(query[field]) !== null) {
+                findInArray = true;
+                break search;
+              }
+            }
+            result = findInArray;
+          } else {
+            if (document[field].toString().match(query[field]) === null) {
+              result = false;
+              break search;
             }
           }
-          result = findInArray;
-        } else {
-          if (target[property].toString().match(source[property]) === null) {
+          break;
+
+        // query selectors
+        case query[field] instanceof Object && !Array.isArray(query[field]):
+          result = isValidWithSelectors(field, query[field], document);
+          break;
+
+        // multiple query
+        case Array.isArray(document[field]) && !Array.isArray(query[field]):
+          if (document[field].indexOf(query[field]) === -1) {
             result = false;
-            break;
+            break search;
           }
-        }
-      } else {
-        if (
-          Array.isArray(target[property]) &&
-          !Array.isArray(source[property])
-        ) {
-          if (target[property].indexOf(source[property]) === -1) {
+          break;
+
+        // simple query
+        default:
+          if (document[field] !== query[field]) {
             result = false;
-            break;
+            break search;
           }
-        } else {
-          if (target[property] !== source[property]) {
-            result = false;
-            break;
-          }
-        }
+          break;
       }
     } else {
       result = false;
@@ -523,10 +650,10 @@ var DatabaseCollection = function DatabaseCollection(name) {
  * $db.Person.find([{'name': 'rene'}, {'name': 'robert'}]);
  */
 DatabaseCollection.prototype.find = function find(query) {
-  var result = [];
+  var result = new _Array();
   var resultId = {};
   var id = '';
-  var object = {};
+  var document = {};
 
   query = query || null;
 
@@ -535,10 +662,10 @@ DatabaseCollection.prototype.find = function find(query) {
       query.forEach(
         function multiSearch(criteria) {
           for (id in exports.store[this.name]) {
-            object = exports.store[this.name][id];
-            if (contains(criteria, object)) {
+            document = exports.store[this.name][id];
+            if (isValid(criteria, document)) {
               if (typeof resultId[id] === 'undefined') {
-                result.push(object);
+                result.push(document);
                 resultId[id] = true;
               }
             }
@@ -547,16 +674,16 @@ DatabaseCollection.prototype.find = function find(query) {
       );
     } else {
       for (id in exports.store[this.name]) {
-        object = exports.store[this.name][id];
-        if (contains(query, object)) {
-          result.push(object);
+        document = exports.store[this.name][id];
+        if (isValid(query, document)) {
+          result.push(document);
         }
       }
     }
   } else {
     for (id in exports.store[this.name]) {
-      object = exports.store[this.name][id];
-      result.push(object);
+      document = exports.store[this.name][id];
+      result.push(document);
     }
   }
 
@@ -836,7 +963,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
           for (id in exports.store[this.name]) {
             object = exports.store[this.name][id];
 
-            if (contains(criteria, object)) {
+            if (isValid(criteria, object)) {
               delete exports.store[this.name][id];
 
               exports.createLog('remove', this.name, id, '', '');
@@ -863,7 +990,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
       for (id in exports.store[this.name]) {
         object = exports.store[this.name][id];
 
-        if (contains(query, object)) {
+        if (isValid(query, object)) {
           delete exports.store[this.name][id];
 
           exports.createLog('remove', this.name, id, '', '');

@@ -60,7 +60,7 @@ var store = {};
  * {String} type type of the array
  * {Array} arr array
  * @private
- * @description Sub class to override push and pop method of Array Class
+ * @description Sub class to override many methods of Array Class
  */
 function _Array(conf) {
   var arr = [];
