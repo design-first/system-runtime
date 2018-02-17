@@ -703,7 +703,7 @@
       "_id": "p1524e1d2c414a17",
       "component": "channel",
       "state": "$designerCreateBehavior",
-      "action": "function $designerCreateBehavior(behavior) { \n  $db._Behavior.insert(component);\t\n}",
+      "action": "function $designerCreateBehavior(behavior) { \n  $db._Behavior.insert(behavior);\t\n}",
       "useCoreAPI": true,
       "core": true
     },
