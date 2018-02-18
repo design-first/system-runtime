@@ -37,7 +37,7 @@ describe('System Runtime db component', () => {
     expect(result.length).equal(1);
   });
 
-  it('can find a document with a $eq operator', () => {
+  it('can find a document with a $eq selector', () => {
     const result = db._Runtime.find({
       '_id': {
         '$eq': 'runtime'
@@ -47,47 +47,17 @@ describe('System Runtime db component', () => {
     expect(result.length).equal(1);
   });
 
-  it('can find a document with a $gt operator', () => {
+  it('can find a document with a $eq selector and regexp', () => {
     const result = db._Runtime.find({
-      'version': {
-        '$gt': '1.0.0'
+      '_id': {
+        '$eq': /runtime/
       }
     });
 
     expect(result.length).equal(1);
   });
 
-  it('can find a document with a $gte operator', () => {
-    const result = db._Runtime.find({
-      'version': {
-        '$gte': '1.0.0'
-      }
-    });
-
-    expect(result.length).equal(1);
-  });
-
-  it('can find a document with a $lt operator', () => {
-    const result = db._Runtime.find({
-      'version': {
-        '$lt': '9.0.0'
-      }
-    });
-
-    expect(result.length).equal(1);
-  });
-
-  it('can find a document with a $lte operator', () => {
-    const result = db._Runtime.find({
-      'version': {
-        '$lte': '9.0.0'
-      }
-    });
-
-    expect(result.length).equal(1);
-  });
-
-  it('can find a document with a $ne operator', () => {
+  it('can find a document with a $ne selector', () => {
     const result = db._Runtime.find({
       'version': {
         '$ne': '1.0.0'
@@ -97,7 +67,47 @@ describe('System Runtime db component', () => {
     expect(result.length).equal(1);
   });
 
-  it('can find a document with a $in operator', () => {
+  it('can find a document with a $gt selector', () => {
+    const result = db._Runtime.find({
+      'version': {
+        '$gt': '1.0.0'
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can find a document with a $gte selector', () => {
+    const result = db._Runtime.find({
+      'version': {
+        '$gte': '1.0.0'
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can find a document with a $lt selector', () => {
+    const result = db._Runtime.find({
+      'version': {
+        '$lt': '9.0.0'
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can find a document with a $lte selector', () => {
+    const result = db._Runtime.find({
+      'version': {
+        '$lte': '9.0.0'
+      }
+    });
+
+    expect(result.length).equal(1);
+  });
+
+  it('can find a document with a $in selector', () => {
     const result = db._Runtime.find({
       '_id': {
         '$in': [42, false, 'runtime']
@@ -107,7 +117,7 @@ describe('System Runtime db component', () => {
     expect(result.length).equal(1);
   });
 
-  it('can find a document with a $nin operator', () => {
+  it('can find a document with a $nin selector', () => {
     const result = db._Runtime.find({
       '_id': {
         '$nin': [42, false]
@@ -117,7 +127,7 @@ describe('System Runtime db component', () => {
     expect(result.length).equal(1);
   });
 
-  it('can find a document with multiple query operator', () => {
+  it('can find a document with multiple selectors', () => {
     const result = db._Runtime.find({
       '_id': {
         '$nin': [''],

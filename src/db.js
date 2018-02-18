@@ -248,9 +248,16 @@ function isValidWithSelectors(field, query, document) {
   search: for (selector in query) {
     switch (true) {
       case selector === '$eq':
-        if (document[field] !== query[selector]) {
-          result = false;
-          break search;
+        if (query[selector] instanceof RegExp) {
+          if (document[field].toString().match(query[selector]) === null) {
+            result = false;
+            break search;
+          }
+        } else {
+          if (document[field] !== query[selector]) {
+            result = false;
+            break search;
+          }
         }
         break;
       case selector === '$gt':
