@@ -200,7 +200,9 @@ exports.invalidClassName = function invalidClassName(
  * @description Missing a property
  */
 exports.missingProperty = function missingProperty(propertyName) {
-  getLogger().warn("missing property '" + propertyName + "'");
+  getLogger().warn(
+    "missing property '" + propertyName + "' for a schema or a model"
+  );
 };
 
 /**
@@ -236,11 +238,7 @@ exports.invalidTypeImp = function invalidTypeImp(property, className) {
  */
 exports.missingPropertyImp = function missingPropertyImp(property, className) {
   getLogger().warn(
-    "missing property '" +
-      property +
-      "' for the definition of '" +
-      className +
-      "'"
+    "missing property '" + property + "' in the model '" + className + "'"
   );
 };
 
@@ -614,7 +612,7 @@ exports.behaviorNotUnique = function behaviorNotUnique(id, stateName) {
  */
 exports.invalidStateOn = function invalidStateOn(id, stateName) {
   getLogger().warn(
-    "try to add a behavior with an unkwown state '" +
+    "try to add a behavior to an unkwown state '" +
       stateName +
       "' on class '" +
       id +
@@ -715,7 +713,7 @@ exports.invalidChannelEvent = function invalidChannelEvent(
  * @param {String} id id of the component
  * @param {String} className class name of the component
  * @param {String} methodName name of the component
- * @description invalid parameter number for an action add with on method
+ * @description invalid parameter number for a behavior add with 'on' method
  */
 exports.invalidParamNumberMethodOn = function invalidParamNumberMethodOn(
   id,
@@ -728,7 +726,7 @@ exports.invalidParamNumberMethodOn = function invalidParamNumberMethodOn(
     classInfo = " (class '" + className + "')";
   }
   getLogger().warn(
-    "invalid number of parameters when adding an action on method '" +
+    "invalid number of parameters when adding a behavior on method '" +
       methodName +
       "' on component '" +
       id +
@@ -781,7 +779,11 @@ exports.invalidUseOfComponent = function invalidUseOfComponent(id) {
  * @description Try to add an invalid schema
  */
 exports.invalidSchema = function invalidSchema(name) {
-  getLogger().warn("the schema '" + name + "' is not valid");
+  getLogger().warn(
+    "the schema '" +
+      name +
+      "' is not valid, it has been removed from the metamodel"
+  );
 };
 
 /**
@@ -790,7 +792,11 @@ exports.invalidSchema = function invalidSchema(name) {
  * @description Try to add an invalid model
  */
 exports.invalidModel = function invalidModel(name) {
-  getLogger().warn("the model '" + name + "' is not valid");
+  getLogger().warn(
+    "the model '" +
+      name +
+      "' is not valid, it has been removed from the metamodel"
+  );
 };
 
 /**
@@ -1029,6 +1035,25 @@ exports.actionInvokeError = function actionInvokeError(
         message
     );
   }
+};
+
+/**
+ * @method invalidSchemaPropertyName
+ * @param {String} name name of the schema
+ * @param {String} propName name of the property
+ * @description Invalid name for the property of a schema
+ */
+exports.invalidSchemaPropertyName = function invalidSchemaPropertyName(
+  name,
+  propName
+) {
+  getLogger().warn(
+    "invalid name '" +
+      propName +
+      "' for schema '" +
+      name +
+      "': a name do not begin with '_'"
+  );
 };
 
 /**

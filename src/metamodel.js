@@ -52,6 +52,14 @@ var PROPERTY_TYPE = 'property';
 var LINK_TYPE = 'link';
 var COLLECTION_TYPE = 'collection';
 var internalTypes = ['property', 'collection', 'link', 'method', 'event'];
+var internalNames = [
+  '_id',
+  '_name',
+  '_inherit',
+  '_description',
+  '_class',
+  '_core'
+];
 var defaultTypes = [
   'boolean',
   'string',
@@ -75,6 +83,21 @@ var store = {
 };
 
 /* Private methods */
+
+/**
+ * @method isInternalName
+ * @param {String} name
+ * @private
+ * @description is name an internal name
+ */
+function isInternalName(name) {
+  var result = true;
+
+  if (internalNames.indexOf(name) === -1) {
+    result = false;
+  }
+  return result;
+}
 
 /**
  * @method generateModels
@@ -127,6 +150,13 @@ function generateModels() {
     // set description
     if (typeof schema._description !== 'undefined') {
       model._description = schema._description;
+    }
+
+    // check valid name
+    for (att in schema) {
+      if (!isInternalName(att) && att.indexOf('_') === 0) {
+        $log.invalidSchemaPropertyName(schema._name, att);
+      }
     }
 
     //  set model default values
@@ -188,7 +218,7 @@ function generateModels() {
           };
           break;
         default:
-          if (att.indexOf('_') !== 0) {
+          if (!isInternalName(att)) {
             $log.invalidSchemaProperty(schema._name, att);
           }
           break;
@@ -1070,18 +1100,17 @@ function merge(source, target, all) {
 
 /**
  * @method schema
- * @param {JSON} importedSchema schema to add
- * @description Add a new schema
+ * @param {JSON} schema schema
+ * @description Add a new schema to the metamodel
  */
-exports.schema = function schema(importedSchema) {
+exports.schema = function schema(schema) {
   var id = null;
   var result = [];
-  var schema = null;
   var name = '';
   var mergedSchema = {};
   var schemas = [];
 
-  schema = JSON.parse(JSON.stringify(importedSchema));
+  schema = JSON.parse(JSON.stringify(schema));
   name = schema[NAME];
 
   if (typeof schema[ID] === 'undefined') {
@@ -1141,11 +1170,10 @@ exports.schema = function schema(importedSchema) {
 
 /**
  * @method model
- * @param {JSON} importedModel model to add
- * @description Add a new model
+ * @param {JSON} model model
+ * @description Add a new model to the metamodel
  */
-exports.model = function model(importedModel) {
-  var model = null;
+exports.model = function model(model) {
   var id = null;
   var result = [];
   var inherit = '';
@@ -1153,7 +1181,7 @@ exports.model = function model(importedModel) {
   var mergedModel = {};
   var models = [];
 
-  model = JSON.parse(JSON.stringify(importedModel));
+  model = JSON.parse(JSON.stringify(model));
   name = model[NAME];
 
   if (typeof model[ID] === 'undefined') {
