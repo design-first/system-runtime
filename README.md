@@ -28,7 +28,7 @@ Use System Runtime APIs to create your system:
 
 ```js
 // create a system
-let system = runtime.system('system');
+const system = runtime.system('system');
 
 // add some business logic in the start method
 system.on('start', () => console.log('Hello world !'));
@@ -83,7 +83,7 @@ Just call *install* API to install and start your bundle:
 
 ```js
 // require System Runtime
-let runtime = require('system-runtime');
+const runtime = require('system-runtime');
 
 // install your bundle 
 runtime.install('system.json');
