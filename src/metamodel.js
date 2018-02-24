@@ -2164,6 +2164,8 @@ exports.prepareObject = function prepareObject(object, schema) {
   var mandatory = true;
   var defaultValue = '';
 
+  schema = JSON.parse(JSON.stringify(schema));
+
   // mandatory & default value
   for (fieldName in schema) {
     field = schema[fieldName];
