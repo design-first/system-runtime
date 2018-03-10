@@ -17,6 +17,7 @@ describe('a System Runtime component', function () {
       'lastName': 'property',
       'address': 'property',
       'likes': 'property',
+      'fullName': 'method',
       'children': 'collection',
       'father': 'link',
       'moving': 'event'
@@ -49,6 +50,9 @@ describe('a System Runtime component', function () {
         'mandatory': false,
         'default': []
       },
+      'fullName': {
+        'result': 'string'
+      },
       'father': {
         'type': 'Person',
         'readOnly': false,
@@ -63,6 +67,12 @@ describe('a System Runtime component', function () {
       },
       'moving': {}
     });
+
+    metamodel.schema({
+      '_name': 'Teacher',
+      '_inherit': ['Person']
+    });
+
     metamodel.create();
   });
 
@@ -236,7 +246,7 @@ describe('a System Runtime component', function () {
       'firstName': 'Yoda',
       'lastName': 'Master'
     });
-    
+
     expect(yoda.firstName()).equal('Yoda');
   });
 
@@ -465,4 +475,23 @@ describe('a System Runtime component', function () {
     expect(runtime.bundle().indexOf('Shadow')).equal(-1);
   });
 
+  it('can call a parent method', function () {
+    const Person = runtime.require('Person');
+    const Teacher = runtime.require('Teacher');
+
+    Person.on('fullName', () => {
+      return this.firstName() + ' ' + this.lastName();
+    });
+
+    Teacher.on('fullName', () => {
+      return 'Great Teacher ' + this.require('Person').fullName(this);
+    });
+
+    const eikichi = new Teacher({
+      'firstName': 'Eikichi',
+      'lastName': 'Onizuka'
+    });
+
+    expect(eikichi.fullName()).equal('Great Teacher Eikichi Onizuka');
+  });
 });

@@ -9,7 +9,7 @@
       "_name": "_Component",
       "_inherit": [],
       "_core": true,
-      "classInfo": "property",
+      "classInfo": "method",
       "on": "method",
       "off": "method",
       "require": "method",
@@ -25,8 +25,14 @@
       "_core": true,
       "on": {
         "params": [
-          { "name": "state", "type": "string" },
-          { "name": "handler", "type": "function" },
+          {
+            "name": "state",
+            "type": "string"
+          },
+          {
+            "name": "action",
+            "type": "function"
+          },
           {
             "name": "useCoreAPI",
             "type": "boolean",
@@ -49,20 +55,48 @@
       },
       "off": {
         "params": [
-          { "name": "state", "type": "string", "mandatory": false },
-          { "name": "behaviorId", "type": "string", "mandatory": false }
+          {
+            "name": "state",
+            "type": "string",
+            "mandatory": false
+          },
+          {
+            "name": "behaviorId",
+            "type": "string",
+            "mandatory": false
+          }
         ]
       },
-      "require": { "params": [{ "name": "id", "type": "string" }] },
-      "destroy": { "params": [] },
-      "classInfo": {
-        "type": "_ClassInfo",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
+      "require": {
+        "params": [
+          {
+            "name": "id",
+            "type": "string"
+          }
+        ]
       },
-      "init": { "params": [{ "name": "conf", "type": "object" }] },
-      "error": { "params": [{ "name": "data", "type": "errorParam" }] }
+      "destroy": {
+        "params": []
+      },
+      "classInfo": {
+        "result": "_ClassInfo"
+      },
+      "init": {
+        "params": [
+          {
+            "name": "conf",
+            "type": "object"
+          }
+        ]
+      },
+      "error": {
+        "params": [
+          {
+            "name": "data",
+            "type": "errorParam"
+          }
+        ]
+      }
     }
   },
   "behaviors": {
@@ -90,6 +124,15 @@
       "action": "function require(id) {\n  return $component.get(id);\n}",
       "core": true,
       "useCoreAPI": true
+    },
+    "d152631c35813f2e": {
+      "_id": "d152631c35813f2e",
+      "component": "_Component",
+      "state": "classInfo",
+      "action":
+        "function classInfo() { \n\tconst className = this.constructor.name;\n\tlet result;\n\t\n\tif (className !== 'Function') {\n\t  result = this.require(className + 'Info');\n\t}\n\t\n\treturn result;\n}",
+      "useCoreAPI": false,
+      "core": true
     }
   },
   "types": {},

@@ -725,11 +725,6 @@ function createClass(classId) {
       'return function id () { return __body.call(this) };'
     )(body);
 
-    // classInfo
-    if ($metamodel.inheritFrom(classId, '_Component')) {
-      config.classInfo = classId + 'Info';
-    }
-
     // create link to db
     $db.store[classId][config._id] = config;
 
@@ -758,19 +753,19 @@ function createClass(classId) {
 }
 
 /**
- * @method addId
+ * @method addIdClass
  * @param {Function} Class a class
  * @param {String} classId name of the class
  * @private
  * @description Add an id method to a class that will return its id
  */
-function addId(Class, classId) {
+function addIdClass(Class, classId) {
   var body = function body() {
     return classId;
   };
   Class.id = new Function(
     '__body',
-    'return function id (prop, val) { return __body.call(this, prop, val) };'
+    'return function id () { return __body.call(this) };'
   )(body);
 }
 
@@ -1461,7 +1456,7 @@ function addStructure(path, name, model, id) {
  * @param {Function} Class Class
  * @param {String} classId name of the class
  * @private
- * @description  * Add methods to a component.
+ * @description Add methods to a component.
  * The call to these methods will invoke the workflow in order to check that inpouts / outputs are compliant with the model.
  */
 function addMethods(model, Class, classId) {
@@ -1469,7 +1464,7 @@ function addMethods(model, Class, classId) {
 
   methods.forEach(function method(methodName) {
     var paramsName = getParamNames(classId, methodName);
-    var params = paramsName.join(',');
+    var params = paramsName.join(', ');
     var paramsWithContext = '';
 
     var body = function body() {
@@ -1506,7 +1501,7 @@ function addMethods(model, Class, classId) {
 
     if (params) {
       paramsName.unshift('context');
-      paramsWithContext = paramsName.join('');
+      paramsWithContext = paramsName.join(', ');
 
       Class.prototype[methodName] = new Function(
         '__body',
@@ -1560,7 +1555,7 @@ function addEvents(model, Class, classId) {
   var events = getEvents(model);
   events.forEach(function event(methodName) {
     var paramsName = getParamNames(classId, methodName);
-    var params = paramsName.join(',');
+    var params = paramsName.join(', ');
 
     var body = function body() {
       var systems = [];
@@ -1635,7 +1630,7 @@ function addEvents(model, Class, classId) {
  * @description Add a on method to a component to add behaviors to the component
  */
 function addOn(Class, classId) {
-  var body = function body(state, handler, useCoreAPI, isCore, context) {
+  var body = function body(state, action, useCoreAPI, isCore, context) {
     var behaviorId = '';
     var currentState = '';
 
@@ -1659,11 +1654,11 @@ function addOn(Class, classId) {
         ) {
           $log.behaviorNotUnique(classId, state);
         } else {
-          if ($workflow.validParamNumbers(classId, state, handler)) {
+          if ($workflow.validParamNumbers(classId, state, action)) {
             behaviorId = $behavior.add(
               this.id(),
               state,
-              handler,
+              action,
               useCoreAPI,
               isCore,
               context
@@ -1689,7 +1684,7 @@ function addOn(Class, classId) {
   };
   Class.prototype.on = new Function(
     '__body',
-    'return function on (state, handler, useCoreAPI, isCore, context) { return __body.call(this, state, handler, useCoreAPI, isCore, context) };'
+    'return function on (state, action, useCoreAPI, isCore, context) { return __body.call(this, state, action, useCoreAPI, isCore, context) };'
   )(body);
 }
 
@@ -1701,7 +1696,7 @@ function addOn(Class, classId) {
  * @description Add a on method to a class component to add behaviors to the class
  */
 function addOnClass(Class, classId) {
-  var body = function body(state, handler, useCoreAPI, isCore, context) {
+  var body = function body(state, action, useCoreAPI, isCore, context) {
     var behaviorId = '';
     var currentState = '';
 
@@ -1725,11 +1720,11 @@ function addOnClass(Class, classId) {
         ) {
           $log.behaviorNotUnique(classId, state);
         } else {
-          if ($workflow.validParamNumbers(classId, state, handler)) {
+          if ($workflow.validParamNumbers(classId, state, action)) {
             behaviorId = $behavior.add(
               this.id(),
               state,
-              handler,
+              action,
               useCoreAPI,
               isCore,
               context
@@ -1755,7 +1750,7 @@ function addOnClass(Class, classId) {
   };
   Class.on = new Function(
     '__body',
-    'return function on (state, handler, useCoreAPI, isCore, context) { return __body.call(this, state, handler, useCoreAPI, isCore, context) };'
+    'return function on (state, action, useCoreAPI, isCore, context) { return __body.call(this, state, action, useCoreAPI, isCore, context) };'
   )(body);
 }
 
@@ -1837,6 +1832,36 @@ function addDestroyClass(Class) {
 }
 
 /**
+ * @method addRequireClass
+ * @param {Object} Class Class
+ * @private
+ * @description Require a component
+ */
+function addRequireClass(Class) {
+  var body = function body(id) {
+    return exports.get(id);
+  };
+  Class.require = new Function(
+    '__body',
+    'return function require (id) { return __body.call(this, id) };'
+  )(body);
+}
+
+/**
+ * @method addInitClass
+ * @param {Object} Class Class
+ * @private
+ * @description Init a class
+ */
+function addInitClass(Class) {
+  var body = function body() {};
+  Class.init = new Function(
+    '__body',
+    'return function init (conf) { return __body.call(this, conf) };'
+  )(body);
+}
+
+/**
  * @method addClassInfoClass
  * @param {Object} Class Class
  * @private
@@ -1875,7 +1900,7 @@ function factory(config) {
 
   store[classId] = Class;
 
-  addId(Class, classId);
+  addIdClass(Class, classId);
 
   addProperties(config.model, Class, classId);
   addMethods(config.model, Class, classId);
@@ -1885,8 +1910,11 @@ function factory(config) {
   // inherit from _Component
   if ($metamodel.inheritFrom(classId, '_Component')) {
     addOn(Class, classId);
+
     addOnClass(Class, classId);
     addOffClass(Class, classId);
+    addRequireClass(Class);
+    addInitClass(Class);
     addDestroyClass(Class);
     addClassInfoClass(Class);
   }
