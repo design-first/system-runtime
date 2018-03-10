@@ -2103,17 +2103,21 @@ exports.isValidObject = function isValidObject(
   for (fieldName in object) {
     field = object[fieldName];
 
-    if (!hasType(schema[fieldName], 'undefined') || fieldName === '_core') {
-      // case of _core
-      if (fieldName !== '_core') {
-        typeSchema = schema[fieldName].type;
-      } else {
-        typeSchema = 'boolean';
-      }
-
-      // cas of _id
-      if (fieldName === '_id') {
-        typeSchema = 'string';
+    if (
+      !hasType(schema[fieldName], 'undefined') ||
+      fieldName === '_core' ||
+      fieldName === '_id'
+    ) {
+      switch (true) {
+        case fieldName === '_core':
+          typeSchema = 'boolean';
+          break;
+        case fieldName === '_id':
+          typeSchema = 'string';
+          break;
+        default:
+          typeSchema = schema[fieldName].type;
+          break;
       }
     } else {
       if (strict) {
