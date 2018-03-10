@@ -1052,7 +1052,7 @@ exports.invalidSchemaPropertyName = function invalidSchemaPropertyName(
       propName +
       "' for schema '" +
       name +
-      "': a name do not begin with '_'"
+      "': a property name can not begin with '_'"
   );
 };
 
