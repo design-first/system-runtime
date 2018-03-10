@@ -1319,7 +1319,7 @@ exports.init = function init() {
         type: 'boolean',
         mandatory: false
       },
-      _description: {
+      description: {
         type: 'string',
         mandatory: false
       }
