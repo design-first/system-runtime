@@ -1865,7 +1865,7 @@ function addInitClass(Class) {
  * @method addClassInfoClass
  * @param {Object} Class Class
  * @private
- * @description Add the addClassInfo method on a class
+ * @description Add the ClassInfo method on a class
  */
 function addClassInfoClass(Class) {
   var body = function body() {

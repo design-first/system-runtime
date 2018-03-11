@@ -155,7 +155,6 @@ function dump() {
       behavior = JSON.parse(
         JSON.stringify(exports.store._Behavior[behaviorId])
       );
-      delete behavior.classInfo;
       dbDump.behaviors[behaviorId] = behavior;
     }
   }
@@ -169,8 +168,6 @@ function dump() {
       collection = JSON.parse(JSON.stringify(exports.store[collectionName]));
 
       for (id in collection) {
-        delete collection[id].classInfo;
-
         if (collection[id]._core) {
           delete collection[id];
         }
