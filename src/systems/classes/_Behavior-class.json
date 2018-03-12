@@ -34,7 +34,7 @@
         "default": false
       },
       "useCoreAPI": {
-        "type": "boolean",
+        "type": "any",
         "readOnly": false,
         "mandatory": false,
         "default": false

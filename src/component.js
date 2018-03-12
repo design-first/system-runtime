@@ -1630,9 +1630,21 @@ function addEvents(model, Class, classId) {
  * @description Add a on method to a component to add behaviors to the component
  */
 function addOn(Class, classId) {
-  var body = function body(state, action, useCoreAPI, isCore, context) {
+  var body = function body(state, action, useCoreAPI, isCore) {
     var behaviorId = '';
     var currentState = '';
+    var context = null;
+
+    // case of context
+    if (
+      useCoreAPI &&
+      useCoreAPI.constructor &&
+      useCoreAPI.constructor.name !== 'Boolean'
+    ) {
+      context = useCoreAPI;
+      useCoreAPI = false;
+      isCore = true;
+    }
 
     if (
       $workflow.checkParams({
@@ -1684,7 +1696,7 @@ function addOn(Class, classId) {
   };
   Class.prototype.on = new Function(
     '__body',
-    'return function on (state, action, useCoreAPI, isCore, context) { return __body.call(this, state, action, useCoreAPI, isCore, context) };'
+    'return function on (state, action, useCoreAPI, isCore) { return __body.call(this, state, action, useCoreAPI, isCore) };'
   )(body);
 }
 
@@ -1696,10 +1708,21 @@ function addOn(Class, classId) {
  * @description Add a on method to a class component to add behaviors to the class
  */
 function addOnClass(Class, classId) {
-  var body = function body(state, action, useCoreAPI, isCore, context) {
+  var body = function body(state, action, useCoreAPI, isCore) {
     var behaviorId = '';
     var currentState = '';
+    var context = null;
 
+    // case of context
+    if (
+      useCoreAPI &&
+      useCoreAPI.constructor &&
+      useCoreAPI.constructor.name !== 'Boolean'
+    ) {
+      context = useCoreAPI;
+      useCoreAPI = false;
+      isCore = true;
+    }
     if (
       $workflow.checkParams({
         component: this,
@@ -1750,7 +1773,7 @@ function addOnClass(Class, classId) {
   };
   Class.on = new Function(
     '__body',
-    'return function on (state, action, useCoreAPI, isCore, context) { return __body.call(this, state, action, useCoreAPI, isCore, context) };'
+    'return function on (state, action, useCoreAPI, isCore) { return __body.call(this, state, action, useCoreAPI, isCore) };'
   )(body);
 }
 

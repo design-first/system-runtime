@@ -114,6 +114,30 @@ describe('a System Runtime component', function () {
     }, 1);
   });
 
+  it('can add an event with context change', function (done) {
+    const Person = runtime.require('Person');
+    const yoda = new Person({
+      'firstName': 'Yoda',
+      'lastName': 'Master',
+      'likes': ['teaching']
+    });
+    const luke = new Person({
+      'firstName': 'Luke',
+      'lastName': '',
+      'likes': []
+    });
+
+    yoda.on('moving', function () {
+      this.lastName('Skywalker');
+    }, luke);
+    yoda.moving();
+
+    setTimeout(function () {
+      expect(luke.lastName()).equal('Skywalker');
+      done();
+    }, 1);
+  });
+
   it('can remove an event', function (done) {
     const Person = runtime.require('Person');
     const yoda = new Person({
