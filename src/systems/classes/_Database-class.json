@@ -1,19 +1,8 @@
 {
-  "_id": "a15c391b38613309",
   "name": "_Database-class",
-  "description": "Database",
+  "master": false,
   "version": "1.0.0",
-  "behaviors": {
-    "1a5111d17a1800c": {
-      "_id": "1a5111d17a1800c",
-      "component": "_Database",
-      "state": "collections",
-      "action":
-        "function collections() {\n  var result = {},\n    collectionName = '';\n\n  for (collectionName in $db.store) {\n    if ($db.store.hasOwnProperty(collectionName) && collectionName.indexOf('_') !== 0) {\n      result[collectionName] = $db[collectionName];\n    }\n  }\n  return result;\n}",
-      "core": true,
-      "useCoreAPI": true
-    }
-  },
+  "description": "Database",
   "schemas": {
     "1723516a30132ac": {
       "_name": "_Database",
@@ -60,6 +49,17 @@
       "_id": "18a51169d7112d4"
     }
   },
+  "behaviors": {
+    "1a5111d17a1800c": {
+      "_id": "1a5111d17a1800c",
+      "component": "_Database",
+      "state": "collections",
+      "action":
+        "function collections() {\n  var result = {},\n    collectionName = '';\n\n  for (collectionName in $db.store) {\n    if ($db.store.hasOwnProperty(collectionName)) {\n      result[collectionName] = $db[collectionName];\n    }\n  }\n  return result;\n}",
+      "core": true,
+      "useCoreAPI": true
+    }
+  },
   "types": {},
   "components": {
     "_Database": {
@@ -68,5 +68,5 @@
       }
     }
   },
-  "master": false
+  "_id": "a15c391b38613309"
 }
