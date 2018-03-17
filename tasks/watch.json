@@ -1,7 +1,6 @@
 {
   "scripts": {
     "files": [
-      "addons/*.json",
       "src/*.js",
       "src/system/system-runtime.json"
     ],
