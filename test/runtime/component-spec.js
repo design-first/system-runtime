@@ -17,7 +17,9 @@ describe('a System Runtime component', function () {
       'lastName': 'property',
       'address': 'property',
       'likes': 'property',
+      'custom': 'property',
       'fullName': 'method',
+      'testMethod': 'method',
       'children': 'collection',
       'father': 'link',
       'moving': 'event'
@@ -50,8 +52,16 @@ describe('a System Runtime component', function () {
         'mandatory': false,
         'default': []
       },
+      'custom': {
+        'type': 'mycustomType',
+        'readOnly': false,
+        'mandatory': false,
+        'default': {}
+      },
       'fullName': {
         'result': 'string'
+      },
+      'testMethod': {
       },
       'father': {
         'type': 'Person',
@@ -71,6 +81,44 @@ describe('a System Runtime component', function () {
     metamodel.schema({
       '_name': 'Teacher',
       '_inherit': ['Person']
+    });
+
+    metamodel.type({
+      "name": "mycustomType",
+      "description": "",
+      "type": "object",
+      "schema": {
+        "property1": {
+          "type": "array",
+          "mandatory": false,
+          "default": []
+        },
+        "property2": {
+          "type": "object",
+          "mandatory": false,
+          "default": {}
+        },
+        "property3": {
+          "type": "any",
+          "mandatory": false,
+          "default": {}
+        },
+        "property4": {
+          "type": "boolean",
+          "mandatory": false,
+          "default": false
+        },
+        "property5": {
+          "type": "date",
+          "mandatory": false,
+          "default": ""
+        },
+        "property6": {
+          "type": "json",
+          "mandatory": false,
+          "default": {}
+        }
+      }
     });
 
     metamodel.create();
@@ -517,5 +565,28 @@ describe('a System Runtime component', function () {
     });
 
     expect(eikichi.fullName()).equal('Great Teacher Eikichi Onizuka');
+  });
+
+  it('can send an error', function (done) {
+    const Person = runtime.require('Person');
+    const yoda = new Person({
+      'firstName': 'Yoda',
+      'lastName': 'Master',
+      'likes': ['teaching']
+    });
+
+    yoda.on('error', function (data) {
+      this.lastName('error');
+    });
+
+    yoda.on('testMethod', function () {
+      ANonDefinedFunction();
+    });
+    yoda.testMethod();
+
+    setTimeout(function () {
+      expect(yoda.lastName()).equal('error');
+      done();
+    }, 1);
   });
 });

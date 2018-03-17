@@ -3,7 +3,13 @@
     "src": [
       "test/module",
       "test/runtime"
-    ]
+    ],
+    "options": {
+      "excludes": [
+        "src/log.js",
+        "src/helper.js"
+      ]
+    }
   },
   "coveralls": {
     "src": [
@@ -13,7 +19,11 @@
     "options": {
       "reporter": "spec",
       "coverage": true,
-      "coverageFolder": "coverage"
+      "coverageFolder": "coverage",
+      "excludes": [
+        "src/log.js",
+        "src/helper.js"
+      ]
     }
   }
 }
