@@ -1,10 +1,8 @@
 {
   "system": {
     "src": [
-      "src/systems/classes/*.json",
-      "src/systems/types/*.json",
       "addons/*.json",
-      "src/systems/core/*.json"
+      "src/system/system-runtime.json"
     ],
     "dest": "build/system-runtime.json"
   }

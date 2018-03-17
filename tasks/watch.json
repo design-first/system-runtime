@@ -1,11 +1,11 @@
 {
   "scripts": {
     "files": [
+      "addons/*.json",
       "src/*.js",
-      "src/systems/**/*.json"
+      "src/system/system-runtime.json"
     ],
     "tasks": [
-      "prettier",
       "json_merge",
       "concat:system",
       "eslint",

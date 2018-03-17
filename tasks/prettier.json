@@ -1,10 +1,10 @@
 {
   "files": {
     "src": [
-      "src/systems/**/*.json",
+      "src/system/system-runtime.json",
       "src/*.js",
       "build/system/*.js",
-      "build/system/*.json"
+      "build/system-runtime.json"
     ]
   }
 }
