@@ -1,7 +1,7 @@
 {
   "name": "system-runtime",
   "master": false,
-  "version": "2.4.1",
+  "version": "2.5.0",
   "description": "System Runtime",
   "schemas": {
     "1ac07185641fa9f": {
@@ -213,62 +213,30 @@
       "_id": "135c71078810af2",
       "_name": "_Channel",
       "_core": true,
-      "send": {
-        "params": [
-          {
-            "name": "message",
-            "type": "message"
-          }
-        ]
-      },
+      "send": { "params": [{ "name": "message", "type": "message" }] },
       "$systemInstalled": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": true,
-            "default": ""
-          }
+          { "name": "id", "type": "string", "mandatory": true, "default": "" }
         ]
       },
       "$systemResolved": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": true,
-            "default": ""
-          }
+          { "name": "id", "type": "string", "mandatory": true, "default": "" }
         ]
       },
       "$systemUninstalled": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": true,
-            "default": ""
-          }
+          { "name": "id", "type": "string", "mandatory": true, "default": "" }
         ]
       },
       "$systemStarted": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": true,
-            "default": ""
-          }
+          { "name": "id", "type": "string", "mandatory": true, "default": "" }
         ]
       },
       "$systemStopped": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": true,
-            "default": ""
-          }
+          { "name": "id", "type": "string", "mandatory": true, "default": "" }
         ]
       }
     },
@@ -282,65 +250,30 @@
         "default": {}
       },
       "property": {
-        "params": [
-          {
-            "name": "name",
-            "type": "string"
-          }
-        ],
+        "params": [{ "name": "name", "type": "string" }],
         "result": "object"
       },
-      "properties": {
-        "result": "array"
-      },
+      "properties": { "result": "array" },
       "link": {
-        "params": [
-          {
-            "name": "name",
-            "type": "string"
-          }
-        ],
+        "params": [{ "name": "name", "type": "string" }],
         "result": "object"
       },
-      "links": {
-        "result": "array"
-      },
+      "links": { "result": "array" },
       "method": {
-        "params": [
-          {
-            "name": "name",
-            "type": "string"
-          }
-        ],
+        "params": [{ "name": "name", "type": "string" }],
         "result": "object"
       },
-      "methods": {
-        "result": "array"
-      },
+      "methods": { "result": "array" },
       "collection": {
-        "params": [
-          {
-            "name": "name",
-            "type": "string"
-          }
-        ],
+        "params": [{ "name": "name", "type": "string" }],
         "result": "object"
       },
-      "collections": {
-        "result": "array"
-      },
+      "collections": { "result": "array" },
       "event": {
-        "params": [
-          {
-            "name": "name",
-            "type": "string"
-          }
-        ],
+        "params": [{ "name": "name", "type": "string" }],
         "result": "object"
       },
-      "events": {
-        "result": "array"
-      },
+      "events": { "result": "array" },
       "_id": "158321dced1014a",
       "schema": {
         "type": "object",
@@ -355,14 +288,8 @@
       "_core": true,
       "on": {
         "params": [
-          {
-            "name": "state",
-            "type": "string"
-          },
-          {
-            "name": "action",
-            "type": "function"
-          },
+          { "name": "state", "type": "string" },
+          { "name": "action", "type": "function" },
           {
             "name": "useCoreAPI",
             "type": "any",
@@ -379,79 +306,23 @@
       },
       "off": {
         "params": [
-          {
-            "name": "state",
-            "type": "string",
-            "mandatory": false
-          },
-          {
-            "name": "behaviorId",
-            "type": "string",
-            "mandatory": false
-          }
+          { "name": "state", "type": "string", "mandatory": false },
+          { "name": "behaviorId", "type": "string", "mandatory": false }
         ]
       },
-      "require": {
-        "params": [
-          {
-            "name": "id",
-            "type": "string"
-          }
-        ]
-      },
-      "destroy": {
-        "params": []
-      },
-      "classInfo": {
-        "result": "_ClassInfo"
-      },
-      "init": {
-        "params": [
-          {
-            "name": "conf",
-            "type": "object"
-          }
-        ]
-      },
-      "error": {
-        "params": [
-          {
-            "name": "data",
-            "type": "errorParam"
-          }
-        ]
-      }
+      "require": { "params": [{ "name": "id", "type": "string" }] },
+      "destroy": { "params": [] },
+      "classInfo": { "result": "_ClassInfo" },
+      "init": { "params": [{ "name": "conf", "type": "object" }] },
+      "error": { "params": [{ "name": "data", "type": "errorParam" }] }
     },
     "18a51169d7112d4": {
       "_name": "_Database",
       "_core": true,
-      "collections": {
-        "result": "object"
-      },
-      "insert": {
-        "params": [
-          {
-            "name": "event",
-            "type": "dbInsertEvent"
-          }
-        ]
-      },
-      "update": {
-        "params": [
-          {
-            "name": "event",
-            "type": "dbUpdateEvent"
-          }
-        ]
-      },
-      "remove": {
-        "params": [
-          {
-            "name": "event",
-            "type": "dbRemoveEvent"
-          }
-        ]
-      },
+      "collections": { "result": "object" },
+      "insert": { "params": [{ "name": "event", "type": "dbInsertEvent" }] },
+      "update": { "params": [{ "name": "event", "type": "dbUpdateEvent" }] },
+      "remove": { "params": [{ "name": "event", "type": "dbRemoveEvent" }] },
       "_id": "18a51169d7112d4"
     },
     "o1e1e01e6b41cec3": {
@@ -505,38 +376,10 @@
         "mandatory": false,
         "default": "warn"
       },
-      "debug": {
-        "params": [
-          {
-            "name": "message",
-            "type": "any"
-          }
-        ]
-      },
-      "info": {
-        "params": [
-          {
-            "name": "message",
-            "type": "any"
-          }
-        ]
-      },
-      "warn": {
-        "params": [
-          {
-            "name": "message",
-            "type": "any"
-          }
-        ]
-      },
-      "error": {
-        "params": [
-          {
-            "name": "message",
-            "type": "any"
-          }
-        ]
-      }
+      "debug": { "params": [{ "name": "message", "type": "any" }] },
+      "info": { "params": [{ "name": "message", "type": "any" }] },
+      "warn": { "params": [{ "name": "message", "type": "any" }] },
+      "error": { "params": [{ "name": "message", "type": "any" }] }
     },
     "1d9b6139411aa91": {
       "_name": "_Message",
@@ -565,35 +408,18 @@
       "_name": "_Metamodel",
       "_core": true,
       "schema": {
-        "params": [
-          {
-            "name": "schema",
-            "type": "object"
-          }
-        ],
+        "params": [{ "name": "schema", "type": "object" }],
         "result": "any"
       },
       "model": {
-        "params": [
-          {
-            "name": "model",
-            "type": "object"
-          }
-        ],
+        "params": [{ "name": "model", "type": "object" }],
         "result": "any"
       },
       "type": {
-        "params": [
-          {
-            "name": "type",
-            "type": "object"
-          }
-        ],
+        "params": [{ "name": "type", "type": "object" }],
         "result": "any"
       },
-      "create": {
-        "params": []
-      },
+      "create": { "params": [] },
       "_id": "1628c13c22152e6"
     },
     "100b91ed2211b15": {
@@ -601,12 +427,7 @@
       "_name": "_OSGi",
       "install": {
         "params": [
-          {
-            "name": "url",
-            "type": "any",
-            "mandatory": true,
-            "default": ""
-          },
+          { "name": "url", "type": "any", "mandatory": true, "default": "" },
           {
             "name": "async",
             "type": "boolean",
@@ -618,41 +439,22 @@
       },
       "uninstall": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": true,
-            "default": ""
-          }
+          { "name": "id", "type": "string", "mandatory": true, "default": "" }
         ]
       },
       "start": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": true,
-            "default": ""
-          }
+          { "name": "id", "type": "string", "mandatory": true, "default": "" }
         ]
       },
       "stop": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": true,
-            "default": ""
-          }
+          { "name": "id", "type": "string", "mandatory": true, "default": "" }
         ]
       },
-      "status": {
-        "result": "object"
-      },
+      "status": { "result": "object" },
       "_core": true,
-      "bundle": {
-        "result": "string"
-      }
+      "bundle": { "result": "string" }
     },
     "14c7c105b31a160": {
       "_id": "14c7c105b31a160",
@@ -665,23 +467,11 @@
         "default": "0.0.0"
       },
       "system": {
-        "params": [
-          {
-            "name": "params",
-            "type": "any",
-            "mandatory": false
-          }
-        ],
+        "params": [{ "name": "params", "type": "any", "mandatory": false }],
         "result": "object"
       },
       "message": {
-        "params": [
-          {
-            "name": "msg",
-            "type": "message",
-            "mandatory": true
-          }
-        ]
+        "params": [{ "name": "msg", "type": "message", "mandatory": true }]
       },
       "ready": {}
     },
@@ -1102,16 +892,8 @@
       "name": "dbInsertEvent",
       "type": "object",
       "schema": {
-        "collection": {
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        },
-        "document": {
-          "type": "object",
-          "mandatory": true,
-          "default": {}
-        }
+        "collection": { "type": "string", "mandatory": true, "default": "" },
+        "document": { "type": "object", "mandatory": true, "default": {} }
       }
     },
     "dbRemoveEvent": {
@@ -1120,16 +902,8 @@
       "type": "object",
       "core": true,
       "schema": {
-        "collection": {
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        },
-        "id": {
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }
+        "collection": { "type": "string", "mandatory": true, "default": "" },
+        "id": { "type": "string", "mandatory": true, "default": "" }
       }
     },
     "dbUpdateEvent": {
@@ -1138,26 +912,10 @@
       "name": "dbUpdateEvent",
       "type": "object",
       "schema": {
-        "collection": {
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        },
-        "id": {
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        },
-        "field": {
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        },
-        "value": {
-          "type": "any",
-          "mandatory": true,
-          "default": null
-        }
+        "collection": { "type": "string", "mandatory": true, "default": "" },
+        "id": { "type": "string", "mandatory": true, "default": "" },
+        "field": { "type": "string", "mandatory": true, "default": "" },
+        "value": { "type": "any", "mandatory": true, "default": null }
       }
     },
     "dbAction": {
@@ -1172,30 +930,12 @@
       "name": "collection",
       "type": "object",
       "schema": {
-        "type": {
-          "type": ["string"],
-          "mandatory": true
-        },
-        "readOnly": {
-          "type": "boolean",
-          "mandatory": true
-        },
-        "mandatory": {
-          "type": "boolean",
-          "mandatory": true
-        },
-        "default": {
-          "type": "object",
-          "mandatory": true
-        },
-        "description": {
-          "type": "string",
-          "mandatory": false
-        },
-        "label": {
-          "type": "string",
-          "mandatory": false
-        }
+        "type": { "type": ["string"], "mandatory": true },
+        "readOnly": { "type": "boolean", "mandatory": true },
+        "mandatory": { "type": "boolean", "mandatory": true },
+        "default": { "type": "object", "mandatory": true },
+        "description": { "type": "string", "mandatory": false },
+        "label": { "type": "string", "mandatory": false }
       },
       "core": true
     },
@@ -1204,14 +944,8 @@
       "name": "errorParam",
       "type": "object",
       "schema": {
-        "message": {
-          "type": "string",
-          "mandatory": true
-        },
-        "error": {
-          "type": "object",
-          "mandatory": true
-        }
+        "message": { "type": "string", "mandatory": true },
+        "error": { "type": "object", "mandatory": true }
       },
       "core": true
     },
@@ -1220,14 +954,8 @@
       "name": "event",
       "type": "object",
       "schema": {
-        "params": {
-          "type": ["parameter"],
-          "mandatory": false
-        },
-        "description": {
-          "type": "string",
-          "mandatory": false
-        }
+        "params": { "type": ["parameter"], "mandatory": false },
+        "description": { "type": "string", "mandatory": false }
       },
       "core": true
     },
@@ -1248,30 +976,12 @@
       "name": "link",
       "type": "object",
       "schema": {
-        "type": {
-          "type": "string",
-          "mandatory": true
-        },
-        "readOnly": {
-          "type": "boolean",
-          "mandatory": true
-        },
-        "mandatory": {
-          "type": "boolean",
-          "mandatory": true
-        },
-        "default": {
-          "type": "{type}",
-          "mandatory": true
-        },
-        "description": {
-          "type": "string",
-          "mandatory": false
-        },
-        "label": {
-          "type": "string",
-          "mandatory": false
-        }
+        "type": { "type": "string", "mandatory": true },
+        "readOnly": { "type": "boolean", "mandatory": true },
+        "mandatory": { "type": "boolean", "mandatory": true },
+        "default": { "type": "{type}", "mandatory": true },
+        "description": { "type": "string", "mandatory": false },
+        "label": { "type": "string", "mandatory": false }
       },
       "core": true
     },
@@ -1287,18 +997,9 @@
       "name": "message",
       "type": "object",
       "schema": {
-        "event": {
-          "type": "string",
-          "mandatory": true
-        },
-        "from": {
-          "type": "string",
-          "mandatory": false
-        },
-        "data": {
-          "type": "object",
-          "mandatory": true
-        }
+        "event": { "type": "string", "mandatory": true },
+        "from": { "type": "string", "mandatory": false },
+        "data": { "type": "object", "mandatory": true }
       },
       "core": true
     },
@@ -1307,18 +1008,9 @@
       "name": "method",
       "type": "object",
       "schema": {
-        "result": {
-          "type": "string",
-          "mandatory": false
-        },
-        "params": {
-          "type": ["parameter"],
-          "mandatory": false
-        },
-        "description": {
-          "type": "string",
-          "mandatory": false
-        }
+        "result": { "type": "string", "mandatory": false },
+        "params": { "type": ["parameter"], "mandatory": false },
+        "description": { "type": "string", "mandatory": false }
       },
       "core": true
     },
@@ -1342,26 +1034,11 @@
       "name": "parameter",
       "type": "object",
       "schema": {
-        "description": {
-          "type": "string",
-          "mandatory": false
-        },
-        "name": {
-          "type": "string",
-          "mandatory": true
-        },
-        "type": {
-          "type": "string",
-          "mandatory": true
-        },
-        "mandatory": {
-          "type": "boolean",
-          "mandatory": false
-        },
-        "default": {
-          "type": "{type}",
-          "mandatory": false
-        }
+        "description": { "type": "string", "mandatory": false },
+        "name": { "type": "string", "mandatory": true },
+        "type": { "type": "string", "mandatory": true },
+        "mandatory": { "type": "boolean", "mandatory": false },
+        "default": { "type": "{type}", "mandatory": false }
       },
       "core": true
     },
@@ -1370,30 +1047,12 @@
       "name": "property",
       "type": "object",
       "schema": {
-        "type": {
-          "type": "string",
-          "mandatory": true
-        },
-        "readOnly": {
-          "type": "boolean",
-          "mandatory": true
-        },
-        "mandatory": {
-          "type": "boolean",
-          "mandatory": true
-        },
-        "default": {
-          "type": "{type}",
-          "mandatory": true
-        },
-        "description": {
-          "type": "string",
-          "mandatory": false
-        },
-        "label": {
-          "type": "string",
-          "mandatory": false
-        }
+        "type": { "type": "string", "mandatory": true },
+        "readOnly": { "type": "boolean", "mandatory": true },
+        "mandatory": { "type": "boolean", "mandatory": true },
+        "default": { "type": "{type}", "mandatory": true },
+        "description": { "type": "string", "mandatory": false },
+        "label": { "type": "string", "mandatory": false }
       },
       "core": true
     },
@@ -1405,33 +1064,11 @@
     }
   },
   "components": {
-    "_Channel": {
-      "channel": {
-        "_id": "channel"
-      }
-    },
-    "_Database": {
-      "db": {
-        "_id": "db"
-      }
-    },
-    "_Logger": {
-      "logger": {
-        "_id": "logger",
-        "level": "warn"
-      }
-    },
-    "_Metamodel": {
-      "metamodel": {
-        "_id": "metamodel"
-      }
-    },
-    "_Runtime": {
-      "runtime": {
-        "_id": "runtime",
-        "version": "2.4.1"
-      }
-    }
+    "_Channel": { "channel": { "_id": "channel" } },
+    "_Database": { "db": { "_id": "db" } },
+    "_Logger": { "logger": { "_id": "logger", "level": "warn" } },
+    "_Metamodel": { "metamodel": { "_id": "metamodel" } },
+    "_Runtime": { "runtime": { "_id": "runtime", "version": "2.5.0" } }
   },
   "_id": "e89c617b6b15d24"
 }
