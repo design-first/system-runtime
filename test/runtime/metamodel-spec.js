@@ -36,6 +36,21 @@ describe('System Runtime metamodel component', () => {
     expect(metamodel.require('PersonTest')).to.not.be.undefined;
   });
 
+  it('can add a schema (simple mode)', () => {
+    const metamodel = runtime.require('metamodel');
+    metamodel.schema('PersonTestSimple', {
+      'firstName': 'property'
+    });
+
+    metamodel.model('PersonTestSimple', {
+      'firstName': 'string'
+    });
+
+    metamodel.create();
+
+    expect(metamodel.require('PersonTestSimple')).to.not.be.undefined;
+  });
+
   it('can add a type', () => {
     const metamodel = runtime.require('metamodel');
 
@@ -107,6 +122,38 @@ describe('System Runtime metamodel component', () => {
     });
 
     expect(yoda.address().planet()).equal('Dagobah');
+  });
+
+  it('can add a type (simple mode)', () => {
+    const metamodel = runtime.require('metamodel');
+    metamodel.schema('PersonTestSimple2', {
+      'firstName': 'property',
+      'address': 'property'
+    });
+
+    metamodel.model('PersonTestSimple2', {
+      'firstName': 'string',
+      'address': 'address2'
+    });
+
+    metamodel.type('address2', {
+      'address': 'string',
+      'city': 'string'
+    });
+
+    metamodel.create();
+
+    var PersonTestSimple2 = runtime.require('PersonTestSimple2');
+
+    var person = new PersonTestSimple2({
+      'firstName': 'a name',
+      'address': {
+        'address': 'an address',
+        'city': 'a city'
+      }
+    });
+
+    expect(person.address().city()).equal('a city');
   });
 
   it('can create a one to one relationship', () => {

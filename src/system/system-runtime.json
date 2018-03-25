@@ -408,15 +408,39 @@
       "_name": "_Metamodel",
       "_core": true,
       "schema": {
-        "params": [{ "name": "schema", "type": "object" }],
+        "params": [
+          { "name": "name", "type": "any", "default": "", "mandatory": false },
+          {
+            "name": "schema",
+            "type": "object",
+            "default": {},
+            "mandatory": false
+          }
+        ],
         "result": "any"
       },
       "model": {
-        "params": [{ "name": "model", "type": "object" }],
+        "params": [
+          { "name": "name", "type": "any", "default": "", "mandatory": false },
+          {
+            "name": "model",
+            "type": "object",
+            "default": {},
+            "mandatory": false
+          }
+        ],
         "result": "any"
       },
       "type": {
-        "params": [{ "name": "type", "type": "object" }],
+        "params": [
+          { "name": "name", "type": "any", "default": "", "mandatory": false },
+          {
+            "name": "type",
+            "type": "object",
+            "default": {},
+            "mandatory": false
+          }
+        ],
         "result": "any"
       },
       "create": { "params": [] },
@@ -765,7 +789,8 @@
       "_id": "1232f1f107142cf",
       "component": "_Metamodel",
       "state": "model",
-      "action": "function model(model) {\n  return $metamodel.model(model);\n}",
+      "action":
+        "function model(name, model) {\n  return $metamodel.model(name, model);\n}",
       "core": true,
       "useCoreAPI": true
     },
@@ -774,7 +799,7 @@
       "component": "_Metamodel",
       "state": "schema",
       "action":
-        "function schema(schema) {\n  return $metamodel.schema(schema);\n}",
+        "function schema(name, schema) {\n  return $metamodel.schema(name, schema);\n}",
       "core": true,
       "useCoreAPI": true
     },
@@ -782,7 +807,8 @@
       "_id": "194db147fe161a2",
       "component": "_Metamodel",
       "state": "type",
-      "action": "function type(type) {\n  return $metamodel.type(type);\n}",
+      "action":
+        "function type(name, type) {\n  return $metamodel.type(name, type);\n}",
       "core": true,
       "useCoreAPI": true
     },

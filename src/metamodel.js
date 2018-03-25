@@ -1096,22 +1096,200 @@ function merge(source, target, all) {
   return result;
 }
 
+/**
+ * @method compileConfiguration
+ * @param {JSON} model definition of the model
+ * @returns {Object} compiled model
+ * @description Create a full model definition from a model
+ */
+function compileConfiguration(model) {
+  var propName = '';
+
+  model = JSON.parse(JSON.stringify(model));
+
+  for (propName in model) {
+    if (model.hasOwnProperty(propName) && propName.indexOf('_') !== 0) {
+      switch (true) {
+        case typeof model[propName] === 'string' &&
+          model[propName] === 'boolean':
+          model[propName] = {
+            type: 'boolean',
+            readOnly: false,
+            mandatory: false,
+            default: false
+          };
+          break;
+        case typeof model[propName] === 'string' &&
+          model[propName] === 'string':
+          model[propName] = {
+            type: 'string',
+            readOnly: false,
+            mandatory: false,
+            default: ''
+          };
+          break;
+        case typeof model[propName] === 'string' &&
+          model[propName] === 'number':
+          model[propName] = {
+            type: 'number',
+            readOnly: false,
+            mandatory: false,
+            default: 0
+          };
+          break;
+        case typeof model[propName] === 'string' &&
+          model[propName] === 'object':
+          model[propName] = {
+            type: 'object',
+            readOnly: false,
+            mandatory: false,
+            default: {}
+          };
+          break;
+        case typeof model[propName] === 'string' &&
+          model[propName] === 'function':
+          model[propName] = {
+            type: 'function',
+            readOnly: false,
+            mandatory: false,
+            default: ''
+          };
+          break;
+        case typeof model[propName] === 'string' && model[propName] === 'array':
+          model[propName] = {
+            type: 'array',
+            readOnly: false,
+            mandatory: false,
+            default: []
+          };
+          break;
+        case typeof model[propName] === 'string' && model[propName] === 'date':
+          model[propName] = {
+            type: 'date',
+            readOnly: false,
+            mandatory: false,
+            default: ''
+          };
+          break;
+        case typeof model[propName] === 'string' && model[propName] === 'any':
+          model[propName] = {
+            type: 'any',
+            readOnly: false,
+            mandatory: false,
+            default: ''
+          };
+          break;
+        // link
+        case typeof model[propName] === 'string':
+          model[propName] = {
+            type: model[propName],
+            readOnly: false,
+            mandatory: false,
+            default: {}
+          };
+          break;
+        case typeof model[propName] === 'array' &&
+          typeof model[propName][0] === 'boolean':
+          model[propName] = {
+            type: ['boolean'],
+            readOnly: false,
+            mandatory: false,
+            default: []
+          };
+          break;
+        case typeof model[propName] === 'array' &&
+          typeof model[propName][0] === 'string':
+          model[propName] = {
+            type: ['string'],
+            readOnly: false,
+            mandatory: false,
+            default: []
+          };
+          break;
+        case typeof model[propName] === 'array' &&
+          typeof model[propName][0] === 'number':
+          model[propName] = {
+            type: ['number'],
+            readOnly: false,
+            mandatory: false,
+            default: []
+          };
+          break;
+        case typeof model[propName] === 'array' &&
+          typeof model[propName][0] === 'object':
+          model[propName] = {
+            type: ['object'],
+            readOnly: false,
+            mandatory: false,
+            default: []
+          };
+          break;
+        case typeof model[propName] === 'array' &&
+          typeof model[propName][0] === 'function':
+          model[propName] = {
+            type: ['function'],
+            readOnly: false,
+            mandatory: false,
+            default: []
+          };
+          break;
+        case typeof model[propName] === 'array' &&
+          typeof model[propName][0] === 'date':
+          model[propName] = {
+            type: ['date'],
+            readOnly: false,
+            mandatory: false,
+            default: []
+          };
+          break;
+        case typeof model[propName] === 'array' &&
+          typeof model[propName][0] === 'any':
+          model[propName] = {
+            type: 'any',
+            readOnly: false,
+            mandatory: false,
+            default: []
+          };
+          break;
+        case typeof model[propName] === 'array':
+          model[propName] = {
+            type: [model[propName]],
+            readOnly: false,
+            mandatory: false,
+            default: []
+          };
+          break;
+        default:
+          break;
+      }
+    }
+  }
+  return model;
+}
+
 /* Public methods */
 
 /**
  * @method schema
- * @param {JSON} schema schema
+ * @param {String} name name of the schema
+ * @param {JSON} schema definition of the schema
  * @description Add a new schema to the metamodel
  */
-exports.schema = function schema(schema) {
+exports.schema = function schema(name, schema) {
   var id = null;
   var result = [];
-  var name = '';
+  var schemaName = '';
   var mergedSchema = {};
   var schemas = [];
 
-  schema = JSON.parse(JSON.stringify(schema));
-  name = schema[NAME];
+  if (typeof schema === 'undefined' || Object.keys(schema).length === 0) {
+    schema = JSON.parse(JSON.stringify(name));
+    schemaName = schema[NAME];
+  } else {
+    schema = JSON.parse(JSON.stringify(schema));
+    schema[NAME] = name;
+    schemaName = schema[NAME];
+  }
 
   if (typeof schema[ID] === 'undefined') {
     schema[ID] = $helper.generateId();
@@ -1146,13 +1324,13 @@ exports.schema = function schema(schema) {
   // check if schema is compliant with the meta meta model
   if (exports.isValidObject(schema, store.metadef.schema, false)) {
     schemas = $db._Schema.find({
-      _name: name
+      _name: schemaName
     });
     if (schemas.length) {
       mergedSchema = merge(schema, schemas[0]);
       $db._Schema.update(
         {
-          _name: name
+          _name: schemaName
         },
         mergedSchema
       );
@@ -1170,19 +1348,27 @@ exports.schema = function schema(schema) {
 
 /**
  * @method model
- * @param {JSON} model model
+ * @param {String} name name of the model
+ * @param {JSON} model definition of the model
  * @description Add a new model to the metamodel
  */
-exports.model = function model(model) {
+exports.model = function model(name, model) {
   var id = null;
   var result = [];
   var inherit = '';
-  var name = '';
+  var modelName = '';
   var mergedModel = {};
   var models = [];
 
-  model = JSON.parse(JSON.stringify(model));
-  name = model[NAME];
+  if (typeof model === 'undefined' || Object.keys(model).length === 0) {
+    model = JSON.parse(JSON.stringify(name));
+    modelName = model[NAME];
+  } else {
+    model = JSON.parse(JSON.stringify(model));
+    model[NAME] = name;
+    model = compileConfiguration(model);
+    modelName = model[NAME];
+  }
 
   if (typeof model[ID] === 'undefined') {
     model[ID] = $helper.generateId();
@@ -1191,13 +1377,13 @@ exports.model = function model(model) {
   // check if model is compliant with the meta meta model
   if (exports.isValidObject(model, store.metadef.model, false)) {
     models = $db._Model.find({
-      _name: name
+      _name: modelName
     });
     if (models.length) {
       mergedModel = merge(model, models[0]);
       $db._Model.update(
         {
-          _name: name
+          _name: modelName
         },
         mergedModel
       );
@@ -1215,20 +1401,33 @@ exports.model = function model(model) {
 
 /**
  * @method type
- * @param {JSON} importedType type to add
+ * @param {String} name name of the type
+ * @param {JSON} type type to add
  * @description Add a new type
  */
-exports.type = function type(importedType) {
+exports.type = function type(name, type) {
   var id = null;
   var result = [];
-  var name = importedType.name;
+  var typeName = '';
+  var typeDef = {};
+
+  if (typeof type === 'undefined' || Object.keys(type).length === 0) {
+    typeDef = JSON.parse(JSON.stringify(name));
+    typeName = typeDef.name;
+  } else {
+    type = JSON.parse(JSON.stringify(type));
+    typeDef.schema = compileConfiguration(type);
+    typeDef.name = name;
+    typeDef.type = 'object';
+    typeName = typeDef.name;
+  }
 
   // check if type is compliant with the meta meta model
-  if (exports.isValidObject(importedType, store.metadef.type)) {
-    result = $db._Type.insert(importedType);
+  if (exports.isValidObject(typeDef, store.metadef.type)) {
+    result = $db._Type.insert(typeDef);
     id = result[0];
   } else {
-    $log.invalidTypeDefinition(name);
+    $log.invalidTypeDefinition(typeName);
   }
 
   return id;
