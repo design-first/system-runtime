@@ -535,7 +535,6 @@ describe('a System Runtime component', function () {
     expect(result).equal(undefined);
   });
 
-
   it('can create a core object', function () {
     const Person = runtime.require('Person');
     const shadow = new Person({

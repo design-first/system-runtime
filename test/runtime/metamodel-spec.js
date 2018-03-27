@@ -51,6 +51,33 @@ describe('System Runtime metamodel component', () => {
     expect(metamodel.require('PersonTestSimple')).to.not.be.undefined;
   });
 
+  it('can add a method (simple mode)', () => {
+    const metamodel = runtime.require('metamodel');
+    metamodel.schema('MethodTest', {
+      'add': 'method'
+    });
+
+    metamodel.model('MethodTest', {
+      'add': {
+        'p1': 'number',
+        'p2': 'number',
+        '=>': 'number'
+      }
+    });
+
+    metamodel.create();
+
+    var MethodTest = runtime.require('MethodTest');
+
+    MethodTest.on('add', (p1, p2) => {
+      return p1 + p2;
+    });
+
+    var test = new MethodTest();
+
+    expect(test.add(1, 2)).equal(3);
+  });
+
   it('can add a type', () => {
     const metamodel = runtime.require('metamodel');
 
@@ -138,8 +165,12 @@ describe('System Runtime metamodel component', () => {
 
     metamodel.type('address2', {
       'address': 'string',
-      'city': 'string'
+      'city': 'city'
     });
+
+    metamodel.type('city',
+      ['Paris', 'Rennes']
+    );
 
     metamodel.create();
 
@@ -149,11 +180,11 @@ describe('System Runtime metamodel component', () => {
       'firstName': 'a name',
       'address': {
         'address': 'an address',
-        'city': 'a city'
+        'city': 'Paris'
       }
     });
 
-    expect(person.address().city()).equal('a city');
+    expect(person.address().city()).equal('Paris');
   });
 
   it('can create a one to one relationship', () => {

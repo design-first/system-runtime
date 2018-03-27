@@ -186,9 +186,22 @@ function generateModels() {
           model[att] = {
             params: [
               {
-                name: 'param',
+                name: 'param1',
                 type: 'any',
-                mandatory: false
+                mandatory: false,
+                default: null
+              },
+              {
+                name: 'param2',
+                type: 'any',
+                mandatory: false,
+                default: null
+              },
+              {
+                name: 'param3',
+                type: 'any',
+                mandatory: false,
+                default: null
               }
             ],
             result: 'any',
@@ -199,9 +212,22 @@ function generateModels() {
           model[att] = {
             params: [
               {
-                name: 'param',
+                name: 'param1',
                 type: 'any',
-                mandatory: false
+                mandatory: false,
+                default: null
+              },
+              {
+                name: 'param2',
+                type: 'any',
+                mandatory: false,
+                default: null
+              },
+              {
+                name: 'param3',
+                type: 'any',
+                mandatory: false,
+                default: null
               }
             ],
             description: att
@@ -1097,6 +1123,283 @@ function merge(source, target, all) {
 }
 
 /**
+ * @method initConfiguration
+ * @param {String} name name of the object to configure
+ * @param {String} type type of the object to configure
+ * @param {Boolean} isMethod is a method
+ * @returns {Object} a configuration
+ * @description Init a configuration depending of the context
+ */
+function initConfiguration(name, type, isMethod) {
+  var result = null;
+
+  switch (true) {
+    case name === '=>':
+      break;
+    case typeof type === 'string' && type === 'boolean':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: 'boolean',
+          mandatory: false,
+          default: false
+        };
+      } else {
+        result = {
+          type: 'boolean',
+          readOnly: false,
+          mandatory: false,
+          default: false
+        };
+      }
+      break;
+    case typeof type === 'string' && type === 'string':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: 'string',
+          mandatory: false,
+          default: ''
+        };
+      } else {
+        result = {
+          type: 'string',
+          readOnly: false,
+          mandatory: false,
+          default: ''
+        };
+      }
+      break;
+    case typeof type === 'string' && type === 'number':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: 'number',
+          mandatory: false,
+          default: 0
+        };
+      } else {
+        result = {
+          type: 'number',
+          readOnly: false,
+          mandatory: false,
+          default: 0
+        };
+      }
+      break;
+    case typeof type === 'string' && type === 'object':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: 'object',
+          mandatory: false,
+          default: {}
+        };
+      } else {
+        result = {
+          type: 'object',
+          readOnly: false,
+          mandatory: false,
+          default: {}
+        };
+      }
+      break;
+    case typeof type === 'string' && type === 'array':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: 'array',
+          mandatory: false,
+          default: []
+        };
+      } else {
+        result = {
+          type: 'array',
+          readOnly: false,
+          mandatory: false,
+          default: []
+        };
+      }
+      break;
+    case typeof type === 'string' && type === 'date':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: 'date',
+          mandatory: false,
+          default: ''
+        };
+      } else {
+        result = {
+          type: 'date',
+          readOnly: false,
+          mandatory: false,
+          default: ''
+        };
+      }
+      break;
+    case typeof type === 'string' && type === 'any':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: 'any',
+          mandatory: false,
+          default: null
+        };
+      } else {
+        result = {
+          type: 'any',
+          readOnly: false,
+          mandatory: false,
+          default: ''
+        };
+      }
+      break;
+    // link / custom type
+    case typeof type === 'string':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: type,
+          mandatory: false,
+          default: {}
+        };
+      } else {
+        result = {
+          type: type,
+          readOnly: false,
+          mandatory: false,
+          default: {}
+        };
+      }
+      break;
+    case typeof type === 'array' && typeof type[0] === 'boolean':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: ['boolean'],
+          mandatory: false,
+          default: []
+        };
+      } else {
+        result = {
+          type: ['boolean'],
+          readOnly: false,
+          mandatory: false,
+          default: []
+        };
+      }
+      break;
+    case typeof type === 'array' && typeof type[0] === 'string':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: ['string'],
+          mandatory: false,
+          default: ''
+        };
+      } else {
+        result = {
+          type: ['string'],
+          readOnly: false,
+          mandatory: false,
+          default: ''
+        };
+      }
+      break;
+    case typeof type === 'array' && typeof type[0] === 'number':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: ['number'],
+          mandatory: false,
+          default: []
+        };
+      } else {
+        result = {
+          type: ['number'],
+          readOnly: false,
+          mandatory: false,
+          default: []
+        };
+      }
+      break;
+    case typeof type === 'array' && typeof type[0] === 'object':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: ['object'],
+          mandatory: false,
+          default: []
+        };
+      } else {
+        result = {
+          type: ['object'],
+          readOnly: false,
+          mandatory: false,
+          default: []
+        };
+      }
+      break;
+    case typeof type === 'array' && typeof type[0] === 'date':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: ['date'],
+          mandatory: false,
+          default: []
+        };
+      } else {
+        result = {
+          type: ['date'],
+          readOnly: false,
+          mandatory: false,
+          default: []
+        };
+      }
+      break;
+    case typeof type === 'array' && typeof type[0] === 'any':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: ['any'],
+          mandatory: false,
+          default: []
+        };
+      } else {
+        result = {
+          type: ['any'],
+          readOnly: false,
+          mandatory: false,
+          default: []
+        };
+      }
+      break;
+    case typeof type === 'array':
+      if (isMethod) {
+        result = {
+          name: name,
+          type: type,
+          mandatory: false,
+          default: []
+        };
+      } else {
+        result = {
+          type: type,
+          readOnly: false,
+          mandatory: false,
+          default: []
+        };
+      }
+      break;
+    default:
+      break;
+  }
+
+  return result;
+}
+
+/**
  * @method compileConfiguration
  * @param {JSON} model definition of the model
  * @returns {Object} compiled model
@@ -1104,160 +1407,65 @@ function merge(source, target, all) {
  */
 function compileConfiguration(model) {
   var propName = '';
+  var paramPropName = '';
+  var configuration = '';
+  var methodConf = {};
 
   model = JSON.parse(JSON.stringify(model));
 
   for (propName in model) {
     if (model.hasOwnProperty(propName) && propName.indexOf('_') !== 0) {
       switch (true) {
-        case typeof model[propName] === 'string' &&
-          model[propName] === 'boolean':
-          model[propName] = {
-            type: 'boolean',
-            readOnly: false,
-            mandatory: false,
-            default: false
-          };
-          break;
-        case typeof model[propName] === 'string' &&
-          model[propName] === 'string':
-          model[propName] = {
-            type: 'string',
-            readOnly: false,
-            mandatory: false,
-            default: ''
-          };
-          break;
-        case typeof model[propName] === 'string' &&
-          model[propName] === 'number':
-          model[propName] = {
-            type: 'number',
-            readOnly: false,
-            mandatory: false,
-            default: 0
-          };
-          break;
-        case typeof model[propName] === 'string' &&
-          model[propName] === 'object':
-          model[propName] = {
-            type: 'object',
-            readOnly: false,
-            mandatory: false,
-            default: {}
-          };
-          break;
-        case typeof model[propName] === 'string' &&
-          model[propName] === 'function':
-          model[propName] = {
-            type: 'function',
-            readOnly: false,
-            mandatory: false,
-            default: ''
-          };
-          break;
-        case typeof model[propName] === 'string' && model[propName] === 'array':
-          model[propName] = {
-            type: 'array',
-            readOnly: false,
-            mandatory: false,
-            default: []
-          };
-          break;
-        case typeof model[propName] === 'string' && model[propName] === 'date':
-          model[propName] = {
-            type: 'date',
-            readOnly: false,
-            mandatory: false,
-            default: ''
-          };
-          break;
-        case typeof model[propName] === 'string' && model[propName] === 'any':
-          model[propName] = {
-            type: 'any',
-            readOnly: false,
-            mandatory: false,
-            default: ''
-          };
-          break;
-        // link
+        // property type
         case typeof model[propName] === 'string':
-          model[propName] = {
-            type: model[propName],
-            readOnly: false,
-            mandatory: false,
-            default: {}
-          };
+          model[propName] = initConfiguration(propName, model[propName], false);
           break;
-        case typeof model[propName] === 'array' &&
-          typeof model[propName][0] === 'boolean':
-          model[propName] = {
-            type: ['boolean'],
-            readOnly: false,
-            mandatory: false,
-            default: []
-          };
+
+        // property configuration
+        case typeof model[propName] === 'object' &&
+          typeof model[propName]['=>'] === 'undefined':
+          model[propName] = merge(
+            model[propName],
+            initConfiguration(propName, model[propName].type || 'any', false)
+          );
           break;
-        case typeof model[propName] === 'array' &&
-          typeof model[propName][0] === 'string':
-          model[propName] = {
-            type: ['string'],
-            readOnly: false,
-            mandatory: false,
-            default: []
+
+        // method / event
+        case typeof model[propName] === 'object' &&
+          typeof model[propName]['=>'] !== 'undefined':
+          methodConf = {
+            params: [],
+            result: 'any'
           };
-          break;
-        case typeof model[propName] === 'array' &&
-          typeof model[propName][0] === 'number':
-          model[propName] = {
-            type: ['number'],
-            readOnly: false,
-            mandatory: false,
-            default: []
-          };
-          break;
-        case typeof model[propName] === 'array' &&
-          typeof model[propName][0] === 'object':
-          model[propName] = {
-            type: ['object'],
-            readOnly: false,
-            mandatory: false,
-            default: []
-          };
-          break;
-        case typeof model[propName] === 'array' &&
-          typeof model[propName][0] === 'function':
-          model[propName] = {
-            type: ['function'],
-            readOnly: false,
-            mandatory: false,
-            default: []
-          };
-          break;
-        case typeof model[propName] === 'array' &&
-          typeof model[propName][0] === 'date':
-          model[propName] = {
-            type: ['date'],
-            readOnly: false,
-            mandatory: false,
-            default: []
-          };
-          break;
-        case typeof model[propName] === 'array' &&
-          typeof model[propName][0] === 'any':
-          model[propName] = {
-            type: 'any',
-            readOnly: false,
-            mandatory: false,
-            default: []
-          };
-          break;
-        case typeof model[propName] === 'array':
-          model[propName] = {
-            type: [model[propName]],
-            readOnly: false,
-            mandatory: false,
-            default: []
-          };
+
+          for (paramPropName in model[propName]) {
+            // parameter type
+            if (typeof model[propName][paramPropName] === 'string') {
+              if (paramPropName === '=>') {
+                methodConf.result = model[propName][paramPropName];
+              } else {
+                methodConf.params.push(
+                  initConfiguration(
+                    paramPropName,
+                    model[propName][paramPropName],
+                    true
+                  )
+                );
+              }
+            }
+            // parameter configuration
+            if (typeof model[propName][paramPropName] === 'object') {
+              methodConf.params.push(
+                merge(model[propName][paramPropName]),
+                initConfiguration(
+                  paramPropName,
+                  model[propName][paramPropName].type || 'any',
+                  true
+                )
+              );
+            }
+          }
+          model[propName] = methodConf;
           break;
         default:
           break;
@@ -1415,11 +1623,19 @@ exports.type = function type(name, type) {
     typeDef = JSON.parse(JSON.stringify(name));
     typeName = typeDef.name;
   } else {
-    type = JSON.parse(JSON.stringify(type));
-    typeDef.schema = compileConfiguration(type);
-    typeDef.name = name;
-    typeDef.type = 'object';
-    typeName = typeDef.name;
+    if (Array.isArray(type)) {
+      type = JSON.parse(JSON.stringify(type));
+      typeDef.value = type;
+      typeDef.name = name;
+      typeDef.type = typeof type[0] || 'any';
+      typeName = typeDef.name;
+    } else {
+      type = JSON.parse(JSON.stringify(type));
+      typeDef.schema = compileConfiguration(type);
+      typeDef.name = name;
+      typeDef.type = 'object';
+      typeName = typeDef.name;
+    }
   }
 
   // check if type is compliant with the meta meta model
