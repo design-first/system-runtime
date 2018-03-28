@@ -1132,6 +1132,8 @@ function merge(source, target, all) {
  */
 function initConfiguration(name, type, isMethod) {
   var result = null;
+  var typeDef = [];
+  var defaultValue = '';
 
   switch (true) {
     case name === '=>':
@@ -1257,19 +1259,29 @@ function initConfiguration(name, type, isMethod) {
       break;
     // link / custom type
     case typeof type === 'string':
+      typeDef = $db._Type.find({
+        name: name
+      });
+      // case of enumeration
+      defaultValue = {};
+      if (typeDef.length) {
+        if (typeDef[0].value) {
+          defaultValue = typeDef[0].value[0];
+        }
+      }
       if (isMethod) {
         result = {
           name: name,
           type: type,
           mandatory: false,
-          default: {}
+          default: defaultValue
         };
       } else {
         result = {
           type: type,
           readOnly: false,
           mandatory: false,
-          default: {}
+          default: defaultValue
         };
       }
       break;
@@ -1491,8 +1503,14 @@ exports.schema = function schema(name, schema) {
   var schemas = [];
 
   if (typeof schema === 'undefined' || Object.keys(schema).length === 0) {
-    schema = JSON.parse(JSON.stringify(name));
-    schemaName = schema[NAME];
+    if (typeof name === 'string') {
+      schema = {};
+      schema[NAME] = name;
+      schemaName = name;
+    } else {
+      schema = JSON.parse(JSON.stringify(name));
+      schemaName = schema[NAME];
+    }
   } else {
     schema = JSON.parse(JSON.stringify(schema));
     schema[NAME] = name;
