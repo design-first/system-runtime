@@ -1,7 +1,7 @@
 {
   "name": "system-runtime",
   "master": false,
-  "version": "2.6.0",
+  "version": "2.6.1",
   "description": "System Runtime",
   "schemas": {
     "1ac07185641fa9f": {
@@ -1094,7 +1094,7 @@
     "_Database": { "db": { "_id": "db" } },
     "_Logger": { "logger": { "_id": "logger", "level": "warn" } },
     "_Metamodel": { "metamodel": { "_id": "metamodel" } },
-    "_Runtime": { "runtime": { "_id": "runtime", "version": "2.6.0" } }
+    "_Runtime": { "runtime": { "_id": "runtime", "version": "2.6.1" } }
   },
   "_id": "e89c617b6b15d24"
 }
