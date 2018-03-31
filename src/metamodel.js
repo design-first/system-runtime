@@ -1264,7 +1264,7 @@ function initConfiguration(name, type, isMethod) {
 
       // case of enumeration
       typeDef = $db._Type.find({
-        name: name
+        name: type
       });
       if (typeDef.length) {
         if (typeDef[0].value) {
