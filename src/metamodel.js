@@ -1133,6 +1133,7 @@ function merge(source, target, all) {
 function initConfiguration(name, type, isMethod) {
   var result = null;
   var typeDef = [];
+  var schemaDef = [];
   var defaultValue = '';
 
   switch (true) {
@@ -1259,16 +1260,26 @@ function initConfiguration(name, type, isMethod) {
       break;
     // link / custom type
     case typeof type === 'string':
+      defaultValue = {};
+
+      // case of enumeration
       typeDef = $db._Type.find({
         name: name
       });
-      // case of enumeration
-      defaultValue = {};
       if (typeDef.length) {
         if (typeDef[0].value) {
           defaultValue = typeDef[0].value[0];
         }
       }
+
+      // case of link
+      schemaDef = $db._Schema.find({
+        _name: type
+      });
+      if (schemaDef.length) {
+        defaultValue = '';
+      }
+
       if (isMethod) {
         result = {
           name: name,
