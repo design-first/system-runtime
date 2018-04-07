@@ -70,6 +70,7 @@ function _Array(conf) {
   var classId = '';
   var propertyName = '';
   var isReadOnly = false;
+  var isClassName = false;
 
   conf = conf || {};
   type = conf.type || '';
@@ -82,9 +83,11 @@ function _Array(conf) {
     isReadOnly = conf.readOnly;
   }
 
+  isClassName = $metamodel.isClassName(type);
+
   // init
   arrDb.forEach(function(val) {
-    if ($metamodel.isClassName(type)) {
+    if (isClassName) {
       arr.push($helper.getRuntime().require(val));
     } else {
       arr.push(val);
@@ -102,7 +105,7 @@ function _Array(conf) {
     var length = arr.length;
 
     arrDb.forEach(function(val) {
-      if ($metamodel.isClassName(type)) {
+      if (isClassName) {
         arr[i] = $helper.getRuntime().require(val);
       } else {
         arr[i] = val;
@@ -126,15 +129,12 @@ function _Array(conf) {
    * @description add an item in the array
    */
   function _add(val, action, start, deleteCount) {
-    var isClass = false;
     var i = 0;
     var length = 0;
     var del = [];
 
     if (!isReadOnly) {
-      isClass = $metamodel.isClassName(type);
-
-      if (isClass) {
+      if (isClassName) {
         if (
           val &&
           $metamodel.inheritFrom(val.constructor.name, type.replace('@', ''))
@@ -238,7 +238,6 @@ function _Array(conf) {
   function _remove(action) {
     var result;
     var val = null;
-    var isClass = false;
 
     if (!isReadOnly) {
       if (arrDb.length !== 0) {
@@ -265,9 +264,7 @@ function _Array(conf) {
             });
         }
 
-        isClass = $metamodel.isClassName(type);
-
-        if (isClass) {
+        if (isClassName) {
           result = store[val];
         } else {
           result = val;
@@ -292,6 +289,36 @@ function _Array(conf) {
    */
   arr.push = function push(val) {
     var result = _add(val, 'push');
+
+    arr[arr.length] = val;
+
+    return result;
+  };
+
+  /**
+   * @method pop
+   * @returns {_Component|Object} value
+   * @description Override pop method
+   */
+  arr.pop = function pop() {
+    var result = _remove('pop');
+    var length = arr.length;
+
+    if (length !== 0) {
+      delete arr[length];
+      arr.length = length - 1;
+    }
+
+    return result;
+  };
+
+  /**
+   * @method shift
+   * @returns {_Component|Object} value
+   * @description Override shift method
+   */
+  arr.shift = function shift() {
+    var result = _remove('shift');
     _copy();
 
     return result;
@@ -329,30 +356,6 @@ function _Array(conf) {
     conf.arr = arrDb;
 
     result = new _Array(conf);
-    _copy();
-
-    return result;
-  };
-
-  /**
-   * @method pop
-   * @returns {_Component|Object} value
-   * @description Override pop method
-   */
-  arr.pop = function pop() {
-    var result = _remove('pop');
-    _copy();
-
-    return result;
-  };
-
-  /**
-   * @method shift
-   * @returns {_Component|Object} value
-   * @description Override shift method
-   */
-  arr.shift = function shift() {
-    var result = _remove('shift');
     _copy();
 
     return result;
@@ -421,7 +424,6 @@ function _Array(conf) {
     var result = [];
     var i = 0;
     var length = 0;
-    var isClass = false;
     var data = null;
 
     if (typeof val !== 'undefined') {
@@ -443,8 +445,7 @@ function _Array(conf) {
 
       length = result.length;
       for (i = 0; i < length; i++) {
-        isClass = $metamodel.isClassName(type);
-        if (isClass) {
+        if (isClassName) {
           data = store[result[i]];
         } else {
           data = result[i];
