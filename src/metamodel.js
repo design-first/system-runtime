@@ -1994,19 +1994,23 @@ exports.isValidType = function isValidType(value, typeName) {
         isValid = hasType(value, typeName);
         break;
       case 'array':
-        length = value.length;
-        for (i = 0; i < length; i++) {
-          switch (true) {
-            case isCustomType(typeName[0]):
-              isValid = checkCustomSchema(value[i], typeName[0]);
-              break;
-            case exports.isClassName(typeName[0]):
-              isValid = _checkClassName(value[i], typeName[0]);
-              break;
-            default:
-              isValid = hasType(value[i], typeName[0]);
-              break;
+        if (Array.isArray(value)) {
+          length = value.length;
+          for (i = 0; i < length; i++) {
+            switch (true) {
+              case isCustomType(typeName[0]):
+                isValid = checkCustomSchema(value[i], typeName[0]);
+                break;
+              case exports.isClassName(typeName[0]):
+                isValid = _checkClassName(value[i], typeName[0]);
+                break;
+              default:
+                isValid = hasType(value[i], typeName[0]);
+                break;
+            }
           }
+        } else {
+          isValid = false;
         }
         break;
       default:
@@ -2228,17 +2232,24 @@ exports.isValidSchema = function isValidSchema(object, schema) {
         }
         break;
       case 'array':
-        length = field.length;
-        for (i = 0; i < length; i++) {
-          if (isCustomType(typeSchema[0])) {
-            isValid = isValidSchema(field[i], store.type[typeSchema[0]].schema);
-          } else {
-            if (!hasType(field[i], typeSchema[0])) {
-              $log.invalidPropertyType(field[i], typeSchema[0], field[i]);
-              isValid = false;
-              break;
+        if (Array.isArray(field)) {
+          length = field.length;
+          for (i = 0; i < length; i++) {
+            if (isCustomType(typeSchema[0])) {
+              isValid = isValidSchema(
+                field[i],
+                store.type[typeSchema[0]].schema
+              );
+            } else {
+              if (!hasType(field[i], typeSchema[0])) {
+                $log.invalidPropertyType(field[i], typeSchema[0], field[i]);
+                isValid = false;
+                break;
+              }
             }
           }
+        } else {
+          isValid = false;
         }
         break;
       default:

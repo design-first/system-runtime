@@ -465,33 +465,19 @@ exports.invalidResultType = function invalidResultType(
     classInfo = " (class '" + className + "')";
   }
 
-  if (type) {
-    getLogger().warn(
-      "invalid type for the result of method '" +
-        methodName +
-        "' on component '" +
-        id +
-        "'" +
-        classInfo +
-        ": expected type '" +
-        expectedType.replace('@', '') +
-        "' instead of type '" +
-        type +
-        "'"
-    );
-  } else {
-    getLogger().warn(
-      "invalid type for the result of method '" +
-        methodName +
-        "' on component '" +
-        id +
-        "'" +
-        classInfo +
-        ": expected type '" +
-        expectedType.replace('@', '') +
-        "'"
-    );
-  }
+  getLogger().warn(
+    "invalid type for the result of method '" +
+      methodName +
+      "' on component '" +
+      id +
+      "'" +
+      classInfo +
+      ": expected type '" +
+      expectedType +
+      "' instead of type '" +
+      type +
+      "'"
+  );
 };
 
 /**

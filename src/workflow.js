@@ -282,64 +282,15 @@ function checkResult(params) {
   }
 
   returnType = getReturnType(componentClassName, methodName);
-
-  if (returnType !== null) {
-    switch (true) {
-      case returnType === 'any':
-        break;
-      case returnType === 'array':
-        if (!Array.isArray(methodResult)) {
-          result = false;
-          $log.invalidResultType(
-            component.id(),
-            component.constructor.name,
-            methodName,
-            returnType,
-            null
-          );
-        }
-        break;
-      case $metamodel.isClassName(returnType):
-        if (methodResult.constructor) {
-          if (methodResult.constructor.name === 'Function') {
-            typeofMethodResult = methodResult.name;
-          } else {
-            typeofMethodResult = methodResult.constructor.name;
-          }
-          if (typeofMethodResult !== returnType.replace('@', '')) {
-            result = false;
-            $log.invalidResultType(
-              component.id(),
-              component.constructor.name,
-              methodName,
-              returnType,
-              typeofMethodResult
-            );
-          }
-        } else {
-          result = false;
-          $log.invalidResultType(
-            component.id(),
-            component.constructor.name,
-            methodName,
-            returnType,
-            typeof methodResult
-          );
-        }
-        break;
-      default:
-        if (typeof methodResult !== returnType) {
-          result = false;
-          $log.invalidResultType(
-            component.id(),
-            component.constructor.name,
-            methodName,
-            returnType,
-            typeof methodResult
-          );
-        }
-        break;
-    }
+  if (!$metamodel.isValidType(methodResult, returnType)) {
+    result = false;
+    $log.invalidResultType(
+      component.id(),
+      component.constructor.name,
+      methodName,
+      JSON.stringify(returnType),
+      Array.isArray(methodResult) ? 'array' : typeof methodResult
+    );
   }
 
   return result;

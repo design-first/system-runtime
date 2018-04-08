@@ -1034,7 +1034,7 @@
       "name": "method",
       "type": "object",
       "schema": {
-        "result": { "type": "string", "mandatory": false },
+        "result": { "type": "any", "mandatory": false },
         "params": { "type": ["parameter"], "mandatory": false },
         "description": { "type": "string", "mandatory": false }
       },
