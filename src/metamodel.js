@@ -1963,10 +1963,7 @@ exports.isValidType = function isValidType(value, typeName) {
       if (hasType(value, 'string')) {
         component = $component.get(value);
       }
-      if (
-        getClassName(component) !== typeRef &&
-        JSON.stringify(component) !== '{}'
-      ) {
+      if (getClassName(component) !== typeRef && component.id) {
         isValid = false;
         $log.invalidType(value, typeName);
       }

@@ -637,11 +637,16 @@ exports.masterSystemNotFound = function masterSystemNotFound() {
  * @description Invalid type
  */
 exports.invalidType = function invalidType(value, typeName) {
+  var realType =
+    value && value.constructor ? value.constructor.name : typeof value;
+
   getLogger().warn(
     "invalid type for value '" +
       JSON.stringify(value) +
       "': expected '" +
       typeName +
+      "' instead of '" +
+      realType +
       "'"
   );
 };
