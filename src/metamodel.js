@@ -938,7 +938,7 @@ function createClassInfo() {
  * @description Get the real name of the referenced class
  */
 function getRealClassName(value) {
-  return value.replace('@', '').trim();
+  return value.trim();
 }
 
 /**
@@ -1968,7 +1968,7 @@ exports.isValidType = function isValidType(value, typeName) {
         JSON.stringify(component) !== '{}'
       ) {
         isValid = false;
-        $log.invalidType(value, typeName.replace('@', ''));
+        $log.invalidType(value, typeName);
       }
     }
     return isValid;
@@ -2125,7 +2125,6 @@ exports.isValidSchema = function isValidSchema(object, schema) {
 
     typeRef = getClassName(typeSchema);
     typeRef = object[typeRef];
-    typeRef = typeRef.replace('@', ''); // backward compatibility
     if (isCustomType(typeRef)) {
       if (store.type[typeRef]) {
         if (store.type[typeRef].schema) {
@@ -2173,7 +2172,6 @@ exports.isValidSchema = function isValidSchema(object, schema) {
 
     typeRef = getRealTypeName(typeSchema);
     typeRef = object[typeRef];
-    typeRef = typeRef.replace('@', ''); // backward compatibility
     if (isCustomType(typeRef)) {
       if (store.type[typeRef]) {
         if (store.type[typeRef].schema) {
@@ -2862,13 +2860,11 @@ exports.inheritFrom = function inheritFrom(name, parentName) {
  * @description Is the value a class name
  */
 exports.isClassName = function isClassName(value) {
-  var name = '';
   var result = hasType(value, 'string');
 
   if (result) {
     if (Object.keys(store.generatedModels).length > 0) {
-      name = value.replace('@', '');
-      result = typeof store.generatedModels[name] !== 'undefined';
+      result = typeof store.generatedModels[value] !== 'undefined';
     } else {
       result = false;
     }

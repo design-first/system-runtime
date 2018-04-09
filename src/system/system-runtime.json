@@ -1062,7 +1062,7 @@
       "schema": {
         "description": { "type": "string", "mandatory": false },
         "name": { "type": "string", "mandatory": true },
-        "type": { "type": "string", "mandatory": true },
+        "type": { "type": "any", "mandatory": true },
         "mandatory": { "type": "boolean", "mandatory": false },
         "default": { "type": "{type}", "mandatory": false }
       },

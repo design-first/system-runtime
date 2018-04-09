@@ -294,7 +294,7 @@ exports.invalidPropertyName = function invalidPropertyName(
         "'" +
         classInfo +
         ": expected '" +
-        type.replace('@', '') +
+        type +
         "' instead of '" +
         typeof propertyValue +
         "'"

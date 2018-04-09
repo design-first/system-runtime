@@ -135,10 +135,7 @@ function _Array(conf) {
 
     if (!isReadOnly) {
       if (isClassName) {
-        if (
-          val &&
-          $metamodel.inheritFrom(val.constructor.name, type.replace('@', ''))
-        ) {
+        if (val && $metamodel.inheritFrom(val.constructor.name, type)) {
           switch (true) {
             case action === 'push':
               arrDb.push(val.id());
@@ -804,10 +801,7 @@ function addProperties(model, Class, classId) {
         if (
           !(
             $metamodel.isValidType(val, type) &&
-            ($metamodel.inheritFrom(
-              val.constructor.name,
-              type.replace('@', '')
-            ) &&
+            ($metamodel.inheritFrom(val.constructor.name, type) &&
               $metamodel.isClassName(type))
           )
         ) {
@@ -954,9 +948,7 @@ function addProperties(model, Class, classId) {
               ) ||
               ($metamodel.inheritFrom(
                 value.constructor.name,
-                propertyType === 'array'
-                  ? 'array'
-                  : propertyType[0].replace('@', '')
+                propertyType === 'array' ? 'array' : propertyType[0]
               ) &&
                 $metamodel.isClassName(
                   propertyType === 'array' ? 'array' : propertyType[0]
