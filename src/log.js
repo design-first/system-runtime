@@ -154,12 +154,12 @@ exports.invalidPropertyType = function invalidPropertyType(
       : typeof property;
   getLogger().warn(
     "invalid type for property '" +
-    propertyName +
-    "': expected type '" +
-    type +
-    "' instead of type '" +
-    realType +
-    "'"
+      propertyName +
+      "': expected type '" +
+      type +
+      "' instead of type '" +
+      realType +
+      "'"
   );
 };
 
@@ -189,12 +189,12 @@ exports.invalidClassName = function invalidClassName(
 ) {
   getLogger().warn(
     "invalid class name for component '" +
-    componentId +
-    "': expected '" +
-    type +
-    "' instead of '" +
-    constructorName +
-    "'"
+      componentId +
+      "': expected '" +
+      type +
+      "' instead of '" +
+      constructorName +
+      "'"
   );
 };
 
@@ -227,10 +227,10 @@ exports.missingImplementation = function missingImplementation(name) {
 exports.invalidTypeImp = function invalidTypeImp(property, className) {
   getLogger().error(
     "the property '" +
-    property +
-    "' of the model '" +
-    className +
-    "' is invalid"
+      property +
+      "' of the model '" +
+      className +
+      "' is invalid"
   );
 };
 
@@ -298,28 +298,28 @@ exports.invalidPropertyName = function invalidPropertyName(
 
     getLogger().warn(
       "invalid type for property '" +
-      propertyName +
-      "' on component '" +
-      id +
-      "'" +
-      classInfo +
-      ": expected '" +
-      type +
-      "' instead of '" +
-      realType +
-      "'"
+        propertyName +
+        "' on component '" +
+        id +
+        "'" +
+        classInfo +
+        ": expected '" +
+        type +
+        "' instead of '" +
+        realType +
+        "'"
     );
   } else {
     realType = type && type.constructor ? type.constructor.name : typeof type;
 
     getLogger().warn(
       "invalid type for property type '" +
-      propertyName +
-      "' on component '" +
-      classInfo +
-      ": expected 'string' instead of '" +
-      realType +
-      "'"
+        propertyName +
+        "' on component '" +
+        classInfo +
+        ": expected 'string' instead of '" +
+        realType +
+        "'"
     );
   }
 };
@@ -343,11 +343,11 @@ exports.readOnlyProperty = function readOnlyProperty(
   }
   getLogger().warn(
     "can not set read-only property '" +
-    propertyName +
-    "' on component '" +
-    id +
-    "'" +
-    classInfo
+      propertyName +
+      "' on component '" +
+      id +
+      "'" +
+      classInfo
   );
 };
 
@@ -363,10 +363,10 @@ exports.invalidDocumentOnDbInsert = function invalidDocumentOnDbInsert(
 ) {
   getLogger().warn(
     "invalid document '" +
-    JSON.stringify(doc).replace(/,/g, ', ') +
-    "' on an insert operation on collection '" +
-    collectionName +
-    "'"
+      JSON.stringify(doc).replace(/,/g, ', ') +
+      "' on an insert operation on collection '" +
+      collectionName +
+      "'"
   );
 };
 
@@ -388,16 +388,16 @@ exports.invalidPropertyTypeOnDbUpdate = function invalidPropertyTypeOnDbUpdate(
 ) {
   getLogger().warn(
     "invalid type when trying to update the property '" +
-    propertyName +
-    "' of document '" +
-    id +
-    "' (collection '" +
-    collectionName +
-    "') with the value '" +
-    JSON.stringify(propertyValue) +
-    "': expected type '" +
-    type +
-    "'"
+      propertyName +
+      "' of document '" +
+      id +
+      "' (collection '" +
+      collectionName +
+      "') with the value '" +
+      JSON.stringify(propertyValue) +
+      "': expected type '" +
+      type +
+      "'"
   );
 };
 
@@ -415,12 +415,12 @@ exports.unknownPropertyOnDbUpdate = function unknownPropertyOnDbUpdate(
 ) {
   getLogger().warn(
     "unknown property '" +
-    propertyName +
-    "' on an update operation on collection '" +
-    collectionName +
-    "' with component '" +
-    id +
-    "'"
+      propertyName +
+      "' on an update operation on collection '" +
+      collectionName +
+      "' with component '" +
+      id +
+      "'"
   );
 };
 
@@ -433,10 +433,10 @@ exports.unknownPropertyOnDbUpdate = function unknownPropertyOnDbUpdate(
 exports.unknownMethod = function unknownMethod(classId, methodName) {
   getLogger().warn(
     "try to call an unknown method '" +
-    methodName +
-    "' for the class '" +
-    classId +
-    "'"
+      methodName +
+      "' for the class '" +
+      classId +
+      "'"
   );
 };
 
@@ -448,10 +448,10 @@ exports.unknownMethod = function unknownMethod(classId, methodName) {
 exports.invalidCollectionName = function invalidCollectionName(name) {
   getLogger().warn(
     "invalid name for creating the collection '" +
-    name +
-    "': there is no schema '" +
-    name +
-    "' in the metamodel"
+      name +
+      "': there is no schema '" +
+      name +
+      "' in the metamodel"
   );
 };
 
@@ -479,16 +479,16 @@ exports.invalidResultType = function invalidResultType(
 
   getLogger().warn(
     "invalid type for the result of method '" +
-    methodName +
-    "' on component '" +
-    id +
-    "'" +
-    classInfo +
-    ": expected type '" +
-    expectedType +
-    "' instead of type '" +
-    type +
-    "'"
+      methodName +
+      "' on component '" +
+      id +
+      "'" +
+      classInfo +
+      ": expected type '" +
+      expectedType +
+      "' instead of type '" +
+      type +
+      "'"
   );
 };
 
@@ -501,10 +501,10 @@ exports.invalidResultType = function invalidResultType(
 exports.unknownComponent = function unknownComponent(className, componentId) {
   getLogger().warn(
     "unkown class component '" +
-    className +
-    "' for component '" +
-    componentId +
-    "'"
+      className +
+      "' for component '" +
+      componentId +
+      "'"
   );
 };
 
@@ -536,11 +536,11 @@ exports.invalidParamNumber = function invalidParamNumber(
 
   getLogger().warn(
     "invalid number of parameters when calling the method '" +
-    methodName +
-    "' on component '" +
-    id +
-    "'" +
-    classInfo
+      methodName +
+      "' on component '" +
+      id +
+      "'" +
+      classInfo
   );
 };
 
@@ -566,22 +566,22 @@ exports.invalidParamType = function invalidParamType(
   if (paramName !== undefined) {
     getLogger().warn(
       "invalid type for the parameter '" +
-      paramName +
-      "' when calling the method '" +
-      methodName +
-      "' on component '" +
-      id +
-      "'" +
-      classInfo
+        paramName +
+        "' when calling the method '" +
+        methodName +
+        "' on component '" +
+        id +
+        "'" +
+        classInfo
     );
   } else {
     getLogger().warn(
       "invalid type for a parameter when calling the method '" +
-      methodName +
-      "' on component '" +
-      id +
-      "'" +
-      classInfo
+        methodName +
+        "' on component '" +
+        id +
+        "'" +
+        classInfo
     );
   }
 };
@@ -595,10 +595,10 @@ exports.invalidParamType = function invalidParamType(
 exports.behaviorNotUnique = function behaviorNotUnique(id, stateName) {
   getLogger().warn(
     "try to add more than one behavior for the state '" +
-    stateName +
-    "' on class '" +
-    id +
-    "'"
+      stateName +
+      "' on class '" +
+      id +
+      "'"
   );
 };
 
@@ -611,10 +611,10 @@ exports.behaviorNotUnique = function behaviorNotUnique(id, stateName) {
 exports.invalidStateOn = function invalidStateOn(id, stateName) {
   getLogger().warn(
     "try to add a behavior to an unkwown state '" +
-    stateName +
-    "' on class '" +
-    id +
-    "'"
+      stateName +
+      "' on class '" +
+      id +
+      "'"
   );
 };
 
@@ -627,10 +627,10 @@ exports.invalidStateOn = function invalidStateOn(id, stateName) {
 exports.invalidStateOff = function invalidStateOff(id, stateName) {
   getLogger().warn(
     "try to remove a behavior from an unkwown state '" +
-    stateName +
-    "' on class '" +
-    id +
-    "'"
+      stateName +
+      "' on class '" +
+      id +
+      "'"
   );
 };
 
@@ -655,12 +655,12 @@ exports.invalidType = function invalidType(name, value, typeName) {
 
   getLogger().warn(
     "invalid type for property '" +
-    name +
-    "': expected '" +
-    typeName +
-    "' instead of '" +
-    realType +
-    "'"
+      name +
+      "': expected '" +
+      typeName +
+      "' instead of '" +
+      realType +
+      "'"
   );
 };
 
@@ -673,9 +673,9 @@ exports.invalidType = function invalidType(name, value, typeName) {
 exports.invalidClassType = function invalidClassType(obj, type) {
   getLogger().warn(
     "invalid class name for the object '" +
-    JSON.stringify(obj) +
-    "': expected '" +
-    type
+      JSON.stringify(obj) +
+      "': expected '" +
+      type
   );
 };
 
@@ -688,9 +688,9 @@ exports.invalidClassType = function invalidClassType(obj, type) {
 exports.invalidConfiguration = function invalidConfiguration(obj, type) {
   getLogger().warn(
     "invalid configuration found for '" +
-    JSON.stringify(obj) +
-    "': expected '" +
-    type
+      JSON.stringify(obj) +
+      "': expected '" +
+      type
   );
 };
 
@@ -712,10 +712,10 @@ exports.unknownType = function unknownType(value) {
 exports.canNotYetValidate = function canNotYetValidate(id, className) {
   getLogger().debug(
     "can not yet validate if the component '" +
-    id +
-    "' is an instance of '" +
-    className +
-    "'"
+      id +
+      "' is an instance of '" +
+      className +
+      "'"
   );
 };
 
@@ -733,12 +733,12 @@ exports.invalidChannelEvent = function invalidChannelEvent(
 ) {
   getLogger().warn(
     "invalid type for the message '" +
-    JSON.stringify(message) +
-    "': expected type '" +
-    type +
-    "' for event '" +
-    eventName +
-    "'"
+      JSON.stringify(message) +
+      "': expected type '" +
+      type +
+      "' for event '" +
+      eventName +
+      "'"
   );
 };
 
@@ -761,11 +761,11 @@ exports.invalidParamNumberMethodOn = function invalidParamNumberMethodOn(
   }
   getLogger().warn(
     "invalid number of parameters when adding a behavior on method '" +
-    methodName +
-    "' on component '" +
-    id +
-    "'" +
-    classInfo
+      methodName +
+      "' on component '" +
+      id +
+      "'" +
+      classInfo
   );
 };
 
@@ -780,18 +780,18 @@ exports.updateUuid = function updateUuid(currentId, newId, alreadyUsed) {
   if (alreadyUsed) {
     getLogger().warn(
       "try to update a component of id '" +
-      currentId +
-      "' with the new id '" +
-      newId +
-      "' that is already used"
+        currentId +
+        "' with the new id '" +
+        newId +
+        "' that is already used"
     );
   } else {
     getLogger().warn(
       "try to update a component of id '" +
-      currentId +
-      "' with the new id '" +
-      newId +
-      "'"
+        currentId +
+        "' with the new id '" +
+        newId +
+        "'"
     );
   }
 };
@@ -815,8 +815,8 @@ exports.invalidUseOfComponent = function invalidUseOfComponent(id) {
 exports.invalidSchema = function invalidSchema(name) {
   getLogger().warn(
     "the schema '" +
-    name +
-    "' is not valid, it has been removed from the metamodel"
+      name +
+      "' is not valid, it has been removed from the metamodel"
   );
 };
 
@@ -828,8 +828,8 @@ exports.invalidSchema = function invalidSchema(name) {
 exports.invalidModel = function invalidModel(name) {
   getLogger().warn(
     "the model '" +
-    name +
-    "' is not valid, it has been removed from the metamodel"
+      name +
+      "' is not valid, it has been removed from the metamodel"
   );
 };
 
@@ -841,8 +841,8 @@ exports.invalidModel = function invalidModel(name) {
 exports.invalidParameters = function invalidParameters(classId) {
   getLogger().warn(
     "the parameters for creating a component of class '" +
-    classId +
-    "' are not compliant with the model"
+      classId +
+      "' are not compliant with the model"
   );
 };
 
@@ -858,10 +858,10 @@ exports.destroyedComponentCall = function destroyedComponentCall(
 ) {
   getLogger().warn(
     "trying to get the property '" +
-    propertyName +
-    "' on the destroyed component '" +
-    id +
-    "'"
+      propertyName +
+      "' on the destroyed component '" +
+      id +
+      "'"
   );
 };
 
@@ -877,10 +877,10 @@ exports.invalidConctructorParameters = function invalidConctructorParameters(
 ) {
   getLogger().warn(
     "the constructor parameter '" +
-    JSON.stringify(object).replace(/,/g, ', ') +
-    "' for creating a component of class '" +
-    name +
-    "' is not an object"
+      JSON.stringify(object).replace(/,/g, ', ') +
+      "' for creating a component of class '" +
+      name +
+      "' is not an object"
   );
 };
 
@@ -913,8 +913,8 @@ exports.cyclicDependency = function cyclicDependency(name) {
   if (name) {
     getLogger().error(
       'a cyclic inheritance dependency with ’' +
-      name +
-      "’ schema has been found, please check the '_inherit' properties of your schemas"
+        name +
+        "’ schema has been found, please check the '_inherit' properties of your schemas"
     );
   } else {
     getLogger().error(
@@ -938,12 +938,12 @@ exports.invalidEnumType = function invalidEnumType(value, typeName, type) {
       value && value.constructor ? value.constructor.name : typeof value;
     getLogger().warn(
       "invalid type for enumerated type '" +
-      typeName +
-      "': expected type '" +
-      type +
-      "' instead of type '" +
-      realType +
-      "'"
+        typeName +
+        "': expected type '" +
+        type +
+        "' instead of type '" +
+        realType +
+        "'"
     );
   } else {
     getLogger().warn("invalid type for enumerated type '" + typeName + "'");
@@ -1055,22 +1055,22 @@ exports.actionInvokeError = function actionInvokeError(
   if (className !== 'Function') {
     getLogger().error(
       "error when trying to call the method '" +
-      state +
-      "' on component '" +
-      id +
-      "' (class '" +
-      className +
-      "'): " +
-      message
+        state +
+        "' on component '" +
+        id +
+        "' (class '" +
+        className +
+        "'): " +
+        message
     );
   } else {
     getLogger().error(
       "error when trying to call the method '" +
-      state +
-      "' on component '" +
-      id +
-      "': " +
-      message
+        state +
+        "' on component '" +
+        id +
+        "': " +
+        message
     );
   }
 };
@@ -1087,10 +1087,10 @@ exports.invalidSchemaPropertyName = function invalidSchemaPropertyName(
 ) {
   getLogger().warn(
     "invalid name '" +
-    propName +
-    "' for schema '" +
-    name +
-    "': a property name can not begin with '_'"
+      propName +
+      "' for schema '" +
+      name +
+      "': a property name can not begin with '_'"
   );
 };
 
@@ -1103,10 +1103,10 @@ exports.invalidSchemaPropertyName = function invalidSchemaPropertyName(
 exports.invalidSchemaProperty = function invalidSchemaProperty(name, propName) {
   getLogger().warn(
     "invalid property '" +
-    propName +
-    "' for schema '" +
-    name +
-    "': only 'property', 'link', 'collection', 'method' and 'event' are allowed."
+      propName +
+      "' for schema '" +
+      name +
+      "': only 'property', 'link', 'collection', 'method' and 'event' are allowed."
   );
 };
 
@@ -1118,8 +1118,8 @@ exports.invalidSchemaProperty = function invalidSchemaProperty(name, propName) {
 exports.invalidPropertyFormat = function invalidPropertyFormat(obj) {
   getLogger().warn(
     "invalid format for a definition of a property': '" +
-    obj +
-    "' is not an object"
+      obj +
+      "' is not an object"
   );
 };
 
@@ -1144,9 +1144,9 @@ exports.invalidState = function invalidState(model, state) {
 exports.unknownContext = function unknownContext(className, methodName) {
   getLogger().warn(
     "invoke the behavior '" +
-    methodName +
-    "' on the class '" +
-    className +
-    "' without a valid context"
+      methodName +
+      "' on the class '" +
+      className +
+      "' without a valid context"
   );
 };

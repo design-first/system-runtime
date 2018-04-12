@@ -686,9 +686,9 @@ function setStructureValue(model, id, path, value) {
  * @description Create a new class from a class definition
  */
 function createClass(classId) {
-  var body = function body(config) {
+  var proxy = function proxy(config) {
     config = config || {};
-    var body = {};
+    var proxy = {};
 
     if (config.constructor.name !== 'Object') {
       $log.invalidConctructorParameters(config, classId);
@@ -715,13 +715,13 @@ function createClass(classId) {
     store[config._id] = this;
 
     // id
-    body = function body() {
+    proxy = function proxy() {
       return config._id;
     };
     this.id = new Function(
-      '__body',
-      'return function id () { return __body.call(this) };'
-    )(body);
+      '__proxy',
+      'return function id () { return __proxy.call(this) };'
+    )(proxy);
 
     // create link to db
     $db.store[classId][config._id] = config;
@@ -745,9 +745,9 @@ function createClass(classId) {
     }
   };
   return new Function(
-    '__body',
-    'return function ' + classId + ' (config) { __body.call(this,config) };'
-  )(body);
+    '__proxy',
+    'return function ' + classId + ' (config) { __proxy.call(this,config) };'
+  )(proxy);
 }
 
 /**
@@ -758,13 +758,13 @@ function createClass(classId) {
  * @description Add an id method to a class that will return its id
  */
 function addIdClass(Class, classId) {
-  var body = function body() {
+  var proxy = function proxy() {
     return classId;
   };
   Class.id = new Function(
-    '__body',
-    'return function id () { return __body.call(this) };'
-  )(body);
+    '__proxy',
+    'return function id () { return __proxy.call(this) };'
+  )(proxy);
 }
 
 /**
@@ -785,7 +785,7 @@ function addProperties(model, Class, classId) {
   var properties = getProperties(model);
 
   properties.forEach(function property(prop) {
-    var body = {};
+    var proxy = {};
     var propertyName = '';
     var propertyType = '';
     var propertyReadOnly = '';
@@ -838,7 +838,7 @@ function addProperties(model, Class, classId) {
 
     if (Array.isArray(propertyType) || propertyType === 'array') {
       // in case of array, return a sub array
-      body = function body(position, value) {
+      proxy = function proxy(position, value) {
         var search = [];
         var component = null;
         var runtimeArr = null;
@@ -1012,13 +1012,13 @@ function addProperties(model, Class, classId) {
         }
       };
       Class.prototype[propertyName] = new Function(
-        '__body',
+        '__proxy',
         'return function ' +
           propertyName +
-          ' (position, value) { return __body.call(this, position, value) };'
-      )(body);
+          ' (position, value) { return __proxy.call(this, position, value) };'
+      )(proxy);
     } else {
-      body = function body(value) {
+      proxy = function proxy(value) {
         var search = [];
         var component = null;
         var propertyValue = null;
@@ -1135,11 +1135,11 @@ function addProperties(model, Class, classId) {
         }
       };
       Class.prototype[propertyName] = new Function(
-        '__body',
+        '__proxy',
         'return function ' +
           propertyName +
-          ' (value) { return __body.call(this,value) };'
-      )(body);
+          ' (value) { return __proxy.call(this,value) };'
+      )(proxy);
     }
   });
 }
@@ -1161,7 +1161,7 @@ function addStructure(path, name, model, id) {
   var sructure = {};
 
   properties.forEach(function property(prop) {
-    var body = {};
+    var proxy = {};
     var propertyName = '';
     var propertyType = '';
     var propertyReadOnly = '';
@@ -1172,7 +1172,7 @@ function addStructure(path, name, model, id) {
 
     if (propertyType === 'array') {
       // in case of array, return a sub array
-      body = function body(position, value) {
+      proxy = function proxy(position, value) {
         var search = [];
         var component = null;
         var runtimeArr = null;
@@ -1314,13 +1314,13 @@ function addStructure(path, name, model, id) {
       };
 
       sructure[propertyName] = new Function(
-        '__body',
+        '__proxy',
         'return function ' +
           propertyName +
-          ' (position, value) { return __body.call(this, position, value) };'
-      )(body);
+          ' (position, value) { return __proxy.call(this, position, value) };'
+      )(proxy);
     } else {
-      body = function body(value) {
+      proxy = function proxy(value) {
         var search = [];
         var component = null;
         var propertyValue = null;
@@ -1432,11 +1432,11 @@ function addStructure(path, name, model, id) {
       };
 
       sructure[propertyName] = new Function(
-        '__body',
+        '__proxy',
         'return function ' +
           propertyName +
-          ' (value) { return __body.call(this,value) };'
-      )(body);
+          ' (value) { return __proxy.call(this,value) };'
+      )(proxy);
     }
   });
 
@@ -1460,7 +1460,7 @@ function addMethods(model, Class, classId) {
     var params = paramsName.join(', ');
     var paramsWithContext = '';
 
-    var body = function body() {
+    var proxy = function proxy() {
       var result = null;
 
       result = $workflow.state({
@@ -1472,7 +1472,7 @@ function addMethods(model, Class, classId) {
       return result;
     };
 
-    var bodyWithContext = function body() {
+    var proxyWithContext = function proxy() {
       var result = null;
       var data = Array.prototype.slice.call(arguments);
 
@@ -1497,39 +1497,39 @@ function addMethods(model, Class, classId) {
       paramsWithContext = paramsName.join(', ');
 
       Class.prototype[methodName] = new Function(
-        '__body',
+        '__proxy',
         'return function ' +
           methodName +
           ' (' +
           params +
-          ') { return __body.call(this,' +
+          ') { return __proxy.call(this,' +
           params +
           ') };'
-      )(body);
+      )(proxy);
       if (methodName !== 'name') {
         Class[methodName] = new Function(
-          '__body',
+          '__proxy',
           'return function ' +
             methodName +
             ' (' +
             paramsWithContext +
-            ') { return __body.call(this,' +
+            ') { return __proxy.call(this,' +
             paramsWithContext +
             ') };'
-        )(bodyWithContext);
+        )(proxyWithContext);
       }
     } else {
       Class.prototype[methodName] = new Function(
-        '__body',
-        'return function ' + methodName + ' () { return __body.call(this) };'
-      )(body);
+        '__proxy',
+        'return function ' + methodName + ' () { return __proxy.call(this) };'
+      )(proxy);
       if (methodName !== 'name') {
         Class[methodName] = new Function(
-          '__body',
+          '__proxy',
           'return function ' +
             methodName +
-            ' (context) { return __body.call(this, context) };'
-        )(bodyWithContext);
+            ' (context) { return __proxy.call(this, context) };'
+        )(proxyWithContext);
       }
     }
   });
@@ -1550,7 +1550,7 @@ function addEvents(model, Class, classId) {
     var paramsName = getParamNames(classId, methodName);
     var params = paramsName.join(', ');
 
-    var body = function body() {
+    var proxy = function proxy() {
       var systems = [];
       var systemId = 'e89c617b6b15d24';
       var data = [];
@@ -1597,20 +1597,20 @@ function addEvents(model, Class, classId) {
     };
     if (params) {
       Class.prototype[methodName] = new Function(
-        '__body',
+        '__proxy',
         'return function ' +
           methodName +
           ' (' +
           params +
-          ') { return __body.call(this,' +
+          ') { return __proxy.call(this,' +
           params +
           ') };'
-      )(body);
+      )(proxy);
     } else {
       Class.prototype[methodName] = new Function(
-        '__body',
-        'return function ' + methodName + ' () { return __body.call(this) };'
-      )(body);
+        '__proxy',
+        'return function ' + methodName + ' () { return __proxy.call(this) };'
+      )(proxy);
     }
   });
 }
@@ -1623,7 +1623,7 @@ function addEvents(model, Class, classId) {
  * @description Add a on method to a component to add behaviors to the component
  */
 function addOn(Class, classId) {
-  var body = function body(state, action, useCoreAPI, isCore) {
+  var proxy = function proxy(state, action, useCoreAPI, isCore) {
     var behaviorId = '';
     var currentState = '';
     var context = null;
@@ -1671,7 +1671,7 @@ function addOn(Class, classId) {
 
             currentState = $state.get(this.id());
             if (currentState && currentState.state === state) {
-              $workflow.action(behaviorId, currentState.value);
+              $workflow.behavior(behaviorId, currentState.value);
             }
           } else {
             $log.invalidParamNumberMethodOn(
@@ -1688,9 +1688,9 @@ function addOn(Class, classId) {
     return behaviorId;
   };
   Class.prototype.on = new Function(
-    '__body',
-    'return function on (state, action, useCoreAPI, isCore) { return __body.call(this, state, action, useCoreAPI, isCore) };'
-  )(body);
+    '__proxy',
+    'return function on (state, action, useCoreAPI, isCore) { return __proxy.call(this, state, action, useCoreAPI, isCore) };'
+  )(proxy);
 }
 
 /**
@@ -1701,7 +1701,7 @@ function addOn(Class, classId) {
  * @description Add a on method to a class component to add behaviors to the class
  */
 function addOnClass(Class, classId) {
-  var body = function body(state, action, useCoreAPI, isCore) {
+  var proxy = function proxy(state, action, useCoreAPI, isCore) {
     var behaviorId = '';
     var currentState = '';
     var context = null;
@@ -1748,7 +1748,7 @@ function addOnClass(Class, classId) {
 
             currentState = $state.get(this.id());
             if (currentState && currentState.state === state) {
-              $workflow.action(behaviorId, currentState.value);
+              $workflow.behavior(behaviorId, currentState.value);
             }
           } else {
             $log.invalidParamNumberMethodOn(
@@ -1765,9 +1765,9 @@ function addOnClass(Class, classId) {
     return behaviorId;
   };
   Class.on = new Function(
-    '__body',
-    'return function on (state, action, useCoreAPI, isCore) { return __body.call(this, state, action, useCoreAPI, isCore) };'
-  )(body);
+    '__proxy',
+    'return function on (state, action, useCoreAPI, isCore) { return __proxy.call(this, state, action, useCoreAPI, isCore) };'
+  )(proxy);
 }
 
 /**
@@ -1778,7 +1778,7 @@ function addOnClass(Class, classId) {
  * @description Add a off method to a class component to remove behaviors from the class
  */
 function addOffClass(Class, classId) {
-  var body = function body(state, behaviorId) {
+  var proxy = function proxy(state, behaviorId) {
     if (
       $workflow.checkParams({
         component: this,
@@ -1798,9 +1798,9 @@ function addOffClass(Class, classId) {
     }
   };
   Class.off = new Function(
-    '__body',
-    'return function off (state, behaviorId) { return __body.call(this, state, behaviorId) };'
-  )(body);
+    '__proxy',
+    'return function off (state, behaviorId) { return __proxy.call(this, state, behaviorId) };'
+  )(proxy);
 }
 
 /**
@@ -1810,7 +1810,7 @@ function addOffClass(Class, classId) {
  * @description Add a destroy method to a class component to detroy the class and all the components of the same class
  */
 function addDestroyClass(Class) {
-  var body = function body() {
+  var proxy = function proxy() {
     var id = this.id();
     var result = [];
     var i = 0;
@@ -1842,9 +1842,9 @@ function addDestroyClass(Class) {
     });
   };
   Class.destroy = new Function(
-    '__body',
-    'return function destroy () { return __body.call(this) };'
-  )(body);
+    '__proxy',
+    'return function destroy () { return __proxy.call(this) };'
+  )(proxy);
 }
 
 /**
@@ -1854,13 +1854,13 @@ function addDestroyClass(Class) {
  * @description Require a component
  */
 function addRequireClass(Class) {
-  var body = function body(id) {
+  var proxy = function proxy(id) {
     return exports.get(id);
   };
   Class.require = new Function(
-    '__body',
-    'return function require (id) { return __body.call(this, id) };'
-  )(body);
+    '__proxy',
+    'return function require (id) { return __proxy.call(this, id) };'
+  )(proxy);
 }
 
 /**
@@ -1870,11 +1870,11 @@ function addRequireClass(Class) {
  * @description Init a class
  */
 function addInitClass(Class) {
-  var body = function body() {};
+  var proxy = function proxy() {};
   Class.init = new Function(
-    '__body',
-    'return function init (conf) { return __body.call(this, conf) };'
-  )(body);
+    '__proxy',
+    'return function init (conf) { return __proxy.call(this, conf) };'
+  )(proxy);
 }
 
 /**
@@ -1884,13 +1884,13 @@ function addInitClass(Class) {
  * @description Add the ClassInfo method on a class
  */
 function addClassInfoClass(Class) {
-  var body = function body() {
+  var proxy = function proxy() {
     return exports.get(this.id() + 'Info');
   };
   Class.classInfo = new Function(
-    '__body',
-    'return function classInfo () { return __body.call(this) };'
-  )(body);
+    '__proxy',
+    'return function classInfo () { return __proxy.call(this) };'
+  )(proxy);
 }
 
 /**

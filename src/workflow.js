@@ -342,16 +342,16 @@ function getActions(component, name, isEvent) {
 }
 
 /**
- * @method callAction
+ * @method action
  * @param {Component} component
  * @param {String} state name of the state
  * @param {Object} action action
  * @param {Array} params parameters of the action
  * @param {Boolean} isEvent is the action a callback of an event
  * @returns {Boolean} result of the action
- * @description Call an action and make some Dependency Injection if it is a core action
+ * @description Execute an action and make some Dependency Injection if it is a core action
  */
-function callAction(component, state, action, params, isEvent) {
+function action(component, state, action, params, isEvent) {
   var result = null;
   var injectedParams = [];
   var componentClassName = '';
@@ -670,12 +670,12 @@ exports.checkParams = function checkParams(params) {
 };
 
 /**
- * @method action
+ * @method behavior
  * @param {String} behaviorId id of the behavior
  * @param {Array} params parameters
- * @description Call an action that comes from an event
+ * @description Execute a behavior (only events)
  */
-exports.action = function action(behaviorId, params) {
+exports.behavior = function behavior(behaviorId, params) {
   var isEvent = false;
   var isProperty = false;
   var isLink = false;
@@ -712,7 +712,7 @@ exports.action = function action(behaviorId, params) {
       );
 
       if (isEvent || isProperty || isCollection || isLink) {
-        callAction(
+        action(
           component,
           behavior.state,
           {
@@ -757,7 +757,6 @@ exports.state = function state(params) {
   var component = null;
   var currentState = '';
   var actions = [];
-  var action = null;
   var result = undefined;
   var i = 0;
   var length = 0;
@@ -796,11 +795,10 @@ exports.state = function state(params) {
       })
     ) {
       if (!isEvent && !isProperty && !isLink && !isCollection) {
-        action = actions[0];
-        result = callAction(
+        result = action(
           params.context || component,
           params.state,
-          action,
+          actions[0],
           params.data,
           false
         );
@@ -813,11 +811,10 @@ exports.state = function state(params) {
       } else {
         length = actions.length;
         for (i = 0; i < length; i++) {
-          action = actions[i];
-          callAction(
+          action(
             params.context || component,
             params.state,
-            action,
+            actions[i],
             params.data,
             true
           );
