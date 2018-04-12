@@ -959,7 +959,7 @@
         "type": { "type": ["string"], "mandatory": true },
         "readOnly": { "type": "boolean", "mandatory": true },
         "mandatory": { "type": "boolean", "mandatory": true },
-        "default": { "type": "object", "mandatory": true },
+        "default": { "type": "array", "mandatory": true },
         "description": { "type": "string", "mandatory": false },
         "label": { "type": "string", "mandatory": false }
       },

@@ -1667,6 +1667,10 @@ exports.type = function type(name, type) {
     }
   }
 
+  if (typeof typeDef[ID] === 'undefined') {
+    typeDef[ID] = $helper.generateId();
+  }
+
   // check if type is compliant with the meta meta model
   if (exports.isValidObject(typeDef, store.metadef.type)) {
     result = $db._Type.insert(typeDef);
@@ -1741,7 +1745,7 @@ exports.init = function init() {
     type: {
       _id: {
         type: 'string',
-        mandatory: false
+        mandatory: true
       },
       name: {
         type: 'string',
@@ -1965,7 +1969,7 @@ exports.isValidType = function isValidType(value, typeName) {
       }
       if (getClassName(component) !== typeRef && component.id) {
         isValid = false;
-        $log.invalidType(value, typeName);
+        $log.invalidClassType(value, typeName);
       }
     }
     return isValid;
@@ -2169,35 +2173,51 @@ exports.isValidSchema = function isValidSchema(object, schema) {
 
     typeRef = getRealTypeName(typeSchema);
     typeRef = object[typeRef];
-    if (isCustomType(typeRef)) {
-      if (store.type[typeRef]) {
-        if (store.type[typeRef].schema) {
-          isValid = isValidSchema(field, store.type[typeRef].schema);
-        } else {
-          // check type
-          isValid = hasType(field, store.type[typeRef].type);
 
-          // check value
-          enumValue = store.type[typeRef].value;
-          if (enumValue) {
-            isValid = isValidEnumValue(field, enumValue);
+    switch (true) {
+      case typeof typeRef === 'string':
+        if (isCustomType(typeRef)) {
+          if (store.type[typeRef]) {
+            if (store.type[typeRef].schema) {
+              isValid = isValidSchema(field, store.type[typeRef].schema);
+            } else {
+              // check type
+              isValid = hasType(field, store.type[typeRef].type);
+
+              // check value
+              enumValue = store.type[typeRef].value;
+              if (enumValue) {
+                isValid = isValidEnumValue(field, enumValue);
+              }
+            }
+          } else {
+            isValid = false;
+          }
+        } else {
+          if (typeRef === 'array') {
+            isValid = Array.isArray(field);
+          } else {
+            if (exports.isClassName(typeRef)) {
+              isValid = hasType(field, 'object') || hasType(field, 'string');
+              // TODO maybe have a more strict validation than just a type checking
+            } else {
+              isValid = hasType(field, typeRef);
+            }
           }
         }
-      } else {
-        isValid = false;
-      }
-    } else {
-      if (typeRef === 'array') {
-        isValid = Array.isArray(field);
-      } else {
-        if (exports.isClassName(typeRef)) {
-          isValid = hasType(field, 'object') || hasType(field, 'string');
-          // TODO maybe have a more strict validation than just a type checking
-        } else {
-          isValid = hasType(field, typeRef);
+        break;
+
+      case Array.isArray(typeRef):
+        if (!Array.isArray(field)) {
+          isValid = false;
         }
-      }
+        break;
+
+      default:
+        isValid = false;
+        break;
     }
+
     if (!isValid) {
       $log.invalidPropertyType(fieldName, typeRef, field);
     }
@@ -2237,7 +2257,7 @@ exports.isValidSchema = function isValidSchema(object, schema) {
               );
             } else {
               if (!hasType(field[i], typeSchema[0])) {
-                $log.invalidPropertyType(field[i], typeSchema[0], field[i]);
+                $log.invalidPropertyType(fieldName, typeSchema[0], field[i]);
                 isValid = false;
                 break;
               }
@@ -2267,13 +2287,13 @@ exports.isValidSchema = function isValidSchema(object, schema) {
 
       switch (true) {
         case exports.isClassName(typeSchema):
-          result = _isValidClassName();
+          result = result && _isValidClassName();
           break;
         case isTypeReference(typeSchema):
-          result = _isValidTypeReference();
+          result = result && _isValidTypeReference();
           break;
         default:
-          result = _isValidType();
+          result = result && _isValidType();
           break;
       }
       if (!result) {
@@ -2394,7 +2414,7 @@ exports.isValidObject = function isValidObject(
       if (!exports.inheritFrom(comp.constructor.name, typeRef)) {
         // if (getClassName(comp) !== typeRef) { uncomment this line for a strict mode
         isValid = false;
-        $log.invalidType(field, typeRef);
+        $log.invalidType(fieldName, field, typeRef);
       } else {
         if (isComponent && cleanRef) {
           object[fieldName] = comp.id(); // store the id instead the full object
@@ -2477,7 +2497,7 @@ exports.isValidObject = function isValidObject(
                   getRealType(field[i]) !== typeArray &&
                   typeArray !== 'any'
                 ) {
-                  $log.invalidPropertyType(field[i], typeArray, field[i]);
+                  $log.invalidPropertyType(fieldName, typeArray, field[i]);
                   isValid = false;
                   break;
                 }
@@ -2532,7 +2552,7 @@ exports.isValidObject = function isValidObject(
           }
         } else {
           isValid = false;
-          $log.invalidType(field, 'array');
+          $log.invalidType(fieldName, field, 'array');
         }
         break;
       default:
@@ -2546,7 +2566,7 @@ exports.isValidObject = function isValidObject(
   // check if object
   if (!hasType(object, 'object')) {
     result = false;
-    $log.invalidType(object, 'object');
+    $log.invalidConfiguration(object, 'object');
   }
 
   // type
@@ -2580,13 +2600,13 @@ exports.isValidObject = function isValidObject(
 
     switch (true) {
       case isCustomType(typeSchema):
-        result = _isValidCustomType(field, typeSchema);
+        result = result && _isValidCustomType(field, typeSchema);
         break;
       case exports.isClassName(typeSchema):
-        result = _isValidClassName(field, typeSchema);
+        result = result && _isValidClassName(field, typeSchema);
         break;
       default:
-        result = _isValidType(field, typeSchema);
+        result = result && _isValidType(field, typeSchema);
         break;
     }
   }
