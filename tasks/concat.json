@@ -3,7 +3,7 @@
     "files": {
       "build/system/system.js": [
         "src/banners/systemmodule-header.txt",
-        "src/system/system-runtime.json",
+        "build/system-runtime.json",
         "src/banners/systemmodule-footer.txt"
       ]
     }

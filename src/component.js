@@ -720,7 +720,7 @@ function createClass(classId) {
     };
     this.id = new Function(
       '__proxy',
-      'return function id () { return __proxy.call(this) };'
+      'return function id () { return __proxy.apply(this) };'
     )(proxy);
 
     // create link to db
@@ -746,7 +746,9 @@ function createClass(classId) {
   };
   return new Function(
     '__proxy',
-    'return function ' + classId + ' (config) { __proxy.call(this,config) };'
+    'return function ' +
+      classId +
+      ' (config) { __proxy.apply(this, arguments) };'
   )(proxy);
 }
 
@@ -763,7 +765,7 @@ function addIdClass(Class, classId) {
   };
   Class.id = new Function(
     '__proxy',
-    'return function id () { return __proxy.call(this) };'
+    'return function id () { return __proxy.apply(this) };'
   )(proxy);
 }
 
@@ -1015,7 +1017,7 @@ function addProperties(model, Class, classId) {
         '__proxy',
         'return function ' +
           propertyName +
-          ' (position, value) { return __proxy.call(this, position, value) };'
+          ' (position, value) { return __proxy.apply(this, arguments) };'
       )(proxy);
     } else {
       proxy = function proxy(value) {
@@ -1138,7 +1140,7 @@ function addProperties(model, Class, classId) {
         '__proxy',
         'return function ' +
           propertyName +
-          ' (value) { return __proxy.call(this,value) };'
+          ' (value) { return __proxy.apply(this, arguments) };'
       )(proxy);
     }
   });
@@ -1317,7 +1319,7 @@ function addStructure(path, name, model, id) {
         '__proxy',
         'return function ' +
           propertyName +
-          ' (position, value) { return __proxy.call(this, position, value) };'
+          ' (position, value) { return __proxy.apply(this, arguments) };'
       )(proxy);
     } else {
       proxy = function proxy(value) {
@@ -1435,7 +1437,7 @@ function addStructure(path, name, model, id) {
         '__proxy',
         'return function ' +
           propertyName +
-          ' (value) { return __proxy.call(this,value) };'
+          ' (value) { return __proxy.apply(this, arguments) };'
       )(proxy);
     }
   });
@@ -1502,9 +1504,7 @@ function addMethods(model, Class, classId) {
           methodName +
           ' (' +
           params +
-          ') { return __proxy.call(this,' +
-          params +
-          ') };'
+          ') { return __proxy.apply(this, arguments) };'
       )(proxy);
       if (methodName !== 'name') {
         Class[methodName] = new Function(
@@ -1513,22 +1513,20 @@ function addMethods(model, Class, classId) {
             methodName +
             ' (' +
             paramsWithContext +
-            ') { return __proxy.call(this,' +
-            paramsWithContext +
-            ') };'
+            ') { return __proxy.apply(this, arguments) };'
         )(proxyWithContext);
       }
     } else {
       Class.prototype[methodName] = new Function(
         '__proxy',
-        'return function ' + methodName + ' () { return __proxy.call(this) };'
+        'return function ' + methodName + ' () { return __proxy.apply(this) };'
       )(proxy);
       if (methodName !== 'name') {
         Class[methodName] = new Function(
           '__proxy',
           'return function ' +
             methodName +
-            ' (context) { return __proxy.call(this, context) };'
+            ' (context) { return __proxy.apply(this, arguments) };'
         )(proxyWithContext);
       }
     }
@@ -1602,14 +1600,12 @@ function addEvents(model, Class, classId) {
           methodName +
           ' (' +
           params +
-          ') { return __proxy.call(this,' +
-          params +
-          ') };'
+          ') { return __proxy.apply(this, arguments) };'
       )(proxy);
     } else {
       Class.prototype[methodName] = new Function(
         '__proxy',
-        'return function ' + methodName + ' () { return __proxy.call(this) };'
+        'return function ' + methodName + ' () { return __proxy.apply(this) };'
       )(proxy);
     }
   });
@@ -1689,7 +1685,7 @@ function addOn(Class, classId) {
   };
   Class.prototype.on = new Function(
     '__proxy',
-    'return function on (state, action, useCoreAPI, isCore) { return __proxy.call(this, state, action, useCoreAPI, isCore) };'
+    'return function on (state, action, useCoreAPI, isCore) { return __proxy.apply(this, arguments) };'
   )(proxy);
 }
 
@@ -1766,7 +1762,7 @@ function addOnClass(Class, classId) {
   };
   Class.on = new Function(
     '__proxy',
-    'return function on (state, action, useCoreAPI, isCore) { return __proxy.call(this, state, action, useCoreAPI, isCore) };'
+    'return function on (state, action, useCoreAPI, isCore) { return __proxy.apply(this, arguments) };'
   )(proxy);
 }
 
@@ -1799,7 +1795,7 @@ function addOffClass(Class, classId) {
   };
   Class.off = new Function(
     '__proxy',
-    'return function off (state, behaviorId) { return __proxy.call(this, state, behaviorId) };'
+    'return function off (state, behaviorId) { return __proxy.apply(this, arguments) };'
   )(proxy);
 }
 
@@ -1843,7 +1839,7 @@ function addDestroyClass(Class) {
   };
   Class.destroy = new Function(
     '__proxy',
-    'return function destroy () { return __proxy.call(this) };'
+    'return function destroy () { return __proxy.apply(this) };'
   )(proxy);
 }
 
@@ -1859,7 +1855,7 @@ function addRequireClass(Class) {
   };
   Class.require = new Function(
     '__proxy',
-    'return function require (id) { return __proxy.call(this, id) };'
+    'return function require (id) { return __proxy.apply(this, arguments) };'
   )(proxy);
 }
 
@@ -1873,7 +1869,7 @@ function addInitClass(Class) {
   var proxy = function proxy() {};
   Class.init = new Function(
     '__proxy',
-    'return function init (conf) { return __proxy.call(this, conf) };'
+    'return function init (conf) { return __proxy.apply(this, arguments) };'
   )(proxy);
 }
 
@@ -1889,7 +1885,7 @@ function addClassInfoClass(Class) {
   };
   Class.classInfo = new Function(
     '__proxy',
-    'return function classInfo () { return __proxy.call(this) };'
+    'return function classInfo () { return __proxy.apply(this) };'
   )(proxy);
 }
 

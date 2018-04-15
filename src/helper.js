@@ -60,9 +60,10 @@ exports.isRuntime = function isRuntime() {
 exports.getRuntime = function getRuntime() {
   var runtimeId = '';
   var result = null;
+  var search = $db._Runtime.find();
 
-  if (!runtimeRef) {
-    runtimeId = $db._Runtime.find()[0]._id;
+  if (!runtimeRef && search[0]) {
+    runtimeId = search[0]._id;
     runtimeRef = $component.get(runtimeId);
   }
 
