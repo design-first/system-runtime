@@ -992,7 +992,7 @@ exports.compileSchema = function compileSchema(name) {
  * @description Generate model
  */
 exports.generateModel = function generateModel(name) {
-  getLogger().debug("generate model '" + name + "'...");
+  getLogger().debug("generating model '" + name + "'...");
 };
 
 /**
@@ -1001,7 +1001,7 @@ exports.generateModel = function generateModel(name) {
  * @description Check model
  */
 exports.checkModel = function checkModel(name) {
-  getLogger().debug("analyze model '" + name + "'...");
+  getLogger().debug("analyzing model '" + name + "'...");
 };
 
 /**
@@ -1010,7 +1010,7 @@ exports.checkModel = function checkModel(name) {
  * @description Create collection
  */
 exports.createCollection = function createCollection(name) {
-  getLogger().debug("create collection '" + name + "'");
+  getLogger().debug("'" + name + "' database collection created");
 };
 
 /**
@@ -1019,7 +1019,7 @@ exports.createCollection = function createCollection(name) {
  * @description Create class
  */
 exports.createClass = function createClass(name) {
-  getLogger().debug("create class '" + name + "'");
+  getLogger().debug("'" + name + "' class created");
 };
 
 /**
