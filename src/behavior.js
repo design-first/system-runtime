@@ -143,21 +143,21 @@ function createFunction(name, func, core, useCoreAPI) {
 
   if (params[0] !== '') {
     action = new Function(
-      '__proxy',
+      '__action',
       'return function ' +
         name +
         ' (' +
-        params.join(',') +
+        params.join(', ') +
         ") { return new Function('" +
-        params.join("','") +
-        "', __proxy).apply(this, arguments) };"
+        params.join("', '") +
+        "', __action).apply(this, arguments) };"
     )(funcBody);
   } else {
     action = new Function(
-      '__proxy',
+      '__action',
       'return function ' +
         name +
-        ' () { return new Function(__proxy).apply(this, arguments) };'
+        ' () { return new Function(__action).apply(this, arguments) };'
     )(funcBody);
   }
 
