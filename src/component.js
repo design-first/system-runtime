@@ -148,7 +148,7 @@ function _Array(conf) {
 
               length = del.length;
               for (i = 0; i < length; i++) {
-                $workflow.state({
+                $workflow.process({
                   component: id,
                   state: propertyName,
                   data: [store[del[i]], 'remove']
@@ -171,7 +171,7 @@ function _Array(conf) {
               });
           }
 
-          $workflow.state({
+          $workflow.process({
             component: id,
             state: propertyName,
             data: [val, 'add']
@@ -211,7 +211,7 @@ function _Array(conf) {
               });
           }
 
-          $workflow.state({
+          $workflow.process({
             component: id,
             state: propertyName,
             data: [val, 'add']
@@ -267,7 +267,7 @@ function _Array(conf) {
           result = val;
         }
 
-        $workflow.state({
+        $workflow.process({
           component: id,
           state: propertyName,
           data: [result, 'remove']
@@ -448,7 +448,7 @@ function _Array(conf) {
           data = result[i];
         }
 
-        $workflow.state({
+        $workflow.process({
           component: id,
           state: propertyName,
           data: [data, 'remove']
@@ -880,7 +880,7 @@ function addProperties(model, Class, classId) {
                     propertyType === 'array' ? 'any' : propertyType[0]
                   );
 
-                  $workflow.state({
+                  $workflow.process({
                     component: this.id(),
                     state: propertyName,
                     data: [position, 'reset']
@@ -995,7 +995,7 @@ function addProperties(model, Class, classId) {
                     });
                 }
 
-                $workflow.state({
+                $workflow.process({
                   component: this.id(),
                   state: propertyName,
                   data: [value, 'add']
@@ -1118,7 +1118,7 @@ function addProperties(model, Class, classId) {
                   $behavior.removeFromMemory(this.id());
                 }
 
-                $workflow.state({
+                $workflow.process({
                   component: this.id(),
                   state: propertyName,
                   data: [value]
@@ -1226,7 +1226,7 @@ function addStructure(path, name, model, id) {
                 if (search.length) {
                   setStructureValue(model, id, fullPath, position);
 
-                  $workflow.state({
+                  $workflow.process({
                     component: id,
                     state: fullPath,
                     data: [position, 'reset']
@@ -1296,7 +1296,7 @@ function addStructure(path, name, model, id) {
                     });
                 }
 
-                $workflow.state({
+                $workflow.process({
                   component: id,
                   state: fullPath,
                   data: [arr, 'add']
@@ -1414,7 +1414,7 @@ function addStructure(path, name, model, id) {
                   $behavior.removeFromMemory(id);
                 }
 
-                $workflow.state({
+                $workflow.process({
                   component: id,
                   state: fullPath,
                   data: [value]
@@ -1465,7 +1465,7 @@ function addMethods(model, Class, classId) {
     var proxy = function proxy() {
       var result = null;
 
-      result = $workflow.state({
+      result = $workflow.process({
         component: this.id(),
         state: methodName,
         data: arguments
@@ -1481,7 +1481,7 @@ function addMethods(model, Class, classId) {
       data.shift();
 
       if (arguments[0]) {
-        result = $workflow.state({
+        result = $workflow.process({
           component: this.id(),
           state: methodName,
           data: data,
@@ -1574,7 +1574,7 @@ function addEvents(model, Class, classId) {
 
         $db._Message.insert(message);
 
-        $workflow.state({
+        $workflow.process({
           component: this.id(),
           state: 'send',
           data: [
@@ -1586,7 +1586,7 @@ function addEvents(model, Class, classId) {
           ]
         });
       } else {
-        $workflow.state({
+        $workflow.process({
           component: this.id(),
           state: methodName,
           data: arguments
@@ -1667,7 +1667,10 @@ function addOn(Class, classId) {
 
             currentState = $state.get(this.id());
             if (currentState && currentState.state === state) {
-              $workflow.behavior(behaviorId, currentState.value);
+              $workflow.process({
+                id: behaviorId,
+                data: currentState.value
+              });
             }
           } else {
             $log.invalidParamNumberMethodOn(
@@ -1744,7 +1747,10 @@ function addOnClass(Class, classId) {
 
             currentState = $state.get(this.id());
             if (currentState && currentState.state === state) {
-              $workflow.behavior(behaviorId, currentState.value);
+              $workflow.process({
+                id: behaviorId,
+                data: currentState.value
+              });
             }
           } else {
             $log.invalidParamNumberMethodOn(
@@ -1832,7 +1838,7 @@ function addDestroyClass(Class) {
       });
     }
 
-    $workflow.state({
+    $workflow.process({
       component: id,
       state: 'destroy'
     });

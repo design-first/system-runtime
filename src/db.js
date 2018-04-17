@@ -767,7 +767,7 @@ DatabaseCollection.prototype.insert = function insert(document) {
               var length = channels.length;
               for (var i = 0; i < length; i++) {
                 channel = $helper.getRuntime().require(channels[i]._id);
-                $workflow.state({
+                $workflow.process({
                   component: channels[i]._id,
                   state: obj.event,
                   data: obj.data
@@ -880,13 +880,13 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                     });
                 }
                 if (type === 'array') {
-                  $workflow.state({
+                  $workflow.process({
                     component: docs[i]._id,
                     state: attributeName,
                     data: [update[attributeName], 'reset']
                   });
                 } else {
-                  $workflow.state({
+                  $workflow.process({
                     component: docs[i]._id,
                     state: attributeName,
                     data: [update[attributeName]]

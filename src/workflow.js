@@ -264,7 +264,6 @@ function checkResult(params) {
   var component = params.component || null;
   var methodName = params.methodName || '';
   var methodResult = null;
-  var typeofMethodResult = '';
   var componentClassName = '';
   var returnType = null;
   var result = true;
@@ -670,85 +669,17 @@ exports.checkParams = function checkParams(params) {
 };
 
 /**
- * @method behavior
- * @param {String} behaviorId id of the behavior
- * @param {Array} params parameters
- * @description Execute a behavior (only events)
- */
-exports.behavior = function behavior(behaviorId, params) {
-  var isEvent = false;
-  var isProperty = false;
-  var isLink = false;
-  var isCollection = false;
-  var behaviors = [];
-  var behavior = null;
-  var component = null;
-  var componentClassName = '';
-  var actionFromMemory = null;
-
-  behaviors = $db._Behavior.find({
-    _id: behaviorId
-  });
-
-  actionFromMemory = $behavior.get(behaviorId);
-
-  if (behaviors.length === 1) {
-    behavior = behaviors[0];
-
-    component = $component.get(behavior.component);
-    if (component) {
-      if (component.constructor.name === 'Function') {
-        componentClassName = component.name;
-      } else {
-        componentClassName = component.constructor.name;
-      }
-
-      isEvent = $metamodel.isEvent(behavior.state, componentClassName);
-      isProperty = $metamodel.isProperty(behavior.state, componentClassName);
-      isLink = $metamodel.isLink(behavior.state, componentClassName);
-      isCollection = $metamodel.isCollection(
-        behavior.state,
-        componentClassName
-      );
-
-      if (isEvent || isProperty || isCollection || isLink) {
-        action(
-          component,
-          behavior.state,
-          {
-            useCoreAPI: behavior.useCoreAPI,
-            context: behavior.context,
-            action: actionFromMemory
-          },
-          params,
-          true
-        );
-      }
-    }
-  }
-};
-
-/**
- * @method state
- * @param {Object} params params to change the state
+ * @method process
+ * @param {Object} params params to process
  * {String} component id of the component
  * {String} state state of the component
  * {Array} data parameters to send to the action
- * @description Change the state of a component.
- * Worklow:
- *
- * 0. Check if the component has not been destroyed
- * 1. Check if the state is a method, a property or an event
- * 2. Search if there is a behavior with actions for the new state
- * 3. If so, get the action(s)
- * 4. Check if the inputs are compliants with the metamodel
- * 5. Call the action(s)
- * 6. If a method, check if the output are compliants with the metamodel
- * 7. If all is ok, the state of the component is updated
- * 8. Return the result
+ * @description Task processing.
  */
-exports.state = function state(params) {
+exports.process = function process(params) {
   params = params || {};
+
+  params.id = params.id || '';
   params.component = params.component || '';
   params.state = params.state || '';
   params.data = params.data || [];
@@ -765,25 +696,74 @@ exports.state = function state(params) {
   var isLink = false;
   var isCollection = false;
   var isEvent = false;
+  var isMethod = false;
+  var behaviors = [];
+  var behavior = null;
+  var actionFromMemory = null;
 
   currentState = $state.get(params.component);
 
+  // check state
   if (currentState && currentState.state === 'destroy') {
     $log.invalidUseOfComponent(params.component);
   }
 
-  component = $component.get(params.component);
-  if (component) {
-    if (component.constructor.name === 'Function') {
-      componentClassName = component.name;
-    } else {
-      componentClassName = component.constructor.name;
+  // case of event processing
+  if (params.id) {
+    behaviors = $db._Behavior.find({
+      _id: params.id
+    });
+
+    if (behaviors.length === 0) {
+      behavior = behaviors[0];
+      component = $component.get(behavior.component);
+
+      if (component) {
+        if (component.constructor.name === 'Function') {
+          componentClassName = component.name;
+        } else {
+          componentClassName = component.constructor.name;
+        }
+
+        isProperty = $metamodel.isProperty(behavior.state, componentClassName);
+        isLink = $metamodel.isLink(behavior.state, componentClassName);
+        isCollection = $metamodel.isCollection(
+          behavior.state,
+          componentClassName
+        );
+        isEvent = $metamodel.isEvent(behavior.state, componentClassName);
+        isMethod = $metamodel.isMethod(behavior.state, componentClassName);
+
+        actionFromMemory = $behavior.get(params.id);
+        if (actionFromMemory) {
+          action = {
+            useCoreAPI: behavior.useCoreAPI,
+            context: behavior.context,
+            action: actionFromMemory
+          };
+
+          actions.push(action);
+        }
+      }
     }
-    isEvent = $metamodel.isEvent(params.state, componentClassName);
-    isProperty = $metamodel.isProperty(params.state, componentClassName);
-    isLink = $metamodel.isLink(params.state, componentClassName);
-    isCollection = $metamodel.isCollection(params.state, componentClassName);
-    actions = getActions(component, params.state, isEvent);
+  } else {
+    component = $component.get(params.component);
+
+    if (component) {
+      if (component.constructor.name === 'Function') {
+        componentClassName = component.name;
+      } else {
+        componentClassName = component.constructor.name;
+      }
+
+      isProperty = $metamodel.isProperty(params.state, componentClassName);
+      isLink = $metamodel.isLink(params.state, componentClassName);
+      isCollection = $metamodel.isCollection(params.state, componentClassName);
+      isEvent = $metamodel.isEvent(params.state, componentClassName);
+      isMethod = $metamodel.isMethod(params.state, componentClassName);
+
+      actions = getActions(component, params.state, isEvent);
+    }
   }
 
   if (actions.length) {
@@ -794,7 +774,7 @@ exports.state = function state(params) {
         args: params.data
       })
     ) {
-      if (!isEvent && !isProperty && !isLink && !isCollection) {
+      if (isMethod) {
         result = action(
           params.context || component,
           params.state,
@@ -823,48 +803,11 @@ exports.state = function state(params) {
         $state.set(component.id(), params.state, params.data);
       }
     }
-    return result;
   } else {
     if (component && (isEvent || isProperty || isLink || isCollection)) {
       $state.set(component.id(), params.state, params.data);
     }
   }
-};
 
-/**
- * @method stop
- * @param {Object} params parameters
- * {Boolean} error true if the stop of the workflow is due to an error (default false)
- * {String} message error message to log (default '')
- * @description Stop the workflow engine
- */
-exports.stop = function stop(params) {
-  params = params || {};
-
-  if (typeof params.error === 'undefined') {
-    params.error = false;
-  }
-  params.message = params.message || '';
-
-  exports.state = function state() {};
-
-  if (params.error) {
-    if (params.message) {
-      throw new RuntimeError(
-        'runtime has been stopped because ' + params.message
-      );
-    } else {
-      throw new RuntimeError(
-        'runtime has been stopped because of an unknown error'
-      );
-    }
-  } else {
-    if (params.message) {
-      console.error(
-        'runtime: runtime has been stopped because ' + params.message
-      );
-    } else {
-      console.error('runtime: runtime has been stopped');
-    }
-  }
+  return result;
 };
