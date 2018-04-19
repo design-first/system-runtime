@@ -1636,7 +1636,7 @@ function addOn(Class, classId) {
     }
 
     if (
-      $workflow.checkParams({
+      $workflow.checkInput({
         component: this,
         methodName: 'on',
         args: arguments
@@ -1655,7 +1655,7 @@ function addOn(Class, classId) {
         ) {
           $log.behaviorNotUnique(classId, state);
         } else {
-          if ($workflow.validParamNumbers(classId, state, action)) {
+          if ($workflow.checkInputNumbers(classId, state, action)) {
             behaviorId = $behavior.add(
               this.id(),
               state,
@@ -1716,7 +1716,7 @@ function addOnClass(Class, classId) {
       isCore = true;
     }
     if (
-      $workflow.checkParams({
+      $workflow.checkInput({
         component: this,
         methodName: 'on',
         args: arguments
@@ -1735,7 +1735,7 @@ function addOnClass(Class, classId) {
         ) {
           $log.behaviorNotUnique(classId, state);
         } else {
-          if ($workflow.validParamNumbers(classId, state, action)) {
+          if ($workflow.checkInputNumbers(classId, state, action)) {
             behaviorId = $behavior.add(
               this.id(),
               state,
@@ -1782,7 +1782,7 @@ function addOnClass(Class, classId) {
 function addOffClass(Class, classId) {
   var proxy = function proxy(state, behaviorId) {
     if (
-      $workflow.checkParams({
+      $workflow.checkInput({
         component: this,
         methodName: 'off',
         args: arguments

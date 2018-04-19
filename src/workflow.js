@@ -252,50 +252,6 @@ function getParamTypes(id, methodName) {
 }
 
 /**
- * @method checkResult
- * @param {Object} params
- * @returns {Boolean} true if conditions on ouput are compliant with the metamodel
- * @private
- * @description Check if conditions on output are compliant with the metamodel
- */
-function checkResult(params) {
-  params = params || {};
-
-  var component = params.component || null;
-  var methodName = params.methodName || '';
-  var methodResult = null;
-  var componentClassName = '';
-  var returnType = null;
-  var result = true;
-
-  if (typeof params.methodResult !== 'undefined') {
-    methodResult = params.methodResult;
-  } else {
-    methodResult = undefined;
-  }
-
-  if (component.constructor.name === 'Function') {
-    componentClassName = component.name;
-  } else {
-    componentClassName = component.constructor.name;
-  }
-
-  returnType = getReturnType(componentClassName, methodName);
-  if (!$metamodel.isValidType(methodResult, returnType)) {
-    result = false;
-    $log.invalidResultType(
-      component.id(),
-      component.constructor.name,
-      methodName,
-      JSON.stringify(returnType),
-      Array.isArray(methodResult) ? 'array' : typeof methodResult
-    );
-  }
-
-  return result;
-}
-
-/**
  * @method getActions
  * @param {Object} component a System Runtime component
  * @param {String} name name of the state
@@ -464,14 +420,14 @@ function action(component, state, action, params, isEvent) {
 /* Public methods */
 
 /**
- * @method validParamNumbers
+ * @method checkInputNumbers
  * @param {String} className name the class
  * @param {String} state state on which the action applied
  * @param {Function} action action
  * @returns {Boolean} true if the action is the valid number of parameters
  * @description Check if an action has the valid number of parameter
  */
-exports.validParamNumbers = function validParamNumbers(
+exports.checkInputNumbers = function checkInputNumbers(
   className,
   state,
   action
@@ -545,12 +501,12 @@ exports.validParamNumbers = function validParamNumbers(
 };
 
 /**
- * @method checkParams
+ * @method checkInput
  * @param {Object} params
  * @returns {Boolean} true if condition on input are compliant with the model
  * @description Check if conditions on input are compliant with the model before calling the action
  */
-exports.checkParams = function checkParams(params) {
+exports.checkInput = function checkInput(params) {
   params = params || {};
 
   var component = params.component || null;
@@ -669,6 +625,49 @@ exports.checkParams = function checkParams(params) {
 };
 
 /**
+ * @method checkOutput
+ * @param {Object} params
+ * @returns {Boolean} true if conditions on ouput are compliant with the metamodel
+ * @description Check if conditions on output are compliant with the metamodel
+ */
+exports.checkOutput = function checkOutput(params) {
+  params = params || {};
+
+  var component = params.component || null;
+  var methodName = params.methodName || '';
+  var methodResult = null;
+  var componentClassName = '';
+  var returnType = null;
+  var result = true;
+
+  if (typeof params.methodResult !== 'undefined') {
+    methodResult = params.methodResult;
+  } else {
+    methodResult = undefined;
+  }
+
+  if (component.constructor.name === 'Function') {
+    componentClassName = component.name;
+  } else {
+    componentClassName = component.constructor.name;
+  }
+
+  returnType = getReturnType(componentClassName, methodName);
+  if (!$metamodel.isValidType(methodResult, returnType)) {
+    result = false;
+    $log.invalidResultType(
+      component.id(),
+      component.constructor.name,
+      methodName,
+      JSON.stringify(returnType),
+      Array.isArray(methodResult) ? 'array' : typeof methodResult
+    );
+  }
+
+  return result;
+};
+
+/**
  * @method process
  * @param {Object} params params to process
  * {String} component id of the component
@@ -768,7 +767,7 @@ exports.process = function process(params) {
 
   if (actions.length) {
     if (
-      exports.checkParams({
+      exports.checkInput({
         component: component,
         methodName: params.state,
         args: params.data
@@ -783,7 +782,7 @@ exports.process = function process(params) {
           false
         );
 
-        checkResult({
+        exports.checkOutput({
           component: component,
           methodName: params.state,
           methodResult: result
