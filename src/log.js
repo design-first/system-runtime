@@ -937,7 +937,7 @@ exports.invalidEnumType = function invalidEnumType(value, typeName, type) {
     realType =
       value && value.constructor ? value.constructor.name : typeof value;
     getLogger().warn(
-      "invalid type for enumerated type '" +
+      "invalid type for the type '" +
         typeName +
         "': expected type '" +
         type +
@@ -946,7 +946,7 @@ exports.invalidEnumType = function invalidEnumType(value, typeName, type) {
         "'"
     );
   } else {
-    getLogger().warn("invalid type for enumerated type '" + typeName + "'");
+    getLogger().warn("invalid type for the type '" + typeName + "'");
   }
 };
 

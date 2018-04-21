@@ -2721,9 +2721,13 @@ exports.getModelPathType = function getModelPathType(model, path) {
 
   for (i = 0; i < length; i++) {
     subpath = subpaths[i];
+    subpath = subpath.split('[')[0];
     if (i === 0) {
       result = exports.getModel(model)[subpath].type;
     } else {
+      if (Array.isArray(result)) {
+        result = result[0];
+      }
       if (isCustomType(result)) {
         structure = exports.getType(result);
         if (structure.schema) {
