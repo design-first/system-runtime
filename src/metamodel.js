@@ -1869,22 +1869,20 @@ exports.isMethod = function isMethod(name, id) {
 
 /**
  * @method isStructure
- * @param {String} name name of the propertys
- * @param {String} id component id
+ * @param {String} path path of the property
+ * @param {String} modelName model name
  * @returns {Boolean} true if the property is a structure
  * @description Check if an attribute of the schema is a structure
  */
-exports.isStructure = function isStructure(name, id) {
+exports.isStructure = function isStructure(path, modelName) {
   var result = false;
-  var model = store.generatedModels[id];
-  var attributeType = '';
+  var structure = null;
   var type = '';
 
-  if (model[name]) {
-    type = store.type[model[name].type];
-  }
+  type = exports.getModelPathType(modelName, path);
+  structure = exports.getType(type);
 
-  if (type && type.schema) {
+  if (structure && structure.schema) {
     result = true;
   }
 

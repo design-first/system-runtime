@@ -187,6 +187,75 @@ describe('System Runtime metamodel component', () => {
     expect(person.address().city()).equal('Paris');
   });
 
+  it('can add a complex structure', () => {
+    const metamodel = runtime.require('metamodel');
+
+    metamodel.type({
+      'name': 'foods',
+      'type': 'object',
+      'schema': {
+        'vegetables': { 'type': 'vegetable', 'mandatory': true }
+      }
+    });
+
+    metamodel.type({
+      'name': 'vegetable',
+      'type': 'object',
+      'schema': {
+        'kind': { 'type': ['string'], 'mandatory': true }
+      }
+    });
+
+    metamodel.schema({
+      '_name': 'Person',
+      '_inherit': ['_Component'],
+      'firstName': 'property',
+      'lastName': 'property',
+      'likes': 'property'
+    });
+
+    metamodel.model({
+      '_name': 'Person',
+      '_inherit': ['_Component'],
+      'firstName': {
+        'type': 'string',
+        'readOnly': false,
+        'mandatory': true,
+        'default': ''
+      },
+      'lastName': {
+        'type': 'string',
+        'readOnly': true,
+        'mandatory': true,
+        'default': ''
+      },
+      'likes': {
+        'type': 'foods',
+        'readOnly': true,
+        'mandatory': false,
+        'default': {
+        }
+      }
+    });
+
+    metamodel.create();
+
+    const Person = runtime.require('Person');
+
+    const yoda = new Person({
+      'sex': 'male',
+      'firstName': 'Yoda',
+      'lastName': 'Master',
+      'likes': {
+        'vegetables': {
+          'kind': ['all']
+        }
+      }
+    });
+
+    expect(yoda.likes().vegetables().kind(0)).equal('all');
+  });
+
   it('can create a one to one relationship', () => {
     const metamodel = runtime.require('metamodel');
 

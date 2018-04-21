@@ -572,24 +572,22 @@ function getMethods(id) {
 
 /**
  * @method getStructureProperties
- * @param {String} name of the property
- * @param {String} name of the model
+ * @param {String} path path of the property
+ * @param {String} name name of the model
  * @returns {Array} list of property schema of the structure type
  * @private
  * @description Get the schema of a structure
  */
-function getStructureProperties(propertyName, model) {
-  var modelDef = null;
+function getStructureProperties(path, model) {
   var type = null;
   var structure = null;
   var result = [];
   var propNames = [];
 
-  modelDef = $metamodel.getModel(model);
-  type = modelDef[propertyName].type;
+  type = $metamodel.getModelPathType(model, path);
   structure = $metamodel.getType(type);
 
-  if (structure.schema) {
+  if (structure && structure.schema) {
     propNames = Object.keys(structure.schema);
     propNames.forEach(function(name) {
       structure.schema[name].name = name;
@@ -1159,7 +1157,10 @@ function addProperties(model, Class, classId) {
  * Some checks can be done in order to see if the set of properties is compliant with the model.
  */
 function addStructure(path, name, model, id) {
-  var properties = getStructureProperties(name, model);
+  var properties = getStructureProperties(
+    path ? path + '.' + name : name,
+    model
+  );
   var sructure = {};
 
   properties.forEach(function property(prop) {
@@ -1172,7 +1173,7 @@ function addStructure(path, name, model, id) {
     propertyType = prop.type;
     propertyReadOnly = prop.readOnly;
 
-    if (propertyType === 'array') {
+    if (Array.isArray(propertyType) || propertyType === 'array') {
       // in case of array, return a sub array
       proxy = function proxy(position, value) {
         var search = [];
@@ -1194,11 +1195,11 @@ function addStructure(path, name, model, id) {
             }
           });
 
-          return true;
+          return result;
         }
 
         if (path) {
-          parentPath = parentPath + '.' + name;
+          parentPath = path + '.' + name;
         } else {
           parentPath = name;
         }
@@ -1219,7 +1220,12 @@ function addStructure(path, name, model, id) {
           } else {
             if (Array.isArray(position)) {
               // we replace the collection
-              if (_isValidCollection(position, 'any')) {
+              if (
+                _isValidCollection(
+                  position,
+                  Array.isArray(propertyType) ? propertyType[0] : 'any'
+                )
+              ) {
                 search = $db[model].find({
                   _id: id
                 });
@@ -1272,7 +1278,12 @@ function addStructure(path, name, model, id) {
           if (propertyReadOnly) {
             $log.readOnlyProperty(id, this.constructor.name, propertyName);
           } else {
-            if ($metamodel.isValidType(value, 'any')) {
+            if (
+              $metamodel.isValidType(
+                value,
+                Array.isArray(propertyType) ? propertyType[0] : 'any'
+              )
+            ) {
               search = $db[model].find({
                 _id: id
               });
@@ -1308,7 +1319,7 @@ function addStructure(path, name, model, id) {
                 this.constructor.name,
                 propertyName,
                 value,
-                propertyType
+                Array.isArray(propertyType) ? propertyType[0] : 'any'
               );
             }
           }
@@ -1330,7 +1341,7 @@ function addStructure(path, name, model, id) {
         var fullPath = '';
 
         if (path) {
-          parentPath = parentPath + '.' + name;
+          parentPath = path + '.' + name;
         } else {
           parentPath = name;
         }
@@ -1355,7 +1366,7 @@ function addStructure(path, name, model, id) {
                   JSON.stringify(getStructureValue(model, id, fullPath))
                 );
                 break;
-              case $metamodel.isStructure(propertyName, model):
+              case $metamodel.isStructure(fullPath, model):
                 propertyValue = addStructure(
                   parentPath,
                   propertyName,
