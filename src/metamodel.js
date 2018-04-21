@@ -1957,7 +1957,7 @@ exports.isValidType = function isValidType(value, typeName) {
    * @description Check if an object is compliant with a class
    */
   function _checkClassName(value, typeName) {
-    var isValid = true;
+    var isValid = false;
     var typeRef = getRealClassName(typeName);
     var component = value;
 
@@ -1965,10 +1965,15 @@ exports.isValidType = function isValidType(value, typeName) {
       if (hasType(value, 'string')) {
         component = $component.get(value);
       }
-      if (getClassName(component) !== typeRef && component.id) {
-        isValid = false;
-        $log.invalidClassType(value, typeName);
+      if (getClassName(component) === typeRef && component && component.id) {
+        isValid = true;
       }
+    } else {
+      isValid = true;
+    }
+
+    if (!isValid) {
+      $log.invalidClassType(value, typeName);
     }
     return isValid;
   }
