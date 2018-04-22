@@ -2733,15 +2733,21 @@ exports.getModelPathType = function getModelPathType(model, path) {
       if (Array.isArray(result)) {
         result = result[0];
       }
+
       if (isCustomType(result)) {
         structure = exports.getType(result);
-        if (structure.schema) {
-          result = structure.schema[subpath].type;
-        } else {
-          $log.invalidState(model, path);
+
+        switch (true) {
+          case typeof structure.schema !== 'undefined':
+            result = structure.schema[subpath].type;
+            break;
+          case typeof structure.type !== 'undefined':
+            result = structure.type;
+            break;
+          default:
+            $log.invalidState(model, path);
+            break;
         }
-      } else {
-        $log.invalidState(model, path);
       }
     }
   }
@@ -2769,18 +2775,25 @@ exports.isValidModelPath = function isValidModelPath(model, path) {
 
   for (i = 0; i < length; i++) {
     subpath = subpaths[i];
+    subpath = subpath.split('[')[0];
     if (i === 0) {
       type = exports.getModel(model)[subpath].type;
+      if (!type) {
+        result = false;
+      }
     } else {
+      if (Array.isArray(result)) {
+        type = type[0];
+      }
+
       if (isCustomType(type)) {
         structure = exports.getType(type);
         if (structure.schema && structure.schema[subpath]) {
           type = structure.schema[subpath].type;
-        } else {
-          result = false;
+          if (!type) {
+            result = false;
+          }
         }
-      } else {
-        result = false;
       }
     }
   }
