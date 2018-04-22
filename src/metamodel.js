@@ -1880,7 +1880,12 @@ exports.isStructure = function isStructure(path, modelName) {
   var type = '';
 
   type = exports.getModelPathType(modelName, path);
-  structure = exports.getType(type);
+
+  if (Array.isArray(structure)) {
+    structure = exports.getType(type[0]);
+  } else {
+    structure = exports.getType(type);
+  }
 
   if (structure && structure.schema) {
     result = true;

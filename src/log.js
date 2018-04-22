@@ -1117,7 +1117,7 @@ exports.invalidSchemaProperty = function invalidSchemaProperty(name, propName) {
  */
 exports.invalidPropertyFormat = function invalidPropertyFormat(obj) {
   getLogger().warn(
-    "invalid format for a definition of a property': '" +
+    "invalid format for a definition of a property: '" +
       obj +
       "' is not an object"
   );

@@ -929,14 +929,28 @@ function addProperties(model, Class, classId) {
               if (typeof position === 'number') {
                 val = $db.store[classId][this.id()][propertyName][position];
                 if (val) {
-                  if (
-                    $metamodel.isClassName(
+                  switch (true) {
+                    case $metamodel.isClassName(
                       propertyType === 'array' ? 'array' : propertyType[0]
-                    )
-                  ) {
-                    realVal = $helper.getRuntime().require(val);
-                  } else {
-                    realVal = val;
+                    ):
+                      realVal = $helper.getRuntime().require(val);
+                      break;
+                    case propertyType === 'array'
+                      ? 'array'
+                      : propertyType[0] === 'date':
+                      realVal = new Date(val);
+                      break;
+                    case $metamodel.isStructure(propertyName, model):
+                      realVal = addStructure(
+                        '',
+                        propertyName + '[' + position + ']',
+                        model,
+                        this.id()
+                      );
+                      break;
+                    default:
+                      realVal = val;
+                      break;
                   }
                   return realVal;
                 }
@@ -976,24 +990,34 @@ function addProperties(model, Class, classId) {
                 _id: this.id()
               });
               if (search.length) {
-                if (
-                  $metamodel.isClassName(
+                switch (true) {
+                  case $metamodel.isClassName(
                     propertyType === 'array' ? 'array' : propertyType[0]
-                  )
-                ) {
-                  switch (true) {
-                    case typeof value === 'string':
+                  ):
+                    switch (true) {
+                      case typeof value === 'string':
+                        realVal = value;
+                        break;
+                      case typeof value.id !== 'undefined':
+                        realVal = value.id();
+                        break;
+                      default:
+                        realVal = '';
+                        break;
+                    }
+                    break;
+                  case Array.isArray(propertyType)
+                    ? propertyType[0]
+                    : 'any' === 'date':
+                    if (typeof value === 'string') {
                       realVal = value;
-                      break;
-                    case typeof value.id !== 'undefined':
-                      realVal = value.id();
-                      break;
-                    default:
-                      realVal = '';
-                      break;
-                  }
-                } else {
-                  realVal = value;
+                    } else {
+                      realVal = value.toISOString();
+                    }
+                    break;
+                  default:
+                    realVal = '';
+                    break;
                 }
 
                 component = search[0];
@@ -1250,6 +1274,16 @@ function addStructure(path, name, model, id) {
                   if (search.length) {
                     setStructureValue(model, id, fullPath, position);
 
+                    // all element
+                    if (fullPath.indexOf('[') !== -1) {
+                      $workflow.process({
+                        component: id,
+                        state: fullPath.replace(/\[(\d)*\]/g, ''),
+                        data: [position, 'reset']
+                      });
+                    }
+
+                    // current element
                     $workflow.process({
                       component: id,
                       state: fullPath,
@@ -1375,9 +1409,13 @@ function addStructure(path, name, model, id) {
                   }
 
                   switch (true) {
-                    case $metamodel.isClassName(
+                    case $metamodel.inheritFrom(
+                      value.constructor.name,
                       Array.isArray(propertyType) ? propertyType[0] : 'any'
-                    ):
+                    ) &&
+                      $metamodel.isClassName(
+                        Array.isArray(propertyType) ? propertyType[0] : 'any'
+                      ):
                       arr[position] = value.id();
                       break;
                     case Array.isArray(propertyType)
@@ -1404,6 +1442,16 @@ function addStructure(path, name, model, id) {
                       });
                   }
 
+                  // all element
+                  if (fullPath.indexOf('[') !== -1) {
+                    $workflow.process({
+                      component: id,
+                      state: fullPath.replace(/\[(\d)*\]/g, ''),
+                      data: [arr, 'add']
+                    });
+                  }
+
+                  // current element
                   $workflow.process({
                     component: id,
                     state: fullPath,
@@ -1528,6 +1576,16 @@ function addStructure(path, name, model, id) {
                     $behavior.removeFromMemory(id);
                   }
 
+                  // all elements
+                  if (fullPath.indexOf('[') !== -1) {
+                    $workflow.process({
+                      component: id,
+                      state: fullPath.replace(/\[(\d)*\]/g, ''),
+                      data: [value]
+                    });
+                  }
+
+                  // the current element
                   $workflow.process({
                     component: id,
                     state: fullPath,

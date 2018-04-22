@@ -63,6 +63,11 @@ function createFunction(name, func, core, useCoreAPI) {
   var action = null;
   var isArrowFunction = true;
   var isOneLine = false;
+  var functionName = name;
+
+  if (functionName.indexOf('.') !== -1) {
+    functionName = name.split('.')[name.split('.').length - 1];
+  }
 
   if (func.trim().indexOf('function') === 0) {
     isArrowFunction = false;
@@ -145,7 +150,7 @@ function createFunction(name, func, core, useCoreAPI) {
     action = new Function(
       '__action',
       'return function ' +
-        name +
+        functionName +
         ' (' +
         params.join(', ') +
         ") { return new Function('" +
@@ -156,7 +161,7 @@ function createFunction(name, func, core, useCoreAPI) {
     action = new Function(
       '__action',
       'return function ' +
-        name +
+        functionName +
         ' () { return new Function(__action).apply(this, arguments) };'
     )(funcBody);
   }

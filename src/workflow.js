@@ -152,7 +152,9 @@ function getParamNumber(id, methodName) {
     result.push(min);
     result.push(max);
   } else {
-    $log.unknownMethod(id, methodName);
+    if (methodName.indexOf('[') === -1 && methodName.indexOf('.') === -1) {
+      $log.unknownMethod(id, methodName);
+    }
   }
   return result;
 }
@@ -187,7 +189,11 @@ function setDefaultValue(id, methodName, args) {
       }
     }
   } else {
-    $log.unknownMethod(id, methodName);
+    if (methodName.indexOf('[') === -1) {
+      $log.unknownMethod(id, methodName);
+    } else {
+      result = args;
+    }
   }
   return result;
 }
@@ -246,7 +252,9 @@ function getParamTypes(id, methodName) {
       }
     }
   } else {
-    $log.unknownMethod(id, methodName);
+    if (methodName.indexOf('[') === -1 && methodName.indexOf('.') === -1) {
+      $log.unknownMethod(id, methodName);
+    }
   }
   return result;
 }
@@ -536,7 +544,7 @@ exports.checkInput = function checkInput(params) {
   paramsName = getParamNames(componentClassName, methodName);
 
   switch (true) {
-    case isCollection:
+    case isCollection && methodName.indexOf('.') === -1:
       if (args && args[1] && args[1] === 'reset') {
         paramsType = [
           [$metamodel.getModel(componentClassName)[methodName].type[0]],
@@ -550,7 +558,7 @@ exports.checkInput = function checkInput(params) {
       }
       paramsNumber = [2, 2];
       break;
-    case isProperty:
+    case isProperty && methodName.indexOf('.') === -1:
       if (isModelPath(methodName)) {
         paramsType = [
           $metamodel.getModelPathType(componentClassName, methodName)
@@ -571,7 +579,7 @@ exports.checkInput = function checkInput(params) {
         paramsNumber = [1, 1];
       }
       break;
-    case isLink:
+    case isLink && methodName.indexOf('.') === -1:
       paramsType = [$metamodel.getModel(componentClassName)[methodName].type];
       paramsNumber = [1, 1];
       break;

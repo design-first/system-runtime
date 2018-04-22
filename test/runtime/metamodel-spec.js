@@ -187,7 +187,65 @@ describe('System Runtime metamodel component', () => {
     expect(person.address().city()).equal('Paris');
   });
 
-  it('can add a complex structure', () => {
+  it('can create a collection of structure', () => {
+    const metamodel = runtime.require('metamodel');
+
+    metamodel.type({
+      'name': 'vegetable',
+      'type': 'object',
+      'schema': {
+        'kind': { 'type': ['string'], 'mandatory': true }
+      }
+    });
+
+    metamodel.schema({
+      '_name': 'Person',
+      '_inherit': ['_Component'],
+      'firstName': 'property',
+      'lastName': 'property',
+      'eats': 'collection'
+    });
+
+    metamodel.model({
+      '_name': 'Person',
+      '_inherit': ['_Component'],
+      'firstName': {
+        'type': 'string',
+        'readOnly': false,
+        'mandatory': true,
+        'default': ''
+      },
+      'lastName': {
+        'type': 'string',
+        'readOnly': true,
+        'mandatory': true,
+        'default': ''
+      },
+      'eats': {
+        'type': ['vegetable'],
+        'readOnly': true,
+        'mandatory': false,
+        'default': []
+      }
+    });
+
+    metamodel.create();
+
+    const Person = runtime.require('Person');
+
+    const yoda = new Person({
+      'sex': 'male',
+      'firstName': 'Yoda',
+      'lastName': 'Master',
+      'eats': [{
+        'kind': ['all']
+      }]
+    });
+
+    expect(yoda.eats(0).kind(0)).equal('all');
+  });
+
+  it('can create a complex structure', () => {
     const metamodel = runtime.require('metamodel');
 
     metamodel.type({
