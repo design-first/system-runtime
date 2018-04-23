@@ -13,6 +13,7 @@ describe('a System Runtime component', function () {
     metamodel.schema({
       '_name': 'Person',
       '_inherit': ['_Component'],
+      'birthDate': 'property',
       'firstName': 'property',
       'lastName': 'property',
       'address': 'property',
@@ -28,6 +29,12 @@ describe('a System Runtime component', function () {
     metamodel.model({
       '_name': 'Person',
       '_inherit': ['_Component'],
+      'birthDate': {
+        'type': 'date',
+        'readOnly': false,
+        'mandatory': false,
+        'default': '1970-01-01T00:00:00.000Z'
+      },
       'children': {
         'type': ['Person'],
         'readOnly': false,
@@ -342,6 +349,18 @@ describe('a System Runtime component', function () {
     yoda.lastName(42);
 
     expect(yoda.lastName()).equal('Master');
+  });
+
+  it('can set a date', function () {
+    const Person = runtime.require('Person');
+    const yoda = new Person({
+      'firstName': 'Yoda',
+      'lastName': 'Master'
+    });
+    const now = new Date();
+    yoda.birthDate(now);
+
+    expect(yoda.birthDate().toISOString()).equal(now.toISOString());
   });
 
   it('can add a link to another components', function () {

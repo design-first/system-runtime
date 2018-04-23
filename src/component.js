@@ -1077,6 +1077,7 @@ function addProperties(model, Class, classId) {
                 break;
               case propertyType === 'json':
                 propertyValue = component[propertyName];
+                propertyValue = JSON.parse(JSON.stringify(propertyValue));
                 break;
               case propertyType === 'array':
                 propertyValue = new _Array({
@@ -1348,6 +1349,7 @@ function addStructure(path, name, model, id) {
                           id,
                           fullPath + '[' + position + ']'
                         );
+                        val = JSON.parse(JSON.stringify(val));
                         return val;
                         break;
                       case $metamodel.isStructure(fullPath, model):
@@ -1508,6 +1510,7 @@ function addStructure(path, name, model, id) {
                   break;
                 case propertyType === 'json':
                   propertyValue = getStructureValue(model, id, fullPath);
+                  propertyValue = JSON.parse(JSON.stringify(propertyValue));
                   break;
                 case $metamodel.isStructure(fullPath, model):
                   propertyValue = addStructure(

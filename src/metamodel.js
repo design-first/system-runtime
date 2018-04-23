@@ -1230,14 +1230,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: 'date',
           mandatory: false,
-          default: ''
+          default: '1970-01-01T00:00:00.000Z'
         };
       } else {
         result = {
           type: 'date',
           readOnly: false,
           mandatory: false,
-          default: ''
+          default: '1970-01-01T00:00:00.000Z'
         };
       }
       break;
