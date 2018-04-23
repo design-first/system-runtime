@@ -95,6 +95,11 @@ describe('a System Runtime component', function () {
       "description": "",
       "type": "object",
       "schema": {
+        "property0": {
+          "type": "string",
+          "mandatory": false,
+          "default": ''
+        },
         "property1": {
           "type": "array",
           "mandatory": false,
@@ -108,7 +113,7 @@ describe('a System Runtime component', function () {
         "property3": {
           "type": "any",
           "mandatory": false,
-          "default": {}
+          "default": ''
         },
         "property4": {
           "type": "boolean",
@@ -290,6 +295,46 @@ describe('a System Runtime component', function () {
 
     setTimeout(function () {
       expect(yoda.address()).equal('');
+      done();
+    }, 1);
+  });
+
+  it('can add an event to a structure change', function (done) {
+    const Person = runtime.require('Person');
+    const yoda = new Person({
+      'firstName': 'Yoda',
+      'lastName': 'Master'
+    });
+
+    yoda.on('custom.property0', function (val) {
+      this.custom().property3('changed');
+    });
+
+    yoda.custom().property0('some');
+
+    setTimeout(function () {
+      expect(yoda.custom().property3()).equal('changed');
+      done();
+    }, 1);
+  });
+
+  it('can remove an event on a structure change', function (done) {
+    const Person = runtime.require('Person');
+    const yoda = new Person({
+      'firstName': 'Yoda',
+      'lastName': 'Master'
+    })
+
+    yoda.on('custom.property0', function (val) {
+      this.custom().property3('changed');
+    });
+
+    yoda.off('custom.property0');
+
+    yoda.custom().property0('some');
+
+    setTimeout(function () {
+      expect(yoda.custom().property3()).equal('');
       done();
     }, 1);
   });
