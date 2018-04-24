@@ -17,6 +17,7 @@ describe('a System Runtime component', function () {
       'firstName': 'property',
       'lastName': 'property',
       'address': 'property',
+      'location': 'property',
       'likes': 'property',
       'custom': 'property',
       'fullName': 'method',
@@ -82,6 +83,12 @@ describe('a System Runtime component', function () {
         'mandatory': false,
         'default': ''
       },
+      'location': {
+        'type': 'location',
+        'readOnly': false,
+        'mandatory': false,
+        'default': {}
+      },
       'moving': {}
     });
 
@@ -132,6 +139,34 @@ describe('a System Runtime component', function () {
         }
       }
     });
+
+    metamodel.type({
+      "name": "street",
+      "description": "",
+      "type": "object",
+      "schema": {
+        "street": {
+          "type": "string",
+          "mandatory": false,
+          "default": ""
+        }
+      }
+    });
+
+    metamodel.type({
+      "name": "location",
+      "description": "",
+      "type": "object",
+      "schema": {
+        "cities": {
+          "type": ["street"],
+          "mandatory": false,
+          "default": []
+        }
+      }
+    });
+
+
 
     metamodel.create();
   });
@@ -299,7 +334,7 @@ describe('a System Runtime component', function () {
     }, 1);
   });
 
-  it('can add an event to a structure change', function (done) {
+  it('can add an event on a structure change', function (done) {
     const Person = runtime.require('Person');
     const yoda = new Person({
       'firstName': 'Yoda',
@@ -335,6 +370,50 @@ describe('a System Runtime component', function () {
 
     setTimeout(function () {
       expect(yoda.custom().property3()).equal('');
+      done();
+    }, 1);
+  });
+
+  it('can add an event on a specific property of an element of a collection', function (done) {
+    const Person = runtime.require('Person');
+    const yoda = new Person({
+      'firstName': 'Yoda',
+      'lastName': 'Master',
+      'location': {
+        'cities': [{ 'street': '' }]
+      }
+    });
+
+    yoda.on('location.cities[0].street', function (val) {
+      this.custom().property0('property changed');
+    });
+
+    yoda.location().cities(0).street('a street');
+
+    setTimeout(function () {
+      expect(yoda.custom().property0()).equal('property changed');
+      done();
+    }, 1);
+  });
+
+  it('can add an event on a specific property of all elements of a collection', function (done) {
+    const Person = runtime.require('Person');
+    const yoda = new Person({
+      'firstName': 'Yoda',
+      'lastName': 'Master',
+      'location': {
+        'cities': [{ 'street': '' }]
+      }
+    });
+
+    yoda.on('location.cities.street', function (val) {
+      this.custom().property0('property changed again');
+    });
+
+    yoda.location().cities(0).street('a street');
+
+    setTimeout(function () {
+      expect(yoda.custom().property0()).equal('property changed again');
       done();
     }, 1);
   });

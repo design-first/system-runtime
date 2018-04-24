@@ -2739,7 +2739,11 @@ exports.getModelPathType = function getModelPathType(model, path) {
 
         switch (true) {
           case typeof structure.schema !== 'undefined':
-            result = structure.schema[subpath].type;
+            if (!structure.schema[subpath]) {
+              $log.unknownPath(path, subpath);
+            } else {
+              result = structure.schema[subpath].type;
+            }
             break;
           case typeof structure.type !== 'undefined':
             result = structure.type;

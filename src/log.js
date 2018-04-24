@@ -704,6 +704,18 @@ exports.unknownType = function unknownType(value) {
 };
 
 /**
+ * @method unknownPath
+ * @param {String} path path
+ * @param {String} path subpath
+ * @description Unknown subpath in a path
+ */
+exports.unknownPath = function unknownPath(path, subpath) {
+  getLogger().warn(
+    "the path '" + path + "' has an unkown subpath '" + subpath + "'"
+  );
+};
+
+/**
  * @method canNotYetValidate
  * @param {String} id id of the component
  * @param {String} className name of the class
