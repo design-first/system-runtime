@@ -397,9 +397,6 @@ function impSystem(importedSystem) {
   var id = null;
 
   if (importedSystem) {
-    // remove deprecated property
-    delete importedSystem.subsystem;
-
     // add types
     for (typeName in importedSystem.types) {
       $metamodel.type(importedSystem.types[typeName]);

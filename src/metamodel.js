@@ -43,7 +43,7 @@ var $helper = require('./helper.js');
 var ID = '_id';
 var NAME = '_name';
 var DESCRIPTION = '_description';
-var INHERITS = '_inherit';
+var INHERIT = '_inherit';
 var CLASS = '_class';
 var CORE = '_core';
 var METHOD_TYPE = 'method';
@@ -129,33 +129,33 @@ function generateModels() {
 
     // set model internal properties
     model = {
-      _name: schema._name
+      _name: schema[NAME]
     };
 
     // set _core
-    if (typeof schema._core !== 'undefined') {
-      model._core = schema._core;
+    if (typeof schema[CORE] !== 'undefined') {
+      model[CORE] = schema[CORE];
     }
 
     // set inherit
-    if (Array.isArray(schema._inherit)) {
-      model._inherit = schema._inherit;
+    if (Array.isArray(schema[INHERIT])) {
+      model[INHERIT] = schema[INHERIT];
     }
 
     // set class
-    if (typeof schema._class !== 'undefined') {
-      model._class = schema._class;
+    if (typeof schema[CLASS] !== 'undefined') {
+      model[CLASS] = schema[CLASS];
     }
 
     // set description
-    if (typeof schema._description !== 'undefined') {
-      model._description = schema._description;
+    if (typeof schema[DESCRIPTION] !== 'undefined') {
+      model[DESCRIPTION] = schema[DESCRIPTION];
     }
 
     // check valid name
     for (att in schema) {
       if (!isInternalName(att) && att.indexOf('_') === 0) {
-        $log.invalidSchemaPropertyName(schema._name, att);
+        $log.invalidSchemaPropertyName(schema[NAME], att);
       }
     }
 
@@ -245,13 +245,13 @@ function generateModels() {
           break;
         default:
           if (!isInternalName(att)) {
-            $log.invalidSchemaProperty(schema._name, att);
+            $log.invalidSchemaProperty(schema[NAME], att);
           }
           break;
       }
     }
 
-    store.generatedModels[model._name] = model;
+    store.generatedModels[model[NAME]] = model;
   }
 
   // models to override
@@ -304,7 +304,7 @@ function generateModels() {
     modelDef = store.generatedModels[modelName];
     $db._GeneratedModel.insert(modelDef);
 
-    if (!modelDef._core) {
+    if (!modelDef[CORE]) {
       $log.generateModel(modelName);
     }
   }
@@ -346,14 +346,14 @@ function loadInMemory() {
     schema = schemas[i];
 
     name = schema[NAME];
-    inherit = schema[INHERITS];
+    inherit = schema[INHERIT];
 
     store.schemas[name] = schema;
     if (inherit) {
       store.inheritance[name] = inherit;
     }
 
-    if (!schema._core) {
+    if (!schema[CORE]) {
       $log.loadSchema(name);
     }
   }
@@ -368,7 +368,7 @@ function loadInMemory() {
 
     store.models[name] = model;
 
-    if (!model._core) {
+    if (!model[CORE]) {
       $log.loadModel(name);
     }
   }
@@ -650,7 +650,7 @@ function compileSchemas() {
   var name = '';
 
   for (name in store.schemas) {
-    if (!store.schemas[name]._core) {
+    if (!store.schemas[name][CORE]) {
       $log.compileSchema(name);
     }
 
@@ -673,7 +673,7 @@ function checkModels() {
     if (classDef) {
       schema = store.compiledSchemas[name];
       if (schema) {
-        if (!classDef._core) {
+        if (!classDef[CORE]) {
           $log.checkModel(name);
         }
         checkImp(classDef, schema);
@@ -730,7 +730,7 @@ function checkImp(classDef, classImp) {
       property !== ID &&
       property !== NAME &&
       property !== DESCRIPTION &&
-      property !== INHERITS &&
+      property !== INHERIT &&
       property !== CLASS &&
       property !== CORE
     ) {
@@ -750,7 +750,7 @@ function checkImp(classDef, classImp) {
       property !== ID &&
       property !== NAME &&
       property !== DESCRIPTION &&
-      property !== INHERITS &&
+      property !== INHERIT &&
       property !== CLASS &&
       property !== CORE
     ) {
@@ -861,7 +861,7 @@ function createDbStructure() {
     ) {
       $db.collection(modelDef[NAME]);
 
-      if (!modelDef._core) {
+      if (!modelDef[CORE]) {
         $log.createCollection(modelDef[NAME]);
       }
     }
@@ -883,7 +883,7 @@ function createClass() {
       $component.create({
         model: modelName
       });
-      if (!modelDef._core) {
+      if (!modelDef[CORE]) {
         $log.createClass(modelName);
       }
     }
@@ -1531,8 +1531,8 @@ exports.schema = function schema(name, schema) {
   if (typeof schema[ID] === 'undefined') {
     schema[ID] = $helper.generateId();
   }
-  if (typeof schema[INHERITS] === 'undefined') {
-    schema[INHERITS] = ['_Component'];
+  if (typeof schema[INHERIT] === 'undefined') {
+    schema[INHERIT] = ['_Component'];
   }
 
   /**
@@ -1556,7 +1556,7 @@ exports.schema = function schema(name, schema) {
     return filteredList;
   }
 
-  schema[INHERITS] = _removeDuplicate(schema[INHERITS]);
+  schema[INHERIT] = _removeDuplicate(schema[INHERIT]);
 
   // check if schema is compliant with the meta meta model
   if (exports.isValidObject(schema, store.metadef.schema, false)) {
@@ -1571,7 +1571,7 @@ exports.schema = function schema(name, schema) {
         },
         mergedSchema
       );
-      id = schemas[0]._id;
+      id = schemas[0][ID];
     } else {
       result = $db._Schema.insert(schema);
       id = result[0];
@@ -1624,7 +1624,7 @@ exports.model = function model(name, model) {
         },
         mergedModel
       );
-      id = models[0]._id;
+      id = models[0][ID];
     } else {
       result = $db._Model.insert(model);
       id = result[0];
@@ -2583,14 +2583,14 @@ exports.isValidObject = function isValidObject(
 
     if (
       !hasType(schema[fieldName], 'undefined') ||
-      fieldName === '_core' ||
-      fieldName === '_id'
+      fieldName === CORE ||
+      fieldName === ID
     ) {
       switch (true) {
-        case fieldName === '_core':
+        case fieldName === CORE:
           typeSchema = 'boolean';
           break;
-        case fieldName === '_id':
+        case fieldName === ID:
           typeSchema = 'string';
           break;
         default:
