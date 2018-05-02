@@ -36,7 +36,7 @@ describe('System Runtime metamodel component', () => {
     expect(metamodel.require('PersonTest')).to.not.be.undefined;
   });
 
-  it('can add a schema (simple mode)', () => {
+  it('can update a generated model (simple mode)', () => {
     const metamodel = runtime.require('metamodel');
     metamodel.schema('PersonTestSimple', {
       'firstName': 'property'
@@ -51,7 +51,7 @@ describe('System Runtime metamodel component', () => {
     expect(metamodel.require('PersonTestSimple')).to.not.be.undefined;
   });
 
-  it('can add a method (simple mode)', () => {
+  it('can update a method signature (simple mode)', () => {
     const metamodel = runtime.require('metamodel');
     metamodel.schema('MethodTest', {
       'add': 'method'
@@ -385,7 +385,7 @@ describe('System Runtime metamodel component', () => {
   });
 
 
-  it('can can create a one to many relationship', () => {
+  it('can create a one to many relationship', () => {
     const metamodel = runtime.require('metamodel');
 
     metamodel.schema({
@@ -469,7 +469,7 @@ describe('System Runtime metamodel component', () => {
   });
 
 
-  it('can create navigation threw model', () => {
+  it('can generate APIs to navigate threw the model', () => {
     const metamodel = runtime.require('metamodel');
 
     metamodel.schema({

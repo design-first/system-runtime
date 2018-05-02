@@ -209,7 +209,7 @@ describe('a System Runtime component', function () {
     }, 1);
   });
 
-  it('can add an event with context change', function (done) {
+  it('can add an event on a new context', function (done) {
     const Person = runtime.require('Person');
     const yoda = new Person({
       'firstName': 'Yoda',

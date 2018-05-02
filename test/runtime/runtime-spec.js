@@ -28,13 +28,13 @@ describe('System Runtime runtime component', () => {
     expect(bundle).to.not.be.undefined;
   });
 
-  it('can get the status of all installed systems', () => {
+  it('can get the status of all installed bundles', () => {
     const status = runtime.status();
 
     expect(status).to.not.be.undefined;
   });
 
-  it('can install a system', () => {
+  it('can install a bundle', () => {
     const systemId = runtime.install({
       "name": "Test",
       "master": true,
@@ -99,7 +99,7 @@ describe('System Runtime runtime component', () => {
     expect(systemId).equal('k16d101760d1ec2a');
   });
 
-  it('can uninstall a system', () => {
+  it('can uninstall a bundle', () => {
     runtime.uninstall('k16d101760d1ec2a');
     const state = runtime.require('k16d101760d1ec2a').state();
 

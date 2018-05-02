@@ -42,8 +42,8 @@ exports.INTERNAL_NAMES = [
 ];
 
 exports.PROPERTY_TYPE = 'property';
-exports.LINK_TYPE = 'link';
 exports.COLLECTION_TYPE = 'collection';
+exports.LINK_TYPE = 'link';
 exports.METHOD_TYPE = 'method';
 exports.EVENT_TYPE = 'event';
 
