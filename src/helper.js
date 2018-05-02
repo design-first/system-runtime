@@ -22,6 +22,7 @@
  * @module helper
  * @requires db
  * @requires component
+ * @requires mson
  * @description This module contains all the functions used by all the modules
  */
 
@@ -29,6 +30,7 @@
 
 var $db = require('./db.js');
 var $component = require('./component.js');
+var $mson = require('./mson.js');
 
 /* Private property */
 
@@ -63,7 +65,7 @@ exports.getRuntime = function getRuntime() {
   var search = $db._Runtime.find();
 
   if (!runtimeRef && search[0]) {
-    runtimeId = search[0]._id;
+    runtimeId = search[0][$mson.ID];
     runtimeRef = $component.get(runtimeId);
   }
 

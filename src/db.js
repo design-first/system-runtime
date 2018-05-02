@@ -27,6 +27,7 @@
  * @requires behavior
  * @requires state
  * @requires workflow
+ * @requires mson
  * @description This module manages System Runtime database.
  * System Runtime database is a micro NoSQL Database that contains:
  * - collections to store documents (schemas, types, components, ...) and
@@ -47,6 +48,7 @@ var $log = require('./log.js');
 var $behavior = require('./behavior.js');
 var $state = require('./state.js');
 var $workflow = require('./workflow.js');
+var $mson = require('./mson.js');
 
 /* Private properties */
 
@@ -119,7 +121,7 @@ function dump() {
   dbDump.schemas = {};
   if (exports._Schema.count()) {
     for (schemaId in exports.store._Schema) {
-      if (!exports.store._Schema[schemaId]._core) {
+      if (!exports.store._Schema[schemaId][$mson.CORE]) {
         schema = JSON.parse(JSON.stringify(exports.store._Schema[schemaId]));
         dbDump.schemas[schemaId] = schema;
       }
@@ -130,7 +132,7 @@ function dump() {
   dbDump.models = {};
   if (exports._Model.count()) {
     for (modelId in exports.store._Model) {
-      if (!exports.store._Model[modelId]._core) {
+      if (!exports.store._Model[modelId][$mson.CORE]) {
         model = JSON.parse(JSON.stringify(exports.store._Model[modelId]));
         dbDump.models[modelId] = model;
       }
@@ -168,7 +170,7 @@ function dump() {
       collection = JSON.parse(JSON.stringify(exports.store[collectionName]));
 
       for (id in collection) {
-        if (collection[id]._core) {
+        if (collection[id][$mson.CORE]) {
           delete collection[id];
         }
       }
@@ -433,7 +435,7 @@ function impSystem(importedSystem) {
       master: true
     });
     if (systems.length) {
-      if (systems[0]._id === importedSystem._id) {
+      if (systems[0][$mson.ID] === importedSystem[$mson.ID]) {
         importedSystem.master = true;
       } else {
         if (importedSystem.master) {
@@ -445,7 +447,7 @@ function impSystem(importedSystem) {
     // insert the system in DB
     exports._System.insert(importedSystem);
 
-    result = importedSystem._id;
+    result = importedSystem[$mson.ID];
   }
 
   return result;
@@ -475,10 +477,10 @@ function expSystem() {
 
   if (systems.length) {
     mastersystem = systems[0];
-    id = mastersystem._id;
+    id = mastersystem[$mson.ID];
 
     // prop
-    exportedSystem._id = id;
+    exportedSystem[$mson.ID] = id;
     exportedSystem.name = mastersystem.name;
     exportedSystem.description = mastersystem.description;
     exportedSystem.version = mastersystem.version;
@@ -541,8 +543,8 @@ function expSubsystem(params) {
     length = result.length;
     for (i = 0; i < length; i++) {
       schema = result[i];
-      if (!schema._core) {
-        system.schemas[schema._id] = schema;
+      if (!schema[$mson.CORE]) {
+        system.schemas[schema[$mson.ID]] = schema;
       }
     }
   }
@@ -555,8 +557,8 @@ function expSubsystem(params) {
     length = result.length;
     for (i = 0; i < length; i++) {
       model = result[i];
-      if (!model._core) {
-        system.models[model._id] = model;
+      if (!model[$mson.CORE]) {
+        system.models[model[$mson.ID]] = model;
       }
     }
   }
@@ -569,8 +571,8 @@ function expSubsystem(params) {
     length = result.length;
     for (i = 0; i < length; i++) {
       type = result[i];
-      if (!type._core) {
-        system.types[type._id] = type;
+      if (!type[$mson.CORE]) {
+        system.types[type[$mson.ID]] = type;
       }
     }
   }
@@ -584,7 +586,7 @@ function expSubsystem(params) {
     for (i = 0; i < length; i++) {
       behavior = result[i];
       if (!behavior.core) {
-        system.behaviors[behavior._id] = behavior;
+        system.behaviors[behavior[$mson.ID]] = behavior;
       }
     }
   }
@@ -600,7 +602,7 @@ function expSubsystem(params) {
         length = result.length;
         for (i = 0; i < length; i++) {
           component = result[i];
-          system.components[className][component._id] = component;
+          system.components[className][component[$mson.ID]] = component;
         }
       }
     }
@@ -732,20 +734,20 @@ DatabaseCollection.prototype.insert = function insert(document) {
         case this.name === '_Type':
         case this.name === '_GeneratedModel':
         case $metamodel.isValidObject(obj, $metamodel.getModel(this.name)):
-          if (typeof obj._id === 'undefined') {
-            obj._id = $helper.generateId();
+          if (typeof obj[$mson.ID] === 'undefined') {
+            obj[$mson.ID] = $helper.generateId();
           }
 
           $metamodel.prepareObject(obj, $metamodel.getModel(this.name));
 
-          exports.store[this.name][obj._id] = obj;
+          exports.store[this.name][obj[$mson.ID]] = obj;
 
           Component = $component.get(this.name);
           if (Component) {
             component = new Component(obj);
             result.push(component.id());
           } else {
-            exports.createLog('insert', this.name, obj._id, '', obj);
+            exports.createLog('insert', this.name, obj[$mson.ID], '', obj);
 
             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
               $helper
@@ -763,9 +765,9 @@ DatabaseCollection.prototype.insert = function insert(document) {
               channels = exports._Channel.find({});
               var length = channels.length;
               for (var i = 0; i < length; i++) {
-                channel = $helper.getRuntime().require(channels[i]._id);
+                channel = $helper.getRuntime().require(channels[i][$mson.ID]);
                 $workflow.process({
-                  component: channels[i]._id,
+                  component: channels[i][$mson.ID],
                   state: obj.event,
                   data: obj.data
                 });
@@ -815,8 +817,8 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
   if (update) {
     // upsert case
     if (length === 0 && options.upsert) {
-      if (query._id) {
-        update._id = query._id;
+      if (query[$mson.ID]) {
+        update[$mson.ID] = query[$mson.ID];
       }
       this.insert(update);
       updated = updated + 1;
@@ -824,11 +826,14 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
 
     for (i = 0; i < length; i++) {
       // case of update of _id
-      if (typeof update._id !== 'undefined' && update._id !== docs[i]._id) {
+      if (
+        typeof update[$mson.ID] !== 'undefined' &&
+        update[$mson.ID] !== docs[i][$mson.ID]
+      ) {
         $log.updateUuid(
-          docs[i]._id,
-          update._id,
-          typeof $component.get(update._id) !== 'undefined'
+          docs[i][$mson.ID],
+          update[$mson.ID],
+          typeof $component.get(update[$mson.ID]) !== 'undefined'
         );
       }
 
@@ -848,8 +853,8 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                 type = schema[attributeName].type;
               }
             } else {
-              if ($metamodel.getMetaDef()[attributeName]) {
-                type = $metamodel.getMetaDef()[attributeName].type;
+              if ($mson.SCHEMA_DEFINITION[attributeName]) {
+                type = $mson.SCHEMA_DEFINITION[attributeName].type;
               }
             }
             if (type) {
@@ -860,7 +865,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                 exports.createLog(
                   'update',
                   this.name,
-                  docs[i]._id,
+                  docs[i][$mson.ID],
                   attributeName,
                   update[attributeName]
                 );
@@ -871,20 +876,20 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                     .require('db')
                     .update({
                       collection: this.name,
-                      id: docs[i]._id,
+                      id: docs[i][$mson.ID],
                       field: attributeName,
                       value: update[attributeName]
                     });
                 }
                 if (type === 'array') {
                   $workflow.process({
-                    component: docs[i]._id,
+                    component: docs[i][$mson.ID],
                     state: attributeName,
                     data: [update[attributeName], 'reset']
                   });
                 } else {
                   $workflow.process({
-                    component: docs[i]._id,
+                    component: docs[i][$mson.ID],
                     state: attributeName,
                     data: [update[attributeName]]
                   });
@@ -892,7 +897,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
               } else {
                 $log.invalidPropertyTypeOnDbUpdate(
                   this.name,
-                  docs[i]._id,
+                  docs[i][$mson.ID],
                   attributeName,
                   update[attributeName],
                   type
@@ -902,7 +907,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
               $log.unknownPropertyOnDbUpdate(
                 this.name,
                 attributeName,
-                docs[i]._id
+                docs[i][$mson.ID]
               );
             }
           } else {
@@ -912,7 +917,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
             exports.createLog(
               'update',
               this.name,
-              docs[i]._id,
+              docs[i][$mson.ID],
               attributeName,
               update[attributeName]
             );
@@ -924,7 +929,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                 .require('db')
                 .update({
                   collection: this.name,
-                  id: docs[i]._id,
+                  id: docs[i][$mson.ID],
                   field: attributeName,
                   value: update[attributeName]
                 });

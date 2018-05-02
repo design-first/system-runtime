@@ -22,7 +22,8 @@
       "coverageFolder": "coverage",
       "excludes": [
         "src/log.js",
-        "src/helper.js"
+        "src/helper.js",
+        "src/mson.js"
       ]
     }
   }

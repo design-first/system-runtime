@@ -27,6 +27,7 @@
  * @requires helper
  * @requires log
  * @requires state
+ * @requires mson
  * @description This module manages the components.
  * It is the factory of all the components that are created by System Runtime.
  */
@@ -40,15 +41,10 @@ var $behavior = require('./behavior.js');
 var $helper = require('./helper.js');
 var $log = require('./log.js');
 var $state = require('./state.js');
+var $mson = require('./mson.js');
 
 /* Private properties */
 
-var PROPERTY_TYPE = 'property';
-var LINK_TYPE = 'link';
-var COLLECTION_TYPE = 'collection';
-var METHOD_TYPE = 'method';
-var EVENT_TYPE = 'event';
-var NAME = '_name';
 var store = {};
 
 /* Private methods */
@@ -518,16 +514,16 @@ function getProperties(id) {
   var result = [];
 
   model = $metamodel.getModel(id);
-  schema = $metamodel.getSchema(model[NAME]);
+  schema = $metamodel.getSchema(model[$mson.NAME]);
 
   propNames = Object.keys(schema);
 
   length = propNames.length;
   for (i = 0; i < length; i++) {
     if (
-      schema[propNames[i]] === LINK_TYPE ||
-      schema[propNames[i]] === PROPERTY_TYPE ||
-      schema[propNames[i]] === COLLECTION_TYPE
+      schema[propNames[i]] === $mson.LINK_TYPE ||
+      schema[propNames[i]] === $mson.PROPERTY_TYPE ||
+      schema[propNames[i]] === $mson.COLLECTION_TYPE
     ) {
       result.push({
         name: propNames[i],
@@ -556,13 +552,13 @@ function getMethods(id) {
   var result = [];
 
   model = $metamodel.getModel(id);
-  schema = $metamodel.getSchema(model[NAME]);
+  schema = $metamodel.getSchema(model[$mson.NAME]);
 
   propNames = Object.keys(schema);
 
   length = propNames.length;
   for (i = 0; i < length; i++) {
-    if (schema[propNames[i]] === METHOD_TYPE) {
+    if (schema[propNames[i]] === $mson.METHOD_TYPE) {
       result.push(propNames[i]);
     }
   }
@@ -614,13 +610,13 @@ function getEvents(id) {
   var result = [];
 
   model = $metamodel.getModel(id);
-  schema = $metamodel.getSchema(model[NAME]);
+  schema = $metamodel.getSchema(model[$mson.NAME]);
 
   propNames = Object.keys(schema);
 
   length = propNames.length;
   for (i = 0; i < length; i++) {
-    if (schema[propNames[i]] === EVENT_TYPE) {
+    if (schema[propNames[i]] === $mson.EVENT_TYPE) {
       result.push(propNames[i]);
     }
   }
@@ -724,15 +720,15 @@ function createClass(classId) {
 
     $metamodel.prepareObject(config, $metamodel.getModel(classId));
 
-    if (typeof config._id === 'undefined') {
-      config._id = $helper.generateId();
+    if (typeof config[$mson.ID] === 'undefined') {
+      config[$mson.ID] = $helper.generateId();
     }
 
-    store[config._id] = this;
+    store[config[$mson.ID]] = this;
 
     // id
     proxy = function proxy() {
-      return config._id;
+      return config[$mson.ID];
     };
     this.id = new Function(
       '__proxy',
@@ -740,9 +736,9 @@ function createClass(classId) {
     )(proxy);
 
     // create link to db
-    $db.store[classId][config._id] = config;
+    $db.store[classId][config[$mson.ID]] = config;
 
-    $db.createLog('insert', classId, config._id, '', config);
+    $db.createLog('insert', classId, config[$mson.ID], '', config);
 
     if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
       $helper
@@ -1737,7 +1733,7 @@ function addEvents(model, Class, classId) {
           master: true
         });
         if (systems.length) {
-          systemId = systems[0]._id;
+          systemId = systems[0][$mson.ID];
         }
 
         message.from = systemId;

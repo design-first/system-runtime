@@ -22,6 +22,7 @@
  * @module behavior
  * @requires db
  * @requires helper
+ * @requires mson
  * @description This module manages the behaviors of all components.
  * A behavior is a mecanism that allow users to add actions that will be executed
  * when a specific state of a component will change.
@@ -31,6 +32,7 @@
 
 var $db = require('./db.js');
 var $helper = require('./helper.js');
+var $mson = require('./mson.js');
 
 /* Private properties */
 
@@ -280,7 +282,7 @@ exports.getActions = function getActions(id, state) {
   });
 
   dbResult.forEach(function(behavior) {
-    action = store[behavior._id];
+    action = store[behavior[$mson.ID]];
     if (typeof action === 'undefined') {
       action = createFunction(
         behavior.state,
@@ -288,7 +290,7 @@ exports.getActions = function getActions(id, state) {
         behavior.core,
         behavior.useCoreAPI
       );
-      store[behavior._id] = action;
+      store[behavior[$mson.ID]] = action;
     }
     result.push({
       useCoreAPI: behavior.useCoreAPI,

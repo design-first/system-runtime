@@ -25,6 +25,7 @@
  * @requires component
  * @requires workflow
  * @requires helper
+ * @requires mson
  * @description This module manages System Runtime metamodel.
  * System Runtime metamodel loads schemas and types, analyzes them and
  * creates the component classes and related DatabaseCollections.
@@ -37,41 +38,11 @@ var $log = require('./log.js');
 var $component = require('./component.js');
 var $workflow = require('./workflow.js');
 var $helper = require('./helper.js');
+var $mson = require('./mson.js');
 
 /* Private properties */
 
-var ID = '_id';
-var NAME = '_name';
-var DESCRIPTION = '_description';
-var INHERIT = '_inherit';
-var CLASS = '_class';
-var CORE = '_core';
-var METHOD_TYPE = 'method';
-var EVENT_TYPE = 'event';
-var PROPERTY_TYPE = 'property';
-var LINK_TYPE = 'link';
-var COLLECTION_TYPE = 'collection';
-var internalTypes = ['property', 'collection', 'link', 'method', 'event'];
-var internalNames = [
-  '_id',
-  '_name',
-  '_inherit',
-  '_description',
-  '_class',
-  '_core'
-];
-var defaultTypes = [
-  'boolean',
-  'string',
-  'number',
-  'object',
-  'function',
-  'array',
-  'date',
-  'any'
-];
 var store = {
-  metadef: {},
   inheritance: {},
   inheritanceTree: {},
   schemas: {},
@@ -93,7 +64,7 @@ var store = {
 function isInternalName(name) {
   var result = true;
 
-  if (internalNames.indexOf(name) === -1) {
+  if ($mson.INTERNAL_NAMES.indexOf(name) === -1) {
     result = false;
   }
   return result;
@@ -129,33 +100,33 @@ function generateModels() {
 
     // set model internal properties
     model = {
-      _name: schema[NAME]
+      _name: schema[$mson.NAME]
     };
 
     // set _core
-    if (typeof schema[CORE] !== 'undefined') {
-      model[CORE] = schema[CORE];
+    if (typeof schema[$mson.CORE] !== 'undefined') {
+      model[$mson.CORE] = schema[$mson.CORE];
     }
 
     // set inherit
-    if (Array.isArray(schema[INHERIT])) {
-      model[INHERIT] = schema[INHERIT];
+    if (Array.isArray(schema[$mson.INHERIT])) {
+      model[$mson.INHERIT] = schema[$mson.INHERIT];
     }
 
     // set class
-    if (typeof schema[CLASS] !== 'undefined') {
-      model[CLASS] = schema[CLASS];
+    if (typeof schema[$mson.CLASS] !== 'undefined') {
+      model[$mson.CLASS] = schema[$mson.CLASS];
     }
 
     // set description
-    if (typeof schema[DESCRIPTION] !== 'undefined') {
-      model[DESCRIPTION] = schema[DESCRIPTION];
+    if (typeof schema[$mson.DESCRIPTION] !== 'undefined') {
+      model[$mson.DESCRIPTION] = schema[$mson.DESCRIPTION];
     }
 
     // check valid name
     for (att in schema) {
       if (!isInternalName(att) && att.indexOf('_') === 0) {
-        $log.invalidSchemaPropertyName(schema[NAME], att);
+        $log.invalidSchemaPropertyName(schema[$mson.NAME], att);
       }
     }
 
@@ -245,19 +216,19 @@ function generateModels() {
           break;
         default:
           if (!isInternalName(att)) {
-            $log.invalidSchemaProperty(schema[NAME], att);
+            $log.invalidSchemaProperty(schema[$mson.NAME], att);
           }
           break;
       }
     }
 
-    store.generatedModels[model[NAME]] = model;
+    store.generatedModels[model[$mson.NAME]] = model;
   }
 
   // models to override
   for (modelName in store.generatedModels) {
     model = store.generatedModels[modelName];
-    name = model[NAME];
+    name = model[$mson.NAME];
     modelExt = store.models[name];
     if (modelExt) {
       mergedModel = merge(modelExt, model);
@@ -304,7 +275,7 @@ function generateModels() {
     modelDef = store.generatedModels[modelName];
     $db._GeneratedModel.insert(modelDef);
 
-    if (!modelDef[CORE]) {
+    if (!modelDef[$mson.CORE]) {
       $log.generateModel(modelName);
     }
   }
@@ -345,15 +316,15 @@ function loadInMemory() {
   for (i = 0; i < length; i++) {
     schema = schemas[i];
 
-    name = schema[NAME];
-    inherit = schema[INHERIT];
+    name = schema[$mson.NAME];
+    inherit = schema[$mson.INHERIT];
 
     store.schemas[name] = schema;
     if (inherit) {
       store.inheritance[name] = inherit;
     }
 
-    if (!schema[CORE]) {
+    if (!schema[$mson.CORE]) {
       $log.loadSchema(name);
     }
   }
@@ -364,11 +335,11 @@ function loadInMemory() {
   length = models.length;
   for (i = 0; i < length; i++) {
     model = models[i];
-    name = model[NAME];
+    name = model[$mson.NAME];
 
     store.models[name] = model;
 
-    if (!model[CORE]) {
+    if (!model[$mson.CORE]) {
       $log.loadModel(name);
     }
   }
@@ -650,7 +621,7 @@ function compileSchemas() {
   var name = '';
 
   for (name in store.schemas) {
-    if (!store.schemas[name][CORE]) {
+    if (!store.schemas[name][$mson.CORE]) {
       $log.compileSchema(name);
     }
 
@@ -673,7 +644,7 @@ function checkModels() {
     if (classDef) {
       schema = store.compiledSchemas[name];
       if (schema) {
-        if (!classDef[CORE]) {
+        if (!classDef[$mson.CORE]) {
           $log.checkModel(name);
         }
         checkImp(classDef, schema);
@@ -704,7 +675,7 @@ function getStates() {
         type = schema[attribute];
         if (
           attribute.indexOf('_') !== 0 &&
-          internalTypes.indexOf(type) !== -1
+          $mson.INTERNAL_TYPES.indexOf(type) !== -1
         ) {
           states.push(attribute);
         }
@@ -727,35 +698,35 @@ function checkImp(classDef, classImp) {
 
   for (property in classImp) {
     if (
-      property !== ID &&
-      property !== NAME &&
-      property !== DESCRIPTION &&
-      property !== INHERIT &&
-      property !== CLASS &&
-      property !== CORE
+      property !== $mson.ID &&
+      property !== $mson.NAME &&
+      property !== $mson.DESCRIPTION &&
+      property !== $mson.INHERIT &&
+      property !== $mson.CLASS &&
+      property !== $mson.CORE
     ) {
       if (typeof classDef[property] !== 'undefined') {
         value = classDef[property];
         if (!checkSchema(value, classImp[property])) {
-          $log.invalidTypeImp(property, classDef[NAME]);
+          $log.invalidTypeImp(property, classDef[$mson.NAME]);
         }
       } else {
-        $log.missingPropertyImp(property, classDef[NAME]);
+        $log.missingPropertyImp(property, classDef[$mson.NAME]);
       }
     }
   }
   // check if all properties are there
   for (property in classDef) {
     if (
-      property !== ID &&
-      property !== NAME &&
-      property !== DESCRIPTION &&
-      property !== INHERIT &&
-      property !== CLASS &&
-      property !== CORE
+      property !== $mson.ID &&
+      property !== $mson.NAME &&
+      property !== $mson.DESCRIPTION &&
+      property !== $mson.INHERIT &&
+      property !== $mson.CLASS &&
+      property !== $mson.CORE
     ) {
       if (typeof classImp[property] === 'undefined') {
-        $log.unknownPropertyImp(property, classDef[NAME]);
+        $log.unknownPropertyImp(property, classDef[$mson.NAME]);
       }
     }
   }
@@ -772,7 +743,7 @@ function checkImp(classDef, classImp) {
 function checkSchema(value, type) {
   var result = true;
 
-  if (hasType(type, 'string') && defaultTypes.indexOf(type) !== -1) {
+  if (hasType(type, 'string') && $mson.DEFAULT_TYPES.indexOf(type) !== -1) {
     result = hasType(value, type);
   } else {
     result = checkCustomSchema(value, type);
@@ -856,13 +827,13 @@ function createDbStructure() {
   for (modelName in store.generatedModels) {
     modelDef = store.generatedModels[modelName];
     if (
-      typeof $db[modelDef[NAME]] === 'undefined' &&
-      modelDef[CLASS] !== false
+      typeof $db[modelDef[$mson.NAME]] === 'undefined' &&
+      modelDef[$mson.CLASS] !== false
     ) {
-      $db.collection(modelDef[NAME]);
+      $db.collection(modelDef[$mson.NAME]);
 
-      if (!modelDef[CORE]) {
-        $log.createCollection(modelDef[NAME]);
+      if (!modelDef[$mson.CORE]) {
+        $log.createCollection(modelDef[$mson.NAME]);
       }
     }
   }
@@ -879,11 +850,11 @@ function createClass() {
 
   for (modelName in store.generatedModels) {
     modelDef = store.generatedModels[modelName];
-    if (modelDef[CLASS] !== false) {
+    if (modelDef[$mson.CLASS] !== false) {
       $component.create({
         model: modelName
       });
-      if (!modelDef[CORE]) {
+      if (!modelDef[$mson.CORE]) {
         $log.createClass(modelName);
       }
     }
@@ -902,11 +873,11 @@ function createClassInfo() {
 
   for (modelName in store.generatedModels) {
     modelDef = store.generatedModels[modelName];
-    name = modelDef[NAME] + 'Info';
+    name = modelDef[$mson.NAME] + 'Info';
 
     if (
-      modelDef[CLASS] !== false &&
-      exports.inheritFrom(modelDef[NAME], '_Component')
+      modelDef[$mson.CLASS] !== false &&
+      exports.inheritFrom(modelDef[$mson.NAME], '_Component')
     ) {
       if (!$component.get(name)) {
         $db._ClassInfo.insert({
@@ -965,7 +936,7 @@ function getRealTypeName(value) {
 function isCustomType(value) {
   var result =
     hasType(value, 'string') &&
-    defaultTypes.indexOf(value) === -1 &&
+    $mson.DEFAULT_TYPES.indexOf(value) === -1 &&
     !exports.isClassName(value);
 
   return result;
@@ -1088,8 +1059,8 @@ function checkType(name, id, type) {
   var componentSchema = store.generatedModels[id];
   var attributeType = '';
 
-  if (componentSchema && componentSchema[NAME]) {
-    componentSchema = store.compiledSchemas[componentSchema[NAME]];
+  if (componentSchema && componentSchema[$mson.NAME]) {
+    componentSchema = store.compiledSchemas[componentSchema[$mson.NAME]];
   }
 
   if (componentSchema) {
@@ -1516,23 +1487,23 @@ exports.schema = function schema(name, schema) {
   if (typeof schema === 'undefined' || Object.keys(schema).length === 0) {
     if (typeof name === 'string') {
       schema = {};
-      schema[NAME] = name;
+      schema[$mson.NAME] = name;
       schemaName = name;
     } else {
       schema = JSON.parse(JSON.stringify(name));
-      schemaName = schema[NAME];
+      schemaName = schema[$mson.NAME];
     }
   } else {
     schema = JSON.parse(JSON.stringify(schema));
-    schema[NAME] = name;
-    schemaName = schema[NAME];
+    schema[$mson.NAME] = name;
+    schemaName = schema[$mson.NAME];
   }
 
-  if (typeof schema[ID] === 'undefined') {
-    schema[ID] = $helper.generateId();
+  if (typeof schema[$mson.ID] === 'undefined') {
+    schema[$mson.ID] = $helper.generateId();
   }
-  if (typeof schema[INHERIT] === 'undefined') {
-    schema[INHERIT] = ['_Component'];
+  if (typeof schema[$mson.INHERIT] === 'undefined') {
+    schema[$mson.INHERIT] = ['_Component'];
   }
 
   /**
@@ -1556,10 +1527,10 @@ exports.schema = function schema(name, schema) {
     return filteredList;
   }
 
-  schema[INHERIT] = _removeDuplicate(schema[INHERIT]);
+  schema[$mson.INHERIT] = _removeDuplicate(schema[$mson.INHERIT]);
 
   // check if schema is compliant with the meta meta model
-  if (exports.isValidObject(schema, store.metadef.schema, false)) {
+  if (exports.isValidObject(schema, $mson.SCHEMA_DEFINITION, false)) {
     schemas = $db._Schema.find({
       _name: schemaName
     });
@@ -1571,13 +1542,13 @@ exports.schema = function schema(name, schema) {
         },
         mergedSchema
       );
-      id = schemas[0][ID];
+      id = schemas[0][$mson.ID];
     } else {
       result = $db._Schema.insert(schema);
       id = result[0];
     }
   } else {
-    $log.invalidSchema(schema[NAME]);
+    $log.invalidSchema(schema[$mson.NAME]);
   }
 
   return id;
@@ -1599,20 +1570,20 @@ exports.model = function model(name, model) {
 
   if (typeof model === 'undefined' || Object.keys(model).length === 0) {
     model = JSON.parse(JSON.stringify(name));
-    modelName = model[NAME];
+    modelName = model[$mson.NAME];
   } else {
     model = JSON.parse(JSON.stringify(model));
-    model[NAME] = name;
+    model[$mson.NAME] = name;
     model = compileConfiguration(model);
-    modelName = model[NAME];
+    modelName = model[$mson.NAME];
   }
 
-  if (typeof model[ID] === 'undefined') {
-    model[ID] = $helper.generateId();
+  if (typeof model[$mson.ID] === 'undefined') {
+    model[$mson.ID] = $helper.generateId();
   }
 
   // check if model is compliant with the meta meta model
-  if (exports.isValidObject(model, store.metadef.model, false)) {
+  if (exports.isValidObject(model, $mson.MODEL_DEFINITION, false)) {
     models = $db._Model.find({
       _name: modelName
     });
@@ -1624,13 +1595,13 @@ exports.model = function model(name, model) {
         },
         mergedModel
       );
-      id = models[0][ID];
+      id = models[0][$mson.ID];
     } else {
       result = $db._Model.insert(model);
       id = result[0];
     }
   } else {
-    $log.invalidModel(model[NAME]);
+    $log.invalidModel(model[$mson.NAME]);
   }
 
   return id;
@@ -1667,12 +1638,12 @@ exports.type = function type(name, type) {
     }
   }
 
-  if (typeof typeDef[ID] === 'undefined') {
-    typeDef[ID] = $helper.generateId();
+  if (typeof typeDef[$mson.ID] === 'undefined') {
+    typeDef[$mson.ID] = $helper.generateId();
   }
 
   // check if type is compliant with the meta meta model
-  if (exports.isValidObject(typeDef, store.metadef.type)) {
+  if (exports.isValidObject(typeDef, $mson.TYPE_DEFINITION)) {
     result = $db._Type.insert(typeDef);
     id = result[0];
   } else {
@@ -1688,91 +1659,6 @@ exports.type = function type(name, type) {
  */
 exports.init = function init() {
   exports.clear();
-  store.metadef = {
-    schema: {
-      _id: {
-        type: 'string',
-        mandatory: true
-      },
-      _name: {
-        type: 'string',
-        mandatory: true
-      },
-      _inherit: {
-        type: ['string'],
-        mandatory: false,
-        default: ['_Component']
-      },
-      _class: {
-        type: 'boolean',
-        mandatory: false
-      },
-      _core: {
-        type: 'boolean',
-        mandatory: false
-      },
-      _description: {
-        type: 'string',
-        mandatory: false
-      }
-    },
-    model: {
-      _id: {
-        type: 'string',
-        mandatory: true
-      },
-      _name: {
-        type: 'string',
-        mandatory: true
-      },
-      _inherit: {
-        type: ['string'],
-        mandatory: false
-      },
-      _class: {
-        type: 'boolean',
-        mandatory: false
-      },
-      _core: {
-        type: 'boolean',
-        mandatory: false
-      },
-      _description: {
-        type: 'string',
-        mandatory: false
-      }
-    },
-    type: {
-      _id: {
-        type: 'string',
-        mandatory: true
-      },
-      name: {
-        type: 'string',
-        mandatory: true
-      },
-      type: {
-        type: 'string',
-        mandatory: true
-      },
-      schema: {
-        type: 'object',
-        mandatory: false
-      },
-      value: {
-        type: ['any'],
-        mandatory: false
-      },
-      core: {
-        type: 'boolean',
-        mandatory: false
-      },
-      description: {
-        type: 'string',
-        mandatory: false
-      }
-    }
-  };
   initDbStructure();
 };
 
@@ -1782,7 +1668,6 @@ exports.init = function init() {
  */
 exports.clear = function clear() {
   store = {
-    metadef: {},
     inheritance: {},
     inheritanceTree: {},
     schemas: {},
@@ -1820,7 +1705,7 @@ exports.create = function create() {
  * @description Check if an attribute of the schema is an event
  */
 exports.isEvent = function isEvent(name, id) {
-  return checkType(name, id, EVENT_TYPE);
+  return checkType(name, id, $mson.EVENT_TYPE);
 };
 
 /**
@@ -1831,7 +1716,7 @@ exports.isEvent = function isEvent(name, id) {
  * @description Check if an attribute of the schema is a property
  */
 exports.isProperty = function isProperty(name, id) {
-  return checkType(name, id, PROPERTY_TYPE);
+  return checkType(name, id, $mson.PROPERTY_TYPE);
 };
 
 /**
@@ -1842,7 +1727,7 @@ exports.isProperty = function isProperty(name, id) {
  * @description Check if an attribute of the schema is a link
  */
 exports.isLink = function isLink(name, id) {
-  return checkType(name, id, LINK_TYPE);
+  return checkType(name, id, $mson.LINK_TYPE);
 };
 
 /**
@@ -1853,7 +1738,7 @@ exports.isLink = function isLink(name, id) {
  * @description Check if an attribute of the schema is a collection
  */
 exports.isCollection = function isCollection(name, id) {
-  return checkType(name, id, COLLECTION_TYPE);
+  return checkType(name, id, $mson.COLLECTION_TYPE);
 };
 
 /**
@@ -1864,7 +1749,7 @@ exports.isCollection = function isCollection(name, id) {
  * @description Check if an attribute of the schema is a method
  */
 exports.isMethod = function isMethod(name, id) {
-  return checkType(name, id, METHOD_TYPE);
+  return checkType(name, id, $mson.METHOD_TYPE);
 };
 
 /**
@@ -1909,10 +1794,10 @@ exports.isValidState = function isValidState(name, id) {
   if (isModelPath(name)) {
     result = exports.isValidModelPath(id, name);
   } else {
-    if (componentSchema && componentSchema[NAME]) {
-      componentSchema = store.generatedModels[componentSchema[NAME]];
+    if (componentSchema && componentSchema[$mson.NAME]) {
+      componentSchema = store.generatedModels[componentSchema[$mson.NAME]];
     }
-    state = store.states[componentSchema[NAME]];
+    state = store.states[componentSchema[$mson.NAME]];
 
     if (Array.isArray(state)) {
       result = state.indexOf(name) !== -1;
@@ -2583,14 +2468,14 @@ exports.isValidObject = function isValidObject(
 
     if (
       !hasType(schema[fieldName], 'undefined') ||
-      fieldName === CORE ||
-      fieldName === ID
+      fieldName === $mson.CORE ||
+      fieldName === $mson.ID
     ) {
       switch (true) {
-        case fieldName === CORE:
+        case fieldName === $mson.CORE:
           typeSchema = 'boolean';
           break;
-        case fieldName === ID:
+        case fieldName === $mson.ID:
           typeSchema = 'string';
           break;
         default:
@@ -2801,17 +2686,6 @@ exports.isValidModelPath = function isValidModelPath(model, path) {
       }
     }
   }
-  return result;
-};
-
-/**
- * @method getMetaDef
- * @returns {Object} the metadefinition of the metamodel
- * @description Get the definition of the metamodel
- */
-exports.getMetaDef = function getMetaDef() {
-  var result = store.metadef.schema;
-
   return result;
 };
 

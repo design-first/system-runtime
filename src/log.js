@@ -23,6 +23,7 @@
  * @requires metamodel
  * @requires db
  * @requires component
+ * @requires mson
  * @description This module contains all the functions that write a log
  */
 
@@ -31,11 +32,10 @@
 var $metamodel = require('./metamodel.js');
 var $db = require('./db.js');
 var $component = require('./component.js');
+var $mson = require('./mson.js');
 
 /* Private properties */
 
-var ID = '_id';
-var NAME = '_name';
 var currentLevel = 'warn';
 var loggerRef = null;
 var fakeLoggerRef = {
@@ -86,7 +86,7 @@ function getLogger() {
   } else {
     loggers = $db._Logger.find();
     if (loggers.length) {
-      loggerId = loggers[0][ID];
+      loggerId = loggers[0][$mson.ID];
 
       if ($component.get(loggerId)) {
         loggerRef = $component.get(loggerId);
@@ -122,12 +122,12 @@ exports.level = function level(levelName) {
 exports.unknownProperty = function unknownProperty(propertyName, schema) {
   var message = '';
 
-  if (schema[NAME]) {
+  if (schema[$mson.NAME]) {
     message =
       "unknown property '" +
       propertyName +
       "' for the definition of '" +
-      schema[NAME] +
+      schema[$mson.NAME] +
       "'";
   } else {
     message = "unknown property '" + propertyName + "' for a model";
