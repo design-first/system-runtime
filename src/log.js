@@ -687,10 +687,10 @@ exports.invalidClassType = function invalidClassType(obj, type) {
  */
 exports.invalidConfiguration = function invalidConfiguration(obj, type) {
   getLogger().warn(
-    "invalid configuration found for '" +
+    "invalid type for '" +
       JSON.stringify(obj) +
       "': expected '" +
-      type
+      type + "'"
   );
 };
 
