@@ -1066,7 +1066,7 @@ DatabaseCollection.prototype.count = function count() {
 /**
  * @method createLog
  * @param {String} action CRUD action that happenned
- * @param {String} collection collection of the
+ * @param {String} collection collection of the component
  * @param {String} id id of the component
  * @param {String} field field of the component
  * @param {String} value value of the field of the component
