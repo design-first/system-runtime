@@ -1839,36 +1839,6 @@ exports.isValidType = function isValidType(value, typeName) {
   }
 
   /**
-   * @method _checkClassName
-   * @param {String} value
-   * @param {String} typeName
-   * @returns {Boolean} the object is compliant with the type
-   * @private
-   * @description Check if an object is compliant with a class
-   */
-  function _checkClassName(value, typeName) {
-    var isValid = false;
-    var typeRef = getRealClassName(typeName);
-    var component = value;
-
-    if (value !== '' && value !== null) {
-      if (hasType(value, 'string')) {
-        component = $component.get(value);
-      }
-      if (getClassName(component) === typeRef && component && component.id) {
-        isValid = true;
-      }
-    } else {
-      isValid = true;
-    }
-
-    if (!isValid) {
-      $log.invalidClassType(value, typeName);
-    }
-    return isValid;
-  }
-
-  /**
    * @method _isValidType
    * @param {String} value
    * @param {String} typeName
@@ -1896,7 +1866,12 @@ exports.isValidType = function isValidType(value, typeName) {
                 isValid = checkCustomSchema(value[i], typeName[0]);
                 break;
               case exports.isClassName(typeName[0]):
-                isValid = _checkClassName(value[i], typeName[0]);
+                if (value[i] !== '' && value[i] !== null) {
+                  isValid = exports.inheritFrom(
+                    getClassName(value[i]),
+                    typeName[0]
+                  );
+                }
                 break;
               default:
                 isValid = hasType(value[i], typeName[0]);
@@ -1930,7 +1905,9 @@ exports.isValidType = function isValidType(value, typeName) {
       }
       break;
     case exports.isClassName(typeName):
-      result = _checkClassName(value, typeName);
+      if (value !== '' && value !== null) {
+        result = exports.inheritFrom(getClassName(value), typeName);
+      }
       break;
     default:
       result = _isValidType(value, typeName);
@@ -2305,7 +2282,6 @@ exports.isValidObject = function isValidObject(
 
     if (!hasType(comp, 'undefined')) {
       if (!exports.inheritFrom(comp.constructor.name, typeRef)) {
-        // if (getClassName(comp) !== typeRef) { uncomment this line for a strict mode
         isValid = false;
         $log.invalidType(fieldName, field, typeRef);
       } else {

@@ -129,34 +129,34 @@ function createFunction(name, func, core, useCoreAPI) {
   // kludge for Babel
   funcBody = funcBody.replace(/_this/g, 'this');
 
-  if (params[0] === '') {
-    params = [];
+  if (paramsClean[0] === '') {
+    paramsClean = [];
   }
 
   if (useCoreAPI) {
-    params.push('$component');
-    params.push('$db');
-    params.push('$metamodel');
-    params.push('$workflow');
-    params.push('$behavior');
-    params.push('$state');
-    params.push('$log');
-    params.push('$helper');
+    paramsClean.push('$component');
+    paramsClean.push('$db');
+    paramsClean.push('$metamodel');
+    paramsClean.push('$workflow');
+    paramsClean.push('$behavior');
+    paramsClean.push('$state');
+    paramsClean.push('$log');
+    paramsClean.push('$helper');
   }
 
   if ($helper.isOnNode()) {
-    params.push('require');
+    paramsClean.push('require');
   }
 
-  if (params[0] !== '') {
+  if (paramsClean[0] !== '') {
     action = new Function(
       '__action',
       'return function ' +
         functionName +
         ' (' +
-        params.join(', ') +
+        paramsClean.join(', ') +
         ") { return new Function('" +
-        params.join("', '") +
+        paramsClean.join("', '") +
         "', __action).apply(this, arguments) };"
     )(funcBody);
   } else {

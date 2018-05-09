@@ -23,6 +23,7 @@ describe('a System Runtime component', function () {
       'fullName': 'method',
       'testMethod': 'method',
       'children': 'collection',
+      'teacher': 'link',
       'father': 'link',
       'moving': 'event'
     });
@@ -72,6 +73,12 @@ describe('a System Runtime component', function () {
       'testMethod': {
       },
       'father': {
+        'type': 'Person',
+        'readOnly': false,
+        'mandatory': false,
+        'default': {}
+      },
+      'teacher': {
         'type': 'Person',
         'readOnly': false,
         'mandatory': false,
@@ -487,7 +494,7 @@ describe('a System Runtime component', function () {
     expect(yoda.birthDate().toISOString()).equal(now.toISOString());
   });
 
-  it('can add a link to another components', function () {
+  it('can add a link to another component', function () {
     const Person = runtime.require('Person');
 
     const anakin = new Person({
@@ -505,7 +512,26 @@ describe('a System Runtime component', function () {
     expect(leia.father().firstName()).equal('Anakin');
   });
 
-  it('can remove a link to another components', function () {
+  it('can add a link to another component that inherits from the valid class', function () {
+    const Person = runtime.require('Person');
+    const Teacher = runtime.require('Teacher');
+
+    const luke = new Person({
+      'firstName': 'Luke',
+      'lastName': 'Skywalker'
+    });
+
+    const yoda = new Teacher({
+      'firstName': 'Yoda',
+      'lastName': 'Master'
+    });
+
+    luke.teacher(yoda);
+
+    expect(luke.teacher()).to.not.be.undefined;
+  });
+
+  it('can remove a link to another component', function () {
     const Person = runtime.require('Person');
 
     const anakin = new Person({
@@ -656,6 +682,25 @@ describe('a System Runtime component', function () {
     anakin.children([]);
 
     expect(anakin.children().length).equal(0);
+  }); const Teacher = runtime.require('Teacher');
+
+  it('can add an item in a collection that inherits from the valid class', function () {
+    const Person = runtime.require('Person');
+    const Teacher = runtime.require('Teacher');
+
+    const vador = new Person({
+      'firstName': 'Dark',
+      'lastName': 'Vador'
+    });
+
+    const luke = new Teacher({
+      'firstName': 'Yoda',
+      'lastName': 'Master'
+    });
+
+    vador.children(0, luke);
+
+    expect(vador.children(0)).to.not.be.undefined;
   });
 
   it('can destroy itself', function () {

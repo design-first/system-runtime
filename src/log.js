@@ -665,21 +665,6 @@ exports.invalidType = function invalidType(name, value, typeName) {
 };
 
 /**
- * @method invalidClassType
- * @param {Object} obj an object
- * @param {String} type expected class type
- * @description Invalid class type
- */
-exports.invalidClassType = function invalidClassType(obj, type) {
-  getLogger().warn(
-    "invalid class name for the object '" +
-      JSON.stringify(obj) +
-      "': expected '" +
-      type
-  );
-};
-
-/**
  * @method invalidConfiguration
  * @param {Object} obj an object
  * @param {String} type expected type for the configuration

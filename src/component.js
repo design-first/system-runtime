@@ -173,11 +173,7 @@ function _Array(conf) {
             data: [val, 'add']
           });
         } else {
-          if (typeof val.id !== 'undefined') {
-            $log.invalidPropertyName(id, classId, propertyName, val.id(), type);
-          } else {
-            $log.invalidPropertyName(id, classId, propertyName, val, type);
-          }
+          $log.invalidPropertyName(id, classId, propertyName, val, type);
         }
       } else {
         if (val && $metamodel.isValidType(val, type)) {
@@ -1043,7 +1039,7 @@ function addProperties(model, Class, classId) {
                 this.constructor.name,
                 propertyName,
                 value,
-                propertyType
+                propertyType[0]
               );
             }
           }
@@ -1445,7 +1441,7 @@ function addStructure(path, name, model, id) {
                     $workflow.process({
                       component: id,
                       state: fullPath.replace(/\[(\d)*\]/g, ''),
-                      data: [arr, 'add']
+                      data: [value, 'add']
                     });
                   }
 
@@ -1453,7 +1449,7 @@ function addStructure(path, name, model, id) {
                   $workflow.process({
                     component: id,
                     state: fullPath,
-                    data: [arr, 'add']
+                    data: [value, 'add']
                   });
                 }
               } else {
