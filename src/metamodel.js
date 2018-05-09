@@ -997,6 +997,8 @@ function getClassName(obj) {
 
   if (obj && obj.constructor) {
     result = obj.constructor.name;
+  } else {
+    result = typeof obj;
   }
   return result;
 }

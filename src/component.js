@@ -914,7 +914,7 @@ function addProperties(model, Class, classId) {
                   this.constructor.name,
                   propertyName,
                   position,
-                  propertyType
+                  propertyType[0]
                 );
               }
             } else {
@@ -1301,7 +1301,7 @@ function addStructure(path, name, model, id) {
                     this.constructor.name,
                     propertyName,
                     position,
-                    propertyType
+                    propertyType[0]
                   );
                 }
               } else {

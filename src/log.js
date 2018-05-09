@@ -153,7 +153,7 @@ exports.invalidPropertyType = function invalidPropertyType(
       ? property.constructor.name
       : typeof property;
   getLogger().warn(
-    "invalid type for property '" +
+    "invalid value for property '" +
       propertyName +
       "': expected type '" +
       type +
@@ -297,15 +297,15 @@ exports.invalidPropertyName = function invalidPropertyName(
         : typeof propertyValue;
 
     getLogger().warn(
-      "invalid type for property '" +
+      "invalid value for property '" +
         propertyName +
         "' on component '" +
         id +
         "'" +
         classInfo +
-        ": expected '" +
+        ": expected type '" +
         type +
-        "' instead of '" +
+        "' instead of type '" +
         realType +
         "'"
     );
@@ -313,11 +313,11 @@ exports.invalidPropertyName = function invalidPropertyName(
     realType = type && type.constructor ? type.constructor.name : typeof type;
 
     getLogger().warn(
-      "invalid type for property type '" +
+      "invalid value for property '" +
         propertyName +
         "' on component '" +
         classInfo +
-        ": expected 'string' instead of '" +
+        ": expected type 'string' instead of type '" +
         realType +
         "'"
     );
@@ -654,11 +654,11 @@ exports.invalidType = function invalidType(name, value, typeName) {
     name && value.constructor ? value.constructor.name : typeof value;
 
   getLogger().warn(
-    "invalid type for property '" +
+    "invalid value for property '" +
       name +
-      "': expected '" +
+      "': expected type '" +
       typeName +
-      "' instead of '" +
+      "' instead of type '" +
       realType +
       "'"
   );
