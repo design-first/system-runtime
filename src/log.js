@@ -188,9 +188,9 @@ exports.invalidClassName = function invalidClassName(
   constructorName
 ) {
   getLogger().warn(
-    "invalid class name for component '" +
+    "invalid component '" +
       componentId +
-      "': expected '" +
+      "' for a collection: expected a component of class '" +
       type +
       "' instead of '" +
       constructorName +
