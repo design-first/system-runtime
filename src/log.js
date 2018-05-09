@@ -1048,7 +1048,7 @@ exports.actionInvokeError = function actionInvokeError(
 ) {
   if (className !== 'Function') {
     getLogger().error(
-      "error when trying to call the method '" +
+      "error when running the behavior '" +
         state +
         "' on component '" +
         id +
@@ -1059,7 +1059,7 @@ exports.actionInvokeError = function actionInvokeError(
     );
   } else {
     getLogger().error(
-      "error when trying to call the method '" +
+      "error when running the behavior '" +
         state +
         "' on component '" +
         id +

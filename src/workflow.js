@@ -393,7 +393,7 @@ function action(component, state, action, params, isEvent) {
         if (component && component.error) {
           component.error({
             message:
-              "error when trying to call the method '" +
+              "error when running the behavior '" +
               state +
               "' on component '" +
               component.id() +
@@ -404,7 +404,7 @@ function action(component, state, action, params, isEvent) {
         if ($helper.getRuntime()) {
           $helper.getRuntime().error({
             message:
-              "error when trying to call the method '" +
+              "error when running the behavior '" +
               state +
               "' on component '" +
               component.id() +
