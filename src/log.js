@@ -215,7 +215,7 @@ exports.missingProperty = function missingProperty(propertyName) {
  * @description A class definition is missing
  */
 exports.missingImplementation = function missingImplementation(name) {
-  getLogger().warn("schema '" + name + "' is missing.");
+  getLogger().warn("schema '" + name + "' is missing");
 };
 
 /**
@@ -364,9 +364,9 @@ exports.invalidDocumentOnDbInsert = function invalidDocumentOnDbInsert(
   getLogger().warn(
     "invalid document '" +
       JSON.stringify(doc).replace(/,/g, ', ') +
-      "' on an insert operation on collection '" +
+      "' (collection '" +
       collectionName +
-      "'"
+      "' )"
   );
 };
 
@@ -387,9 +387,9 @@ exports.invalidPropertyTypeOnDbUpdate = function invalidPropertyTypeOnDbUpdate(
   type
 ) {
   getLogger().warn(
-    "invalid type when trying to update the property '" +
+    "invalid type for the property '" +
       propertyName +
-      "' of document '" +
+      "' of the document '" +
       id +
       "' (collection '" +
       collectionName +
@@ -416,11 +416,11 @@ exports.unknownPropertyOnDbUpdate = function unknownPropertyOnDbUpdate(
   getLogger().warn(
     "unknown property '" +
       propertyName +
-      "' on an update operation on collection '" +
-      collectionName +
-      "' with component '" +
+      "' for document '" +
       id +
-      "'"
+      "' (collection '" +
+      collectionName +
+      "' )"
   );
 };
 
@@ -432,7 +432,7 @@ exports.unknownPropertyOnDbUpdate = function unknownPropertyOnDbUpdate(
  */
 exports.unknownMethod = function unknownMethod(classId, methodName) {
   getLogger().warn(
-    "try to call an unknown method '" +
+    "try to call an unknown action '" +
       methodName +
       "' for the class '" +
       classId +
@@ -447,11 +447,11 @@ exports.unknownMethod = function unknownMethod(classId, methodName) {
  */
 exports.invalidCollectionName = function invalidCollectionName(name) {
   getLogger().warn(
-    "invalid name for creating the collection '" +
+    "invalid name for the collection '" +
       name +
       "': there is no schema '" +
       name +
-      "' in the metamodel"
+      "'"
   );
 };
 
@@ -478,7 +478,7 @@ exports.invalidResultType = function invalidResultType(
   }
 
   getLogger().warn(
-    "invalid type for the result of method '" +
+    "invalid type for the result of action '" +
       methodName +
       "' on component '" +
       id +
@@ -495,25 +495,13 @@ exports.invalidResultType = function invalidResultType(
 /**
  * @method unknownComponent
  * @param {String} id id of the class
- * @param {String} componentId if of the component
+ * @param {String} componentId id of the component
  * @description Unknown class
  */
 exports.unknownComponent = function unknownComponent(className, componentId) {
   getLogger().warn(
-    "unkown class component '" +
-      className +
-      "' for component '" +
-      componentId +
-      "'"
+    "unkown class name '" + className + "' for component '" + componentId + "'"
   );
-};
-
-/**
- * @method workflowRestarted
- * @description The System Runtime workflow has been restarted
- */
-exports.workflowRestarted = function workflowRestarted() {
-  getLogger().warn('runtime has been restarted');
 };
 
 /**
@@ -535,7 +523,7 @@ exports.invalidParamNumber = function invalidParamNumber(
   }
 
   getLogger().warn(
-    "invalid number of parameters when calling the method '" +
+    "invalid number of parameters when calling the action '" +
       methodName +
       "' on component '" +
       id +
@@ -567,7 +555,7 @@ exports.invalidParamType = function invalidParamType(
     getLogger().warn(
       "invalid type for the parameter '" +
         paramName +
-        "' when calling the method '" +
+        "' when calling the action '" +
         methodName +
         "' on component '" +
         id +
@@ -576,7 +564,7 @@ exports.invalidParamType = function invalidParamType(
     );
   } else {
     getLogger().warn(
-      "invalid type for a parameter when calling the method '" +
+      "invalid type for a parameter when calling the action '" +
         methodName +
         "' on component '" +
         id +
@@ -594,7 +582,7 @@ exports.invalidParamType = function invalidParamType(
  */
 exports.behaviorNotUnique = function behaviorNotUnique(id, stateName) {
   getLogger().warn(
-    "try to add more than one behavior for the state '" +
+    "try to add more than one action for the state '" +
       stateName +
       "' on class '" +
       id +
@@ -610,7 +598,7 @@ exports.behaviorNotUnique = function behaviorNotUnique(id, stateName) {
  */
 exports.invalidStateOn = function invalidStateOn(id, stateName) {
   getLogger().warn(
-    "try to add a behavior to an unkwown state '" +
+    "try to add an action to an unkwown state '" +
       stateName +
       "' on class '" +
       id +
@@ -626,7 +614,7 @@ exports.invalidStateOn = function invalidStateOn(id, stateName) {
  */
 exports.invalidStateOff = function invalidStateOff(id, stateName) {
   getLogger().warn(
-    "try to remove a behavior from an unkwown state '" +
+    "try to remove an action from an unkwown state '" +
       stateName +
       "' on class '" +
       id +
@@ -754,7 +742,7 @@ exports.invalidParamNumberMethodOn = function invalidParamNumberMethodOn(
     classInfo = " (class '" + className + "')";
   }
   getLogger().warn(
-    "invalid number of parameters when adding a behavior on method '" +
+    "invalid number of parameters when adding an action for the state '" +
       methodName +
       "' on component '" +
       id +
@@ -884,9 +872,7 @@ exports.invalidConctructorParameters = function invalidConctructorParameters(
  * @description Get the information of an unkown model
  */
 exports.unknownModel = function unknownModel(classId) {
-  getLogger().warn(
-    "try get the information of an unknown model '" + classId + "'"
-  );
+  getLogger().warn("the model '" + classId + "' does not exist");
 };
 
 /**
@@ -906,13 +892,13 @@ exports.missingSchema = function missingSchema(name) {
 exports.cyclicDependency = function cyclicDependency(name) {
   if (name) {
     getLogger().error(
-      'a cyclic inheritance dependency with ’' +
+      "a cyclic inheritance dependency with the schema '" +
         name +
-        "’ schema has been found, please check the '_inherit' properties of your schemas"
+        "’ has been found, please check the '_inherit' property of this schema"
     );
   } else {
     getLogger().error(
-      "a cyclic inheritance dependency has been found, please check the '_inherit' properties of your schemas"
+      "a cyclic inheritance dependency has been found, please check the '_inherit' properties of the schemas"
     );
   }
 };
@@ -1048,7 +1034,7 @@ exports.actionInvokeError = function actionInvokeError(
 ) {
   if (className !== 'Function') {
     getLogger().error(
-      "error when running the behavior '" +
+      "error when calling the action '" +
         state +
         "' on component '" +
         id +
@@ -1059,7 +1045,7 @@ exports.actionInvokeError = function actionInvokeError(
     );
   } else {
     getLogger().error(
-      "error when running the behavior '" +
+      "error when calling the action '" +
         state +
         "' on component '" +
         id +
@@ -1100,7 +1086,7 @@ exports.invalidSchemaProperty = function invalidSchemaProperty(name, propName) {
       propName +
       "' for schema '" +
       name +
-      "': only 'property', 'link', 'collection', 'method' and 'event' are allowed."
+      "': only 'property', 'link', 'collection', 'method' and 'event' are allowed"
   );
 };
 
@@ -1137,7 +1123,7 @@ exports.invalidState = function invalidState(model, state) {
  */
 exports.unknownContext = function unknownContext(className, methodName) {
   getLogger().warn(
-    "invoke the behavior '" +
+    "invoke the action '" +
       methodName +
       "' on the class '" +
       className +
