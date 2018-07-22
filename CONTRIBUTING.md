@@ -2,7 +2,7 @@
 
 ## For questions
 
-Read the [documentation](https://system-runtime.readme.io/) before to see if your questions has been answered in the documentation
+Read the [documentation](https://designfirst.io/systemruntime/documentation/docs/what-is-system-runtime.html) before to see if your questions has been answered in the documentation
 
 ## For issues
 

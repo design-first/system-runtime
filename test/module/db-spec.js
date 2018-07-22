@@ -139,6 +139,7 @@ describe('System Runtime db component', () => {
   });
 
   it('can sort the result of a find', () => {
+    // TODO improve test
     const result = db._Runtime.find({
       '_id': 'runtime'
     }).sort({

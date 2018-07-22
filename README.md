@@ -96,11 +96,11 @@ runtime.install('system.json');
 
 #### A metamodel
 
-System Runtime contains a metamodel to help you to design your model. The definition of the model is made on a JSON format called [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson), no code is needed. 
+System Runtime contains a metamodel to help you to design your model. The definition of the model is made on a JSON format called [MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-model.html#defining-your-model), no code is needed. 
 
-With [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson) you can define types, classes, one to one / one to many relationships and multi inheritance between classes. 
+With [MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-model.html#defining-your-model) you can define types, classes, one to one / one to many relationships and multi inheritance between classes. 
 
-[MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson) is based on [UML](http://uml.org), so learning it is very easy.
+[MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-model.html#defining-your-model) is based on [UML](http://uml.org), so learning it is very easy.
 
 #### A component factory
 
@@ -162,9 +162,9 @@ All the modifications to the source code of System Runtime will rebuild the proj
 
 ## Documentation
 
-* [Quick Start](https://system-runtime.readme.io/docs/quick-start)
-* [Guide](https://system-runtime.readme.io/docs/installation)
-* [Examples](https://system-runtime.readme.io/docs/a-basic-hello-world)
+* [Quick Start](https://designfirst.io/systemruntime/documentation/docs/quick-start.html)
+* [Guide](https://designfirst.io/systemruntime/documentation/docs/install-system-runtime.html)
+* [Examples](https://designfirst.io/systemruntime/documentation/docs/a-basic-hello-world.html)
 
 ## Community
 

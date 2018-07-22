@@ -357,8 +357,6 @@ function _Array(conf) {
    * @description Override sort method
    */
   arr.sort = function sort(funct) {
-    var result = null;
-
     arrDb.sort(funct);
 
     if ($helper.isRuntime()) {
@@ -373,10 +371,9 @@ function _Array(conf) {
         });
     }
 
-    result = arr;
     _copy();
 
-    return result;
+    return arr;
   };
 
   /**
