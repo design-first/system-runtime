@@ -23,7 +23,6 @@
     "no-case-declarations": 1,
     "no-nested-ternary": 1,
     "no-unneeded-ternary": 1,
-    "no-mixed-operators": 1,
     "nonblock-statement-body-position": 1,
     "brace-style": 1,
     "spaced-comment": 1,
