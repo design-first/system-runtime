@@ -127,13 +127,13 @@ With System Runtime your components really behave the way you designed them.
 Clone the repository:
 
 ```sh
-$ git clone https://github.com/design-first/system-runtime.git
+git clone https://github.com/design-first/system-runtime.git
 ```
 
 Once you have cloned the repository, install the dependencies:
 
 ```sh
-$ npm i
+npm i
 ```	 	
 
 #### Build
@@ -141,7 +141,7 @@ $ npm i
 Then build System Runtime:
 
 ```sh
-$ npm run build
+npm run build
 ```	 
 
 It will:
@@ -155,7 +155,7 @@ It will:
 To start System Runtime in development mode:
 
 ```sh
-$ npm run dev
+npm run dev
 ```
 
 All the modifications to the source code of System Runtime will rebuild the project.
