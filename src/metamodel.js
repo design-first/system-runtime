@@ -1477,6 +1477,7 @@ function compileConfiguration(model) {
  * @method schema
  * @param {String} name name of the schema
  * @param {JSON} schema definition of the schema
+ * @returns {String} id of the schema
  * @description Add a new schema to the metamodel
  */
 exports.schema = function schema(name, schema) {
@@ -1560,12 +1561,12 @@ exports.schema = function schema(name, schema) {
  * @method model
  * @param {String} name name of the model
  * @param {JSON} model definition of the model
+ * @returns {String} id of the model
  * @description Add a new model to the metamodel
  */
 exports.model = function model(name, model) {
   var id = null;
   var result = [];
-  var inherit = '';
   var modelName = '';
   var mergedModel = {};
   var models = [];
@@ -1613,6 +1614,7 @@ exports.model = function model(name, model) {
  * @method type
  * @param {String} name name of the type
  * @param {JSON} type type to add
+ * @returns {String} id of the type
  * @description Add a new type
  */
 exports.type = function type(name, type) {
