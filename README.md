@@ -21,7 +21,7 @@ A system:
 
 ![Image Alt](https://designfirst.io/img/system.png)
 
-## How works System Runtime ?
+## How does System Runtime work?
 
 #### Create a system
 
