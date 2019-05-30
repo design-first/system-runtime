@@ -18,4 +18,5 @@ CONTRIBUTING.md
 .npmignore$
 .gitignore
 .DS_Store
+.github
 package-lock.json
