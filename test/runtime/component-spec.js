@@ -689,8 +689,8 @@ describe('a System Runtime component', function () {
     const Teacher = runtime.require('Teacher');
 
     const vador = new Person({
-      'firstName': 'Dark',
-      'lastName': 'Vador'
+      'firstName': 'Darth',
+      'lastName': 'Vader'
     });
 
     const luke = new Teacher({
