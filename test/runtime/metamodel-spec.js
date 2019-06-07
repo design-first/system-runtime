@@ -469,7 +469,7 @@ describe('System Runtime metamodel component', () => {
   });
 
 
-  it('can generate APIs to navigate threw the model', () => {
+  it('can generate APIs to navigate through the model', () => {
     const metamodel = runtime.require('metamodel');
 
     metamodel.schema({

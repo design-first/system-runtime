@@ -425,7 +425,7 @@ describe('a System Runtime component', function () {
     }, 1);
   });
 
-  it('can navigate threw relationships bewteen components', function () {
+  it('can navigate through relationships bewteen components', function () {
     const Person = runtime.require('Person');
 
     const luke = new Person({
