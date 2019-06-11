@@ -4,8 +4,10 @@
 /tasks/
 /coverage/
 /build/system-runtime.json
-/src/systems/
+/dist/system-runtime.js
+/extensions/README.md
 /src/banners/
+/src/system/
 bower.json
 Gruntfile.js
 karma.conf.js
