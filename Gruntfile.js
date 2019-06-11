@@ -44,8 +44,6 @@ module.exports = grunt => {
   // test
   grunt.registerTask('test', [
     'eslint',
-    'json_merge',
-    'concat:system',
     'mocha_istanbul:coverage',
     'karma:release'
   ]);
@@ -63,8 +61,6 @@ module.exports = grunt => {
 
   // coveralls
   grunt.registerTask('coveralls', [
-    'json_merge',
-    'concat:system',
     'mocha_istanbul:coveralls'
   ]);
 
