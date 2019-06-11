@@ -19,4 +19,5 @@ CONTRIBUTING.md
 .gitignore
 .DS_Store
 .github
+README.md
 package-lock.json
