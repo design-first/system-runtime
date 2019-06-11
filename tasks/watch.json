@@ -6,9 +6,7 @@
     ],
     "tasks": [
       "json_merge",
-      "concat:system",
-      "eslint",
-      "mocha_istanbul:coverage"
+      "concat:system"
     ],
     "options": {
       "spawn": true
