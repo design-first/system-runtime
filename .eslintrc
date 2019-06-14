@@ -43,5 +43,15 @@
     "camelcase": 1,
     "new-cap": 1,
     "no-restricted-globals": 1
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*-spec.js"],
+      "rules": {
+        "no-undef": 0,
+        "indent": 0,
+        "newline-per-chained-call": 0
+      }
+    }
+  ]
 }

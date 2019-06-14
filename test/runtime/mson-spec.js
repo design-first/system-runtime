@@ -19,7 +19,7 @@ describe('a MSON schema', () => {
 
     metamodel.schema({
       '_name': 'Teacher_test',
-      '_inherit': ['Person_test'],
+      '_inherit': ['Person_test']
     });
 
     metamodel.create();

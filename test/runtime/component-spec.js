@@ -306,7 +306,7 @@ describe('a System Runtime component', function () {
     const yoda = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master'
-    })
+    });
 
     yoda.on('lastName', function (val) {
       this.address('Dagobah');
@@ -325,7 +325,7 @@ describe('a System Runtime component', function () {
     const yoda = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master'
-    })
+    });
 
     yoda.on('lastName', function (val) {
       this.address('Dagobah');
@@ -365,7 +365,7 @@ describe('a System Runtime component', function () {
     const yoda = new Person({
       'firstName': 'Yoda',
       'lastName': 'Master'
-    })
+    });
 
     yoda.on('custom.property0', function (val) {
       this.custom().property3('changed');
@@ -387,7 +387,7 @@ describe('a System Runtime component', function () {
       'firstName': 'Yoda',
       'lastName': 'Master',
       'location': {
-        'cities': [{ 'street': '' }]
+        'cities': [{'street': ''}]
       }
     });
 
@@ -409,7 +409,7 @@ describe('a System Runtime component', function () {
       'firstName': 'Yoda',
       'lastName': 'Master',
       'location': {
-        'cities': [{ 'street': '' }]
+        'cities': [{'street': ''}]
       }
     });
 

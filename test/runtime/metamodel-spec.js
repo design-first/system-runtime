@@ -85,7 +85,7 @@ describe('System Runtime metamodel component', () => {
       'name': 'address',
       'type': 'object',
       'schema': {
-        'planet': { 'type': 'string', 'mandatory': true }
+        'planet': {'type': 'string', 'mandatory': true}
       }
     });
 
@@ -194,7 +194,7 @@ describe('System Runtime metamodel component', () => {
       'name': 'vegetable',
       'type': 'object',
       'schema': {
-        'kind': { 'type': ['string'], 'mandatory': true }
+        'kind': {'type': ['string'], 'mandatory': true}
       }
     });
 
@@ -252,7 +252,7 @@ describe('System Runtime metamodel component', () => {
       'name': 'foods',
       'type': 'object',
       'schema': {
-        'vegetables': { 'type': 'vegetable', 'mandatory': true }
+        'vegetables': {'type': 'vegetable', 'mandatory': true}
       }
     });
 
@@ -260,7 +260,7 @@ describe('System Runtime metamodel component', () => {
       'name': 'vegetable',
       'type': 'object',
       'schema': {
-        'kind': { 'type': ['string'], 'mandatory': true }
+        'kind': {'type': ['string'], 'mandatory': true}
       }
     });
 
