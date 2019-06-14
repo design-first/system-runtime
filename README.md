@@ -145,8 +145,7 @@ npm run build
 ```	 
 
 It will:
-*  generate System Runtime core system in **/build** directory,
-*  generate System Runtime core module for the server library and
+*  build System Runtime core module for the server library and
 *  build System Runtime client library on **/dist** directory
 
 ## Development
