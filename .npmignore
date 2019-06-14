@@ -5,10 +5,8 @@
 /coverage/
 /build/system-runtime.json
 /dist/system-runtime.js
-/extensions/README.md
 /src/banners/
 /src/system/
-bower.json
 Gruntfile.js
 karma.conf.js
 CODE_OF_CONDUCT.md
@@ -21,5 +19,4 @@ CONTRIBUTING.md
 .gitignore
 .DS_Store
 .github
-README.md
 package-lock.json
