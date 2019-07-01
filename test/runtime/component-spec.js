@@ -754,7 +754,31 @@ describe('a System Runtime component', function () {
     expect(eikichi.fullName()).equal('Great Teacher Eikichi Onizuka');
   });
 
-  it('can send an error', function (done) {
+  it('can send an error catched by the runtime', function (done) {
+    const Person = runtime.require('Person');
+    const yoda = new Person({
+      '_id': 'yoda',
+      'firstName': 'Yoda',
+      'lastName': 'Master',
+      'likes': ['teaching']
+    });
+
+    runtime.on('error', function (data) {
+      this.require('yoda').lastName('error');
+    });
+
+    yoda.on('testMethod', function () {
+      ANonDefinedFunction();
+    });
+    yoda.testMethod();
+
+    setTimeout(function () {
+      expect(yoda.lastName()).equal('error');
+      done();
+    }, 1);
+  });
+
+  it('can send an error catched by a component', function (done) {
     const Person = runtime.require('Person');
     const yoda = new Person({
       'firstName': 'Yoda',
@@ -764,6 +788,30 @@ describe('a System Runtime component', function () {
 
     yoda.on('error', function (data) {
       this.lastName('error');
+    });
+
+    yoda.on('testMethod', function () {
+      ANonDefinedFunction();
+    });
+    yoda.testMethod();
+
+    setTimeout(function () {
+      expect(yoda.lastName()).equal('error');
+      done();
+    }, 1);
+  });
+
+  it('can send an error catched by the system', function (done) {
+    const Person = runtime.require('Person');
+    const yoda = new Person({
+      '_id': 'yoda1',
+      'firstName': 'Yoda',
+      'lastName': 'Master',
+      'likes': ['teaching']
+    });
+
+    runtime.system().on('error', function (data) {
+      this.require('yoda1').lastName('error');
     });
 
     yoda.on('testMethod', function () {

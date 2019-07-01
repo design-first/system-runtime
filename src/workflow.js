@@ -34,8 +34,7 @@
  * - the input (i.e. parameters) of all actions for the state are compliants with the model and
  * - the output of all actions are compliants with the model.
  *
- * If an error occurs, the workflow will call the error state of the component and runtime.
- * If the error can break the consistency of the current system, the worklow will stop.
+ * If an error occurs, the workflow will call the error state of the component, the current system and the runtime.
  *
  */
 
@@ -385,40 +384,58 @@ function action(component, state, action, params, isEvent) {
     if (e instanceof RuntimeError) {
       throw e;
     } else {
-      if (new Function() === undefined) {
-        console.error(
-          'runtime: can not execute new Function() instruction in the current context.'
-        );
-      } else {
-        if (component && component.error) {
-          component.error({
-            message:
-              "error when running the behavior '" +
-              state +
-              "' on component '" +
-              component.id() +
-              "'",
-            error: e
-          });
-        }
-        if ($helper.getRuntime()) {
-          $helper.getRuntime().error({
-            message:
-              "error when running the behavior '" +
-              state +
-              "' on component '" +
-              component.id() +
-              "'",
-            error: e
-          });
-        }
-        $log.actionInvokeError(
-          state,
-          component.id(),
-          component.constructor.name,
-          e.message
-        );
+      if (component && component.error) {
+        component.error({
+          message:
+            "error when running the behavior '" +
+            state +
+            "' on component '" +
+            component.id() +
+            "'",
+          error: e
+        });
       }
+      if ($helper.getRuntime()) {
+        // do not invoke the error action of the system twice
+        if (
+          component &&
+          component.id() !==
+            $helper
+              .getRuntime()
+              .system()
+              .id()
+        ) {
+          $helper
+            .getRuntime()
+            .system()
+            .error({
+              message:
+                "error when running the behavior '" +
+                state +
+                "' on component '" +
+                component.id() +
+                "'",
+              error: e
+            });
+        }
+
+        $helper.getRuntime().error({
+          message:
+            "error when running the behavior '" +
+            state +
+            "' on component '" +
+            component.id() +
+            "'",
+          error: e
+        });
+      }
+
+      $log.actionInvokeError(
+        state,
+        component.id(),
+        component.constructor.name,
+        e.message
+      );
     }
   }
 
