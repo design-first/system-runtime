@@ -684,7 +684,7 @@ exports.checkOutput = function checkOutput(params) {
       component.id(),
       component.constructor.name,
       methodName,
-      JSON.stringify(returnType),
+      typeof returnType === 'string' ? returnType : JSON.stringify(returnType),
       Array.isArray(methodResult) ? 'array' : typeof methodResult
     );
   }

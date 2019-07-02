@@ -66,7 +66,14 @@ var fakeLoggerRef = {
     }
   },
   error: function error(message) {
-    console.error('runtime: ' + message);
+    if (
+      this.currentLevel === 'info' ||
+      this.currentLevel === 'warn' ||
+      this.currentLevel === 'debug' ||
+      this.currentLevel === 'error'
+    ) {
+      console.error('runtime: ' + message);
+    }
   }
 };
 

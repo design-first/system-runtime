@@ -7,6 +7,8 @@ describe('a System Runtime component', function () {
   }
 
   beforeEach(function () {
+    runtime.require('logger').level('off');
+
     runtime.system('component-spec');
     const metamodel = runtime.require('metamodel');
 
