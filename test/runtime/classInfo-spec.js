@@ -69,7 +69,7 @@ describe('a System Runtime component classInfo property', () => {
   it('can show the definition of an event', () => {
     const event = runtime.classInfo().event('error');
 
-    expect(event.params[0].name).equal('data');
+    expect(event.params[0].name).equal('e');
   });
 
   it('can show its events', () => {

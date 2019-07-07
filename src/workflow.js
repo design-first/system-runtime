@@ -392,7 +392,7 @@ function action(component, state, action, params, isEvent) {
             "' on component '" +
             component.id() +
             "'",
-          error: e
+          stack: e
         });
       }
       if ($helper.getRuntime()) {
@@ -415,7 +415,7 @@ function action(component, state, action, params, isEvent) {
                 "' on component '" +
                 component.id() +
                 "'",
-              error: e
+              stack: e
             });
         }
 
@@ -426,7 +426,7 @@ function action(component, state, action, params, isEvent) {
             "' on component '" +
             component.id() +
             "'",
-          error: e
+          stack: e
         });
       }
 
