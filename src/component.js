@@ -2045,22 +2045,6 @@ function addInitClass(Class) {
 }
 
 /**
- * @method addClassInfoClass
- * @param {Object} Class Class
- * @private
- * @description Add the ClassInfo method on a class
- */
-function addClassInfoClass(Class) {
-  var proxy = function proxy() {
-    return exports.get(this.id() + 'Info');
-  };
-  Class.classInfo = new Function(
-    '__proxy',
-    'return function classInfo () { return __proxy.apply(this) };'
-  )(proxy);
-}
-
-/**
  * @method factory
  * @param {JSON} config configuration of the component
  * @returns {Component} the created component
@@ -2099,7 +2083,6 @@ function factory(config) {
     addRequireClass(Class);
     addInitClass(Class);
     addDestroyClass(Class);
-    addClassInfoClass(Class);
   }
 
   Object.freeze(Class);

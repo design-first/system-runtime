@@ -47,7 +47,6 @@ module.exports = config => {
       'test/runtime/component-spec.js',
       'test/runtime/metamodel-spec.js',
       'test/runtime/database-spec.js',
-      'test/runtime/classInfo-spec.js',
       'test/runtime/system-spec.js',
       'test/runtime/mson-spec.js'
     ],

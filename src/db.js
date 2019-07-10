@@ -64,7 +64,6 @@ var internalDB = [
   '_Metamodel',
   '_Database',
   '_System',
-  '_ClassInfo',
   '_Message',
   '_Channel',
   '_Logger',

@@ -806,7 +806,6 @@ function initDbStructure() {
   $db.collection('_Schema');
   $db.collection('_Model');
   $db.collection('_GeneratedModel');
-  $db.collection('_ClassInfo');
   $db.collection('_Behavior');
   $db.collection('_State');
   $db.collection('_Type');
@@ -856,46 +855,6 @@ function createClass() {
       });
       if (!modelDef[$mson.CORE]) {
         $log.createClass(modelName);
-      }
-    }
-  }
-}
-
-/**
- * @method createClassInfo
- * @private
- * @description Create all the ClassInfo of the model
- */
-function createClassInfo() {
-  var modelName = '';
-  var modelDef = {};
-  var name = '';
-
-  for (modelName in store.generatedModels) {
-    modelDef = store.generatedModels[modelName];
-    name = modelDef[$mson.NAME] + 'Info';
-
-    if (
-      modelDef[$mson.CLASS] !== false &&
-      exports.inheritFrom(modelDef[$mson.NAME], '_Component')
-    ) {
-      if (!$component.get(name)) {
-        $db._ClassInfo.insert({
-          _id: name,
-          schema: store.compiledSchemas[modelName],
-          model: modelDef
-        });
-      } else {
-        $db._ClassInfo.update(
-          {
-            _id: name
-          },
-          {
-            _id: name,
-            schema: store.compiledSchemas[modelName],
-            model: modelDef
-          }
-        );
       }
     }
   }
@@ -1697,7 +1656,6 @@ exports.create = function create() {
   getStates();
   createDbStructure();
   createClass();
-  createClassInfo();
   $log.modelCreationEnd();
 };
 

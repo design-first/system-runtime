@@ -175,8 +175,6 @@ describe('a System Runtime component', function () {
       }
     });
 
-
-
     metamodel.create();
   });
 
@@ -190,13 +188,6 @@ describe('a System Runtime component', function () {
     const db = runtime.require('db');
 
     expect(db).to.not.be.undefined;
-  });
-
-  it('can show its classInfo', function () {
-    const db = runtime.require('db');
-    const classInfo = db.classInfo();
-
-    expect(classInfo).to.not.be.undefined;
   });
 
   it('can add an event', function (done) {
