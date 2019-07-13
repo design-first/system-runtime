@@ -61,7 +61,6 @@ exports.isRuntime = function isRuntime() {
  */
 exports.getRuntime = function getRuntime() {
   var runtimeId = '';
-  var result = null;
   var search = $db._Runtime.find();
 
   if (!runtimeRef && search[0]) {

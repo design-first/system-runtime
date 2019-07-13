@@ -200,7 +200,6 @@ function _Array() {
    * @description Override sort method
    */
   arr.sort = function sort(param) {
-    var result = null;
     var field = '';
     var arrCopy = [];
 
@@ -397,7 +396,6 @@ function impSystem(importedSystem) {
   var modelName = '';
   var behaviorId = '';
   var systems = [];
-  var id = null;
 
   if (importedSystem) {
     // add types
@@ -463,12 +461,10 @@ function impSystem(importedSystem) {
 function expSystem() {
   var result = '';
   var collectionName = '';
-  var behaviorId = '';
   var systems = [];
   var id = null;
   var dbDump = null;
   var mastersystem = null;
-  var behavior = null;
   var exportedSystem = {};
 
   // get id of the master system

@@ -44,8 +44,6 @@ var store = {};
  * @method createFunction
  * @param {String} name default name of the function
  * @param {String} func a stringified function
- * @param {Boolean} core if true, the behavior will be treated as a System Runtime core behavior.
- * In that case, the behavior can not be exported in a system (default false)
  * @param {Boolean} useCoreAPI if true, System Runtime core modules will be injected as parameters of the function (default false)
  * @returns {Function} the created function
  * @private
@@ -55,7 +53,7 @@ var store = {};
  * - has the context of the component and
  * - can have some core modules injected as parameters
  */
-function createFunction(name, func, core, useCoreAPI) {
+function createFunction(name, func, useCoreAPI) {
   var beginBody = -1;
   var funcParams = '';
   var params = [];
@@ -179,7 +177,6 @@ function createFunction(name, func, core, useCoreAPI) {
  * @param {Object} state the state on which the action will be executed
  * @param {Object} action the action to execute when the component will have a specific state
  * @param {Boolean} useCoreAPI if true, System Runtime core modules will be injected as parameters of the action (default false)
- * @param {Boolean} core if true, behavior can not be exported
  * @param {Object} context new context of the behavior
  * @returns {String} id of the behavior created in System Runtime database
  * @description Add a behavior that will be stored in System Runtime database
@@ -195,7 +192,7 @@ exports.add = function add(id, state, action, useCoreAPI, core, context) {
     useCoreAPI = false;
   }
 
-  action = createFunction(state, strAction, core, useCoreAPI);
+  action = createFunction(state, strAction, useCoreAPI);
 
   store[behaviorId] = action;
 
@@ -287,7 +284,6 @@ exports.getActions = function getActions(id, state) {
       action = createFunction(
         behavior.state,
         behavior.action,
-        behavior.core,
         behavior.useCoreAPI
       );
       store[behavior[$mson.ID]] = action;

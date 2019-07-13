@@ -851,8 +851,6 @@ function addProperties(model, Class, classId) {
         var runtimeArr = null;
         var val = null;
         var realVal = null;
-        var i = 0;
-        var length = 0;
 
         if (typeof value === 'undefined') {
           if (typeof position === 'undefined') {
@@ -1212,9 +1210,6 @@ function addStructure(path, name, model, id) {
           var component = null;
           var runtimeArr = null;
           var val = null;
-          var realVal = null;
-          var i = 0;
-          var length = 0;
           var parentPath = '';
           var fullPath = '';
 
@@ -1359,10 +1354,6 @@ function addStructure(path, name, model, id) {
                         return val;
                         break;
                     }
-                    if (val === undefined && prop.default !== undefined) {
-                      val = prop.default;
-                    }
-                    return val;
                   } else {
                     $log.destroyedComponentCall(
                       fullPath[position] + '[' + position + ']',
