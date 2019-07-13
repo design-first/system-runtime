@@ -67,10 +67,10 @@ var internalDB = [
   '_Message',
   '_Channel',
   '_Logger',
-  '_Log'
+  '_DatabaseLog'
 ];
 var coreDb = [
-  '_Log',
+  '_DatabaseLog',
   '_Schema',
   '_Logger',
   '_Model',
@@ -1080,11 +1080,11 @@ exports.createLog = function createLog(action, collection, id, field, value) {
   value = value || '';
 
   // clean log every 1000 logs
-  if (Object.keys(exports.store._Log).length > 1000) {
-    exports.store._Log = {};
+  if (Object.keys(exports.store._DatabaseLog).length > 1000) {
+    exports.store._DatabaseLog = {};
   }
 
-  exports.store._Log[logId] = {
+  exports.store._DatabaseLog[logId] = {
     _id: logId,
     action: action,
     collection: collection,

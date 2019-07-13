@@ -811,7 +811,7 @@ function initDbStructure() {
   $db.collection('_Type');
   $db.collection('_Message');
   $db.collection('_Channel');
-  $db.collection('_Log');
+  $db.collection('_DatabaseLog');
 }
 
 /**
