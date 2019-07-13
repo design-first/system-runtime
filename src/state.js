@@ -42,14 +42,33 @@ var store = {};
  * @description Set the state of a component
  */
 exports.set = function set(id, state, value) {
+  var component = null;
+
   store[id] = {
     state: state,
     value: value
   };
-  $db.store._State[id] = {
-    state: state,
-    value: value
-  };
+
+  component = $db._State.find({
+    component: id
+  });
+  if (component.length === 0) {
+    $db._State.insert({
+      component: id,
+      state: state,
+      value: value
+    });
+  } else {
+    $db._State.update(
+      {
+        _id: id
+      },
+      {
+        state: state,
+        value: value
+      }
+    );
+  }
 };
 
 /**

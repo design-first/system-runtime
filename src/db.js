@@ -724,7 +724,6 @@ DatabaseCollection.prototype.insert = function insert(document) {
       var component = null;
       var channels = [];
       var channel = null;
-      var systems = [];
 
       switch (true) {
         case this.name === '_Schema':
