@@ -36,7 +36,6 @@
 var $db = require('./db.js');
 var $log = require('./log.js');
 var $component = require('./component.js');
-var $workflow = require('./workflow.js');
 var $helper = require('./helper.js');
 var $mson = require('./mson.js');
 
@@ -46,7 +45,7 @@ var store = {
   inheritance: {},
   inheritanceTree: {},
   schemas: {},
-  compiledSchemas: {},
+  generatedSchemas: {},
   models: {},
   generatedModels: {},
   states: {},
@@ -80,12 +79,12 @@ function generateModels() {
   var name = '';
   var schemaName = '';
   var schema = {};
+  var schemaDef = null;
   var modelName = '';
   var modelParent = null;
   var modelExt = null;
   var modelDef = null;
   var model = {};
-  var models = {};
   var mergedModel = {};
   var parents = [];
   var length = 0;
@@ -95,8 +94,8 @@ function generateModels() {
   var sortInheritTree = [];
 
   // default values
-  for (schemaName in store.compiledSchemas) {
-    schema = store.compiledSchemas[schemaName];
+  for (schemaName in store.generatedSchemas) {
+    schema = store.generatedSchemas[schemaName];
 
     // set model internal properties
     model = {
@@ -248,8 +247,6 @@ function generateModels() {
       parents = exports.getParents(modelName);
       parents.reverse();
 
-      var modelToMerge = JSON.parse(JSON.stringify(model));
-
       length = parents.length;
       for (j = 0; j < length; j++) {
         name = parents[j];
@@ -271,6 +268,10 @@ function generateModels() {
   }
 
   // save
+  for (schemaName in store.generatedSchemas) {
+    schemaDef = store.generatedSchemas[schemaName];
+    $db._GeneratedSchema.insert(schemaDef);
+  }
   for (modelName in store.generatedModels) {
     modelDef = store.generatedModels[modelName];
     $db._GeneratedModel.insert(modelDef);
@@ -293,7 +294,6 @@ function loadInMemory() {
   var model = {};
   var models = [];
   var type = null;
-  var id = '';
   var name = '';
   var inherit = '';
   var i = 0;
@@ -303,7 +303,7 @@ function loadInMemory() {
   store.inheritance = {};
   store.inheritanceTree = {};
   store.schemas = {};
-  store.compiledSchemas = {};
+  store.generatedSchemas = {};
   store.models = {};
   store.generatedModels = {};
   store.states = {};
@@ -613,19 +613,19 @@ function sortInheritanceTree() {
 }
 
 /**
- * @method compileSchemas
+ * @method generateSchemas
  * @private
- * @description Add the models
+ * @description Generate the schemas
  */
-function compileSchemas() {
+function generateSchemas() {
   var name = '';
 
   for (name in store.schemas) {
     if (!store.schemas[name][$mson.CORE]) {
-      $log.compileSchema(name);
+      $log.generatingSchema(name);
     }
 
-    store.compiledSchemas[name] = extend(name);
+    store.generatedSchemas[name] = extend(name);
   }
 }
 
@@ -642,7 +642,7 @@ function checkModels() {
   for (name in store.generatedModels) {
     classDef = store.generatedModels[name];
     if (classDef) {
-      schema = store.compiledSchemas[name];
+      schema = store.generatedSchemas[name];
       if (schema) {
         if (!classDef[$mson.CORE]) {
           $log.checkModel(name);
@@ -667,9 +667,9 @@ function getStates() {
   var states = [];
   var attribute = '';
 
-  for (name in store.compiledSchemas) {
+  for (name in store.generatedSchemas) {
     states = [];
-    schema = store.compiledSchemas[name];
+    schema = store.generatedSchemas[name];
     if (schema) {
       for (attribute in schema) {
         type = schema[attribute];
@@ -804,6 +804,7 @@ function checkCustomSchema(value, typeName) {
 function initDbStructure() {
   $db.collection('_Logger');
   $db.collection('_Schema');
+  $db.collection('_GeneratedSchema');
   $db.collection('_Model');
   $db.collection('_GeneratedModel');
   $db.collection('_Behavior');
@@ -1021,7 +1022,7 @@ function checkType(name, id, type) {
   var attributeType = '';
 
   if (componentSchema && componentSchema[$mson.NAME]) {
-    componentSchema = store.compiledSchemas[componentSchema[$mson.NAME]];
+    componentSchema = store.generatedSchemas[componentSchema[$mson.NAME]];
   }
 
   if (componentSchema) {
@@ -1038,11 +1039,10 @@ function checkType(name, id, type) {
  * @method merge
  * @param {Object} source source schema
  * @param {Object} target target schema
- * @param {Boolean} merge also private properties
  * @returns {Object} merged schema
  * @description Merge two schemas
  */
-function merge(source, target, all) {
+function merge(source, target) {
   var propName = '';
   var result = target;
 
@@ -1355,15 +1355,14 @@ function initConfiguration(name, type, isMethod) {
 }
 
 /**
- * @method compileConfiguration
+ * @method generateConfiguration
  * @param {JSON} model definition of the model
- * @returns {Object} compiled model
+ * @returns {Object} generated model
  * @description Create a full model definition from a model
  */
-function compileConfiguration(model) {
+function generateConfiguration(model) {
   var propName = '';
   var paramPropName = '';
-  var configuration = '';
   var methodConf = {};
 
   model = JSON.parse(JSON.stringify(model));
@@ -1381,7 +1380,7 @@ function compileConfiguration(model) {
           typeof model[propName]['=>'] === 'undefined':
           model[propName] = merge(
             model[propName],
-            initConfiguration(propName, model[propName].type || 'any', false)
+            initConfiguration(propName, model[propName].type || 'any')
           );
           break;
 
@@ -1414,8 +1413,7 @@ function compileConfiguration(model) {
                 merge(model[propName][paramPropName]),
                 initConfiguration(
                   paramPropName,
-                  model[propName][paramPropName].type || 'any',
-                  true
+                  model[propName][paramPropName].type || 'any'
                 )
               );
             }
@@ -1536,7 +1534,7 @@ exports.model = function model(name, model) {
   } else {
     model = JSON.parse(JSON.stringify(model));
     model[$mson.NAME] = name;
-    model = compileConfiguration(model);
+    model = generateConfiguration(model);
     modelName = model[$mson.NAME];
   }
 
@@ -1594,7 +1592,7 @@ exports.type = function type(name, type) {
       typeName = typeDef.name;
     } else {
       type = JSON.parse(JSON.stringify(type));
-      typeDef.schema = compileConfiguration(type);
+      typeDef.schema = generateConfiguration(type);
       typeDef.name = name;
       typeDef.type = 'object';
       typeName = typeDef.name;
@@ -1634,7 +1632,7 @@ exports.clear = function clear() {
     inheritance: {},
     inheritanceTree: {},
     schemas: {},
-    compiledSchemas: {},
+    generatedSchemas: {},
     models: {},
     generatedModels: {},
     states: {},
@@ -1650,7 +1648,7 @@ exports.create = function create() {
   $log.modelCreationBegin();
   loadInMemory();
   createInheritanceTree();
-  compileSchemas();
+  generateSchemas();
   generateModels();
   checkModels();
   getStates();
@@ -2493,8 +2491,8 @@ exports.prepareObject = function prepareObject(object, schema) {
 exports.getSchema = function getSchema(name) {
   var result = null;
 
-  if (store.compiledSchemas[name]) {
-    result = store.compiledSchemas[name];
+  if (store.generatedSchemas[name]) {
+    result = store.generatedSchemas[name];
   }
   return result;
 };

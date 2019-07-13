@@ -56,6 +56,7 @@ var collections = [];
 var internalDB = [
   '_Runtime',
   '_Schema',
+  '_GeneratedSchema',
   '_Model',
   '_GeneratedModel',
   '_Behavior',
@@ -72,6 +73,7 @@ var internalDB = [
 var coreDb = [
   '_DatabaseLog',
   '_Schema',
+  '_GeneratedSchema',
   '_Logger',
   '_Model',
   '_GeneratedModel',
@@ -731,6 +733,7 @@ DatabaseCollection.prototype.insert = function insert(document) {
         case this.name === '_Model':
         case this.name === '_Type':
         case this.name === '_GeneratedModel':
+        case this.name === '_GeneratedSchema':
         case $metamodel.isValidObject(obj, $metamodel.getModel(this.name)):
           if (typeof obj[$mson.ID] === 'undefined') {
             obj[$mson.ID] = $helper.generateId();
@@ -839,6 +842,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
         if (typeof docs[i][attributeName.split('.')[0]] !== 'undefined') {
           if (
             this.name !== '_Schema' &&
+            this.name !== '_GeneratedSchema' &&
             this.name !== '_Model' &&
             this.name !== '_GeneratedModel'
           ) {

@@ -965,12 +965,12 @@ exports.loadType = function loadType(name) {
 };
 
 /**
- * @method compileSchema
+ * @method generatingSchema
  * @param {String} name name of the schema
- * @description Compile schema
+ * @description Generate schema
  */
-exports.compileSchema = function compileSchema(name) {
-  getLogger().debug("compile schema '" + name + "'...");
+exports.generatingSchema = function generatingSchema(name) {
+  getLogger().debug("generating schema '" + name + "'...");
 };
 
 /**
