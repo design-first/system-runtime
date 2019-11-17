@@ -48,27 +48,6 @@ exports.set = function set(id, state, value) {
     state: state,
     value: value
   };
-
-  component = $db._State.find({
-    component: id
-  });
-  if (component.length === 0) {
-    $db._State.insert({
-      component: id,
-      state: state,
-      value: value
-    });
-  } else {
-    $db._State.update(
-      {
-        _id: id
-      },
-      {
-        state: state,
-        value: value
-      }
-    );
-  }
 };
 
 /**

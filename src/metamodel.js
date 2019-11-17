@@ -808,7 +808,6 @@ function initDbStructure() {
   $db.collection('_Model');
   $db.collection('_GeneratedModel');
   $db.collection('_Behavior');
-  $db.collection('_State');
   $db.collection('_Type');
   $db.collection('_Message');
   $db.collection('_Channel');
@@ -2137,8 +2136,8 @@ exports.isValidSchema = function isValidSchema(object, schema) {
       mandatory = field.mandatory;
       if (
         mandatory === true &&
-        (hasType(object[fieldName], 'undefined') &&
-          object[fieldName] !== undefined)
+        hasType(object[fieldName], 'undefined') &&
+          object[fieldName] !== undefined
       ) {
         $log.missingProperty(fieldName);
         result = false;

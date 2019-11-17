@@ -60,7 +60,6 @@ var internalDB = [
   '_Model',
   '_GeneratedModel',
   '_Behavior',
-  '_State',
   '_Type',
   '_Metamodel',
   '_Database',
@@ -77,7 +76,6 @@ var coreDb = [
   '_Logger',
   '_Model',
   '_GeneratedModel',
-  '_State',
   '_Type'
 ];
 var logOrder = 0;
