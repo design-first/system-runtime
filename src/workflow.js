@@ -399,6 +399,7 @@ function action(component, state, action, params, isEvent) {
         // do not invoke the error action of the system twice
         if (
           component &&
+          $helper.getRuntime().system() &&
           component.id() !==
             $helper
               .getRuntime()
