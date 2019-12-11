@@ -400,6 +400,7 @@ function action(component, state, action, params, isEvent) {
         if (
           component &&
           $helper.getRuntime().system() &&
+          $helper.getRuntime().system().id &&
           component.id() !==
             $helper
               .getRuntime()
