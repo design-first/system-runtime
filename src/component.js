@@ -3,7 +3,7 @@
  *
  * https://designfirst.io/systemruntime/
  *
- * Copyright 2019 Erwan Carriou
+ * Copyright 2020 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -808,8 +808,8 @@ function addProperties(model, Class, classId) {
         if (
           !(
             $metamodel.isValidType(val, type) &&
-            ($metamodel.inheritFrom(val.constructor.name, type) &&
-              $metamodel.isClassName(type))
+            $metamodel.inheritFrom(val.constructor.name, type) &&
+              $metamodel.isClassName(type)
           )
         ) {
           result = result && false;

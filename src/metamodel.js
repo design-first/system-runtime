@@ -3,7 +3,7 @@
  *
  * https://designfirst.io/systemruntime/
  *
- * Copyright 2019 Erwan Carriou
+ * Copyright 2020 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -2137,7 +2137,7 @@ exports.isValidSchema = function isValidSchema(object, schema) {
       if (
         mandatory === true &&
         hasType(object[fieldName], 'undefined') &&
-          object[fieldName] !== undefined
+        object[fieldName] !== undefined
       ) {
         $log.missingProperty(fieldName);
         result = false;
