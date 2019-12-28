@@ -45,7 +45,7 @@ describe('System Runtime history component', () => {
 
     const history = runtime.require('history');
 
-    history.fromState(-1);
+    history.from(-1);
     history.back();
 
     expect(runtime.require('db').collections().PersonHistoryTest1.find().length).equal(0);
@@ -85,7 +85,7 @@ describe('System Runtime history component', () => {
 
     const history = runtime.require('history');
 
-    history.fromState(-1);
+    history.from(-1);
     history.back();
 
     expect(runtime.require('db').collections().PersonHistoryTest2.find().length).equal(1);
@@ -95,11 +95,19 @@ describe('System Runtime history component', () => {
     expect(runtime.require('db').collections().PersonHistoryTest2.find().length).equal(0);
   });
 
+  it('can get an item of the history', () => {
+    const history = runtime.require('history');
+    const item = history.get(0); 
+
+    expect(item).to.not.be.undefined;
+  });
+
   it('can dump all the history of state', () => {
     const history = runtime.require('history');
 
     expect(history.dump()).to.not.be.undefined;
   });
+
   it('can load a dump of an history', () => {
     const history = runtime.require('history');
     const dump = history.dump(); 

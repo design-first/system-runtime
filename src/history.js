@@ -124,10 +124,26 @@ exports.forward = function forward() {
 };
 
 /**
- * @method fromState
+ * @method get
+ * @param {}
  * @description Start back/forward from state
  */
-exports.fromState = function fromState(index) {
+exports.get = function get(index) {
+  var result = null;
+  if (index === -1) {
+    result = stack[stack.length - 1];
+  } else {
+    cursorIndex = stack[index];
+  }
+  return result;
+};
+
+/**
+ * @method from
+ * @param {Number} index index of the stack
+ * @description Start back/forward from state
+ */
+exports.from = function from(index) {
   if (index === -1) {
     cursorIndex = stack.length - 1;
   } else {
@@ -146,6 +162,7 @@ exports.dump = function dump() {
 
 /**
  * @method load
+ * @param {Object} dump dump of an history to load
  * @returns {Boolean} true if the dump was loaded with no error
  * @description Load a dump of an history
  */
