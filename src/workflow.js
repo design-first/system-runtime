@@ -47,6 +47,7 @@ var $state = require('./state.js');
 var $helper = require('./helper.js');
 var $log = require('./log.js');
 var $db = require('./db.js');
+var $history = require('./history.js');
 
 /* Private methods */
 
@@ -349,6 +350,7 @@ function action(component, state, action, params, isEvent) {
       injectedParams.push($state);
       injectedParams.push($log);
       injectedParams.push($helper);
+      injectedParams.push($history);
     }
 
     if ($helper.isOnNode()) {

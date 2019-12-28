@@ -28,6 +28,7 @@
  * @requires log
  * @requires state
  * @requires mson
+ * @requires history
  * @description This module manages the components.
  * It is the factory of all the components that are created by System Runtime.
  */
@@ -40,6 +41,7 @@ var $metamodel = require('./metamodel.js');
 var $behavior = require('./behavior.js');
 var $helper = require('./helper.js');
 var $log = require('./log.js');
+var $history = require('./history.js');
 var $state = require('./state.js');
 var $mson = require('./mson.js');
 
@@ -731,7 +733,14 @@ function createClass(classId) {
     // create link to db
     $db.store[classId][config[$mson.ID]] = config;
 
-    $db.createLog('insert', classId, config[$mson.ID], '', config);
+    if (classId.indexOf('_') !== 0) {
+      $history.pushState({
+        action: 'insert',
+        collection: classId,
+        id: config[$mson.ID],
+        value: JSON.stringify(config)
+      });
+    }
 
     if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
       $helper
@@ -809,7 +818,7 @@ function addProperties(model, Class, classId) {
           !(
             $metamodel.isValidType(val, type) &&
             $metamodel.inheritFrom(val.constructor.name, type) &&
-              $metamodel.isClassName(type)
+            $metamodel.isClassName(type)
           )
         ) {
           result = result && false;

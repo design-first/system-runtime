@@ -21,14 +21,12 @@
 /**
  * @module state
  * @requires db
- * @description This module manages the states of all thecomponents
+ * @description This module manages the states of all the components
  */
 
 'use strict';
 
-var $db = require('./db.js');
-
-/* Private properties */
+/* Private property */
 
 var store = {};
 
@@ -42,8 +40,6 @@ var store = {};
  * @description Set the state of a component
  */
 exports.set = function set(id, state, value) {
-  var component = null;
-
   store[id] = {
     state: state,
     value: value

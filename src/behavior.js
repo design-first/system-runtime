@@ -140,6 +140,7 @@ function createFunction(name, func, useCoreAPI) {
     paramsClean.push('$state');
     paramsClean.push('$log');
     paramsClean.push('$helper');
+    paramsClean.push('$history');
   }
 
   if ($helper.isOnNode()) {

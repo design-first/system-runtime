@@ -28,6 +28,7 @@
  * @requires state
  * @requires workflow
  * @requires mson
+ * @requires history
  * @description This module manages System Runtime database.
  * System Runtime database is a micro NoSQL Database that contains:
  * - collections to store documents (schemas, types, components, ...) and
@@ -45,6 +46,7 @@ var $component = require('./component.js');
 var $metamodel = require('./metamodel.js');
 var $helper = require('./helper.js');
 var $log = require('./log.js');
+var $history = require('./history.js');
 var $behavior = require('./behavior.js');
 var $state = require('./state.js');
 var $workflow = require('./workflow.js');
@@ -66,11 +68,9 @@ var internalDB = [
   '_System',
   '_Message',
   '_Channel',
-  '_Logger',
-  '_DatabaseLog'
+  '_Logger'
 ];
 var coreDb = [
-  '_DatabaseLog',
   '_Schema',
   '_GeneratedSchema',
   '_Logger',
@@ -78,17 +78,8 @@ var coreDb = [
   '_GeneratedModel',
   '_Type'
 ];
-var logOrder = 0;
 
 /* Private methods */
-
-/**
- * @method incLogOrder
- * @description Increment Log
- */
-function incLogOrder() {
-  return logOrder++;
-}
 
 /**
  * @method dump
@@ -742,7 +733,14 @@ DatabaseCollection.prototype.insert = function insert(document) {
             component = new Component(obj);
             result.push(component.id());
           } else {
-            exports.createLog('insert', this.name, obj[$mson.ID], '', obj);
+            if (this.name.indexOf('_') !== 0) {
+              $history.pushState({
+                action: 'insert',
+                collection: this.name,
+                id: obj[$mson.ID],
+                value: JSON.stringify(obj)
+              });
+            }
 
             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
               $helper
@@ -855,16 +853,19 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
             }
             if (type) {
               if ($metamodel.isValidType(update[attributeName], type)) {
+                if (this.name.indexOf('_') !== 0) {
+                  $history.pushState({
+                    action: 'update',
+                    collection: this.name,
+                    id: docs[i][$mson.ID],
+                    field: attributeName,
+                    value: JSON.stringify(update[attributeName]),
+                    oldValue: JSON.stringify(docs[i][attributeName])
+                  });
+                }
+
                 docs[i][attributeName] = update[attributeName];
                 updated = updated + 1;
-
-                exports.createLog(
-                  'update',
-                  this.name,
-                  docs[i][$mson.ID],
-                  attributeName,
-                  update[attributeName]
-                );
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                   $helper
@@ -908,15 +909,18 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
             }
           } else {
             // TODO more check in case of schema update
-            docs[i][attributeName] = update[attributeName];
+            if (this.name.indexOf('_') !== 0) {
+              $history.pushState({
+                action: 'update',
+                collection: this.name,
+                id: docs[i][$mson.ID],
+                field: attributeName,
+                value: JSON.stringify(update[attributeName]),
+                oldValue: JSON.stringify(docs[i][attributeName])
+              });
+            }
 
-            exports.createLog(
-              'update',
-              this.name,
-              docs[i][$mson.ID],
-              attributeName,
-              update[attributeName]
-            );
+            docs[i][attributeName] = update[attributeName];
 
             updated = updated + 1;
             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
@@ -966,9 +970,16 @@ DatabaseCollection.prototype.remove = function remove(query) {
             object = exports.store[this.name][id];
 
             if (isValid(criteria, object)) {
-              delete exports.store[this.name][id];
+              if (this.name.indexOf('_') !== 0) {
+                $history.pushState({
+                  action: 'remove',
+                  collection: this.name,
+                  id: id,
+                  oldValue: JSON.stringify(exports.store[this.name][id])
+                });
+              }
 
-              exports.createLog('remove', this.name, id, '', '');
+              delete exports.store[this.name][id];
 
               component = $component.get(id);
               if (component) {
@@ -993,9 +1004,16 @@ DatabaseCollection.prototype.remove = function remove(query) {
         object = exports.store[this.name][id];
 
         if (isValid(query, object)) {
-          delete exports.store[this.name][id];
+          if (this.name.indexOf('_') !== 0) {
+            $history.pushState({
+              action: 'remove',
+              collection: this.name,
+              id: id,
+              oldValue: JSON.stringify(exports.store[this.name][id])
+            });
+          }
 
-          exports.createLog('remove', this.name, id, '', '');
+          delete exports.store[this.name][id];
 
           component = $component.get(id);
           if (component) {
@@ -1016,9 +1034,16 @@ DatabaseCollection.prototype.remove = function remove(query) {
     }
   } else {
     for (id in exports.store[this.name]) {
-      delete exports.store[this.name][id];
+      if (this.name.indexOf('_') !== 0) {
+        $history.pushState({
+          action: 'remove',
+          collection: this.name,
+          id: id,
+          oldValue: JSON.stringify(exports.store[this.name][id])
+        });
+      }
 
-      exports.createLog('remove', this.name, id, '', '');
+      delete exports.store[this.name][id];
 
       if (coreDb.indexOf(this.name) === -1) {
         component = $component.get(id);
@@ -1058,39 +1083,6 @@ DatabaseCollection.prototype.count = function count() {
 };
 
 /* Public methods */
-
-/**
- * @method createLog
- * @param {String} action CRUD action that happenned
- * @param {String} collection collection of the component
- * @param {String} id id of the component
- * @param {String} field field of the component
- * @param {String} value value of the field of the component
- * @description Create a Log
- */
-exports.createLog = function createLog(action, collection, id, field, value) {
-  var logId = $helper.generateId();
-
-  collection = collection || '';
-  id = id || '';
-  field = field || '';
-  value = value || '';
-
-  // clean log every 1000 logs
-  if (Object.keys(exports.store._DatabaseLog).length > 1000) {
-    exports.store._DatabaseLog = {};
-  }
-
-  exports.store._DatabaseLog[logId] = {
-    _id: logId,
-    action: action,
-    collection: collection,
-    id: id,
-    field: field,
-    value: value,
-    order: incLogOrder()
-  };
-};
 
 /**
  * @method collection
@@ -1178,6 +1170,7 @@ exports.init = function init() {
   $metamodel.clear();
   $state.clear();
   $behavior.clear();
+  $history.clear();
 
   // init metamodel
   $metamodel.init();
