@@ -182,8 +182,8 @@ exports.forward = function forward() {
  */
 exports.get = function get(index) {
   var result = null;
-  if (index === -1) {
-    result = stack[stack.length - 1];
+  if (index < 0) {
+    result = stack[stack.length + index];
   } else {
     result = stack[index];
   }
