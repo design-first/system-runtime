@@ -1227,7 +1227,7 @@ function initConfiguration(name, type, isMethod) {
         };
       }
       break;
-    case typeof type === 'array' && typeof type[0] === 'boolean':
+    case Array.isArray(type) && type[0] === 'boolean':
       if (isMethod) {
         result = {
           name: name,
@@ -1244,7 +1244,7 @@ function initConfiguration(name, type, isMethod) {
         };
       }
       break;
-    case typeof type === 'array' && typeof type[0] === 'string':
+    case Array.isArray(type) && type[0] === 'string':
       if (isMethod) {
         result = {
           name: name,
@@ -1261,7 +1261,7 @@ function initConfiguration(name, type, isMethod) {
         };
       }
       break;
-    case typeof type === 'array' && typeof type[0] === 'number':
+    case Array.isArray(type) && type[0] === 'number':
       if (isMethod) {
         result = {
           name: name,
@@ -1278,7 +1278,7 @@ function initConfiguration(name, type, isMethod) {
         };
       }
       break;
-    case typeof type === 'array' && typeof type[0] === 'object':
+    case Array.isArray(type) && type[0] === 'object':
       if (isMethod) {
         result = {
           name: name,
@@ -1295,7 +1295,7 @@ function initConfiguration(name, type, isMethod) {
         };
       }
       break;
-    case typeof type === 'array' && typeof type[0] === 'date':
+    case Array.isArray(type) && type[0] === 'date':
       if (isMethod) {
         result = {
           name: name,
@@ -1312,7 +1312,7 @@ function initConfiguration(name, type, isMethod) {
         };
       }
       break;
-    case typeof type === 'array' && typeof type[0] === 'any':
+    case Array.isArray(type) && type[0] === 'any':
       if (isMethod) {
         result = {
           name: name,
@@ -1329,7 +1329,7 @@ function initConfiguration(name, type, isMethod) {
         };
       }
       break;
-    case typeof type === 'array':
+    case Array.isArray(type):
       if (isMethod) {
         result = {
           name: name,
@@ -1370,7 +1370,8 @@ function generateConfiguration(model) {
     if (model.hasOwnProperty(propName) && propName.indexOf('_') !== 0) {
       switch (true) {
         // property type
-        case typeof model[propName] === 'string':
+        case typeof model[propName] === 'string' ||
+          Array.isArray(model[propName]):
           model[propName] = initConfiguration(propName, model[propName], false);
           break;
 
@@ -1825,7 +1826,11 @@ exports.isValidType = function isValidType(value, typeName) {
                 isValid = checkCustomSchema(value[i], typeName[0]);
                 break;
               case exports.isClassName(typeName[0]):
-                if (value[i] !== '' && value[i] !== null) {
+                if (
+                  value[i] !== '' &&
+                  value[i] !== null &&
+                  typeof value[i] !== 'string'
+                ) {
                   isValid = exports.inheritFrom(
                     getClassName(value[i]),
                     typeName[0]
@@ -1864,7 +1869,7 @@ exports.isValidType = function isValidType(value, typeName) {
       }
       break;
     case exports.isClassName(typeName):
-      if (value !== '' && value !== null) {
+      if (value !== '' && value !== null && typeof value !== 'string') {
         result = exports.inheritFrom(getClassName(value), typeName);
       }
       break;

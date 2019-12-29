@@ -85,7 +85,7 @@ describe('System Runtime metamodel component', () => {
       'name': 'address',
       'type': 'object',
       'schema': {
-        'planet': {'type': 'string', 'mandatory': true}
+        'planet': { 'type': 'string', 'mandatory': true }
       }
     });
 
@@ -194,7 +194,7 @@ describe('System Runtime metamodel component', () => {
       'name': 'vegetable',
       'type': 'object',
       'schema': {
-        'kind': {'type': ['string'], 'mandatory': true}
+        'kind': { 'type': ['string'], 'mandatory': true }
       }
     });
 
@@ -252,7 +252,7 @@ describe('System Runtime metamodel component', () => {
       'name': 'foods',
       'type': 'object',
       'schema': {
-        'vegetables': {'type': 'vegetable', 'mandatory': true}
+        'vegetables': { 'type': 'vegetable', 'mandatory': true }
       }
     });
 
@@ -260,7 +260,7 @@ describe('System Runtime metamodel component', () => {
       'name': 'vegetable',
       'type': 'object',
       'schema': {
-        'kind': {'type': ['string'], 'mandatory': true}
+        'kind': { 'type': ['string'], 'mandatory': true }
       }
     });
 
@@ -558,5 +558,45 @@ describe('System Runtime metamodel component', () => {
     });
 
     expect(leia.father().son().firstName()).equal('Luke');
+  });
+
+  it('can add a type (simple mode)', () => {
+    const metamodel = runtime.require('metamodel');
+
+    // create the schema
+    metamodel.schema('PersonSimple', {
+      'firstName': 'property',
+      'lastName': 'property',
+      'age': 'property',
+      'father': 'link',
+      'mother': 'link',
+      'children': 'collection',
+      'fullName': 'method'
+    });
+
+    // override the generated model
+    metamodel.model('PersonSimple', {
+      'firstName': 'string',
+      'lastName': 'string',
+      'age': 'number',
+      'father': 'Person',
+      'mother': 'Person',
+      'children': ['Person'],
+      'fullName': {
+        '=>': 'string'
+      }
+    });
+
+    // create the model and related class
+    metamodel.create();
+
+    const PersonSimple = runtime.require('PersonSimple');
+    const person = new PersonSimple({
+      firstName: 'a first name',
+      mother: '',
+      children: []
+    });
+
+    expect(person.fullName()).equal(undefined);
   });
 });
