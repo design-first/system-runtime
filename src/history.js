@@ -62,6 +62,7 @@ exports.state = function state() {
  */
 exports.back = function back() {
   var state = stack[cursorIndex];
+  var update = {};
   if (state) {
     switch (state.action) {
       case 'insert':
@@ -73,11 +74,13 @@ exports.back = function back() {
         $db[state.collection].insert(JSON.parse(state.oldValue));
         break;
       case 'update':
+        update[state.field] = JSON.parse(state.oldValue);
+
         $db[state.collection].update(
           {
             _id: state.id
           },
-          JSON.parse(state.oldValue)
+          update
         );
         break;
       default:
@@ -97,6 +100,7 @@ exports.back = function back() {
 exports.forward = function forward() {
   cursorIndex = cursorIndex + 1;
   var state = stack[cursorIndex];
+  var update = {};
   if (state) {
     switch (state.action) {
       case 'insert':
@@ -108,11 +112,13 @@ exports.forward = function forward() {
         });
         break;
       case 'update':
+        update[state.field] = JSON.parse(state.value);
+
         $db[state.collection].update(
           {
             _id: state.id
           },
-          JSON.parse(state.value)
+          update
         );
         break;
       default:
@@ -133,7 +139,7 @@ exports.get = function get(index) {
   if (index === -1) {
     result = stack[stack.length - 1];
   } else {
-    cursorIndex = stack[index];
+    result = stack[index];
   }
   return result;
 };

@@ -130,6 +130,7 @@ function _Array(conf) {
     var i = 0;
     var length = 0;
     var del = [];
+    var oldValue = JSON.stringify(arrDb);
 
     if (!isReadOnly) {
       if (isClassName) {
@@ -155,6 +156,17 @@ function _Array(conf) {
               break;
             default:
               break;
+          }
+
+          if (classId.indexOf('_') !== 0) {
+            $history.pushState({
+              action: 'update',
+              collection: classId,
+              id: id,
+              field: propertyName,
+              value: JSON.stringify(arrDb),
+              oldValue: oldValue
+            });
           }
 
           if ($helper.isRuntime()) {
@@ -193,6 +205,17 @@ function _Array(conf) {
               break;
           }
 
+          if (classId.indexOf('_') !== 0) {
+            $history.pushState({
+              action: 'update',
+              collection: classId,
+              id: id,
+              field: propertyName,
+              value: JSON.stringify(arrDb),
+              oldValue: oldValue
+            });
+          }
+
           if ($helper.isRuntime()) {
             $helper
               .getRuntime()
@@ -229,6 +252,7 @@ function _Array(conf) {
   function _remove(action) {
     var result;
     var val = null;
+    var oldValue = JSON.stringify(arrDb);
 
     if (!isReadOnly) {
       if (arrDb.length !== 0) {
@@ -241,6 +265,17 @@ function _Array(conf) {
             break;
           default:
             break;
+        }
+
+        if (classId.indexOf('_') !== 0) {
+          $history.pushState({
+            action: 'update',
+            collection: classId,
+            id: id,
+            field: propertyName,
+            value: JSON.stringify(arrDb),
+            oldValue: oldValue
+          });
         }
 
         if ($helper.isRuntime()) {
@@ -359,7 +394,19 @@ function _Array(conf) {
    * @description Override sort method
    */
   arr.sort = function sort(funct) {
+    var oldValue = JSON.stringify(oldValue);
     arrDb.sort(funct);
+
+    if (classId.indexOf('_') !== 0) {
+      $history.pushState({
+        action: 'update',
+        collection: classId,
+        id: id,
+        field: propertyName,
+        value: JSON.stringify(arrDb),
+        oldValue: oldValue
+      });
+    }
 
     if ($helper.isRuntime()) {
       $helper
@@ -384,7 +431,19 @@ function _Array(conf) {
    * @description Override reverse method
    */
   arr.reverse = function reverse() {
+    var oldValue = JSON.stringify(oldValue);
     arrDb.reverse();
+
+    if (classId.indexOf('_') !== 0) {
+      $history.pushState({
+        action: 'update',
+        collection: classId,
+        id: id,
+        field: propertyName,
+        value: JSON.stringify(arrDb),
+        oldValue: oldValue
+      });
+    }
 
     if ($helper.isRuntime()) {
       $helper
@@ -409,6 +468,7 @@ function _Array(conf) {
    * @description Override splice method
    */
   arr.splice = function splice(start, deleteCount, val) {
+    var oldValue = JSON.stringify(oldValue);
     var result = [];
     var i = 0;
     var length = 0;
@@ -418,6 +478,17 @@ function _Array(conf) {
       _add(val, 'splice', start, deleteCount);
     } else {
       result = arrDb.splice(start, deleteCount);
+
+      if (classId.indexOf('_') !== 0) {
+        $history.pushState({
+          action: 'update',
+          collection: classId,
+          id: id,
+          field: propertyName,
+          value: JSON.stringify(arrDb),
+          oldValue: oldValue
+        });
+      }
 
       if ($helper.isRuntime()) {
         $helper
@@ -860,6 +931,7 @@ function addProperties(model, Class, classId) {
         var runtimeArr = null;
         var val = null;
         var realVal = null;
+        var oldValue = null;
 
         if (typeof value === 'undefined') {
           if (typeof position === 'undefined') {
@@ -898,7 +970,20 @@ function addProperties(model, Class, classId) {
                     data: [position, 'reset']
                   });
 
+                  oldValue = JSON.stringify(component[propertyName]);
+
                   component[propertyName] = realVal;
+
+                  if (classId.indexOf('_') !== 0) {
+                    $history.pushState({
+                      action: 'update',
+                      collection: classId,
+                      id: this.id(),
+                      field: propertyName,
+                      value: JSON.stringify(component[propertyName]),
+                      oldValue: oldValue
+                    });
+                  }
 
                   if ($helper.isRuntime()) {
                     $helper
@@ -1019,6 +1104,19 @@ function addProperties(model, Class, classId) {
                 component = search[0];
                 component[propertyName][position] = realVal;
 
+                oldValue = JSON.stringify(component[propertyName]);
+
+                if (classId.indexOf('_') !== 0) {
+                  $history.pushState({
+                    action: 'update',
+                    collection: classId,
+                    id: this.id(),
+                    field: propertyName,
+                    value: JSON.stringify(component[propertyName]),
+                    oldValue: oldValue
+                  });
+                }
+
                 if ($helper.isRuntime()) {
                   $helper
                     .getRuntime()
@@ -1060,6 +1158,7 @@ function addProperties(model, Class, classId) {
         var search = [];
         var component = null;
         var propertyValue = null;
+        var oldValue = null;
 
         if (typeof value === 'undefined') {
           component = $db.store[classId][this.id()];
@@ -1115,6 +1214,7 @@ function addProperties(model, Class, classId) {
               });
               if (search.length) {
                 component = search[0];
+                oldValue = JSON.stringify(component[propertyName]);
 
                 switch (true) {
                   case $metamodel.isClassName(propertyType):
@@ -1134,6 +1234,17 @@ function addProperties(model, Class, classId) {
                   default:
                     component[propertyName] = value;
                     break;
+                }
+
+                if (classId.indexOf('_') !== 0) {
+                  $history.pushState({
+                    action: 'update',
+                    collection: classId,
+                    id: this.id(),
+                    field: propertyName,
+                    value: JSON.stringify(component[propertyName]),
+                    oldValue: oldValue
+                  });
                 }
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
@@ -1221,6 +1332,7 @@ function addStructure(path, name, model, id) {
           var val = null;
           var parentPath = '';
           var fullPath = '';
+          var oldValue = null;
 
           function _isValidCollection(coll, type) {
             var result = true;
@@ -1266,6 +1378,7 @@ function addStructure(path, name, model, id) {
                     _id: id
                   });
                   if (search.length) {
+                    oldValue = getStructureValue(model, id, fullPath);
                     setStructureValue(model, id, fullPath, position);
 
                     // all element
@@ -1283,6 +1396,17 @@ function addStructure(path, name, model, id) {
                       state: fullPath,
                       data: [position, 'reset']
                     });
+
+                    if (model.indexOf('_') !== 0) {
+                      $history.pushState({
+                        action: 'update',
+                        collection: model,
+                        id: id,
+                        field: fullPath,
+                        value: JSON.stringify([]),
+                        oldValue: JSON.stringify(oldValue)
+                      });
+                    }
 
                     if ($helper.isRuntime()) {
                       $helper
@@ -1419,7 +1543,19 @@ function addStructure(path, name, model, id) {
                       break;
                   }
 
+                  oldValue = getStructureValue(model, id, fullPath);
                   setStructureValue(model, id, fullPath, arr);
+
+                  if (model.indexOf('_') !== 0) {
+                    $history.pushState({
+                      action: 'update',
+                      collection: model,
+                      id: id,
+                      field: fullPath,
+                      value: JSON.stringify(value),
+                      oldValue: JSON.stringify(oldValue)
+                    });
+                  }
 
                   if ($helper.isRuntime()) {
                     $helper
@@ -1475,6 +1611,7 @@ function addStructure(path, name, model, id) {
           var propertyValue = null;
           var parentPath = '';
           var fullPath = '';
+          var oldValue = null;
 
           if (path) {
             parentPath = path + '.' + name;
@@ -1531,6 +1668,8 @@ function addStructure(path, name, model, id) {
                 if (search.length) {
                   component = search[0];
 
+                  oldValue = getStructureValue(model, id, fullPath);
+
                   switch (true) {
                     case $metamodel.isClassName(propertyType):
                       setStructureValue(model, id, fullPath, value.id());
@@ -1546,6 +1685,17 @@ function addStructure(path, name, model, id) {
                     default:
                       setStructureValue(model, id, fullPath, value);
                       break;
+                  }
+
+                  if (model.indexOf('_') !== 0) {
+                    $history.pushState({
+                      action: 'update',
+                      collection: model,
+                      id: id,
+                      field: fullPath,
+                      value: JSON.stringify(value),
+                      oldValue: JSON.stringify(oldValue)
+                    });
                   }
 
                   if (
