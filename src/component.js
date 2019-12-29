@@ -405,7 +405,7 @@ function _Array(conf) {
     var oldValue = null;
 
     if ($history.isEnabled()) {
-      oldValue = JSON.stringify(oldValue);
+      oldValue = JSON.stringify(arrDb);
     }
 
     arrDb.sort(funct);
@@ -447,7 +447,7 @@ function _Array(conf) {
     var oldValue = null;
 
     if ($history.isEnabled()) {
-      oldValue = JSON.stringify(oldValue);
+      oldValue = JSON.stringify(arrDb);
     }
     arrDb.reverse();
 
@@ -492,7 +492,7 @@ function _Array(conf) {
     var data = null;
 
     if ($history.isEnabled()) {
-      oldValue = JSON.stringify(oldValue);
+      oldValue = JSON.stringify(arrDb);
     }
 
     if (typeof val !== 'undefined') {
