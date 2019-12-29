@@ -6,6 +6,16 @@ describe('System Runtime history component', () => {
     expect = require('chai').expect;
   }
 
+  beforeEach(() => {
+    const history = runtime.require('history');
+    history.start();
+  });
+
+  afterEach(() => {
+    const history = runtime.require('history');
+    history.stop();
+  });
+
   it('exists', () => {
     const history = runtime.require('history');
 

@@ -32,10 +32,34 @@ var $db = require('./db.js');
 
 var stack = [];
 var cursorIndex = -1;
-
-/* Private methods */
+var historizationEnabled = false;
 
 /* Public methods */
+
+/**
+ * @method isEnabled
+ * @returns {Boolean} true if the history is enabled
+ * @description Is historization enabled
+ */
+exports.isEnabled = function isEnabled() {
+  return historizationEnabled;
+};
+
+/**
+ * @method start
+ * @description start historization
+ */
+exports.start = function start() {
+  historizationEnabled = true;
+};
+
+/**
+ * @method stop
+ * @description stop historization
+ */
+exports.stop = function stop() {
+  historizationEnabled = false;
+};
 
 /**
  * @method pushState

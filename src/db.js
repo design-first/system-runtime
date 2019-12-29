@@ -68,7 +68,8 @@ var internalDB = [
   '_System',
   '_Message',
   '_Channel',
-  '_Logger'
+  '_Logger',
+  '_History'
 ];
 var coreDb = [
   '_Schema',
@@ -76,7 +77,8 @@ var coreDb = [
   '_Logger',
   '_Model',
   '_GeneratedModel',
-  '_Type'
+  '_Type',
+  '_History'
 ];
 
 /* Private methods */
@@ -733,7 +735,7 @@ DatabaseCollection.prototype.insert = function insert(document) {
             component = new Component(obj);
             result.push(component.id());
           } else {
-            if (this.name.indexOf('_') !== 0) {
+            if ($history.isEnabled() && this.name.indexOf('_') !== 0) {
               $history.pushState({
                 action: 'insert',
                 collection: this.name,
@@ -853,7 +855,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
             }
             if (type) {
               if ($metamodel.isValidType(update[attributeName], type)) {
-                if (this.name.indexOf('_') !== 0) {
+                if ($history.isEnabled() && this.name.indexOf('_') !== 0) {
                   $history.pushState({
                     action: 'update',
                     collection: this.name,
@@ -909,7 +911,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
             }
           } else {
             // TODO more check in case of schema update
-            if (this.name.indexOf('_') !== 0) {
+            if ($history.isEnabled() && this.name.indexOf('_') !== 0) {
               $history.pushState({
                 action: 'update',
                 collection: this.name,
@@ -970,7 +972,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
             object = exports.store[this.name][id];
 
             if (isValid(criteria, object)) {
-              if (this.name.indexOf('_') !== 0) {
+              if ($history.isEnabled() && this.name.indexOf('_') !== 0) {
                 $history.pushState({
                   action: 'remove',
                   collection: this.name,
@@ -1004,7 +1006,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
         object = exports.store[this.name][id];
 
         if (isValid(query, object)) {
-          if (this.name.indexOf('_') !== 0) {
+          if ($history.isEnabled() && this.name.indexOf('_') !== 0) {
             $history.pushState({
               action: 'remove',
               collection: this.name,
@@ -1034,7 +1036,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
     }
   } else {
     for (id in exports.store[this.name]) {
-      if (this.name.indexOf('_') !== 0) {
+      if ($history.isEnabled() && this.name.indexOf('_') !== 0) {
         $history.pushState({
           action: 'remove',
           collection: this.name,
