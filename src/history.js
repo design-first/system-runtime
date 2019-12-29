@@ -21,12 +21,14 @@
 /**
  * @module history
  * @requires db
+ * @requires log
  * @description This module manages the history of all components lifecycle
  */
 
 'use strict';
 
 var $db = require('./db.js');
+var $log = require('./log.js');
 
 /* Private property */
 
@@ -93,9 +95,15 @@ exports.back = function back() {
         $db[state.collection].remove({
           _id: state.id
         });
+        $log.historyDocumentRemoved(state.id, state.collection);
         break;
       case 'remove':
         $db[state.collection].insert(JSON.parse(state.oldValue));
+        $log.historyDocumentInserted(
+          state.id,
+          state.collection,
+          state.oldValue
+        );
         break;
       case 'update':
         update[state.field] = JSON.parse(state.oldValue);
@@ -105,6 +113,12 @@ exports.back = function back() {
             _id: state.id
           },
           update
+        );
+        $log.historyDocumentUpdated(
+          state.id,
+          state.collection,
+          state.field,
+          state.oldValue
         );
         break;
       default:
@@ -129,11 +143,13 @@ exports.forward = function forward() {
     switch (state.action) {
       case 'insert':
         $db[state.collection].insert(JSON.parse(state.value));
+        $log.historyDocumentInserted(state.id, state.collection, state.value);
         break;
       case 'remove':
         $db[state.collection].remove({
           _id: state.id
         });
+        $log.historyDocumentRemoved(state.id, state.collection);
         break;
       case 'update':
         update[state.field] = JSON.parse(state.value);
@@ -143,6 +159,12 @@ exports.forward = function forward() {
             _id: state.id
           },
           update
+        );
+        $log.historyDocumentUpdated(
+          state.id,
+          state.collection,
+          state.field,
+          state.value
         );
         break;
       default:

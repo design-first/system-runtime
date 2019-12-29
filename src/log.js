@@ -1137,3 +1137,72 @@ exports.unknownContext = function unknownContext(className, methodName) {
       "' without a valid context"
   );
 };
+
+/**
+ * @method historyDocumentInserted
+ * @param {Object} id id of the component
+ * @param {String} collectionName collectionName of the component
+ * @param {String} document
+ * @description Created document from history
+ */
+exports.historyDocumentInserted = function historyDocumentInserted(
+  id,
+  collectionName,
+  doc
+) {
+  getLogger().debug(
+    "Created component of id '" +
+      id +
+      "' (collection '" +
+      collectionName +
+      "') with document '" +
+      doc +
+      "'"
+  );
+};
+
+/**
+ * @method historyDocumentRemoved
+ * @param {Object} id id of the component
+ * @param {String} collectionName collectionName of the component
+ * @description Removed document from history
+ */
+exports.historyDocumentRemoved = function historyDocumentRemoved(
+  id,
+  collectionName
+) {
+  getLogger().debug(
+    "Destroyed component of id '" +
+      id +
+      "' (collection '" +
+      collectionName +
+      "')"
+  );
+};
+
+/**
+ * @method historyDocumentUpdated
+ * @param {Object} id id of the component
+ * @param {String} collectionName collectionName of the component
+ * @param {String} fieldName field name of the component
+ * @param {String} value value of the field
+ * @description Updated document from history
+ */
+exports.historyDocumentUpdated = function historyDocumentRemoved(
+  id,
+  collectionName,
+  fieldName,
+  value
+) {
+  getLogger().debug(
+    "Updated field '" +
+      fieldName +
+      "' of component of id '" +
+      id +
+      "' (collection '" +
+      collectionName +
+      "') with value '" +
+      value +
+      "'"
+  );
+};
