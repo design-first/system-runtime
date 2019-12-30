@@ -209,55 +209,84 @@ exports.from = function from(index) {
  * @description Dump all the history
  */
 exports.dump = function dump() {
-  return JSON.stringify(stack);
+  return JSON.stringify({
+    stack: stack
+  });
 };
 
 /**
  * @method load
- * @param {Object} dump dump of an history to load
+ * @param {Object|String} dump dump of an history to load
  * @returns {Boolean} true if the dump was loaded with no error
  * @description Load a dump of an history
  */
 exports.load = function load(dump) {
-  var newDump = JSON.parse(dump);
   var noError = true;
 
-  newDump.forEach(function(state) {
-    if (state) {
-      switch (state.action) {
-        case 'insert':
-          if ($db[state.collection]) {
-            $db[state.collection].insert(JSON.parse(state.value));
-          } else {
-            noError = false;
-          }
-          break;
-        case 'remove':
-          if ($db[state.collection]) {
-            $db[state.collection].remove({
-              _id: state.id
-            });
-          } else {
-            noError = false;
-          }
-          break;
-        case 'update':
-          if ($db[state.collection]) {
-            $db[state.collection].update(
-              {
-                _id: state.id
-              },
-              JSON.parse(state.value)
-            );
-          } else {
-            noError = false;
-          }
-          break;
-        default:
-          break;
-      }
+  try {
+    var newStack = {};
+    var update = {};
+
+    if (typeof dump === 'string') {
+      newStack = JSON.parse(dump).stack;
+    } else {
+      newStack = dump.stack;
     }
-  });
+
+    newStack.forEach(function(state) {
+      if (state) {
+        switch (state.action) {
+          case 'insert':
+            if ($db[state.collection]) {
+              $db[state.collection].insert(JSON.parse(state.value));
+              $log.historyDocumentInserted(
+                state.id,
+                state.collection,
+                state.value
+              );
+            } else {
+              noError = false;
+            }
+            break;
+          case 'remove':
+            if ($db[state.collection]) {
+              $db[state.collection].remove({
+                _id: state.id
+              });
+              $log.historyDocumentRemoved(state.id, state.collection);
+            } else {
+              noError = false;
+            }
+            break;
+          case 'update':
+            if ($db[state.collection]) {
+              update[state.field] = JSON.parse(state.value);
+
+              $db[state.collection].update(
+                {
+                  _id: state.id
+                },
+                update
+              );
+
+              $log.historyDocumentUpdated(
+                state.id,
+                state.collection,
+                state.field,
+                state.value
+              );
+            } else {
+              noError = false;
+            }
+            break;
+          default:
+            break;
+        }
+      }
+    });
+  } catch (e) {
+    noError = false;
+  }
 
   return noError;
 };
