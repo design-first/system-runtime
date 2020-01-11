@@ -1199,10 +1199,61 @@ exports.historyDocumentUpdated = function historyDocumentRemoved(
       fieldName +
       "' of component of id '" +
       id +
+      "' with value '" +
+      value +
       "' (collection '" +
       collectionName +
-      "') with value '" +
+      "')"
+  );
+};
+
+/**
+ * @method documentRemoved
+ * @param {String} id id of the document
+ * @param {String} collection name of the collection
+ * @description A document from a collection was removed
+ */
+exports.documentRemoved = function documentRemoved(id, collection) {
+  getLogger().debug(
+    "the document '" + id + "' was removed (collection '" + collection + "')"
+  );
+};
+
+/**
+ * @method documentInserted
+ * @param {String} id id of the document
+ * @param {String} collection name of the collection
+ * @description A document was inserted into a collection
+ */
+exports.documentInserted = function documentInserted(id, collection) {
+  getLogger().debug(
+    "the document '" + id + "' was inserted (collection '" + collection + "')"
+  );
+};
+
+/**
+ * @method documentUpdated
+ * @param {String} id id of the document
+ * @param {String} collection name of the collection
+ * @param {String} property property of the document
+ * @param {String} value new value of the property
+ * @description A document was updated
+ */
+exports.documentUpdated = function documentUpdated(
+  id,
+  collection,
+  property,
+  value
+) {
+  getLogger().debug(
+    "the property '" +
+      property +
+      "' of the document '" +
+      id +
+      "' was updated with the value '" +
       value +
-      "'"
+      "' (collection '" +
+      collection +
+      "')"
   );
 };

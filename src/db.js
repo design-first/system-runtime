@@ -729,11 +729,13 @@ DatabaseCollection.prototype.insert = function insert(document) {
           $metamodel.prepareObject(obj, $metamodel.getModel(this.name));
 
           exports.store[this.name][obj[$mson.ID]] = obj;
+          result.push(obj[$mson.ID]);
+
+          $log.documentInserted(obj[$mson.ID], this.name);
 
           Component = $component.get(this.name);
           if (Component) {
             component = new Component(obj);
-            result.push(component.id());
           } else {
             if ($history.isEnabled() && this.name.indexOf('_') !== 0) {
               $history.pushState({
@@ -787,7 +789,7 @@ DatabaseCollection.prototype.insert = function insert(document) {
  * @param {Object} update update to make
  * @param {Object} options
  * {Boolean} upsert true if we create a document when no document is found by the query
- * @returns {Number} Number of documents updated
+ * @returns {Array} array of id of updated documents
  * @description Update documents into a collection
  *
  * @example
@@ -797,12 +799,13 @@ DatabaseCollection.prototype.insert = function insert(document) {
  */
 DatabaseCollection.prototype.update = function update(query, update, options) {
   var docs = this.find(query);
-  var updated = 0;
+  var result = [];
   var i = 0;
   var length = docs.length;
   var attributeName = '';
   var schema = $metamodel.getModel(this.name);
   var type = '';
+  var createdDocumentId = [];
 
   options = options || {};
   if (typeof options.upsert === 'undefined') {
@@ -815,8 +818,10 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
       if (query[$mson.ID]) {
         update[$mson.ID] = query[$mson.ID];
       }
-      this.insert(update);
-      updated = updated + 1;
+      createdDocumentId = this.insert(update);
+      if (createdDocumentId.length === 1) {
+        result.push(createdDocumentId[0]);
+      }
     }
 
     for (i = 0; i < length; i++) {
@@ -867,7 +872,14 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                 }
 
                 docs[i][attributeName] = update[attributeName];
-                updated = updated + 1;
+
+                $log.documentUpdated(
+                  docs[i][$mson.ID],
+                  this.name,
+                  attributeName,
+                  update[attributeName]
+                );
+                result.push(docs[i][$mson.ID]);
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                   $helper
@@ -924,7 +936,14 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
 
             docs[i][attributeName] = update[attributeName];
 
-            updated = updated + 1;
+            $log.documentUpdated(
+              docs[i][$mson.ID],
+              this.name,
+              attributeName,
+              update[attributeName]
+            );
+            result.push(docs[i][$mson.ID]);
+
             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
               $helper
                 .getRuntime()
@@ -942,7 +961,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
     }
   }
 
-  return updated;
+  return result;
 };
 
 /**
@@ -983,6 +1002,9 @@ DatabaseCollection.prototype.remove = function remove(query) {
 
               delete exports.store[this.name][id];
 
+              $log.documentRemoved(id, this.name);
+              result.push(id);
+
               component = $component.get(id);
               if (component) {
                 component.destroy();
@@ -996,7 +1018,6 @@ DatabaseCollection.prototype.remove = function remove(query) {
                     id: id
                   });
               }
-              result.push(id);
             }
           }
         }.bind(this)
@@ -1017,6 +1038,9 @@ DatabaseCollection.prototype.remove = function remove(query) {
 
           delete exports.store[this.name][id];
 
+          $log.documentRemoved(id, this.name);
+          result.push(id);
+
           component = $component.get(id);
           if (component) {
             component.destroy();
@@ -1030,7 +1054,6 @@ DatabaseCollection.prototype.remove = function remove(query) {
                 id: id
               });
           }
-          result.push(id);
         }
       }
     }
@@ -1046,6 +1069,8 @@ DatabaseCollection.prototype.remove = function remove(query) {
       }
 
       delete exports.store[this.name][id];
+
+      $log.documentRemoved(id, this.name);
 
       if (coreDb.indexOf(this.name) === -1) {
         component = $component.get(id);

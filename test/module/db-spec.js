@@ -150,10 +150,13 @@ describe('System Runtime db component', () => {
   });
 
   it('can add a document', () => {
-    db._Runtime.insert({
+    const docAdded = db._Runtime.insert({
       '_id': 'runtime1',
       'version': '0.0.0'
     });
+
+    expect(docAdded[0]).equal('runtime1');
+
     const result = db._Runtime.find({
       '_id': 'runtime1'
     });
@@ -177,11 +180,14 @@ describe('System Runtime db component', () => {
   });
 
   it('can update a document', () => {
-    db._Runtime.update({
+    const updatedDoc = db._Runtime.update({
       '_id': 'runtime1'
     }, {
-        'version': '0.0.4'
-      });
+      'version': '0.0.4'
+    });
+
+    expect(updatedDoc[0]).equal('runtime1');
+
     const result = db._Runtime.find({
       '_id': 'runtime1'
     })[0];
@@ -190,13 +196,18 @@ describe('System Runtime db component', () => {
   });
 
   it('can update many documents', () => {
-    db._Runtime.update([{
+    const updatedDoc = db._Runtime.update([{
       '_id': 'runtime2'
     }, {
       '_id': 'runtime3'
     }], {
-        'version': '0.0.4'
-      });
+      'version': '0.0.4'
+    });
+
+    expect(updatedDoc.length).equal(2);
+    expect(updatedDoc[0]).equal('runtime2');
+    expect(updatedDoc[1]).equal('runtime3');
+
     const result = db._Runtime.find({
       '_id': 'runtime3'
     })[0];
@@ -208,10 +219,10 @@ describe('System Runtime db component', () => {
     db._Runtime.update({
       '_id': 'runtime5'
     }, {
-        'version': '0.0.1'
-      }, {
-        'upsert': true
-      });
+      'version': '0.0.1'
+    }, {
+      'upsert': true
+    });
     const result = db._Runtime.find({
       '_id': 'runtime5'
     });
@@ -225,9 +236,13 @@ describe('System Runtime db component', () => {
       '_id': runtimeid,
       'version': '0.0.0'
     });
-    db._Runtime.remove({
+
+    const removedDocument = db._Runtime.remove({
       '_id': runtimeid
     });
+
+    expect(removedDocument[0]).equal(runtimeid);
+
     const result = db._Runtime.find({
       '_id': runtimeid
     });
@@ -246,11 +261,16 @@ describe('System Runtime db component', () => {
       '_id': runtimeid2,
       'version': '0.0.0'
     }]);
-    db._Runtime.remove([{
+    const removedDocument = db._Runtime.remove([{
       '_id': runtimeid1
     }, {
       '_id': runtimeid2
     }]);
+
+    expect(removedDocument.length).equal(2);
+    expect(removedDocument[0]).equal(runtimeid1);
+    expect(removedDocument[1]).equal(runtimeid2);
+
     const result1 = db._Runtime.find({
       '_id': runtimeid1
     });
