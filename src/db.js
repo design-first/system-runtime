@@ -729,9 +729,8 @@ DatabaseCollection.prototype.insert = function insert(document) {
           $metamodel.prepareObject(obj, $metamodel.getModel(this.name));
 
           exports.store[this.name][obj[$mson.ID]] = obj;
-          result.push(obj[$mson.ID]);
 
-          $log.documentInserted(obj[$mson.ID], this.name);
+          result.push(obj[$mson.ID]);
 
           Component = $component.get(this.name);
           if (Component) {
@@ -873,12 +872,6 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
 
                 docs[i][attributeName] = update[attributeName];
 
-                $log.documentUpdated(
-                  docs[i][$mson.ID],
-                  this.name,
-                  attributeName,
-                  update[attributeName]
-                );
                 result.push(docs[i][$mson.ID]);
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
@@ -936,12 +929,6 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
 
             docs[i][attributeName] = update[attributeName];
 
-            $log.documentUpdated(
-              docs[i][$mson.ID],
-              this.name,
-              attributeName,
-              update[attributeName]
-            );
             result.push(docs[i][$mson.ID]);
 
             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
@@ -1002,7 +989,6 @@ DatabaseCollection.prototype.remove = function remove(query) {
 
               delete exports.store[this.name][id];
 
-              $log.documentRemoved(id, this.name);
               result.push(id);
 
               component = $component.get(id);
@@ -1038,7 +1024,6 @@ DatabaseCollection.prototype.remove = function remove(query) {
 
           delete exports.store[this.name][id];
 
-          $log.documentRemoved(id, this.name);
           result.push(id);
 
           component = $component.get(id);
@@ -1069,8 +1054,6 @@ DatabaseCollection.prototype.remove = function remove(query) {
       }
 
       delete exports.store[this.name][id];
-
-      $log.documentRemoved(id, this.name);
 
       if (coreDb.indexOf(this.name) === -1) {
         component = $component.get(id);

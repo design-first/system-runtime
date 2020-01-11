@@ -150,7 +150,15 @@ describe('System Runtime db component', () => {
   });
 
   it('can add a document', () => {
-    const docAdded = db._Runtime.insert({
+    let docAdded = db._Runtime.insert({
+      '_id': 'runtime1',
+      'version': '0.0.0'
+    });
+
+    expect(docAdded[0]).equal('runtime1');
+
+    // try to insert the same document
+    docAdded = db._Runtime.insert({
       '_id': 'runtime1',
       'version': '0.0.0'
     });
