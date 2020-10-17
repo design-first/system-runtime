@@ -67,15 +67,15 @@
     "grunt-mocha-istanbul": "5.0.2",
     "husky": "4.3.0",
     "istanbul": "0.4.5",
-    "karma": "5.1.1",
+    "karma": "5.2.3",
     "karma-chai": "0.1.0",
     "karma-chrome-launcher": "3.1.0",
     "karma-coverage": "2.0.3",
     "karma-mocha": "2.0.1",
     "karma-script-launcher": "1.0.0",
-    "lint-staged": "10.4.0",
+    "lint-staged": "10.4.2",
     "load-grunt-tasks": "5.1.0",
-    "mocha": "8.1.3",
+    "mocha": "8.2.0",
     "prettier": "2.1.2"
   }
 }
