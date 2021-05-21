@@ -90,9 +90,57 @@ const runtime = require('system-runtime');
 runtime.install('system.json');
 ```
 
+## How System runtime help you to create your system
+
+#### Create your system
+
+Creating a system in System Runtime is very simple, you do not have to code but just to define its model in a human readable format called [MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-model.html#defining-your-model).
+
+With [MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-model.html#defining-your-model) you can define types, classes, one to one / one to many relationships and multi inheritance between classes.
+
+```json
+{
+    "firstName": "property",
+    "lastName": "property",
+    "nickname": "property",
+    "father": "link",
+    "fullName": "method"
+} 
+```
+
+#### Create your components
+
+Once your model is created, you will be able to get the classes of your model and create components based on your model.
+
+Because you have defined a model for your system, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your system.
+
+```js
+// get your component class
+const Jedi = runtime.require('Jedi');
+
+// create components
+const luke = new Jedi({
+  'firstName': 'Luke',
+  'lastName': 'Skywalker'
+});
+
+const anakin = new Jedi({
+  'firstName': 'Anakin',
+  'lastName': 'Skywalker'
+});
+
+// add a link
+luke.father(anakin);
+
+// get the first name of luke father
+luke.father().firstName();
+```
+
 #### Manage your components 
 
-Find, create, update, delete components like you do in a NoSQL Database:
+All your components are stored in System Runtime NoSQL Database. In fact, System Runtime acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents.
+
+You can find, create, update, delete components like you do in a NoSQL Database.
 
 ```js
 // get a collection
