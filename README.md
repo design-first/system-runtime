@@ -150,8 +150,7 @@ You can find, create, update, delete components like you do in a NoSQL Database.
 ```js
 // get a collection
 const Jedi = runtime.require('db')
-                    .collections()
-                    .Jedi;
+.collections().Jedi;
 
 // find components
 Jedi.find({
