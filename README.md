@@ -102,7 +102,7 @@ With [MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-
 const metamodel = runtime.require('metamodel');
 
 // create the Jedi schema
-metamodel.schema( 'Jedi', {
+metamodel.schema('Jedi', {
   'firstName': 'property',
   'lastName': 'property',
   'nickname': 'property',
