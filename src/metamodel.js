@@ -1869,8 +1869,12 @@ exports.isValidType = function isValidType(value, typeName) {
       }
       break;
     case exports.isClassName(typeName):
-      if (value !== '' && value !== null && typeof value !== 'string') {
+      if (value !== null && typeof value !== 'string') {
         result = exports.inheritFrom(getClassName(value), typeName);
+      } else {
+        if (value !== null) {
+          result = false;
+        }
       }
       break;
     default:
