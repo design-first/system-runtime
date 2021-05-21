@@ -95,10 +95,10 @@ runtime.install('system.json');
 Find, create, update, delete components like you do in a NoSQL Database:
 
 ```js
-const Jedi = runtime
-              .require('db')
-              .collections()
-              .Jedi;
+// get a collection
+const Jedi = runtime.require('db')
+                    .collections()
+                    .Jedi;
 
 // find components
 Jedi.find({
