@@ -90,6 +90,36 @@ const runtime = require('system-runtime');
 runtime.install('system.json');
 ```
 
+#### Manage your components 
+
+All your components are stored in System Runtime NoSQL Database. In fact, System Runtime acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents.
+
+You can find, create, update, delete components like you do in a NoSQL Database.
+
+```js
+const Jedi = runtime
+              .require('db')
+              .collections()
+              .Jedi;
+
+// find components
+Jedi.find({
+  'firstName': 'Luke'
+});
+
+// update components
+Jedi.update({
+  'firstName': 'Anakin'
+},{
+  'nickname': 'Darth Vader'
+});
+
+// remove components
+Jedi.remove({
+  'firstName': 'Anakin'
+});;
+```
+
 ## What contains System Runtime ?
 
 ![Image Alt](https://designfirst.io/img/archi.png)
