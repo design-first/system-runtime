@@ -90,7 +90,7 @@ const runtime = require('system-runtime');
 runtime.install('system.json');
 ```
 
-## How System runtime help you to create your system
+## How System runtime helps you to create your system
 
 #### Create your system
 
@@ -98,14 +98,19 @@ Creating a system in System Runtime is very simple, you do not have to code but 
 
 With [MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-model.html#defining-your-model) you can define types, classes, one to one / one to many relationships and multi inheritance between classes.
 
-```json
-{
-    "firstName": "property",
-    "lastName": "property",
-    "nickname": "property",
-    "father": "link",
-    "fullName": "method"
-} 
+```js
+const metamodel = runtime.require('metamodel');
+
+// create the Jedi schema
+metamodel.schema( 'Jedi', {
+  'firstName': 'property',
+  'lastName': 'property',
+  'nickname': 'property',
+  'father': 'link',
+  'shout': 'method'
+});
+
+metamodel.create();
 ```
 
 #### Create your components
