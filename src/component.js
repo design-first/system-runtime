@@ -1184,6 +1184,7 @@ function addProperties(model, Class, classId) {
         var component = null;
         var propertyValue = null;
         var oldValue = null;
+        var realVal = null;
 
         if (typeof value === 'undefined') {
           component = $db.store[classId][this.id()];
@@ -1247,22 +1248,25 @@ function addProperties(model, Class, classId) {
                 switch (true) {
                   case $metamodel.isClassName(propertyType):
                     if (value === null) {
-                      component[propertyName] = value;
+                      realVal = value;
                     } else {
-                      component[propertyName] = value.id();
+                      realVal = value.id();
                     }
                     break;
                   case propertyType === 'date':
                     if (typeof value === 'string') {
-                      component[propertyName] = value;
+                      realVal = value;
                     } else {
+                      realVal = value.toISOString();
                       component[propertyName] = value.toISOString();
                     }
                     break;
                   default:
-                    component[propertyName] = value;
+                    realVal = value;
                     break;
                 }
+
+                component[propertyName] = realVal;
 
                 if ($history.isEnabled() && classId.indexOf('_') !== 0) {
                   $history.pushState({
@@ -1270,7 +1274,7 @@ function addProperties(model, Class, classId) {
                     collection: classId,
                     id: this.id(),
                     field: propertyName,
-                    value: JSON.stringify(component[propertyName]),
+                    value: JSON.stringify(realVal),
                     oldValue: oldValue
                   });
                 }
@@ -1283,7 +1287,7 @@ function addProperties(model, Class, classId) {
                       collection: classId,
                       id: this.id(),
                       field: propertyName,
-                      value: value
+                      value: realVal
                     });
                 }
 
@@ -1646,6 +1650,7 @@ function addStructure(path, name, model, id) {
           var parentPath = '';
           var fullPath = '';
           var oldValue = null;
+          var realVal = null;
 
           if (path) {
             parentPath = path + '.' + name;
@@ -1708,20 +1713,17 @@ function addStructure(path, name, model, id) {
 
                   switch (true) {
                     case $metamodel.isClassName(propertyType):
-                      setStructureValue(model, id, fullPath, value.id());
+                      realVal = value.id();
                       break;
                     case propertyType === 'date':
-                      setStructureValue(
-                        model,
-                        id,
-                        fullPath,
-                        value.toISOString()
-                      );
+                      realVal = value.toISOString();
                       break;
                     default:
-                      setStructureValue(model, id, fullPath, value);
+                      realVal = value;
                       break;
                   }
+
+                  setStructureValue(model, id, fullPath, realVal);
 
                   if ($history.isEnabled() && model.indexOf('_') !== 0) {
                     $history.pushState({
@@ -1729,7 +1731,7 @@ function addStructure(path, name, model, id) {
                       collection: model,
                       id: id,
                       field: fullPath,
-                      value: JSON.stringify(value),
+                      value: JSON.stringify(realVal),
                       oldValue: JSON.stringify(oldValue)
                     });
                   }
@@ -1745,7 +1747,7 @@ function addStructure(path, name, model, id) {
                         collection: model,
                         id: id,
                         field: fullPath,
-                        value: value
+                        value: realVal
                       });
                   }
 
