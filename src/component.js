@@ -917,7 +917,7 @@ function addProperties(model, Class, classId) {
         }
       });
 
-      return true;
+      return result;
     }
 
     function _getRealCollection(coll, type) {
@@ -1021,7 +1021,7 @@ function addProperties(model, Class, classId) {
                   }
                 }
               } else {
-                $log.invalidPropertyName(
+                $log.invalidCollectionItem(
                   this.id(),
                   this.constructor.name,
                   propertyName,

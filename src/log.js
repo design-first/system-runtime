@@ -1205,3 +1205,34 @@ exports.historyDocumentUpdated = function historyDocumentRemoved(
       " collection)"
   );
 };
+
+/**
+ * @method invalidCollectionItem
+ * @param {String} componentId id of the component
+ * @param {String} type the type defined by the schema
+ * @param {String} constructorName name of the component class
+ * @description Invalid class name for a component
+ */
+exports.invalidCollectionItem = function invalidCollectionItem(
+  id,
+  className,
+  propertyName,
+  propertyValue,
+  type
+) {
+  var classInfo = '';
+
+  if (className !== 'Function') {
+    classInfo = " (" + className + " class)";
+  }
+
+  getLogger().warn(
+    "invalid property '" + propertyName + "' on component '" +
+    id +
+    "'" +
+    classInfo +
+    ": expected type '" +
+      type
+      + "' for all items of the collection '[" + propertyValue + "']"
+  );
+};

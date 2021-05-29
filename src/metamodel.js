@@ -1828,15 +1828,19 @@ exports.isValidType = function isValidType(value, typeName, isDocument) {
                 isValid = checkCustomSchema(value[i], typeName[0]);
                 break;
               case exports.isClassName(typeName[0]):
-                if (
-                  value[i] !== '' &&
-                  value[i] !== null &&
-                  typeof value[i] !== 'string'
-                ) {
-                  isValid = exports.inheritFrom(
-                    getClassName(value[i]),
-                    typeName[0]
-                  );
+                if (!isDocument) {
+                  if (
+                    value[i] !== '' &&
+                    value[i] !== null &&
+                    typeof value[i] !== 'string'
+                  ) {
+                    isValid = exports.inheritFrom(
+                      getClassName(value[i]),
+                      typeName[0]
+                    );
+                  }
+                } else {
+                  isValid = false;
                 }
                 break;
               default:
