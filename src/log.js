@@ -1227,7 +1227,7 @@ exports.invalidCollectionItem = function invalidCollectionItem(
   }
 
   getLogger().warn(
-    "invalid property '" + propertyName + "' on component '" +
+    "invalid value for property '" + propertyName + "' on component '" +
     id +
     "'" +
     classInfo +
