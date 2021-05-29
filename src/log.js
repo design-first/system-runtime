@@ -1233,6 +1233,6 @@ exports.invalidCollectionItem = function invalidCollectionItem(
     classInfo +
     ": expected type '" +
       type
-      + "' for all items of the collection '[" + propertyValue + "']"
+      + "' for all items of the collection '" + JSON.stringify(propertyValue) + "'"
   );
 };
