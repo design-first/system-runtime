@@ -371,9 +371,9 @@ exports.invalidDocumentOnDbInsert = function invalidDocumentOnDbInsert(
   getLogger().warn(
     "invalid document '" +
       JSON.stringify(doc).replace(/,/g, ', ') +
-      "' (collection '" +
+      "' (" +
       collectionName +
-      "' )"
+      " collection)"
   );
 };
 
@@ -398,9 +398,9 @@ exports.invalidPropertyTypeOnDbUpdate = function invalidPropertyTypeOnDbUpdate(
       propertyName +
       "' of the document '" +
       id +
-      "' (collection '" +
+      "' (" +
       collectionName +
-      "') with the value '" +
+      " collection) with the value '" +
       JSON.stringify(propertyValue) +
       "': expected type '" +
       type +
@@ -425,9 +425,9 @@ exports.unknownPropertyOnDbUpdate = function unknownPropertyOnDbUpdate(
       propertyName +
       "' for document '" +
       id +
-      "' (collection '" +
+      "' (" +
       collectionName +
-      "' )"
+      " collection)"
   );
 };
 
@@ -1153,9 +1153,9 @@ exports.historyDocumentInserted = function historyDocumentInserted(
   getLogger().debug(
     "Created component of id '" +
       id +
-      "' (collection '" +
+      "' ('" +
       collectionName +
-      "') with document '" +
+      " collection) with document '" +
       doc +
       "'"
   );
@@ -1174,9 +1174,9 @@ exports.historyDocumentRemoved = function historyDocumentRemoved(
   getLogger().debug(
     "Destroyed component of id '" +
       id +
-      "' (collection '" +
+      "' (" +
       collectionName +
-      "')"
+      " collection)"
   );
 };
 
@@ -1201,8 +1201,8 @@ exports.historyDocumentUpdated = function historyDocumentRemoved(
       id +
       "' with value '" +
       value +
-      "' (collection '" +
+      "' (" +
       collectionName +
-      "')"
+      " collection)"
   );
 };
