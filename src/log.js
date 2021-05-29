@@ -294,7 +294,7 @@ exports.invalidPropertyName = function invalidPropertyName(
   var realType = '';
 
   if (className !== 'Function') {
-    classInfo = " (class '" + className + "')";
+    classInfo = " (" + className + " class)";
   }
 
   if (typeof type === 'string') {
@@ -346,7 +346,7 @@ exports.readOnlyProperty = function readOnlyProperty(
   var classInfo = '';
 
   if (className !== 'Function') {
-    classInfo = " (class '" + className + "')";
+    classInfo = " (" + className + " class)";
   }
   getLogger().warn(
     "can not set read-only property '" +
@@ -481,7 +481,7 @@ exports.invalidResultType = function invalidResultType(
   var classInfo = '';
 
   if (className !== 'Function') {
-    classInfo = " (class '" + className + "')";
+    classInfo = " (" + className + " class)";
   }
 
   getLogger().warn(
@@ -526,7 +526,7 @@ exports.invalidParamNumber = function invalidParamNumber(
   var classInfo = '';
 
   if (className !== 'Function') {
-    classInfo = " (class '" + className + "')";
+    classInfo = " (" + className + " class)";
   }
 
   getLogger().warn(
@@ -556,7 +556,7 @@ exports.invalidParamType = function invalidParamType(
   var classInfo = '';
 
   if (className !== 'Function') {
-    classInfo = " (class '" + className + "')";
+    classInfo = " (" + className + " class)";
   }
   if (paramName !== undefined) {
     getLogger().warn(
@@ -746,7 +746,7 @@ exports.invalidParamNumberMethodOn = function invalidParamNumberMethodOn(
   var classInfo = '';
 
   if (className !== 'Function') {
-    classInfo = " (class '" + className + "')";
+    classInfo = " (" + className + " class)";
   }
   getLogger().warn(
     "invalid number of parameters when adding an action for the state '" +
@@ -1045,9 +1045,8 @@ exports.actionInvokeError = function actionInvokeError(
         state +
         "' on component '" +
         id +
-        "' (class '" +
-        className +
-        "'): " +
+        "' (" + className +
+        " class): " +
         message
     );
   } else {

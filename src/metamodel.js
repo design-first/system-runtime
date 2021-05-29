@@ -1769,12 +1769,13 @@ exports.isValidState = function isValidState(name, id) {
 
 /**
  * @method isValidType
- * @param {Object} object object to validate
+ * @param {Object} value value to validate
  * @param {String} type type to use for validation
+ * @param {Boolean} isDocument is the value from a document
  * @returns {Boolean} true if the object is compliant with the type
  * @description Check if a value is compliant with a type
  */
-exports.isValidType = function isValidType(value, typeName) {
+exports.isValidType = function isValidType(value, typeName, isDocument) {
   var result = true;
 
   /**
@@ -1802,11 +1803,12 @@ exports.isValidType = function isValidType(value, typeName) {
    * @method _isValidType
    * @param {String} value
    * @param {String} typeName
+   * @param {Boolean} isDocument is the value to validate from a document
    * @returns {Boolean} the object is compliant with the type
    * @private
    * @description Check if an object is compliant with a type
    */
-  function _isValidType(value, typeName) {
+  function _isValidType(value, typeName, isDocument) {
     var isValid = true;
     var realType = '';
     var i = 0;
@@ -1869,16 +1871,18 @@ exports.isValidType = function isValidType(value, typeName) {
       }
       break;
     case exports.isClassName(typeName):
-      if (value !== null && typeof value !== 'string') {
-        result = exports.inheritFrom(getClassName(value), typeName);
-      } else {
-        if (value !== null) {
-          result = false;
+      if (!isDocument) {
+        if (value !== null && typeof value !== 'string') {
+          result = exports.inheritFrom(getClassName(value), typeName);
+        } else {
+          if (value !== null) {
+            result = false;
+          }
         }
       }
       break;
     default:
-      result = _isValidType(value, typeName);
+      result = _isValidType(value, typeName, isDocument);
       break;
   }
 

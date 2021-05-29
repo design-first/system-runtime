@@ -858,7 +858,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
               }
             }
             if (type) {
-              if ($metamodel.isValidType(update[attributeName], type)) {
+              if ($metamodel.isValidType(update[attributeName], type, true)) {
                 if ($history.isEnabled() && this.name.indexOf('_') !== 0) {
                   $history.pushState({
                     action: 'update',
