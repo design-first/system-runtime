@@ -1002,7 +1002,7 @@ exports.createCollection = function createCollection(name) {
  * @description Create class
  */
 exports.createClass = function createClass(name) {
-  getLogger().debug("the " + name + " class had been created");
+  getLogger().debug("the " + name + " class has been created");
 };
 
 /**
