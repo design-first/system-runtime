@@ -2270,7 +2270,8 @@ exports.isValidObject = function isValidObject(
           field !== null &&
           Object.keys(field).length > 0:
         case hasType(field, 'string') && field !== '':
-          $log.canNotYetValidate(field, typeRef);
+          // uncomment line if we need this log
+          // $log.canNotYetValidate(field, typeRef);
           break;
         default:
           break;
@@ -2364,10 +2365,11 @@ exports.isValidObject = function isValidObject(
                     }
                   } else {
                     if (field[i] !== '') {
-                      $log.canNotYetValidate(
-                        field[i],
-                        getRealClassName(typeArray)
-                      );
+                      // uncomment line if we need this log
+                      // $log.canNotYetValidate(
+                      //  field[i],
+                      //  getRealClassName(typeArray)
+                      // );
                     }
                   }
                 } else {
