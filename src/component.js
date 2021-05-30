@@ -905,17 +905,19 @@ function addProperties(model, Class, classId) {
     function _isValidCollection(coll, type) {
       var result = true;
 
-      coll.forEach(function(val) {
-        if (
-          !(
-            $metamodel.isValidType(val, type) &&
-            $metamodel.inheritFrom(val.constructor.name, type) &&
-            $metamodel.isClassName(type)
-          )
-        ) {
-          result = result && false;
-        }
-      });
+      if (type !== 'any') {
+        coll.forEach(function(val) {
+          if ($metamodel.isClassName(type)) {
+            if (!$metamodel.isValidType(val, type) && !$metamodel.inheritFrom(val.constructor.name, type)) {
+              result = result && false;
+            }
+          } else {
+            if (!$metamodel.isValidType(val, type)) {
+              result = result && false;
+            }
+          } 
+        });
+      }
 
       return result;
     }
@@ -1026,7 +1028,7 @@ function addProperties(model, Class, classId) {
                   this.constructor.name,
                   propertyName,
                   position,
-                  propertyType[0]
+                  propertyType === 'array' ? 'any' : propertyType[0]
                 );
               }
             } else {
