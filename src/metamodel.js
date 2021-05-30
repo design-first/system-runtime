@@ -1645,7 +1645,6 @@ exports.clear = function clear() {
  * @description Create the metamodel
  */
 exports.create = function create() {
-  $log.modelCreationBegin();
   loadInMemory();
   createInheritanceTree();
   generateSchemas();
@@ -1654,7 +1653,6 @@ exports.create = function create() {
   getStates();
   createDbStructure();
   createClass();
-  $log.modelCreationEnd();
 };
 
 /**

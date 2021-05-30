@@ -235,9 +235,7 @@ exports.invalidTypeImp = function invalidTypeImp(property, className) {
   getLogger().error(
     "the property '" +
       property +
-      "' of the model '" +
-      className +
-      "' is invalid"
+      "' of " + className + " model is invalid"
   );
 };
 
@@ -696,15 +694,13 @@ exports.unknownPath = function unknownPath(path, subpath) {
  * @method canNotYetValidate
  * @param {String} id id of the component
  * @param {String} className name of the class
- * @description A component has not been alreay created
+ * @description A component has not been alreay validated
  */
 exports.canNotYetValidate = function canNotYetValidate(id, className) {
   getLogger().debug(
-    "can not yet validate if the component '" +
+    "can not yet validate if the document '" +
       id +
-      "' is an instance of '" +
-      className +
-      "'"
+      "' is compliant with " + className + " model"
   );
 };
 
@@ -970,7 +966,7 @@ exports.loadType = function loadType(name) {
  * @description Generate schema
  */
 exports.generatingSchema = function generatingSchema(name) {
-  getLogger().debug("generating schema '" + name + "'...");
+  getLogger().debug("generating " + name + " schema ...");
 };
 
 /**
@@ -979,7 +975,7 @@ exports.generatingSchema = function generatingSchema(name) {
  * @description Generate model
  */
 exports.generateModel = function generateModel(name) {
-  getLogger().debug("generating model '" + name + "'...");
+  getLogger().debug("the " + name + " model has been created");
 };
 
 /**
@@ -988,7 +984,7 @@ exports.generateModel = function generateModel(name) {
  * @description Check model
  */
 exports.checkModel = function checkModel(name) {
-  getLogger().debug("analyzing model '" + name + "'...");
+  getLogger().debug("analyzing " + name + " model...");
 };
 
 /**
@@ -997,7 +993,7 @@ exports.checkModel = function checkModel(name) {
  * @description Create collection
  */
 exports.createCollection = function createCollection(name) {
-  getLogger().debug("'" + name + "' database collection created");
+  getLogger().debug("the " + name + " database collection has been created");
 };
 
 /**
@@ -1006,23 +1002,7 @@ exports.createCollection = function createCollection(name) {
  * @description Create class
  */
 exports.createClass = function createClass(name) {
-  getLogger().debug("'" + name + "' class created");
-};
-
-/**
- * @method modelCreationBegin
- * @description Begins model creation
- */
-exports.modelCreationBegin = function modelCreationBegin() {
-  getLogger().debug('starting model creation...');
-};
-
-/**
- * @method modelCreationEnd
- * @description End model creation
- */
-exports.modelCreationEnd = function modelCreationEnd() {
-  getLogger().debug('model creation ended');
+  getLogger().debug("the " + name + " class had been created");
 };
 
 /**
