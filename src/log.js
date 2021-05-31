@@ -970,15 +970,6 @@ exports.generatingSchema = function generatingSchema(name) {
 };
 
 /**
- * @method generateModel
- * @param {String} name name of the model
- * @description Generate model
- */
-exports.generateModel = function generateModel(name) {
-  getLogger().debug("the " + name + " model has been created");
-};
-
-/**
  * @method checkModel
  * @param {String} name name of the model
  * @description Check model
@@ -988,21 +979,12 @@ exports.checkModel = function checkModel(name) {
 };
 
 /**
- * @method createCollection
- * @param {String} name name of the collection
- * @description Create collection
- */
-exports.createCollection = function createCollection(name) {
-  getLogger().debug("the " + name + " database collection has been created");
-};
-
-/**
  * @method createClass
  * @param {String} name name of the class
  * @description Create class
  */
 exports.createClass = function createClass(name) {
-  getLogger().debug("the " + name + " class has been created");
+  getLogger().debug(name + " class has been created");
 };
 
 /**

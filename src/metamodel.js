@@ -275,10 +275,6 @@ function generateModels() {
   for (modelName in store.generatedModels) {
     modelDef = store.generatedModels[modelName];
     $db._GeneratedModel.insert(modelDef);
-
-    if (!modelDef[$mson.CORE]) {
-      $log.generateModel(modelName);
-    }
   }
 }
 
@@ -830,10 +826,6 @@ function createDbStructure() {
       modelDef[$mson.CLASS] !== false
     ) {
       $db.collection(modelDef[$mson.NAME]);
-
-      if (!modelDef[$mson.CORE]) {
-        $log.createCollection(modelDef[$mson.NAME]);
-      }
     }
   }
 }
