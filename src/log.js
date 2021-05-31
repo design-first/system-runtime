@@ -988,6 +988,14 @@ exports.createClass = function createClass(name) {
 };
 
 /**
+ * @method initDb
+ * @description Init the database
+ */
+exports.initDb = function initDb() {
+  getLogger().debug("initializing data store...");
+};
+
+/**
  * @method actionInvokeError
  * @param {String} state state
  * @param {String} id component id

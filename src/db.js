@@ -411,6 +411,8 @@ function impSystem(importedSystem) {
       exports._Behavior.insert(importedSystem.behaviors[behaviorId]);
     }
 
+    $log.initDb();
+
     // add components
     for (collectionName in importedSystem.components) {
       for (componentId in importedSystem.components[collectionName]) {
