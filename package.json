@@ -1,6 +1,6 @@
 {
   "name": "system-runtime",
-  "version": "4.4.4",
+  "version": "4.4.5",
   "description": "A JavaScript library that runs systems",
   "homepage": "https://designfirst.io/systemruntime/",
   "keywords": [
@@ -67,7 +67,7 @@
     "grunt-mocha-istanbul": "5.0.2",
     "husky": "6.0.0",
     "istanbul": "0.4.5",
-    "karma": "6.3.2",
+    "karma": "6.3.3",
     "karma-chai": "0.1.0",
     "karma-chrome-launcher": "3.1.0",
     "karma-coverage": "2.0.3",
