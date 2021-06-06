@@ -212,7 +212,7 @@ exports.invalidClassName = function invalidClassName(
  */
 exports.missingProperty = function missingProperty(propertyName) {
   getLogger().warn(
-    "missing property '" + propertyName + "' for a schema or a model"
+    "property '" + propertyName + "' is missing"
   );
 };
 
@@ -821,13 +821,16 @@ exports.invalidModel = function invalidModel(name) {
 /**
  * @method invalidParameters
  * @param {String} classId class name of the component
+ * @param {String} document document
  * @description Invalid parameters set when creating an instance of a class
  */
-exports.invalidParameters = function invalidParameters(classId) {
+exports.invalidParameters = function invalidParameters(classId, document) {
+  var id = document && document._id ? document._id : '';
+
   getLogger().warn(
-    "the parameters for creating a component of class '" +
+    "the parameters for creating '" + id + "' component (" +
       classId +
-      "' are not compliant with the model"
+      " model) are not compliant with the model"
   );
 };
 

@@ -802,7 +802,7 @@ function createClass(classId) {
         true
       )
     ) {
-      $log.invalidParameters(classId);
+      $log.invalidParameters(classId, config);
     }
 
     $metamodel.prepareObject(config, $metamodel.getModel(classId));
