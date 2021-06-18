@@ -1,10 +1,9 @@
 {
   "name": "system-runtime",
-  "version": "4.5.1",
+  "version": "5.0.0",
   "description": "A JavaScript library that runs systems",
   "homepage": "https://designfirst.io/systemruntime/",
   "keywords": [
-    "uml",
     "mda",
     "metamodel",
     "model",
@@ -14,10 +13,8 @@
     "nosql",
     "component",
     "system",
-    "graph",
+    "mson",
     "runtime",
-    "json",
-    "osgi",
     "bundle"
   ],
   "main": "./src/runtime.js",
