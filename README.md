@@ -1,8 +1,6 @@
 # System Runtime
 
 [![npm](https://img.shields.io/npm/v/system-runtime.svg)](https://www.npmjs.com/package/system-runtime)
-[![Build Status](https://travis-ci.org/design-first/system-runtime.svg?branch=master)](https://travis-ci.org/design-first/system-runtime)
-[![Coverage Status](https://coveralls.io/repos/github/design-first/system-runtime/badge.svg?branch=master)](https://coveralls.io/github/design-first/system-runtime?branch=master)
 
 ## What is System Runtime ?
 
