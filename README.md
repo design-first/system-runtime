@@ -1,6 +1,6 @@
 # System Runtime
 
-![unit tests](https://github.com/design-first/system-runtime/actions/workflows/node.js.yml/badge.svg)
+[![unit tests](https://github.com/design-first/system-runtime/actions/workflows/node.js.yml/badge.svg)](https://github.com/design-first/system-runtime/actions/workflows/node.js.yml)
 
 ## What is System Runtime ?
 
