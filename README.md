@@ -1,6 +1,6 @@
 # System Runtime
 
-[![npm](https://img.shields.io/npm/v/system-runtime.svg)](https://www.npmjs.com/package/system-runtime)
+![unit tests](https://github.com/design-first/system-runtime/actions/workflows/node.js.yml/badge.svg)
 
 ## What is System Runtime ?
 
