@@ -715,8 +715,11 @@ DatabaseCollection.prototype.insert = function insert(document) {
       var component = null;
       var channels = [];
       var channel = null;
-
+       
       switch (true) {
+        case obj === null: 
+          $log.invalidDocumentOnDbInsert(obj, this.name);
+          break;
         case this.name === '_Schema':
         case this.name === '_Logger':
         case this.name === '_Model':

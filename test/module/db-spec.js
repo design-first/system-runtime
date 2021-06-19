@@ -157,6 +157,11 @@ describe('System Runtime db component', () => {
 
     expect(docAdded[0]).equal('runtime1');
 
+    // try to insert an invalid document
+    let invalidDoc = db._Runtime.insert(null);
+    
+    expect(invalidDoc.length).equal(0);
+
     // try to insert the same document
     docAdded = db._Runtime.insert({
       '_id': 'runtime1',
