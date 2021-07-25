@@ -38,7 +38,7 @@ exports.INTERNAL_NAMES = [
   '_inherit',
   '_description',
   '_class',
-  '_core'
+  '_core',
 ];
 
 exports.PROPERTY_TYPE = 'property';
@@ -57,91 +57,91 @@ exports.DEFAULT_TYPES = [
   'function',
   'array',
   'date',
-  'any'
+  'any',
 ];
 
 exports.SCHEMA_DEFINITION = {
   _id: {
     type: 'string',
-    mandatory: true
+    mandatory: true,
   },
   _name: {
     type: 'string',
-    mandatory: true
+    mandatory: true,
   },
   _inherit: {
     type: ['string'],
     mandatory: false,
-    default: ['_Component']
+    default: ['_Component'],
   },
   _class: {
     type: 'boolean',
-    mandatory: false
+    mandatory: false,
   },
   _core: {
     type: 'boolean',
-    mandatory: false
+    mandatory: false,
   },
   _description: {
     type: 'string',
-    mandatory: false
-  }
+    mandatory: false,
+  },
 };
 
 exports.MODEL_DEFINITION = {
   _id: {
     type: 'string',
-    mandatory: true
+    mandatory: true,
   },
   _name: {
     type: 'string',
-    mandatory: true
+    mandatory: true,
   },
   _inherit: {
     type: ['string'],
-    mandatory: false
+    mandatory: false,
   },
   _class: {
     type: 'boolean',
-    mandatory: false
+    mandatory: false,
   },
   _core: {
     type: 'boolean',
-    mandatory: false
+    mandatory: false,
   },
   _description: {
     type: 'string',
-    mandatory: false
-  }
+    mandatory: false,
+  },
 };
 
 exports.TYPE_DEFINITION = {
   _id: {
     type: 'string',
-    mandatory: true
+    mandatory: true,
   },
   name: {
     type: 'string',
-    mandatory: true
+    mandatory: true,
   },
   type: {
     type: 'string',
-    mandatory: true
+    mandatory: true,
   },
   schema: {
     type: 'object',
-    mandatory: false
+    mandatory: false,
   },
   value: {
     type: ['any'],
-    mandatory: false
+    mandatory: false,
   },
   core: {
     type: 'boolean',
-    mandatory: false
+    mandatory: false,
   },
   description: {
     type: 'string',
-    mandatory: false
-  }
+    mandatory: false,
+  },
 };

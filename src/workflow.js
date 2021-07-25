@@ -394,7 +394,7 @@ function action(component, state, action, params, isEvent) {
             "' on component '" +
             component.id() +
             "'",
-          stack: e
+          stack: e,
         });
       }
       if ($helper.getRuntime()) {
@@ -403,11 +403,7 @@ function action(component, state, action, params, isEvent) {
           component &&
           $helper.getRuntime().system() &&
           $helper.getRuntime().system().id &&
-          component.id() !==
-            $helper
-              .getRuntime()
-              .system()
-              .id()
+          component.id() !== $helper.getRuntime().system().id()
         ) {
           $helper
             .getRuntime()
@@ -419,7 +415,7 @@ function action(component, state, action, params, isEvent) {
                 "' on component '" +
                 component.id() +
                 "'",
-              stack: e
+              stack: e,
             });
         }
 
@@ -430,7 +426,7 @@ function action(component, state, action, params, isEvent) {
             "' on component '" +
             component.id() +
             "'",
-          stack: e
+          stack: e,
         });
       }
 
@@ -480,10 +476,7 @@ exports.checkInputNumbers = function checkInputNumbers(
   header = header.replace('=>', '');
 
   if (header.indexOf('(') !== -1) {
-    funcParams = header
-      .split('(')[1]
-      .replace(')', '')
-      .trim();
+    funcParams = header.split('(')[1].replace(')', '').trim();
   } else {
     funcParams = header.trim();
   }
@@ -569,12 +562,12 @@ exports.checkInput = function checkInput(params) {
       if (args && args[1] && args[1] === 'reset') {
         paramsType = [
           [$metamodel.getModel(componentClassName)[methodName].type[0]],
-          'string'
+          'string',
         ];
       } else {
         paramsType = [
           $metamodel.getModel(componentClassName)[methodName].type[0],
-          'string'
+          'string',
         ];
       }
       paramsNumber = [2, 2];
@@ -582,7 +575,7 @@ exports.checkInput = function checkInput(params) {
     case isProperty && methodName.indexOf('.') === -1:
       if (isModelPath(methodName)) {
         paramsType = [
-          $metamodel.getModelPathType(componentClassName, methodName)
+          $metamodel.getModelPathType(componentClassName, methodName),
         ];
       } else {
         paramsType = [$metamodel.getModel(componentClassName)[methodName].type];
@@ -739,7 +732,7 @@ exports.process = function process(params) {
   // case of event processing
   if (params.id) {
     behaviors = $db._Behavior.find({
-      _id: params.id
+      _id: params.id,
     });
 
     if (behaviors.length === 0) {
@@ -767,7 +760,7 @@ exports.process = function process(params) {
           action = {
             useCoreAPI: behavior.useCoreAPI,
             context: behavior.context,
-            action: actionFromMemory
+            action: actionFromMemory,
           };
 
           actions.push(action);
@@ -799,7 +792,7 @@ exports.process = function process(params) {
       exports.checkInput({
         component: component,
         methodName: params.state,
-        args: params.data
+        args: params.data,
       })
     ) {
       if (isMethod) {
@@ -814,7 +807,7 @@ exports.process = function process(params) {
         exports.checkOutput({
           component: component,
           methodName: params.state,
-          methodResult: result
+          methodResult: result,
         });
       } else {
         length = actions.length;

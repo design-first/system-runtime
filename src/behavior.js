@@ -80,16 +80,13 @@ function createFunction(name, func, useCoreAPI) {
     header = header.replace('=>', '');
 
     if (header.indexOf('(') !== -1) {
-      funcParams = header
-        .split('(')[1]
-        .replace(')', '')
-        .trim();
+      funcParams = header.split('(')[1].replace(')', '').trim();
     } else {
       funcParams = header.trim();
     }
 
     params = funcParams.split(',');
-    params.forEach(function(param) {
+    params.forEach(function (param) {
       paramsClean.push(param.trim());
     });
 
@@ -110,13 +107,10 @@ function createFunction(name, func, useCoreAPI) {
     beginBody = func.indexOf('{');
     header = func.substring(0, beginBody);
 
-    funcParams = header
-      .split('(')[1]
-      .replace(')', '')
-      .trim();
+    funcParams = header.split('(')[1].replace(')', '').trim();
 
     params = funcParams.split(',');
-    params.forEach(function(param) {
+    params.forEach(function (param) {
       paramsClean.push(param.trim());
     });
 
@@ -204,7 +198,7 @@ exports.add = function add(id, state, action, useCoreAPI, core, context) {
     action: strAction,
     useCoreAPI: useCoreAPI,
     core: core,
-    context: context
+    context: context,
   });
 
   return behaviorId;
@@ -232,21 +226,21 @@ exports.remove = function remove(params) {
       $db._Behavior.remove({
         _id: params.behaviorId,
         component: params.componentId,
-        state: params.state
+        state: params.state,
       });
       delete store[params.behaviorId];
     } else {
       if (params.state) {
         result = $db._Behavior.remove({
           component: params.componentId,
-          state: params.state
+          state: params.state,
         });
       } else {
         result = $db._Behavior.remove({
-          component: params.componentId
+          component: params.componentId,
         });
       }
-      result.forEach(function(id) {
+      result.forEach(function (id) {
         delete store[id];
       });
     }
@@ -276,10 +270,10 @@ exports.getActions = function getActions(id, state) {
 
   dbResult = $db._Behavior.find({
     component: id,
-    state: state
+    state: state,
   });
 
-  dbResult.forEach(function(behavior) {
+  dbResult.forEach(function (behavior) {
     action = store[behavior[$mson.ID]];
     if (typeof action === 'undefined') {
       action = createFunction(
@@ -292,7 +286,7 @@ exports.getActions = function getActions(id, state) {
     result.push({
       useCoreAPI: behavior.useCoreAPI,
       context: behavior.context,
-      action: action
+      action: action,
     });
   });
 

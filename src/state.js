@@ -42,7 +42,7 @@ var store = {};
 exports.set = function set(id, state, value) {
   store[id] = {
     state: state,
-    value: value
+    value: value,
   };
 };
 

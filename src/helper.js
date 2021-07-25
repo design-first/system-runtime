@@ -108,7 +108,7 @@ exports.getRequire = function getRequire() {
 exports.generateId = function generateId() {
   // taken from https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
   function gen() {
-    return 'xxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    return 'xxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       var r = (Math.random() * 16) | 0;
       var v = c === 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);
@@ -141,7 +141,7 @@ exports.polyfill = function polyfill() {
         var results = funcNameRegex.exec(this.toString());
         return results && results.length > 1 ? results[1].trim() : '';
       },
-      set: function set(value) {}
+      set: function set(value) {},
     });
   }
 };

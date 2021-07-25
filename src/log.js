@@ -74,7 +74,7 @@ var fakeLoggerRef = {
     ) {
       console.error('runtime: ' + message);
     }
-  }
+  },
 };
 
 /**
@@ -211,9 +211,7 @@ exports.invalidClassName = function invalidClassName(
  * @description Missing a property
  */
 exports.missingProperty = function missingProperty(propertyName) {
-  getLogger().warn(
-    "property '" + propertyName + "' is missing"
-  );
+  getLogger().warn("property '" + propertyName + "' is missing");
 };
 
 /**
@@ -233,9 +231,7 @@ exports.missingImplementation = function missingImplementation(name) {
  */
 exports.invalidTypeImp = function invalidTypeImp(property, className) {
   getLogger().error(
-    "the property '" +
-      property +
-      "' of " + className + " model is invalid"
+    "the property '" + property + "' of " + className + ' model is invalid'
   );
 };
 
@@ -292,7 +288,7 @@ exports.invalidPropertyName = function invalidPropertyName(
   var realType = '';
 
   if (className !== 'Function') {
-    classInfo = " (" + className + " class)";
+    classInfo = ' (' + className + ' class)';
   }
 
   if (typeof type === 'string') {
@@ -344,7 +340,7 @@ exports.readOnlyProperty = function readOnlyProperty(
   var classInfo = '';
 
   if (className !== 'Function') {
-    classInfo = " (" + className + " class)";
+    classInfo = ' (' + className + ' class)';
   }
   getLogger().warn(
     "can not set read-only property '" +
@@ -371,7 +367,7 @@ exports.invalidDocumentOnDbInsert = function invalidDocumentOnDbInsert(
       JSON.stringify(doc).replace(/,/g, ', ') +
       "' (" +
       collectionName +
-      " collection)"
+      ' collection)'
   );
 };
 
@@ -425,7 +421,7 @@ exports.unknownPropertyOnDbUpdate = function unknownPropertyOnDbUpdate(
       id +
       "' (" +
       collectionName +
-      " collection)"
+      ' collection)'
   );
 };
 
@@ -479,7 +475,7 @@ exports.invalidResultType = function invalidResultType(
   var classInfo = '';
 
   if (className !== 'Function') {
-    classInfo = " (" + className + " class)";
+    classInfo = ' (' + className + ' class)';
   }
 
   getLogger().warn(
@@ -524,7 +520,7 @@ exports.invalidParamNumber = function invalidParamNumber(
   var classInfo = '';
 
   if (className !== 'Function') {
-    classInfo = " (" + className + " class)";
+    classInfo = ' (' + className + ' class)';
   }
 
   getLogger().warn(
@@ -554,7 +550,7 @@ exports.invalidParamType = function invalidParamType(
   var classInfo = '';
 
   if (className !== 'Function') {
-    classInfo = " (" + className + " class)";
+    classInfo = ' (' + className + ' class)';
   }
   if (paramName !== undefined) {
     getLogger().warn(
@@ -700,7 +696,9 @@ exports.canNotYetValidate = function canNotYetValidate(id, className) {
   getLogger().debug(
     "can not yet validate if the document '" +
       id +
-      "' is compliant with " + className + " model"
+      "' is compliant with " +
+      className +
+      ' model'
   );
 };
 
@@ -742,7 +740,7 @@ exports.invalidParamNumberMethodOn = function invalidParamNumberMethodOn(
   var classInfo = '';
 
   if (className !== 'Function') {
-    classInfo = " (" + className + " class)";
+    classInfo = ' (' + className + ' class)';
   }
   getLogger().warn(
     "invalid number of parameters when adding an action for the state '" +
@@ -828,9 +826,11 @@ exports.invalidParameters = function invalidParameters(classId, document) {
   var id = document && document._id ? document._id : '';
 
   getLogger().warn(
-    "the parameters for creating '" + id + "' component (" +
+    "the parameters for creating '" +
+      id +
+      "' component (" +
       classId +
-      " model) are not compliant with the model"
+      ' model) are not compliant with the model'
   );
 };
 
@@ -969,7 +969,7 @@ exports.loadType = function loadType(name) {
  * @description Generate schema
  */
 exports.generatingSchema = function generatingSchema(name) {
-  getLogger().debug("generating " + name + " schema ...");
+  getLogger().debug('generating ' + name + ' schema ...');
 };
 
 /**
@@ -978,7 +978,7 @@ exports.generatingSchema = function generatingSchema(name) {
  * @description Check model
  */
 exports.checkModel = function checkModel(name) {
-  getLogger().debug("analyzing " + name + " model...");
+  getLogger().debug('analyzing ' + name + ' model...');
 };
 
 /**
@@ -987,7 +987,7 @@ exports.checkModel = function checkModel(name) {
  * @description Create class
  */
 exports.createClass = function createClass(name) {
-  getLogger().debug(name + " class has been created");
+  getLogger().debug(name + ' class has been created');
 };
 
 /**
@@ -995,7 +995,7 @@ exports.createClass = function createClass(name) {
  * @description Init the database
  */
 exports.initDb = function initDb() {
-  getLogger().debug("initializing data store...");
+  getLogger().debug('initializing data store...');
 };
 
 /**
@@ -1018,8 +1018,9 @@ exports.actionInvokeError = function actionInvokeError(
         state +
         "' on component '" +
         id +
-        "' (" + className +
-        " class): " +
+        "' (" +
+        className +
+        ' class): ' +
         message
     );
   } else {
@@ -1144,11 +1145,7 @@ exports.historyDocumentRemoved = function historyDocumentRemoved(
   collectionName
 ) {
   getLogger().debug(
-    "Destroyed component of id '" +
-      id +
-      "' (" +
-      collectionName +
-      " collection)"
+    "Destroyed component of id '" + id + "' (" + collectionName + ' collection)'
   );
 };
 
@@ -1175,7 +1172,7 @@ exports.historyDocumentUpdated = function historyDocumentRemoved(
       value +
       "' (" +
       collectionName +
-      " collection)"
+      ' collection)'
   );
 };
 
@@ -1196,16 +1193,20 @@ exports.invalidCollectionItem = function invalidCollectionItem(
   var classInfo = '';
 
   if (className !== 'Function') {
-    classInfo = " (" + className + " class)";
+    classInfo = ' (' + className + ' class)';
   }
 
   getLogger().warn(
-    "invalid value for property '" + propertyName + "' on component '" +
-    id +
-    "'" +
-    classInfo +
-    ": expected type '" +
-      type
-      + "' for all items of the collection '" + JSON.stringify(propertyValue) + "'"
+    "invalid value for property '" +
+      propertyName +
+      "' on component '" +
+      id +
+      "'" +
+      classInfo +
+      ": expected type '" +
+      type +
+      "' for all items of the collection '" +
+      JSON.stringify(propertyValue) +
+      "'"
   );
 };

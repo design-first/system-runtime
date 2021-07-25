@@ -35,7 +35,8 @@
     "test": "grunt test",
     "clean": "grunt clean",
     "build": "grunt build",
-    "coveralls": "grunt coveralls"
+    "coveralls": "grunt coveralls",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "chai": "4.3.4",

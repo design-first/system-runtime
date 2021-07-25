@@ -69,7 +69,7 @@ var internalDB = [
   '_Message',
   '_Channel',
   '_Logger',
-  '_History'
+  '_History',
 ];
 var coreDb = [
   '_Schema',
@@ -78,7 +78,7 @@ var coreDb = [
   '_Model',
   '_GeneratedModel',
   '_Type',
-  '_History'
+  '_History',
 ];
 
 /* Private methods */
@@ -195,7 +195,7 @@ function _Array() {
     var arrCopy = [];
 
     // copy
-    arr.forEach(function(val) {
+    arr.forEach(function (val) {
       arrCopy.push(val);
     });
 
@@ -203,7 +203,7 @@ function _Array() {
       arrCopy.sort(param);
     } else {
       field = Object.keys(param)[0];
-      arrCopy.sort(function(docA, docB) {
+      arrCopy.sort(function (docA, docB) {
         if (docA[field] < docB[field]) {
           return param[field] === 1 ? -1 : 1;
         }
@@ -424,7 +424,7 @@ function impSystem(importedSystem) {
 
     // reset info if already a master system
     systems = exports._System.find({
-      master: true
+      master: true,
     });
     if (systems.length) {
       if (systems[0][$mson.ID] === importedSystem[$mson.ID]) {
@@ -462,7 +462,7 @@ function expSystem() {
 
   // get id of the master system
   systems = exports._System.find({
-    master: true
+    master: true,
   });
 
   if (systems.length) {
@@ -515,7 +515,7 @@ function expSubsystem(params) {
 
   // default values
   result = exports._System.find({
-    master: true
+    master: true,
   });
   if (result.length) {
     defaultName = result[0].name;
@@ -715,9 +715,9 @@ DatabaseCollection.prototype.insert = function insert(document) {
       var component = null;
       var channels = [];
       var channel = null;
-       
+
       switch (true) {
-        case obj === null: 
+        case obj === null:
           $log.invalidDocumentOnDbInsert(obj, this.name);
           break;
         case this.name === '_Schema':
@@ -746,18 +746,15 @@ DatabaseCollection.prototype.insert = function insert(document) {
                 action: 'insert',
                 collection: this.name,
                 id: obj[$mson.ID],
-                value: JSON.stringify(obj)
+                value: JSON.stringify(obj),
               });
             }
 
             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-              $helper
-                .getRuntime()
-                .require('db')
-                .insert({
-                  collection: this.name,
-                  document: obj
-                });
+              $helper.getRuntime().require('db').insert({
+                collection: this.name,
+                document: obj,
+              });
             }
           }
 
@@ -770,7 +767,7 @@ DatabaseCollection.prototype.insert = function insert(document) {
                 $workflow.process({
                   component: channels[i][$mson.ID],
                   state: obj.event,
-                  data: obj.data
+                  data: obj.data,
                 });
               }
             }
@@ -871,7 +868,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                     id: docs[i][$mson.ID],
                     field: attributeName,
                     value: JSON.stringify(update[attributeName]),
-                    oldValue: JSON.stringify(docs[i][attributeName])
+                    oldValue: JSON.stringify(docs[i][attributeName]),
                   });
                 }
 
@@ -880,27 +877,24 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                 result.push(docs[i][$mson.ID]);
 
                 if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                  $helper
-                    .getRuntime()
-                    .require('db')
-                    .update({
-                      collection: this.name,
-                      id: docs[i][$mson.ID],
-                      field: attributeName,
-                      value: update[attributeName]
-                    });
+                  $helper.getRuntime().require('db').update({
+                    collection: this.name,
+                    id: docs[i][$mson.ID],
+                    field: attributeName,
+                    value: update[attributeName],
+                  });
                 }
                 if (type === 'array') {
                   $workflow.process({
                     component: docs[i][$mson.ID],
                     state: attributeName,
-                    data: [update[attributeName], 'reset']
+                    data: [update[attributeName], 'reset'],
                   });
                 } else {
                   $workflow.process({
                     component: docs[i][$mson.ID],
                     state: attributeName,
-                    data: [update[attributeName]]
+                    data: [update[attributeName]],
                   });
                 }
               } else {
@@ -928,7 +922,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                 id: docs[i][$mson.ID],
                 field: attributeName,
                 value: JSON.stringify(update[attributeName]),
-                oldValue: JSON.stringify(docs[i][attributeName])
+                oldValue: JSON.stringify(docs[i][attributeName]),
               });
             }
 
@@ -937,15 +931,12 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
             result.push(docs[i][$mson.ID]);
 
             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-              $helper
-                .getRuntime()
-                .require('db')
-                .update({
-                  collection: this.name,
-                  id: docs[i][$mson.ID],
-                  field: attributeName,
-                  value: update[attributeName]
-                });
+              $helper.getRuntime().require('db').update({
+                collection: this.name,
+                id: docs[i][$mson.ID],
+                field: attributeName,
+                value: update[attributeName],
+              });
             }
           }
         }
@@ -988,7 +979,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
                   action: 'remove',
                   collection: this.name,
                   id: id,
-                  oldValue: JSON.stringify(exports.store[this.name][id])
+                  oldValue: JSON.stringify(exports.store[this.name][id]),
                 });
               }
 
@@ -1001,13 +992,10 @@ DatabaseCollection.prototype.remove = function remove(query) {
                 component.destroy();
               }
               if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-                $helper
-                  .getRuntime()
-                  .require('db')
-                  .remove({
-                    collection: this.name,
-                    id: id
-                  });
+                $helper.getRuntime().require('db').remove({
+                  collection: this.name,
+                  id: id,
+                });
               }
             }
           }
@@ -1023,7 +1011,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
               action: 'remove',
               collection: this.name,
               id: id,
-              oldValue: JSON.stringify(exports.store[this.name][id])
+              oldValue: JSON.stringify(exports.store[this.name][id]),
             });
           }
 
@@ -1036,13 +1024,10 @@ DatabaseCollection.prototype.remove = function remove(query) {
             component.destroy();
           }
           if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-            $helper
-              .getRuntime()
-              .require('db')
-              .remove({
-                collection: this.name,
-                id: id
-              });
+            $helper.getRuntime().require('db').remove({
+              collection: this.name,
+              id: id,
+            });
           }
         }
       }
@@ -1054,7 +1039,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
           action: 'remove',
           collection: this.name,
           id: id,
-          oldValue: JSON.stringify(exports.store[this.name][id])
+          oldValue: JSON.stringify(exports.store[this.name][id]),
         });
       }
 
@@ -1067,13 +1052,10 @@ DatabaseCollection.prototype.remove = function remove(query) {
         }
       }
       if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
-        $helper
-          .getRuntime()
-          .require('db')
-          .remove({
-            collection: this.name,
-            id: id
-          });
+        $helper.getRuntime().require('db').remove({
+          collection: this.name,
+          id: id,
+        });
       }
       result.push(id);
     }
@@ -1176,7 +1158,7 @@ exports.init = function init() {
   var runtimeSystem = null;
 
   runtimeSystem = exports._System.find({
-    _id: 'e89c617b6b15d24'
+    _id: 'e89c617b6b15d24',
   })[0];
 
   // clear all the data in memory
