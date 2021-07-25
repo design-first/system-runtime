@@ -1,3 +1,10 @@
 {
-  "src/*.js": ["prettier --single-quote --write", "git add"]
+  "src/*.js": [
+    "prettier --single-quote --write", 
+    "git add"
+  ],
+  "src/system/*.json": [
+    "prettier --single-quote --write",
+    "git add"
+  ]
 }
