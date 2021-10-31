@@ -206,7 +206,7 @@ describe('a System Runtime component', function () {
     setTimeout(function () {
       expect(yoda.address()).equal('Dagobah');
       done();
-    }, 1);
+    }, 10);
   });
 
   it('can add an event on a new context', function (done) {
@@ -230,7 +230,7 @@ describe('a System Runtime component', function () {
     setTimeout(function () {
       expect(luke.lastName()).equal('Skywalker');
       done();
-    }, 1);
+    }, 10);
   });
 
   it('can remove an event', function (done) {

@@ -4,6 +4,6 @@
     "test/*.js"
   ],
   "options": {
-    "configFile": ".eslintrc"
+    "overrideConfigFile": ".eslintrc"
   }
 }
