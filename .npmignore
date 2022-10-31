@@ -3,6 +3,7 @@
 /.vscode/
 /build/
 /cypress/
+/example/
 /src/banners/
 /src/system/
 /tasks/
