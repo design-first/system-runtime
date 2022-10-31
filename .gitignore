@@ -1,7 +1,4 @@
-/.vscode/
 /build/
-/coverage/
-/dist/
 /node_modules/
 *.log
 .DS_Store

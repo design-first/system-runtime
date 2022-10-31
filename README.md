@@ -11,9 +11,9 @@ System Runtime gives you the APIs to create the model, components and behaviors 
 
 A system:
 
-* is defined by a model,
-* is composed by components and
-* reacts to events with actions that we call behaviors.
+- is defined by a model,
+- is composed by components and
+- reacts to events with actions that we call behaviors.
 
 ![Image Alt](https://designfirst.io/img/system.png)
 
@@ -25,23 +25,24 @@ Use System Runtime APIs to create your system:
 
 ```js
 // create a system
-const system = runtime.system('system');
+const system = runtime.system('system')
 
 // add some business logic in the start method
-system.on('start', () => console.log('Hello world !'));
+system.on('start', () => console.log('Hello world !'))
 
 // run the system
-system.start();
+system.start()
 ```
 
 Now you can bundle your system into a JSON object:
 
 ```js
 // create a bundle
-runtime.bundle();
+runtime.bundle()
 ```
 
 It will return this JSON:
+
 ```json
 {
   "_id": "154cd18d0210516",
@@ -71,19 +72,19 @@ Just add a link tag in your HTML to install and start your bundle:
 
 ```html
 <!-- install your bundle -->
-<link rel="system" type="application/json" href="system.json">
+<link rel="system" type="application/json" href="system.json" />
 ```
 
 #### Install the bundle in Node.js
 
-Just call *install* API to install and start your bundle:
+Just call _install_ API to install and start your bundle:
 
 ```js
 // require System Runtime
-const runtime = require('system-runtime');
+import runtime from 'system-runtime'
 
-// install your bundle 
-runtime.install('system.json');
+// install your bundle
+runtime.install('system.json')
 ```
 
 ## How System runtime helps you to create your system ?
@@ -95,18 +96,18 @@ Creating a system in System Runtime is very simple, you do not have to code but 
 With [MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-model.html#defining-your-model) you can define types, classes, one to one / one to many relationships and multi inheritance between classes.
 
 ```js
-const metamodel = runtime.require('metamodel');
+const metamodel = runtime.require('metamodel')
 
 // create the Jedi schema
 metamodel.schema('Jedi', {
-  'firstName': 'property',
-  'lastName': 'property',
-  'nickname': 'property',
-  'father': 'link',
-  'shout': 'method'
-});
+  firstName: 'property',
+  lastName: 'property',
+  nickname: 'property',
+  father: 'link',
+  shout: 'method',
+})
 
-metamodel.create();
+metamodel.create()
 ```
 
 #### Create your components
@@ -117,27 +118,27 @@ Because you have defined a model for your system, a [Dynamic Type Check](https:/
 
 ```js
 // get your component class
-const Jedi = runtime.require('Jedi');
+const Jedi = runtime.require('Jedi')
 
 // create components
 const luke = new Jedi({
-  'firstName': 'Luke',
-  'lastName': 'Skywalker'
-});
+  firstName: 'Luke',
+  lastName: 'Skywalker',
+})
 
 const anakin = new Jedi({
-  'firstName': 'Anakin',
-  'lastName': 'Skywalker'
-});
+  firstName: 'Anakin',
+  lastName: 'Skywalker',
+})
 
 // add a link
-luke.father(anakin);
+luke.father(anakin)
 
 // get the first name of luke father
-luke.father().firstName();
+luke.father().firstName()
 ```
 
-#### Manage your components 
+#### Manage your components
 
 All your components are stored in System Runtime NoSQL Database. In fact, System Runtime acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents.
 
@@ -145,24 +146,27 @@ You can find, create, update, delete components like you do in a NoSQL Database.
 
 ```js
 // get a collection
-const Jedi = runtime.require('db').collections().Jedi;
+const Jedi = runtime.require('db').collections().Jedi
 
 // find components
 Jedi.find({
-  'firstName': 'Luke'
-});
+  firstName: 'Luke',
+})
 
 // update components
-Jedi.update({
-  'firstName': 'Anakin'
-},{
-  'nickname': 'Darth Vader'
-});
+Jedi.update(
+  {
+    firstName: 'Anakin',
+  },
+  {
+    nickname: 'Darth Vader',
+  }
+)
 
 // remove components
 Jedi.remove({
-  'firstName': 'Anakin'
-});;
+  firstName: 'Anakin',
+})
 ```
 
 ## What contains System Runtime ?
@@ -171,27 +175,27 @@ Jedi.remove({
 
 #### A metamodel
 
-System Runtime contains a metamodel to help you to design your model. The definition of the model is made on a JSON format called [MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-model.html#defining-your-model), no code is needed. 
+System Runtime contains a metamodel to help you to design your model. The definition of the model is made on a JSON format called [MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-model.html#defining-your-model), no code is needed.
 
-With [MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-model.html#defining-your-model) you can define types, classes, one to one / one to many relationships and multi inheritance between classes. 
+With [MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-model.html#defining-your-model) you can define types, classes, one to one / one to many relationships and multi inheritance between classes.
 
 [MSON](https://designfirst.io/systemruntime/documentation/docs/design-your-model.html#defining-your-model) is based on [UML](http://uml.org), so learning it is very easy.
 
 #### A component factory
 
-System Runtime uses the [Model-Driven Architecture](http://www.omg.org/mda/) approach to create classes based on your design. Use them to instantiate your components. 
+System Runtime uses the [Model-Driven Architecture](http://www.omg.org/mda/) approach to create classes based on your design. Use them to instantiate your components.
 
 #### A NoSQL Database
 
-System Runtime acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents. 
+System Runtime acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents.
 
-System Runtime has a micro NoSQL Database that stores your components and you can export/import them into another System Runtime NoSQL Database. 
+System Runtime has a micro NoSQL Database that stores your components and you can export/import them into another System Runtime NoSQL Database.
 
 Thanks to System Runtime NoSQL Database, you can compose your system with an another system.
 
 #### A workflow engine
 
-System Runtime checks at runtime if the signatures of invoked methods are compliant with your model. 
+System Runtime checks at runtime if the signatures of invoked methods are compliant with your model.
 
 With System Runtime your components really behave the way you designed them.
 
@@ -209,7 +213,7 @@ Once you have cloned the repository, install the dependencies:
 
 ```sh
 npm i
-```	 	
+```
 
 #### Build
 
@@ -217,32 +221,23 @@ Then build System Runtime:
 
 ```sh
 npm run build
-```	 
-
-It will:
-*  build System Runtime core module for the server library and
-*  build System Runtime client library on **/dist** directory
-
-## Development
-
-To start System Runtime in development mode:
-
-```sh
-npm run dev
 ```
 
-All the modifications to the source code of System Runtime will rebuild the project.
+It will:
+
+- build System Runtime core module for the server library and
+- build System Runtime client library on **/dist** directory.
 
 ## Documentation
 
-* [Quick Start](https://designfirst.io/systemruntime/documentation/docs/quick-start.html)
-* [Guide](https://designfirst.io/systemruntime/documentation/docs/install-system-runtime.html)
-* [Examples](https://designfirst.io/systemruntime/documentation/docs/a-basic-hello-world.html)
+- [Quick Start](https://designfirst.io/systemruntime/documentation/docs/quick-start.html)
+- [Guide](https://designfirst.io/systemruntime/documentation/docs/install-system-runtime.html)
+- [Examples](https://designfirst.io/systemruntime/documentation/docs/a-basic-hello-world.html)
 
 ## Community
 
-* [Code of Conduct](CODE_OF_CONDUCT.md)
-* [Contributing Guidelines](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Contributing Guidelines](CONTRIBUTING.md)
 
 ## License
 
@@ -258,7 +253,7 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
-limitations under the License. 
+limitations under the License.
 
 **Do not use System Runtime if you do not believe in Equality and Diversity.**
 

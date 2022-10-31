@@ -1,9 +1,0 @@
-{
-  "files": [
-    "src/*.js",
-    "test/*.js"
-  ],
-  "options": {
-    "overrideConfigFile": ".eslintrc"
-  }
-}

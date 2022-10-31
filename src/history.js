@@ -25,16 +25,14 @@
  * @description This module manages the history of all components lifecycle
  */
 
-'use strict';
-
-var $db = require('./db.js');
-var $log = require('./log.js');
+import $db from './db.js'
+import $log from './log.js'
 
 /* Private property */
 
-var stack = [];
-var cursorIndex = -1;
-var historizationEnabled = false;
+let stack = []
+let cursorIndex = -1
+let historizationEnabled = false
 
 /* Public methods */
 
@@ -43,176 +41,172 @@ var historizationEnabled = false;
  * @returns {Boolean} true if the history is enabled
  * @description Is historization enabled
  */
-exports.isEnabled = function isEnabled() {
-  return historizationEnabled;
-};
+function isEnabled() {
+  return historizationEnabled
+}
 
 /**
  * @method start
  * @description start historization
  */
-exports.start = function start() {
-  historizationEnabled = true;
-};
+function start() {
+  historizationEnabled = true
+}
 
 /**
  * @method stop
  * @description stop historization
  */
-exports.stop = function stop() {
-  historizationEnabled = false;
-};
+function stop() {
+  historizationEnabled = false
+}
 
 /**
  * @method pushState
  * @param {Object} state new state
  * @description Add a state in the history
  */
-exports.pushState = function pushState(state) {
-  stack.push(state);
-};
+function pushState(state) {
+  stack.push(state)
+}
 
 /**
  * @method state
  * @returns {Object} current state
  * @description get Current state
  */
-exports.state = function state() {
-  return state[state.length - 1];
-};
+function state() {
+  return state[state.length - 1]
+}
 
 /**
  * @method back
  * @returns {Integer} current cursor index
  * @description move backward into the history of state
  */
-exports.back = function back() {
-  var state = stack[cursorIndex];
-  var update = {};
+function back() {
+  let state = stack[cursorIndex]
+  let update = {}
   if (state) {
     switch (state.action) {
       case 'insert':
-        $db[state.collection].remove({
+        $db.collections[state.collection].remove({
           _id: state.id,
-        });
-        $log.historyDocumentRemoved(state.id, state.collection);
-        break;
+        })
+        $log.historyDocumentRemoved(state.id, state.collection)
+        break
       case 'remove':
-        $db[state.collection].insert(JSON.parse(state.oldValue));
-        $log.historyDocumentInserted(
-          state.id,
-          state.collection,
-          state.oldValue
-        );
-        break;
+        $db.collections[state.collection].insert(JSON.parse(state.oldValue))
+        $log.historyDocumentInserted(state.id, state.collection, state.oldValue)
+        break
       case 'update':
-        update[state.field] = JSON.parse(state.oldValue);
+        update[state.field] = JSON.parse(state.oldValue)
 
-        $db[state.collection].update(
+        $db.collections[state.collection].update(
           {
             _id: state.id,
           },
           update
-        );
+        )
         $log.historyDocumentUpdated(
           state.id,
           state.collection,
           state.field,
           state.oldValue
-        );
-        break;
+        )
+        break
       default:
-        break;
+        break
     }
-    cursorIndex = cursorIndex - 1;
+    cursorIndex = cursorIndex - 1
   }
 
-  return cursorIndex;
-};
+  return cursorIndex
+}
 
 /**
  * @method forward
  * @returns {Integer} current cursor index
  * @description move forward into the history of state
  */
-exports.forward = function forward() {
-  cursorIndex = cursorIndex + 1;
-  var state = stack[cursorIndex];
-  var update = {};
+function forward() {
+  cursorIndex = cursorIndex + 1
+  let state = stack[cursorIndex]
+  let update = {}
   if (state) {
     switch (state.action) {
       case 'insert':
-        $db[state.collection].insert(JSON.parse(state.value));
-        $log.historyDocumentInserted(state.id, state.collection, state.value);
-        break;
+        $db.collections[state.collection].insert(JSON.parse(state.value))
+        $log.historyDocumentInserted(state.id, state.collection, state.value)
+        break
       case 'remove':
-        $db[state.collection].remove({
+        $db.collections[state.collection].remove({
           _id: state.id,
-        });
-        $log.historyDocumentRemoved(state.id, state.collection);
-        break;
+        })
+        $log.historyDocumentRemoved(state.id, state.collection)
+        break
       case 'update':
-        update[state.field] = JSON.parse(state.value);
+        update[state.field] = JSON.parse(state.value)
 
-        $db[state.collection].update(
+        $db.collections[state.collection].update(
           {
             _id: state.id,
           },
           update
-        );
+        )
         $log.historyDocumentUpdated(
           state.id,
           state.collection,
           state.field,
           state.value
-        );
-        break;
+        )
+        break
       default:
-        break;
+        break
     }
   }
 
-  return cursorIndex;
-};
+  return cursorIndex
+}
 
 /**
  * @method get
  * @param {}
  * @description Start back/forward from state
  */
-exports.get = function get(index) {
-  var result = null;
+function get(index) {
+  let result = null
   if (index < 0) {
-    result = stack[stack.length + index];
+    result = stack[stack.length + index]
   } else {
-    result = stack[index];
+    result = stack[index]
   }
-  return result;
-};
+  return result
+}
 
 /**
  * @method from
  * @param {Number} index index of the stack
  * @description Start back/forward from state
  */
-exports.from = function from(index) {
+function from(index) {
   if (index === -1) {
-    cursorIndex = stack.length - 1;
+    cursorIndex = stack.length - 1
   } else {
-    cursorIndex = index;
+    cursorIndex = index
   }
-};
+}
 
 /**
  * @method dump
  * @returns {String} a dump of the history
  * @description Dump all the history
  */
-exports.dump = function dump() {
+function dump() {
   return JSON.stringify({
     stack: stack,
-  });
-};
+  })
+}
 
 /**
  * @method load
@@ -220,81 +214,96 @@ exports.dump = function dump() {
  * @returns {Boolean} true if the dump was loaded with no error
  * @description Load a dump of an history
  */
-exports.load = function load(dump) {
-  var noError = true;
+function load(dump) {
+  let noError = true
 
   try {
-    var newStack = {};
-    var update = {};
+    let newStack = {}
+    let update = {}
 
     if (typeof dump === 'string') {
-      newStack = JSON.parse(dump).stack;
+      newStack = JSON.parse(dump).stack
     } else {
-      newStack = dump.stack;
+      newStack = dump.stack
     }
 
     newStack.forEach(function (state) {
       if (state) {
         switch (state.action) {
           case 'insert':
-            if ($db[state.collection]) {
-              $db[state.collection].insert(JSON.parse(state.value));
+            if ($db.collections[state.collection]) {
+              $db.collections[state.collection].insert(JSON.parse(state.value))
               $log.historyDocumentInserted(
                 state.id,
                 state.collection,
                 state.value
-              );
+              )
             } else {
-              noError = false;
+              noError = false
             }
-            break;
+            break
           case 'remove':
-            if ($db[state.collection]) {
-              $db[state.collection].remove({
+            if ($db.collections[state.collection]) {
+              $db.collections[state.collection].remove({
                 _id: state.id,
-              });
-              $log.historyDocumentRemoved(state.id, state.collection);
+              })
+              $log.historyDocumentRemoved(state.id, state.collection)
             } else {
-              noError = false;
+              noError = false
             }
-            break;
+            break
           case 'update':
-            if ($db[state.collection]) {
-              update[state.field] = JSON.parse(state.value);
+            if ($db.collections[state.collection]) {
+              update[state.field] = JSON.parse(state.value)
 
-              $db[state.collection].update(
+              $db.collections[state.collection].update(
                 {
                   _id: state.id,
                 },
                 update
-              );
+              )
 
               $log.historyDocumentUpdated(
                 state.id,
                 state.collection,
                 state.field,
                 state.value
-              );
+              )
             } else {
-              noError = false;
+              noError = false
             }
-            break;
+            break
           default:
-            break;
+            break
         }
       }
-    });
+    })
   } catch (e) {
-    noError = false;
+    noError = false
   }
 
-  return noError;
-};
+  return noError
+}
 
 /**
  * @method clear
  * @description Remove all the states from the memory
  */
-exports.clear = function clear() {
-  stack = [];
-};
+function clear() {
+  stack = []
+}
+
+export default {
+  isEnabled,
+  start,
+  stop,
+  pushState,
+  state,
+  back,
+  forward,
+  get,
+  from,
+  dump,
+  load,
+  clear,
+}

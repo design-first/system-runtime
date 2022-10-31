@@ -27,33 +27,31 @@
  * @description This module contains all the functions that write a log
  */
 
-'use strict';
-
-var $metamodel = require('./metamodel.js');
-var $db = require('./db.js');
-var $component = require('./component.js');
-var $mson = require('./mson.js');
+import $metamodel from './metamodel.js'
+import $db from './db.js'
+import $component from './component.js'
+import $mson from './mson.js'
 
 /* Private properties */
 
-var currentLevel = 'warn';
-var loggerRef = null;
-var fakeLoggerRef = {
+let currentLevel = 'warn' // eslint-disable-line no-unused-vars
+let loggerRef = null
+let fakeLoggerRef = {
   currentLevel: 'warn',
   level: function debug(levelName) {
     if (levelName) {
-      this.currentLevel = levelName;
+      this.currentLevel = levelName
     }
-    return this.currentLevel;
+    return this.currentLevel
   },
   debug: function debug(message) {
     if (this.currentLevel === 'debug') {
-      console.log('runtime: ' + message);
+      console.log('runtime: ' + message)
     }
   },
   info: function info(message) {
     if (this.currentLevel === 'info' || this.currentLevel === 'debug') {
-      console.info('runtime: ' + message);
+      console.info('runtime: ' + message)
     }
   },
   warn: function warning(message) {
@@ -62,7 +60,7 @@ var fakeLoggerRef = {
       this.currentLevel === 'warn' ||
       this.currentLevel === 'debug'
     ) {
-      console.warn('runtime: ' + message);
+      console.warn('runtime: ' + message)
     }
   },
   error: function error(message) {
@@ -72,10 +70,10 @@ var fakeLoggerRef = {
       this.currentLevel === 'debug' ||
       this.currentLevel === 'error'
     ) {
-      console.error('runtime: ' + message);
+      console.error('runtime: ' + message)
     }
   },
-};
+}
 
 /**
  * @method getLogger
@@ -84,29 +82,29 @@ var fakeLoggerRef = {
  * @description Get the _Logger instance
  */
 function getLogger() {
-  var loggerId = '';
-  var loggers = [];
-  var result = null;
+  let loggerId = ''
+  let loggers = []
+  let result = null
 
   if (!$metamodel.getModel('_Logger')) {
-    result = fakeLoggerRef;
+    result = fakeLoggerRef
   } else {
-    loggers = $db._Logger.find();
+    loggers = $db.collections._Logger.find()
     if (loggers.length) {
-      loggerId = loggers[0][$mson.ID];
+      loggerId = loggers[0][$mson.ID]
 
       if ($component.get(loggerId)) {
-        loggerRef = $component.get(loggerId);
-        result = loggerRef;
+        loggerRef = $component.get(loggerId)
+        result = loggerRef
       } else {
-        result = fakeLoggerRef;
+        result = fakeLoggerRef
       }
     } else {
-      result = fakeLoggerRef;
+      result = fakeLoggerRef
     }
   }
 
-  return result;
+  return result
 }
 
 /* Public methods */
@@ -116,9 +114,9 @@ function getLogger() {
  * @param {String} levelName name of the level
  * @description Set the level of the log
  */
-exports.level = function level(levelName) {
-  currentLevel = levelName;
-};
+function level(levelName) {
+  currentLevel = levelName
+}
 
 /**
  * @method unknownProperty
@@ -126,8 +124,8 @@ exports.level = function level(levelName) {
  * @param {Object} schema the schema definition
  * @description A property of a schema is unknown
  */
-exports.unknownProperty = function unknownProperty(propertyName, schema) {
-  var message = '';
+function unknownProperty(propertyName, schema) {
+  let message = ''
 
   if (schema[$mson.NAME]) {
     message =
@@ -135,13 +133,13 @@ exports.unknownProperty = function unknownProperty(propertyName, schema) {
       propertyName +
       "' for the definition of '" +
       schema[$mson.NAME] +
-      "'";
+      "'"
   } else {
-    message = "unknown property '" + propertyName + "' for a model";
+    message = "unknown property '" + propertyName + "' for a model"
   }
 
-  getLogger().warn(message);
-};
+  getLogger().warn(message)
+}
 
 /**
  * @method invalidPropertyType
@@ -150,15 +148,11 @@ exports.unknownProperty = function unknownProperty(propertyName, schema) {
  * @param {String} property the property
  * @description Invalid type for a property
  */
-exports.invalidPropertyType = function invalidPropertyType(
-  propertyName,
-  type,
-  property
-) {
-  var realType =
+function invalidPropertyType(propertyName, type, property) {
+  let realType =
     property && property.constructor
       ? property.constructor.name
-      : typeof property;
+      : typeof property
   getLogger().warn(
     "invalid value for property '" +
       propertyName +
@@ -167,8 +161,8 @@ exports.invalidPropertyType = function invalidPropertyType(
       "' instead of type '" +
       realType +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidEnumValue
@@ -176,11 +170,11 @@ exports.invalidPropertyType = function invalidPropertyType(
  * @param {String} type the type defined by the schema
  * @description Invalid value for type enum
  */
-exports.invalidEnumValue = function invalidEnumValue(value, type) {
+function invalidEnumValue(value, type) {
   getLogger().warn(
     "'" + value + "' is an invalid value for the type enum '" + type + "'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidClassName
@@ -189,11 +183,7 @@ exports.invalidEnumValue = function invalidEnumValue(value, type) {
  * @param {String} constructorName name of the component class
  * @description Invalid class name for a component
  */
-exports.invalidClassName = function invalidClassName(
-  componentId,
-  type,
-  constructorName
-) {
+function invalidClassName(componentId, type, constructorName) {
   getLogger().warn(
     "invalid component '" +
       componentId +
@@ -202,26 +192,26 @@ exports.invalidClassName = function invalidClassName(
       "' instead of '" +
       constructorName +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method missingProperty
  * @param {String} propertyName name of the property
  * @description Missing a property
  */
-exports.missingProperty = function missingProperty(propertyName) {
-  getLogger().warn("property '" + propertyName + "' is missing");
-};
+function missingProperty(propertyName) {
+  getLogger().warn("property '" + propertyName + "' is missing")
+}
 
 /**
  * @method missingImplementation
  * @param {String} name name of the missing schema
  * @description A class definition is missing
  */
-exports.missingImplementation = function missingImplementation(name) {
-  getLogger().warn("schema '" + name + "' is missing");
-};
+function missingImplementation(name) {
+  getLogger().warn("schema '" + name + "' is missing")
+}
 
 /**
  * @method invalidTypeImp
@@ -229,11 +219,11 @@ exports.missingImplementation = function missingImplementation(name) {
  * @param {String} className a class name
  * @description Invalid type for a property of a class definition
  */
-exports.invalidTypeImp = function invalidTypeImp(property, className) {
+function invalidTypeImp(property, className) {
   getLogger().error(
     "the property '" + property + "' of " + className + ' model is invalid'
-  );
-};
+  )
+}
 
 /**
  * @method missingPropertyImp
@@ -241,11 +231,11 @@ exports.invalidTypeImp = function invalidTypeImp(property, className) {
  * @param {String} className a class name
  * @description Missing a property for a class definition
  */
-exports.missingPropertyImp = function missingPropertyImp(property, className) {
+function missingPropertyImp(property, className) {
   getLogger().warn(
     "missing property '" + property + "' in the model '" + className + "'"
-  );
-};
+  )
+}
 
 /**
  * @method unknownPropertyImp
@@ -253,20 +243,20 @@ exports.missingPropertyImp = function missingPropertyImp(property, className) {
  * @param {Object} schema a schema
  * @description Unkown property for a class definition
  */
-exports.unknownPropertyImp = function unknownPropertyImp(property, schema) {
+function unknownPropertyImp(property, schema) {
   getLogger().error(
     "the model '" + schema + "' has an unknown property '" + property + "'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidTypeDefinition
  * @param {String} name a type definition
  * @description  Try to add an invalid type
  */
-exports.invalidTypeDefinition = function invalidTypeDefinition(name) {
-  getLogger().warn("the type '" + name + "' is not valid");
-};
+function invalidTypeDefinition(name) {
+  getLogger().warn("the type '" + name + "' is not valid")
+}
 
 /**
  * @method invalidPropertyName
@@ -277,25 +267,19 @@ exports.invalidTypeDefinition = function invalidTypeDefinition(name) {
  * @param {String} type type defined by the schema
  * @description Invalid property name
  */
-exports.invalidPropertyName = function invalidPropertyName(
-  id,
-  className,
-  propertyName,
-  propertyValue,
-  type
-) {
-  var classInfo = '';
-  var realType = '';
+function invalidPropertyName(id, className, propertyName, propertyValue, type) {
+  let classInfo = ''
+  let realType = ''
 
   if (className !== 'Function') {
-    classInfo = ' (' + className + ' class)';
+    classInfo = ' (' + className + ' class)'
   }
 
   if (typeof type === 'string') {
     realType =
       propertyValue && propertyValue.constructor
         ? propertyValue.constructor.name
-        : typeof propertyValue;
+        : typeof propertyValue
 
     getLogger().warn(
       "invalid value for property '" +
@@ -309,9 +293,9 @@ exports.invalidPropertyName = function invalidPropertyName(
         "' instead of type '" +
         realType +
         "'"
-    );
+    )
   } else {
-    realType = type && type.constructor ? type.constructor.name : typeof type;
+    realType = type && type.constructor ? type.constructor.name : typeof type
 
     getLogger().warn(
       "invalid value for property '" +
@@ -321,9 +305,9 @@ exports.invalidPropertyName = function invalidPropertyName(
         ": expected type 'string' instead of type '" +
         realType +
         "'"
-    );
+    )
   }
-};
+}
 
 /**
  * @method readOnlyProperty
@@ -332,15 +316,11 @@ exports.invalidPropertyName = function invalidPropertyName(
  * @param {String} propertyName name of the property
  * @description Trying to set a read-only property
  */
-exports.readOnlyProperty = function readOnlyProperty(
-  id,
-  className,
-  propertyName
-) {
-  var classInfo = '';
+function readOnlyProperty(id, className, propertyName) {
+  let classInfo = ''
 
   if (className !== 'Function') {
-    classInfo = ' (' + className + ' class)';
+    classInfo = ' (' + className + ' class)'
   }
   getLogger().warn(
     "can not set read-only property '" +
@@ -349,8 +329,8 @@ exports.readOnlyProperty = function readOnlyProperty(
       id +
       "'" +
       classInfo
-  );
-};
+  )
+}
 
 /**
  * @method invalidDocumentOnDbInsert
@@ -358,18 +338,15 @@ exports.readOnlyProperty = function readOnlyProperty(
  * @param {String} collectionName the name of the collection
  * @description Invalid document on a System Runtime database insert operation
  */
-exports.invalidDocumentOnDbInsert = function invalidDocumentOnDbInsert(
-  doc,
-  collectionName
-) {
+function invalidDocumentOnDbInsert(doc, collectionName) {
   getLogger().warn(
     "invalid document '" +
       JSON.stringify(doc).replace(/,/g, ', ') +
       "' (" +
       collectionName +
       ' collection)'
-  );
-};
+  )
+}
 
 /**
  * @method invalidPropertyTypeOnDbUpdate
@@ -380,7 +357,7 @@ exports.invalidDocumentOnDbInsert = function invalidDocumentOnDbInsert(
  * @param {String} type expected type defined by the schema
  * @description  Invalid property on a System Runtime database update operation
  */
-exports.invalidPropertyTypeOnDbUpdate = function invalidPropertyTypeOnDbUpdate(
+function invalidPropertyTypeOnDbUpdate(
   collectionName,
   id,
   propertyName,
@@ -399,8 +376,8 @@ exports.invalidPropertyTypeOnDbUpdate = function invalidPropertyTypeOnDbUpdate(
       "': expected type '" +
       type +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method unknownPropertyOnDbUpdate
@@ -409,11 +386,7 @@ exports.invalidPropertyTypeOnDbUpdate = function invalidPropertyTypeOnDbUpdate(
  * @param {String} id id of the component
  * @description Unkonw property on a System Runtime database update operation
  */
-exports.unknownPropertyOnDbUpdate = function unknownPropertyOnDbUpdate(
-  propertyName,
-  collectionName,
-  id
-) {
+function unknownPropertyOnDbUpdate(propertyName, collectionName, id) {
   getLogger().warn(
     "unknown property '" +
       propertyName +
@@ -422,8 +395,8 @@ exports.unknownPropertyOnDbUpdate = function unknownPropertyOnDbUpdate(
       "' (" +
       collectionName +
       ' collection)'
-  );
-};
+  )
+}
 
 /**
  * @method unknownMethod
@@ -431,30 +404,30 @@ exports.unknownPropertyOnDbUpdate = function unknownPropertyOnDbUpdate(
  * @param {String} methodName name of the method
  * @description Call an unknown method of a class
  */
-exports.unknownMethod = function unknownMethod(classId, methodName) {
+function unknownMethod(classId, methodName) {
   getLogger().warn(
     "try to call an unknown action '" +
       methodName +
       "' for the class '" +
       classId +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidCollectionName
  * @param {String} name name of the collection
  * @description Try to create an invalid DatabaseCollection
  */
-exports.invalidCollectionName = function invalidCollectionName(name) {
+function invalidCollectionName(name) {
   getLogger().warn(
     "invalid name for the collection '" +
       name +
       "': there is no schema '" +
       name +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidResultType
@@ -465,17 +438,11 @@ exports.invalidCollectionName = function invalidCollectionName(name) {
  * @param {String} type current type
  * @description Invalid type result of a method
  */
-exports.invalidResultType = function invalidResultType(
-  id,
-  className,
-  methodName,
-  expectedType,
-  type
-) {
-  var classInfo = '';
+function invalidResultType(id, className, methodName, expectedType, type) {
+  let classInfo = ''
 
   if (className !== 'Function') {
-    classInfo = ' (' + className + ' class)';
+    classInfo = ' (' + className + ' class)'
   }
 
   getLogger().warn(
@@ -490,8 +457,8 @@ exports.invalidResultType = function invalidResultType(
       "' instead of type '" +
       type +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method unknownComponent
@@ -499,11 +466,11 @@ exports.invalidResultType = function invalidResultType(
  * @param {String} componentId id of the component
  * @description Unknown class
  */
-exports.unknownComponent = function unknownComponent(className, componentId) {
+function unknownComponent(className, componentId) {
   getLogger().warn(
     "unkown class name '" + className + "' for component '" + componentId + "'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidParamNumber
@@ -512,15 +479,11 @@ exports.unknownComponent = function unknownComponent(className, componentId) {
  * @param {String} methodName name of the component
  * @description invalid parameter number for a method
  */
-exports.invalidParamNumber = function invalidParamNumber(
-  id,
-  className,
-  methodName
-) {
-  var classInfo = '';
+function invalidParamNumber(id, className, methodName) {
+  let classInfo = ''
 
   if (className !== 'Function') {
-    classInfo = ' (' + className + ' class)';
+    classInfo = ' (' + className + ' class)'
   }
 
   getLogger().warn(
@@ -530,8 +493,8 @@ exports.invalidParamNumber = function invalidParamNumber(
       id +
       "'" +
       classInfo
-  );
-};
+  )
+}
 
 /**
  * @method invalidParamType
@@ -541,16 +504,11 @@ exports.invalidParamNumber = function invalidParamNumber(
  * @param {String} paramName name of the parameter
  * @description  Invalid type parameters for a method
  */
-exports.invalidParamType = function invalidParamType(
-  id,
-  className,
-  methodName,
-  paramName
-) {
-  var classInfo = '';
+function invalidParamType(id, className, methodName, paramName) {
+  let classInfo = ''
 
   if (className !== 'Function') {
-    classInfo = ' (' + className + ' class)';
+    classInfo = ' (' + className + ' class)'
   }
   if (paramName !== undefined) {
     getLogger().warn(
@@ -562,7 +520,7 @@ exports.invalidParamType = function invalidParamType(
         id +
         "'" +
         classInfo
-    );
+    )
   } else {
     getLogger().warn(
       "invalid type for a parameter when calling the action '" +
@@ -571,9 +529,9 @@ exports.invalidParamType = function invalidParamType(
         id +
         "'" +
         classInfo
-    );
+    )
   }
-};
+}
 
 /**
  * @method behaviorNotUnique
@@ -581,15 +539,15 @@ exports.invalidParamType = function invalidParamType(
  * @param {String} stateName name of the state
  * @description Add a more than one behavior to a state
  */
-exports.behaviorNotUnique = function behaviorNotUnique(id, stateName) {
+function behaviorNotUnique(id, stateName) {
   getLogger().warn(
     "try to add more than one action for the state '" +
       stateName +
       "' on class '" +
       id +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidStateOn
@@ -597,15 +555,15 @@ exports.behaviorNotUnique = function behaviorNotUnique(id, stateName) {
  * @param {String} stateName name of the state
  * @description Can not add a behavior with an invalid state
  */
-exports.invalidStateOn = function invalidStateOn(id, stateName) {
+function invalidStateOn(id, stateName) {
   getLogger().warn(
     "try to add an action to an unkwown state '" +
       stateName +
       "' on class '" +
       id +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidStateOff
@@ -613,23 +571,23 @@ exports.invalidStateOn = function invalidStateOn(id, stateName) {
  * @param {String} stateName name of the state
  * @description The call to a remove state of the behavior module is invalid
  */
-exports.invalidStateOff = function invalidStateOff(id, stateName) {
+function invalidStateOff(id, stateName) {
   getLogger().warn(
     "try to remove an action from an unkwown state '" +
       stateName +
       "' on class '" +
       id +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method masterSystemNotFound
  * @description The master system is not found
  */
-exports.masterSystemNotFound = function masterSystemNotFound() {
-  getLogger().warn('can not export the database because no system was defined');
-};
+function masterSystemNotFound() {
+  getLogger().warn('can not export the database because no system was defined')
+}
 
 /**
  * @method invalidType
@@ -638,9 +596,9 @@ exports.masterSystemNotFound = function masterSystemNotFound() {
  * @param {String} typeName expected type defined by the schema
  * @description Invalid type
  */
-exports.invalidType = function invalidType(name, value, typeName) {
-  var realType =
-    name && value.constructor ? value.constructor.name : typeof value;
+function invalidType(name, value, typeName) {
+  let realType =
+    name && value.constructor ? value.constructor.name : typeof value
 
   getLogger().warn(
     "invalid value for property '" +
@@ -650,8 +608,8 @@ exports.invalidType = function invalidType(name, value, typeName) {
       "' instead of type '" +
       realType +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidConfiguration
@@ -659,20 +617,20 @@ exports.invalidType = function invalidType(name, value, typeName) {
  * @param {String} type expected type for the configuration
  * @description Invalid class name
  */
-exports.invalidConfiguration = function invalidConfiguration(obj, type) {
+function invalidConfiguration(obj, type) {
   getLogger().warn(
     "invalid type for '" + JSON.stringify(obj) + "': expected '" + type + "'"
-  );
-};
+  )
+}
 
 /**
  * @method unknownType
  * @param {String} value value
  * @description Unknown type
  */
-exports.unknownType = function unknownType(value) {
-  getLogger().warn("unknown type for value '" + JSON.stringify(value) + "'");
-};
+function unknownType(value) {
+  getLogger().warn("unknown type for value '" + JSON.stringify(value) + "'")
+}
 
 /**
  * @method unknownPath
@@ -680,11 +638,11 @@ exports.unknownType = function unknownType(value) {
  * @param {String} path subpath
  * @description Unknown subpath in a path
  */
-exports.unknownPath = function unknownPath(path, subpath) {
+function unknownPath(path, subpath) {
   getLogger().warn(
     "the path '" + path + "' has an unkown subpath '" + subpath + "'"
-  );
-};
+  )
+}
 
 /**
  * @method canNotYetValidate
@@ -692,15 +650,15 @@ exports.unknownPath = function unknownPath(path, subpath) {
  * @param {String} className name of the class
  * @description A component has not been alreay validated
  */
-exports.canNotYetValidate = function canNotYetValidate(id, className) {
+function canNotYetValidate(id, className) {
   getLogger().debug(
     "can not yet validate if the document '" +
       id +
       "' is compliant with " +
       className +
       ' model'
-  );
-};
+  )
+}
 
 /**
  * @method invalidChannelEvent
@@ -709,11 +667,7 @@ exports.canNotYetValidate = function canNotYetValidate(id, className) {
  * @param {String} type expected type
  * @description A message send by the channel is invalid
  */
-exports.invalidChannelEvent = function invalidChannelEvent(
-  message,
-  eventName,
-  type
-) {
+function invalidChannelEvent(message, eventName, type) {
   getLogger().warn(
     "invalid type for the message '" +
       JSON.stringify(message) +
@@ -722,8 +676,8 @@ exports.invalidChannelEvent = function invalidChannelEvent(
       "' for event '" +
       eventName +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidParamNumberMethodOn
@@ -732,15 +686,11 @@ exports.invalidChannelEvent = function invalidChannelEvent(
  * @param {String} methodName name of the component
  * @description invalid parameter number for a behavior add with 'on' method
  */
-exports.invalidParamNumberMethodOn = function invalidParamNumberMethodOn(
-  id,
-  className,
-  methodName
-) {
-  var classInfo = '';
+function invalidParamNumberMethodOn(id, className, methodName) {
+  let classInfo = ''
 
   if (className !== 'Function') {
-    classInfo = ' (' + className + ' class)';
+    classInfo = ' (' + className + ' class)'
   }
   getLogger().warn(
     "invalid number of parameters when adding an action for the state '" +
@@ -749,8 +699,8 @@ exports.invalidParamNumberMethodOn = function invalidParamNumberMethodOn(
       id +
       "'" +
       classInfo
-  );
-};
+  )
+}
 
 /**
  * @method updateUuid
@@ -759,7 +709,7 @@ exports.invalidParamNumberMethodOn = function invalidParamNumberMethodOn(
  * @param {Boolean} alreadyUsed newId already used
  * @description Change the id of a component
  */
-exports.updateUuid = function updateUuid(currentId, newId, alreadyUsed) {
+function updateUuid(currentId, newId, alreadyUsed) {
   if (alreadyUsed) {
     getLogger().warn(
       "try to update a component of id '" +
@@ -767,7 +717,7 @@ exports.updateUuid = function updateUuid(currentId, newId, alreadyUsed) {
         "' with the new id '" +
         newId +
         "' that is already used"
-    );
+    )
   } else {
     getLogger().warn(
       "try to update a component of id '" +
@@ -775,46 +725,46 @@ exports.updateUuid = function updateUuid(currentId, newId, alreadyUsed) {
         "' with the new id '" +
         newId +
         "'"
-    );
+    )
   }
-};
+}
 
 /**
  * @method invalidUseOfComponent
  * @param {String} id id of the component
  * @description Try to change the state of a component that has been destroyed
  */
-exports.invalidUseOfComponent = function invalidUseOfComponent(id) {
+function invalidUseOfComponent(id) {
   getLogger().warn(
     "try to change the state of the destroyed component '" + id + "'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidSchema
  * @param {String} name name of the schema
  * @description Try to add an invalid schema
  */
-exports.invalidSchema = function invalidSchema(name) {
+function invalidSchema(name) {
   getLogger().warn(
     "the schema '" +
       name +
       "' is not valid, it has been removed from the metamodel"
-  );
-};
+  )
+}
 
 /**
  * @method invalidModel
  * @param {String} name name of the model
  * @description Try to add an invalid model
  */
-exports.invalidModel = function invalidModel(name) {
+function invalidModel(name) {
   getLogger().warn(
     "the model '" +
       name +
       "' is not valid, it has been removed from the metamodel"
-  );
-};
+  )
+}
 
 /**
  * @method invalidParameters
@@ -822,8 +772,8 @@ exports.invalidModel = function invalidModel(name) {
  * @param {String} document document
  * @description Invalid parameters set when creating an instance of a class
  */
-exports.invalidParameters = function invalidParameters(classId, document) {
-  var id = document && document._id ? document._id : '';
+function invalidParameters(classId, document) {
+  let id = document && document._id ? document._id : ''
 
   getLogger().warn(
     "the parameters for creating '" +
@@ -831,8 +781,8 @@ exports.invalidParameters = function invalidParameters(classId, document) {
       "' component (" +
       classId +
       ' model) are not compliant with the model'
-  );
-};
+  )
+}
 
 /**
  * @method destroyedComponentCall
@@ -840,18 +790,15 @@ exports.invalidParameters = function invalidParameters(classId, document) {
  * @param {String} id id of the component
  * @description Try to get the property of a destroyed component
  */
-exports.destroyedComponentCall = function destroyedComponentCall(
-  propertyName,
-  id
-) {
+function destroyedComponentCall(propertyName, id) {
   getLogger().warn(
     "trying to get the property '" +
       propertyName +
       "' on the destroyed component '" +
       id +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidConctructorParameters
@@ -859,55 +806,52 @@ exports.destroyedComponentCall = function destroyedComponentCall(
  * @param {String} name schema name
  * @description Invalid parameter type  when creating an instance of a class
  */
-exports.invalidConctructorParameters = function invalidConctructorParameters(
-  object,
-  name
-) {
+function invalidConctructorParameters(object, name) {
   getLogger().warn(
     "the constructor parameter '" +
       JSON.stringify(object).replace(/,/g, ', ') +
       "' for creating a component of class '" +
       name +
       "' is not an object"
-  );
-};
+  )
+}
 
 /**
  * @method unknownModel
  * @param {String} classId id of the class
  * @description Get the information of an unkown model
  */
-exports.unknownModel = function unknownModel(classId) {
-  getLogger().warn("the model '" + classId + "' does not exist");
-};
+function unknownModel(classId) {
+  getLogger().warn("the model '" + classId + "' does not exist")
+}
 
 /**
  * @method missingSchema
  * @param {String} name name of the schema
  * @description A schema is missing
  */
-exports.missingSchema = function missingSchema(name) {
-  getLogger().warn("the schema '" + name + "' is missing");
-};
+function missingSchema(name) {
+  getLogger().warn("the schema '" + name + "' is missing")
+}
 
 /**
  * @method missingSchema
  * @param {String} name name of the schema where the cyclic dependency was found
  * @description A cyclic dependency was found
  */
-exports.cyclicDependency = function cyclicDependency(name) {
+function cyclicDependency(name) {
   if (name) {
     getLogger().error(
       "a cyclic inheritance dependency with the schema '" +
         name +
         "’ has been found, please check the '_inherit' property of this schema"
-    );
+    )
   } else {
     getLogger().error(
       "a cyclic inheritance dependency has been found, please check the '_inherit' properties of the schemas"
-    );
+    )
   }
-};
+}
 
 /**
  * @method invalidEnumType
@@ -916,12 +860,12 @@ exports.cyclicDependency = function cyclicDependency(name) {
  * @param {String} type typeName of the type
  * @description Invalid type for a type enum
  */
-exports.invalidEnumType = function invalidEnumType(value, typeName, type) {
-  var realType = '';
+function invalidEnumType(value, typeName, type) {
+  let realType = ''
 
   if (typeof type !== 'undefined' && type !== typeof value) {
     realType =
-      value && value.constructor ? value.constructor.name : typeof value;
+      value && value.constructor ? value.constructor.name : typeof value
     getLogger().warn(
       "invalid type for the type '" +
         typeName +
@@ -930,73 +874,73 @@ exports.invalidEnumType = function invalidEnumType(value, typeName, type) {
         "' instead of type '" +
         realType +
         "'"
-    );
+    )
   } else {
-    getLogger().warn("invalid type for the type '" + typeName + "'");
+    getLogger().warn("invalid type for the type '" + typeName + "'")
   }
-};
+}
 
 /**
  * @method loadSchema
  * @param {String} name name of the schema
  * @description Load schema
  */
-exports.loadSchema = function loadSchema(name) {
-  getLogger().debug("load schema '" + name + "'");
-};
+function loadSchema(name) {
+  getLogger().debug("load schema '" + name + "'")
+}
 
 /**
  * @method loadModel
  * @param {String} name name of the model
  * @description Load model
  */
-exports.loadModel = function loadModel(name) {
-  getLogger().debug("load model '" + name + "'");
-};
+function loadModel(name) {
+  getLogger().debug("load model '" + name + "'")
+}
 
 /**
  * @method loadType
  * @param {String} name name of the type
  * @description Load type
  */
-exports.loadType = function loadType(name) {
-  getLogger().debug("load type '" + name + "'");
-};
+function loadType(name) {
+  getLogger().debug("load type '" + name + "'")
+}
 
 /**
  * @method generatingSchema
  * @param {String} name name of the schema
  * @description Generate schema
  */
-exports.generatingSchema = function generatingSchema(name) {
-  getLogger().debug('generating ' + name + ' schema ...');
-};
+function generatingSchema(name) {
+  getLogger().debug('generating ' + name + ' schema ...')
+}
 
 /**
  * @method checkModel
  * @param {String} name name of the model
  * @description Check model
  */
-exports.checkModel = function checkModel(name) {
-  getLogger().debug('analyzing ' + name + ' model...');
-};
+function checkModel(name) {
+  getLogger().debug('analyzing ' + name + ' model...')
+}
 
 /**
  * @method createClass
  * @param {String} name name of the class
  * @description Create class
  */
-exports.createClass = function createClass(name) {
-  getLogger().debug(name + ' class has been created');
-};
+function createClass(name) {
+  getLogger().debug(name + ' class has been created')
+}
 
 /**
  * @method initDb
  * @description Init the database
  */
-exports.initDb = function initDb() {
-  getLogger().debug('initializing data store...');
-};
+function initDb() {
+  getLogger().debug('initializing data store...')
+}
 
 /**
  * @method actionInvokeError
@@ -1006,12 +950,7 @@ exports.initDb = function initDb() {
  * @param {String} message
  * @description An error happened when invoking a behavior
  */
-exports.actionInvokeError = function actionInvokeError(
-  state,
-  id,
-  className,
-  message
-) {
+function actionInvokeError(state, id, className, message) {
   if (className !== 'Function') {
     getLogger().error(
       "error when calling the action '" +
@@ -1022,7 +961,7 @@ exports.actionInvokeError = function actionInvokeError(
         className +
         ' class): ' +
         message
-    );
+    )
   } else {
     getLogger().error(
       "error when calling the action '" +
@@ -1031,9 +970,9 @@ exports.actionInvokeError = function actionInvokeError(
         id +
         "': " +
         message
-    );
+    )
   }
-};
+}
 
 /**
  * @method invalidSchemaPropertyName
@@ -1041,18 +980,15 @@ exports.actionInvokeError = function actionInvokeError(
  * @param {String} propName name of the property
  * @description Invalid name for the property of a schema
  */
-exports.invalidSchemaPropertyName = function invalidSchemaPropertyName(
-  name,
-  propName
-) {
+function invalidSchemaPropertyName(name, propName) {
   getLogger().warn(
     "invalid name '" +
       propName +
       "' for schema '" +
       name +
       "': a property name can not begin with '_'"
-  );
-};
+  )
+}
 
 /**
  * @method invalidSchemaProperty
@@ -1060,28 +996,28 @@ exports.invalidSchemaPropertyName = function invalidSchemaPropertyName(
  * @param {String} propName name of the property
  * @description Invalid name for the property of a schema
  */
-exports.invalidSchemaProperty = function invalidSchemaProperty(name, propName) {
+function invalidSchemaProperty(name, propName) {
   getLogger().warn(
     "invalid property '" +
       propName +
       "' for schema '" +
       name +
       "': only 'property', 'link', 'collection', 'method' and 'event' are allowed"
-  );
-};
+  )
+}
 
 /**
  * @method invalidPropertyFormat
  * @param {String} obj definition of a property
  * @description Invalid format for the definition of a property
  */
-exports.invalidPropertyFormat = function invalidPropertyFormat(obj) {
+function invalidPropertyFormat(obj) {
   getLogger().warn(
     "invalid format for a definition of a property: '" +
       obj +
       "' is not an object"
-  );
-};
+  )
+}
 
 /**
  * @method invalidState
@@ -1089,11 +1025,11 @@ exports.invalidPropertyFormat = function invalidPropertyFormat(obj) {
  * @param {String} state invalid state
  * @description Invalid state
  */
-exports.invalidState = function invalidState(model, state) {
+function invalidState(model, state) {
   getLogger().warn(
     "invalid state '" + state + "' for the model '" + model + "'"
-  );
-};
+  )
+}
 
 /**
  * @method unknownContext
@@ -1101,15 +1037,15 @@ exports.invalidState = function invalidState(model, state) {
  * @param {String} methodName name of the method
  * @description Invoke a method class without a context
  */
-exports.unknownContext = function unknownContext(className, methodName) {
+function unknownContext(className, methodName) {
   getLogger().warn(
     "invoke the action '" +
       methodName +
       "' on the class '" +
       className +
       "' without a valid context"
-  );
-};
+  )
+}
 
 /**
  * @method historyDocumentInserted
@@ -1118,11 +1054,7 @@ exports.unknownContext = function unknownContext(className, methodName) {
  * @param {String} document
  * @description Created document from history
  */
-exports.historyDocumentInserted = function historyDocumentInserted(
-  id,
-  collectionName,
-  doc
-) {
+function historyDocumentInserted(id, collectionName, doc) {
   getLogger().debug(
     "Created component of id '" +
       id +
@@ -1131,8 +1063,8 @@ exports.historyDocumentInserted = function historyDocumentInserted(
       " collection) with document '" +
       doc +
       "'"
-  );
-};
+  )
+}
 
 /**
  * @method historyDocumentRemoved
@@ -1140,14 +1072,11 @@ exports.historyDocumentInserted = function historyDocumentInserted(
  * @param {String} collectionName collectionName of the component
  * @description Removed document from history
  */
-exports.historyDocumentRemoved = function historyDocumentRemoved(
-  id,
-  collectionName
-) {
+function historyDocumentRemoved(id, collectionName) {
   getLogger().debug(
     "Destroyed component of id '" + id + "' (" + collectionName + ' collection)'
-  );
-};
+  )
+}
 
 /**
  * @method historyDocumentUpdated
@@ -1157,12 +1086,7 @@ exports.historyDocumentRemoved = function historyDocumentRemoved(
  * @param {String} value value of the field
  * @description Updated document from history
  */
-exports.historyDocumentUpdated = function historyDocumentRemoved(
-  id,
-  collectionName,
-  fieldName,
-  value
-) {
+function historyDocumentUpdated(id, collectionName, fieldName, value) {
   getLogger().debug(
     "Updated field '" +
       fieldName +
@@ -1173,8 +1097,8 @@ exports.historyDocumentUpdated = function historyDocumentRemoved(
       "' (" +
       collectionName +
       ' collection)'
-  );
-};
+  )
+}
 
 /**
  * @method invalidCollectionItem
@@ -1183,17 +1107,17 @@ exports.historyDocumentUpdated = function historyDocumentRemoved(
  * @param {String} constructorName name of the component class
  * @description Invalid class name for a component
  */
-exports.invalidCollectionItem = function invalidCollectionItem(
+function invalidCollectionItem(
   id,
   className,
   propertyName,
   propertyValue,
   type
 ) {
-  var classInfo = '';
+  let classInfo = ''
 
   if (className !== 'Function') {
-    classInfo = ' (' + className + ' class)';
+    classInfo = ' (' + className + ' class)'
   }
 
   getLogger().warn(
@@ -1208,5 +1132,69 @@ exports.invalidCollectionItem = function invalidCollectionItem(
       "' for all items of the collection '" +
       JSON.stringify(propertyValue) +
       "'"
-  );
-};
+  )
+}
+
+export default {
+  level,
+  unknownProperty,
+  invalidPropertyType,
+  invalidEnumValue,
+  invalidClassName,
+  missingProperty,
+  missingImplementation,
+  invalidTypeImp,
+  missingPropertyImp,
+  unknownPropertyImp,
+  invalidTypeDefinition,
+  invalidPropertyName,
+  readOnlyProperty,
+  invalidDocumentOnDbInsert,
+  invalidPropertyTypeOnDbUpdate,
+  unknownPropertyOnDbUpdate,
+  unknownMethod,
+  invalidCollectionName,
+  invalidResultType,
+  unknownComponent,
+  invalidParamNumber,
+  invalidParamType,
+  behaviorNotUnique,
+  invalidStateOn,
+  invalidStateOff,
+  masterSystemNotFound,
+  invalidType,
+  invalidConfiguration,
+  unknownType,
+  unknownPath,
+  canNotYetValidate,
+  invalidChannelEvent,
+  invalidParamNumberMethodOn,
+  updateUuid,
+  invalidUseOfComponent,
+  invalidSchema,
+  invalidModel,
+  invalidParameters,
+  destroyedComponentCall,
+  invalidConctructorParameters,
+  unknownModel,
+  missingSchema,
+  cyclicDependency,
+  invalidEnumType,
+  loadSchema,
+  loadModel,
+  loadType,
+  generatingSchema,
+  checkModel,
+  createClass,
+  initDb,
+  actionInvokeError,
+  invalidSchemaPropertyName,
+  invalidSchemaProperty,
+  invalidPropertyFormat,
+  invalidState,
+  unknownContext,
+  historyDocumentInserted,
+  historyDocumentRemoved,
+  historyDocumentUpdated,
+  invalidCollectionItem,
+}

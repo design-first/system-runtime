@@ -1,63 +1,20 @@
 {
-  "root": true,
-  "parserOptions": {
-    "ecmaVersion": 6
-  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:mocha/recommended"
+  ],
   "env": {
-    "node": true
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "globals": {
+    "expect": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
   },
   "rules": {
-    "no-new-object": 1,
-    "no-array-constructor": 1,
-    "array-callback-return": 1,
-    "one-var": ["warn", "never"],
-    "indent": ["warn", 2, { "SwitchCase": 1 }],
-    "wrap-iife": 1,
-    "no-loop-func": 1,
-    "no-duplicate-imports": 1,
-    "dot-notation": 1,
-    "no-restricted-properties": 1,
-    "no-undef": 1,
-    "no-multi-assign": 1,
-    "eqeqeq": 1,
-    "no-case-declarations": 1,
-    "no-nested-ternary": 1,
-    "no-unneeded-ternary": 1,
-    "nonblock-statement-body-position": 1,
-    "brace-style": 1,
-    "spaced-comment": 1,
-    "space-before-blocks": 1,
-    "keyword-spacing": 1,
-    "space-infix-ops": 1,
-    "eol-last": 1,
-    "newline-per-chained-call": 0,
-    "no-whitespace-before-property": 1,
-    "space-in-parens": 1,
-    "array-bracket-spacing": 1,
-    "object-curly-spacing": 1,
-    "comma-style": 1,
-    "comma-dangle": 0,
-    "semi": 1,
-    "no-new-wrappers": 1,
-    "radix": 1,
-    "camelcase": 1,
-    "new-cap": 1,
-    "no-restricted-globals": 1
-  },
-  "overrides": [
-    {
-      "files": ["*-spec.js"],
-      "rules": {
-        "no-undef": 0,
-        "indent": 0,
-        "newline-per-chained-call": 0
-      }
-    },
-    {
-      "files": ["Gruntfile.js"],
-      "rules": {
-        "camelcase": 0
-      }
-    }
-  ]
+    "no-prototype-builtins": 0
+  }
 }

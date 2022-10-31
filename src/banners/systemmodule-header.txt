@@ -18,19 +18,18 @@
  * limitations under the License.
  */
 
+/* !! This file has been generated, do not edit it !! */
+
 /**
  * @module system
  * @description This module contains System Runtime core system.
  */
-
-'use strict';
-
 
 /* Public properties */
 
 
 /**
  * System Runtime core system
- * @property {_System} system
+ * @property {Object} system
  */
-exports.system = 
+export default {system:

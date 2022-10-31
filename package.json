@@ -1,6 +1,6 @@
 {
   "name": "system-runtime",
-  "version": "5.1.0",
+  "version": "6.0.0",
   "description": "A JavaScript library that runs systems",
   "homepage": "https://designfirst.io/systemruntime/",
   "keywords": [
@@ -17,6 +17,7 @@
     "runtime",
     "bundle"
   ],
+  "type": "module",
   "main": "./src/runtime.js",
   "author": {
     "name": "erwan carriou",
@@ -31,38 +32,33 @@
     "url": "https://github.com/design-first/system-runtime/issues"
   },
   "scripts": {
-    "dev": "grunt dev",
-    "test": "grunt test",
-    "clean": "grunt clean",
-    "build": "grunt build",
-    "coveralls": "grunt coveralls",
-    "prepare": "husky install"
+    "build": "grunt system && rollup --config rollup.config.js && grunt licence && prettier --write src/system.js",
+    "example": "serve",
+    "prettier": "prettier --write src/",
+    "lint": "eslint --ext .js src/",
+    "prepare": "husky install",
+    "test": "mocha && cypress run"
   },
   "devDependencies": {
+    "@rollup/plugin-terser": "0.1.0",
     "chai": "4.3.6",
-    "coveralls": "3.1.1",
+    "cypress": "10.11.0",
+    "eslint": "8.26.0",
+    "eslint-plugin-mocha": "10.1.0",
     "grunt": "1.5.3",
-    "grunt-browserify": "6.0.0",
     "grunt-cli": "1.4.3",
     "grunt-contrib-clean": "2.0.1",
     "grunt-contrib-concat": "2.1.0",
-    "grunt-contrib-uglify": "5.2.2",
-    "grunt-contrib-watch": "1.1.0",
-    "grunt-eslint": "24.0.0",
     "grunt-json-merge": "0.2.2",
-    "grunt-karma": "4.0.2",
-    "grunt-mocha-istanbul": "5.0.2",
     "husky": "8.0.1",
-    "istanbul": "0.4.5",
-    "karma": "6.4.0",
-    "karma-chai": "0.1.0",
-    "karma-chrome-launcher": "3.1.1",
-    "karma-coverage": "2.2.0",
-    "karma-mocha": "2.0.1",
-    "karma-script-launcher": "1.0.0",
     "lint-staged": "13.0.3",
     "load-grunt-tasks": "5.1.0",
-    "mocha": "10.0.0",
-    "prettier": "2.7.1"
+    "mocha": "10.1.0",
+    "prettier": "2.7.1",
+    "rollup": "3.2.3",
+    "serve": "14.0.1"
+  },
+  "engines": {
+    "node": ">= 16.0.0"
   }
 }

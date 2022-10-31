@@ -6,12 +6,12 @@ Read the [documentation](https://designfirst.io/systemruntime/documentation/docs
 
 ## For issues
 
-Give the following informations related to your problem: 
+Give the following informations related to your problem:
 
-- [ ] System Runtime version number (ex: *v1.9.9*)
-- [ ] If the problem occured client-side: your browser name and  version (ex: *Safari Version 10.1.2*)
-- [ ] If the problem occured server-side: Node version (ex: *v8.2.1*)
-- [ ] You OS version (ex: *macOS 10.12.6*)
+- [ ] System Runtime version number (ex: _v1.9.9_)
+- [ ] If the problem occured client-side: your browser name and version (ex: _Safari Version 10.1.2_)
+- [ ] If the problem occured server-side: Node version (ex: _v8.2.1_)
+- [ ] You OS version (ex: _macOS 10.12.6_)
 - [ ] Steps to reproduce the problem
 
 ## For contributing to System Runtime codebase

@@ -31,17 +31,15 @@
  * creates the component classes and related DatabaseCollections.
  */
 
-'use strict';
-
-var $db = require('./db.js');
-var $log = require('./log.js');
-var $component = require('./component.js');
-var $helper = require('./helper.js');
-var $mson = require('./mson.js');
+import $db from './db.js'
+import $log from './log.js'
+import $component from './component.js'
+import $helper from './helper.js'
+import $mson from './mson.js'
 
 /* Private properties */
 
-var store = {
+let store = {
   inheritance: {},
   inheritanceTree: {},
   schemas: {},
@@ -50,7 +48,7 @@ var store = {
   generatedModels: {},
   states: {},
   type: {},
-};
+}
 
 /* Private methods */
 
@@ -61,12 +59,12 @@ var store = {
  * @description is name an internal name
  */
 function isInternalName(name) {
-  var result = true;
+  let result = true
 
   if ($mson.INTERNAL_NAMES.indexOf(name) === -1) {
-    result = false;
+    result = false
   }
-  return result;
+  return result
 }
 
 /**
@@ -75,57 +73,57 @@ function isInternalName(name) {
  * @description Generate the models
  */
 function generateModels() {
-  var att = '';
-  var name = '';
-  var schemaName = '';
-  var schema = {};
-  var schemaDef = null;
-  var modelName = '';
-  var modelParent = null;
-  var modelExt = null;
-  var modelDef = null;
-  var model = {};
-  var mergedModel = {};
-  var parents = [];
-  var length = 0;
-  var i = 0;
-  var j = 0;
-  var nbAncestors = 0;
-  var sortInheritTree = [];
+  let att = ''
+  let name = ''
+  let schemaName = ''
+  let schema = {}
+  let schemaDef = null
+  let modelName = ''
+  let modelParent = null
+  let modelExt = null
+  let modelDef = null
+  let model = {}
+  let mergedModel = {}
+  let parents = []
+  let length = 0
+  let i = 0
+  let j = 0
+  let nbAncestors = 0
+  let sortInheritTree = []
 
   // default values
   for (schemaName in store.generatedSchemas) {
-    schema = store.generatedSchemas[schemaName];
+    schema = store.generatedSchemas[schemaName]
 
     // set model internal properties
     model = {
       _name: schema[$mson.NAME],
-    };
+    }
 
     // set _core
     if (typeof schema[$mson.CORE] !== 'undefined') {
-      model[$mson.CORE] = schema[$mson.CORE];
+      model[$mson.CORE] = schema[$mson.CORE]
     }
 
     // set inherit
     if (Array.isArray(schema[$mson.INHERIT])) {
-      model[$mson.INHERIT] = schema[$mson.INHERIT];
+      model[$mson.INHERIT] = schema[$mson.INHERIT]
     }
 
     // set class
     if (typeof schema[$mson.CLASS] !== 'undefined') {
-      model[$mson.CLASS] = schema[$mson.CLASS];
+      model[$mson.CLASS] = schema[$mson.CLASS]
     }
 
     // set description
     if (typeof schema[$mson.DESCRIPTION] !== 'undefined') {
-      model[$mson.DESCRIPTION] = schema[$mson.DESCRIPTION];
+      model[$mson.DESCRIPTION] = schema[$mson.DESCRIPTION]
     }
 
     // check valid name
     for (att in schema) {
       if (!isInternalName(att) && att.indexOf('_') === 0) {
-        $log.invalidSchemaPropertyName(schema[$mson.NAME], att);
+        $log.invalidSchemaPropertyName(schema[$mson.NAME], att)
       }
     }
 
@@ -140,8 +138,8 @@ function generateModels() {
             default: '',
             description: att,
             label: att,
-          };
-          break;
+          }
+          break
         case schema[att] === 'link':
           model[att] = {
             type: '_Component',
@@ -150,8 +148,8 @@ function generateModels() {
             default: '',
             description: att,
             label: att,
-          };
-          break;
+          }
+          break
         case schema[att] === 'method':
           model[att] = {
             params: [
@@ -176,8 +174,8 @@ function generateModels() {
             ],
             result: 'any',
             description: att,
-          };
-          break;
+          }
+          break
         case schema[att] === 'event':
           model[att] = {
             params: [
@@ -201,8 +199,8 @@ function generateModels() {
               },
             ],
             description: att,
-          };
-          break;
+          }
+          break
         case schema[att] === 'collection':
           model[att] = {
             type: ['_Component'],
@@ -211,70 +209,70 @@ function generateModels() {
             default: [],
             description: att,
             label: att,
-          };
-          break;
+          }
+          break
         default:
           if (!isInternalName(att)) {
-            $log.invalidSchemaProperty(schema[$mson.NAME], att);
+            $log.invalidSchemaProperty(schema[$mson.NAME], att)
           }
-          break;
+          break
       }
     }
 
-    store.generatedModels[model[$mson.NAME]] = model;
+    store.generatedModels[model[$mson.NAME]] = model
   }
 
   // models to override
   for (modelName in store.generatedModels) {
-    model = store.generatedModels[modelName];
-    name = model[$mson.NAME];
-    modelExt = store.models[name];
+    model = store.generatedModels[modelName]
+    name = model[$mson.NAME]
+    modelExt = store.models[name]
     if (modelExt) {
-      mergedModel = merge(modelExt, model);
-      store.generatedModels[name] = mergedModel;
+      mergedModel = merge(modelExt, model)
+      store.generatedModels[name] = mergedModel
     }
   }
 
   // inheritance
-  sortInheritTree = sortInheritanceTree();
+  sortInheritTree = sortInheritanceTree()
 
-  nbAncestors = sortInheritTree.length;
+  nbAncestors = sortInheritTree.length
   for (i = 0; i < nbAncestors; i++) {
-    modelName = sortInheritTree[i];
-    model = store.generatedModels[modelName];
+    modelName = sortInheritTree[i]
+    model = store.generatedModels[modelName]
 
     if (model) {
-      parents = exports.getParents(modelName);
-      parents.reverse();
+      parents = getParents(modelName)
+      parents.reverse()
 
-      length = parents.length;
+      length = parents.length
       for (j = 0; j < length; j++) {
-        name = parents[j];
-        modelParent = store.generatedModels[name];
+        name = parents[j]
+        modelParent = store.generatedModels[name]
         if (modelParent) {
-          mergedModel = merge(modelParent, model);
-          store.generatedModels[modelName] = mergedModel;
+          mergedModel = merge(modelParent, model)
+          store.generatedModels[modelName] = mergedModel
         }
       }
 
       // last inherit
       // is the overriden model
-      modelExt = store.models[modelName];
+      modelExt = store.models[modelName]
       if (modelExt) {
-        mergedModel = merge(modelExt, store.generatedModels[modelName]);
-        store.generatedModels[modelName] = mergedModel;
+        mergedModel = merge(modelExt, store.generatedModels[modelName])
+        store.generatedModels[modelName] = mergedModel
       }
     }
   }
 
   // save
   for (schemaName in store.generatedSchemas) {
-    schemaDef = store.generatedSchemas[schemaName];
-    $db._GeneratedSchema.insert(schemaDef);
+    schemaDef = store.generatedSchemas[schemaName]
+    $db.collections._GeneratedSchema.insert(schemaDef)
   }
   for (modelName in store.generatedModels) {
-    modelDef = store.generatedModels[modelName];
-    $db._GeneratedModel.insert(modelDef);
+    modelDef = store.generatedModels[modelName]
+    $db.collections._GeneratedModel.insert(modelDef)
   }
 }
 
@@ -284,72 +282,72 @@ function generateModels() {
  * @description Load schemas and types in memory
  */
 function loadInMemory() {
-  var schemas = [];
-  var types = [];
-  var schema = null;
-  var model = {};
-  var models = [];
-  var type = null;
-  var name = '';
-  var inherit = '';
-  var i = 0;
-  var length = 0;
+  let schemas = []
+  let types = []
+  let schema = null
+  let model = {}
+  let models = []
+  let type = null
+  let name = ''
+  let inherit = ''
+  let i = 0
+  let length = 0
 
   // init store
-  store.inheritance = {};
-  store.inheritanceTree = {};
-  store.schemas = {};
-  store.generatedSchemas = {};
-  store.models = {};
-  store.generatedModels = {};
-  store.states = {};
-  store.type = {};
+  store.inheritance = {}
+  store.inheritanceTree = {}
+  store.schemas = {}
+  store.generatedSchemas = {}
+  store.models = {}
+  store.generatedModels = {}
+  store.states = {}
+  store.type = {}
 
   // load schemas
-  schemas = $db._Schema.find({});
+  schemas = $db.collections._Schema.find({})
 
-  length = schemas.length;
+  length = schemas.length
   for (i = 0; i < length; i++) {
-    schema = schemas[i];
+    schema = schemas[i]
 
-    name = schema[$mson.NAME];
-    inherit = schema[$mson.INHERIT];
+    name = schema[$mson.NAME]
+    inherit = schema[$mson.INHERIT]
 
-    store.schemas[name] = schema;
+    store.schemas[name] = schema
     if (inherit) {
-      store.inheritance[name] = inherit;
+      store.inheritance[name] = inherit
     }
 
     if (!schema[$mson.CORE]) {
-      $log.loadSchema(name);
+      $log.loadSchema(name)
     }
   }
 
   // load models
-  models = $db._Model.find({});
+  models = $db.collections._Model.find({})
 
-  length = models.length;
+  length = models.length
   for (i = 0; i < length; i++) {
-    model = models[i];
-    name = model[$mson.NAME];
+    model = models[i]
+    name = model[$mson.NAME]
 
-    store.models[name] = model;
+    store.models[name] = model
 
     if (!model[$mson.CORE]) {
-      $log.loadModel(name);
+      $log.loadModel(name)
     }
   }
 
   // load types
-  types = $db._Type.find({});
+  types = $db.collections._Type.find({})
 
-  length = types.length;
+  length = types.length
   for (i = 0; i < length; i++) {
-    type = types[i];
-    store.type[type.name] = type;
+    type = types[i]
+    store.type[type.name] = type
 
     if (!type.core) {
-      $log.loadType(type.name);
+      $log.loadType(type.name)
     }
   }
 }
@@ -360,9 +358,9 @@ function loadInMemory() {
  * @description Create the inheritance tree
  */
 function createInheritanceTree() {
-  var name = '';
-  var c3linerization = [];
-  var ancestors = [];
+  let name = ''
+  let c3linerization = []
+  let ancestors = []
 
   /**
    *
@@ -372,17 +370,17 @@ function createInheritanceTree() {
    * @description  Check if we have finisehd to linerize
    */
   function _isEmpty(elts) {
-    var i = 0;
-    var length = 0;
-    var result = true;
+    let i = 0
+    let length = 0
+    let result = true
 
-    length = elts.length;
+    length = elts.length
     for (i = 0; i < length; i++) {
       if (elts[i].length) {
-        result = false;
+        result = false
       }
     }
-    return result;
+    return result
   }
 
   /**
@@ -392,18 +390,18 @@ function createInheritanceTree() {
    * @description Remove an elt from all the arrays
    */
   function _removeCandidate(elt, elts) {
-    var i = 0;
-    var length = 0;
-    var arr = [];
+    let i = 0
+    let length = 0
+    let arr = []
 
-    length = elts.length;
+    length = elts.length
     for (i = 0; i < length; i++) {
       if (elts[i].indexOf(elt) === 0) {
-        arr = elts[i];
-        arr.reverse();
-        arr.pop();
-        arr.reverse();
-        elts[i] = arr;
+        arr = elts[i]
+        arr.reverse()
+        arr.pop()
+        arr.reverse()
+        elts[i] = arr
       }
     }
   }
@@ -417,18 +415,18 @@ function createInheritanceTree() {
    * @description Check the element is a good candidate
    */
   function _isCandidate(elt, elts) {
-    var result = true;
-    var i = 0;
-    var length = 0;
+    let result = true
+    let i = 0
+    let length = 0
 
-    length = elts.length;
+    length = elts.length
     for (i = 0; i < length; i++) {
       if (elts[i].indexOf(elt) > 0) {
-        result = false;
+        result = false
       }
     }
 
-    return result;
+    return result
   }
 
   /**
@@ -439,19 +437,19 @@ function createInheritanceTree() {
    * @description Find a candidate and return it.
    */
   function _findCandidate(elts) {
-    var i = 0;
-    var length = 0;
-    var result = [];
+    let i = 0
+    let length = 0
+    let result = []
 
-    length = elts.length;
+    length = elts.length
     for (i = 0; i < length; i++) {
       if (_isCandidate(elts[i][0], elts)) {
-        result.push(elts[i][0]);
-        _removeCandidate(elts[i][0], elts);
-        break;
+        result.push(elts[i][0])
+        _removeCandidate(elts[i][0], elts)
+        break
       }
     }
-    return result;
+    return result
   }
 
   /**
@@ -462,19 +460,19 @@ function createInheritanceTree() {
    * @description Merge the arrays
    */
   function _merge(elts) {
-    var result = [];
-    var candidates = [];
+    let result = []
+    let candidates = []
 
-    candidates = _findCandidate(elts);
+    candidates = _findCandidate(elts)
     while (candidates[0] !== undefined) {
-      result = result.concat(candidates);
-      candidates = _findCandidate(elts);
+      result = result.concat(candidates)
+      candidates = _findCandidate(elts)
     }
 
     if (!_isEmpty(elts)) {
-      $log.cyclicDependency();
+      $log.cyclicDependency()
     }
-    return result;
+    return result
   }
 
   /**
@@ -485,10 +483,10 @@ function createInheritanceTree() {
    * @description Start the linerieation from an element
    */
   function _linerize(name) {
-    var result = [];
-    var parents = [];
-    var i = 0;
-    var length = 0;
+    let result = []
+    let parents = []
+    let i = 0
+    let length = 0
 
     /**
      * @method _checkCyclicDep
@@ -499,46 +497,46 @@ function createInheritanceTree() {
      * @description Check if there is a cyclic dependency
      */
     function _checkCyclicDep(name, item) {
-      var isCyclicDeb = false;
+      let isCyclicDeb = false
 
       if (
         Array.isArray(store.inheritance[item]) &&
         store.inheritance[item].indexOf(name) !== -1
       ) {
-        $log.cyclicDependency(name);
-        isCyclicDeb = true;
+        $log.cyclicDependency(name)
+        isCyclicDeb = true
       }
-      return isCyclicDeb;
+      return isCyclicDeb
     }
 
     if (Array.isArray(store.inheritance[name])) {
-      parents = store.inheritance[name].slice();
+      parents = store.inheritance[name].slice()
     } else {
-      $log.missingSchema(name);
+      $log.missingSchema(name)
     }
 
-    length = parents.length;
+    length = parents.length
     for (i = 0; i < length; i++) {
       if (_checkCyclicDep(name, parents[i])) {
-        parents = [];
-        break;
+        parents = []
+        break
       }
     }
 
     if (parents.length) {
-      result = [name].concat(_merge(parents.map(_linerize).concat([parents])));
+      result = [name].concat(_merge(parents.map(_linerize).concat([parents])))
     } else {
-      result = [name];
+      result = [name]
     }
-    return result;
+    return result
   }
 
   for (name in store.inheritance) {
-    c3linerization = _linerize(name);
-    ancestors = c3linerization.reverse();
-    ancestors.pop();
+    c3linerization = _linerize(name)
+    ancestors = c3linerization.reverse()
+    ancestors.pop()
     if (ancestors.length) {
-      store.inheritanceTree[name] = ancestors;
+      store.inheritanceTree[name] = ancestors
     }
   }
 }
@@ -551,30 +549,30 @@ function createInheritanceTree() {
  * @description Extend a schema with the properties of its parent
  */
 function extend(name) {
-  var sonExtend = {};
-  var son = store.schemas[name];
-  var ancestors = store.inheritanceTree[name];
-  var length = 0;
-  var i = 0;
-  var ancestor = null;
-  var prop = '';
+  let sonExtend = {}
+  let son = store.schemas[name]
+  let ancestors = store.inheritanceTree[name]
+  let length = 0
+  let i = 0
+  let ancestor = null
+  let prop = ''
 
   if (ancestors) {
-    length = ancestors.length;
-    ancestors.reverse();
+    length = ancestors.length
+    ancestors.reverse()
   }
   for (i = 0; i < length; i++) {
-    ancestor = store.schemas[ancestors[i]];
+    ancestor = store.schemas[ancestors[i]]
     for (prop in ancestor) {
       if (prop.indexOf('_') !== 0) {
-        sonExtend[prop] = ancestor[prop];
+        sonExtend[prop] = ancestor[prop]
       }
     }
   }
   for (prop in son) {
-    sonExtend[prop] = son[prop];
+    sonExtend[prop] = son[prop]
   }
-  return sonExtend;
+  return sonExtend
 }
 
 /**
@@ -584,28 +582,28 @@ function extend(name) {
  * @description Get sorted InheritanceTree structure
  */
 function sortInheritanceTree() {
-  var result = [];
-  var temp = {};
-  var keys = [];
-  var modelName = '';
-  var nbAncestors = 0;
+  let result = []
+  let temp = {}
+  let keys = []
+  let modelName = ''
+  let nbAncestors = 0
 
   for (modelName in store.inheritanceTree) {
-    nbAncestors = store.inheritanceTree[modelName].length;
+    nbAncestors = store.inheritanceTree[modelName].length
     if (typeof temp[nbAncestors] === 'undefined') {
-      temp[nbAncestors] = [];
+      temp[nbAncestors] = []
     }
-    temp[nbAncestors].push(modelName);
+    temp[nbAncestors].push(modelName)
   }
 
-  keys = Object.keys(temp).sort();
+  keys = Object.keys(temp).sort()
   keys.forEach(function (index) {
     temp[index].forEach(function (model) {
-      result.push(model);
-    });
-  });
+      result.push(model)
+    })
+  })
 
-  return result;
+  return result
 }
 
 /**
@@ -614,14 +612,14 @@ function sortInheritanceTree() {
  * @description Generate the schemas
  */
 function generateSchemas() {
-  var name = '';
+  let name = ''
 
   for (name in store.schemas) {
     if (!store.schemas[name][$mson.CORE]) {
-      $log.generatingSchema(name);
+      $log.generatingSchema(name)
     }
 
-    store.generatedSchemas[name] = extend(name);
+    store.generatedSchemas[name] = extend(name)
   }
 }
 
@@ -631,21 +629,21 @@ function generateSchemas() {
  * @description Test if all the models are compliants with their schemas
  */
 function checkModels() {
-  var name = '';
-  var classDef = null;
-  var schema = '';
+  let name = ''
+  let classDef = null
+  let schema = ''
 
   for (name in store.generatedModels) {
-    classDef = store.generatedModels[name];
+    classDef = store.generatedModels[name]
     if (classDef) {
-      schema = store.generatedSchemas[name];
+      schema = store.generatedSchemas[name]
       if (schema) {
         if (!classDef[$mson.CORE]) {
-          $log.checkModel(name);
+          $log.checkModel(name)
         }
-        checkImp(classDef, schema);
+        checkImp(classDef, schema)
       } else {
-        $log.missingImplementation(name);
+        $log.missingImplementation(name)
       }
     }
   }
@@ -657,27 +655,27 @@ function checkModels() {
  * @description Get all the states of a schema
  */
 function getStates() {
-  var name = '';
-  var schema = null;
-  var type = '';
-  var states = [];
-  var attribute = '';
+  let name = ''
+  let schema = null
+  let type = ''
+  let states = []
+  let attribute = ''
 
   for (name in store.generatedSchemas) {
-    states = [];
-    schema = store.generatedSchemas[name];
+    states = []
+    schema = store.generatedSchemas[name]
     if (schema) {
       for (attribute in schema) {
-        type = schema[attribute];
+        type = schema[attribute]
         if (
           attribute.indexOf('_') !== 0 &&
           $mson.INTERNAL_TYPES.indexOf(type) !== -1
         ) {
-          states.push(attribute);
+          states.push(attribute)
         }
       }
     }
-    store.states[name] = states;
+    store.states[name] = states
   }
 }
 
@@ -689,8 +687,8 @@ function getStates() {
  * @description Test if a schema is compliant with its schema
  */
 function checkImp(classDef, classImp) {
-  var property = '';
-  var value = null;
+  let property = ''
+  let value = null
 
   for (property in classImp) {
     if (
@@ -702,12 +700,12 @@ function checkImp(classDef, classImp) {
       property !== $mson.CORE
     ) {
       if (typeof classDef[property] !== 'undefined') {
-        value = classDef[property];
+        value = classDef[property]
         if (!checkSchema(value, classImp[property])) {
-          $log.invalidTypeImp(property, classDef[$mson.NAME]);
+          $log.invalidTypeImp(property, classDef[$mson.NAME])
         }
       } else {
-        $log.missingPropertyImp(property, classDef[$mson.NAME]);
+        $log.missingPropertyImp(property, classDef[$mson.NAME])
       }
     }
   }
@@ -722,7 +720,7 @@ function checkImp(classDef, classImp) {
       property !== $mson.CORE
     ) {
       if (typeof classImp[property] === 'undefined') {
-        $log.unknownPropertyImp(property, classDef[$mson.NAME]);
+        $log.unknownPropertyImp(property, classDef[$mson.NAME])
       }
     }
   }
@@ -737,14 +735,14 @@ function checkImp(classDef, classImp) {
  * @description Test if a value has the correct type
  */
 function checkSchema(value, type) {
-  var result = true;
+  let result = true
 
   if (hasType(type, 'string') && $mson.DEFAULT_TYPES.indexOf(type) !== -1) {
-    result = hasType(value, type);
+    result = hasType(value, type)
   } else {
-    result = checkCustomSchema(value, type);
+    result = checkCustomSchema(value, type)
   }
-  return result;
+  return result
 }
 
 /**
@@ -756,40 +754,40 @@ function checkSchema(value, type) {
  * @description Test if a value has correct custom type
  */
 function checkCustomSchema(value, typeName) {
-  var result = true;
-  var typeDef = store.type[typeName];
-  var length = 0;
-  var i = 0;
+  let result = true
+  let typeDef = store.type[typeName]
+  let length = 0
+  let i = 0
 
   if (!hasType(typeDef, 'undefined')) {
     if (!hasType(value, 'undefined')) {
       if (typeDef.type === 'array') {
-        length = value.length;
+        length = value.length
         for (i = 0; i < length; i++) {
           if (!hasType(typeDef.schema, 'undefined')) {
-            result = exports.isValidSchema(value[i], typeDef.schema);
+            result = isValidSchema(value[i], typeDef.schema)
           } else {
-            result = exports.isValidType(value[i], typeDef.type);
+            result = isValidType(value[i], typeDef.type)
           }
           if (result === false) {
-            break;
+            break
           }
         }
       } else {
         if (!hasType(typeDef.schema, 'undefined')) {
-          result = exports.isValidSchema(value, typeDef.schema);
+          result = isValidSchema(value, typeDef.schema)
         } else {
-          result = exports.isValidType(value, typeDef.type);
+          result = isValidType(value, typeDef.type)
         }
       }
     } else {
-      result = false;
+      result = false
     }
   } else {
-    result = false;
+    result = false
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -798,16 +796,16 @@ function checkCustomSchema(value, typeName) {
  * @description Init the Database stucture
  */
 function initDbStructure() {
-  $db.collection('_Logger');
-  $db.collection('_Schema');
-  $db.collection('_GeneratedSchema');
-  $db.collection('_Model');
-  $db.collection('_GeneratedModel');
-  $db.collection('_Behavior');
-  $db.collection('_Type');
-  $db.collection('_Message');
-  $db.collection('_Channel');
-  $db.collection('_History');
+  $db.collection('_Logger')
+  $db.collection('_Schema')
+  $db.collection('_GeneratedSchema')
+  $db.collection('_Model')
+  $db.collection('_GeneratedModel')
+  $db.collection('_Behavior')
+  $db.collection('_Type')
+  $db.collection('_Message')
+  $db.collection('_Channel')
+  $db.collection('_History')
 }
 
 /**
@@ -816,16 +814,16 @@ function initDbStructure() {
  * @description Create the Database structure (i.e. DatabaseCollection)
  */
 function createDbStructure() {
-  var modelName = '';
-  var modelDef = {};
+  let modelName = ''
+  let modelDef = {}
 
   for (modelName in store.generatedModels) {
-    modelDef = store.generatedModels[modelName];
+    modelDef = store.generatedModels[modelName]
     if (
-      typeof $db[modelDef[$mson.NAME]] === 'undefined' &&
+      typeof $db.collections[modelDef[$mson.NAME]] === 'undefined' &&
       modelDef[$mson.CLASS] !== false
     ) {
-      $db.collection(modelDef[$mson.NAME]);
+      $db.collection(modelDef[$mson.NAME])
     }
   }
 }
@@ -836,17 +834,17 @@ function createDbStructure() {
  * @description Create all the classes of the model
  */
 function createClass() {
-  var modelName = '';
-  var modelDef = {};
+  let modelName = ''
+  let modelDef = {}
 
   for (modelName in store.generatedModels) {
-    modelDef = store.generatedModels[modelName];
+    modelDef = store.generatedModels[modelName]
     if (modelDef[$mson.CLASS] !== false) {
       $component.create({
         model: modelName,
-      });
+      })
       if (!modelDef[$mson.CORE]) {
-        $log.createClass(modelName);
+        $log.createClass(modelName)
       }
     }
   }
@@ -860,7 +858,7 @@ function createClass() {
  * @description Get the real name of the referenced class
  */
 function getRealClassName(value) {
-  return value.trim();
+  return value.trim()
 }
 
 /**
@@ -871,7 +869,7 @@ function getRealClassName(value) {
  * @description Get the real name of the referenced type
  */
 function getRealTypeName(value) {
-  return value.replace('{', '').replace('}', '').trim();
+  return value.replace('{', '').replace('}', '').trim()
 }
 
 /**
@@ -882,12 +880,12 @@ function getRealTypeName(value) {
  * @description Is the value a custom type
  */
 function isCustomType(value) {
-  var result =
+  let result =
     hasType(value, 'string') &&
     $mson.DEFAULT_TYPES.indexOf(value) === -1 &&
-    !exports.isClassName(value);
+    !isClassName(value)
 
-  return result;
+  return result
 }
 
 /**
@@ -897,7 +895,7 @@ function isCustomType(value) {
  * @description Is the value reference a type value
  */
 function isTypeReference(value) {
-  return value.indexOf('{') !== -1;
+  return value.indexOf('{') !== -1
 }
 
 /**
@@ -908,7 +906,7 @@ function isTypeReference(value) {
  * @description Is the value a model path
  */
 function isModelPath(value) {
-  return value.indexOf('.') !== -1;
+  return value.indexOf('.') !== -1
 }
 
 /**
@@ -919,18 +917,18 @@ function isModelPath(value) {
  * @description Get the real type of a value
  */
 function getRealType(value) {
-  var type = '';
+  let type = ''
 
   if (Array.isArray(value)) {
-    type = 'array';
+    type = 'array'
   } else {
-    type = typeof value;
+    type = typeof value
   }
   if (value === 'any') {
-    type = 'any';
+    type = 'any'
   }
 
-  return type;
+  return type
 }
 
 /**
@@ -941,14 +939,14 @@ function getRealType(value) {
  * @description Get the class name of an object
  */
 function getClassName(obj) {
-  var result = '';
+  let result = ''
 
   if (obj && obj.constructor) {
-    result = obj.constructor.name;
+    result = obj.constructor.name
   } else {
-    result = typeof obj;
+    result = typeof obj
   }
-  return result;
+  return result
 }
 
 /**
@@ -960,7 +958,7 @@ function getClassName(obj) {
  * @description Check if the value is a valid enum value
  */
 function isValidEnumValue(value, enumValue) {
-  return enumValue.indexOf(value) !== -1;
+  return enumValue.indexOf(value) !== -1
 }
 
 /**
@@ -970,30 +968,30 @@ function isValidEnumValue(value, enumValue) {
  * @description Check if a value has the specified type
  */
 function hasType(value, type) {
-  var result = true;
-  var date = null;
+  let result = true
+  let date = null
 
   switch (type) {
     case 'array':
-      result = Array.isArray(value);
-      break;
+      result = Array.isArray(value)
+      break
     case 'date':
       if (typeof value === 'string') {
-        date = new Date(value);
-        result = !isNaN(date.getDate());
+        date = new Date(value)
+        result = !isNaN(date.getDate())
       } else {
-        result = value instanceof Date;
+        result = value instanceof Date
       }
-      break;
+      break
     case 'any':
-      result = true;
-      break;
+      result = true
+      break
     default:
-      result = type === typeof value;
-      break;
+      result = type === typeof value
+      break
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -1005,22 +1003,22 @@ function hasType(value, type) {
  * @description Check if an attribute of the schema has a specific type
  */
 function checkType(name, id, type) {
-  var result = false;
-  var componentSchema = store.generatedModels[id];
-  var attributeType = '';
+  let result = false
+  let componentSchema = store.generatedModels[id]
+  let attributeType = ''
 
   if (componentSchema && componentSchema[$mson.NAME]) {
-    componentSchema = store.generatedSchemas[componentSchema[$mson.NAME]];
+    componentSchema = store.generatedSchemas[componentSchema[$mson.NAME]]
   }
 
   if (componentSchema) {
-    attributeType = componentSchema[name.split('.')[0]];
+    attributeType = componentSchema[name.split('.')[0]]
     if (attributeType === type) {
-      result = true;
+      result = true
     }
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -1031,15 +1029,15 @@ function checkType(name, id, type) {
  * @description Merge two schemas
  */
 function merge(source, target) {
-  var propName = '';
-  var result = target;
+  let propName = ''
+  let result = target
 
   for (propName in source) {
     if (source.hasOwnProperty(propName) && propName.indexOf('_') !== 0) {
-      result[propName] = source[propName];
+      result[propName] = source[propName]
     }
   }
-  return result;
+  return result
 }
 
 /**
@@ -1051,14 +1049,14 @@ function merge(source, target) {
  * @description Init a configuration depending of the context
  */
 function initConfiguration(name, type, isMethod) {
-  var result = null;
-  var typeDef = [];
-  var schemaDef = [];
-  var defaultValue = '';
+  let result = null
+  let typeDef = []
+  let schemaDef = []
+  let defaultValue = ''
 
   switch (true) {
     case name === '=>':
-      break;
+      break
     case typeof type === 'string' && type === 'boolean':
       if (isMethod) {
         result = {
@@ -1066,16 +1064,16 @@ function initConfiguration(name, type, isMethod) {
           type: 'boolean',
           mandatory: false,
           default: false,
-        };
+        }
       } else {
         result = {
           type: 'boolean',
           readOnly: false,
           mandatory: false,
           default: false,
-        };
+        }
       }
-      break;
+      break
     case typeof type === 'string' && type === 'string':
       if (isMethod) {
         result = {
@@ -1083,16 +1081,16 @@ function initConfiguration(name, type, isMethod) {
           type: 'string',
           mandatory: false,
           default: '',
-        };
+        }
       } else {
         result = {
           type: 'string',
           readOnly: false,
           mandatory: false,
           default: '',
-        };
+        }
       }
-      break;
+      break
     case typeof type === 'string' && type === 'number':
       if (isMethod) {
         result = {
@@ -1100,16 +1098,16 @@ function initConfiguration(name, type, isMethod) {
           type: 'number',
           mandatory: false,
           default: 0,
-        };
+        }
       } else {
         result = {
           type: 'number',
           readOnly: false,
           mandatory: false,
           default: 0,
-        };
+        }
       }
-      break;
+      break
     case typeof type === 'string' && type === 'object':
       if (isMethod) {
         result = {
@@ -1117,16 +1115,16 @@ function initConfiguration(name, type, isMethod) {
           type: 'object',
           mandatory: false,
           default: {},
-        };
+        }
       } else {
         result = {
           type: 'object',
           readOnly: false,
           mandatory: false,
           default: {},
-        };
+        }
       }
-      break;
+      break
     case typeof type === 'string' && type === 'array':
       if (isMethod) {
         result = {
@@ -1134,16 +1132,16 @@ function initConfiguration(name, type, isMethod) {
           type: 'array',
           mandatory: false,
           default: [],
-        };
+        }
       } else {
         result = {
           type: 'array',
           readOnly: false,
           mandatory: false,
           default: [],
-        };
+        }
       }
-      break;
+      break
     case typeof type === 'string' && type === 'date':
       if (isMethod) {
         result = {
@@ -1151,16 +1149,16 @@ function initConfiguration(name, type, isMethod) {
           type: 'date',
           mandatory: false,
           default: '1970-01-01T00:00:00.000Z',
-        };
+        }
       } else {
         result = {
           type: 'date',
           readOnly: false,
           mandatory: false,
           default: '1970-01-01T00:00:00.000Z',
-        };
+        }
       }
-      break;
+      break
     case typeof type === 'string' && type === 'any':
       if (isMethod) {
         result = {
@@ -1168,36 +1166,36 @@ function initConfiguration(name, type, isMethod) {
           type: 'any',
           mandatory: false,
           default: null,
-        };
+        }
       } else {
         result = {
           type: 'any',
           readOnly: false,
           mandatory: false,
           default: '',
-        };
+        }
       }
-      break;
+      break
     // link / custom type
     case typeof type === 'string':
-      defaultValue = {};
+      defaultValue = {}
 
       // case of enumeration
-      typeDef = $db._Type.find({
+      typeDef = $db.collections._Type.find({
         name: type,
-      });
+      })
       if (typeDef.length) {
         if (typeDef[0].value) {
-          defaultValue = typeDef[0].value[0];
+          defaultValue = typeDef[0].value[0]
         }
       }
 
       // case of link
-      schemaDef = $db._Schema.find({
+      schemaDef = $db.collections._Schema.find({
         _name: type,
-      });
+      })
       if (schemaDef.length) {
-        defaultValue = '';
+        defaultValue = ''
       }
 
       if (isMethod) {
@@ -1206,16 +1204,16 @@ function initConfiguration(name, type, isMethod) {
           type: type,
           mandatory: false,
           default: defaultValue,
-        };
+        }
       } else {
         result = {
           type: type,
           readOnly: false,
           mandatory: false,
           default: defaultValue,
-        };
+        }
       }
-      break;
+      break
     case Array.isArray(type) && type[0] === 'boolean':
       if (isMethod) {
         result = {
@@ -1223,16 +1221,16 @@ function initConfiguration(name, type, isMethod) {
           type: ['boolean'],
           mandatory: false,
           default: [],
-        };
+        }
       } else {
         result = {
           type: ['boolean'],
           readOnly: false,
           mandatory: false,
           default: [],
-        };
+        }
       }
-      break;
+      break
     case Array.isArray(type) && type[0] === 'string':
       if (isMethod) {
         result = {
@@ -1240,16 +1238,16 @@ function initConfiguration(name, type, isMethod) {
           type: ['string'],
           mandatory: false,
           default: '',
-        };
+        }
       } else {
         result = {
           type: ['string'],
           readOnly: false,
           mandatory: false,
           default: '',
-        };
+        }
       }
-      break;
+      break
     case Array.isArray(type) && type[0] === 'number':
       if (isMethod) {
         result = {
@@ -1257,16 +1255,16 @@ function initConfiguration(name, type, isMethod) {
           type: ['number'],
           mandatory: false,
           default: [],
-        };
+        }
       } else {
         result = {
           type: ['number'],
           readOnly: false,
           mandatory: false,
           default: [],
-        };
+        }
       }
-      break;
+      break
     case Array.isArray(type) && type[0] === 'object':
       if (isMethod) {
         result = {
@@ -1274,16 +1272,16 @@ function initConfiguration(name, type, isMethod) {
           type: ['object'],
           mandatory: false,
           default: [],
-        };
+        }
       } else {
         result = {
           type: ['object'],
           readOnly: false,
           mandatory: false,
           default: [],
-        };
+        }
       }
-      break;
+      break
     case Array.isArray(type) && type[0] === 'date':
       if (isMethod) {
         result = {
@@ -1291,16 +1289,16 @@ function initConfiguration(name, type, isMethod) {
           type: ['date'],
           mandatory: false,
           default: [],
-        };
+        }
       } else {
         result = {
           type: ['date'],
           readOnly: false,
           mandatory: false,
           default: [],
-        };
+        }
       }
-      break;
+      break
     case Array.isArray(type) && type[0] === 'any':
       if (isMethod) {
         result = {
@@ -1308,16 +1306,16 @@ function initConfiguration(name, type, isMethod) {
           type: ['any'],
           mandatory: false,
           default: [],
-        };
+        }
       } else {
         result = {
           type: ['any'],
           readOnly: false,
           mandatory: false,
           default: [],
-        };
+        }
       }
-      break;
+      break
     case Array.isArray(type):
       if (isMethod) {
         result = {
@@ -1325,21 +1323,21 @@ function initConfiguration(name, type, isMethod) {
           type: type,
           mandatory: false,
           default: [],
-        };
+        }
       } else {
         result = {
           type: type,
           readOnly: false,
           mandatory: false,
           default: [],
-        };
+        }
       }
-      break;
+      break
     default:
-      break;
+      break
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -1349,11 +1347,11 @@ function initConfiguration(name, type, isMethod) {
  * @description Create a full model definition from a model
  */
 function generateConfiguration(model) {
-  var propName = '';
-  var paramPropName = '';
-  var methodConf = {};
+  let propName = ''
+  let paramPropName = ''
+  let methodConf = {}
 
-  model = JSON.parse(JSON.stringify(model));
+  model = JSON.parse(JSON.stringify(model))
 
   for (propName in model) {
     if (model.hasOwnProperty(propName) && propName.indexOf('_') !== 0) {
@@ -1361,8 +1359,8 @@ function generateConfiguration(model) {
         // property type
         case typeof model[propName] === 'string' ||
           Array.isArray(model[propName]):
-          model[propName] = initConfiguration(propName, model[propName], false);
-          break;
+          model[propName] = initConfiguration(propName, model[propName], false)
+          break
 
         // property configuration
         case typeof model[propName] === 'object' &&
@@ -1370,8 +1368,8 @@ function generateConfiguration(model) {
           model[propName] = merge(
             model[propName],
             initConfiguration(propName, model[propName].type || 'any')
-          );
-          break;
+          )
+          break
 
         // method / event
         case typeof model[propName] === 'object' &&
@@ -1379,13 +1377,13 @@ function generateConfiguration(model) {
           methodConf = {
             params: [],
             result: 'any',
-          };
+          }
 
           for (paramPropName in model[propName]) {
             // parameter type
             if (typeof model[propName][paramPropName] === 'string') {
               if (paramPropName === '=>') {
-                methodConf.result = model[propName][paramPropName];
+                methodConf.result = model[propName][paramPropName]
               } else {
                 methodConf.params.push(
                   initConfiguration(
@@ -1393,7 +1391,7 @@ function generateConfiguration(model) {
                     model[propName][paramPropName],
                     true
                   )
-                );
+                )
               }
             }
             // parameter configuration
@@ -1404,17 +1402,17 @@ function generateConfiguration(model) {
                   paramPropName,
                   model[propName][paramPropName].type || 'any'
                 )
-              );
+              )
             }
           }
-          model[propName] = methodConf;
-          break;
+          model[propName] = methodConf
+          break
         default:
-          break;
+          break
       }
     }
   }
-  return model;
+  return model
 }
 
 /* Public methods */
@@ -1426,33 +1424,33 @@ function generateConfiguration(model) {
  * @returns {String} id of the schema
  * @description Add a new schema to the metamodel
  */
-exports.schema = function schema(name, schema) {
-  var id = null;
-  var result = [];
-  var schemaName = '';
-  var mergedSchema = {};
-  var schemas = [];
+function schema(name, schema) {
+  let id = null
+  let result = []
+  let schemaName = ''
+  let mergedSchema = {}
+  let schemas = []
 
   if (typeof schema === 'undefined' || Object.keys(schema).length === 0) {
     if (typeof name === 'string') {
-      schema = {};
-      schema[$mson.NAME] = name;
-      schemaName = name;
+      schema = {}
+      schema[$mson.NAME] = name
+      schemaName = name
     } else {
-      schema = JSON.parse(JSON.stringify(name));
-      schemaName = schema[$mson.NAME];
+      schema = JSON.parse(JSON.stringify(name))
+      schemaName = schema[$mson.NAME]
     }
   } else {
-    schema = JSON.parse(JSON.stringify(schema));
-    schema[$mson.NAME] = name;
-    schemaName = schema[$mson.NAME];
+    schema = JSON.parse(JSON.stringify(schema))
+    schema[$mson.NAME] = name
+    schemaName = schema[$mson.NAME]
   }
 
   if (typeof schema[$mson.ID] === 'undefined') {
-    schema[$mson.ID] = $helper.generateId();
+    schema[$mson.ID] = $helper.generateId()
   }
   if (typeof schema[$mson.INHERIT] === 'undefined') {
-    schema[$mson.INHERIT] = ['_Component'];
+    schema[$mson.INHERIT] = ['_Component']
   }
 
   /**
@@ -1462,99 +1460,99 @@ exports.schema = function schema(name, schema) {
    * @description remove duplicate parents in the list of parents
    */
   function _removeDuplicate(inherits) {
-    var filteredList = [];
-    var list = {};
+    let filteredList = []
+    let list = {}
 
     inherits.forEach(function (name) {
-      var cleanName = name.trim();
+      let cleanName = name.trim()
       if (typeof list[cleanName] === 'undefined') {
-        list[cleanName] = cleanName;
-        filteredList.push(cleanName);
+        list[cleanName] = cleanName
+        filteredList.push(cleanName)
       }
-    });
+    })
 
-    return filteredList;
+    return filteredList
   }
 
-  schema[$mson.INHERIT] = _removeDuplicate(schema[$mson.INHERIT]);
+  schema[$mson.INHERIT] = _removeDuplicate(schema[$mson.INHERIT])
 
   // check if schema is compliant with the meta meta model
-  if (exports.isValidObject(schema, $mson.SCHEMA_DEFINITION, false)) {
-    schemas = $db._Schema.find({
+  if (isValidObject(schema, $mson.SCHEMA_DEFINITION, false)) {
+    schemas = $db.collections._Schema.find({
       _name: schemaName,
-    });
+    })
     if (schemas.length) {
-      mergedSchema = merge(schema, schemas[0]);
-      $db._Schema.update(
+      mergedSchema = merge(schema, schemas[0])
+      $db.collections._Schema.update(
         {
           _name: schemaName,
         },
         mergedSchema
-      );
-      id = schemas[0][$mson.ID];
+      )
+      id = schemas[0][$mson.ID]
     } else {
-      result = $db._Schema.insert(schema);
-      id = result[0];
+      result = $db.collections._Schema.insert(schema)
+      id = result[0]
     }
   } else {
-    $log.invalidSchema(schema[$mson.NAME]);
+    $log.invalidSchema(schema[$mson.NAME])
   }
 
-  return id;
-};
+  return id
+}
 
 /**
  * @method model
  * @param {String} name name of the model
  * @param {JSON} model definition of the model
- * @returns {String} id of the model
+ * @returns {String} id of the model
  * @description Add a new model to the metamodel
  */
-exports.model = function model(name, model) {
-  var id = null;
-  var result = [];
-  var modelName = '';
-  var mergedModel = {};
-  var models = [];
+function model(name, model) {
+  let id = null
+  let result = []
+  let modelName = ''
+  let mergedModel = {}
+  let models = []
 
   if (typeof model === 'undefined' || Object.keys(model).length === 0) {
-    model = JSON.parse(JSON.stringify(name));
-    modelName = model[$mson.NAME];
+    model = JSON.parse(JSON.stringify(name))
+    modelName = model[$mson.NAME]
   } else {
-    model = JSON.parse(JSON.stringify(model));
-    model[$mson.NAME] = name;
-    model = generateConfiguration(model);
-    modelName = model[$mson.NAME];
+    model = JSON.parse(JSON.stringify(model))
+    model[$mson.NAME] = name
+    model = generateConfiguration(model)
+    modelName = model[$mson.NAME]
   }
 
   if (typeof model[$mson.ID] === 'undefined') {
-    model[$mson.ID] = $helper.generateId();
+    model[$mson.ID] = $helper.generateId()
   }
 
   // check if model is compliant with the meta meta model
-  if (exports.isValidObject(model, $mson.MODEL_DEFINITION, false)) {
-    models = $db._Model.find({
+  if (isValidObject(model, $mson.MODEL_DEFINITION, false)) {
+    models = $db.collections._Model.find({
       _name: modelName,
-    });
+    })
     if (models.length) {
-      mergedModel = merge(model, models[0]);
-      $db._Model.update(
+      mergedModel = merge(model, models[0])
+      $db.collections._Model.update(
         {
           _name: modelName,
         },
         mergedModel
-      );
-      id = models[0][$mson.ID];
+      )
+      id = models[0][$mson.ID]
     } else {
-      result = $db._Model.insert(model);
-      id = result[0];
+      result = $db.collections._Model.insert(model)
+      id = result[0]
     }
   } else {
-    $log.invalidModel(model[$mson.NAME]);
+    $log.invalidModel(model[$mson.NAME])
   }
 
-  return id;
-};
+  return id
+}
 
 /**
  * @method type
@@ -1563,60 +1561,60 @@ exports.model = function model(name, model) {
  * @returns {String} id of the type
  * @description Add a new type
  */
-exports.type = function type(name, type) {
-  var id = null;
-  var result = [];
-  var typeName = '';
-  var typeDef = {};
+function type(name, type) {
+  let id = null
+  let result = []
+  let typeName = ''
+  let typeDef = {}
 
   if (typeof type === 'undefined' || Object.keys(type).length === 0) {
-    typeDef = JSON.parse(JSON.stringify(name));
-    typeName = typeDef.name;
+    typeDef = JSON.parse(JSON.stringify(name))
+    typeName = typeDef.name
   } else {
     if (Array.isArray(type)) {
-      type = JSON.parse(JSON.stringify(type));
-      typeDef.value = type;
-      typeDef.name = name;
-      typeDef.type = typeof type[0] || 'any';
-      typeName = typeDef.name;
+      type = JSON.parse(JSON.stringify(type))
+      typeDef.value = type
+      typeDef.name = name
+      typeDef.type = typeof type[0] || 'any'
+      typeName = typeDef.name
     } else {
-      type = JSON.parse(JSON.stringify(type));
-      typeDef.schema = generateConfiguration(type);
-      typeDef.name = name;
-      typeDef.type = 'object';
-      typeName = typeDef.name;
+      type = JSON.parse(JSON.stringify(type))
+      typeDef.schema = generateConfiguration(type)
+      typeDef.name = name
+      typeDef.type = 'object'
+      typeName = typeDef.name
     }
   }
 
   if (typeof typeDef[$mson.ID] === 'undefined') {
-    typeDef[$mson.ID] = $helper.generateId();
+    typeDef[$mson.ID] = $helper.generateId()
   }
 
   // check if type is compliant with the meta meta model
-  if (exports.isValidObject(typeDef, $mson.TYPE_DEFINITION)) {
-    result = $db._Type.insert(typeDef);
-    id = result[0];
+  if (isValidObject(typeDef, $mson.TYPE_DEFINITION)) {
+    result = $db.collections._Type.insert(typeDef)
+    id = result[0]
   } else {
-    $log.invalidTypeDefinition(typeName);
+    $log.invalidTypeDefinition(typeName)
   }
 
-  return id;
-};
+  return id
+}
 
 /**
  * @method init
  * @description Init the metamodel
  */
-exports.init = function init() {
-  exports.clear();
-  initDbStructure();
-};
+function init() {
+  clear()
+  initDbStructure()
+}
 
 /**
  * @method clear
  * @description Remove the data of the metamodel from the memory
  */
-exports.clear = function clear() {
+function clear() {
   store = {
     inheritance: {},
     inheritanceTree: {},
@@ -1626,23 +1624,23 @@ exports.clear = function clear() {
     generatedModels: {},
     states: {},
     type: {},
-  };
-};
+  }
+}
 
 /**
  * @method create
  * @description Create the metamodel
  */
-exports.create = function create() {
-  loadInMemory();
-  createInheritanceTree();
-  generateSchemas();
-  generateModels();
-  checkModels();
-  getStates();
-  createDbStructure();
-  createClass();
-};
+function create() {
+  loadInMemory()
+  createInheritanceTree()
+  generateSchemas()
+  generateModels()
+  checkModels()
+  getStates()
+  createDbStructure()
+  createClass()
+}
 
 /**
  * @method isEvent
@@ -1651,9 +1649,9 @@ exports.create = function create() {
  * @returns {Boolean} true if the attribute is an event
  * @description Check if an attribute of the schema is an event
  */
-exports.isEvent = function isEvent(name, id) {
-  return checkType(name, id, $mson.EVENT_TYPE);
-};
+function isEvent(name, id) {
+  return checkType(name, id, $mson.EVENT_TYPE)
+}
 
 /**
  * @method isProperty
@@ -1662,9 +1660,9 @@ exports.isEvent = function isEvent(name, id) {
  * @returns {Boolean} true if the attribute is a property
  * @description Check if an attribute of the schema is a property
  */
-exports.isProperty = function isProperty(name, id) {
-  return checkType(name, id, $mson.PROPERTY_TYPE);
-};
+function isProperty(name, id) {
+  return checkType(name, id, $mson.PROPERTY_TYPE)
+}
 
 /**
  * @method isLink
@@ -1673,9 +1671,9 @@ exports.isProperty = function isProperty(name, id) {
  * @returns {Boolean} true if the attribute is a link
  * @description Check if an attribute of the schema is a link
  */
-exports.isLink = function isLink(name, id) {
-  return checkType(name, id, $mson.LINK_TYPE);
-};
+function isLink(name, id) {
+  return checkType(name, id, $mson.LINK_TYPE)
+}
 
 /**
  * @method isCollection
@@ -1684,9 +1682,9 @@ exports.isLink = function isLink(name, id) {
  * @returns {Boolean} true if the attribute is a collection
  * @description Check if an attribute of the schema is a collection
  */
-exports.isCollection = function isCollection(name, id) {
-  return checkType(name, id, $mson.COLLECTION_TYPE);
-};
+function isCollection(name, id) {
+  return checkType(name, id, $mson.COLLECTION_TYPE)
+}
 
 /**
  * @method isMethod
@@ -1695,9 +1693,9 @@ exports.isCollection = function isCollection(name, id) {
  * @returns {Boolean} true if the attribute is a method
  * @description Check if an attribute of the schema is a method
  */
-exports.isMethod = function isMethod(name, id) {
-  return checkType(name, id, $mson.METHOD_TYPE);
-};
+function isMethod(name, id) {
+  return checkType(name, id, $mson.METHOD_TYPE)
+}
 
 /**
  * @method isStructure
@@ -1706,25 +1704,25 @@ exports.isMethod = function isMethod(name, id) {
  * @returns {Boolean} true if the property is a structure
  * @description Check if an attribute of the schema is a structure
  */
-exports.isStructure = function isStructure(path, modelName) {
-  var result = false;
-  var structure = null;
-  var type = '';
+function isStructure(path, modelName) {
+  let result = false
+  let structure = null
+  let type = ''
 
-  type = exports.getModelPathType(modelName, path);
+  type = getModelPathType(modelName, path)
 
   if (Array.isArray(structure)) {
-    structure = exports.getType(type[0]);
+    structure = getType(type[0])
   } else {
-    structure = exports.getType(type);
+    structure = getType(type)
   }
 
   if (structure && structure.schema) {
-    result = true;
+    result = true
   }
 
-  return result;
-};
+  return result
+}
 
 /**
  * @method isValidState
@@ -1733,26 +1731,26 @@ exports.isStructure = function isStructure(path, modelName) {
  * @returns {Boolean} true if the name is a correct state for the component
  * @description Check if the name is a correct state for the component
  */
-exports.isValidState = function isValidState(name, id) {
-  var result = false;
-  var componentSchema = store.generatedModels[id];
-  var state = {};
+function isValidState(name, id) {
+  let result = false
+  let componentSchema = store.generatedModels[id]
+  let state = {}
 
   if (isModelPath(name)) {
-    result = exports.isValidModelPath(id, name);
+    result = isValidModelPath(id, name)
   } else {
     if (componentSchema && componentSchema[$mson.NAME]) {
-      componentSchema = store.generatedModels[componentSchema[$mson.NAME]];
+      componentSchema = store.generatedModels[componentSchema[$mson.NAME]]
     }
-    state = store.states[componentSchema[$mson.NAME]];
+    state = store.states[componentSchema[$mson.NAME]]
 
     if (Array.isArray(state)) {
-      result = state.indexOf(name) !== -1;
+      result = state.indexOf(name) !== -1
     }
   }
 
-  return result;
-};
+  return result
+}
 
 /**
  * @method isValidType
@@ -1762,8 +1760,8 @@ exports.isValidState = function isValidState(name, id) {
  * @returns {Boolean} true if the object is compliant with the type
  * @description Check if a value is compliant with a type
  */
-exports.isValidType = function isValidType(value, typeName, isDocument) {
-  var result = true;
+function isValidType(value, typeName, isDocument) {
+  let result = true
 
   /**
    * @method _isValidCustomType
@@ -1773,17 +1771,17 @@ exports.isValidType = function isValidType(value, typeName, isDocument) {
    * @description Check if a value has the correct type
    */
   function _isValidCustomType(value, typeName) {
-    var typeDef = store.type[typeName];
-    var result = true;
+    let typeDef = store.type[typeName]
+    let result = true
 
     if (Array.isArray(typeDef.value) && typeDef.value.indexOf(value) === -1) {
-      result = false;
+      result = false
     }
 
     if (result === false) {
-      $log.invalidEnumValue(value, typeName);
+      $log.invalidEnumValue(value, typeName)
     }
-    return result;
+    return result
   }
 
   /**
@@ -1796,89 +1794,86 @@ exports.isValidType = function isValidType(value, typeName, isDocument) {
    * @description Check if an object is compliant with a type
    */
   function _isValidType(value, typeName, isDocument) {
-    var isValid = true;
-    var realType = '';
-    var i = 0;
-    var length = 0;
+    let isValid = true
+    let realType = ''
+    let i = 0
+    let length = 0
 
-    realType = getRealType(typeName);
+    realType = getRealType(typeName)
     switch (realType) {
       case 'string':
-        isValid = hasType(value, typeName);
-        break;
+        isValid = hasType(value, typeName)
+        break
       case 'array':
         if (Array.isArray(value)) {
-          length = value.length;
+          length = value.length
           for (i = 0; i < length; i++) {
             switch (true) {
               case isCustomType(typeName[0]):
-                isValid = checkCustomSchema(value[i], typeName[0]);
-                break;
-              case exports.isClassName(typeName[0]):
+                isValid = checkCustomSchema(value[i], typeName[0])
+                break
+              case isClassName(typeName[0]):
                 if (!isDocument) {
                   if (
                     value[i] !== '' &&
                     value[i] !== null &&
                     typeof value[i] !== 'string'
                   ) {
-                    isValid = exports.inheritFrom(
-                      getClassName(value[i]),
-                      typeName[0]
-                    );
+                    isValid = inheritFrom(getClassName(value[i]), typeName[0])
                   }
                 } else {
-                  isValid = false;
+                  isValid = false
                 }
-                break;
+                break
               default:
-                isValid = hasType(value[i], typeName[0]);
-                break;
+                isValid = hasType(value[i], typeName[0])
+                break
             }
           }
         } else {
-          isValid = false;
+          isValid = false
         }
-        break;
+        break
       default:
-        break;
+        break
     }
-    return isValid;
+    return isValid
   }
 
   switch (true) {
     case isCustomType(typeName):
-      result = checkCustomSchema(value, typeName);
+      result = checkCustomSchema(value, typeName)
 
       if (!result) {
         if (store.type[typeName]) {
-          $log.invalidEnumType(value, typeName, store.type[typeName].type);
+          $log.invalidEnumType(value, typeName, store.type[typeName].type)
         } else {
-          $log.invalidEnumType(value, typeName);
+          $log.invalidEnumType(value, typeName)
         }
       }
 
       if (result) {
-        result = _isValidCustomType(value, typeName);
+        result = _isValidCustomType(value, typeName)
       }
-      break;
-    case exports.isClassName(typeName):
+      break
+    case isClassName(typeName):
       if (!isDocument) {
         if (value !== null && typeof value !== 'string') {
-          result = exports.inheritFrom(getClassName(value), typeName);
+          result = inheritFrom(getClassName(value), typeName)
         } else {
           if (value !== null) {
-            result = false;
+            result = false
           }
         }
       }
-      break;
+      break
     default:
-      result = _isValidType(value, typeName, isDocument);
-      break;
+      result = _isValidType(value, typeName, isDocument)
+      break
   }
 
-  return result;
-};
+  return result
+}
 
 /**
  * @method isValidEnum
@@ -1887,8 +1882,8 @@ exports.isValidType = function isValidType(value, typeName, isDocument) {
  * @returns {Boolean} true if the object is compliant with the enum
  * @description Check if a value is compliant with a type enum.
  */
-exports.isValidEnum = function isValidEnum(value, schema) {
-  var result = true;
+function isValidEnum(value, schema) {
+  let result = true
 
   /**
    * @method _isInstanceOf
@@ -1897,35 +1892,35 @@ exports.isValidEnum = function isValidEnum(value, schema) {
    * @private Check if the component has for class name className
    */
   function _isInstanceOf(component, className) {
-    var result = false;
-    var componentClassName = '';
+    let result = false
+    let componentClassName = ''
 
-    componentClassName = component.constructor.name;
+    componentClassName = component.constructor.name
 
     if (componentClassName === 'Function') {
-      componentClassName = component.name;
+      componentClassName = component.name
     }
-    result = componentClassName === className;
+    result = componentClassName === className
 
-    return result;
+    return result
   }
 
-  if (exports.isClassName(schema.type)) {
+  if (isClassName(schema.type)) {
     result =
       _isInstanceOf($component.get(value), getRealClassName(schema.type)) &&
-      schema.value.indexOf(value) !== -1;
+      schema.value.indexOf(value) !== -1
     if (!result) {
-      $log.invalidEnumValue(value, schema.type);
+      $log.invalidEnumValue(value, schema.type)
     }
   } else {
-    result = hasType(value, schema.type) && schema.value.indexOf(value) !== -1;
+    result = hasType(value, schema.type) && schema.value.indexOf(value) !== -1
     if (!result) {
-      $log.invalidEnumValue(value, schema.name);
+      $log.invalidEnumValue(value, schema.name)
     }
   }
 
-  return result;
-};
+  return result
+}
 
 /**
  * @method isValidSchema
@@ -1936,16 +1931,16 @@ exports.isValidEnum = function isValidEnum(value, schema) {
  * Use it to test if a schema is compliant with a schema
  * it is supposed to validate.
  */
-exports.isValidSchema = function isValidSchema(object, schema) {
-  var fieldName = '';
-  var field = null;
-  var result = true;
-  var mandatory = true;
-  var typeSchema = '';
-  var typeRef = '';
-  var realType = '';
-  var length = 0;
-  var i = 0;
+function isValidSchema(object, schema) {
+  let fieldName = ''
+  let field = null
+  let result = true
+  let mandatory = true
+  let typeSchema = ''
+  let typeRef = ''
+  let realType = ''
+  let length = 0
+  let i = 0
 
   /**
    * @method _isValidClassName
@@ -1954,44 +1949,44 @@ exports.isValidSchema = function isValidSchema(object, schema) {
    * @description Check if a field is compliant with the type of the class name
    */
   function _isValidClassName() {
-    var isValid = true;
-    var enumValue = [];
+    let isValid = true
+    let enumValue = []
 
-    typeRef = getClassName(typeSchema);
-    typeRef = object[typeRef];
+    typeRef = getClassName(typeSchema)
+    typeRef = object[typeRef]
     if (isCustomType(typeRef)) {
       if (store.type[typeRef]) {
         if (store.type[typeRef].schema) {
-          isValid = isValidSchema(field, store.type[typeRef].schema);
+          isValid = isValidSchema(field, store.type[typeRef].schema)
         } else {
           // check type
-          isValid = hasType(field, store.type[typeRef].type);
+          isValid = hasType(field, store.type[typeRef].type)
 
           // check value
-          enumValue = store.type[typeRef].value;
+          enumValue = store.type[typeRef].value
           if (enumValue) {
-            isValid = isValidEnumValue(field, enumValue);
+            isValid = isValidEnumValue(field, enumValue)
           }
         }
       } else {
-        isValid = false;
+        isValid = false
       }
     } else {
       if (typeRef === 'array') {
-        isValid = Array.isArray(field);
+        isValid = Array.isArray(field)
       } else {
-        if (exports.isClassName(typeRef)) {
-          isValid = hasType(field, 'object') || hasType(field, 'string');
+        if (isClassName(typeRef)) {
+          isValid = hasType(field, 'object') || hasType(field, 'string')
           // TODO maybe have a more strict validation than just a type checking
         } else {
-          isValid = hasType(field, typeRef);
+          isValid = hasType(field, typeRef)
         }
       }
     }
     if (!isValid) {
-      $log.invalidPropertyType(fieldName, typeRef, field);
+      $log.invalidPropertyType(fieldName, typeRef, field)
     }
-    return isValid;
+    return isValid
   }
 
   /**
@@ -2001,60 +1996,60 @@ exports.isValidSchema = function isValidSchema(object, schema) {
    * @description Check if a field is compliant with the type of the references type
    */
   function _isValidTypeReference() {
-    var isValid = true;
-    var enumValue = [];
+    let isValid = true
+    let enumValue = []
 
-    typeRef = getRealTypeName(typeSchema);
-    typeRef = object[typeRef];
+    typeRef = getRealTypeName(typeSchema)
+    typeRef = object[typeRef]
 
     switch (true) {
       case typeof typeRef === 'string':
         if (isCustomType(typeRef)) {
           if (store.type[typeRef]) {
             if (store.type[typeRef].schema) {
-              isValid = isValidSchema(field, store.type[typeRef].schema);
+              isValid = isValidSchema(field, store.type[typeRef].schema)
             } else {
               // check type
-              isValid = hasType(field, store.type[typeRef].type);
+              isValid = hasType(field, store.type[typeRef].type)
 
               // check value
-              enumValue = store.type[typeRef].value;
+              enumValue = store.type[typeRef].value
               if (enumValue) {
-                isValid = isValidEnumValue(field, enumValue);
+                isValid = isValidEnumValue(field, enumValue)
               }
             }
           } else {
-            isValid = false;
+            isValid = false
           }
         } else {
           if (typeRef === 'array') {
-            isValid = Array.isArray(field);
+            isValid = Array.isArray(field)
           } else {
-            if (exports.isClassName(typeRef)) {
-              isValid = hasType(field, 'object') || hasType(field, 'string');
+            if (isClassName(typeRef)) {
+              isValid = hasType(field, 'object') || hasType(field, 'string')
               // TODO maybe have a more strict validation than just a type checking
             } else {
-              isValid = hasType(field, typeRef);
+              isValid = hasType(field, typeRef)
             }
           }
         }
-        break;
+        break
 
       case Array.isArray(typeRef):
         if (!Array.isArray(field)) {
-          isValid = false;
+          isValid = false
         }
-        break;
+        break
 
       default:
-        isValid = false;
-        break;
+        isValid = false
+        break
     }
 
     if (!isValid) {
-      $log.invalidPropertyType(fieldName, typeRef, field);
+      $log.invalidPropertyType(fieldName, typeRef, field)
     }
-    return isValid;
+    return isValid
   }
 
   /**
@@ -2064,97 +2059,97 @@ exports.isValidSchema = function isValidSchema(object, schema) {
    * @description Check if a field is compliant with a type
    */
   function _isValidType() {
-    var isValid = true;
+    let isValid = true
 
-    realType = getRealType(typeSchema);
+    realType = getRealType(typeSchema)
     switch (realType) {
       case 'string':
         if (isCustomType(realType)) {
-          isValid = isValidSchema(field, typeSchema);
+          isValid = isValidSchema(field, typeSchema)
         } else {
           if (!hasType(field, typeSchema)) {
-            $log.invalidPropertyType(fieldName, typeSchema, field);
-            isValid = false;
-            break;
+            $log.invalidPropertyType(fieldName, typeSchema, field)
+            isValid = false
+            break
           }
         }
-        break;
+        break
       case 'array':
         if (Array.isArray(field)) {
-          length = field.length;
+          length = field.length
           for (i = 0; i < length; i++) {
             if (isCustomType(typeSchema[0])) {
               isValid = isValidSchema(
                 field[i],
                 store.type[typeSchema[0]].schema
-              );
+              )
             } else {
               if (!hasType(field[i], typeSchema[0])) {
-                $log.invalidPropertyType(fieldName, typeSchema[0], field[i]);
-                isValid = false;
-                break;
+                $log.invalidPropertyType(fieldName, typeSchema[0], field[i])
+                isValid = false
+                break
               }
             }
           }
         } else {
-          isValid = false;
+          isValid = false
         }
-        break;
+        break
       default:
-        break;
+        break
     }
-    return isValid;
+    return isValid
   }
 
   // type
   if (hasType(object, 'object')) {
     for (fieldName in object) {
-      field = object[fieldName];
+      field = object[fieldName]
 
       if (hasType(schema[fieldName], 'undefined')) {
-        $log.unknownProperty(fieldName, schema);
-        return false;
+        $log.unknownProperty(fieldName, schema)
+        return false
       } else {
-        typeSchema = schema[fieldName].type;
+        typeSchema = schema[fieldName].type
       }
 
       switch (true) {
-        case exports.isClassName(typeSchema):
-          result = result && _isValidClassName();
-          break;
+        case isClassName(typeSchema):
+          result = result && _isValidClassName()
+          break
         case isTypeReference(typeSchema):
-          result = result && _isValidTypeReference();
-          break;
+          result = result && _isValidTypeReference()
+          break
         default:
-          result = result && _isValidType();
-          break;
+          result = result && _isValidType()
+          break
       }
       if (!result) {
-        break;
+        break
       }
     }
 
     // mandatory
     for (fieldName in schema) {
-      field = schema[fieldName];
-      mandatory = field.mandatory;
+      field = schema[fieldName]
+      mandatory = field.mandatory
       if (
         mandatory === true &&
         hasType(object[fieldName], 'undefined') &&
         object[fieldName] !== undefined
       ) {
-        $log.missingProperty(fieldName);
-        result = false;
-        break;
+        $log.missingProperty(fieldName)
+        result = false
+        break
       }
     }
   } else {
-    result = false;
-    $log.invalidPropertyFormat(object);
+    result = false
+    $log.invalidPropertyFormat(object)
   }
 
-  return result;
-};
+  return result
+}
 
 /**
  * @method isValidObject
@@ -2167,28 +2162,23 @@ exports.isValidSchema = function isValidSchema(object, schema) {
  * Use it to test if the constructor of an object is compliant
  * with the definition of the class.
  */
-exports.isValidObject = function isValidObject(
-  object,
-  schema,
-  strict,
-  cleanRef
-) {
-  var fieldName = '';
-  var field = null;
-  var result = true;
-  var mandatory = true;
-  var typeSchema = '';
-  var typeRef = '';
-  var realType = '';
-  var length = 0;
-  var i = 0;
+function isValidObject(object, schema, strict, cleanRef) {
+  let fieldName = ''
+  let field = null
+  let result = true
+  let mandatory = true
+  let typeSchema = ''
+  let typeRef = ''
+  let realType = ''
+  let length = 0
+  let i = 0
 
   if (hasType(strict, 'undefined')) {
-    strict = true;
+    strict = true
   }
 
   if (hasType(cleanRef, 'undefined')) {
-    cleanRef = false;
+    cleanRef = false
   }
 
   /**
@@ -2200,26 +2190,26 @@ exports.isValidObject = function isValidObject(
    * @description Check if a field is compliant with a custom type
    */
   function _isValidCustomType(field, typeSchema) {
-    var isValid = true;
-    var realType = '';
+    let isValid = true
+    let realType = ''
 
-    realType = store.type[typeSchema];
+    realType = store.type[typeSchema]
     if (realType) {
       switch (true) {
         case !hasType(realType.schema, 'undefined'):
-          isValid = isValidObject(field, realType.schema, strict, cleanRef);
-          break;
+          isValid = isValidObject(field, realType.schema, strict, cleanRef)
+          break
         case !hasType(realType.value, 'undefined'):
-          isValid = exports.isValidEnum(field, realType);
-          break;
+          isValid = isValidEnum(field, realType)
+          break
         default:
-          isValid = exports.isValidType(field, realType.type);
-          break;
+          isValid = isValidType(field, realType.type)
+          break
       }
     } else {
-      isValid = false;
+      isValid = false
     }
-    return isValid;
+    return isValid
   }
 
   /**
@@ -2231,25 +2221,25 @@ exports.isValidObject = function isValidObject(
    * @description Check if a field is compliant with the type of the class name
    */
   function _isValidClassName(field, typeSchema) {
-    var isValid = true;
-    var comp = null;
-    var isComponent = false;
+    let isValid = true
+    let comp = null
+    let isComponent = false
 
-    typeRef = getRealClassName(typeSchema);
+    typeRef = getRealClassName(typeSchema)
     if (field && field.id) {
-      comp = field;
-      isComponent = true;
+      comp = field
+      isComponent = true
     } else {
-      comp = $component.get(field);
+      comp = $component.get(field)
     }
 
     if (!hasType(comp, 'undefined')) {
-      if (!exports.inheritFrom(comp.constructor.name, typeRef)) {
-        isValid = false;
-        $log.invalidType(fieldName, field, typeRef);
+      if (!inheritFrom(comp.constructor.name, typeRef)) {
+        isValid = false
+        $log.invalidType(fieldName, field, typeRef)
       } else {
         if (isComponent && cleanRef) {
-          object[fieldName] = comp.id(); // store the id instead the full object
+          object[fieldName] = comp.id() // store the id instead the full object
         }
       }
     } else {
@@ -2261,12 +2251,12 @@ exports.isValidObject = function isValidObject(
         case hasType(field, 'string') && field !== '':
           // uncomment line if we need this log
           // $log.canNotYetValidate(field, typeRef);
-          break;
+          break
         default:
-          break;
+          break
       }
     }
-    return isValid;
+    return isValid
   }
 
   /**
@@ -2278,68 +2268,68 @@ exports.isValidObject = function isValidObject(
    * @description Check if a field is compliant with a type
    */
   function _isValidType(field, typeSchema) {
-    var isValid = true;
-    var date = null;
-    var typeArray = '';
+    let isValid = true
+    let date = null
+    let typeArray = ''
 
-    realType = getRealType(typeSchema);
+    realType = getRealType(typeSchema)
     switch (realType) {
       case 'any':
-        break;
+        break
       case 'string':
         if (isCustomType(realType)) {
-          isValid = isValidObject(field, typeSchema, strict, cleanRef);
+          isValid = isValidObject(field, typeSchema, strict, cleanRef)
         } else {
           if (typeSchema === 'array') {
             if (getRealType(field) !== 'array') {
-              $log.invalidPropertyType(fieldName, typeSchema, field);
-              isValid = false;
-              break;
+              $log.invalidPropertyType(fieldName, typeSchema, field)
+              isValid = false
+              break
             }
           } else {
             if (typeSchema === 'date') {
-              date = new Date(field);
-              isValid = !isNaN(date.getDate());
+              date = new Date(field)
+              isValid = !isNaN(date.getDate())
               if (!isValid) {
-                $log.invalidPropertyType(fieldName, typeSchema, field);
-                break;
+                $log.invalidPropertyType(fieldName, typeSchema, field)
+                break
               }
             } else {
               if (
                 getRealType(field) !== typeSchema &&
                 getRealType(field) !== 'any'
               ) {
-                $log.invalidPropertyType(fieldName, typeSchema, field);
-                isValid = false;
-                break;
+                $log.invalidPropertyType(fieldName, typeSchema, field)
+                isValid = false
+                break
               }
             }
           }
         }
-        break;
+        break
       case 'array':
         if (Array.isArray(field)) {
-          length = field.length;
-          typeArray = typeSchema[0];
+          length = field.length
+          typeArray = typeSchema[0]
           for (i = 0; i < length; i++) {
             if (isCustomType(typeArray)) {
-              isValid = _isValidCustomType(field[i], typeArray);
+              isValid = _isValidCustomType(field[i], typeArray)
             } else {
-              if (!exports.isClassName(typeArray)) {
+              if (!isClassName(typeArray)) {
                 if (
                   getRealType(field[i]) !== typeArray &&
                   typeArray !== 'any'
                 ) {
-                  $log.invalidPropertyType(fieldName, typeArray, field[i]);
-                  isValid = false;
-                  break;
+                  $log.invalidPropertyType(fieldName, typeArray, field[i])
+                  isValid = false
+                  break
                 }
               } else {
                 if (getRealType(field[i]) === 'string') {
                   // Case of an import of a system
                   if ($component.get(field[i])) {
                     if (
-                      !exports.inheritFrom(
+                      !inheritFrom(
                         getClassName($component.get(field[i])),
                         getRealClassName(typeArray)
                       )
@@ -2348,9 +2338,9 @@ exports.isValidObject = function isValidObject(
                         JSON.stringify(field[i]),
                         getRealClassName(typeArray),
                         getClassName($component.get(field[i]))
-                      );
-                      isValid = false;
-                      break;
+                      )
+                      isValid = false
+                      break
                     }
                   } else {
                     if (field[i] !== '') {
@@ -2363,7 +2353,7 @@ exports.isValidObject = function isValidObject(
                   }
                 } else {
                   if (
-                    !exports.inheritFrom(
+                    !inheritFrom(
                       getClassName(field[i]),
                       getRealClassName(typeArray)
                     )
@@ -2372,12 +2362,12 @@ exports.isValidObject = function isValidObject(
                       JSON.stringify(field[i]),
                       getRealClassName(typeArray),
                       getClassName(field[i])
-                    );
-                    isValid = false;
-                    break;
+                    )
+                    isValid = false
+                    break
                   } else {
                     if (cleanRef) {
-                      field[i] = field[i].id(); // store the id instead the full object
+                      field[i] = field[i].id() // store the id instead the full object
                     }
                   }
                 }
@@ -2385,27 +2375,27 @@ exports.isValidObject = function isValidObject(
             }
           }
         } else {
-          isValid = false;
-          $log.invalidType(fieldName, field, 'array');
+          isValid = false
+          $log.invalidType(fieldName, field, 'array')
         }
-        break;
+        break
       default:
-        isValid = false;
-        $log.unknownType(field);
-        break;
+        isValid = false
+        $log.unknownType(field)
+        break
     }
-    return isValid;
+    return isValid
   }
 
   // check if object
   if (!hasType(object, 'object')) {
-    result = false;
-    $log.invalidConfiguration(object, 'object');
+    result = false
+    $log.invalidConfiguration(object, 'object')
   }
 
   // type
   for (fieldName in object) {
-    field = object[fieldName];
+    field = object[fieldName]
 
     if (
       !hasType(schema[fieldName], 'undefined') ||
@@ -2414,51 +2404,51 @@ exports.isValidObject = function isValidObject(
     ) {
       switch (true) {
         case fieldName === $mson.CORE:
-          typeSchema = 'boolean';
-          break;
+          typeSchema = 'boolean'
+          break
         case fieldName === $mson.ID:
-          typeSchema = 'string';
-          break;
+          typeSchema = 'string'
+          break
         default:
-          typeSchema = schema[fieldName].type;
-          break;
+          typeSchema = schema[fieldName].type
+          break
       }
     } else {
       if (strict) {
-        $log.unknownProperty(fieldName, schema);
-        return false;
+        $log.unknownProperty(fieldName, schema)
+        return false
       } else {
-        continue;
+        continue
       }
     }
 
     switch (true) {
       case isCustomType(typeSchema):
-        result = result && _isValidCustomType(field, typeSchema);
-        break;
-      case exports.isClassName(typeSchema):
-        result = result && _isValidClassName(field, typeSchema);
-        break;
+        result = result && _isValidCustomType(field, typeSchema)
+        break
+      case isClassName(typeSchema):
+        result = result && _isValidClassName(field, typeSchema)
+        break
       default:
-        result = result && _isValidType(field, typeSchema);
-        break;
+        result = result && _isValidType(field, typeSchema)
+        break
     }
   }
 
   // mandatory
   for (fieldName in schema) {
-    field = schema[fieldName];
-    mandatory = field.mandatory;
+    field = schema[fieldName]
+    mandatory = field.mandatory
     if (object && hasType(object[fieldName], 'undefined')) {
       if (mandatory === true) {
-        $log.missingProperty(fieldName);
-        result = false;
+        $log.missingProperty(fieldName)
+        result = false
       }
     }
   }
 
-  return result;
-};
+  return result
+}
 
 /**
  * Prepare the object in order to be compliant with the schema.
@@ -2466,26 +2456,26 @@ exports.isValidObject = function isValidObject(
  * @param {Object} object object to prepate
  * @param {Object} schema schema that validates the object
  */
-exports.prepareObject = function prepareObject(object, schema) {
-  var fieldName = '';
-  var field = null;
-  var mandatory = true;
-  var defaultValue = '';
+function prepareObject(object, schema) {
+  let fieldName = ''
+  let field = null
+  let mandatory = true
+  let defaultValue = ''
 
-  schema = JSON.parse(JSON.stringify(schema));
+  schema = JSON.parse(JSON.stringify(schema))
 
   // mandatory & default value
   for (fieldName in schema) {
-    field = schema[fieldName];
-    mandatory = field.mandatory;
-    defaultValue = field.default;
+    field = schema[fieldName]
+    mandatory = field.mandatory
+    defaultValue = field.default
     if (hasType(object[fieldName], 'undefined')) {
       if (mandatory === false && !hasType(defaultValue, 'undefined')) {
-        object[fieldName] = defaultValue;
+        object[fieldName] = defaultValue
       }
     }
   }
-};
+}
 
 /**
  * @method getSchema
@@ -2493,14 +2483,14 @@ exports.prepareObject = function prepareObject(object, schema) {
  * @returns {Object} the schema
  * @description Get a schema
  */
-exports.getSchema = function getSchema(name) {
-  var result = null;
+function getSchema(name) {
+  let result = null
 
   if (store.generatedSchemas[name]) {
-    result = store.generatedSchemas[name];
+    result = store.generatedSchemas[name]
   }
-  return result;
-};
+  return result
+}
 
 /**
  * @method getModel
@@ -2508,14 +2498,14 @@ exports.getSchema = function getSchema(name) {
  * @returns {Object} the model
  * @description Get a model
  */
-exports.getModel = function getModel(name) {
-  var result = null;
+function getModel(name) {
+  let result = null
 
   if (store.generatedModels[name]) {
-    result = store.generatedModels[name];
+    result = store.generatedModels[name]
   }
-  return result;
-};
+  return result
+}
 
 /**
  * @method getType
@@ -2523,14 +2513,14 @@ exports.getModel = function getModel(name) {
  * @returns {Object} the type
  * @description Get a type
  */
-exports.getType = function getType(name) {
-  var result = null;
+function getType(name) {
+  let result = null
 
   if (store.type[name] && store.type[name]) {
-    result = JSON.parse(JSON.stringify(store.type[name]));
+    result = JSON.parse(JSON.stringify(store.type[name]))
   }
-  return result;
-};
+  return result
+}
 
 /**
  * @method getModelPathType
@@ -2539,50 +2529,50 @@ exports.getType = function getType(name) {
  * @returns {Object} the type
  * @description Get the type of a model path
  */
-exports.getModelPathType = function getModelPathType(model, path) {
-  var result = null;
-  var subpaths = [];
-  var subpath = '';
-  var i = 0;
-  var length = 0;
-  var structure = '';
+function getModelPathType(model, path) {
+  let result = null
+  let subpaths = []
+  let subpath = ''
+  let i = 0
+  let length = 0
+  let structure = ''
 
-  subpaths = path.split('.');
-  length = subpaths.length;
+  subpaths = path.split('.')
+  length = subpaths.length
 
   for (i = 0; i < length; i++) {
-    subpath = subpaths[i];
-    subpath = subpath.split('[')[0];
+    subpath = subpaths[i]
+    subpath = subpath.split('[')[0]
     if (i === 0) {
-      result = exports.getModel(model)[subpath].type;
+      result = getModel(model)[subpath].type
     } else {
       if (Array.isArray(result)) {
-        result = result[0];
+        result = result[0]
       }
 
       if (isCustomType(result)) {
-        structure = exports.getType(result);
+        structure = getType(result)
 
         switch (true) {
           case typeof structure.schema !== 'undefined':
             if (!structure.schema[subpath]) {
-              $log.unknownPath(path, subpath);
+              $log.unknownPath(path, subpath)
             } else {
-              result = structure.schema[subpath].type;
+              result = structure.schema[subpath].type
             }
-            break;
+            break
           case typeof structure.type !== 'undefined':
-            result = structure.type;
-            break;
+            result = structure.type
+            break
           default:
-            $log.invalidState(model, path);
-            break;
+            $log.invalidState(model, path)
+            break
         }
       }
     }
   }
-  return result;
-};
+  return result
+}
 
 /**
  * @method isValidModelPath
@@ -2591,44 +2581,44 @@ exports.getModelPathType = function getModelPathType(model, path) {
  * @returns {Boolean} true if the path is valid for the model
  * @description Check if a path is valid model path
  */
-exports.isValidModelPath = function isValidModelPath(model, path) {
-  var result = true;
-  var type = null;
-  var subpaths = [];
-  var subpath = '';
-  var i = 0;
-  var length = 0;
-  var structure = '';
+function isValidModelPath(model, path) {
+  let result = true
+  let type = null
+  let subpaths = []
+  let subpath = ''
+  let i = 0
+  let length = 0
+  let structure = ''
 
-  subpaths = path.split('.');
-  length = subpaths.length;
+  subpaths = path.split('.')
+  length = subpaths.length
 
   for (i = 0; i < length; i++) {
-    subpath = subpaths[i];
-    subpath = subpath.split('[')[0];
+    subpath = subpaths[i]
+    subpath = subpath.split('[')[0]
     if (i === 0) {
-      type = exports.getModel(model)[subpath].type;
+      type = getModel(model)[subpath].type
       if (!type) {
-        result = false;
+        result = false
       }
     } else {
       if (Array.isArray(result)) {
-        type = type[0];
+        type = type[0]
       }
 
       if (isCustomType(type)) {
-        structure = exports.getType(type);
+        structure = getType(type)
         if (structure.schema && structure.schema[subpath]) {
-          type = structure.schema[subpath].type;
+          type = structure.schema[subpath].type
           if (!type) {
-            result = false;
+            result = false
           }
         }
       }
     }
   }
-  return result;
-};
+  return result
+}
 
 /**
  * @method get
@@ -2636,17 +2626,17 @@ exports.isValidModelPath = function isValidModelPath(model, path) {
  * @returns {Array} id id of the parents
  * @description Get parents of a schema if any
  */
-exports.getParents = function getParents(id) {
-  var result = [];
+function getParents(id) {
+  let result = []
 
   if (!store.inheritanceTree[id]) {
-    result = [];
+    result = []
   } else {
-    result = store.inheritanceTree[id].slice();
+    result = store.inheritanceTree[id].slice()
   }
 
-  return result;
-};
+  return result
+}
 
 /**
  * @method inheritFrom
@@ -2655,11 +2645,11 @@ exports.getParents = function getParents(id) {
  * @returns {Boolean} true if the component inherit from the specific class name
  * @description Check if a class inherits from another one
  */
-exports.inheritFrom = function inheritFrom(name, parentName) {
-  var result = false;
-  var parents = [];
-  var i = 0;
-  var length = 0;
+function inheritFrom(name, parentName) {
+  let result = false
+  let parents = []
+  let i = 0
+  let length = 0
 
   /**
    * @method _searchParent
@@ -2670,49 +2660,49 @@ exports.inheritFrom = function inheritFrom(name, parentName) {
    * @description Check if a class inherits from another one
    */
   function _searchParent(className, ancestorName) {
-    var isAncestor = false;
-    var parents = [];
-    var i = 0;
-    var length = 0;
+    let isAncestor = false
+    let parents = []
+    let i = 0
+    let length = 0
 
-    parents = exports.getParents(className);
+    parents = getParents(className)
     if (parents.length !== 0) {
       if (parents.indexOf(ancestorName) !== -1) {
-        isAncestor = true;
+        isAncestor = true
       } else {
         for (i = 0; i < length; i++) {
-          isAncestor = _searchParent(parents[i], ancestorName);
+          isAncestor = _searchParent(parents[i], ancestorName)
           if (isAncestor) {
-            break;
+            break
           }
         }
       }
     }
-    return isAncestor;
+    return isAncestor
   }
 
   if (name !== parentName) {
-    parents = exports.getParents(name);
-    length = parents.length;
+    parents = getParents(name)
+    length = parents.length
 
     if (parents.length !== 0) {
       if (parents.indexOf(parentName) !== -1) {
-        result = true;
+        result = true
       } else {
         for (i = 0; i < length; i++) {
-          result = _searchParent(parents[i], parentName);
+          result = _searchParent(parents[i], parentName)
           if (result) {
-            break;
+            break
           }
         }
       }
     }
   } else {
-    result = true;
+    result = true
   }
 
-  return result;
-};
+  return result
+}
 
 /**
  * @method isClassName
@@ -2720,16 +2710,45 @@ exports.inheritFrom = function inheritFrom(name, parentName) {
  * @returns {Boolean} true if the name is a class name
  * @description Is the value a class name
  */
-exports.isClassName = function isClassName(value) {
-  var result = hasType(value, 'string');
+function isClassName(value) {
+  let result = hasType(value, 'string')
 
   if (result) {
     if (Object.keys(store.generatedModels).length > 0) {
-      result = typeof store.generatedModels[value] !== 'undefined';
+      result = typeof store.generatedModels[value] !== 'undefined'
     } else {
-      result = false;
+      result = false
     }
   }
 
-  return result;
-};
+  return result
+}
+
+export default {
+  schema,
+  model,
+  type,
+  init,
+  clear,
+  create,
+  isEvent,
+  isProperty,
+  isLink,
+  isCollection,
+  isMethod,
+  isStructure,
+  isValidState,
+  isValidType,
+  isValidEnum,
+  isValidSchema,
+  isValidObject,
+  prepareObject,
+  getSchema,
+  getModel,
+  getType,
+  getModelPathType,
+  isValidModelPath,
+  getParents,
+  inheritFrom,
+  isClassName,
+}

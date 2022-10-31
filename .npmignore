@@ -1,9 +1,8 @@
 /.github/
 /.husky/
 /.vscode/
-/build/system-runtime.json
-/coverage/
-/dist/system-runtime.js
+/build/
+/cypress/
 /src/banners/
 /src/system/
 /tasks/
@@ -15,8 +14,9 @@
 .prettierrc
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
+cypress.config.js
 Gruntfile.js
-karma.conf.js
 package-lock.json
+rollup.config.js
 *.log
 .DS_Store

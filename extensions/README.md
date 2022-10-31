@@ -10,14 +10,14 @@ Just add a link tag in your HTML to install and start your extension:
 
 ```html
 <!-- install your extension -->
-<link rel="system" type="application/json" href="storage.json">
+<link rel="system" type="application/json" href="storage.json" />
 ```
 
 #### Install an extension server-side
 
-Just call *install* API to install and start your extension:
+Just call _install_ API to install and start your extension:
 
 ```js
-// install your extensions 
-runtime.install('storage.json');
+// install your extensions
+runtime.install('storage.json')
 ```
