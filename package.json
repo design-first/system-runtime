@@ -1,6 +1,6 @@
 {
   "name": "system-runtime",
-  "version": "6.0.0-beta.2",
+  "version": "6.0.0-beta.3",
   "description": "A JavaScript library that runs systems",
   "homepage": "https://designfirst.io/systemruntime/",
   "keywords": [
@@ -32,7 +32,7 @@
     "url": "https://github.com/design-first/system-runtime/issues"
   },
   "scripts": {
-    "build": "grunt system && rollup --config rollup.config.js && grunt licence && prettier --write src/system.js",
+    "build": "grunt system && rollup --config rollup.config.js && rollup --config rollup.config.cjs.js && grunt licenses && prettier --write src/system.js",
     "example": "serve",
     "prettier": "prettier --write src/",
     "lint": "eslint --ext .js src/",

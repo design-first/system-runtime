@@ -18,21 +18,13 @@
  * limitations under the License.
  */
 
-module.exports = (grunt) => {
-  // load tasks
-  require('load-grunt-tasks')(grunt)
+import terser from '@rollup/plugin-terser'
 
-  // init configuration
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    clean: grunt.file.readJSON('tasks/clean.json'),
-    concat: grunt.file.readJSON('tasks/concat.json'),
-    json_merge: grunt.file.readJSON('tasks/json_merge.json'),
-  })
-
-  // build system
-  grunt.registerTask('system', ['clean', 'json_merge', 'concat:system'])
-
-  // add licenses
-  grunt.registerTask('licenses', ['concat:licenses'])
+export default {
+  input: 'src/runtime.js',
+  output: {
+    file: 'dist/system-runtime.min.js',
+    format: 'cjs',
+  },
+  plugins: [terser()],
 }
