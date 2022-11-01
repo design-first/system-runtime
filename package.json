@@ -1,6 +1,6 @@
 {
   "name": "system-runtime",
-  "version": "6.0.0",
+  "version": "6.0.0-beta.2",
   "description": "A JavaScript library that runs systems",
   "homepage": "https://designfirst.io/systemruntime/",
   "keywords": [
@@ -55,7 +55,7 @@
     "load-grunt-tasks": "5.1.0",
     "mocha": "10.1.0",
     "prettier": "2.7.1",
-    "rollup": "3.2.3",
+    "rollup": "3.2.5",
     "serve": "14.0.1"
   },
   "engines": {
