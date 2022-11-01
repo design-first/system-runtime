@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-/* !! This file has been generated, do not edit it !! */
+/* !! THIS FILE HAS BEEN GENERATED, DO NOT EDIT IT !! */
 
 /**
  * @module system
@@ -35,7 +35,7 @@ export default {
   system: {
     name: 'system-runtime',
     master: false,
-    version: '6.0.0-beta.4',
+    version: '6.0.0-beta.5',
     description: 'System Runtime',
     schemas: {
       '1ac07185641fa9f': {
@@ -413,7 +413,7 @@ export default {
           type: 'string',
           readOnly: true,
           mandatory: true,
-          default: '6.0.0-beta.4',
+          default: '6.0.0-beta.5',
         },
         system: {
           params: [{ name: 'params', type: 'any', mandatory: false }],
@@ -1019,7 +1019,7 @@ export default {
       _Database: { db: { _id: 'db' } },
       _Logger: { logger: { _id: 'logger', level: 'warn' } },
       _Metamodel: { metamodel: { _id: 'metamodel' } },
-      _Runtime: { runtime: { _id: 'runtime', version: '6.0.0-beta.4' } },
+      _Runtime: { runtime: { _id: 'runtime', version: '6.0.0-beta.5' } },
       _History: { history: { _id: 'history' } },
     },
     _id: 'e89c617b6b15d24',

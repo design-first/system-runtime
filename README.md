@@ -73,6 +73,9 @@ Just add a link tag in your HTML to install and start your bundle:
 ```html
 <!-- install your bundle -->
 <link rel="system" type="application/json" href="system.json" />
+
+<!-- install System Runtime -->
+<script type="module" src="https://cdn.jsdelivr.net/npm/system-runtime@6.0.0-beta.5/dist/system-runtime.js"></script>
 ```
 
 #### Install the bundle in Node.js
@@ -80,11 +83,14 @@ Just add a link tag in your HTML to install and start your bundle:
 Just call _install_ API to install and start your bundle:
 
 ```js
-// require System Runtime
+// import System Runtime
 import runtime from 'system-runtime'
 
+// import the system
+import system from './system.json' assert { type: 'json' }
+
 // install your bundle
-runtime.install('system.json')
+runtime.install(system)
 ```
 
 ## How System runtime helps you to create your system ?
