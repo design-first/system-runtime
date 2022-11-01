@@ -1,6 +1,0 @@
-{
-  "system": {
-    "src": ["addons/*.json", "src/system/system-runtime.json"],
-    "dest": "build/system-runtime.json"
-  }
-}

@@ -222,62 +222,30 @@ export default {
         _id: '135c71078810af2',
         _name: '_Channel',
         _core: true,
-        send: {
-          params: [
-            {
-              name: 'message',
-              type: 'message',
-            },
-          ],
-        },
+        send: { params: [{ name: 'message', type: 'message' }] },
         $systemInstalled: {
           params: [
-            {
-              name: 'id',
-              type: 'string',
-              mandatory: true,
-              default: '',
-            },
+            { name: 'id', type: 'string', mandatory: true, default: '' },
           ],
         },
         $systemResolved: {
           params: [
-            {
-              name: 'id',
-              type: 'string',
-              mandatory: true,
-              default: '',
-            },
+            { name: 'id', type: 'string', mandatory: true, default: '' },
           ],
         },
         $systemUninstalled: {
           params: [
-            {
-              name: 'id',
-              type: 'string',
-              mandatory: true,
-              default: '',
-            },
+            { name: 'id', type: 'string', mandatory: true, default: '' },
           ],
         },
         $systemStarted: {
           params: [
-            {
-              name: 'id',
-              type: 'string',
-              mandatory: true,
-              default: '',
-            },
+            { name: 'id', type: 'string', mandatory: true, default: '' },
           ],
         },
         $systemStopped: {
           params: [
-            {
-              name: 'id',
-              type: 'string',
-              mandatory: true,
-              default: '',
-            },
+            { name: 'id', type: 'string', mandatory: true, default: '' },
           ],
         },
       },
@@ -287,14 +255,8 @@ export default {
         _core: true,
         on: {
           params: [
-            {
-              name: 'state',
-              type: 'string',
-            },
-            {
-              name: 'action',
-              type: 'function',
-            },
+            { name: 'state', type: 'string' },
+            { name: 'action', type: 'function' },
             {
               name: 'useCoreAPI',
               type: 'any',
@@ -311,76 +273,22 @@ export default {
         },
         off: {
           params: [
-            {
-              name: 'state',
-              type: 'string',
-              mandatory: false,
-            },
-            {
-              name: 'behaviorId',
-              type: 'string',
-              mandatory: false,
-            },
+            { name: 'state', type: 'string', mandatory: false },
+            { name: 'behaviorId', type: 'string', mandatory: false },
           ],
         },
-        require: {
-          params: [
-            {
-              name: 'id',
-              type: 'string',
-            },
-          ],
-        },
-        destroy: {
-          params: [],
-        },
-        init: {
-          params: [
-            {
-              name: 'document',
-              type: 'object',
-            },
-          ],
-        },
-        error: {
-          params: [
-            {
-              name: 'e',
-              type: 'errorInfo',
-            },
-          ],
-        },
+        require: { params: [{ name: 'id', type: 'string' }] },
+        destroy: { params: [] },
+        init: { params: [{ name: 'document', type: 'object' }] },
+        error: { params: [{ name: 'e', type: 'errorInfo' }] },
       },
       '18a51169d7112d4': {
         _name: '_Database',
         _core: true,
-        collections: {
-          result: 'object',
-        },
-        insert: {
-          params: [
-            {
-              name: 'event',
-              type: 'dbInsertEvent',
-            },
-          ],
-        },
-        update: {
-          params: [
-            {
-              name: 'event',
-              type: 'dbUpdateEvent',
-            },
-          ],
-        },
-        remove: {
-          params: [
-            {
-              name: 'event',
-              type: 'dbRemoveEvent',
-            },
-          ],
-        },
+        collections: { result: 'object' },
+        insert: { params: [{ name: 'event', type: 'dbInsertEvent' }] },
+        update: { params: [{ name: 'event', type: 'dbUpdateEvent' }] },
+        remove: { params: [{ name: 'event', type: 'dbRemoveEvent' }] },
         _id: '18a51169d7112d4',
       },
       '16b9d1ac2216ffe': {
@@ -393,38 +301,10 @@ export default {
           mandatory: false,
           default: 'warn',
         },
-        debug: {
-          params: [
-            {
-              name: 'message',
-              type: 'any',
-            },
-          ],
-        },
-        info: {
-          params: [
-            {
-              name: 'message',
-              type: 'any',
-            },
-          ],
-        },
-        warn: {
-          params: [
-            {
-              name: 'message',
-              type: 'any',
-            },
-          ],
-        },
-        error: {
-          params: [
-            {
-              name: 'message',
-              type: 'any',
-            },
-          ],
-        },
+        debug: { params: [{ name: 'message', type: 'any' }] },
+        info: { params: [{ name: 'message', type: 'any' }] },
+        warn: { params: [{ name: 'message', type: 'any' }] },
+        error: { params: [{ name: 'message', type: 'any' }] },
       },
       '1d9b6139411aa91': {
         _name: '_Message',
@@ -454,12 +334,7 @@ export default {
         _core: true,
         schema: {
           params: [
-            {
-              name: 'name',
-              type: 'any',
-              default: '',
-              mandatory: false,
-            },
+            { name: 'name', type: 'any', default: '', mandatory: false },
             {
               name: 'schema',
               type: 'object',
@@ -471,12 +346,7 @@ export default {
         },
         model: {
           params: [
-            {
-              name: 'name',
-              type: 'any',
-              default: '',
-              mandatory: false,
-            },
+            { name: 'name', type: 'any', default: '', mandatory: false },
             {
               name: 'model',
               type: 'object',
@@ -488,12 +358,7 @@ export default {
         },
         type: {
           params: [
-            {
-              name: 'name',
-              type: 'any',
-              default: '',
-              mandatory: false,
-            },
+            { name: 'name', type: 'any', default: '', mandatory: false },
             {
               name: 'type',
               type: 'object',
@@ -503,9 +368,7 @@ export default {
           ],
           result: 'any',
         },
-        create: {
-          params: [],
-        },
+        create: { params: [] },
         _id: '1628c13c22152e6',
       },
       '100b91ed2211b15': {
@@ -513,12 +376,7 @@ export default {
         _name: '_OSGi',
         install: {
           params: [
-            {
-              name: 'url',
-              type: 'any',
-              mandatory: true,
-              default: '',
-            },
+            { name: 'url', type: 'any', mandatory: true, default: '' },
             {
               name: 'async',
               type: 'boolean',
@@ -530,41 +388,22 @@ export default {
         },
         uninstall: {
           params: [
-            {
-              name: 'id',
-              type: 'string',
-              mandatory: true,
-              default: '',
-            },
+            { name: 'id', type: 'string', mandatory: true, default: '' },
           ],
         },
         start: {
           params: [
-            {
-              name: 'id',
-              type: 'string',
-              mandatory: true,
-              default: '',
-            },
+            { name: 'id', type: 'string', mandatory: true, default: '' },
           ],
         },
         stop: {
           params: [
-            {
-              name: 'id',
-              type: 'string',
-              mandatory: true,
-              default: '',
-            },
+            { name: 'id', type: 'string', mandatory: true, default: '' },
           ],
         },
-        status: {
-          result: 'object',
-        },
+        status: { result: 'object' },
         _core: true,
-        bundle: {
-          result: 'string',
-        },
+        bundle: { result: 'string' },
       },
       '14c7c105b31a160': {
         _id: '14c7c105b31a160',
@@ -577,23 +416,11 @@ export default {
           default: '6.0.0-beta.4',
         },
         system: {
-          params: [
-            {
-              name: 'params',
-              type: 'any',
-              mandatory: false,
-            },
-          ],
+          params: [{ name: 'params', type: 'any', mandatory: false }],
           result: 'object',
         },
         message: {
-          params: [
-            {
-              name: 'msg',
-              type: 'message',
-              mandatory: true,
-            },
-          ],
+          params: [{ name: 'msg', type: 'message', mandatory: true }],
         },
         ready: {},
       },
@@ -679,15 +506,9 @@ export default {
         _id: 'bd8d7e02-cd1f-4e4e-857f-077d6425cc1a',
         _name: '_History',
         _description: '',
-        back: {
-          result: 'number',
-        },
-        forward: {
-          result: 'number',
-        },
-        dump: {
-          result: 'string',
-        },
+        back: { result: 'number' },
+        forward: { result: 'number' },
+        dump: { result: 'string' },
         _core: true,
         from: {
           params: [
@@ -712,25 +533,12 @@ export default {
           result: 'object',
         },
         load: {
-          params: [
-            {
-              name: 'dump',
-              type: 'any',
-              mandatory: true,
-              default: '',
-            },
-          ],
+          params: [{ name: 'dump', type: 'any', mandatory: true, default: '' }],
           result: 'boolean',
         },
-        start: {
-          result: 'any',
-        },
-        stop: {
-          result: 'any',
-        },
-        clear: {
-          result: 'any',
-        },
+        start: { result: 'any' },
+        stop: { result: 'any' },
+        clear: { result: 'any' },
       },
     },
     behaviors: {
@@ -1040,16 +848,8 @@ export default {
         name: 'dbInsertEvent',
         type: 'object',
         schema: {
-          collection: {
-            type: 'string',
-            mandatory: true,
-            default: '',
-          },
-          document: {
-            type: 'object',
-            mandatory: true,
-            default: {},
-          },
+          collection: { type: 'string', mandatory: true, default: '' },
+          document: { type: 'object', mandatory: true, default: {} },
         },
       },
       dbRemoveEvent: {
@@ -1058,16 +858,8 @@ export default {
         type: 'object',
         core: true,
         schema: {
-          collection: {
-            type: 'string',
-            mandatory: true,
-            default: '',
-          },
-          id: {
-            type: 'string',
-            mandatory: true,
-            default: '',
-          },
+          collection: { type: 'string', mandatory: true, default: '' },
+          id: { type: 'string', mandatory: true, default: '' },
         },
       },
       dbUpdateEvent: {
@@ -1076,26 +868,10 @@ export default {
         name: 'dbUpdateEvent',
         type: 'object',
         schema: {
-          collection: {
-            type: 'string',
-            mandatory: true,
-            default: '',
-          },
-          id: {
-            type: 'string',
-            mandatory: true,
-            default: '',
-          },
-          field: {
-            type: 'string',
-            mandatory: true,
-            default: '',
-          },
-          value: {
-            type: 'any',
-            mandatory: true,
-            default: null,
-          },
+          collection: { type: 'string', mandatory: true, default: '' },
+          id: { type: 'string', mandatory: true, default: '' },
+          field: { type: 'string', mandatory: true, default: '' },
+          value: { type: 'any', mandatory: true, default: null },
         },
       },
       collection: {
@@ -1103,34 +879,13 @@ export default {
         name: 'collection',
         type: 'object',
         schema: {
-          type: {
-            type: ['string'],
-            mandatory: true,
-          },
-          readOnly: {
-            type: 'boolean',
-            mandatory: true,
-          },
-          mandatory: {
-            type: 'boolean',
-            mandatory: true,
-          },
-          default: {
-            type: 'array',
-            mandatory: true,
-          },
-          description: {
-            type: 'string',
-            mandatory: false,
-          },
-          label: {
-            type: 'string',
-            mandatory: false,
-          },
-          kind: {
-            type: 'string',
-            mandatory: false,
-          },
+          type: { type: ['string'], mandatory: true },
+          readOnly: { type: 'boolean', mandatory: true },
+          mandatory: { type: 'boolean', mandatory: true },
+          default: { type: 'array', mandatory: true },
+          description: { type: 'string', mandatory: false },
+          label: { type: 'string', mandatory: false },
+          kind: { type: 'string', mandatory: false },
         },
         core: true,
       },
@@ -1139,14 +894,8 @@ export default {
         name: 'event',
         type: 'object',
         schema: {
-          params: {
-            type: ['parameter'],
-            mandatory: false,
-          },
-          description: {
-            type: 'string',
-            mandatory: false,
-          },
+          params: { type: ['parameter'], mandatory: false },
+          description: { type: 'string', mandatory: false },
         },
         core: true,
       },
@@ -1167,34 +916,13 @@ export default {
         name: 'link',
         type: 'object',
         schema: {
-          type: {
-            type: 'string',
-            mandatory: true,
-          },
-          readOnly: {
-            type: 'boolean',
-            mandatory: true,
-          },
-          mandatory: {
-            type: 'boolean',
-            mandatory: true,
-          },
-          default: {
-            type: '{type}',
-            mandatory: true,
-          },
-          description: {
-            type: 'string',
-            mandatory: false,
-          },
-          label: {
-            type: 'string',
-            mandatory: false,
-          },
-          kind: {
-            type: 'string',
-            mandatory: false,
-          },
+          type: { type: 'string', mandatory: true },
+          readOnly: { type: 'boolean', mandatory: true },
+          mandatory: { type: 'boolean', mandatory: true },
+          default: { type: '{type}', mandatory: true },
+          description: { type: 'string', mandatory: false },
+          label: { type: 'string', mandatory: false },
+          kind: { type: 'string', mandatory: false },
         },
         core: true,
       },
@@ -1210,18 +938,9 @@ export default {
         name: 'message',
         type: 'object',
         schema: {
-          event: {
-            type: 'string',
-            mandatory: true,
-          },
-          from: {
-            type: 'string',
-            mandatory: false,
-          },
-          data: {
-            type: 'array',
-            mandatory: true,
-          },
+          event: { type: 'string', mandatory: true },
+          from: { type: 'string', mandatory: false },
+          data: { type: 'array', mandatory: true },
         },
         core: true,
       },
@@ -1230,18 +949,9 @@ export default {
         name: 'method',
         type: 'object',
         schema: {
-          result: {
-            type: 'any',
-            mandatory: false,
-          },
-          params: {
-            type: ['parameter'],
-            mandatory: false,
-          },
-          description: {
-            type: 'string',
-            mandatory: false,
-          },
+          result: { type: 'any', mandatory: false },
+          params: { type: ['parameter'], mandatory: false },
+          description: { type: 'string', mandatory: false },
         },
         core: true,
       },
@@ -1265,26 +975,11 @@ export default {
         name: 'parameter',
         type: 'object',
         schema: {
-          description: {
-            type: 'string',
-            mandatory: false,
-          },
-          name: {
-            type: 'string',
-            mandatory: true,
-          },
-          type: {
-            type: 'any',
-            mandatory: true,
-          },
-          mandatory: {
-            type: 'boolean',
-            mandatory: false,
-          },
-          default: {
-            type: '{type}',
-            mandatory: false,
-          },
+          description: { type: 'string', mandatory: false },
+          name: { type: 'string', mandatory: true },
+          type: { type: 'any', mandatory: true },
+          mandatory: { type: 'boolean', mandatory: false },
+          default: { type: '{type}', mandatory: false },
         },
         core: true,
       },
@@ -1293,30 +988,12 @@ export default {
         name: 'property',
         type: 'object',
         schema: {
-          type: {
-            type: 'string',
-            mandatory: true,
-          },
-          readOnly: {
-            type: 'boolean',
-            mandatory: true,
-          },
-          mandatory: {
-            type: 'boolean',
-            mandatory: true,
-          },
-          default: {
-            type: '{type}',
-            mandatory: true,
-          },
-          description: {
-            type: 'string',
-            mandatory: false,
-          },
-          label: {
-            type: 'string',
-            mandatory: false,
-          },
+          type: { type: 'string', mandatory: true },
+          readOnly: { type: 'boolean', mandatory: true },
+          mandatory: { type: 'boolean', mandatory: true },
+          default: { type: '{type}', mandatory: true },
+          description: { type: 'string', mandatory: false },
+          label: { type: 'string', mandatory: false },
         },
         core: true,
       },
@@ -1331,51 +1008,19 @@ export default {
         name: 'errorInfo',
         type: 'object',
         schema: {
-          message: {
-            type: 'string',
-            mandatory: true,
-          },
-          stack: {
-            type: 'object',
-            mandatory: true,
-          },
+          message: { type: 'string', mandatory: true },
+          stack: { type: 'object', mandatory: true },
         },
         core: true,
       },
     },
     components: {
-      _Channel: {
-        channel: {
-          _id: 'channel',
-        },
-      },
-      _Database: {
-        db: {
-          _id: 'db',
-        },
-      },
-      _Logger: {
-        logger: {
-          _id: 'logger',
-          level: 'warn',
-        },
-      },
-      _Metamodel: {
-        metamodel: {
-          _id: 'metamodel',
-        },
-      },
-      _Runtime: {
-        runtime: {
-          _id: 'runtime',
-          version: '6.0.0-beta.4',
-        },
-      },
-      _History: {
-        history: {
-          _id: 'history',
-        },
-      },
+      _Channel: { channel: { _id: 'channel' } },
+      _Database: { db: { _id: 'db' } },
+      _Logger: { logger: { _id: 'logger', level: 'warn' } },
+      _Metamodel: { metamodel: { _id: 'metamodel' } },
+      _Runtime: { runtime: { _id: 'runtime', version: '6.0.0-beta.4' } },
+      _History: { history: { _id: 'history' } },
     },
     _id: 'e89c617b6b15d24',
   },

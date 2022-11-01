@@ -1,7 +1,6 @@
 /.github/
 /.husky/
 /.vscode/
-/build/
 /cypress/
 /example/
 /src/banners/

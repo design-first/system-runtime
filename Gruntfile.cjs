@@ -25,13 +25,11 @@ module.exports = (grunt) => {
   // init configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    clean: grunt.file.readJSON('tasks/clean.json'),
     concat: grunt.file.readJSON('tasks/concat.json'),
-    json_merge: grunt.file.readJSON('tasks/json_merge.json'),
   })
 
-  // build system
-  grunt.registerTask('system', ['clean', 'json_merge', 'concat:system'])
+  // create src/system.js file
+  grunt.registerTask('system', ['concat:system'])
 
   // add licenses
   grunt.registerTask('licenses', ['concat:licenses'])
