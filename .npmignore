@@ -15,8 +15,9 @@
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
 cypress.config.js
-Gruntfile.js
+Gruntfile.cjs
 package-lock.json
+rollup.config.iife
 rollup.config.js
 *.log
 .DS_Store
