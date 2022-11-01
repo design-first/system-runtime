@@ -24,7 +24,8 @@ export default {
   input: 'src/runtime.js',
   output: {
     file: 'dist/system-runtime.min.js',
-    format: 'cjs',
+    format: 'iife',
+    name: 'runtime',
   },
   plugins: [terser()],
 }

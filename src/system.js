@@ -35,7 +35,7 @@ export default {
   system: {
     name: 'system-runtime',
     master: false,
-    version: '6.0.0-beta.2',
+    version: '6.0.0-beta.4',
     description: 'System Runtime',
     schemas: {
       '1ac07185641fa9f': {
@@ -574,7 +574,7 @@ export default {
           type: 'string',
           readOnly: true,
           mandatory: true,
-          default: '6.0.0-beta.2',
+          default: '6.0.0-beta.4',
         },
         system: {
           params: [
@@ -1368,7 +1368,7 @@ export default {
       _Runtime: {
         runtime: {
           _id: 'runtime',
-          version: '6.0.0-beta.2',
+          version: '6.0.0-beta.4',
         },
       },
       _History: {
