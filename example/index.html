@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example</title>
+  </head>
+
+  <body>
+    <script type="module">
+      import runtime from '../dist/system-runtime.js'
+
+      const system = runtime.system('mySystem')
+      const metamodel = runtime.require('metamodel')
+
+      // create the Jedi schema
+      metamodel.schema('Jedi', {
+        firstName: 'property',
+        lastName: 'property',
+        nickname: 'property',
+        father: 'link',
+        shout: 'method',
+      })
+
+      metamodel.create()
+
+      // Create some Jedis
+      const Jedi = runtime.require('Jedi')
+
+      new Jedi({
+        _id: 'anakin',
+        firstName: 'Anakin',
+        lastName: 'Skywalker',
+        nickname: 'Darth Vader',
+      })
+
+      new Jedi({
+        _id: 'luke',
+        firstName: 'Luke',
+        lastName: 'Skywalker',
+        father: 'anakin',
+      })
+
+      // add Jedi behaviors
+      Jedi.on('shout', (message) => message + '!!')
+
+      // code your system's logic
+      system.on('start', () => {
+        const luke = this.require('luke')
+
+        if (luke.father().nickname() === 'Darth Vader') {
+          document.querySelector(
+            'span'
+          ).innerText = `System output: ${luke.shout('NOOOOOO')}`
+        }
+      })
+
+      // run
+      system.start()
+    </script>
+  </body>
+  <span
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 3rem;
+    "
+  ></span>
+</html>

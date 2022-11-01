@@ -1,18 +1,18 @@
 {
   "system": {
     "files": {
-      "build/system/system.js": [
+      "src/system.js": [
         "src/banners/systemmodule-header.txt",
-        "build/system-runtime.json",
+        "src/system/system-runtime.json",
         "src/banners/systemmodule-footer.txt"
       ]
     }
   },
   "license": {
     "files": {
-      "dist/system-runtime.min.js": [
+      "dist/system-runtime.js": [
         "src/banners/license.txt",
-        "dist/system-runtime.min.js"
+        "dist/system-runtime.js"
       ]
     }
   }

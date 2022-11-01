@@ -29,42 +29,36 @@
  * It inits System Runtime metamodel and loads System Runtime core system.
  */
 
-'use strict';
-
-var $db = require('./db.js');
-var $component = require('./component.js');
-var $metamodel = require('./metamodel.js');
-var $system = require('../build/system/system.js');
-var $helper = require('./helper.js');
+import $db from './db.js'
+import $component from './component.js'
+import $metamodel from './metamodel.js'
+import $system from './system.js'
 
 /* Private Property */
 
-var sytemId = '';
-var system = '';
-var channel = null;
-
-// polyfill
-$helper.polyfill();
+let sytemId = ''
+let system = ''
+let channel = null
 
 // init Metamodel
-$metamodel.init();
+$metamodel.init()
 
 // init runtime from a system
-sytemId = $db.importSystem($system.system);
+sytemId = $db.importSystem($system.system)
 
-system = $component.get(sytemId);
-channel = $component.get('channel');
+system = $component.get(sytemId)
+channel = $component.get('channel')
 
-system.state('installed');
-channel.$systemInstalled(sytemId);
-system.state('resolved');
-channel.$systemResolved(sytemId);
-system.state('starting');
-channel.$systemStarted(sytemId);
+system.state('installed')
+channel.$systemInstalled(sytemId)
+system.state('resolved')
+channel.$systemResolved(sytemId)
+system.state('starting')
+channel.$systemStarted(sytemId)
 
-system.start();
+system.start()
 
-system.state('active');
+system.state('active')
 
 /* Public property */
 
@@ -73,4 +67,6 @@ system.state('active');
  * @type _Runtime
  * @description _Runtime instance
  */
-module.exports = $component.get('runtime');
+const runtime = $component.get('runtime')
+
+export default runtime

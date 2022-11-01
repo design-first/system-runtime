@@ -26,16 +26,13 @@
  * @description This module contains all the functions used by all the modules
  */
 
-'use strict';
-
-var $db = require('./db.js');
-var $component = require('./component.js');
-var $mson = require('./mson.js');
+import $db from './db.js'
+import $component from './component.js'
+import $mson from './mson.js'
 
 /* Private property */
 
-var runtimeRef = null;
-var requireRef = null;
+let runtimeRef = null
 
 /* Public method */
 
@@ -44,104 +41,75 @@ var requireRef = null;
  * @returns {Boolean} true if a System Runtime instance exist
  * @description Check if a System Runtime instance exists
  */
-exports.isRuntime = function isRuntime() {
-  var result = false;
+function isRuntime() {
+  let result = false
 
-  if ($db._Runtime && $db._Runtime.find().length) {
-    result = true;
+  if ($db.collections._Runtime && $db.collections._Runtime.find().length) {
+    result = true
   }
 
-  return result;
-};
+  return result
+}
 
 /**
  * @method getRuntime
  * @returns {_Runtime} System Runtime instance
  * @description Get the System Runtime instance
  */
-exports.getRuntime = function getRuntime() {
-  var runtimeId = '';
-  var search = $db._Runtime.find();
+function getRuntime() {
+  let runtimeId = ''
+  let search = $db.collections._Runtime.find()
 
   if (!runtimeRef && search[0]) {
-    runtimeId = search[0][$mson.ID];
-    runtimeRef = $component.get(runtimeId);
+    runtimeId = search[0][$mson.ID]
+    runtimeRef = $component.get(runtimeId)
   }
 
-  return runtimeRef;
-};
+  return runtimeRef
+}
 
 /**
  * @method isOnNode
  * @returns {Boolean} true if a System Runtime is running on node
  * @description Check if a System Runtime is running on node
  */
-exports.isOnNode = function isOnNode() {
-  var result = false;
+function isOnNode() {
+  let result = false
 
   if (typeof window === 'undefined' && typeof global !== 'undefined') {
-    result = true;
+    result = true
   }
 
-  return result;
-};
-
-/**
- * @method getRequire
- * @returns {Object} the require object
- * @description Get the require object
- */
-exports.getRequire = function getRequire() {
-  if (!requireRef) {
-    // kludge for webpack
-    requireRef = eval('require');
-  }
-
-  return requireRef;
-};
+  return result
+}
 
 /**
  * @method generateId
  * @returns {String} a uuid
  * @description Generate a uuid
  */
-exports.generateId = function generateId() {
+function generateId() {
   // taken from https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
   function gen() {
     return 'xxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = (Math.random() * 16) | 0;
-      var v = c === 'x' ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    });
+      let r = (Math.random() * 16) | 0
+      let v = c === 'x' ? r : (r & 0x3) | 0x8
+      return v.toString(16)
+    })
   }
 
   // force the uuid to start with a letter
   function getPrefix() {
-    var validPrefix = 'abcdef';
-    return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
+    let validPrefix = 'abcdef'
+    return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length))
   }
 
-  return getPrefix() + gen();
-};
+  return getPrefix() + gen()
+}
 
-/**
- * @method polyfill
- * @description Add Polyfill
- */
-exports.polyfill = function polyfill() {
-  // fixing constructor.name property in IE
-  // taken from http://stackoverflow.com/questions/25140723/constructor-name-is-undefined-in-internet-explorer
-  if (
-    Function.prototype.name === undefined &&
-    Object.defineProperty !== undefined
-  ) {
-    Object.defineProperty(Function.prototype, 'name', {
-      get: function get() {
-        var funcNameRegex = /function\s([^(]{1,})\(/;
-        var results = funcNameRegex.exec(this.toString());
-        return results && results.length > 1 ? results[1].trim() : '';
-      },
-      set: function set(value) {},
-    });
-  }
-};
+export default {
+  isRuntime,
+  getRuntime,
+  isOnNode,
+  generateId,
+}

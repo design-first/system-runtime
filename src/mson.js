@@ -23,33 +23,31 @@
  * @description This module contains all the mson definition.
  */
 
-'use strict';
+const ID = '_id'
+const NAME = '_name'
+const DESCRIPTION = '_description'
+const INHERIT = '_inherit'
+const CLASS = '_class'
+const CORE = '_core'
 
-exports.ID = '_id';
-exports.NAME = '_name';
-exports.DESCRIPTION = '_description';
-exports.INHERIT = '_inherit';
-exports.CLASS = '_class';
-exports.CORE = '_core';
-
-exports.INTERNAL_NAMES = [
+const INTERNAL_NAMES = [
   '_id',
   '_name',
   '_inherit',
   '_description',
   '_class',
   '_core',
-];
+]
 
-exports.PROPERTY_TYPE = 'property';
-exports.COLLECTION_TYPE = 'collection';
-exports.LINK_TYPE = 'link';
-exports.METHOD_TYPE = 'method';
-exports.EVENT_TYPE = 'event';
+const PROPERTY_TYPE = 'property'
+const COLLECTION_TYPE = 'collection'
+const LINK_TYPE = 'link'
+const METHOD_TYPE = 'method'
+const EVENT_TYPE = 'event'
 
-exports.INTERNAL_TYPES = ['property', 'collection', 'link', 'method', 'event'];
+const INTERNAL_TYPES = ['property', 'collection', 'link', 'method', 'event']
 
-exports.DEFAULT_TYPES = [
+const DEFAULT_TYPES = [
   'boolean',
   'string',
   'number',
@@ -58,9 +56,9 @@ exports.DEFAULT_TYPES = [
   'array',
   'date',
   'any',
-];
+]
 
-exports.SCHEMA_DEFINITION = {
+const SCHEMA_DEFINITION = {
   _id: {
     type: 'string',
     mandatory: true,
@@ -86,9 +84,9 @@ exports.SCHEMA_DEFINITION = {
     type: 'string',
     mandatory: false,
   },
-};
+}
 
-exports.MODEL_DEFINITION = {
+const MODEL_DEFINITION = {
   _id: {
     type: 'string',
     mandatory: true,
@@ -113,9 +111,9 @@ exports.MODEL_DEFINITION = {
     type: 'string',
     mandatory: false,
   },
-};
+}
 
-exports.TYPE_DEFINITION = {
+const TYPE_DEFINITION = {
   _id: {
     type: 'string',
     mandatory: true,
@@ -144,4 +142,24 @@ exports.TYPE_DEFINITION = {
     type: 'string',
     mandatory: false,
   },
-};
+}
+
+export default {
+  ID,
+  NAME,
+  DESCRIPTION,
+  INHERIT,
+  CLASS,
+  CORE,
+  INTERNAL_NAMES,
+  PROPERTY_TYPE,
+  COLLECTION_TYPE,
+  LINK_TYPE,
+  METHOD_TYPE,
+  EVENT_TYPE,
+  INTERNAL_TYPES,
+  DEFAULT_TYPES,
+  SCHEMA_DEFINITION,
+  MODEL_DEFINITION,
+  TYPE_DEFINITION,
+}

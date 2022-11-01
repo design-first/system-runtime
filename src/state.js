@@ -20,15 +20,12 @@
 
 /**
  * @module state
- * @requires db
  * @description This module manages the states of all the components
  */
 
-'use strict';
-
 /* Private property */
 
-var store = {};
+let store = {}
 
 /* Public methods */
 
@@ -39,12 +36,12 @@ var store = {};
  * @param {Object} value value of the state
  * @description Set the state of a component
  */
-exports.set = function set(id, state, value) {
+function set(id, state, value) {
   store[id] = {
     state: state,
     value: value,
-  };
-};
+  }
+}
 
 /**
  * @method get
@@ -52,14 +49,20 @@ exports.set = function set(id, state, value) {
  * @returns {String} state of the component
  * @description Get the state of a component
  */
-exports.get = function get(id) {
-  return store[id];
-};
+function get(id) {
+  return store[id]
+}
 
 /**
  * @method clear
  * @description Remove all the states of the components from the memory
  */
-exports.clear = function clear() {
-  store = {};
-};
+function clear() {
+  store = {}
+}
+
+export default {
+  set,
+  get,
+  clear,
+}

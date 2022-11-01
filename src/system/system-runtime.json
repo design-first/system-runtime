@@ -1,7 +1,7 @@
 {
   "name": "system-runtime",
   "master": false,
-  "version": "5.1.0",
+  "version": "6.0.0-beta.5",
   "description": "System Runtime",
   "schemas": {
     "1ac07185641fa9f": {
@@ -379,7 +379,7 @@
         "type": "string",
         "readOnly": true,
         "mandatory": true,
-        "default": "5.1.0"
+        "default": "6.0.0-beta.5"
       },
       "system": {
         "params": [{ "name": "params", "type": "any", "mandatory": false }],
@@ -514,7 +514,7 @@
       "_id": "12e491859c13918",
       "component": "_Channel",
       "state": "$systemStarted",
-      "action": "function $systemStarted(id) { \n  var systems = null;\n    \n  if (id !== 'e89c617b6b15d24') {\n    if (typeof document !== 'undefined') {\n      systems = document.querySelectorAll('link[rel=system]');\n         \n      if ($state.get('runtime') && $state.get('runtime').state === 'ready') {    \n      } else {\n        if (systems.length + 1 === $db._System.count()) {\n          $component.get('runtime').ready();\n        }\n      }\n    }\n  }\n}",
+      "action": "function $systemStarted(id) { \n  let systems = null;\n    \n  if (id !== 'e89c617b6b15d24') {\n    if (typeof document !== 'undefined') {\n      systems = document.querySelectorAll('link[rel=system]');\n         \n      if ($state.get('runtime') && $state.get('runtime').state === 'ready') {    \n      } else {\n        if (systems.length + 1 === $db.collections._System.count()) {\n          $component.get('runtime').ready();\n        }\n      }\n    }\n  }\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -522,7 +522,7 @@
       "_id": "1e9021bd4e1bc6e",
       "component": "_Channel",
       "state": "$systemInstalled",
-      "action": "function $systemInstalled(id) {\n  var systems = null,\n    dependencies = [],\n    master = [],\n    canStart = true;\n\n  if (id !== 'e89c617b6b15d24') {\n    // if all systems are installed\n    systems = $db._System.find({});\n\n    systems.forEach(function (system) {\n      var sys = this.require(system._id);\n      if (sys && sys.state && sys.state() === 'none') {\n        canStart = false;\n      }\n    }.bind(this));\n\n    // start all the systems\n    if (canStart) {\n      dependencies = $db._System.find({\n        'master': false\n      });\n\n      dependencies.forEach(function (dep) {\n        var system = this.require(dep._id);\n        channel = this.require('channel');\n\n        if (system.state() === 'resolved') {\n          system.state('starting');\n          system.start();\n          channel.$systemStarted(dep._id);\n          system.state('active');\n        }\n      }.bind(this));\n\n      master = $db._System.find({\n        'master': true\n      });\n\n      master.forEach(function (dep) {\n        var system = this.require(dep._id);\n        channel = this.require('channel');\n\n        if (system && system.state && system.state() === 'resolved') {\n          system.state('starting');\n          system.start();\n          channel.$systemStarted(dep._id);\n          system.state('active');\n        }\n      }.bind(this));\n    }\n  }\n}",
+      "action": "function $systemInstalled(id) {\n  let systems = null,\n    dependencies = [],\n    master = [],\n    canStart = true;\n\n  if (id !== 'e89c617b6b15d24') {\n    // if all systems are installed\n    systems = $db.collections._System.find({});\n\n    systems.forEach(function (system) {\n      let sys = this.require(system._id);\n      if (sys && sys.state && sys.state() === 'none') {\n        canStart = false;\n      }\n    }.bind(this));\n\n    // start all the systems\n    if (canStart) {\n      dependencies = $db.collections._System.find({\n        'master': false\n      });\n\n      dependencies.forEach(function (dep) {\n        let system = this.require(dep._id);\n        channel = this.require('channel');\n\n        if (system.state() === 'resolved') {\n          system.state('starting');\n          system.start();\n          channel.$systemStarted(dep._id);\n          system.state('active');\n        }\n      }.bind(this));\n\n      master = $db.collections._System.find({\n        'master': true\n      });\n\n      master.forEach(function (dep) {\n        let system = this.require(dep._id);\n        channel = this.require('channel');\n\n        if (system && system.state && system.state() === 'resolved') {\n          system.state('starting');\n          system.start();\n          channel.$systemStarted(dep._id);\n          system.state('active');\n        }\n      }.bind(this));\n    }\n  }\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -538,7 +538,7 @@
       "_id": "15486186f41a48c",
       "component": "_Component",
       "state": "off",
-      "action": "function off(state, behaviorId) {\n  var args = [],\n    i = 0,\n    numInjectedParams = 9,\n    length = arguments.length;\n\n  if ($helper.isOnNode()) {\n    numInjectedParams = numInjectedParams +1;\n  }\n\n  for (i = 0; i < length - numInjectedParams; i++) {\n    args.push(arguments[i]);\n  }\n\n  if ($workflow.checkInput({\n    \"component\": this,\n    \"methodName\": \"off\",\n    \"args\": args\n  })) {\n\n    if (state || behaviorId) {\n      if ($metamodel.isValidState(state, this.constructor.name)) {\n        $behavior.remove({\n          \"behaviorId\": behaviorId,\n          \"componentId\": this.id(),\n          \"state\": state\n        });\n      } else {\n        this.require('logger').warn(\"invoke \\'off\\' method of component '\" + this.id() + \"' with an invalid state '\" + state + \"'\");\n      }\n    } else {\n      $behavior.remove({\n        \"componentId\": this.id()\n      });\n    }\n  }\n}",
+      "action": "function off(state, behaviorId) {\n  let args = [],\n    i = 0,\n    numInjectedParams = 9,\n    length = arguments.length;\n\n  if ($helper.isOnNode()) {\n    numInjectedParams = numInjectedParams +1;\n  }\n\n  for (i = 0; i < length - numInjectedParams; i++) {\n    args.push(arguments[i]);\n  }\n\n  if ($workflow.checkInput({\n    \"component\": this,\n    \"methodName\": \"off\",\n    \"args\": args\n  })) {\n\n    if (state || behaviorId) {\n      if ($metamodel.isValidState(state, this.constructor.name)) {\n        $behavior.remove({\n          \"behaviorId\": behaviorId,\n          \"componentId\": this.id(),\n          \"state\": state\n        });\n      } else {\n        this.require('logger').warn(\"invoke \\'off\\' method of component '\" + this.id() + \"' with an invalid state '\" + state + \"'\");\n      }\n    } else {\n      $behavior.remove({\n        \"componentId\": this.id()\n      });\n    }\n  }\n}",
       "core": true,
       "useCoreAPI": true
     },
@@ -554,7 +554,7 @@
       "_id": "1a5111d17a1800c",
       "component": "_Database",
       "state": "collections",
-      "action": "function collections() {\n  var result = {},\n    collectionName = '';\n\n  for (collectionName in $db.store) {\n    if ($db.store.hasOwnProperty(collectionName)) {\n      result[collectionName] = $db[collectionName];\n    }\n  }\n  return result;\n}",
+      "action": "function collections() {\n  let result = {},\n    collectionName = '';\n\n  for (collectionName in $db.store) {\n    if ($db.store.hasOwnProperty(collectionName)) {\n      result[collectionName] = $db.collections[collectionName];\n    }\n  }\n  return result;\n}",
       "core": true,
       "useCoreAPI": true
     },
@@ -630,7 +630,7 @@
       "_id": "1ef951f1411b895",
       "component": "_OSGi",
       "state": "install",
-      "action": "function install(url, async) {\n  var importedSystem = null,\n    system = {},\n    systemId = '',\n    callbackLoad = null,\n    xhr = null,\n    result = '',\n    channel = $component.get('channel');\n\n  if (typeof url === 'object') {\n    importedSystem = url;\n  } else {\n    if (url.indexOf('{') === 0) {\n      importedSystem = JSON.parse(url);\n    }\n  }\n\n  if (importedSystem) {\n    systemId = $db.importSystem(importedSystem);\n    if (systemId) {\n      system = this.require(systemId);\n\n      if (typeof url === 'string') {\n        system.location(url);\n      }\n      system.state('installed');\n      channel.$systemInstalled(systemId);\n      system.state('resolved');\n      channel.$systemResolved(systemId);\n\n      result = systemId;\n    }\n  } else {\n    if (typeof global !== 'undefined' && typeof window === 'undefined') {\n      if (url.indexOf('.json') !== -1) {\n        if (typeof global.process.env.PWD === 'undefined') {\n          system = require(global.process.cwd() + '/' + url);\n        } else {\n          system = require(global.process.env.PWD + '/' + url);\n        }\n      } else {\n        system = require(url);\n      }\n      systemId = $db.importSystem(system);\n      system = this.require(systemId);\n\n      if (typeof url === 'string') {\n        system.location(url);\n      }\n      system.state('installed');\n      channel.$systemInstalled(systemId);\n      system.state('resolved');\n      channel.$systemResolved(systemId);\n\n      result = systemId;\n    } else {\n      xhr = new XMLHttpRequest();\n      callbackLoad = function callbackLoad(system, url) {\n        var sysId = $db.importSystem(system),\n          sys = $component.get(sysId),\n          channel = $component.get('channel');\n\n        if (typeof url === 'string') {\n          sys.location(url);\n        }\n        sys.state('installed');\n        channel.$systemInstalled(sysId);\n        sys.state('resolved');\n        channel.$systemResolved(sysId);\n\n        result = sysId;\n      };\n\n      if (async) {\n        xhr.open('GET', url, true);\n        xhr.onreadystatechange = function () {\n          if (xhr.readyState === 4) {\n            if (xhr.status === 200 || xhr.status === 0) {\n              if (xhr.response !== '') {\n                callbackLoad(JSON.parse(xhr.response), url);\n              }\n            }\n          }\n        };\n        xhr.send(null);\n      } else {\n        xhr.open('GET', url, false);\n        xhr.send(null);\n        if (xhr.status === 200 || xhr.status === 0) {\n          callbackLoad(JSON.parse(xhr.response), url);\n        }\n      }\n    }\n  }\n  return result;\n}",
+      "action": "function install(url, async) {\n  let importedSystem = null,\n    system = {},\n    systemId = '',\n    callbackLoad = null,\n    xhr = null,\n    result = '',\n    channel = $component.get('channel');\n\n  if (typeof url === 'object') {\n    importedSystem = url;\n  } else {\n    if (url.indexOf('{') === 0) {\n      importedSystem = JSON.parse(url);\n    }\n  }\n\n  if (importedSystem) {\n    systemId = $db.importSystem(importedSystem);\n    if (systemId) {\n      system = this.require(systemId);\n\n      if (typeof url === 'string') {\n        system.location(url);\n      }\n      system.state('installed');\n      channel.$systemInstalled(systemId);\n      system.state('resolved');\n      channel.$systemResolved(systemId);\n\n      result = systemId;\n    }\n  } else {\n    xhr = new XMLHttpRequest();\n    callbackLoad = function callbackLoad(system, url) {\n      let sysId = $db.importSystem(system),\n        sys = $component.get(sysId),\n        channel = $component.get('channel');\n\n      if (typeof url === 'string') {\n        sys.location(url);\n      }\n      sys.state('installed');\n      channel.$systemInstalled(sysId);\n      sys.state('resolved');\n      channel.$systemResolved(sysId);\n\n      result = sysId;\n    };\n\n    if (async) {\n      xhr.open('GET', url, true);\n      xhr.onreadystatechange = function () {\n        if (xhr.readyState === 4) {\n          if (xhr.status === 200 || xhr.status === 0) {\n            if (xhr.response !== '') {\n              callbackLoad(JSON.parse(xhr.response), url);\n            }\n          }\n        }\n      };\n      xhr.send(null);\n    } else {\n      xhr.open('GET', url, false);\n      xhr.send(null);\n      if (xhr.status === 200 || xhr.status === 0) {\n        callbackLoad(JSON.parse(xhr.response), url);\n      }\n    }\n  }\n  return result;\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -638,7 +638,7 @@
       "_id": "14c1517b711cb78",
       "component": "_OSGi",
       "state": "uninstall",
-      "action": "function uninstall(id) {\n  var search = {},\n    system = null,\n    behaviorId = '',\n    collection = '',\n    componentId = '',\n    length = 0,\n    i = 0,\n    coreComponents = ['admin', 'channel', 'db', 'logger', 'metamodel', 'runtime'];\n\n  search = $db._System.find({\n    '_id': id\n  });\n\n  if (search.length) {\n    system = search[0];\n    // remove behaviors\n    if (system.behaviors) {\n      for (behaviorId in system.behaviors) {\n        $db._Behavior.remove({\n          '_id': system.behaviors[behaviorId]._id\n        });\n      }\n    }\n    // remove components\n    if (system.components) {\n      for (collection in system.components) {\n        for (componentId in system.components[collection]) {\n          if (coreComponents.indexOf(componentId) === -1) {\n            $db[collection].remove({\n              '_id': componentId\n            });\n          }\n        }\n      }\n    }\n  }\n  if (this.require(id) && this.require(id).state) {\n    this.require(id).state('uninstalled');\n    this.require('channel').$systemUninstalled(id);\n  }\n}",
+      "action": "function uninstall(id) {\n  let search = {},\n    system = null,\n    behaviorId = '',\n    collection = '',\n    componentId = '',\n    length = 0,\n    i = 0,\n    coreComponents = ['admin', 'channel', 'db', 'logger', 'metamodel', 'runtime'];\n\n  search = $db.collections._System.find({\n    '_id': id\n  });\n\n  if (search.length) {\n    system = search[0];\n    // remove behaviors\n    if (system.behaviors) {\n      for (behaviorId in system.behaviors) {\n        $db.collections._Behavior.remove({\n          '_id': system.behaviors[behaviorId]._id\n        });\n      }\n    }\n    // remove components\n    if (system.components) {\n      for (collection in system.components) {\n        for (componentId in system.components[collection]) {\n          if (coreComponents.indexOf(componentId) === -1) {\n            $db.collections[collection].remove({\n              '_id': componentId\n            });\n          }\n        }\n      }\n    }\n  }\n  if (this.require(id) && this.require(id).state) {\n    this.require(id).state('uninstalled');\n    this.require('channel').$systemUninstalled(id);\n  }\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -646,7 +646,7 @@
       "_id": "105f219c6813643",
       "component": "_OSGi",
       "state": "start",
-      "action": "function start(id) {\n  var system = this.require(id),\n    channel = this.require('channel');\n\n  if (system && system.state() === 'resolved' || system.state() === 'installed') {\n    system.state('starting');\n    if (system.start) {\n      system.start();\n    }\n    channel.$systemStarted(id);\n    system.state('active');\n  }\n}",
+      "action": "function start(id) {\n  let system = this.require(id),\n    channel = this.require('channel');\n\n  if (system && system.state() === 'resolved' || system.state() === 'installed') {\n    system.state('starting');\n    if (system.start) {\n      system.start();\n    }\n    channel.$systemStarted(id);\n    system.state('active');\n  }\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -654,7 +654,7 @@
       "_id": "1a81a1f00d17269",
       "component": "_OSGi",
       "state": "stop",
-      "action": "function stop(id) {\n  var system = this.require(id),\n    channel = this.require('channel');\n\n  if (system && system.state() === 'active') {\n    system.state('stopping');\n    if (system.stop) {\n      system.stop();\n    }\n    channel.$systemStopped(id);\n    system.state('resolved');\n    channel.$systemResolved(id);\n  }\n}",
+      "action": "function stop(id) {\n  let system = this.require(id),\n    channel = this.require('channel');\n\n  if (system && system.state() === 'active') {\n    system.state('stopping');\n    if (system.stop) {\n      system.stop();\n    }\n    channel.$systemStopped(id);\n    system.state('resolved');\n    channel.$systemResolved(id);\n  }\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -662,7 +662,7 @@
       "_id": "116851b602128d1",
       "component": "_OSGi",
       "state": "status",
-      "action": "function status() {\n  var result = {},\n    system = null,\n    length = 0,\n    i = 0;\n\n  systems = $db._System.find({});\n\n  length = systems.length;\n  for (i = 0; i < length; i++) {\n    system = systems[i];\n    result[system.name] = {\n      'id': system._id,\n      'state': system.state,\n      'name': system.name,\n      'version': system.version,\n      'location': system.location,\n      'master': system.master\n    };\n  }\n\n  return result;\n}",
+      "action": "function status() {\n  let result = {},\n    system = null,\n    length = 0,\n    i = 0;\n\n  systems = $db.collections._System.find({});\n\n  length = systems.length;\n  for (i = 0; i < length; i++) {\n    system = systems[i];\n    result[system.name] = {\n      'id': system._id,\n      'state': system.state,\n      'name': system.name,\n      'version': system.version,\n      'location': system.location,\n      'master': system.master\n    };\n  }\n\n  return result;\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -670,7 +670,7 @@
       "_id": "19cf317d7217331",
       "component": "_OSGi",
       "state": "bundle",
-      "action": "function bundle() { \n\tvar result = $db.exportSystem();\n\treturn result;\n}",
+      "action": "function bundle() { \n\tlet result = $db.exportSystem();\n\treturn result;\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -678,7 +678,7 @@
       "_id": "13010167f313f87",
       "component": "_Runtime",
       "state": "system",
-      "action": "function system(params) {\n  var RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n\n  if (params) {\n    if (typeof params === 'string') {\n      conf.master = true;\n      conf.name = params;\n    } else {\n      conf = params;\n      conf.master = true;\n    }\n    RuntimeSystem = this.require('_System');\n    system = new RuntimeSystem(conf);\n    system.state('active');\n  } else {\n    result = $db._System.find({\n      'master': true\n    });\n    if (result.length) {\n      systemId = result[0]._id;\n      system = $component.get(systemId);\n    }\n  }\n  return system;\n}",
+      "action": "function system(params) {\n  let RuntimeSystem = null,\n    system = {},\n    systemId = '',\n    result = [],\n    conf = {};\n\n  if (params) {\n    if (typeof params === 'string') {\n      conf.master = true;\n      conf.name = params;\n    } else {\n      conf = params;\n      conf.master = true;\n    }\n    RuntimeSystem = this.require('_System');\n    system = new RuntimeSystem(conf);\n    system.state('active');\n  } else {\n    result = $db.collections._System.find({\n      'master': true\n    });\n    if (result.length) {\n      systemId = result[0]._id;\n      system = $component.get(systemId);\n    }\n  }\n  return system;\n}",
       "core": true,
       "useCoreAPI": true
     },
@@ -686,7 +686,7 @@
       "_id": "1cfa4145f614da8",
       "component": "_Runtime",
       "state": "message",
-      "action": "function message(msg) { \n  $db._Message.insert(msg);\n}",
+      "action": "function message(msg) { \n  $db.collections._Message.insert(msg);\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -694,7 +694,7 @@
       "_id": "1cb9d103d41dd97",
       "component": "e89c617b6b15d24",
       "state": "start",
-      "action": "function start() {\n  if (typeof document !== 'undefined') {\n    document.addEventListener('DOMContentLoaded', function DOMContentLoaded(e) {\n      var systems = [],\n        system = null,\n        scripts = [],\n        script = null,\n        logLevel = 'warn',\n        i = 0,\n        length = 0;\n    \n      systems = document.querySelectorAll('link[rel=system]');\n      length = systems.length;\n  \n      // logger\n      scripts = document.querySelectorAll('script[log]');\n      if (scripts.length) {\n        logLevel = scripts[0].getAttribute('log');\n        this.require('logger').level(logLevel);\n      }\n  \n      // systems\n      for (i = 0; i < length; i++) {\n        system = systems[i];\n  \n        if (system.getAttribute('async') === 'false') {\n          this.require('runtime').install(system.href, false);\n        } else {\n          this.require('runtime').install(system.href, true);\n        }\n      }\n  \n      // ready event\n      if (length === 0) {\n        this.require('runtime').ready();\n      }\n  }.bind(this));\n  }\n}",
+      "action": "function start() {\n  if (typeof document !== 'undefined') {\n    document.addEventListener('DOMContentLoaded', function DOMContentLoaded(e) {\n      let systems = [],\n        system = null,\n        scripts = [],\n        script = null,\n        logLevel = 'warn',\n        i = 0,\n        length = 0;\n    \n      systems = document.querySelectorAll('link[rel=system]');\n      length = systems.length;\n  \n      // logger\n      scripts = document.querySelectorAll('script[log]');\n      if (scripts.length) {\n        logLevel = scripts[0].getAttribute('log');\n        this.require('logger').level(logLevel);\n      }\n  \n      // systems\n      for (i = 0; i < length; i++) {\n        system = systems[i];\n  \n        if (system.getAttribute('async') === 'false') {\n          this.require('runtime').install(system.href, false);\n        } else {\n          this.require('runtime').install(system.href, true);\n        }\n      }\n  \n      // ready event\n      if (length === 0) {\n        this.require('runtime').ready();\n      }\n  }.bind(this));\n  }\n}",
       "useCoreAPI": true,
       "core": true
     },
@@ -967,7 +967,7 @@
     "_Database": { "db": { "_id": "db" } },
     "_Logger": { "logger": { "_id": "logger", "level": "warn" } },
     "_Metamodel": { "metamodel": { "_id": "metamodel" } },
-    "_Runtime": { "runtime": { "_id": "runtime", "version": "5.1.0" } },
+    "_Runtime": { "runtime": { "_id": "runtime", "version": "6.0.0-beta.5" } },
     "_History": { "history": { "_id": "history" } }
   },
   "_id": "e89c617b6b15d24"
