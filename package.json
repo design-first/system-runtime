@@ -32,7 +32,7 @@
     "url": "https://github.com/design-first/system-runtime/issues"
   },
   "scripts": {
-    "build": "grunt system && rollup --config rollup.config.js && rollup --config rollup.config.iife.js && grunt licenses && prettier --write src/system.js",
+    "build": "grunt system && rollup --config rollup.config.js && grunt license && prettier --write src/system.js",
     "example": "serve",
     "prettier": "prettier --write src/",
     "lint": "eslint --ext .js src/",

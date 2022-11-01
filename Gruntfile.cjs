@@ -31,6 +31,6 @@ module.exports = (grunt) => {
   // create src/system.js file
   grunt.registerTask('system', ['concat:system'])
 
-  // add licenses
-  grunt.registerTask('licenses', ['concat:licenses'])
+  // add license
+  grunt.registerTask('license', ['concat:license'])
 }

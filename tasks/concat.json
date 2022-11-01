@@ -8,15 +8,11 @@
       ]
     }
   },
-  "licenses": {
+  "license": {
     "files": {
       "dist/system-runtime.js": [
         "src/banners/license.txt",
         "dist/system-runtime.js"
-      ],
-      "dist/system-runtime.min.js": [
-        "src/banners/license.txt",
-        "dist/system-runtime.min.js"
       ]
     }
   }
