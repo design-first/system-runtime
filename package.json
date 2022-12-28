@@ -39,7 +39,7 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "chai": "4.3.6",
+    "chai": "4.3.7",
     "coveralls": "3.1.1",
     "grunt": "1.5.3",
     "grunt-browserify": "6.0.0",
@@ -48,21 +48,21 @@
     "grunt-contrib-concat": "2.1.0",
     "grunt-contrib-uglify": "5.2.2",
     "grunt-contrib-watch": "1.1.0",
-    "grunt-eslint": "24.0.0",
+    "grunt-eslint": "24.0.1",
     "grunt-json-merge": "0.2.2",
     "grunt-karma": "4.0.2",
     "grunt-mocha-istanbul": "5.0.2",
-    "husky": "7.0.4",
+    "husky": "8.0.2",
     "istanbul": "0.4.5",
-    "karma": "6.4.0",
+    "karma": "6.4.1",
     "karma-chai": "0.1.0",
     "karma-chrome-launcher": "3.1.1",
     "karma-coverage": "2.2.0",
     "karma-mocha": "2.0.1",
     "karma-script-launcher": "1.0.0",
-    "lint-staged": "12.4.1",
+    "lint-staged": "13.1.0",
     "load-grunt-tasks": "5.1.0",
-    "mocha": "10.0.0",
-    "prettier": "2.7.1"
+    "mocha": "10.2.0",
+    "prettier": "2.8.1"
   }
 }
