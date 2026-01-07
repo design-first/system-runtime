@@ -3,7 +3,7 @@
  *
  * https://designfirst.io/systemruntime/
  *
- * Copyright 2024 Erwan Carriou
+ * Copyright 2026 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ var internalDB = [
   '_Message',
   '_Channel',
   '_Logger',
-  '_History',
+  '_History'
 ];
 var coreDb = [
   '_Schema',
@@ -78,7 +78,7 @@ var coreDb = [
   '_Model',
   '_GeneratedModel',
   '_Type',
-  '_History',
+  '_History'
 ];
 
 /* Private methods */
@@ -424,7 +424,7 @@ function impSystem(importedSystem) {
 
     // reset info if already a master system
     systems = exports._System.find({
-      master: true,
+      master: true
     });
     if (systems.length) {
       if (systems[0][$mson.ID] === importedSystem[$mson.ID]) {
@@ -462,7 +462,7 @@ function expSystem() {
 
   // get id of the master system
   systems = exports._System.find({
-    master: true,
+    master: true
   });
 
   if (systems.length) {
@@ -515,7 +515,7 @@ function expSubsystem(params) {
 
   // default values
   result = exports._System.find({
-    master: true,
+    master: true
   });
   if (result.length) {
     defaultName = result[0].name;
@@ -746,14 +746,14 @@ DatabaseCollection.prototype.insert = function insert(document) {
                 action: 'insert',
                 collection: this.name,
                 id: obj[$mson.ID],
-                value: JSON.stringify(obj),
+                value: JSON.stringify(obj)
               });
             }
 
             if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
               $helper.getRuntime().require('db').insert({
                 collection: this.name,
-                document: obj,
+                document: obj
               });
             }
           }
@@ -767,7 +767,7 @@ DatabaseCollection.prototype.insert = function insert(document) {
                 $workflow.process({
                   component: channels[i][$mson.ID],
                   state: obj.event,
-                  data: obj.data,
+                  data: obj.data
                 });
               }
             }
@@ -868,7 +868,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                     id: docs[i][$mson.ID],
                     field: attributeName,
                     value: JSON.stringify(update[attributeName]),
-                    oldValue: JSON.stringify(docs[i][attributeName]),
+                    oldValue: JSON.stringify(docs[i][attributeName])
                   });
                 }
 
@@ -881,20 +881,20 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                     collection: this.name,
                     id: docs[i][$mson.ID],
                     field: attributeName,
-                    value: update[attributeName],
+                    value: update[attributeName]
                   });
                 }
                 if (type === 'array') {
                   $workflow.process({
                     component: docs[i][$mson.ID],
                     state: attributeName,
-                    data: [update[attributeName], 'reset'],
+                    data: [update[attributeName], 'reset']
                   });
                 } else {
                   $workflow.process({
                     component: docs[i][$mson.ID],
                     state: attributeName,
-                    data: [update[attributeName]],
+                    data: [update[attributeName]]
                   });
                 }
               } else {
@@ -922,7 +922,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                 id: docs[i][$mson.ID],
                 field: attributeName,
                 value: JSON.stringify(update[attributeName]),
-                oldValue: JSON.stringify(docs[i][attributeName]),
+                oldValue: JSON.stringify(docs[i][attributeName])
               });
             }
 
@@ -935,7 +935,7 @@ DatabaseCollection.prototype.update = function update(query, update, options) {
                 collection: this.name,
                 id: docs[i][$mson.ID],
                 field: attributeName,
-                value: update[attributeName],
+                value: update[attributeName]
               });
             }
           }
@@ -979,7 +979,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
                   action: 'remove',
                   collection: this.name,
                   id: id,
-                  oldValue: JSON.stringify(exports.store[this.name][id]),
+                  oldValue: JSON.stringify(exports.store[this.name][id])
                 });
               }
 
@@ -994,7 +994,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
               if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
                 $helper.getRuntime().require('db').remove({
                   collection: this.name,
-                  id: id,
+                  id: id
                 });
               }
             }
@@ -1011,7 +1011,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
               action: 'remove',
               collection: this.name,
               id: id,
-              oldValue: JSON.stringify(exports.store[this.name][id]),
+              oldValue: JSON.stringify(exports.store[this.name][id])
             });
           }
 
@@ -1026,7 +1026,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
           if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
             $helper.getRuntime().require('db').remove({
               collection: this.name,
-              id: id,
+              id: id
             });
           }
         }
@@ -1039,7 +1039,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
           action: 'remove',
           collection: this.name,
           id: id,
-          oldValue: JSON.stringify(exports.store[this.name][id]),
+          oldValue: JSON.stringify(exports.store[this.name][id])
         });
       }
 
@@ -1054,7 +1054,7 @@ DatabaseCollection.prototype.remove = function remove(query) {
       if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
         $helper.getRuntime().require('db').remove({
           collection: this.name,
-          id: id,
+          id: id
         });
       }
       result.push(id);
@@ -1158,7 +1158,7 @@ exports.init = function init() {
   var runtimeSystem = null;
 
   runtimeSystem = exports._System.find({
-    _id: 'e89c617b6b15d24',
+    _id: 'e89c617b6b15d24'
   })[0];
 
   // clear all the data in memory

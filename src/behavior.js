@@ -3,7 +3,7 @@
  *
  * https://designfirst.io/systemruntime/
  *
- * Copyright 2024 Erwan Carriou
+ * Copyright 2026 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -198,7 +198,7 @@ exports.add = function add(id, state, action, useCoreAPI, core, context) {
     action: strAction,
     useCoreAPI: useCoreAPI,
     core: core,
-    context: context,
+    context: context
   });
 
   return behaviorId;
@@ -226,18 +226,18 @@ exports.remove = function remove(params) {
       $db._Behavior.remove({
         _id: params.behaviorId,
         component: params.componentId,
-        state: params.state,
+        state: params.state
       });
       delete store[params.behaviorId];
     } else {
       if (params.state) {
         result = $db._Behavior.remove({
           component: params.componentId,
-          state: params.state,
+          state: params.state
         });
       } else {
         result = $db._Behavior.remove({
-          component: params.componentId,
+          component: params.componentId
         });
       }
       result.forEach(function (id) {
@@ -270,7 +270,7 @@ exports.getActions = function getActions(id, state) {
 
   dbResult = $db._Behavior.find({
     component: id,
-    state: state,
+    state: state
   });
 
   dbResult.forEach(function (behavior) {
@@ -286,7 +286,7 @@ exports.getActions = function getActions(id, state) {
     result.push({
       useCoreAPI: behavior.useCoreAPI,
       context: behavior.context,
-      action: action,
+      action: action
     });
   });
 
