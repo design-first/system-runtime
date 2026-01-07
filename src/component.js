@@ -3,7 +3,7 @@
  *
  * https://designfirst.io/systemruntime/
  *
- * Copyright 2024 Erwan Carriou
+ * Copyright 2026 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -154,7 +154,7 @@ function _Array(conf) {
                 $workflow.process({
                   component: id,
                   state: propertyName,
-                  data: [store[del[i]], 'remove'],
+                  data: [store[del[i]], 'remove']
                 });
               }
               break;
@@ -169,7 +169,7 @@ function _Array(conf) {
               id: id,
               field: propertyName,
               value: JSON.stringify(arrDb),
-              oldValue: oldValue,
+              oldValue: oldValue
             });
           }
 
@@ -178,14 +178,14 @@ function _Array(conf) {
               collection: classId,
               id: id,
               field: propertyName,
-              value: arrDb,
+              value: arrDb
             });
           }
 
           $workflow.process({
             component: id,
             state: propertyName,
-            data: [val, 'add'],
+            data: [val, 'add']
           });
         } else {
           $log.invalidPropertyName(id, classId, propertyName, val, type);
@@ -213,7 +213,7 @@ function _Array(conf) {
               id: id,
               field: propertyName,
               value: JSON.stringify(arrDb),
-              oldValue: oldValue,
+              oldValue: oldValue
             });
           }
 
@@ -222,14 +222,14 @@ function _Array(conf) {
               collection: classId,
               id: id,
               field: propertyName,
-              value: arrDb,
+              value: arrDb
             });
           }
 
           $workflow.process({
             component: id,
             state: propertyName,
-            data: [val, 'add'],
+            data: [val, 'add']
           });
         } else {
           $log.invalidPropertyName(id, classId, propertyName, val, type);
@@ -276,7 +276,7 @@ function _Array(conf) {
             id: id,
             field: propertyName,
             value: JSON.stringify(arrDb),
-            oldValue: oldValue,
+            oldValue: oldValue
           });
         }
 
@@ -285,7 +285,7 @@ function _Array(conf) {
             collection: classId,
             id: id,
             field: propertyName,
-            value: arrDb,
+            value: arrDb
           });
         }
 
@@ -298,7 +298,7 @@ function _Array(conf) {
         $workflow.process({
           component: id,
           state: propertyName,
-          data: [result, 'remove'],
+          data: [result, 'remove']
         });
       }
     } else {
@@ -408,7 +408,7 @@ function _Array(conf) {
         id: id,
         field: propertyName,
         value: JSON.stringify(arrDb),
-        oldValue: oldValue,
+        oldValue: oldValue
       });
     }
 
@@ -417,7 +417,7 @@ function _Array(conf) {
         collection: classId,
         id: id,
         field: propertyName,
-        value: arrDb,
+        value: arrDb
       });
     }
 
@@ -446,7 +446,7 @@ function _Array(conf) {
         id: id,
         field: propertyName,
         value: JSON.stringify(arrDb),
-        oldValue: oldValue,
+        oldValue: oldValue
       });
     }
 
@@ -455,7 +455,7 @@ function _Array(conf) {
         collection: classId,
         id: id,
         field: propertyName,
-        value: arrDb,
+        value: arrDb
       });
     }
 
@@ -492,7 +492,7 @@ function _Array(conf) {
           id: id,
           field: propertyName,
           value: JSON.stringify(arrDb),
-          oldValue: oldValue,
+          oldValue: oldValue
         });
       }
 
@@ -501,7 +501,7 @@ function _Array(conf) {
           collection: classId,
           id: id,
           field: propertyName,
-          value: arrDb,
+          value: arrDb
         });
       }
 
@@ -516,7 +516,7 @@ function _Array(conf) {
         $workflow.process({
           component: id,
           state: propertyName,
-          data: [data, 'remove'],
+          data: [data, 'remove']
         });
       }
     }
@@ -597,7 +597,7 @@ function getProperties(id) {
       result.push({
         name: propNames[i],
         type: model[propNames[i]].type,
-        readOnly: model[propNames[i]].readOnly,
+        readOnly: model[propNames[i]].readOnly
       });
     }
   }
@@ -812,14 +812,14 @@ function createClass(classId) {
         action: 'insert',
         collection: classId,
         id: config[$mson.ID],
-        value: JSON.stringify(config),
+        value: JSON.stringify(config)
       });
     }
 
     if ($helper.isRuntime() && $helper.getRuntime().require('db')) {
       $helper.getRuntime().require('db').insert({
         collection: classId,
-        document: config,
+        document: config
       });
     }
 
@@ -946,7 +946,7 @@ function addProperties(model, Class, classId) {
               readOnly: propertyReadOnly,
               classId: classId,
               type: propertyType === 'array' ? 'any' : propertyType[0],
-              arr: $db.store[classId][this.id()][propertyName],
+              arr: $db.store[classId][this.id()][propertyName]
             });
 
             return runtimeArr;
@@ -960,7 +960,7 @@ function addProperties(model, Class, classId) {
                 )
               ) {
                 search = $db[classId].find({
-                  _id: this.id(),
+                  _id: this.id()
                 });
                 if (search.length) {
                   component = search[0];
@@ -972,7 +972,7 @@ function addProperties(model, Class, classId) {
                   $workflow.process({
                     component: this.id(),
                     state: propertyName,
-                    data: [position, 'reset'],
+                    data: [position, 'reset']
                   });
 
                   if ($history.isEnabled()) {
@@ -988,7 +988,7 @@ function addProperties(model, Class, classId) {
                       id: this.id(),
                       field: propertyName,
                       value: JSON.stringify(component[propertyName]),
-                      oldValue: oldValue,
+                      oldValue: oldValue
                     });
                   }
 
@@ -997,7 +997,7 @@ function addProperties(model, Class, classId) {
                       collection: classId,
                       id: this.id(),
                       field: propertyName,
-                      value: component[propertyName],
+                      value: component[propertyName]
                     });
                   }
                 }
@@ -1072,7 +1072,7 @@ function addProperties(model, Class, classId) {
                 ))
             ) {
               search = $db[classId].find({
-                _id: this.id(),
+                _id: this.id()
               });
               if (search.length) {
                 switch (true) {
@@ -1119,7 +1119,7 @@ function addProperties(model, Class, classId) {
                     id: this.id(),
                     field: propertyName,
                     value: JSON.stringify(component[propertyName]),
-                    oldValue: oldValue,
+                    oldValue: oldValue
                   });
                 }
 
@@ -1128,14 +1128,14 @@ function addProperties(model, Class, classId) {
                     collection: classId,
                     id: this.id(),
                     field: propertyName,
-                    value: component[propertyName],
+                    value: component[propertyName]
                   });
                 }
 
                 $workflow.process({
                   component: this.id(),
                   state: propertyName,
-                  data: [value, 'add'],
+                  data: [value, 'add']
                 });
               }
             } else {
@@ -1185,7 +1185,7 @@ function addProperties(model, Class, classId) {
                   readOnly: propertyReadOnly,
                   classId: classId,
                   type: 'any',
-                  arr: $db.store[classId][this.id()][propertyName],
+                  arr: $db.store[classId][this.id()][propertyName]
                 });
                 break;
               case $metamodel.isStructure(propertyName, classId):
@@ -1214,7 +1214,7 @@ function addProperties(model, Class, classId) {
           } else {
             if ($metamodel.isValidType(value, propertyType)) {
               search = $db[classId].find({
-                _id: this.id(),
+                _id: this.id()
               });
               if (search.length) {
                 component = search[0];
@@ -1253,7 +1253,7 @@ function addProperties(model, Class, classId) {
                     id: this.id(),
                     field: propertyName,
                     value: JSON.stringify(realVal),
-                    oldValue: oldValue,
+                    oldValue: oldValue
                   });
                 }
 
@@ -1262,7 +1262,7 @@ function addProperties(model, Class, classId) {
                     collection: classId,
                     id: this.id(),
                     field: propertyName,
-                    value: realVal,
+                    value: realVal
                   });
                 }
 
@@ -1274,7 +1274,7 @@ function addProperties(model, Class, classId) {
                 $workflow.process({
                   component: this.id(),
                   state: propertyName,
-                  data: [value],
+                  data: [value]
                 });
               }
             } else {
@@ -1368,7 +1368,7 @@ function addStructure(path, name, model, id) {
                 readOnly: propertyReadOnly,
                 classId: model,
                 type: Array.isArray(propertyType) ? propertyType[0] : 'any',
-                arr: getStructureValue(model, id, fullPath),
+                arr: getStructureValue(model, id, fullPath)
               });
 
               return runtimeArr;
@@ -1382,7 +1382,7 @@ function addStructure(path, name, model, id) {
                   )
                 ) {
                   search = $db[model].find({
-                    _id: id,
+                    _id: id
                   });
                   if (search.length) {
                     if ($history.isEnabled()) {
@@ -1396,7 +1396,7 @@ function addStructure(path, name, model, id) {
                       $workflow.process({
                         component: id,
                         state: fullPath.replace(/\[(\d)*\]/g, ''),
-                        data: [position, 'reset'],
+                        data: [position, 'reset']
                       });
                     }
 
@@ -1404,7 +1404,7 @@ function addStructure(path, name, model, id) {
                     $workflow.process({
                       component: id,
                       state: fullPath,
-                      data: [position, 'reset'],
+                      data: [position, 'reset']
                     });
 
                     if ($history.isEnabled() && model.indexOf('_') !== 0) {
@@ -1414,7 +1414,7 @@ function addStructure(path, name, model, id) {
                         id: id,
                         field: fullPath,
                         value: JSON.stringify([]),
-                        oldValue: JSON.stringify(oldValue),
+                        oldValue: JSON.stringify(oldValue)
                       });
                     }
 
@@ -1423,7 +1423,7 @@ function addStructure(path, name, model, id) {
                         collection: model,
                         id: id,
                         field: fullPath,
-                        value: position,
+                        value: position
                       });
                     }
                   }
@@ -1522,7 +1522,7 @@ function addStructure(path, name, model, id) {
                 )
               ) {
                 search = $db[model].find({
-                  _id: id,
+                  _id: id
                 });
                 if (search.length) {
                   var arr = getStructureValue(model, id, fullPath);
@@ -1563,7 +1563,7 @@ function addStructure(path, name, model, id) {
                       id: id,
                       field: fullPath,
                       value: JSON.stringify(value),
-                      oldValue: JSON.stringify(oldValue),
+                      oldValue: JSON.stringify(oldValue)
                     });
                   }
 
@@ -1572,7 +1572,7 @@ function addStructure(path, name, model, id) {
                       collection: model,
                       id: id,
                       field: fullPath,
-                      value: arr,
+                      value: arr
                     });
                   }
 
@@ -1581,7 +1581,7 @@ function addStructure(path, name, model, id) {
                     $workflow.process({
                       component: id,
                       state: fullPath.replace(/\[(\d)*\]/g, ''),
-                      data: [value, 'add'],
+                      data: [value, 'add']
                     });
                   }
 
@@ -1589,7 +1589,7 @@ function addStructure(path, name, model, id) {
                   $workflow.process({
                     component: id,
                     state: fullPath,
-                    data: [value, 'add'],
+                    data: [value, 'add']
                   });
                 }
               } else {
@@ -1671,7 +1671,7 @@ function addStructure(path, name, model, id) {
             } else {
               if ($metamodel.isValidType(value, propertyType)) {
                 search = $db[model].find({
-                  _id: id,
+                  _id: id
                 });
                 if (search.length) {
                   component = search[0];
@@ -1701,7 +1701,7 @@ function addStructure(path, name, model, id) {
                       id: id,
                       field: fullPath,
                       value: JSON.stringify(realVal),
-                      oldValue: JSON.stringify(oldValue),
+                      oldValue: JSON.stringify(oldValue)
                     });
                   }
 
@@ -1713,7 +1713,7 @@ function addStructure(path, name, model, id) {
                       collection: model,
                       id: id,
                       field: fullPath,
-                      value: realVal,
+                      value: realVal
                     });
                   }
 
@@ -1727,7 +1727,7 @@ function addStructure(path, name, model, id) {
                     $workflow.process({
                       component: id,
                       state: fullPath.replace(/\[(\d)*\]/g, ''),
-                      data: [value],
+                      data: [value]
                     });
                   }
 
@@ -1735,7 +1735,7 @@ function addStructure(path, name, model, id) {
                   $workflow.process({
                     component: id,
                     state: fullPath,
-                    data: [value],
+                    data: [value]
                   });
                 }
               } else {
@@ -1787,7 +1787,7 @@ function addMethods(model, Class, classId) {
       result = $workflow.process({
         component: this.id(),
         state: methodName,
-        data: arguments,
+        data: arguments
       });
 
       return result;
@@ -1804,7 +1804,7 @@ function addMethods(model, Class, classId) {
           component: this.id(),
           state: methodName,
           data: data,
-          context: arguments[0],
+          context: arguments[0]
         });
       } else {
         $log.unknownContext(classId, methodName);
@@ -1877,7 +1877,7 @@ function addEvents(model, Class, classId) {
 
       if (classId === '_Channel') {
         systems = $db._System.find({
-          master: true,
+          master: true
         });
         if (systems.length) {
           systemId = systems[0][$mson.ID];
@@ -1900,15 +1900,15 @@ function addEvents(model, Class, classId) {
             {
               event: message.event,
               from: message.from,
-              data: message.data,
-            },
-          ],
+              data: message.data
+            }
+          ]
         });
       } else {
         $workflow.process({
           component: this.id(),
           state: methodName,
-          data: arguments,
+          data: arguments
         });
       }
     };
@@ -1958,7 +1958,7 @@ function addOn(Class, classId) {
       $workflow.checkInput({
         component: this,
         methodName: 'on',
-        args: arguments,
+        args: arguments
       })
     ) {
       if ($metamodel.isValidState(state, classId)) {
@@ -1969,7 +1969,7 @@ function addOn(Class, classId) {
           !$metamodel.isCollection(state, classId) &&
           $db._Behavior.find({
             component: this.id(),
-            state: state,
+            state: state
           }).length >= 1
         ) {
           $log.behaviorNotUnique(classId, state);
@@ -1988,7 +1988,7 @@ function addOn(Class, classId) {
             if (currentState && currentState.state === state) {
               $workflow.process({
                 id: behaviorId,
-                data: currentState.value,
+                data: currentState.value
               });
             }
           } else {
@@ -2038,7 +2038,7 @@ function addOnClass(Class, classId) {
       $workflow.checkInput({
         component: this,
         methodName: 'on',
-        args: arguments,
+        args: arguments
       })
     ) {
       if ($metamodel.isValidState(state, classId)) {
@@ -2049,7 +2049,7 @@ function addOnClass(Class, classId) {
           !$metamodel.isCollection(state, classId) &&
           $db._Behavior.find({
             component: this.id(),
-            state: state,
+            state: state
           }).length >= 1
         ) {
           $log.behaviorNotUnique(classId, state);
@@ -2068,7 +2068,7 @@ function addOnClass(Class, classId) {
             if (currentState && currentState.state === state) {
               $workflow.process({
                 id: behaviorId,
-                data: currentState.value,
+                data: currentState.value
               });
             }
           } else {
@@ -2104,14 +2104,14 @@ function addOffClass(Class, classId) {
       $workflow.checkInput({
         component: this,
         methodName: 'off',
-        args: arguments,
+        args: arguments
       })
     ) {
       if ($metamodel.isValidState(state, classId)) {
         $behavior.remove({
           behaviorId: behaviorId,
           componentId: classId,
-          state: state,
+          state: state
         });
       } else {
         $log.invalidStateOff(classId, state);
@@ -2146,20 +2146,20 @@ function addDestroyClass(Class) {
 
     // remove behaviors
     $behavior.remove({
-      componentId: id,
+      componentId: id
     });
 
     length = result.length;
     for (i = 0; i < length; i++) {
       // remove behaviors
       $behavior.remove({
-        componentId: result[i],
+        componentId: result[i]
       });
     }
 
     $workflow.process({
       component: id,
-      state: 'destroy',
+      state: 'destroy'
     });
   };
   Class.destroy = new Function(
@@ -2280,12 +2280,12 @@ exports.destroy = function destroy(id) {
     delete store[id];
     classId = component.constructor.name;
     $db[classId].remove({
-      _id: id,
+      _id: id
     });
 
     // remove behaviors
     $behavior.remove({
-      componentId: id,
+      componentId: id
     });
 
     // case of Behavior

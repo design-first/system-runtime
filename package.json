@@ -1,6 +1,6 @@
 {
   "name": "system-runtime",
-  "version": "5.3.0",
+  "version": "5.4.0",
   "description": "A JavaScript library that runs systems",
   "homepage": "https://designfirst.io/systemruntime/",
   "keywords": [
@@ -36,14 +36,14 @@
     "clean": "grunt clean",
     "build": "grunt build",
     "coveralls": "grunt coveralls",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "devDependencies": {
-    "chai": "4.4.1",
-    "coveralls": "3.1.1",
+    "chai": "4.5.0",
+    "coveralls-next": "6.0.1",
     "grunt": "1.6.1",
     "grunt-browserify": "6.0.0",
-    "grunt-cli": "1.4.3",
+    "grunt-cli": "1.5.0",
     "grunt-contrib-clean": "2.0.1",
     "grunt-contrib-concat": "2.1.0",
     "grunt-contrib-uglify": "5.2.2",
@@ -52,17 +52,17 @@
     "grunt-json-merge": "0.2.2",
     "grunt-karma": "4.0.2",
     "grunt-mocha-istanbul": "5.0.2",
-    "husky": "8.0.3",
+    "husky": "9.1.7",
     "istanbul": "0.4.5",
-    "karma": "6.4.2",
+    "karma": "6.4.4",
     "karma-chai": "0.1.0",
     "karma-chrome-launcher": "3.2.0",
     "karma-coverage": "2.2.1",
     "karma-mocha": "2.0.1",
     "karma-script-launcher": "1.0.0",
-    "lint-staged": "15.2.0",
+    "lint-staged": "16.2.7",
     "load-grunt-tasks": "5.1.0",
-    "mocha": "10.2.0",
-    "prettier": "2.8.8"
+    "mocha": "11.7.5",
+    "prettier": "3.7.4"
   }
 }

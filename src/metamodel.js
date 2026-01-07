@@ -3,7 +3,7 @@
  *
  * https://designfirst.io/systemruntime/
  *
- * Copyright 2024 Erwan Carriou
+ * Copyright 2026 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ var store = {
   models: {},
   generatedModels: {},
   states: {},
-  type: {},
+  type: {}
 };
 
 /* Private methods */
@@ -99,7 +99,7 @@ function generateModels() {
 
     // set model internal properties
     model = {
-      _name: schema[$mson.NAME],
+      _name: schema[$mson.NAME]
     };
 
     // set _core
@@ -139,7 +139,7 @@ function generateModels() {
             mandatory: false,
             default: '',
             description: att,
-            label: att,
+            label: att
           };
           break;
         case schema[att] === 'link':
@@ -149,7 +149,7 @@ function generateModels() {
             mandatory: false,
             default: '',
             description: att,
-            label: att,
+            label: att
           };
           break;
         case schema[att] === 'method':
@@ -159,23 +159,23 @@ function generateModels() {
                 name: 'param1',
                 type: 'any',
                 mandatory: false,
-                default: null,
+                default: null
               },
               {
                 name: 'param2',
                 type: 'any',
                 mandatory: false,
-                default: null,
+                default: null
               },
               {
                 name: 'param3',
                 type: 'any',
                 mandatory: false,
-                default: null,
-              },
+                default: null
+              }
             ],
             result: 'any',
-            description: att,
+            description: att
           };
           break;
         case schema[att] === 'event':
@@ -185,22 +185,22 @@ function generateModels() {
                 name: 'param1',
                 type: 'any',
                 mandatory: false,
-                default: null,
+                default: null
               },
               {
                 name: 'param2',
                 type: 'any',
                 mandatory: false,
-                default: null,
+                default: null
               },
               {
                 name: 'param3',
                 type: 'any',
                 mandatory: false,
-                default: null,
-              },
+                default: null
+              }
             ],
-            description: att,
+            description: att
           };
           break;
         case schema[att] === 'collection':
@@ -210,7 +210,7 @@ function generateModels() {
             mandatory: false,
             default: [],
             description: att,
-            label: att,
+            label: att
           };
           break;
         default:
@@ -843,7 +843,7 @@ function createClass() {
     modelDef = store.generatedModels[modelName];
     if (modelDef[$mson.CLASS] !== false) {
       $component.create({
-        model: modelName,
+        model: modelName
       });
       if (!modelDef[$mson.CORE]) {
         $log.createClass(modelName);
@@ -1065,14 +1065,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: 'boolean',
           mandatory: false,
-          default: false,
+          default: false
         };
       } else {
         result = {
           type: 'boolean',
           readOnly: false,
           mandatory: false,
-          default: false,
+          default: false
         };
       }
       break;
@@ -1082,14 +1082,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: 'string',
           mandatory: false,
-          default: '',
+          default: ''
         };
       } else {
         result = {
           type: 'string',
           readOnly: false,
           mandatory: false,
-          default: '',
+          default: ''
         };
       }
       break;
@@ -1099,14 +1099,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: 'number',
           mandatory: false,
-          default: 0,
+          default: 0
         };
       } else {
         result = {
           type: 'number',
           readOnly: false,
           mandatory: false,
-          default: 0,
+          default: 0
         };
       }
       break;
@@ -1116,14 +1116,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: 'object',
           mandatory: false,
-          default: {},
+          default: {}
         };
       } else {
         result = {
           type: 'object',
           readOnly: false,
           mandatory: false,
-          default: {},
+          default: {}
         };
       }
       break;
@@ -1133,14 +1133,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: 'array',
           mandatory: false,
-          default: [],
+          default: []
         };
       } else {
         result = {
           type: 'array',
           readOnly: false,
           mandatory: false,
-          default: [],
+          default: []
         };
       }
       break;
@@ -1150,14 +1150,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: 'date',
           mandatory: false,
-          default: '1970-01-01T00:00:00.000Z',
+          default: '1970-01-01T00:00:00.000Z'
         };
       } else {
         result = {
           type: 'date',
           readOnly: false,
           mandatory: false,
-          default: '1970-01-01T00:00:00.000Z',
+          default: '1970-01-01T00:00:00.000Z'
         };
       }
       break;
@@ -1167,14 +1167,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: 'any',
           mandatory: false,
-          default: null,
+          default: null
         };
       } else {
         result = {
           type: 'any',
           readOnly: false,
           mandatory: false,
-          default: '',
+          default: ''
         };
       }
       break;
@@ -1184,7 +1184,7 @@ function initConfiguration(name, type, isMethod) {
 
       // case of enumeration
       typeDef = $db._Type.find({
-        name: type,
+        name: type
       });
       if (typeDef.length) {
         if (typeDef[0].value) {
@@ -1194,7 +1194,7 @@ function initConfiguration(name, type, isMethod) {
 
       // case of link
       schemaDef = $db._Schema.find({
-        _name: type,
+        _name: type
       });
       if (schemaDef.length) {
         defaultValue = '';
@@ -1205,14 +1205,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: type,
           mandatory: false,
-          default: defaultValue,
+          default: defaultValue
         };
       } else {
         result = {
           type: type,
           readOnly: false,
           mandatory: false,
-          default: defaultValue,
+          default: defaultValue
         };
       }
       break;
@@ -1222,14 +1222,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: ['boolean'],
           mandatory: false,
-          default: [],
+          default: []
         };
       } else {
         result = {
           type: ['boolean'],
           readOnly: false,
           mandatory: false,
-          default: [],
+          default: []
         };
       }
       break;
@@ -1239,14 +1239,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: ['string'],
           mandatory: false,
-          default: '',
+          default: ''
         };
       } else {
         result = {
           type: ['string'],
           readOnly: false,
           mandatory: false,
-          default: '',
+          default: ''
         };
       }
       break;
@@ -1256,14 +1256,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: ['number'],
           mandatory: false,
-          default: [],
+          default: []
         };
       } else {
         result = {
           type: ['number'],
           readOnly: false,
           mandatory: false,
-          default: [],
+          default: []
         };
       }
       break;
@@ -1273,14 +1273,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: ['object'],
           mandatory: false,
-          default: [],
+          default: []
         };
       } else {
         result = {
           type: ['object'],
           readOnly: false,
           mandatory: false,
-          default: [],
+          default: []
         };
       }
       break;
@@ -1290,14 +1290,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: ['date'],
           mandatory: false,
-          default: [],
+          default: []
         };
       } else {
         result = {
           type: ['date'],
           readOnly: false,
           mandatory: false,
-          default: [],
+          default: []
         };
       }
       break;
@@ -1307,14 +1307,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: ['any'],
           mandatory: false,
-          default: [],
+          default: []
         };
       } else {
         result = {
           type: ['any'],
           readOnly: false,
           mandatory: false,
-          default: [],
+          default: []
         };
       }
       break;
@@ -1324,14 +1324,14 @@ function initConfiguration(name, type, isMethod) {
           name: name,
           type: type,
           mandatory: false,
-          default: [],
+          default: []
         };
       } else {
         result = {
           type: type,
           readOnly: false,
           mandatory: false,
-          default: [],
+          default: []
         };
       }
       break;
@@ -1378,7 +1378,7 @@ function generateConfiguration(model) {
           typeof model[propName]['=>'] !== 'undefined':
           methodConf = {
             params: [],
-            result: 'any',
+            result: 'any'
           };
 
           for (paramPropName in model[propName]) {
@@ -1481,13 +1481,13 @@ exports.schema = function schema(name, schema) {
   // check if schema is compliant with the meta meta model
   if (exports.isValidObject(schema, $mson.SCHEMA_DEFINITION, false)) {
     schemas = $db._Schema.find({
-      _name: schemaName,
+      _name: schemaName
     });
     if (schemas.length) {
       mergedSchema = merge(schema, schemas[0]);
       $db._Schema.update(
         {
-          _name: schemaName,
+          _name: schemaName
         },
         mergedSchema
       );
@@ -1534,13 +1534,13 @@ exports.model = function model(name, model) {
   // check if model is compliant with the meta meta model
   if (exports.isValidObject(model, $mson.MODEL_DEFINITION, false)) {
     models = $db._Model.find({
-      _name: modelName,
+      _name: modelName
     });
     if (models.length) {
       mergedModel = merge(model, models[0]);
       $db._Model.update(
         {
-          _name: modelName,
+          _name: modelName
         },
         mergedModel
       );
@@ -1625,7 +1625,7 @@ exports.clear = function clear() {
     models: {},
     generatedModels: {},
     states: {},
-    type: {},
+    type: {}
   };
 };
 

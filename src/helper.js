@@ -3,7 +3,7 @@
  *
  * https://designfirst.io/systemruntime/
  *
- * Copyright 2024 Erwan Carriou
+ * Copyright 2026 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -141,7 +141,7 @@ exports.polyfill = function polyfill() {
         var results = funcNameRegex.exec(this.toString());
         return results && results.length > 1 ? results[1].trim() : '';
       },
-      set: function set(value) {},
+      set: function set(value) {}
     });
   }
 };

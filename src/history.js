@@ -3,7 +3,7 @@
  *
  * https://designfirst.io/systemruntime/
  *
- * Copyright 2024 Erwan Carriou
+ * Copyright 2026 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -93,7 +93,7 @@ exports.back = function back() {
     switch (state.action) {
       case 'insert':
         $db[state.collection].remove({
-          _id: state.id,
+          _id: state.id
         });
         $log.historyDocumentRemoved(state.id, state.collection);
         break;
@@ -110,7 +110,7 @@ exports.back = function back() {
 
         $db[state.collection].update(
           {
-            _id: state.id,
+            _id: state.id
           },
           update
         );
@@ -147,7 +147,7 @@ exports.forward = function forward() {
         break;
       case 'remove':
         $db[state.collection].remove({
-          _id: state.id,
+          _id: state.id
         });
         $log.historyDocumentRemoved(state.id, state.collection);
         break;
@@ -156,7 +156,7 @@ exports.forward = function forward() {
 
         $db[state.collection].update(
           {
-            _id: state.id,
+            _id: state.id
           },
           update
         );
@@ -210,7 +210,7 @@ exports.from = function from(index) {
  */
 exports.dump = function dump() {
   return JSON.stringify({
-    stack: stack,
+    stack: stack
   });
 };
 
@@ -251,7 +251,7 @@ exports.load = function load(dump) {
           case 'remove':
             if ($db[state.collection]) {
               $db[state.collection].remove({
-                _id: state.id,
+                _id: state.id
               });
               $log.historyDocumentRemoved(state.id, state.collection);
             } else {
@@ -264,7 +264,7 @@ exports.load = function load(dump) {
 
               $db[state.collection].update(
                 {
-                  _id: state.id,
+                  _id: state.id
                 },
                 update
               );
